@@ -154,6 +154,11 @@ public class AppConstants {
      */
     public static final String URL_SEARCH_WUYE = URL_BASE + "m/prop/search";
 
+    /**
+     * 获取缴费类别
+     */
+    public static final String URL_JIAOFEI_TYPE=URL_BASE+"m/propPayment/menu";
+
     /*==========================*/
 
     public static final int PAGE_SIZE = 10;

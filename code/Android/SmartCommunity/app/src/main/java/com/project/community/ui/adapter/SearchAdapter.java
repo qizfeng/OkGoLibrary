@@ -67,10 +67,13 @@ public class SearchAdapter extends BaseQuickAdapter<SearchModel, BaseViewHolder>
         SpannableStringBuilder style = new SpannableStringBuilder(result);
         style.setSpan(new ForegroundColorSpan(Color.BLACK), 0, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         baseViewHolder.setText(R.id.tv_content, model.description).setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-        baseViewHolder.setText(R.id.tv_title,"【"+model.articleName+"】"+model.title);
         //****************************//
         baseViewHolder.setText(R.id.tv_comment_num, model.comments + "评论");
         try {
+            if (index == 1)
+                baseViewHolder.setText(R.id.tv_title, "【" + model.articleName + "】" + model.title);
+            else if(index==0)
+                baseViewHolder.setText(R.id.tv_content,"【" + model.articleName + "】" + model.title);
             baseViewHolder.setText(R.id.tv_time, DateUtil.getStandardTime(Long.parseLong(model.createDate)));
         } catch (Exception e) {
             e.printStackTrace();

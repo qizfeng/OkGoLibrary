@@ -322,7 +322,7 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
             userId = getUser(this).id;
         else
             userId = "";
-        serverDao.getWuyeIndexData(userId, pageIndex, AppConstants.PAGE_SIZE,type, new DialogCallback<BaseResponse<WuyeIndexResponse>>(this) {
+        serverDao.getWuyeIndexData(userId, pageIndex, AppConstants.PAGE_SIZE,type, new JsonCallback<BaseResponse<WuyeIndexResponse>>() {
             @Override
             public void onSuccess(BaseResponse<WuyeIndexResponse> baseResponse, Call call, Response response) {
                 mResponseData = baseResponse.retData;

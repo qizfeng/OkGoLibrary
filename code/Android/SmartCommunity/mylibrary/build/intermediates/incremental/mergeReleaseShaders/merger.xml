@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/src/main/shaders"/></dataSet><dataSet config="release"><source path="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/src/release/shaders"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/src/main/shaders"/></dataSet><dataSet config="release"><source path="/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/src/release/shaders"/></dataSet></merger>

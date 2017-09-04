@@ -1,18 +1,18 @@
 [
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/banner-lib/build/intermediates/res/merged/debug/layout-v21/notification_template_icon_group.xml",
-        "source": "/Users/qizfeng/.android/build-cache/70e209d0807dd4edeb2ea73fae95383a5a40d209/output/res/layout-v21/notification_template_icon_group.xml"
-    },
-    {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/banner-lib/build/intermediates/res/merged/debug/layout-v21/notification_template_custom_big.xml",
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/banner-lib/build/intermediates/res/merged/debug/layout-v21/notification_template_custom_big.xml",
         "source": "/Users/qizfeng/.android/build-cache/70e209d0807dd4edeb2ea73fae95383a5a40d209/output/res/layout-v21/notification_template_custom_big.xml"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/banner-lib/build/intermediates/res/merged/debug/layout-v21/notification_action_tombstone.xml",
-        "source": "/Users/qizfeng/.android/build-cache/70e209d0807dd4edeb2ea73fae95383a5a40d209/output/res/layout-v21/notification_action_tombstone.xml"
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/banner-lib/build/intermediates/res/merged/debug/layout-v21/notification_action.xml",
+        "source": "/Users/qizfeng/.android/build-cache/70e209d0807dd4edeb2ea73fae95383a5a40d209/output/res/layout-v21/notification_action.xml"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/banner-lib/build/intermediates/res/merged/debug/layout-v21/notification_action.xml",
-        "source": "/Users/qizfeng/.android/build-cache/70e209d0807dd4edeb2ea73fae95383a5a40d209/output/res/layout-v21/notification_action.xml"
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/banner-lib/build/intermediates/res/merged/debug/layout-v21/notification_template_icon_group.xml",
+        "source": "/Users/qizfeng/.android/build-cache/70e209d0807dd4edeb2ea73fae95383a5a40d209/output/res/layout-v21/notification_template_icon_group.xml"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/banner-lib/build/intermediates/res/merged/debug/layout-v21/notification_action_tombstone.xml",
+        "source": "/Users/qizfeng/.android/build-cache/70e209d0807dd4edeb2ea73fae95383a5a40d209/output/res/layout-v21/notification_action_tombstone.xml"
     }
 ]

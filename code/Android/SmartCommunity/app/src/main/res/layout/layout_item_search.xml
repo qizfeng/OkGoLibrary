@@ -24,7 +24,7 @@
                 android:layout_marginRight="@dimen/dp_10"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="【政务】吐鲁番市发展和改革2017政风行风调查问卷社区居民需求调查问卷"
+                android:minLines="2"
                 android:textColor="@color/txt_color"
                 android:textSize="@dimen/common_txt_size"
                 android:textStyle="normal" />

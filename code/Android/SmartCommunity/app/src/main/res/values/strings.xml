@@ -37,6 +37,7 @@
     <string name="txt_submit">提交</string>
     <string name="txt_know">我知道了</string>
     <string name="txt_phone">手机号</string>
+    <string name="txt_work_time">工作时间:</string>
     <!--民生-->
     <string name="tab_title_minsheng_nearby">附近商家</string>
     <string name="tab_title_minsheng_bbs">社区论坛</string>
