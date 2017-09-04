@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"/>
+    <TextView
+        android:id="@+id/tv_comment_tips"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:background="@color/white"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:paddingLeft="24px"
+        android:textSize="@dimen/common_txt_size"
+        android:gravity="center_vertical"
+        android:text="评论(0)"/>
+</LinearLayout>

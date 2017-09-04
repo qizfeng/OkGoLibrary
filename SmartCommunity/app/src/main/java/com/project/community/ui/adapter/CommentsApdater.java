@@ -48,9 +48,13 @@ public class CommentsApdater extends BaseQuickAdapter<CommentModel, BaseViewHold
                 itemClickListener.onItemClick(view, position);
             }
         });
-        String userId = ((BaseActivity) mContext).getUser(mContext).id;
-        if (model.userId.equals(userId)) {
-            baseViewHolder.setVisible(R.id.iv_delete, true);
+        if (((BaseActivity) mContext).isLogin(mContext)) {
+            String userId = ((BaseActivity) mContext).getUser(mContext).id;
+            if (model.userId.equals(userId)) {
+                baseViewHolder.setVisible(R.id.iv_delete, true);
+            } else {
+                baseViewHolder.setVisible(R.id.iv_delete, false);
+            }
         } else {
             baseViewHolder.setVisible(R.id.iv_delete, false);
         }
