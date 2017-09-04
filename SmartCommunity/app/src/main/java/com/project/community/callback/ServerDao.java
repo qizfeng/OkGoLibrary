@@ -11,7 +11,9 @@ import com.project.community.model.DictionaryResponse;
 import com.project.community.model.DistModel;
 import com.project.community.model.FileUploadModel;
 import com.project.community.model.GuideModel;
+import com.project.community.model.HotlineModel;
 import com.project.community.model.NewsModel;
+import com.project.community.model.PaymentWayModel;
 import com.project.community.model.SearchModel;
 import com.project.community.model.UserModel;
 import com.project.community.model.UserResponse;
@@ -203,7 +205,7 @@ public interface ServerDao {
      * @param orgCode 机构代码
      * @param callback
      */
-    void getHotLine(String type,String orgCode,JsonCallback<BaseResponse<List>>callback);
+    void getHotLine(String type,String orgCode,JsonCallback<BaseResponse<HotlineModel>>callback);
 
     /**
      * 根据类别获取文章
@@ -274,4 +276,11 @@ public interface ServerDao {
      * @param callback
      */
     void getWuyeIndexData(String userId,int pageNo,int pageSize,int type,JsonCallback<BaseResponse<WuyeIndexResponse>>callback);
+
+
+    /**
+     * 获取缴费方式
+     * @param callback
+     */
+    void getPaymentWay(JsonCallback<BaseResponse<List<PaymentWayModel>>> callback);
 }

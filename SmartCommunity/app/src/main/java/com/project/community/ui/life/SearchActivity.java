@@ -272,7 +272,9 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
         serverDao.doSearch(type, text, new DialogCallback<BaseResponse<List<SearchModel>>>(this) {
             @Override
             public void onSuccess(BaseResponse<List<SearchModel>> baseResponse, Call call, Response response) {
+                mData = new ArrayList<>();
                 mData.addAll(baseResponse.retData);
+                LogUtils.e("search:"+baseResponse.retData.toString());
                 if (llResult.getVisibility() == View.GONE) {
                     llResult.setVisibility(View.VISIBLE);
                 }

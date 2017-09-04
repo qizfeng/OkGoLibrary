@@ -27,11 +27,11 @@ public class PayWayAdapter extends BaseQuickAdapter<PaymentWayModel, BaseViewHol
 
     @Override
     protected void convert(final BaseViewHolder baseViewHolder, final PaymentWayModel model) {
-        baseViewHolder.setText(R.id.tv_payment_way,model.payWay);
-//        Glide.with(mContext)
-//                .load(model.icon)
-//                .into((ImageView) baseViewHolder.getView(R.id.iv_image));
-        baseViewHolder.setImageResource(R.id.iv_image,model.res);
+        baseViewHolder.setText(R.id.tv_payment_way,model.label);
+        Glide.with(mContext)
+                .load(model.icon)
+                .into((ImageView) baseViewHolder.getView(R.id.iv_image));
+//        baseViewHolder.setImageResource(R.id.iv_image,model.res);
         final int position = baseViewHolder.getLayoutPosition();
         baseViewHolder.getConvertView().setOnClickListener(new View.OnClickListener() {
             @Override

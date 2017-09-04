@@ -22,6 +22,7 @@ import com.library.okgo.model.BaseResponse;
 import com.library.okgo.utils.ToastUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
+import com.project.community.model.HotlineModel;
 import com.project.community.util.ScreenUtils;
 
 import java.util.List;
@@ -56,7 +57,8 @@ public class PhoneDialogActivity extends BaseActivity implements View.OnClickLis
     @Bind(R.id.btn_call)
     Button mBtnCall;
     public boolean hasHeader = true;
-    private String type="1";//1政务 2物业
+    private String type = "1";//1政务 2物业
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,15 +70,17 @@ public class PhoneDialogActivity extends BaseActivity implements View.OnClickLis
         mIvClose.setOnClickListener(this);
         mBtnCall.setOnClickListener(this);
 
-        hasHeader = getIntent().getBooleanExtra("hasHeader",true);
-        type=getIntent().getStringExtra("type");
-        if(hasHeader){
+        hasHeader = getIntent().getBooleanExtra("hasHeader", true);
+        type = getIntent().getStringExtra("type");
+        if (hasHeader) {
             mIvHeader.setVisibility(View.VISIBLE);
             mTvPhoneNumber.setGravity(Gravity.CENTER_VERTICAL);
-        }else {
+        } else {
             mIvHeader.setVisibility(View.GONE);
             mTvPhoneNumber.setGravity(Gravity.CENTER);
         }
+
+        getData();
     }
 
     @Override
@@ -92,7 +96,7 @@ public class PhoneDialogActivity extends BaseActivity implements View.OnClickLis
                     if (ActivityCompat.checkSelfPermission(PhoneDialogActivity.this, PERMISSION_CALL_PHONE)
                             != PackageManager.PERMISSION_GRANTED) {
                         // 没有权限，申请权限。
-                        ActivityCompat.requestPermissions(PhoneDialogActivity.this,requestPermissions, REQUEST_PERMISSION_CODE);
+                        ActivityCompat.requestPermissions(PhoneDialogActivity.this, requestPermissions, REQUEST_PERMISSION_CODE);
                     } else {
                         // 有权限了，去放肆吧。
                         startActivity(intent);
@@ -118,11 +122,11 @@ public class PhoneDialogActivity extends BaseActivity implements View.OnClickLis
                 } else {
 //                    if (grantResults.length > 0
 //                            && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                        // 权限被用户同意，可以去放肆了。
-                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + mTvPhoneNumber.getText().toString().trim()));
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                        finish();
+                    // 权限被用户同意，可以去放肆了。
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + mTvPhoneNumber.getText().toString().trim()));
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
 //                    } else {
 //                        // 权限被用户拒绝了，洗洗睡吧。
 //                        ToastUtils.showShortToast(PhoneDialogActivity.this, getString(R.string.permission_tips));
@@ -133,14 +137,19 @@ public class PhoneDialogActivity extends BaseActivity implements View.OnClickLis
         }
     }
 
-    private void getData(){
+    private void getData() {
         String orgCode = "";
-        if(isLogin(this)){
+        if (isLogin(this)) {
         }
-        serverDao.getHotLine(type, "", new DialogCallback<BaseResponse<List>>(this) {
+        serverDao.getHotLine(type, orgCode, new DialogCallback<BaseResponse<HotlineModel>>(this) {
             @Override
-            public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
-
+            public void onSuccess(BaseResponse<HotlineModel> baseResponse, Call call, Response response) {
+                try {
+                    mTvPhoneNumber.setText(baseResponse.retData.contact);
+                    mTvTime.setText(getString(R.string.txt_work_time) + baseResponse.retData.work_start + "~" + baseResponse.retData.work_end);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override

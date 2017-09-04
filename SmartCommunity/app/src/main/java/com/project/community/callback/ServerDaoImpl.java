@@ -21,7 +21,9 @@ import com.project.community.model.DictionaryResponse;
 import com.project.community.model.DistModel;
 import com.project.community.model.FileUploadModel;
 import com.project.community.model.GuideModel;
+import com.project.community.model.HotlineModel;
 import com.project.community.model.NewsModel;
+import com.project.community.model.PaymentWayModel;
 import com.project.community.model.SearchModel;
 import com.project.community.model.UserModel;
 import com.project.community.model.UserResponse;
@@ -260,7 +262,7 @@ public class ServerDaoImpl implements ServerDao {
     }
 
     @Override
-    public void getHotLine(String type, String orgCode, JsonCallback<BaseResponse<List>> callback) {
+    public void getHotLine(String type, String orgCode, JsonCallback<BaseResponse<HotlineModel>> callback) {
         String url = AppConstants.URL_ZHENGWU_HOTLINE;
         if ("1".equals(type))
             url = AppConstants.URL_ZHENGWU_HOTLINE;
@@ -372,6 +374,13 @@ public class ServerDaoImpl implements ServerDao {
         OkGo.post(AppConstants.URL_WUYE_INDEX)
                 .tag(mContext)
                 .params(params)
+                .execute(callback);
+    }
+
+    @Override
+    public void getPaymentWay(JsonCallback<BaseResponse<List<PaymentWayModel>>> callback) {
+        OkGo.post(AppConstants.URL_JIAOFEI_TYPE)
+                .tag(mContext)
                 .execute(callback);
     }
 }

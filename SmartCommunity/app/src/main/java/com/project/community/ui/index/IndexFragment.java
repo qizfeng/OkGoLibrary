@@ -530,7 +530,6 @@ public class IndexFragment extends BaseFragment implements GestureDetector.OnGes
 
 
     private void loadData() {
-
         serverDao.getNewsList(new JsonCallback<BaseResponse<List<NewsModel>>>() {
             @Override
             public void onSuccess(BaseResponse<List<NewsModel>> newsResponseBaseResponse, Call call, Response response) {
@@ -545,8 +544,6 @@ public class IndexFragment extends BaseFragment implements GestureDetector.OnGes
                     } else {
                         //显示没有更多数据
                         if (page == 5) {
-//                            mAdapter.loadMoreComplete();
-//                            mAdapter.setEnableLoadMore(false);
                             mAdapter.loadMoreEnd();         //加载完成
                         } else {
                             List<NewsModel> data = new ArrayList<>();

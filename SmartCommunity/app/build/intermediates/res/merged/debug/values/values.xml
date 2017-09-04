@@ -1185,6 +1185,7 @@
     <string name="txt_title">标题</string>
     <string name="txt_unsave">离开本页,填写的内容将不保留,您是否确定离开?</string>
     <string name="txt_wei_pay">微信支付</string>
+    <string name="txt_work_time">工作时间:</string>
     <string name="txt_write_comment">写评论</string>
     <string name="txt_write_houseno">填写房屋编号</string>
     <string name="umeng_example_home_btn_plus">社交分享</string>

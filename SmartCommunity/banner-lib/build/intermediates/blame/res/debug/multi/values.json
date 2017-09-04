@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/banner-lib/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
+        "outputFile": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/banner-lib/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
         "map": [
             {
                 "to": {
@@ -372,7 +372,7 @@
                     "endOffset": 1368
                 },
                 "from": {
-                    "file": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/banner-lib/src/main/res/values/color.xml",
+                    "file": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/banner-lib/src/main/res/values/color.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -657,7 +657,7 @@
                     "endOffset": 2476
                 },
                 "from": {
-                    "file": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/banner-lib/src/main/res/values/color.xml",
+                    "file": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/banner-lib/src/main/res/values/color.xml",
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
@@ -676,7 +676,7 @@
                     "endOffset": 2517
                 },
                 "from": {
-                    "file": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/banner-lib/src/main/res/values/color.xml",
+                    "file": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/banner-lib/src/main/res/values/color.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -1018,7 +1018,7 @@
                     "endOffset": 3601
                 },
                 "from": {
-                    "file": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/banner-lib/src/main/res/values/color.xml",
+                    "file": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/banner-lib/src/main/res/values/color.xml",
                     "position": {
                         "startLine": 12,
                         "startColumn": 4,
@@ -1037,7 +1037,7 @@
                     "endOffset": 3659
                 },
                 "from": {
-                    "file": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/banner-lib/src/main/res/values/color.xml",
+                    "file": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/banner-lib/src/main/res/values/color.xml",
                     "position": {
                         "startLine": 11,
                         "startColumn": 4,
@@ -1056,7 +1056,7 @@
                     "endOffset": 3700
                 },
                 "from": {
-                    "file": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/banner-lib/src/main/res/values/color.xml",
+                    "file": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/banner-lib/src/main/res/values/color.xml",
                     "position": {
                         "startLine": 15,
                         "startColumn": 4,
@@ -1075,7 +1075,7 @@
                     "endOffset": 3753
                 },
                 "from": {
-                    "file": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/banner-lib/src/main/res/values/color.xml",
+                    "file": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/banner-lib/src/main/res/values/color.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
@@ -1094,7 +1094,7 @@
                     "endOffset": 3808
                 },
                 "from": {
-                    "file": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/banner-lib/src/main/res/values/color.xml",
+                    "file": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/banner-lib/src/main/res/values/color.xml",
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
@@ -1455,7 +1455,7 @@
                     "endOffset": 5134
                 },
                 "from": {
-                    "file": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/banner-lib/src/main/res/values/color.xml",
+                    "file": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/banner-lib/src/main/res/values/color.xml",
                     "position": {
                         "startLine": 9,
                         "startColumn": 4,
@@ -1474,7 +1474,7 @@
                     "endOffset": 5174
                 },
                 "from": {
-                    "file": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/banner-lib/src/main/res/values/color.xml",
+                    "file": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/banner-lib/src/main/res/values/color.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -4229,7 +4229,7 @@
                     "endOffset": 38208
                 },
                 "from": {
-                    "file": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/banner-lib/src/main/res/values/strings.xml",
+                    "file": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/banner-lib/src/main/res/values/strings.xml",
                     "position": {
                         "startLine": 1,
                         "startColumn": 4,

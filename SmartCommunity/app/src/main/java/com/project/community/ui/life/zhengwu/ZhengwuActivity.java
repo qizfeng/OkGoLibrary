@@ -30,8 +30,6 @@ import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
 import com.library.okgo.request.BaseRequest;
-import com.library.okgo.utils.DateUtil;
-import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.constants.AppConstants;
@@ -77,7 +75,6 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
     HorizaontalGridView gridView;
 
     private int pageIndex = 1;//当前页码
-    //    private NewsPageAdapter mAdapter;
     private View header;
     private List<ModuleModel> moduleModels = new ArrayList<>();
     private List<CommentModel> comments = new ArrayList<>();//评论列表
@@ -140,10 +137,6 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
         }, new DiggClickListener() {
             @Override
             public void onDiggClick(ImageView imageView, TextView textView, int position) {
-                // position = position - 1;//去掉头部
-//                mAdapter.getData().get(position).hits = mAdapter.getData().get(position).hits + 1;
-//                textView.setText(mAdapter.getData().get(position).hits + "");
-//                imageView.setImageResource(R.mipmap.c1_icon9_p);
                 if (isLogin(ZhengwuActivity.this))
                     onCollect(textView, imageView, position);
                 else
@@ -252,7 +245,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
      * @param position
      */
     private void onCollect(final TextView textView, final ImageView imageView, final int position) {
-        serverDao.doCollectTopic(getUser(this).id, mAdapter.getItem(position).id, new JsonCallback<BaseResponse<List>>() {
+        serverDao.doCollectTopic(getUser(this).id, mAdapter.getItem(position).id, new DialogCallback<BaseResponse<List>>(this) {
             @Override
             public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
                 if ("收藏成功".equals(baseResponse.message)) {
@@ -456,7 +449,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             userId = getUser(this).id;
         else
             userId = "";
-        serverDao.getTypeTopic(userId, pageIndex, AppConstants.PAGE_SIZE, type, new DialogCallback<BaseResponse<List<ArticleModel>>>(this) {
+        serverDao.getTypeTopic(userId, pageIndex, AppConstants.PAGE_SIZE, type, new JsonCallback<BaseResponse<List<ArticleModel>>>() {
             @Override
             public void onSuccess(BaseResponse<List<ArticleModel>> baseResponse, Call call, Response response) {
                 if (pageIndex == 1) {
@@ -487,6 +480,10 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
                 setRefreshing(false);
             }
 
+            @Override
+            public void onBefore(BaseRequest request) {
+                super.onBefore(request);
+            }
         });
     }
 
