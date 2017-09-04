@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="alanapi-switchbutton-0.0.3">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.android/build-cache/2cec8e7f24209e4d5c6d4f26e3593c73018afc58/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/2cec8e7f24209e4d5c6d4f26e3593c73018afc58/output/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.alanapi.switchbutton/alanapi-switchbutton/0.0.3/e13f124f206859ac94adaa14981e090eb20e139b/alanapi-switchbutton-0.0.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
