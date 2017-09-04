@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#000000</color>
+    <color name="green">#cc44ff18</color>
+    <color name="grey">#55000000</color>
+    <color name="number_normal_color">#cc666666</color>
+    <color name="number_selected_color">#ccA500CC</color>
+    <color name="orange">#FF5809</color>
+    <color name="point_normal_color">#ffffff</color>
+    <color name="point_selected_color">#103375</color>
+    <color name="test">#ccA500CC</color>
+    <color name="white">#ffffff</color>
+    <string name="app_name">banner-lib</string>
+</resources>

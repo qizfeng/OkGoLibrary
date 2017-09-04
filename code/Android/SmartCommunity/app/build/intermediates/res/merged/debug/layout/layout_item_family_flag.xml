@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_family_no"
+        style="@style/textview_style"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingLeft="@dimen/dp_15"
+        android:text="@string/txt_family_person"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/common_sub_title_txt_size" />
+
+</LinearLayout>
