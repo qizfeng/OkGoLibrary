@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/navigation_collect"
+        android:icon="@mipmap/d4_shoucang1"
+        app:showAsAction="ifRoom"
+        android:title="@string/txt_collect"/>
+
+    <item
+        android:id="@+id/navigation_share"
+        android:icon="@mipmap/d4_btn1"
+        app:showAsAction="ifRoom"
+        android:title="@string/txt_share"/>
+
+</menu>

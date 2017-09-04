@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#103375</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryLight">#3067A8</color>
+    <!--3F51B5-->
+    <color name="colorAccent">#ffffff</color>
+    <color name="txt_color">#333333</color>
+    <color name="gray_line">#999999</color>
+    <color name="common_gray_bg">#eeeeee</color>
+    <color name="login_gray_light_1">#afc7e4</color>
+    <color name="login_gray_light_2">#a8c1df</color>
+    <color name="login_bottom_txt">#103375</color>
+    <color name="login_input_color">#799CC5</color>
+    <color name="login_gray_line">#cccccc</color>
+    <color name="txt_gray_color">#666666</color>
+    <color name="switch_button_color">#48B759</color>
+    <color name="logout_txt_color">#D65432</color>
+    <color name="color_gray_333333">#333333</color>
+    <color name="color_gray_666666">#666666</color>
+    <color name="color_gray_999999">#999999</color>
+    <color name="color_gray_eeeeee">#eeeeee</color>
+    <color name="color_gray_b3c0d5">#b3c0d5</color>
+    <color name="color_gray_e5e5e5">#e5e5e5</color>
+    <color name="color_red_d54824">#d54824</color>
+    <color name="color_grag_93b0cc">#9eb0cc</color>
+</resources>

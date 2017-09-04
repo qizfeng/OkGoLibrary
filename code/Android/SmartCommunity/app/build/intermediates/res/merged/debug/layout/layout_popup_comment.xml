@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pop_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    android:layout_gravity="bottom"
+    android:layout_alignParentBottom="true">
+
+    <ListView
+        android:id="@+id/lv_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_comment_num"
+        android:divider="@null"
+        android:layout_marginTop="100dp"
+        android:layout_above="@+id/bottom_layout"
+        android:background="@color/white"/>
+
+    <LinearLayout
+        android:id="@+id/bottom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_65"
+            android:paddingBottom="10dp"
+            android:paddingTop="@dimen/dp_10"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:minHeight="45dp"
+                android:maxLines="3"
+                style="@style/rectangle_info_input"
+                android:textCursorDrawable="@drawable/edit_cursor_color"
+                android:layout_toLeftOf="@+id/btn_send"
+                android:gravity="center_vertical"
+                android:hint="@string/txt_write_comment"
+                android:inputType="textMultiLine"
+                android:padding="10dp"
+                android:scrollHorizontally="false">
+
+                <requestFocus></requestFocus>
+            </EditText>
+
+            <Button
+                android:id="@+id/btn_send"
+                style="@style/rectangle_send_button"
+                android:layout_width="65dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:text="@string/txt_button_send"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_line" />
+    </LinearLayout>
+</RelativeLayout>

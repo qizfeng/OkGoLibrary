@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+    <include
+        layout="@layout/pub_layout_toolbar"/>
+    <EditText
+        android:id="@+id/et_house_name"
+        android:layout_marginTop="@dimen/dp_65"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_15"
+        android:hint="@string/txt_add_family_name_hint"
+        android:textCursorDrawable="@drawable/edit_cursor_color"
+        style="@style/rectangle_info_input"/>
+    <EditText
+        android:id="@+id/et_house_no"
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_15"
+        android:hint="@string/txt_add_house_no_hint"
+        android:textCursorDrawable="@drawable/edit_cursor_color"
+        style="@style/rectangle_info_input"/>
+
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_marginTop="@dimen/dp_55"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:text="@string/txt_add_house_no_next"
+        style="@style/rectangle_register_button"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_gray_666666"
+        android:layout_marginTop="@dimen/dp_55"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:text="@string/txt_add_house_no_desc"
+        android:textColorLink="@color/colorPrimary"
+        android:textSize="@dimen/common_txt_size"
+        android:linksClickable="true"
+        android:autoLink="all"/>
+</LinearLayout>

@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/menu/menu_webview.xml",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/src/main/res/menu/menu_webview.xml"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/menu/menu_category.xml",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/src/main/res/menu/menu_category.xml"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/menu/main_bottom_navigation.xml",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/src/main/res/menu/main_bottom_navigation.xml"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/menu/menu_topic_detail.xml",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/src/main/res/menu/menu_topic_detail.xml"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/menu/menu_actionbar.xml",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/src/main/res/menu/menu_actionbar.xml"
+    }
+]
