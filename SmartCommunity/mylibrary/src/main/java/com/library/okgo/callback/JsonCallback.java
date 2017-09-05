@@ -14,6 +14,7 @@ import org.json.JSONObject;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
+import okhttp3.Call;
 import okhttp3.Response;
 
 /**
@@ -121,6 +122,9 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
                     response.close();
                     return (T) baseResponse;
                 } else {
+                    LogUtils.e("error:" + message);
+                    if (message.contains("No address"))
+                        message = "似乎已断开与互联网的链接。";
                     throw new IllegalStateException(message);
                 }
             } else {
@@ -134,4 +138,5 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
             throw new IllegalStateException("基类错误无法解析!");
         }
     }
+
 }
