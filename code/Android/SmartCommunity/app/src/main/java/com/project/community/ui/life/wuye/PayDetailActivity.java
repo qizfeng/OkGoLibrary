@@ -17,6 +17,7 @@ import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.listener.RecycleItemClickListener;
 import com.project.community.model.NewsModel;
+import com.project.community.model.PaymentDetailHistoryModel;
 import com.project.community.ui.adapter.PayHistoryAdapter;
 import com.project.community.view.SpacesItemDecoration;
 
@@ -78,8 +79,8 @@ public class PayDetailActivity extends BaseActivity {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        List<NewsModel> data = new ArrayList<>();
-        NewsModel model = new NewsModel();
+        List<PaymentDetailHistoryModel> data = new ArrayList<>();
+        PaymentDetailHistoryModel model = new PaymentDetailHistoryModel();
         for (int i = 0; i < 6; i++)
             data.add(model);
         mAdapter = new PayHistoryAdapter(data, new RecycleItemClickListener() {

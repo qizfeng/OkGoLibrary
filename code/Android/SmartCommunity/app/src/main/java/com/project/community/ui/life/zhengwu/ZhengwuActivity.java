@@ -131,7 +131,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
                 if (isLogin(ZhengwuActivity.this))
                     getComments(mAdapter.getItem(position).id, view);
                 else
-                    showToast("沒有登录,无法进行此操作");
+                    showToast(getString(R.string.toast_no_login));
 
             }
         }, new DiggClickListener() {
@@ -140,7 +140,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
                 if (isLogin(ZhengwuActivity.this))
                     onCollect(textView, imageView, position);
                 else
-                    showToast("沒有登录,无法进行此操作");
+                    showToast(getString(R.string.toast_no_login));
             }
         });
 
@@ -190,9 +190,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             intent.setClass(ZhengwuActivity.this, PhoneDialogActivity.class);
             startActivity(intent);
         } else if ("公告".equals(typeStr) || "宣传".equals(typeStr) || "就业".equals(typeStr)) {
-            intent.setClass(ZhengwuActivity.this, TypeNewsActivity.class);
-            intent.putExtra("title", typeStr);
-            intent.putExtra("type", "mobile");//传递类型,测试数据写死了
+            setRefreshing(true);
             if ("公告".equals(typeStr)) {
                 pageIndex = 1;
                 type = AppConstants.ZHENGWU_GONGGAO_TYPE;
@@ -202,7 +200,6 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
                 type = AppConstants.ZHENGWU_XUANCHUAN_TYPE;
                 getTypeTopic(type + "");
             }
-//            startActivity(intent);
         } else if ("意见".equals(typeStr)) {
             intent.setClass(ZhengwuActivity.this, SuggestionActivity.class);
             startActivity(intent);
@@ -264,7 +261,8 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                showToast(e.getMessage());
+                if (!e.getMessage().contains("No address"))
+                    showToast(e.getMessage());
             }
         });
     }
@@ -303,7 +301,8 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                showToast(e.getMessage());
+                if (!e.getMessage().contains("No address"))
+                   showToast(e.getMessage());
             }
 
             @Override
@@ -468,7 +467,8 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                showToast(e.getMessage());
+                if (!e.getMessage().contains("No address"))
+                    showToast(e.getMessage());
             }
 
             @Override
@@ -502,7 +502,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
                 commentsPopwinAdapter = new CommentsPopwinAdapter(ZhengwuActivity.this, comments, new RecycleItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        recStr = "回复 " + commentsPopwinAdapter.getItem(position).userName + ":";
+                        recStr = getString(R.string.txt_receive) + commentsPopwinAdapter.getItem(position).userName + ":";
                         targetId = commentsPopwinAdapter.getItem(position).userId;
                         popupWindow.et_comment.setText(recStr);
                         popupWindow.et_comment.setSelection(popupWindow.et_comment.getText().length());
@@ -535,9 +535,12 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
                             }
                             doComment(parent, artId, popupWindow.et_comment.getText().toString(), "");
                         } else {
-                            if (!popupWindow.et_comment.getText().toString().contains(recStr))
+                            if (!popupWindow.et_comment.getText().toString().startsWith(recStr))
                                 targetId = "";
                             String content = popupWindow.et_comment.getText().toString().replace(recStr, "");
+                            if (TextUtils.isEmpty(content)) {
+                                return;
+                            }
                             doComment(parent, artId, content, targetId);
                         }
                     }
@@ -547,7 +550,8 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                showToast(e.getMessage());
+                if (!e.getMessage().contains("No address"))
+                    showToast(e.getMessage());
             }
         });
     }
@@ -570,7 +574,8 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                showToast(e.getMessage());
+                if (!e.getMessage().contains("No address"))
+                    showToast(e.getMessage());
             }
         });
     }

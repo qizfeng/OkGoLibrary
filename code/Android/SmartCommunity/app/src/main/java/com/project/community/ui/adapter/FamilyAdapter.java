@@ -5,9 +5,7 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.project.community.R;
-import com.project.community.listener.RecycleItemClickListener;
 import com.project.community.model.FamilyPersonModel;
-import com.project.community.model.PaymentHistroyModel;
 
 import java.util.ArrayList;
 import java.util.List;

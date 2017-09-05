@@ -1,4 +1,4 @@
-#Mon Sep 04 18:41:33 CST 2017
-base.0=/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main
+#Tue Sep 05 22:23:07 CST 2017
+base.0=/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main
 renamed.0=classes.dex
-file.0=/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex
+file.0=/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex

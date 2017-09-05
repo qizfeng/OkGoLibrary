@@ -64,7 +64,7 @@
     <style name="rectangle_gray_button">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">45dp</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">@dimen/common_txt_size</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:background">@drawable/button_round_gray</item>
     </style>

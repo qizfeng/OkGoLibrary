@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/common_gray_bg"
+    android:background="@color/color_gray_eeeeee"
     android:orientation="vertical">
 
     <include layout="@layout/pub_layout_toolbar" />
@@ -10,14 +10,17 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
+        android:layout_height="wrap_content"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_10"
+        android:background="@color/color_gray_eeeeee"/>
     <Button
         android:id="@+id/btn_add"
         style="@style/textview_style"
         android:layout_width="match_parent"
+        android:background="@color/white"
         android:layout_height="@dimen/dp_55"
-        android:layout_marginTop="@dimen/dp_10"
         android:gravity="center"
         android:text="@string/button_add"
         android:textColor="@color/colorPrimary"

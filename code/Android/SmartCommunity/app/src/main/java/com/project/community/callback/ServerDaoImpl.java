@@ -8,9 +8,7 @@ import com.library.okgo.cache.CacheMode;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
 import com.library.okgo.model.HttpParams;
-import com.library.okgo.utils.LogUtils;
 import com.library.okgo.utils.ToastUtils;
-import com.project.community.App;
 import com.project.community.R;
 import com.project.community.constants.AppConstants;
 import com.project.community.model.AgreementResponse;
@@ -22,11 +20,14 @@ import com.project.community.model.DistModel;
 import com.project.community.model.FileUploadModel;
 import com.project.community.model.GuideModel;
 import com.project.community.model.HotlineModel;
+import com.project.community.model.HouseModel;
 import com.project.community.model.NewsModel;
+import com.project.community.model.PaymentDetailModel;
+import com.project.community.model.PaymentHouseHistroyModel;
+import com.project.community.model.PaymentInfoModel;
 import com.project.community.model.PaymentWayModel;
 import com.project.community.model.SearchModel;
 import com.project.community.model.UserModel;
-import com.project.community.model.UserResponse;
 import com.project.community.model.WuyeIndexResponse;
 import com.project.community.model.ZhengwuIndexResponse;
 import com.project.community.util.NetworkUtils;
@@ -100,7 +101,7 @@ public class ServerDaoImpl implements ServerDao {
                 .params("password", password)
                 .params("prepPassword", prepPassword)
                 .params("idCard", idcard)
-                .params("orgCode", "650422100007000")
+                .params("orgCode", sysOrg)//650422100007000
                 .execute(callback);
     }
 
@@ -225,6 +226,7 @@ public class ServerDaoImpl implements ServerDao {
 
     @Override
     public void uploadUserPhoto(String id, String photo, JsonCallback<BaseResponse<List>> callback) {
+        checkNet();
         OkGo.post(AppConstants.URL_EDIT_USER_INFO)
                 .tag(mContext)
                 .params("id", id)
@@ -234,6 +236,7 @@ public class ServerDaoImpl implements ServerDao {
 
     @Override
     public void getBannerData(String imageType, String imageAddress, JsonCallback<BaseResponse<BannerResponse>> callback) {
+        checkNet();
         OkGo.post(AppConstants.URL_BANNER)
                 .tag(mContext)
                 .params("imageType", imageType)
@@ -243,6 +246,7 @@ public class ServerDaoImpl implements ServerDao {
 
     @Override
     public void submitSuggest(String phone, String title, String context, JsonCallback<BaseResponse<List>> callback) {
+        checkNet();
         OkGo.post(AppConstants.URL_SUGGEST)
                 .tag(mContext)
                 .params("phone", phone)
@@ -254,6 +258,7 @@ public class ServerDaoImpl implements ServerDao {
 
     @Override
     public void getWorkGuide(String guideTheme, String guidePart, JsonCallback<BaseResponse<List<GuideModel>>> callback) {
+        checkNet();
         OkGo.post(AppConstants.URL_GUIDE_LIST)
                 .tag(mContext)
                 .params("guideTheme", guideTheme)
@@ -262,12 +267,15 @@ public class ServerDaoImpl implements ServerDao {
     }
 
     @Override
-    public void getHotLine(String type, String orgCode, JsonCallback<BaseResponse<HotlineModel>> callback) {
+    public void getHotLine(String type, String orgCode, JsonCallback<BaseResponse<List<HotlineModel>>> callback) {
+        checkNet();
         String url = AppConstants.URL_ZHENGWU_HOTLINE;
         if ("1".equals(type))
             url = AppConstants.URL_ZHENGWU_HOTLINE;
         else if ("2".equals(type))
             url = AppConstants.URL_WUYE_HOTLINE;
+        if (TextUtils.isEmpty(orgCode))
+            orgCode = "650422100007000";
         OkGo.post(url)
                 .tag(mContext)
                 .params("orgCode", orgCode)
@@ -275,14 +283,15 @@ public class ServerDaoImpl implements ServerDao {
     }
 
     @Override
-    public void getTypeTopic(String userId,int pageNo,int pageSize,String type, JsonCallback<BaseResponse<List<ArticleModel>>> callback) {
+    public void getTypeTopic(String userId, int pageNo, int pageSize, String type, JsonCallback<BaseResponse<List<ArticleModel>>> callback) {
+        checkNet();
         HttpParams params = new HttpParams();
         params.put("pageNo", pageNo);
         params.put("pageSize", pageSize);
         if (!TextUtils.isEmpty(userId)) {
             params.put("userId", userId);
         }
-        params.put("type",type);
+        params.put("type", type);
         OkGo.post(AppConstants.URL_TYPE_TOPIC)
                 .tag(mContext)
                 .params(params)
@@ -291,6 +300,7 @@ public class ServerDaoImpl implements ServerDao {
 
     @Override
     public void getTopicDetail(String userId, String artId, JsonCallback<BaseResponse<ArticleModel>> callback) {
+        checkNet();
         OkGo.post(AppConstants.URL_TOPIC_DETAIL)
                 .tag(mContext)
                 .params("userId", userId)
@@ -309,6 +319,7 @@ public class ServerDaoImpl implements ServerDao {
 
     @Override
     public void getComments(String artId, JsonCallback<BaseResponse<List<CommentModel>>> callback) {
+        checkNet();
         OkGo.post(AppConstants.URL_COMMENT_LIST)
                 .tag(mContext)
                 .params("artId", artId)
@@ -317,6 +328,7 @@ public class ServerDaoImpl implements ServerDao {
 
     @Override
     public void doComment(String userId, String artId, String content, String targetId, JsonCallback<BaseResponse<List>> callback) {
+        checkNet();
         HttpParams params = new HttpParams();
         params.put("userId", userId);
         params.put("artId", artId);
@@ -331,6 +343,7 @@ public class ServerDaoImpl implements ServerDao {
 
     @Override
     public void getDistList(JsonCallback<BaseResponse<List<DistModel>>> callback) {
+        checkNet();
         OkGo.post(AppConstants.URL_DIST_LIST)
                 .tag(mContext)
                 .execute(callback);
@@ -338,6 +351,7 @@ public class ServerDaoImpl implements ServerDao {
 
     @Override
     public void doDeleteComment(String userId, String commentId, int type, JsonCallback<BaseResponse<List>> callback) {
+        checkNet();
         OkGo.post(AppConstants.URL_COMMENT_DELETE)
                 .tag(mContext)
                 .params("userId", userId)
@@ -348,6 +362,7 @@ public class ServerDaoImpl implements ServerDao {
 
     @Override
     public void doSearch(String type, String keywords, JsonCallback<BaseResponse<List<SearchModel>>> callback) {
+        checkNet();
         String url = AppConstants.URL_SEARCH_ZHENGWU;
         if ("0".equals(type))
             url = AppConstants.URL_SEARCH_ZHENGWU;
@@ -363,14 +378,15 @@ public class ServerDaoImpl implements ServerDao {
     }
 
     @Override
-    public void getWuyeIndexData(String userId,int pageNo,int pageSize,int type, JsonCallback<BaseResponse<WuyeIndexResponse>> callback) {
+    public void getWuyeIndexData(String userId, int pageNo, int pageSize, int type, JsonCallback<BaseResponse<WuyeIndexResponse>> callback) {
+        checkNet();
         HttpParams params = new HttpParams();
         params.put("pageNo", pageNo);
         params.put("pageSize", pageSize);
         if (!TextUtils.isEmpty(userId)) {
             params.put("userId", userId);
         }
-        params.put("type",type);
+        params.put("type", type);
         OkGo.post(AppConstants.URL_WUYE_INDEX)
                 .tag(mContext)
                 .params(params)
@@ -379,8 +395,54 @@ public class ServerDaoImpl implements ServerDao {
 
     @Override
     public void getPaymentWay(JsonCallback<BaseResponse<List<PaymentWayModel>>> callback) {
+        checkNet();
         OkGo.post(AppConstants.URL_JIAOFEI_TYPE)
                 .tag(mContext)
+                .execute(callback);
+    }
+
+    @Override
+    public void getPaymentNoData(String userId, JsonCallback<BaseResponse<List<PaymentHouseHistroyModel>>> callback) {
+        checkNet();
+        OkGo.post(AppConstants.URL_JIAOFEI_NO_LIST)
+                .tag(mContext)
+                .params("userId", userId)
+                .execute(callback);
+    }
+
+    @Override
+    public void selectHouseInfo(String roomNo, JsonCallback<BaseResponse<HouseModel>> callback) {
+        checkNet();
+        OkGo.post(AppConstants.URL_SELECT_HOUSE)
+                .tag(mContext)
+                .params("roomNo", roomNo)
+                .execute(callback);
+    }
+
+    @Override
+    public void addHouse(String userId, String roomNo, JsonCallback<BaseResponse<HouseModel>> callback) {
+        OkGo.post(AppConstants.URL_ADD_HOUSE)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("roomNo", roomNo)
+                .execute(callback);
+    }
+
+    @Override
+    public void deleteHouse(String userId, String payRoomId, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.URL_DELETE_HOUSE)
+                .tag(mContext)
+                .params("userId",userId)
+                .params("payRoomId",payRoomId)
+                .execute(callback);
+    }
+
+    @Override
+    public void getPaymentDetailInfo(String paymentType, String roomNo, JsonCallback<BaseResponse<PaymentInfoModel>> callback) {
+        OkGo.post(AppConstants.URL_SELECT_PAY_INFO)
+                .tag(mContext)
+                .params("paymentType",paymentType)
+                .params("roomNo",roomNo)
                 .execute(callback);
     }
 }

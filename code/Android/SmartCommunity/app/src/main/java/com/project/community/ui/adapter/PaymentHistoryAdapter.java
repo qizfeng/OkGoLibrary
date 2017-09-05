@@ -5,7 +5,7 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseSectionQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.project.community.R;
-import com.project.community.model.PaymentHistroyModel;
+import com.project.community.model.PaymentHouseHistroyModel;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * 缴费历史适配器
  */
 
-public class PaymentHistoryAdapter extends BaseSectionQuickAdapter<PaymentHistroyModel, BaseViewHolder> {
+public class PaymentHistoryAdapter extends BaseSectionQuickAdapter<PaymentHouseHistroyModel, BaseViewHolder> {
     OnAdapterItemClickListener onClickListener;
 
     /**
@@ -31,7 +31,7 @@ public class PaymentHistoryAdapter extends BaseSectionQuickAdapter<PaymentHistro
     }
 
     @Override
-    protected void convertHead(BaseViewHolder helper, final PaymentHistroyModel item) {
+    protected void convertHead(BaseViewHolder helper, final PaymentHouseHistroyModel item) {
         if(item.isHeader){
             if ("水费".equals(item.header)){
                 helper.setImageResource(R.id.iv_pay_icon,R.mipmap.d21_icon1);
@@ -44,9 +44,9 @@ public class PaymentHistoryAdapter extends BaseSectionQuickAdapter<PaymentHistro
 
 
     @Override
-    protected void convert(final BaseViewHolder helper, final PaymentHistroyModel item) {
+    protected void convert(final BaseViewHolder helper, final PaymentHouseHistroyModel item) {
         if(!item.isHeader){
-            helper.setText(R.id.tv_pay_no,item.payNo);
+            helper.setText(R.id.tv_pay_no,"房屋编号"+item.room.getRoomNo());
             helper.setOnClickListener(R.id.layout_item, new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -65,8 +65,8 @@ public class PaymentHistoryAdapter extends BaseSectionQuickAdapter<PaymentHistro
 
 
     public interface OnAdapterItemClickListener {
-        void onDeleteClick(List<PaymentHistroyModel> list, int position);
-        void onItemClick(PaymentHistroyModel item,int position);
+        void onDeleteClick(List<PaymentHouseHistroyModel> list, int position);
+        void onItemClick(PaymentHouseHistroyModel item, int position);
     }
 
 }

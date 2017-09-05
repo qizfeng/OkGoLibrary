@@ -17,6 +17,7 @@ import com.library.okgo.utils.DateUtil;
 import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
+import com.project.community.constants.AppConstants;
 import com.project.community.listener.RecycleItemClickListener;
 import com.project.community.model.CommentModel;
 import com.project.community.util.StringUtils;
@@ -41,11 +42,16 @@ public class CommentsApdater extends BaseQuickAdapter<CommentModel, BaseViewHold
 
     @Override
     protected void convert(final BaseViewHolder baseViewHolder, final CommentModel model) {
-        final int position = baseViewHolder.getLayoutPosition() - 1;
         baseViewHolder.getConvertView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                itemClickListener.onItemClick(view, position);
+                itemClickListener.onItemClick(view, baseViewHolder.getLayoutPosition());
+            }
+        });
+        baseViewHolder.setOnClickListener(R.id.iv_delete, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemClickListener.onCustomClick(v,baseViewHolder.getLayoutPosition());
             }
         });
         if (((BaseActivity) mContext).isLogin(mContext)) {
@@ -60,7 +66,7 @@ public class CommentsApdater extends BaseQuickAdapter<CommentModel, BaseViewHold
         }
         baseViewHolder.setVisible(R.id.tv_comment_num, false);
         Glide.with(mContext)
-                .load(model.photo)
+                .load(AppConstants.HOST+model.photo)
                 .placeholder(R.mipmap.d54_tx)
                 .bitmapTransform(new CropCircleTransformation(mContext))
                 .into((ImageView) baseViewHolder.getView(R.id.iv_header));
@@ -70,10 +76,9 @@ public class CommentsApdater extends BaseQuickAdapter<CommentModel, BaseViewHold
         else {
             Spanned result;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                //加粗
-                result = Html.fromHtml(StringUtils.ToDBC("回复 " + model.targetName + ":" + model.content), Html.FROM_HTML_MODE_LEGACY);
+                result = Html.fromHtml(StringUtils.ToDBC(mContext.getResources().getString(R.string.txt_receive) + model.targetName + ":" + model.content), Html.FROM_HTML_MODE_LEGACY);
             } else {
-                result = Html.fromHtml(StringUtils.ToDBC("回复 " + model.targetName + ":" + model.content));
+                result = Html.fromHtml(StringUtils.ToDBC(mContext.getResources().getString(R.string.txt_receive) + model.targetName + ":" + model.content));
             }
             /**
              *  * 设置蓝

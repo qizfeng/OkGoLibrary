@@ -3,6 +3,7 @@ package com.project.community.ui.adapter;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -67,17 +68,26 @@ public class ArticlePageAdapter extends BaseQuickAdapter<ArticleModel, BaseViewH
         else if (1 == model.status)
             baseViewHolder.setImageResource(R.id.iv_zan_icon, R.mipmap.c1_icon9_p);
         try {
-            long timeDiff = Long.parseLong(model.weightDate) - DateUtil.millis();
-            if (timeDiff > 0) {
-                if (999 == model.weight) {//权重999显示置顶
+            if (!TextUtils.isEmpty(model.weightDate)) {//失效时间不为空
+                long timeDiff = Long.parseLong(model.weightDate) - DateUtil.millis();
+                if (timeDiff > 0) {//失效时间大于当前时间
+                    if (999 == model.weight) {//权重999显示hot
+                        baseViewHolder.setImageResource(R.id.iv_status, R.mipmap.c1_bq1);
+                        baseViewHolder.setVisible(R.id.iv_status, true);
+                    } else {//不显示hot
+                        baseViewHolder.setVisible(R.id.iv_status, false);
+                    }
+                } else {//显示失效
+                    baseViewHolder.setVisible(R.id.iv_status, true);
+                    baseViewHolder.setImageResource(R.id.iv_status, R.mipmap.c1_bq2);
+                }
+            } else {//失效时间为空
+                if (999 == model.weight) {//权重999显示hot
                     baseViewHolder.setImageResource(R.id.iv_status, R.mipmap.c1_bq1);
                     baseViewHolder.setVisible(R.id.iv_status, true);
-                } else {
+                } else {//不显示标签
                     baseViewHolder.setVisible(R.id.iv_status, false);
                 }
-            } else {//失效
-                baseViewHolder.setVisible(R.id.iv_status, true);
-                baseViewHolder.setImageResource(R.id.iv_status, R.mipmap.c1_bq2);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -87,6 +97,15 @@ public class ArticlePageAdapter extends BaseQuickAdapter<ArticleModel, BaseViewH
             } else {
                 baseViewHolder.setVisible(R.id.iv_status, false);
             }
+        }
+
+        if (TextUtils.isEmpty(model.surveyId)) {
+            baseViewHolder.setVisible(R.id.tv_wenjuan, false);
+        } else {
+            if (!TextUtils.isEmpty(model.image))
+                baseViewHolder.setVisible(R.id.tv_wenjuan, true);
+            else
+                baseViewHolder.setVisible(R.id.tv_wenjuan, false);
         }
 
         GlideImageLoader glide = new GlideImageLoader();

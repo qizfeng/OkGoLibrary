@@ -137,7 +137,7 @@ public class IndexFragment extends BaseFragment implements GestureDetector.OnGes
                 if (isLogin(getActivity()))
                     popAwindow(view, position);
                 else
-                    showToast("沒有登录,无法进行此操作");
+                    showToast(getString(R.string.toast_no_login));
             }
         }, new DiggClickListener() {
             @Override
@@ -285,7 +285,7 @@ public class IndexFragment extends BaseFragment implements GestureDetector.OnGes
         commentsPopwinAdapter = new CommentsPopwinAdapter(getActivity(), comments, new RecycleItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                popupWindow.et_comment.setText("回复 " + comments.get(position).userName + ":");
+                popupWindow.et_comment.setText(getString(R.string.txt_receive)+ comments.get(position).userName + ":");
                 popupWindow.et_comment.setSelection(popupWindow.et_comment.getText().length());
             }
 

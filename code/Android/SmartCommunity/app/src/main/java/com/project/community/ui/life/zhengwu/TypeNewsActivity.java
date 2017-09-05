@@ -281,7 +281,7 @@ public class TypeNewsActivity extends BaseActivity implements View.OnClickListen
         commentsPopwinAdapter = new CommentsPopwinAdapter(this, comments, new RecycleItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                popupWindow.et_comment.setText("回复 " + comments.get(position).userId + ":");
+                popupWindow.et_comment.setText(getString(R.string.txt_receive)+ comments.get(position).userId + ":");
                 popupWindow.et_comment.setSelection(popupWindow.et_comment.getText().length());
             }
 

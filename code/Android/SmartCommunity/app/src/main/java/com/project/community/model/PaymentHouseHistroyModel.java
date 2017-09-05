@@ -9,24 +9,25 @@ import java.io.Serializable;
  * 缴费历史模型
  */
 
-public class PaymentHistroyModel extends SectionEntity<PaymentHistroyModel> implements Serializable {
+public class PaymentHouseHistroyModel extends SectionEntity<HouseModel> implements Serializable {
     private static final long serialVersionUID = 6753210234564872868L;
     public String id;
     public int type;//1:缴费历史第一项标题展示 2:缴费历史
     public String payNo;
-    public String header;
-    public boolean isHeader;
+//    public String header;
+//    public boolean isHeader;
     public String icon;
     public int res;
+    public HouseModel room = new HouseModel();
 
-    public PaymentHistroyModel(boolean isHeader, String header, String icon,int res) {
+    public PaymentHouseHistroyModel(boolean isHeader, String header, String icon, int res) {
         super(isHeader, header);
         this.isHeader=isHeader;
         this.header=header;
         this.icon=icon;
         this.res=res;
     }
-    public PaymentHistroyModel(boolean isHeader, String header, String id, int type, String payNo) {
+    public PaymentHouseHistroyModel(boolean isHeader, String header, String id, int type, String payNo) {
         super(isHeader, header);
         this.id = id;
         this.type = type;
@@ -36,13 +37,15 @@ public class PaymentHistroyModel extends SectionEntity<PaymentHistroyModel> impl
     }
 
 
-
     @Override
     public String toString() {
-        return "PaymentHistroyModel{" +
+        return "PaymentHouseHistroyModel{" +
                 "id='" + id + '\'' +
                 ", type=" + type +
                 ", payNo='" + payNo + '\'' +
+                ", icon='" + icon + '\'' +
+                ", res=" + res +
+                ", room=" + room +
                 '}';
     }
 }

@@ -76,7 +76,8 @@ public class CompanionActivity extends BaseActivity implements View.OnClickListe
     private List<GuideModel> mData = new ArrayList<>();
     private List<DictionaryModel> dictionaryModels = new ArrayList<>();
     private String theme;
-    private String  part;
+    private String part;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,7 +128,8 @@ public class CompanionActivity extends BaseActivity implements View.OnClickListe
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                showToast(e.getMessage());
+                if (!e.getMessage().contains("No address"))
+                    showToast(e.getMessage());
             }
         });
     }
@@ -138,11 +140,11 @@ public class CompanionActivity extends BaseActivity implements View.OnClickListe
         switch (view.getId()) {
             case R.id.layout_depart:
                 show_dialog_type = SHOW_DIALOG_TYPE_DEPART;
-                getDictionary(getString(R.string.txt_choise_depart),"gov_part");
+                getDictionary(getString(R.string.txt_choise_depart), "gov_part");
                 break;
             case R.id.layout_theme:
                 show_dialog_type = SHOW_DIALOG_TYPE_THEME;
-                getDictionary(getString(R.string.txt_choise_theme),"gov_theme");
+                getDictionary(getString(R.string.txt_choise_theme), "gov_theme");
                 break;
             case R.id.tv_cancel:
                 if (mPopupWindow != null) {
@@ -154,10 +156,10 @@ public class CompanionActivity extends BaseActivity implements View.OnClickListe
                     mPopupWindow.dismiss();
                     if (show_dialog_type == SHOW_DIALOG_TYPE_DEPART) {
                         mTvDepart.setText(mLoopView.getCurrentItem().toString());
-                        part=dictionaryModels.get(mLoopView.getSelectedItem()).value;
+                        part = dictionaryModels.get(mLoopView.getSelectedItem()).value;
                     } else if (show_dialog_type == SHOW_DIALOG_TYPE_THEME) {
                         mTvTheme.setText(mLoopView.getCurrentItem().toString());
-                        theme=dictionaryModels.get(mLoopView.getSelectedItem()).value;
+                        theme = dictionaryModels.get(mLoopView.getSelectedItem()).value;
                     }
                 }
                 break;
@@ -176,7 +178,7 @@ public class CompanionActivity extends BaseActivity implements View.OnClickListe
      * @param type
      */
     private void getDictionary(final String title, final String type) {
-        serverDao.getDictionaryData(type+"", new JsonCallback<BaseResponse<DictionaryResponse>>() {
+        serverDao.getDictionaryData(type + "", new JsonCallback<BaseResponse<DictionaryResponse>>() {
             @Override
             public void onSuccess(BaseResponse<DictionaryResponse> baseResponse, Call call, Response response) {
                 dictionaryModels = new ArrayList<>();
@@ -186,7 +188,7 @@ public class CompanionActivity extends BaseActivity implements View.OnClickListe
         });
     }
 
-    private void showDialog(String title,List<DictionaryModel> dictionaryModels) {
+    private void showDialog(String title, List<DictionaryModel> dictionaryModels) {
         //填充对话框的布局
         View inflate = LayoutInflater.from(this).inflate(R.layout.layout_loopview, null);
         List<String> strings = new ArrayList<>();
@@ -194,9 +196,9 @@ public class CompanionActivity extends BaseActivity implements View.OnClickListe
             strings.add(dictionaryModels.get(i).label);
         }
         //初始化控件
-        TextView tv_cancel = (TextView)inflate.findViewById(R.id.tv_cancel);
-        TextView tv_confirm = (TextView)inflate.findViewById(R.id.tv_confirm);
-        TextView tv_title = (TextView)inflate.findViewById(R.id.tv_title);
+        TextView tv_cancel = (TextView) inflate.findViewById(R.id.tv_cancel);
+        TextView tv_confirm = (TextView) inflate.findViewById(R.id.tv_confirm);
+        TextView tv_title = (TextView) inflate.findViewById(R.id.tv_title);
         tv_title.setText(title);
         tv_cancel.setOnClickListener(this);
         tv_confirm.setOnClickListener(this);
@@ -210,7 +212,8 @@ public class CompanionActivity extends BaseActivity implements View.OnClickListe
 
             }
         });
-        mPopupWindow = new PopupWindow(CompanionActivity.this);
+        if (mPopupWindow == null)
+            mPopupWindow = new PopupWindow(CompanionActivity.this);
         // 设置视图
         mPopupWindow.setContentView(inflate);
         // 设置弹出窗体的宽和高

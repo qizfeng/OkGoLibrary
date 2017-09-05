@@ -34,6 +34,7 @@
 
     <!--政务-->
     <string name="title_wenjuan">问卷</string>
+    <string name="txt_wenjuan">问卷调查</string>
     <string name="txt_submit">提交</string>
     <string name="txt_know">我知道了</string>
     <string name="txt_phone">手机号</string>
@@ -109,7 +110,7 @@
     <string name="str_search_hint">搜索</string>
     <string name="str_searchHistory">搜索历史</string>
     <string name="str_clearSearchHistory">清空搜索记录</string>
-    <string name="str_search_empty">没有搜索结果</string>
+    <string name="str_search_empty">没有搜索结果~</string>
     <string name="str_empty_history">暂无搜索历史</string>
 
     <!--缴费-->
@@ -132,7 +133,7 @@
     <string name="txt_add_house_no_next">下一步</string>
     <string name="txt_add_house_no_desc">说明:\n房屋编号是指您缴费的房屋编码,无房屋编码客服电话:400-0000进行查询。</string>
     <string name="txt_house_no">房屋编码</string>
-   
+    <string name="txt_no_payment_info">暂无缴费信息</string>
     <!--意见-->
     <string name="txt_suggest_phone">请输入您的手机号</string>
 
@@ -209,6 +210,7 @@
     <string name="toast_empty_idcardno">身份证号不能为空</string>
     <string name="toast_empty_username">用户名不能为空</string>
     <string name="toast_error_idcard">请输入正确的身份证号</string>
+    <string name="toast_no_login">没有登录,无法进行此操作</string>
 
     <string name="txt_save">保存</string>
     <string name="txt_confirm">确定</string>
@@ -242,6 +244,8 @@
 
     <string name="txt_dont_leave">不离开</string>
     <string name="txt_leave">离开</string>
+    <string name="txt_money_unit">元</string>
+    <string name="txt_receive">回复 </string>
     <!--activity label name-->
     <string name="activity_splash">启动动画</string>
     <string name="activity_imageborwse">图片浏览</string>

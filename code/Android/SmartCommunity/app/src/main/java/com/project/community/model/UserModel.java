@@ -39,6 +39,7 @@ public class UserModel implements Serializable {
       "sex": "1",
       "admin": false,
       "roleNames": ""
+      orgCode:组织机构
     */
     public String id;//用户ID
     public String loginName;//用户名
@@ -77,6 +78,7 @@ public class UserModel implements Serializable {
     public String isOwner;//是否是业主
     public String nation;//民族
     public String roomNo;//房屋编号
+    public String orgCode;
 
     @Override
     public String toString() {
@@ -117,6 +119,7 @@ public class UserModel implements Serializable {
                 ", isOwner='" + isOwner + '\'' +
                 ", nation='" + nation + '\'' +
                 ", roomNo='" + roomNo + '\'' +
+                ", orgCode='" + orgCode + '\'' +
                 '}';
     }
 }
