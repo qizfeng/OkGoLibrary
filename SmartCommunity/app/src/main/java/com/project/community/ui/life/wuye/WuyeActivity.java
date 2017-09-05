@@ -158,7 +158,7 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                 if (isLogin(WuyeActivity.this))
                     getComments(mAdapter.getItem(position).id, view);
                 else
-                    showToast("沒有登录,无法进行此操作");
+                    showToast(getString(R.string.toast_no_login));
             }
         }, new DiggClickListener() {
             @Override
@@ -167,7 +167,7 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                 if (isLogin(WuyeActivity.this))
                     onCollect(textView, imageView, position);
                 else
-                    showToast("沒有登录,无法进行此操作");
+                    showToast(getString(R.string.toast_no_login));
             }
         });
 
@@ -275,7 +275,7 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                     type = AppConstants.WUYE_KUAIXUN;
                 else if (tab.getPosition() == 1)//公告
                     type = AppConstants.WUYE_GONGGAO;
-
+                setRefreshing(true);
                 pageIndex = 1;
                 loadData(type);
             }
@@ -356,7 +356,8 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                showToast(e.getMessage());
+                if (!e.getMessage().contains("No address"))
+                    showToast(e.getMessage());
 
             }
         });
@@ -557,7 +558,7 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                 commentsPopwinAdapter = new CommentsPopwinAdapter(WuyeActivity.this, comments, new RecycleItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        recStr = "回复 " + commentsPopwinAdapter.getItem(position).userName + ":";
+                        recStr = getString(R.string.txt_receive) + commentsPopwinAdapter.getItem(position).userName + ":";
                         targetId = commentsPopwinAdapter.getItem(position).userId;
                         popupWindow.et_comment.setText(recStr);
                         popupWindow.et_comment.setSelection(popupWindow.et_comment.getText().length());
@@ -590,9 +591,12 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                             }
                             doComment(parent, artId, popupWindow.et_comment.getText().toString(), "");
                         } else {
-                            if (!popupWindow.et_comment.getText().toString().contains(recStr))
+                            if (!popupWindow.et_comment.getText().toString().startsWith(recStr))
                                 targetId = "";
                             String content = popupWindow.et_comment.getText().toString().replace(recStr, "");
+                            if (TextUtils.isEmpty(content)) {
+                                return;
+                            }
                             doComment(parent, artId, content, targetId);
                         }
                     }
@@ -602,7 +606,8 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                showToast(e.getMessage());
+                if (!e.getMessage().contains("No address"))
+                    showToast(e.getMessage());
             }
         });
     }
@@ -625,7 +630,8 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                showToast(e.getMessage());
+                if (!e.getMessage().contains("No address"))
+                    showToast(e.getMessage());
             }
         });
     }
@@ -645,7 +651,8 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                showToast(e.getMessage());
+                if (!e.getMessage().contains("No address"))
+                    showToast(e.getMessage());
             }
         });
     }
@@ -677,7 +684,8 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                showToast(e.getMessage());
+                if (!e.getMessage().contains("No address"))
+                    showToast(e.getMessage());
             }
         });
     }

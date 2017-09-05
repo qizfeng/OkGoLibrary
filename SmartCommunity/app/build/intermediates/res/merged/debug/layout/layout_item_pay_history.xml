@@ -31,6 +31,7 @@
             android:textSize="@dimen/common_txt_size" />
 
         <TextView
+            android:id="@+id/tv_pay_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_40"

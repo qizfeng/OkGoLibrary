@@ -125,7 +125,8 @@ public class ModifyUserInfoActivity extends BaseActivity {
                     @Override
                     public void onError(Call call, Response response, Exception e) {
                         super.onError(call, response, e);
-                        showToast(e.getMessage());
+                        if (!e.getMessage().contains("No address"))
+                            showToast(e.getMessage());
                     }
                 });
     }

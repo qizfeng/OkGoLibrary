@@ -1,9 +1,11 @@
 package com.project.community.ui.life;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
@@ -13,6 +15,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,11 +23,14 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -89,6 +95,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
     private View header;
     private WebView mWebView;
     private TextView mTvCommentsTips;
+    private Button mBtnWenjuan;
     private List<CommentModel> comments = new ArrayList<>();//评论列表
     private CommentsApdater mAdapter;
     private String mUrl;
@@ -96,6 +103,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
     private String recStr = "";//回复评论
     private String targetId;//回復人id
     private MenuItem menuItem;
+    private Dialog mDialog;
 
     public static void startActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, TopicDetailActivity.class);
@@ -124,6 +132,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
         }
         header = LayoutInflater.from(this).inflate(R.layout.layout_header_topic_detail, null);
         mWebView = (WebView) header.findViewById(R.id.webView);
+        mBtnWenjuan = (Button) header.findViewById(R.id.btn_wenjuan);
         mTvCommentsTips = (TextView) header.findViewById(R.id.tv_comment_tips);
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
@@ -162,8 +171,9 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
         mAdapter = new CommentsApdater(comments, new RecycleItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+                position=position-1;//去掉头部
                 mBottomLayout.setVisibility(View.VISIBLE);
-                recStr = "回复 " + comments.get(position).userName + ":";
+                recStr = getString(R.string.txt_receive) + comments.get(position).userName + ":";
                 targetId = comments.get(position).userId;
                 mEtInput.setText(recStr);
                 mEtInput.setSelection(mEtInput.getText().length());
@@ -171,7 +181,8 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
 
             @Override
             public void onCustomClick(View view, int position) {
-
+                position=position-1;//去除头部
+                showAlertDialog(position);
             }
         });
         recyclerView.setAdapter(mAdapter);
@@ -252,21 +263,14 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
                     }
                     doComment(artId, mEtInput.getText().toString(), "");
                 } else {
-                    String content = mEtInput.getText().toString().replace(recStr, "");
-                    doComment(artId, content, targetId);
-                }
-                if (TextUtils.isEmpty(recStr)) {
-                    if (TextUtils.isEmpty(mEtInput.getText().toString())) {
-                        return;
-                    }
-                    doComment(artId, mEtInput.getText().toString(), "");
-                } else {
-                    if (!mEtInput.getText().toString().contains(recStr))
+                    if (!mEtInput.getText().toString().startsWith(recStr))
                         targetId = "";
                     String content = mEtInput.getText().toString().replace(recStr, "");
+                    if (TextUtils.isEmpty(content)) {
+                        return;
+                    }
                     doComment(artId, content, targetId);
                 }
-                doComment(artId, mEtInput.getText().toString(), targetId);
 //                recyclerView.smoothScrollToPosition(mAdapter.getItemCount() - 1);
                 break;
         }
@@ -298,7 +302,8 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                showToast(e.getMessage());
+                if (!e.getMessage().contains("No address"))
+                    showToast(e.getMessage());
             }
         });
     }
@@ -312,7 +317,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
      */
     private void doComment(final String artId, String content, String targetId) {
         if (!isLogin(this)) {
-            showToast("沒有登录,无法进行此操作");
+            showToast(getString(R.string.toast_no_login));
             return;
         }
         serverDao.doComment(getUser(this).id, artId, content, targetId, new DialogCallback<BaseResponse<List>>(this) {
@@ -326,7 +331,8 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                showToast(e.getMessage());
+                if (!e.getMessage().contains("No address"))
+                    showToast(e.getMessage());
             }
         });
     }
@@ -355,16 +361,29 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
         serverDao.getTopicDetail(userId, artId, new DialogCallback<BaseResponse<ArticleModel>>(this) {
             @Override
             public void onSuccess(final BaseResponse<ArticleModel> baseResponse, Call call, Response response) {
-                LogUtils.e("getTopicDetail:" + baseResponse.retData.url);
+
                 if (0 == baseResponse.retData.status) {
                     menuItem.setIcon(R.mipmap.d4_shoucang1);
                 } else if (1 == baseResponse.retData.status) {
                     menuItem.setIcon(R.mipmap.d4_shoucang1_p);
                 }
+                if (baseResponse.retData.surveyInfo != null) {
+                    if (!TextUtils.isEmpty(baseResponse.retData.surveyInfo.id))
+                        mBtnWenjuan.setVisibility(View.VISIBLE);
+                    else
+                        mBtnWenjuan.setVisibility(View.GONE);
+                }else {
+                    mBtnWenjuan.setVisibility(View.GONE);
+                }
                 new Handler().post(new Runnable() {
                     @Override
                     public void run() {
-                        mWebView.loadUrl(AppConstants.HOST + baseResponse.retData.url);
+                        try {
+                            LogUtils.e("getTopicDetail:" + baseResponse.retData.url);
+                            mWebView.loadUrl(AppConstants.HOST + baseResponse.retData.url);
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
                     }
                 });
 
@@ -382,7 +401,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
      */
     private void onCollect(final MenuItem item) {
         if (!isLogin(this)) {
-            showToast("沒有登录,无法进行此操作");
+            showToast(getString(R.string.toast_no_login));
             return;
         }
         serverDao.doCollectTopic(getUser(this).id, artId, new JsonCallback<BaseResponse<List>>() {
@@ -400,10 +419,70 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
+                if (!e.getMessage().contains("No address"))
+                    showToast(e.getMessage());
+            }
+        });
+    }
+
+    public void showAlertDialog(final int position) {
+//        mDialog = new AlertDialog.Builder(this).create();
+        mDialog = new Dialog(this);
+        mDialog.setContentView(R.layout.activity_dialog_common);
+        Window window = mDialog.getWindow();
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        WindowManager m = getWindowManager();
+        Display d = m.getDefaultDisplay(); // 获取屏幕宽、高用
+        WindowManager.LayoutParams p = window.getAttributes(); // 获取对话框当前的参数值
+        p.height = (int) (d.getHeight() * 0.6); // 高度设置为屏幕的0.6
+        p.width = (int) (d.getWidth() * 0.7); // 宽度设置为屏幕的0.65
+        window.setAttributes(p);
+        mDialog.show();
+        TextView tv_content = (TextView) mDialog.findViewById(R.id.tv_content);
+        tv_content.setText(R.string.txt_confirm_delete);
+        Button btn_confirm = (Button) mDialog.findViewById(R.id.btn_confirm);
+        Button btn_cancel = (Button) mDialog.findViewById(R.id.btn_cancel);
+        ImageView iv_close = (ImageView) mDialog.findViewById(R.id.iv_close);
+        iv_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDialog.dismiss();
+            }
+        });
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDialog.dismiss();
+            }
+        });
+        btn_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteComment(position, mAdapter.getItem(position).id, 1);
+                mDialog.dismiss();
+            }
+        });
+
+    }
+    /**
+     * 删除评论
+     */
+    private void deleteComment(final int position, String commentId, int type) {
+        serverDao.doDeleteComment(getUser(this).id, commentId, type, new DialogCallback<BaseResponse<List>>(this) {
+            @Override
+            public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
+                showToast(baseResponse.message);
+                mAdapter.remove(position);
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
                 showToast(e.getMessage());
             }
         });
     }
+
 
     @Override
     protected void onDestroy() {

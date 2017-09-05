@@ -159,6 +159,30 @@ public class AppConstants {
      */
     public static final String URL_JIAOFEI_TYPE=URL_BASE+"m/propPayment/menu";
 
+    /**
+     * 获取缴费编号列表
+     */
+    public static final String URL_JIAOFEI_NO_LIST= URL_BASE+"m/propPayRoom/index";
+
+    /**
+     * 添加房屋
+     */
+    public static final String URL_ADD_HOUSE=URL_BASE+"m/propPayRoom/save";
+
+    /**
+     * 查询房屋信息
+     */
+    public static final String URL_SELECT_HOUSE=URL_BASE+"m/propPayment/checkRoom";
+    /**
+     * 删除缴费房屋
+     */
+    public static final String URL_DELETE_HOUSE= URL_BASE+"m/propPayRoom/delete";
+
+
+    /**
+     * 查询缴费信息
+     */
+    public static final String URL_SELECT_PAY_INFO=URL_BASE+"m/propPayment/index";
     /*==========================*/
 
     public static final int PAGE_SIZE = 10;

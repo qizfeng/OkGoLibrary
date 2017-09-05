@@ -166,30 +166,42 @@
             android:label="@string/activity_pay_detail"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.life.wuye.PayDetailWuyeActivity"
+            android:label="@string/activity_pay_detail"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.life.wuye.PaymentDialogActivity"
             android:theme="@style/DialogActivityStyle" />
-        <activity android:name=".ui.life.family.FamilyInfoActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/activity_family_info"/>
-        <activity android:name=".ui.life.family.FamilyAddActivity"
+        <activity
+            android:name=".ui.life.family.FamilyInfoActivity"
+            android:label="@string/activity_family_info"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.life.family.FamilyAddActivity"
             android:label="@string/activity_family_add"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.life.family.FamilyAddPersonActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.life.family.FamilyAddPersonActivity"
             android:label="@string/activity_family_add_person"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.user.UserInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.user.UserInfoActivity"
             android:label="@string/activity_userinfo"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.CommonDialogActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.CommonDialogActivity"
             android:theme="@style/DialogActivityStyle" />
-        <activity android:name=".ui.user.ModifyUserInfoActivity"
+        <activity
+            android:name=".ui.user.ModifyUserInfoActivity"
             android:label="@string/activity_modify_nickname"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.user.ModifyPwdActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.user.ModifyPwdActivity"
             android:label="@string/activity_modify_pwd"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.user.AgreementWebViewActivity"
-            android:label="@string/activity_add_house"/>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.user.AgreementWebViewActivity"
+            android:label="@string/activity_add_house" />
         <!--自定义service-->
         <service
             android:name=".service.AppLocationService"

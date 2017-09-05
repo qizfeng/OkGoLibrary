@@ -18,15 +18,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
+        android:layout_marginTop="@dimen/dp_10"
         android:layout_marginLeft="10dp"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/iv_header"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:src="@mipmap/ic_launcher_round" />
+            android:layout_width="@dimen/dp_45"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_height="@dimen/dp_45" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,16 +42,18 @@
                     android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="张三"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/common_txt_size" />
+                    android:textSize="@dimen/common_txt_size"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
 
                 <TextView
                     android:id="@+id/tv_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="07-24 15:42"
+                    android:textColor="@color/color_gray_999999"
                     android:textSize="@dimen/common_txt_size" />
             </RelativeLayout>
 
@@ -61,8 +63,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/txt_color"
                 android:layout_marginTop="10dp"
-                android:textSize="@dimen/common_txt_size"
-                android:text="这个文章不錯喲,愛不錯的風格啊兩地分居拉束帶結髮六點十分是兩地分居da十里坊就都是麗楓酒店私聊可分類登錄是積分" />
+                android:textSize="@dimen/common_txt_size" />
         </LinearLayout>
 
     </LinearLayout>

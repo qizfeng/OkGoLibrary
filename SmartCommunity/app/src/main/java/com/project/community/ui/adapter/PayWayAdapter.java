@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.project.community.R;
+import com.project.community.constants.AppConstants;
 import com.project.community.listener.RecycleItemClickListener;
 import com.project.community.model.PaymentWayModel;
 
@@ -29,7 +30,7 @@ public class PayWayAdapter extends BaseQuickAdapter<PaymentWayModel, BaseViewHol
     protected void convert(final BaseViewHolder baseViewHolder, final PaymentWayModel model) {
         baseViewHolder.setText(R.id.tv_payment_way,model.label);
         Glide.with(mContext)
-                .load(model.icon)
+                .load(AppConstants.HOST+model.icon)
                 .into((ImageView) baseViewHolder.getView(R.id.iv_image));
 //        baseViewHolder.setImageResource(R.id.iv_image,model.res);
         final int position = baseViewHolder.getLayoutPosition();

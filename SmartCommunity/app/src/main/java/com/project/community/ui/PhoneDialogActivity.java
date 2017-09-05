@@ -25,6 +25,7 @@ import com.project.community.base.BaseActivity;
 import com.project.community.model.HotlineModel;
 import com.project.community.util.ScreenUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -141,12 +142,17 @@ public class PhoneDialogActivity extends BaseActivity implements View.OnClickLis
         String orgCode = "";
         if (isLogin(this)) {
         }
-        serverDao.getHotLine(type, orgCode, new DialogCallback<BaseResponse<HotlineModel>>(this) {
+        serverDao.getHotLine(type, orgCode, new DialogCallback<BaseResponse<List<HotlineModel>>>(this) {
             @Override
-            public void onSuccess(BaseResponse<HotlineModel> baseResponse, Call call, Response response) {
+            public void onSuccess(BaseResponse<List<HotlineModel>> baseResponse, Call call, Response response) {
                 try {
-                    mTvPhoneNumber.setText(baseResponse.retData.contact);
-                    mTvTime.setText(getString(R.string.txt_work_time) + baseResponse.retData.work_start + "~" + baseResponse.retData.work_end);
+                    List<HotlineModel> data = new ArrayList<HotlineModel>();
+                    data = baseResponse.retData;
+                    if (data.size() > 0) {
+                        mTvPhoneNumber.setText(data.get(0).contact);
+                        mTvTime.setText(getString(R.string.txt_work_time) + data.get(0).work_start + "~" + data.get(0)
+                                .work_end);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -155,7 +161,8 @@ public class PhoneDialogActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                showToast(e.getMessage());
+                if (!e.getMessage().contains("No address"))
+                    showToast(e.getMessage());
             }
         });
     }

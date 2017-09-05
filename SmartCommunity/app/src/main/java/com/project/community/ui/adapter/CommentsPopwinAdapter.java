@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.library.okgo.utils.DateUtil;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
+import com.project.community.constants.AppConstants;
 import com.project.community.listener.RecycleItemClickListener;
 import com.project.community.model.CommentModel;
 import com.project.community.model.UserModel;
@@ -98,7 +99,7 @@ public class CommentsPopwinAdapter extends BaseAdapter {
             iv_delete.setVisibility(View.GONE);
         }
         Glide.with(mContext)
-                .load(item.photo)
+                .load(AppConstants.HOST+item.photo)
                 .placeholder(R.mipmap.d54_tx)
                 .bitmapTransform(new CropCircleTransformation(mContext))
                 .into(iv_header);
@@ -108,9 +109,9 @@ public class CommentsPopwinAdapter extends BaseAdapter {
             Spanned result;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
                 //加粗
-                result = Html.fromHtml(StringUtils.ToDBC("回复 " + item.targetName + ":" + item.content), Html.FROM_HTML_MODE_LEGACY);
+                result = Html.fromHtml(StringUtils.ToDBC(mContext.getResources().getString(R.string.txt_receive)+ item.targetName + ":" + item.content), Html.FROM_HTML_MODE_LEGACY);
             } else {
-                result = Html.fromHtml(StringUtils.ToDBC("回复 " + item.targetName + ":" + item.content));
+                result = Html.fromHtml(StringUtils.ToDBC(mContext.getResources().getString(R.string.txt_receive) + item.targetName + ":" + item.content));
             }
             /**
              *  * 设置蓝

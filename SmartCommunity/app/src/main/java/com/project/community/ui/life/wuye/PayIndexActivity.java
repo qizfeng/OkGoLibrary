@@ -52,6 +52,10 @@ public class PayIndexActivity extends BaseActivity {
         mAdapter = new PayWayAdapter(mData, new RecycleItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+                if(!isLogin(PayIndexActivity.this)){
+                    showToast(getString(R.string.toast_no_login));
+                    return;
+                }
                 Bundle bundle = new Bundle();
                 bundle.putString("title", mAdapter.getItem(position).label);
                 PayHistroyActivity.startActivity(PayIndexActivity.this, bundle);
@@ -79,7 +83,8 @@ public class PayIndexActivity extends BaseActivity {
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                showToast(e.getMessage());
+                if (!e.getMessage().contains("No address"))
+                    showToast(e.getMessage());
             }
         });
 

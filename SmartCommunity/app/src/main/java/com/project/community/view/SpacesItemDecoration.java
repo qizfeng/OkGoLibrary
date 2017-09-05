@@ -48,7 +48,7 @@ public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
                         outRect.bottom = space * 2;
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 }
 
             }

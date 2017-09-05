@@ -114,6 +114,7 @@
                 android:layout_marginBottom="@dimen/dp_10"
                 android:background="@color/white"
                 android:gravity="right"
+                android:textColor="@color/color_gray_999999"
                 android:padding="@dimen/dp_10"
                 android:text="0/350" />
 

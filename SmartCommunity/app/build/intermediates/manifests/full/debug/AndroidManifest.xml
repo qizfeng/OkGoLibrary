@@ -186,6 +186,10 @@
             android:label="@string/activity_pay_detail"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.project.community.ui.life.wuye.PayDetailWuyeActivity"
+            android:label="@string/activity_pay_detail"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.project.community.ui.life.wuye.PaymentDialogActivity"
             android:theme="@style/DialogActivityStyle" />
         <activity

@@ -60,7 +60,9 @@ public class ArticleModel implements Serializable {
        "allowCollection":1,#是否允许收藏
        "status",0,#收藏状态
        "url": "/f/view-3-299f2f4f5e84415f98b03606bf6427d9.html",#文章URL地址
-       "posidList": []*/
+       "posidList": []
+       surveyId 问卷id
+       */
     public String id;
     public String image;
     public String articleName;
@@ -82,6 +84,7 @@ public class ArticleModel implements Serializable {
     public String description;
     public int hits;
     public String posid;
+    public String surveyId;
     public SysOrgModel sysOrg = new SysOrgModel();
-    public SurveyInfoModel surveyInfo = new SurveyInfoModel();
+    public SurveyInfoModel surveyInfo = null;
 }
