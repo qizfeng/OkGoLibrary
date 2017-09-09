@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.model.BaseResponse;
+import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.model.PaymentHouseHistroyModel;
@@ -43,7 +44,7 @@ public class PayHistroyActivity extends BaseActivity {
     @Bind(R.id.tv_title)
     TextView mTvTitle;
     @Bind(R.id.btn_add)
-    Button mBtnAdd;
+    TextView mBtnAdd;
     private int type;//缴费类型
     private List<PaymentHouseHistroyModel> mData = new ArrayList<>();
     private PaymentHistoryAdapter mAdapter;

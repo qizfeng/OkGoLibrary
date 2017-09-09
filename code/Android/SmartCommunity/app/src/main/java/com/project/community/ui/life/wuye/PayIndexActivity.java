@@ -47,7 +47,7 @@ public class PayIndexActivity extends BaseActivity {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
-        mRecyclerView.addItemDecoration(new DividerGridItemDecoration(this));
+        mRecyclerView.addItemDecoration(new DividerGridItemDecoration(this,2));
         initData();
         mAdapter = new PayWayAdapter(mData, new RecycleItemClickListener() {
             @Override
@@ -66,7 +66,6 @@ public class PayIndexActivity extends BaseActivity {
 
             }
         });
-        mRecyclerView.addItemDecoration(new DividerGridItemDecoration(this));
         mRecyclerView.setAdapter(mAdapter);
     }
 

@@ -39,6 +39,7 @@
     <string name="txt_know">我知道了</string>
     <string name="txt_phone">手机号</string>
     <string name="txt_work_time">工作时间:</string>
+    <string name="txt_hot_line">政府热线</string>
     <!--民生-->
     <string name="tab_title_minsheng_nearby">附近商家</string>
     <string name="tab_title_minsheng_bbs">社区论坛</string>
@@ -147,6 +148,10 @@
     <string name="txt_add_family_name_hint">请您输入房屋名称</string>
     <string name="txt_add_family_no_hint">请您输入房屋编号</string>
     <string name="txt_family_delete_confirm">确定删除此家庭？</string>
+    <string name="txt_dialog_tips">该房屋未审核,是否提交房屋审核?</string>
+    <string name="txt_family_auditing">该房屋业主审核中</string>
+    <string name="txt_family_audit_error">该房屋业主审核未通过</string>
+    <string name="toast_error_permission">您不是该家庭业主,无法进行此操作。</string>
     <!--添加人口-->
     <string name="txt_add_person_name">真实姓名</string>
     <string name="txt_add_person_header">头像</string>
@@ -219,11 +224,12 @@
     <string name="collasping_view_behavior">android.support.design.widget.CollapsingToolbarLayout</string>
     <string name="recyclerview_view_behavior">android.support.v7.widget.RecyclerView</string>
     <string name="empty_no_data">没有数据,点击重试</string>
+    <string name="empty_no_data_family">暂无家庭信息</string>
     <string name="network_error">似乎已断开与互联网的连接。</string>
     <string name="permission_tips">您拒绝了权限,部分功能将不可使用</string>
     <string name="txt_confirm_delete">您是否确定要删除?</string>
     <string name="txt_unsave">离开本页,填写的内容将不保留,您是否确定离开?</string>
-
+    <string name="txt_dialog_house_no">房屋编码</string>
     <string name="btn_bindService">bindService</string>
     <string name="btn_unbindService">UnbindService</string>
     <string name="loaction_prod_name">移动定位器，随时随地确认我当前的位置</string>
@@ -246,6 +252,9 @@
     <string name="txt_leave">离开</string>
     <string name="txt_money_unit">元</string>
     <string name="txt_receive">回复 </string>
+    <string name="toast_no_comment">该文章不允许评论</string>
+    <string name="toast_no_collect">该文章不允许收藏</string>
+    <string name="toast_no_share">该文章不允许分享</string>
     <!--activity label name-->
     <string name="activity_splash">启动动画</string>
     <string name="activity_imageborwse">图片浏览</string>

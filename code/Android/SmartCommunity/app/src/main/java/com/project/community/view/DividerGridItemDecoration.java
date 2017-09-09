@@ -20,11 +20,12 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
 
     private static final int[] ATTRS = new int[]{android.R.attr.listDivider};
     private Drawable mDivider;
-
-    public DividerGridItemDecoration(Context context) {
+    private int dividerHeight=15;
+    public DividerGridItemDecoration(Context context,int dividerHeight) {
         final TypedArray a = context.obtainStyledAttributes(ATTRS);
         mDivider = context.getResources().getDrawable( R.drawable.button_shape_white_border);
         a.recycle();
+        this.dividerHeight=dividerHeight;
     }
 
     @Override
@@ -142,13 +143,13 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
         int childCount = parent.getAdapter().getItemCount()+1;
         if (isLastRaw(parent, itemPosition, spanCount, childCount))// 如果是最后一行，则不需要绘制底部
         {
-            outRect.set(0, 0, 15, 0);
+            outRect.set(0, 0, dividerHeight, 0);
         } else if (isLastColum(parent, itemPosition, spanCount, childCount))// 如果是最后一列，则不需要绘制右边
         {
-            outRect.set(0, 0, 0, 15);
+            outRect.set(0, 0, 0, dividerHeight);
         } else {
-            outRect.set(0, 0, 15,
-                    15);
+            outRect.set(0, 0, dividerHeight,
+                    dividerHeight);
         }
     }
 }

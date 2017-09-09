@@ -37,6 +37,14 @@ public class PaymentHistoryAdapter extends BaseSectionQuickAdapter<PaymentHouseH
                 helper.setImageResource(R.id.iv_pay_icon,R.mipmap.d21_icon1);
             }else if("燃气费".equals(item.header)){
                 helper.setImageResource(R.id.iv_pay_icon,R.mipmap.d21_icon2);
+            }else if("物业费".equals(item.header)){
+                helper.setImageResource(R.id.iv_pay_icon,R.mipmap.d21_icon5);
+            }else if("供冷费".equals(item.header)){
+                helper.setImageResource(R.id.iv_pay_icon,R.mipmap.d21_icon3);
+            }else if("电费".equals(item.header)){
+                helper.setImageResource(R.id.iv_pay_icon,R.mipmap.d21_icon4);
+            }else if("有线电视费".equals(item.header)){
+                helper.setImageResource(R.id.iv_pay_icon,R.mipmap.d21_icon6);
             }
             helper.setText(R.id.tv_pay_name,item.header);
         }

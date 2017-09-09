@@ -30,6 +30,7 @@ import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
 import com.library.okgo.request.BaseRequest;
+import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.constants.AppConstants;
@@ -41,6 +42,7 @@ import com.project.community.model.MenuModel;
 import com.project.community.model.ModuleModel;
 import com.project.community.model.ZhengwuIndexResponse;
 import com.project.community.ui.PhoneDialogActivity;
+import com.project.community.ui.WebViewActivity;
 import com.project.community.ui.adapter.ArticlePageAdapter;
 import com.project.community.ui.adapter.CommentsPopwinAdapter;
 import com.project.community.ui.adapter.ModuleAdapter;
@@ -128,18 +130,22 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             @Override
             public void onCommentClick(View view, int position) {//点击评论
                 //  popAwindow(view);
-                if (isLogin(ZhengwuActivity.this))
-                    getComments(mAdapter.getItem(position).id, view);
-                else
+                if (isLogin(ZhengwuActivity.this)) {
+                    getComments(mAdapter.getItem(position).id, view,position);
+                } else
                     showToast(getString(R.string.toast_no_login));
 
             }
         }, new DiggClickListener() {
             @Override
             public void onDiggClick(ImageView imageView, TextView textView, int position) {
-                if (isLogin(ZhengwuActivity.this))
+                if (isLogin(ZhengwuActivity.this)) {
+                    if(mAdapter.getItem(position).allowCollection==0){
+                        showToast(getString(R.string.toast_no_collect));
+                        return;
+                    }
                     onCollect(textView, imageView, position);
-                else
+                } else
                     showToast(getString(R.string.toast_no_login));
             }
         });
@@ -182,8 +188,16 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
         Intent intent = new Intent();
         String typeStr = moduleModels.get(position).title;
         if ("问卷".equals(typeStr)) {
-            intent.setClass(ZhengwuActivity.this, WenjuanActivity.class);
-            startActivity(intent);
+            if (isLogin(this)) {
+                Bundle bundle = new Bundle();
+                bundle.putString("url", AppConstants.URL_WENJUAN_LIST + "?uid=" + getUser(this).id);
+                intent.putExtra("bundle", bundle);
+                intent.putExtra("hideNavigation", true);
+                intent.setClass(ZhengwuActivity.this, WenjuanActivity.class);
+                startActivity(intent);
+            } else {
+                showToast(getString(R.string.toast_no_login));
+            }
         } else if ("热线".equals(typeStr)) {
             intent.putExtra("hasHeader", false);
             intent.putExtra("type", "1");
@@ -201,8 +215,13 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
                 getTypeTopic(type + "");
             }
         } else if ("意见".equals(typeStr)) {
-            intent.setClass(ZhengwuActivity.this, SuggestionActivity.class);
-            startActivity(intent);
+            if (isLogin(this)) {
+                intent.setClass(ZhengwuActivity.this, SuggestionActivity.class);
+                startActivity(intent);
+            } else {
+                showToast(getString(R.string.toast_no_login));
+            }
+
         } else if ("指南".equals(typeStr)) {
             intent.setClass(ZhengwuActivity.this, CompanionActivity.class);
             startActivity(intent);
@@ -302,7 +321,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
                 if (!e.getMessage().contains("No address"))
-                   showToast(e.getMessage());
+                    showToast(e.getMessage());
             }
 
             @Override
@@ -493,7 +512,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
      * @param artId
      * @param parent
      */
-    private void getComments(final String artId, final View parent) {
+    private void getComments(final String artId, final View parent,final int posistion) {
         serverDao.getComments(artId, new DialogCallback<BaseResponse<List<CommentModel>>>(this) {
             @Override
             public void onSuccess(BaseResponse<List<CommentModel>> baseResponse, Call call, Response response) {
@@ -520,15 +539,19 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
                             popupWindow.dismiss();
                         }
                     });
-                if (comments.size() > 5) {//超过5条评论,指定listView高度
-                    popupWindow.lv_container.getLayoutParams().height = ScreenUtils.getScreenHeight(ZhengwuActivity.this) / 2 + 100;
-                }
+//                if (comments.size() > 5) {//超过5条评论,指定listView高度
+//                    popupWindow.lv_container.getLayoutParams().height = ScreenUtils.getScreenHeight(ZhengwuActivity.this) / 2 + 100;
+//                }
                 popupWindow.lv_container.setAdapter(commentsPopwinAdapter);
                 popupWindow.showAtLocation(parent, Gravity.BOTTOM, ScreenUtils.getScreenWidth(ZhengwuActivity.this), 0);
                 //发评论事件
                 popupWindow.btn_send.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        if(mAdapter.getItem(posistion).allowComment==0){
+                            showToast(getString(R.string.toast_no_comment));
+                            return;
+                        }
                         if (TextUtils.isEmpty(recStr)) {
                             if (TextUtils.isEmpty(popupWindow.et_comment.getText().toString())) {
                                 return;
@@ -567,7 +590,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             @Override
             public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
                 popupWindow.et_comment.setText("");
-                getComments(artId, view);
+                getComments(artId, view,0);
                 showToast(baseResponse.message);
             }
 

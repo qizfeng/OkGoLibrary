@@ -305,12 +305,10 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
         });
     }
 
-    private void showDialog(String title, String type, List<DictionaryModel> data) {
+    private void showDialog(String title, List<DictionaryModel> data) {
         //填充对话框的布局
         View inflate = LayoutInflater.from(this).inflate(R.layout.layout_loopview, null);
         List<String> strings = new ArrayList<>();
-//        strings.add("接口数据1");
-//        strings.add("接口数据2");
         for (int i = 0; i < data.size(); i++) {
             strings.add(data.get(i).label);
         }
@@ -593,7 +591,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
             public void onSuccess(BaseResponse<DictionaryResponse> baseResponse, Call call, Response response) {
                 dictionaryModels = new ArrayList<>();
                 dictionaryModels.addAll(baseResponse.retData.dictList);
-                showDialog(title, type, dictionaryModels);
+                showDialog(title, dictionaryModels);
             }
         });
     }

@@ -194,7 +194,13 @@ public class IndexFragment extends BaseFragment implements GestureDetector.OnGes
         super.onResume();
         //开启loading,获取数据
         setRefreshing(true);
-        onRefresh();
+        if (!NetworkUtils.isNetworkAvailable(getActivity())) {
+            ToastUtils.showShortToast(getActivity(), R.string.network_error);
+            setRefreshing(false);
+            return;
+        }
+        page = 1;
+        loadData();
     }
 
     @Override
@@ -285,7 +291,7 @@ public class IndexFragment extends BaseFragment implements GestureDetector.OnGes
         commentsPopwinAdapter = new CommentsPopwinAdapter(getActivity(), comments, new RecycleItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                popupWindow.et_comment.setText(getString(R.string.txt_receive)+ comments.get(position).userName + ":");
+                popupWindow.et_comment.setText(getString(R.string.txt_receive) + comments.get(position).userName + ":");
                 popupWindow.et_comment.setSelection(popupWindow.et_comment.getText().length());
             }
 
@@ -375,12 +381,12 @@ public class IndexFragment extends BaseFragment implements GestureDetector.OnGes
 
                 View rowView = LayoutInflater.from(tableRow.getContext()).inflate(R.layout.layout_item_index_top, null);
                 ImageView iv_icon = (ImageView) rowView.findViewById(R.id.ivIcon);
-                final TextView tv_title =(TextView) rowView.findViewById(R.id.tvCity);
+                final TextView tv_title = (TextView) rowView.findViewById(R.id.tvCity);
                 iv_icon.setImageResource(moduleModels.get(i * 4 + j).res);
                 tv_title.setText(moduleModels.get(i * 4 + j).title);
 
                 tv_title.setTextColor(getResources().getColor(R.color.txt_gray_color));
-                TextView tvRedPoint = (TextView)rowView.findViewById(R.id.tv_red_point);
+                TextView tvRedPoint = (TextView) rowView.findViewById(R.id.tv_red_point);
                 if (moduleModels.get(i * 4 + j).hasRedPoint) {
                     tvRedPoint.setVisibility(View.VISIBLE);
                     //摇摆
@@ -533,29 +539,34 @@ public class IndexFragment extends BaseFragment implements GestureDetector.OnGes
         serverDao.getNewsList(new JsonCallback<BaseResponse<List<NewsModel>>>() {
             @Override
             public void onSuccess(BaseResponse<List<NewsModel>> newsResponseBaseResponse, Call call, Response response) {
-                    if (page == 1) {
+                if (page == 1) {
+                    List<NewsModel> data = new ArrayList<>();
+                    data.addAll(newsResponseBaseResponse.newslist);
+                    for (int i = 0; i < data.size(); i++) {
+                        data.get(i).zanNum = i;
+                    }
+                    try {
+
+                        mAdapter.setNewData(data);
+                        mAdapter.setEnableLoadMore(true);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    //显示没有更多数据
+                    if (page == 5) {
+                        mAdapter.loadMoreEnd();         //加载完成
+                    } else {
                         List<NewsModel> data = new ArrayList<>();
                         data.addAll(newsResponseBaseResponse.newslist);
+                        mAdapter.addData(data);
                         for (int i = 0; i < data.size(); i++) {
                             data.get(i).zanNum = i;
                         }
-                        mAdapter.setNewData(data);
-                        mAdapter.setEnableLoadMore(true);
-                    } else {
-                        //显示没有更多数据
-                        if (page == 5) {
-                            mAdapter.loadMoreEnd();         //加载完成
-                        } else {
-                            List<NewsModel> data = new ArrayList<>();
-                            data.addAll(newsResponseBaseResponse.newslist);
-                            mAdapter.addData(data);
-                            for (int i = 0; i < data.size(); i++) {
-                                data.get(i).zanNum = i;
-                            }
-                            mAdapter.loadMoreComplete();
-                        }
-
+                        mAdapter.loadMoreComplete();
                     }
+
+                }
 
             }
 
@@ -565,7 +576,7 @@ public class IndexFragment extends BaseFragment implements GestureDetector.OnGes
                 //一般来说,只需要第一次初始化界面的时候需要使用缓存刷新界面,以后不需要,所以用一个变量标识
                 if (!isInitCache) {
                     //一般来说,缓存回调成功和网络回调成功做的事情是一样的,所以这里直接回调onSuccess
-                   // onSuccess(baseResponse, call, null);
+                    // onSuccess(baseResponse, call, null);
                     isInitCache = true;
                 }
             }
@@ -574,7 +585,11 @@ public class IndexFragment extends BaseFragment implements GestureDetector.OnGes
             public void onAfter(@Nullable BaseResponse<List<NewsModel>> baseResponse, @Nullable Exception e) {
                 super.onAfter(baseResponse, e);
                 //可能需要移除之前添加的布局
-                mAdapter.removeAllFooterView();
+                try {
+                    mAdapter.removeAllFooterView();
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
                 //结束刷新动画
                 setRefreshing(false);
 //                if (page == 3)

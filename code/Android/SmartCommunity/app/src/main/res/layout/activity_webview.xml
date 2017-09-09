@@ -4,37 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="" />
-
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_marginTop="-56dp"
-            android:elevation="10dp"
-            android:gravity="center"
-            android:text="@string/app_name"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:svb_dependOn="@id/appbar"
-            app:svb_dependType="y"
-            app:svb_targetAlpha="1"
-            app:svb_targetY="0dp" />
-
-    </android.support.design.widget.AppBarLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -57,4 +26,7 @@
             android:background="@android:color/white"
             android:orientation="vertical" />
     </LinearLayout>
+
+    <include
+        layout="@layout/pub_layout_toolbar"/>
 </android.support.design.widget.CoordinatorLayout>

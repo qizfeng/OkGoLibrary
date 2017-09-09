@@ -8,9 +8,9 @@ package com.facebook.drawee.backends.pipeline;
 
 public final class R {
     public static final class attr {
-        public static final int actualImageResource = 0x7f0100dd;
+        public static final int actualImageResource = 0x7f0100df;
         public static final int actualImageScaleType = 0x7f0100b4;
-        public static final int actualImageUri = 0x7f0100dc;
+        public static final int actualImageUri = 0x7f0100de;
         public static final int backgroundImage = 0x7f0100b5;
         public static final int fadeDuration = 0x7f0100a9;
         public static final int failureImage = 0x7f0100af;
@@ -74,7 +74,7 @@ public final class R {
         public static final int GenericDraweeHierarchy_roundingBorderPadding = 24;
         public static final int GenericDraweeHierarchy_roundingBorderWidth = 22;
         public static final int GenericDraweeHierarchy_viewAspectRatio = 1;
-        public static final int[] SimpleDraweeView = { 0x7f0100dc, 0x7f0100dd };
+        public static final int[] SimpleDraweeView = { 0x7f0100de, 0x7f0100df };
         public static final int SimpleDraweeView_actualImageResource = 1;
         public static final int SimpleDraweeView_actualImageUri = 0;
     }

@@ -21,11 +21,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.library.okgo.callback.DialogCallback;
+import com.library.okgo.callback.JsonCallback;
+import com.library.okgo.model.BaseResponse;
 import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.model.FamilyModel;
 import com.project.community.model.FamilyPersonModel;
+import com.project.community.model.HouseModel;
 import com.project.community.ui.CommonDialogActivity;
 import com.project.community.ui.adapter.FamilyAdapter;
 import com.project.community.view.SpacesItemDecoration;
@@ -34,6 +38,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * Created by qizfeng on 17/8/23.
@@ -55,9 +61,12 @@ public class FamilyInfoActivity extends BaseActivity implements View.OnClickList
     Button mBtnDeleteFamily;
 
     private List<FamilyModel> mData = new ArrayList<>();
+    private List<FamilyPersonModel> personList = new ArrayList<>();
     private FamilyAdapter mAdapter;
     private View footer;
     private View header;
+    private TextView mTvFamilyNo;
+    private TextView mTvFamilyAddress;
     private Dialog mDialog;
 
     public static void startActivity(Context context, Bundle bundle) {
@@ -73,35 +82,19 @@ public class FamilyInfoActivity extends BaseActivity implements View.OnClickList
         initToolBar(mToolBar, mTvTitle, true, getString(R.string.activity_family_info), R.mipmap.iv_back);
         initView();
         initData();
-        initTabLayout();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Bundle bundle = getIntent().getBundleExtra("bundle");
-        if (bundle != null) {
-            FamilyModel familyModel1 = new FamilyModel();
-            familyModel1.id = "9";
-            familyModel1.familyNo = "1000001";
-            familyModel1.familyAddr = "北京市海淀区西三旗";
-            familyModel1.familyName = bundle.getString("houseName");
-            familyModel1.familyPersons = new ArrayList<>();
-            mData.add(familyModel1);
-            mTabLayout.addTab(mTabLayout.newTab().setText(bundle.getString("houseName")));
-            if (mTabLayout.getTabCount() > 4) {
-                mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-                mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-            } else {
-                mTabLayout.setTabMode(TabLayout.MODE_FIXED);
-                mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-            }
-        }
+        loadData();
     }
 
     private void initView() {
         footer = LayoutInflater.from(this).inflate(R.layout.layout_footer_family, null);
         header = LayoutInflater.from(this).inflate(R.layout.layout_header_family, null);
+        mTvFamilyNo = (TextView) header.findViewById(R.id.tv_family_no);
+        mTvFamilyAddress = (TextView) header.findViewById(R.id.tv_family_addr);
         mBtnDeleteFamily = (Button) footer.findViewById(R.id.btn_delete_family);
         mBtnAddPerson = (Button) footer.findViewById(R.id.btn_add_person);
         mBtnDeleteFamily.setOnClickListener(this);
@@ -116,17 +109,10 @@ public class FamilyInfoActivity extends BaseActivity implements View.OnClickList
     /**
      * 初始化tabLayout
      */
-    private void initTabLayout() {
-        //  tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_title_wuye_all));
-//        mTabLayout.addTab(mTabLayout.newTab().setText("家庭1"));
-//        mTabLayout.addTab(mTabLayout.newTab().setText("family2"));
-//        mTabLayout.addTab(mTabLayout.newTab().setText("家庭1"));
-//        mTabLayout.addTab(mTabLayout.newTab().setText("family2"));
-//        mTabLayout.addTab(mTabLayout.newTab().setText("家庭1"));
-//        mTabLayout.addTab(mTabLayout.newTab().setText("family2"));
-
-        for (int i = 0; i < mData.size(); i++) {
-            mTabLayout.addTab(mTabLayout.newTab().setText(mData.get(i).familyName));
+    private void initTabLayout(List<FamilyModel> models) {
+        mTabLayout.removeAllTabs();
+        for (int i = 0; i < models.size(); i++) {
+            mTabLayout.addTab(mTabLayout.newTab().setText(models.get(i).familyName));
         }
         if (mTabLayout.getTabCount() > 4) {
             mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
@@ -166,84 +152,7 @@ public class FamilyInfoActivity extends BaseActivity implements View.OnClickList
      * 初始化家庭数据
      */
     public void initData() {
-        mData = new ArrayList<>();
-
-        List<FamilyPersonModel> familyPersonModels1 = new ArrayList<>();
-
-        FamilyPersonModel familyPersonModelInfo = new FamilyPersonModel();
-        familyPersonModelInfo.itemType = 1;
-
-
-        FamilyPersonModel familyPersonModel1 = new FamilyPersonModel();
-        familyPersonModel1.id = "1-1";
-        familyPersonModel1.itemType = 2;
-        familyPersonModel1.relative = "户主";
-        familyPersonModel1.relativeId = "1";
-        familyPersonModel1.name = "努尔哈赤";
-        familyPersonModel1.hasTag = true;
-        familyPersonModel1.tagRes = R.mipmap.d24_renzhen;
-        familyPersonModel1.res = R.mipmap.d54_tx;
-
-        FamilyPersonModel familyPersonModel2 = new FamilyPersonModel();
-        familyPersonModel2.id = "1-2";
-        familyPersonModel2.itemType = 2;
-        familyPersonModel2.relative = "皇后";
-        familyPersonModel2.relativeId = "2";
-        familyPersonModel2.name = "哈哈纳扎青";
-        familyPersonModel2.hasTag = true;
-        familyPersonModel2.tagRes = R.mipmap.d24_renzhen;
-        familyPersonModel2.res = R.mipmap.d54_tx;
-
-        FamilyPersonModel familyPersonModel3 = new FamilyPersonModel();
-        familyPersonModel3.id = "1-3";
-        familyPersonModel3.itemType = 2;
-        familyPersonModel3.relative = "儿子";
-        familyPersonModel3.relativeId = "2";
-        familyPersonModel3.name = "皇太极";
-        familyPersonModel3.hasTag = false;
-        familyPersonModel3.tagRes = R.mipmap.d24_renzhen;
-        familyPersonModel3.res = R.mipmap.d54_tx;
-
-
-        familyPersonModels1.add(familyPersonModelInfo);
-        familyPersonModels1.add(familyPersonModel1);
-        familyPersonModels1.add(familyPersonModel2);
-        familyPersonModels1.add(familyPersonModel3);
-
-
-        FamilyModel familyModel1 = new FamilyModel();
-        familyModel1.id = "1";
-        familyModel1.familyNo = "1000001";
-        familyModel1.familyAddr = "北京市海淀区西三旗";
-        familyModel1.familyName = "海淀家";
-        familyModel1.familyPersons = familyPersonModels1;
-
-
-        FamilyModel familyModel2 = new FamilyModel();
-        familyModel2.id = "2";
-        familyModel2.familyNo = "1000002";
-        familyModel2.familyAddr = "北京市丰台区镇岗塔路";
-        familyModel2.familyName = "丰台家";
-        familyModel2.familyPersons = familyPersonModels1;
-
-        FamilyModel familyModel3 = new FamilyModel();
-        familyModel3.id = "2";
-        familyModel3.familyNo = "1000003";
-        familyModel3.familyAddr = "德克萨斯州休斯顿丰田中心";
-        familyModel3.familyName = "火箭家";
-        familyModel3.familyPersons = familyPersonModels1;
-
-        mData.add(familyModel1);
-        mData.add(familyModel2);
-        mData.add(familyModel3);
-        mData.add(familyModel3);
-        mData.add(familyModel3);
-        mData.add(familyModel3);
-        mData.add(familyModel3);
-        mData.add(familyModel3);
-        mData.add(familyModel3);
-//        if (mData.size() > 0)
-        mAdapter = new FamilyAdapter(mData.get(0).familyPersons, new FamilyAdapter.OnAdapterItemClickListener() {
+        mAdapter = new FamilyAdapter(personList, new FamilyAdapter.OnAdapterItemClickListener() {
             @Override
             public void onItemClick(FamilyPersonModel item, int position) {
 
@@ -251,45 +160,57 @@ public class FamilyInfoActivity extends BaseActivity implements View.OnClickList
 
             @Override
             public void onDeleteClick(FamilyPersonModel item, int position) {
-                showAlertDialog(position);
+                if (!"2".equals(mData.get(mTabLayout.getSelectedTabPosition()).auditStatus)) {
+                    showToast(getString(R.string.toast_error_permission));
+                    return;
+                }
+                showAlertDialog(position - 1);//-1 去掉头部
 
             }
 
             @Override
             public void onEdit(FamilyPersonModel item, int position) {
+                if (!"2".equals(mData.get(mTabLayout.getSelectedTabPosition()).auditStatus)) {
+                    showToast(getString(R.string.toast_error_permission));
+                    return;
+                }
                 Bundle bundle = new Bundle();
                 bundle.putString("title", getString(R.string.activity_family_edit_person));
+                bundle.putString("familyId", mData.get(mTabLayout.getSelectedTabPosition()).id);
+                bundle.putString("personId", item.id);
+                bundle.putString("roomNo",mData.get(mTabLayout.getSelectedTabPosition()).room.roomNo);
                 FamilyAddPersonActivity.startActivity(FamilyInfoActivity.this, bundle);
             }
         });
-//        else {
-//            mAdapter = new FamilyAdapter(null, new RecycleItemClickListener() {
-//                @Override
-//                public void onItemClick(View view, int position) {
-//
-//                }
-//
-//                @Override
-//                public void onTextClick(View view, int position) {
-//
-//                }
-//            });
-//        }
+
         SpacesItemDecoration decoration = new SpacesItemDecoration(1, false);
         mRecyclerView.addItemDecoration(decoration);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.addFooterView(footer);
         mAdapter.addHeaderView(header);
-//        ItemTouchHelper helper = new ItemTouchHelper(new RecyclerItemTouchHelperCallBack(mRecyclerView, mData));
-//        helper.attachToRecyclerView(mRecyclerView);
+        mAdapter.bindToRecyclerView(mRecyclerView);
     }
 
     private void switchData(int position) {
-        mAdapter.setNewData(mData.get(position).familyPersons);
-        mAdapter.notifyDataSetChanged();
+//        personList = new ArrayList<>();
+//        mTvFamilyNo.setText(mData.get(position).room.getRoomNo());
+//        mTvFamilyAddress.setText(mData.get(position).room.getAddress());
+//        FamilyPersonModel familyPersonModelInfo = new FamilyPersonModel();
+//        familyPersonModelInfo.itemType = 1;
+//        personList.add(0, familyPersonModelInfo);
+//        personList.addAll(mData.get(position).memberList);
+//        mAdapter.setNewData(personList);
+//        mAdapter.notifyDataSetChanged();
+
+        getFamilyData(mData.get(position).room.roomNo,mData.get(position).id);
     }
 
 
+    /**
+     * 删除成员对话框
+     *
+     * @param position
+     */
     public void showAlertDialog(final int position) {
 //        mDialog = new AlertDialog.Builder(this).create();
         mDialog = new Dialog(this);
@@ -303,11 +224,11 @@ public class FamilyInfoActivity extends BaseActivity implements View.OnClickList
         p.width = (int) (d.getWidth() * 0.7); // 宽度设置为屏幕的0.65
         window.setAttributes(p);
         mDialog.show();
-        TextView tv_content = (TextView)mDialog.findViewById(R.id.tv_content);
+        TextView tv_content = (TextView) mDialog.findViewById(R.id.tv_content);
         tv_content.setText(R.string.txt_confirm_delete);
         Button btn_confirm = (Button) mDialog.findViewById(R.id.btn_confirm);
-        Button btn_cancel =(Button) mDialog.findViewById(R.id.btn_cancel);
-        ImageView iv_close =(ImageView) mDialog.findViewById(R.id.iv_close);
+        Button btn_cancel = (Button) mDialog.findViewById(R.id.btn_cancel);
+        ImageView iv_close = (ImageView) mDialog.findViewById(R.id.iv_close);
         iv_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -323,18 +244,18 @@ public class FamilyInfoActivity extends BaseActivity implements View.OnClickList
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mData.remove(position);
-                mAdapter.remove(position);
-                mAdapter.notifyDataSetChanged();
+                deletePerson(position);
                 mDialog.dismiss();
             }
         });
-
-//        Bundle bundle = new Bundle();
-//        bundle.putString("title",getString(R.string.txt_confirm_delete));
-//        CommonDialogActivity.startActivity(this,bundle);
     }
 
+    /**
+     * 删除家庭对话框
+     *
+     * @param content
+     * @param position
+     */
     public void showAlertDialog(String content, final int position) {
         mDialog = new Dialog(this);
         mDialog.setContentView(R.layout.activity_dialog_common);
@@ -347,11 +268,11 @@ public class FamilyInfoActivity extends BaseActivity implements View.OnClickList
         p.width = (int) (d.getWidth() * 0.7); // 宽度设置为屏幕的0.65
         window.setAttributes(p);
         mDialog.show();
-        TextView tv_content =(TextView) mDialog.findViewById(R.id.tv_content);
+        TextView tv_content = (TextView) mDialog.findViewById(R.id.tv_content);
         tv_content.setText(content);
         Button btn_confirm = (Button) mDialog.findViewById(R.id.btn_confirm);
-        Button btn_cancel =(Button) mDialog.findViewById(R.id.btn_cancel);
-        ImageView iv_close =(ImageView) mDialog.findViewById(R.id.iv_close);
+        Button btn_cancel = (Button) mDialog.findViewById(R.id.btn_cancel);
+        ImageView iv_close = (ImageView) mDialog.findViewById(R.id.iv_close);
         iv_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -367,13 +288,35 @@ public class FamilyInfoActivity extends BaseActivity implements View.OnClickList
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mTabLayout.removeTabAt(position);
+//                mTabLayout.removeTabAt(position);
+                deleteFamily(position, mData.get(position).id);
                 mDialog.dismiss();
             }
         });
 
-//        Bundle bundle = new Bundle();
-//        CommonDialogActivity.startActivity(this, bundle);
+    }
+
+    /**
+     * 删除家庭接口调用
+     *
+     * @param position
+     * @param familyId
+     */
+    private void deleteFamily(final int position, String familyId) {
+        serverDao.deleteFamily(getUser(this).id, mData.get(mTabLayout.getSelectedTabPosition()).room.roomNo, familyId, new DialogCallback<BaseResponse<List>>(this) {
+            @Override
+            public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
+                mTabLayout.removeTabAt(position);
+                showToast(baseResponse.message);
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                if (!e.getMessage().contains("No address"))
+                    showToast(e.getMessage());
+            }
+        });
     }
 
     /**
@@ -382,17 +325,27 @@ public class FamilyInfoActivity extends BaseActivity implements View.OnClickList
      * @param view
      */
     public void onAddPerson(View view) {
+        if (!"2".equals(mData.get(mTabLayout.getSelectedTabPosition()).auditStatus)) {
+            showToast(getString(R.string.toast_error_permission));
+            return;
+        }
         Bundle bundle = new Bundle();
         bundle.putString("title", getString(R.string.activity_family_add_person));
+        bundle.putString("familyId", mData.get(mTabLayout.getSelectedTabPosition()).id);
+        bundle.putString("roomNo",mData.get(mTabLayout.getSelectedTabPosition()).room.roomNo);
         FamilyAddPersonActivity.startActivity(this, bundle);
     }
 
     /**
-     * 删除家庭
+     * 删除家庭点击事件
      *
      * @param view
      */
     public void onDeleteFamily(View view) {
+        if (!"2".equals(mData.get(mTabLayout.getSelectedTabPosition()).auditStatus)) {
+            showToast(getString(R.string.toast_error_permission));
+            return;
+        }
         showAlertDialog(getString(R.string.txt_family_delete_confirm), mTabLayout.getSelectedTabPosition());
     }
 
@@ -410,4 +363,95 @@ public class FamilyInfoActivity extends BaseActivity implements View.OnClickList
                 break;
         }
     }
+
+    /**
+     * 加载数据
+     */
+    private void loadData() {
+        serverDao.getFamilyListInfo(getUser(this).id, getUsername(this), getUser(this).roomNo, new DialogCallback<BaseResponse<List<FamilyModel>>>(this) {
+            @Override
+            public void onSuccess(BaseResponse<List<FamilyModel>> baseResponse, Call call, Response response) {
+                mData = new ArrayList<>();
+                mData = baseResponse.retData;
+                if (mData.size() == 0) {
+                    personList = new ArrayList<>();
+                    mAdapter.setNewData(null);
+                    mAdapter.setEmptyView(R.layout.empty_view);
+                    TextView textView = (TextView) mAdapter.getEmptyView().findViewById(R.id.tv_tips);
+                    textView.setText(getString(R.string.empty_no_data_family));
+                } else {
+                    initTabLayout(mData);
+                    switchData(0);
+                }
+
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                mAdapter.setNewData(null);
+                mAdapter.setEmptyView(R.layout.empty_view);
+                TextView textView = (TextView) mAdapter.getEmptyView().findViewById(R.id.tv_tips);
+                textView.setText(getString(R.string.empty_no_data_family));
+                if (!e.getMessage().contains("No address"))
+                    showToast(e.getMessage());
+            }
+        });
+    }
+
+    /**
+     * 切换选项卡获取单个家庭信息
+     */
+    private void getFamilyData(String roomNo,String familyId){
+        serverDao.getFamilyInfo(getUser(this).id, getUsername(this), roomNo, familyId, new JsonCallback<BaseResponse<List<FamilyModel>>>() {
+            @Override
+            public void onSuccess(BaseResponse<List<FamilyModel>> baseResponse, Call call, Response response) {
+                mTvFamilyNo.setText(baseResponse.retData.get(0).room.roomNo);
+                mTvFamilyAddress.setText(baseResponse.retData.get(0).room.address);
+
+                personList = new ArrayList<>();
+                FamilyPersonModel familyPersonModelInfo = new FamilyPersonModel();
+                familyPersonModelInfo.itemType = 1;
+                personList.add(0, familyPersonModelInfo);
+                personList.addAll(baseResponse.retData.get(0).memberList);
+                mAdapter.setNewData(personList);
+                mAdapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                if (!e.getMessage().contains("No address"))
+                    showToast(e.getMessage());
+            }
+        });
+    }
+
+    /**
+     * 删除家庭成员接口调用
+     *
+     * @param position
+     */
+    private void deletePerson(final int position) {
+        LogUtils.e("roomNo:"+ mData.get(mTabLayout.getSelectedTabPosition()).room.getRoomNo());
+        serverDao.deletePerson(getUser(this).id, mAdapter.getItem(position).id,
+                mData.get(mTabLayout.getSelectedTabPosition()).room.getRoomNo(),
+                new DialogCallback<BaseResponse<List>>(this) {
+            @Override
+            public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
+                mAdapter.remove(position);
+                mAdapter.notifyDataSetChanged();
+                showToast(baseResponse.message);
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                if (!e.getMessage().contains("No address"))
+                    showToast(e.getMessage());
+            }
+
+        });
+    }
+
+
 }

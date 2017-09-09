@@ -1,14 +1,11 @@
 package com.project.community.ui.life.wuye;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -20,11 +17,9 @@ import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -35,8 +30,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
-import com.library.okgo.utils.DateUtil;
-import com.library.okgo.utils.ToastUtils;
+import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.constants.AppConstants;
@@ -47,23 +41,15 @@ import com.project.community.model.BannerResponse;
 import com.project.community.model.CommentModel;
 import com.project.community.model.MenuModel;
 import com.project.community.model.ModuleModel;
-import com.project.community.model.NewsModel;
 import com.project.community.model.WuyeIndexResponse;
-import com.project.community.model.ZhengwuIndexResponse;
 import com.project.community.ui.PhoneDialogActivity;
 import com.project.community.ui.WebViewActivity;
 import com.project.community.ui.adapter.ArticlePageAdapter;
 import com.project.community.ui.adapter.CommentsPopwinAdapter;
 import com.project.community.ui.adapter.ModuleAdapter;
-import com.project.community.ui.adapter.NewsPageAdapter;
 import com.project.community.ui.adapter.listener.IndexAdapterItemListener;
 import com.project.community.ui.life.TopicDetailActivity;
 import com.project.community.ui.life.family.FamilyInfoActivity;
-import com.project.community.ui.life.zhengwu.CompanionActivity;
-import com.project.community.ui.life.zhengwu.SuggestionActivity;
-import com.project.community.ui.life.zhengwu.TypeNewsActivity;
-import com.project.community.ui.life.zhengwu.WenjuanActivity;
-import com.project.community.ui.life.zhengwu.ZhengwuActivity;
 import com.project.community.util.ScreenUtils;
 import com.project.community.util.TablayoutLineReflex;
 import com.project.community.view.CommentPopWin;
@@ -72,7 +58,6 @@ import com.project.community.view.SpacesItemDecoration;
 import com.project.community.view.VpSwipeRefreshLayout;
 import com.ryane.banner_lib.AdPageInfo;
 import com.ryane.banner_lib.AdPlayBanner;
-import com.ryane.banner_lib.transformer.RotateDownTransformer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -214,9 +199,10 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     }
 
     private void getBannerData() {
-        serverDao.getBannerData("1", "1", new JsonCallback<BaseResponse<BannerResponse>>() {
+        serverDao.getBannerData("1", "2", new JsonCallback<BaseResponse<BannerResponse>>() {
             @Override
             public void onSuccess(BaseResponse<BannerResponse> baseResponse, Call call, Response response) {
+                mDatas = new ArrayList<AdPageInfo>();
                 mDatas = baseResponse.retData.imageList;
                 try {
                     //开始轮播
@@ -229,14 +215,25 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                             .setOnPageClickListener(new AdPlayBanner.OnPageClickListener() {
                                 @Override
                                 public void onPageClick(AdPageInfo info, int postion) {
-                                    String url = info.getImageUrl();
-                                    Intent intent = new Intent(WuyeActivity.this, WebViewActivity.class);
-                                    if (!TextUtils.isEmpty(url)) {
+                                    LogUtils.e("position:" + postion);
+                                    info = mDatas.get(postion);
+                                    if ("2".equals(info.linkType)) {//文章
                                         Bundle bundle = new Bundle();
-                                        bundle.putString("url", url);
+                                        if ((AppConstants.WUYE_GONGGAO + "").equals(info.categoryId)) {
+                                            bundle.putString("title", getString(R.string.title_communication_notice));
+                                        } else if ((AppConstants.WUYE_KUAIXUN + "").equals(info.categoryId)) {
+                                            bundle.putString("title", getString(R.string.tab_title_wuye_kuaixun));
+                                        }
+                                        bundle.putString("artId", info.articleId);
+                                        TopicDetailActivity.startActivity(WuyeActivity.this, bundle);
+                                    } else if ("1".equals(info.linkType)) {//链接
+                                        Intent intent = new Intent(WuyeActivity.this, WebViewActivity.class);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("url", info.link);
                                         intent.putExtra("bundle", bundle);
+                                        startActivity(intent);
                                     }
-                                    startActivity(intent);
+
                                 }
                             })
 //                .setPageTransfromer(new FadeInFadeOutTransformer())//淡入淡出
@@ -245,7 +242,7 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                             .setInfoList((ArrayList<AdPageInfo>) mDatas)
                             .setUp();
                 } catch (Exception e) {
-                    e.toString();
+                    e.printStackTrace();
                 }
             }
         });
@@ -256,21 +253,25 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
      */
     private void initTabLayout() {
         //  tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_title_wuye_all));
+//        tabLayout.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                TablayoutLineReflex.setIndicator(tabLayout, 60, 60);
+//            }
+//        });
+//        tabLayout.setTabData(new String[]{getString(R.string.tab_title_wuye_kuaixun),getString(R.string.tab_title_wuye_kuaixun)});
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.tab_title_wuye_kuaixun)));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.tab_title_wuye_gonggao)));
         tabLayout.post(new Runnable() {
             @Override
             public void run() {
-                TablayoutLineReflex.setIndicator(tabLayout, 50, 50);
+                TablayoutLineReflex
+                        .setTabLine(WuyeActivity.this, tabLayout, 65, 65);
             }
         });
-        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.tab_title_wuye_kuaixun)));
-        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.tab_title_wuye_gonggao)));
-
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-//                if (tab.getPosition() == 0)//全部
-//                    type = "health";
-//                else
                 if (tab.getPosition() == 0)//快讯
                     type = AppConstants.WUYE_KUAIXUN;
                 else if (tab.getPosition() == 1)//公告
@@ -290,6 +291,48 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
             }
         });
+//        tabLayout.setOnTabSelectListener(new OnTabSelectListener() {
+//            @Override
+//            public void onTabSelect(int position) {
+//                if (position == 0)//快讯
+//                    type = AppConstants.WUYE_KUAIXUN;
+//                else if (position == 1)//公告
+//                    type = AppConstants.WUYE_GONGGAO;
+//                setRefreshing(true);
+//                pageIndex = 1;
+//                loadData(type);
+//            }
+//
+//            @Override
+//            public void onTabReselect(int position) {
+//
+//            }
+//        });
+//        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+//            @Override
+//            public void onTabSelected(TabLayout.Tab tab) {
+////                if (tab.getPosition() == 0)//全部
+////                    type = "health";
+////                else
+//                if (tab.getPosition() == 0)//快讯
+//                    type = AppConstants.WUYE_KUAIXUN;
+//                else if (tab.getPosition() == 1)//公告
+//                    type = AppConstants.WUYE_GONGGAO;
+//                setRefreshing(true);
+//                pageIndex = 1;
+//                loadData(type);
+//            }
+//
+//            @Override
+//            public void onTabUnselected(TabLayout.Tab tab) {
+//
+//            }
+//
+//            @Override
+//            public void onTabReselected(TabLayout.Tab tab) {
+//
+//            }
+//        });
     }
 
     @Override
@@ -306,13 +349,17 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         Intent intent = new Intent();
         String type = moduleModels.get(position).title;
         if ("客服".equals(type)) {
+            intent.putExtra("type", "2");
             intent.setClass(this, PhoneDialogActivity.class);
             startActivity(intent);
         } else if (getString(R.string.activity_payment).equals(type)) {
             intent.setClass(this, PayIndexActivity.class);
             startActivity(intent);
         } else if (getString(R.string.activity_family_info).equals(type)) {
-            FamilyInfoActivity.startActivity(this, null);
+            if (isLogin(this))
+                FamilyInfoActivity.startActivity(this, null);
+            else
+                showToast(getString(R.string.toast_no_login));
         }
     }
 
@@ -322,7 +369,7 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
             userId = getUser(this).id;
         else
             userId = "";
-        serverDao.getWuyeIndexData(userId, pageIndex, AppConstants.PAGE_SIZE,type, new JsonCallback<BaseResponse<WuyeIndexResponse>>() {
+        serverDao.getWuyeIndexData(userId, pageIndex, AppConstants.PAGE_SIZE, type, new JsonCallback<BaseResponse<WuyeIndexResponse>>() {
             @Override
             public void onSuccess(BaseResponse<WuyeIndexResponse> baseResponse, Call call, Response response) {
                 mResponseData = baseResponse.retData;
@@ -381,30 +428,13 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     @Override
     public void onStart() {
         super.onStart();
-        //开始轮播
-        adPlayBanner
-                .setImageLoadType(AdPlayBanner.ImageLoaderType.GLIDE)
-                .setAutoPlay(true)
-                .setIndicatorType(AdPlayBanner.IndicatorType.POINT_INDICATOR)
-                .setNumberViewColor(0xcc00A600, 0xccea0000, 0xffffffff)
-                .setInterval(5000)
-                .setOnPageClickListener(new AdPlayBanner.OnPageClickListener() {
-                    @Override
-                    public void onPageClick(AdPageInfo info, int postion) {
-
-                    }
-                })
-//                .setPageTransfromer(new FadeInFadeOutTransformer())//淡入淡出
-//                .setPageTransfromer(new RotateDownTransformer())//旋转效果
-//                .setPageTransfromer(new ZoomOutPageTransformer())//空间切换
-                .setInfoList((ArrayList<AdPageInfo>) mDatas)
-                .setUp();
     }
 
     @Override
     public void onRefresh() {
         pageIndex = 1;
         loadData(type);
+        getBannerData();
     }
 
     @Override
@@ -413,6 +443,11 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         loadData(type);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getBannerData();
+    }
 
     /**
      * 设置数据
@@ -487,60 +522,6 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         gridView.setStretchMode(GridView.NO_STRETCH);
         gridView.setNumColumns(columns);
     }
-
-//    /**
-//     * 弹出评论列表
-//     *
-//     * @param parent
-//     */
-//    private void popAwindow(View parent, int position) {
-//        comments = new ArrayList<>();
-//        CommentModel comment1 = new CommentModel();
-//        comment1.userId = "張三";
-//        comment1.createDate = DateUtil.getCustomDateStr(DateUtil.millis(), "MM-dd HH:mm");
-//        comment1.content = "張三:這個文章不錯喲";
-//        comment1.photo = "https://d-image.i4.cn/i4web/image//upload/20170112/1484183249877077333.jpg";
-//        CommentModel comment2 = new CommentModel();
-//        comment2.userId = "李三";
-//        comment2.createDate = DateUtil.getCustomDateStr(DateUtil.millis(), "MM-dd HH:mm");
-//        comment2.content = "李四 回复 张三:多谢支持";
-//        comment2.photo = "https://d-image.i4.cn/i4web/image//upload/20170111/1484114886498013658.jpg";
-//        CommentModel comment3 = new CommentModel();
-//        comment3.userId = "王五";
-//        comment3.createDate = DateUtil.getCustomDateStr(DateUtil.millis(), "MM-dd HH:mm");
-//        comment3.content = "王五:呵呵";
-//        comment3.photo = "https://d-image.i4.cn/i4web/image//upload/20170112/1484185403611050214.jpg";
-//        comments.add(comment1);
-//        comments.add(comment2);
-//        comments.add(comment3);
-//
-//        commentsPopwinAdapter = new CommentsPopwinAdapter(this, comments, new RecycleItemClickListener() {
-//            @Override
-//            public void onItemClick(View view, int position) {
-//                popupWindow.et_comment.setText("回复 " + comments.get(position).userId + ":");
-//                popupWindow.et_comment.setSelection(popupWindow.et_comment.getText().length());
-//            }
-//
-//            @Override
-//            public void onCustomClick(View view, int position) {
-//
-//            }
-//        });
-//        popupWindow = new CommentPopWin(this, new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                popupWindow.dismiss();
-//            }
-//        });
-//        if (comments.size() > 5) {//超过5条评论,指定listView高度
-//            popupWindow.lv_container.getLayoutParams().height = ScreenUtils.getScreenHeight(this) / 2 + 100;
-//        }
-//        popupWindow.lv_container.setAdapter(commentsPopwinAdapter);
-////        popupWindow.lv_container.smoothScrollToPosition(comments.size() - 1);
-////        popupWindow.lv_container.setSelection(comments.size() - 1);
-//        popupWindow.showAtLocation(parent, Gravity.BOTTOM, ScreenUtils.getScreenWidth(this), 0);
-//        popupWindow.btn_send.setOnClickListener(this);
-//    }
 
 
     /**

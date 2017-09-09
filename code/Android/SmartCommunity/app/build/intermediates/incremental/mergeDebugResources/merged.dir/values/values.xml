@@ -604,13 +604,7 @@
             <enum name="add" value="16"/>
         </attr><attr name="android:textOn"/><attr name="android:textOff"/><attr format="dimension" name="thumbTextPadding"/><attr format="reference" name="switchTextAppearance"/><attr format="dimension" name="switchMinWidth"/><attr format="dimension" name="switchPadding"/><attr format="boolean" name="splitTrack"/><attr format="boolean" name="showText"/></declare-styleable>
     <declare-styleable name="TabItem"><attr name="android:text"/><attr name="android:icon"/><attr name="android:layout"/></declare-styleable>
-    <declare-styleable name="TabLayout"><attr format="color" name="tabIndicatorColor"/><attr format="dimension" name="tabIndicatorHeight"/><attr format="dimension" name="tabContentStart"/><attr format="reference" name="tabBackground"/><attr name="tabMode">
-            <enum name="scrollable" value="0"/>
-            <enum name="fixed" value="1"/>
-        </attr><attr name="tabGravity">
-            <enum name="fill" value="0"/>
-            <enum name="center" value="1"/>
-        </attr><attr format="dimension" name="tabMinWidth"/><attr format="dimension" name="tabMaxWidth"/><attr format="reference" name="tabTextAppearance"/><attr format="color" name="tabTextColor"/><attr format="color" name="tabSelectedTextColor"/><attr format="dimension" name="tabPaddingStart"/><attr format="dimension" name="tabPaddingTop"/><attr format="dimension" name="tabPaddingEnd"/><attr format="dimension" name="tabPaddingBottom"/><attr format="dimension" name="tabPadding"/></declare-styleable>
+    <declare-styleable name="TabLayout"><attr format="color" name="tabIndicatorColor"/><attr format="dimension" name="tabIndicatorHeight"/><attr format="boolean" name="tabIndicatorScrollable"/><attr format="dimension" name="tabContentStart"/><attr format="reference" name="tabBackground"/><attr name="tabMode"><enum name="scrollable" value="0"/><enum name="fixed" value="1"/></attr><attr name="tabGravity"><enum name="fill" value="0"/><enum name="center" value="1"/></attr><attr format="dimension" name="tabMinWidth"/><attr format="dimension" name="tabMaxWidth"/><attr format="reference" name="tabTextAppearance"/><attr format="color" name="tabTextColor"/><attr format="color" name="tabSelectedTextColor"/><attr format="dimension" name="tabPaddingStart"/><attr format="dimension" name="tabPaddingTop"/><attr format="dimension" name="tabPaddingEnd"/><attr format="dimension" name="tabPaddingBottom"/><attr format="dimension" name="tabPadding"/></declare-styleable>
     <declare-styleable name="TabTitleIndicator"><attr format="dimension" name="tti_indicatorHeight"/><attr format="color" name="tti_indicatorColor"/><attr format="dimension" name="tti_underlineHeight"/><attr format="color" name="tti_underlineColor"/><attr format="dimension" name="tti_dividerWidth"/><attr format="dimension" name="tti_dividerPaddingTopBottom"/><attr format="color" name="tti_dividerColor"/><attr format="dimension" name="tti_triangleHeight"/><attr format="dimension" name="tti_tabPaddingLeftRight"/><attr format="dimension" name="tti_tabTextSizeNormal"/><attr format="dimension" name="tti_tabTextSizeSelected"/><attr format="color" name="tti_tabTextColorNormal"/><attr format="color" name="tti_tabTextColorSelected"/><attr format="reference" name="tti_tabBackground"/><attr format="integer" name="tti_visibleCount"/><attr format="dimension" name="tti_scrollOffset"/></declare-styleable>
     <declare-styleable name="TextAppearance"><attr name="android:textSize"/><attr name="android:textColor"/><attr name="android:textColorHint"/><attr name="android:textStyle"/><attr name="android:typeface"/><attr name="textAllCaps"/><attr name="android:shadowColor"/><attr name="android:shadowDy"/><attr name="android:shadowDx"/><attr name="android:shadowRadius"/></declare-styleable>
     <declare-styleable name="TextInputLayout"><attr format="reference" name="hintTextAppearance"/><attr name="android:hint"/><attr format="boolean" name="hintEnabled"/><attr format="boolean" name="errorEnabled"/><attr format="reference" name="errorTextAppearance"/><attr format="boolean" name="counterEnabled"/><attr format="integer" name="counterMaxLength"/><attr format="reference" name="counterTextAppearance"/><attr format="reference" name="counterOverflowTextAppearance"/><attr name="android:textColorHint"/><attr format="boolean" name="hintAnimationEnabled"/><attr format="boolean" name="passwordToggleEnabled"/><attr format="reference" name="passwordToggleDrawable"/><attr format="string" name="passwordToggleContentDescription"/><attr format="color" name="passwordToggleTint"/><attr name="passwordToggleTintMode">
@@ -785,6 +779,7 @@
     <dimen name="dp_105">105dp</dimen>
     <dimen name="dp_15">15dp</dimen>
     <dimen name="dp_20">20dp</dimen>
+    <dimen name="dp_25">25dp</dimen>
     <dimen name="dp_30">30dp</dimen>
     <dimen name="dp_35">35dp</dimen>
     <dimen name="dp_4">4dp</dimen>
@@ -794,7 +789,7 @@
     <dimen name="dp_5">5dp</dimen>
     <dimen name="dp_50">50dp</dimen>
     <dimen name="dp_55">55dp</dimen>
-    <dimen name="dp_60">65dp</dimen>
+    <dimen name="dp_60">60dp</dimen>
     <dimen name="dp_65">65dp</dimen>
     <dimen name="dp_72">72dp</dimen>
     <dimen name="dp_80">80dp</dimen>
@@ -976,6 +971,7 @@
     <string name="dialog_name_network">网络异常</string>
     <string name="dialog_network_content">没有找到可用的网络，请确认WLAN、3G、2G网络至少有一项可以使用。</string>
     <string name="empty_no_data">没有数据,点击重试</string>
+    <string name="empty_no_data_family">暂无家庭信息</string>
     <string name="folder_image_count">共%1$d张</string>
     <string name="forget_phone_hint">请您输入手机号</string>
     <string name="library_FloatingActionButton_author">Oleksandr Melnykov</string>
@@ -1077,12 +1073,16 @@
     <string name="toast_error_idcard">请输入正确的身份证号</string>
     <string name="toast_error_name">真实姓名不能超过25个字符</string>
     <string name="toast_error_new_pwd">请您输入6-16位新密码</string>
+    <string name="toast_error_permission">您不是该家庭业主,无法进行此操作。</string>
     <string name="toast_error_phone">请输入正确的手机号</string>
     <string name="toast_error_pwd">请输入6-16位密码</string>
     <string name="toast_menu_setting">设置</string>
     <string name="toast_modify_success">修改成功</string>
     <string name="toast_nickname_error">昵称不能超过25个字符</string>
+    <string name="toast_no_collect">该文章不允许收藏</string>
+    <string name="toast_no_comment">该文章不允许评论</string>
     <string name="toast_no_login">没有登录,无法进行此操作</string>
+    <string name="toast_no_share">该文章不允许分享</string>
     <string name="translate_up_down_behavior">com.project.community.view.TranslateUpDownBehavior</string>
     <string name="txt_about">关于我们</string>
     <string name="txt_add">添加</string>
@@ -1133,9 +1133,13 @@
     <string name="txt_confirm_delete">您是否确定要删除?</string>
     <string name="txt_delete">删除</string>
     <string name="txt_depart">部门</string>
+    <string name="txt_dialog_house_no">房屋编码</string>
+    <string name="txt_dialog_tips">该房屋未审核,是否提交房屋审核?</string>
     <string name="txt_dont_leave">不离开</string>
     <string name="txt_edit">编辑</string>
     <string name="txt_family_add_person">添加人口</string>
+    <string name="txt_family_audit_error">该房屋业主审核未通过</string>
+    <string name="txt_family_auditing">该房屋业主审核中</string>
     <string name="txt_family_delete_confirm">确定删除此家庭？</string>
     <string name="txt_family_delete_family">删除此家庭</string>
     <string name="txt_family_info">家庭信息</string>
@@ -1143,6 +1147,7 @@
     <string name="txt_go_pay">去缴费</string>
     <string name="txt_hint_detail">请输入详细</string>
     <string name="txt_hint_suggestion">请输入您的意见</string>
+    <string name="txt_hot_line">政府热线</string>
     <string name="txt_house_no">房屋编码</string>
     <string name="txt_houseno_hint">请输入房屋编号</string>
     <string name="txt_is_owner">是否是业主</string>
@@ -2805,6 +2810,9 @@
         <item name="passwordToggleTint">@color/design_tint_password_toggle</item>
         <item name="passwordToggleContentDescription">@string/password_toggle_content_description</item>
     </style>
+    <style name="WuyeTabLayoutTextStyle">
+        <item name="android:textSize">@dimen/common_sub_title_txt_size</item>
+    </style>
     <style name="bg">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
@@ -2874,6 +2882,16 @@
         <item name="android:textSize">@dimen/common_txt_size</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:background">@drawable/button_round_gray</item>
+    </style>
+    <style name="rectangle_guide_button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:textSize">@dimen/common_txt_size</item>
+        <item name="android:background">@drawable/rectangle_guide_button</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
     </style>
     <style name="rectangle_info_button">
         <item name="android:layout_width">match_parent</item>

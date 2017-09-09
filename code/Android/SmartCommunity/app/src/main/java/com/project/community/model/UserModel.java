@@ -40,6 +40,7 @@ public class UserModel implements Serializable {
       "admin": false,
       "roleNames": ""
       orgCode:组织机构
+      ownerAuditStatus:业主审核状态 true false
     */
     public String id;//用户ID
     public String loginName;//用户名
@@ -79,7 +80,7 @@ public class UserModel implements Serializable {
     public String nation;//民族
     public String roomNo;//房屋编号
     public String orgCode;
-
+    public boolean ownerAuditStatus;
     @Override
     public String toString() {
         return "UserModel{" +
@@ -120,6 +121,7 @@ public class UserModel implements Serializable {
                 ", nation='" + nation + '\'' +
                 ", roomNo='" + roomNo + '\'' +
                 ", orgCode='" + orgCode + '\'' +
+                ", ownerAuditStatus='" + ownerAuditStatus + '\'' +
                 '}';
     }
 }

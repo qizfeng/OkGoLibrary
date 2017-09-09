@@ -40,6 +40,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.baidu.platform.comapi.map.B;
+import com.bumptech.glide.Glide;
+import com.library.okgo.callback.DialogCallback;
+import com.library.okgo.callback.JsonCallback;
+import com.library.okgo.model.BaseResponse;
+import com.library.okgo.model.HttpParams;
 import com.library.okgo.utils.KeyBoardUtils;
 import com.library.okgo.utils.LogUtils;
 import com.library.okgo.utils.ValidateUtil;
@@ -48,6 +53,11 @@ import com.library.okgo.view.loopview.LoopView;
 import com.library.okgo.view.loopview.OnItemSelectedListener;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
+import com.project.community.constants.AppConstants;
+import com.project.community.model.DictionaryModel;
+import com.project.community.model.DictionaryResponse;
+import com.project.community.model.FamilyPersonModel;
+import com.project.community.model.FileUploadModel;
 import com.project.community.util.ScreenUtils;
 
 import java.io.File;
@@ -55,6 +65,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * Created by qizfeng on 17/8/25.
@@ -144,6 +157,29 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
     private LoopView mLoopView;
     private Dialog mDialog;
     private int choiseFlag = 1;//选择框标记
+    private List<DictionaryModel> dictionaryModels = new ArrayList<>();
+    private String familyId;//家庭id
+    private String personId;//成员id,如果是编辑
+    private String photo;//头像
+    private String realName;//真实姓名
+    private String bind;//和户主关系
+    private String position;//职业
+    private String sex;//性别
+    private String idcardNo;//身份证号
+    private String age;
+    private String birthday;//出生日期
+    private String nation;//民族
+    private String religion;//宗教信仰
+    private String party;//党派
+    private String phone;//手机号
+    private String address;//地址
+    private String roomNo;//房间编号
+
+//    private String headRelationId;//与户主关系id
+//    private String sexId;//性别id
+//    private String nationId;//民族id
+//    private String religionId;//宗教信仰id
+//    private String partyId;//党派id
 
     public static void startActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, FamilyAddPersonActivity.class);
@@ -159,7 +195,7 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
     }
 
     private void initView() {
-        KeyBoardUtils.closeKeybord(mEtName,this);
+        KeyBoardUtils.closeKeybord(mEtName, this);
         mTvRelative.setOnClickListener(this);
         mTvGender.setOnClickListener(this);
         mTvNation.setOnClickListener(this);
@@ -169,7 +205,13 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
         Bundle bundle = getIntent().getBundleExtra("bundle");
         if (bundle != null) {
             initToolBar(mToolBar, mTvTitle, true, bundle.getString("title"), R.mipmap.iv_back);
+            familyId = bundle.getString("familyId");
+            personId = bundle.getString("personId");
+            roomNo=bundle.getString("roomNo");
         }
+
+        if (!TextUtils.isEmpty(personId))
+            loadData();
 
         mEtIdcard.addTextChangedListener(new TextWatcher() {
             @Override
@@ -199,7 +241,7 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
         mScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                KeyBoardUtils.closeKeybord(mEtName,FamilyAddPersonActivity.this);
+                KeyBoardUtils.closeKeybord(mEtName, FamilyAddPersonActivity.this);
             }
         });
     }
@@ -208,32 +250,31 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.layout_header:
-                KeyBoardUtils.closeKeybord(mEtName,this);
+                KeyBoardUtils.closeKeybord(mEtName, this);
                 showPhotoDialog();
                 break;
             case R.id.tv_relative:
-                LogUtils.e("======");
-                showDialog(getString(R.string.txt_choise_relative));
+                getDictionary(getString(R.string.txt_chose_nation), "prop_member_relation");
                 choiseFlag = CHOISE_RELATIVE;
                 KeyBoardUtils.closeKeybord(mEtName, FamilyAddPersonActivity.this);
                 break;
             case R.id.tv_gender:
-                showDialog(getString(R.string.txt_choise_gender));
+                getDictionary(getString(R.string.txt_chose_nation), "sex");
                 choiseFlag = CHOISE_GENDER;
                 KeyBoardUtils.closeKeybord(mEtName, FamilyAddPersonActivity.this);
                 break;
             case R.id.tv_nation:
-                showDialog(getString(R.string.txt_chose_nation));
                 choiseFlag = CHOISE_NATION;
+                getDictionary(getString(R.string.txt_chose_nation), "sys_user_nation");
                 KeyBoardUtils.closeKeybord(mEtName, FamilyAddPersonActivity.this);
                 break;
             case R.id.tv_religion:
-                showDialog(getString(R.string.txt_choise_religion));
                 choiseFlag = CHOISE_RELIGION;
+                getDictionary(getString(R.string.txt_choise_religion), "sys_user_religion");
                 KeyBoardUtils.closeKeybord(mEtName, FamilyAddPersonActivity.this);
                 break;
             case R.id.tv_party:
-                showDialog(getString(R.string.txt_choise_party));
+                getDictionary(getString(R.string.txt_choise_party), "sys_user_party");
                 choiseFlag = CHOISE_PARTY;
                 KeyBoardUtils.closeKeybord(mEtName, FamilyAddPersonActivity.this);
                 break;
@@ -248,18 +289,23 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
                     switch (choiseFlag) {
                         case CHOISE_RELATIVE:
                             mTvRelative.setText(mLoopView.getCurrentItem().toString());
+                            bind = dictionaryModels.get(mLoopView.getSelectedItem()).value;
                             break;
                         case CHOISE_GENDER:
                             mTvGender.setText(mLoopView.getCurrentItem().toString());
+                            sex = dictionaryModels.get(mLoopView.getSelectedItem()).value;
                             break;
                         case CHOISE_NATION:
                             mTvNation.setText(mLoopView.getCurrentItem().toString());
+                            nation = dictionaryModels.get(mLoopView.getSelectedItem()).value;
                             break;
                         case CHOISE_RELIGION:
                             mTvReligion.setText(mLoopView.getCurrentItem().toString());
+                            religion = dictionaryModels.get(mLoopView.getSelectedItem()).value;
                             break;
                         case CHOISE_PARTY:
                             mTvParty.setText(mLoopView.getCurrentItem().toString());
+                            party = dictionaryModels.get(mLoopView.getSelectedItem()).value;
                             break;
                     }
                 }
@@ -318,91 +364,175 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
      * 保存
      */
     private void onSave() {
-        String name = mEtName.getText().toString();
-        String idcard = mEtIdcard.getText().toString();
-        String mobile = mEtMobile.getText().toString();
-        if (TextUtils.isEmpty(name)) {
+        realName = mEtName.getText().toString();
+        position = mEtPosition.getText().toString();
+        idcardNo = mEtIdcard.getText().toString();
+        birthday = mTvBirthday.getText().toString();
+        phone = mEtMobile.getText().toString();
+        address = mEtAddress.getText().toString();
+
+        if (TextUtils.isEmpty(realName)) {
             showToast(getString(R.string.toast_empty_name));
             return;
         }
 
-        if (name.length() > 25) {
+        if (realName.length() > 25) {
             showToast(getString(R.string.toast_error_name));
             return;
         }
 
-        if (TextUtils.isEmpty(idcard)) {
+        if (TextUtils.isEmpty(idcardNo)) {
             showToast(getString(R.string.toast_empty_idcard));
             return;
         }
 
-        if (!ValidateUtil.personIdValidation(idcard)) {
+        if (!ValidateUtil.personIdValidation2(idcardNo)) {
             showToast(getString(R.string.toast_error_idcard));
             return;
         }
 
-        if (TextUtils.isEmpty(mobile)) {
+        if (TextUtils.isEmpty(phone)) {
             showToast(getString(R.string.toast_empty_mobile));
             return;
         }
-        if (!ValidateUtil.isMobileNO(mobile)) {
+        if (!ValidateUtil.isPhone(phone)) {
             showToast(getString(R.string.toast_error_phone));
             return;
         }
-
-        finish();
-    }
-
-    private void showDialog(String title) {
-        //填充对话框的布局
-        View inflate = LayoutInflater.from(this).inflate(R.layout.layout_loopview, null);
-        List<String> strings = new ArrayList<>();
-        strings.add("接口数据1");
-        strings.add("接口数据2");
-
-        //初始化控件
-        TextView tv_cancel = (TextView)inflate.findViewById(R.id.tv_cancel);
-        TextView tv_confirm = (TextView)inflate.findViewById(R.id.tv_confirm);
-        TextView tv_title = (TextView)inflate.findViewById(R.id.tv_title);
-        tv_title.setText(title);
-        tv_cancel.setOnClickListener(this);
-        tv_confirm.setOnClickListener(this);
-
-        mLoopView = (LoopView) inflate.findViewById(R.id.loopView);
-        mLoopView.setItems(strings);
-        mLoopView.setNotLoop();
-        mLoopView.setCenterTextColor(getResources().getColor(R.color.txt_color));
-        mLoopView.setListener(new OnItemSelectedListener() {
+        HttpParams params = new HttpParams();
+        params.put("roomNo",roomNo);
+        params.put("userId", getUser(this).id);
+        params.put("familyId", familyId);
+        if (!TextUtils.isEmpty(personId))
+            params.put("memberId", personId);
+        if (!TextUtils.isEmpty(photo))
+            params.put("photo", photo);
+        if (!TextUtils.isEmpty(realName))
+            params.put("realName", realName);
+        if (!TextUtils.isEmpty(bind))
+            params.put("headRelation", bind);
+        if (!TextUtils.isEmpty(position))
+            params.put("occupation", position);
+        if (!TextUtils.isEmpty(sex))
+            params.put("sex", sex);
+        if (!TextUtils.isEmpty(idcardNo))
+            params.put("idNumber", idcardNo);
+        if (!TextUtils.isEmpty(birthday))
+            params.put("dateOfBirth", birthday);
+        if (!TextUtils.isEmpty(nation))
+            params.put("nation", nation);
+        if (!TextUtils.isEmpty(religion))
+            params.put("religion", religion);
+        if (!TextUtils.isEmpty(party))
+            params.put("party", party);
+        if (!TextUtils.isEmpty(phone))
+            params.put("phone", phone);
+        if (!TextUtils.isEmpty(address))
+            params.put("roomAddress", address);
+        serverDao.addPerson(params, new DialogCallback<BaseResponse<List>>(this) {
             @Override
-            public void onItemSelected(int index) {
+            public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
+                showToast(baseResponse.message);
+                setResult(RESULT_OK);
+                finish();
+            }
 
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                if (!e.getMessage().contains("No address"))
+                    showToast(e.getMessage());
             }
         });
-        mPopupWindow = new PopupWindow(this);
-        // 设置视图
-        mPopupWindow.setContentView(inflate);
-        // 设置弹出窗体的宽和高
-        mPopupWindow.setHeight(RelativeLayout.LayoutParams.WRAP_CONTENT);
-        mPopupWindow.setWidth(RelativeLayout.LayoutParams.MATCH_PARENT);
-        // 设置弹出窗体可点击
-        mPopupWindow.setFocusable(true);
-        // 实例化一个ColorDrawable颜色为半透明
-        ColorDrawable dw = new ColorDrawable(0xb0000000);
-        // 设置弹出窗体的背景
-        mPopupWindow.setBackgroundDrawable(dw);
-        // 设置弹出窗体显示时的动画，从底部向上弹出
-        mPopupWindow.setAnimationStyle(R.style.popwin_comment_anim);
-        mPopupWindow.showAtLocation(mLayoutRoot, Gravity.BOTTOM, ScreenUtils.getScreenWidth(this), 0);
-        inflate.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                mPopupWindow.dismiss();
-                return false;
-            }
-        });
+
     }
 
 
+    /**
+     * 编辑时,先获取数据
+     */
+    private void loadData() {
+        serverDao.getPerson(personId, new DialogCallback<BaseResponse<FamilyPersonModel>>(this) {
+            @Override
+            public void onSuccess(BaseResponse<FamilyPersonModel> baseResponse, Call call, Response response) {
+                FamilyPersonModel personModel = baseResponse.retData;
+                if (personModel != null) {
+                    if (!TextUtils.isEmpty(personModel.photo)) {
+                        Glide.with(FamilyAddPersonActivity.this)
+                                .load(AppConstants.HOST+personModel.photo)
+                                .placeholder(R.mipmap.d54_tx)
+                                .bitmapTransform(new CropCircleTransformation(FamilyAddPersonActivity.this))
+                                .into(mIvHeader);
+                    }
+                    if (!TextUtils.isEmpty(personModel.realName))
+                        mEtName.setText(personModel.realName);
+
+                    if (!TextUtils.isEmpty(personModel.headRelation)) {
+                        String[] arr = personModel.headRelation.split("_");
+                        if (arr.length == 2) {
+                            bind = arr[0];
+                            mTvRelative.setText(arr[1]);
+                        }
+                    }
+                    if (!TextUtils.isEmpty(personModel.occupation))
+                        mEtPosition.setText(personModel.occupation);
+                    if (!TextUtils.isEmpty(personModel.sex)) {
+                        String[] arr = personModel.sex.split("_");
+                        if (arr.length == 2) {
+                            mTvGender.setText(arr[1]);
+                            sex = arr[0];
+                        }
+                    }
+
+                    if (!TextUtils.isEmpty(personModel.idNumber)) {
+                        mEtIdcard.setText(personModel.idNumber);
+                        mTvAge.setText(ValidateUtil.getUserAgeByCardId(personModel.idNumber));
+                        mTvBirthday.setText(ValidateUtil.getUserBrithdayByCardId(personModel.idNumber));
+                    }
+
+                    if (!TextUtils.isEmpty(personModel.nation)) {
+                        String[] arr = personModel.nation.split("_");
+                        if (arr.length == 2) {
+                            mTvNation.setText(arr[1]);
+                            nation = arr[0];
+                        }
+                    }
+
+                    if (!TextUtils.isEmpty(personModel.religion)) {
+                        String[] arr = personModel.religion.split("_");
+                        if (arr.length == 2) {
+                            mTvReligion.setText(arr[1]);
+                            religion = arr[0];
+                        }
+                    }
+                    if (!TextUtils.isEmpty(personModel.party)) {
+                        String[] arr = personModel.party.split("_");
+                        if (arr.length == 2) {
+                            mTvParty.setText(arr[1]);
+                            party = arr[0];
+                        }
+                    }
+                    if (!TextUtils.isEmpty(personModel.phone))
+                        mEtMobile.setText(personModel.phone);
+                    if (!TextUtils.isEmpty(personModel.roomAddress))
+                        mEtAddress.setText(personModel.roomAddress);
+                }
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                if (!e.getMessage().contains("No address"))
+                    showToast(e.getMessage());
+            }
+        });
+    }
+
+    /**
+     * 检查数据是否为空
+     *
+     * @return
+     */
     private boolean checkValue() {
         boolean isCheck = false;
         String name = mEtName.getText().toString();
@@ -414,7 +544,11 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
         return isCheck;
     }
 
-
+    /**
+     * 离开弹窗对话框
+     *
+     * @param content 内容
+     */
     public void showAlertDialog(String content) {
         mDialog = new Dialog(this);
         mDialog.setContentView(R.layout.activity_dialog_common);
@@ -427,10 +561,10 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
         p.width = (int) (d.getWidth() * 0.7); // 宽度设置为屏幕的0.65
         window.setAttributes(p);
         mDialog.show();
-        TextView tv_content =(TextView) mDialog.getWindow().findViewById(R.id.tv_content);
+        TextView tv_content = (TextView) mDialog.getWindow().findViewById(R.id.tv_content);
         tv_content.setText(content);
         Button btn_confirm = (Button) mDialog.getWindow().findViewById(R.id.btn_confirm);
-        Button btn_cancel = (Button)mDialog.getWindow().findViewById(R.id.btn_cancel);
+        Button btn_cancel = (Button) mDialog.getWindow().findViewById(R.id.btn_cancel);
         btn_cancel.setText(getString(R.string.txt_dont_leave));
         btn_confirm.setText(getString(R.string.txt_leave));
         ImageView iv_close = (ImageView) mDialog.getWindow().findViewById(R.id.iv_close);
@@ -456,17 +590,20 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
     }
 
 
+    /**
+     * 拍照/相册选择框
+     */
     public void showPhotoDialog() {
-
         //填充对话框的布局
         View inflate = LayoutInflater.from(this).inflate(R.layout.activity_dialog_photo, null);
-        TextView tv_take_photo = (TextView)inflate.findViewById(R.id.tv_take_photo);
-        TextView tv_pick_photo =(TextView) inflate.findViewById(R.id.tv_pick_photo);
-        TextView tv_cancel = (TextView)inflate.findViewById(R.id.tv_cancel);
+        TextView tv_take_photo = (TextView) inflate.findViewById(R.id.tv_take_photo);
+        TextView tv_pick_photo = (TextView) inflate.findViewById(R.id.tv_pick_photo);
+        TextView tv_cancel = (TextView) inflate.findViewById(R.id.tv_cancel);
         tv_cancel.setOnClickListener(this);
         tv_pick_photo.setOnClickListener(this);
         tv_take_photo.setOnClickListener(this);
-        mPopupWindow = new PopupWindow(this);
+        if (mPopupWindow == null)
+            mPopupWindow = new PopupWindow(this);
         // 设置视图
         mPopupWindow.setContentView(inflate);
         // 设置弹出窗体的宽和高
@@ -603,6 +740,7 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
                 case CODE_RESULT_REQUEST:
                     Bitmap bitmap = PhotoUtils.getBitmapFromUri(cropImageUri, this);
                     if (bitmap != null) {
+                        uploadFile(new File(cropImageUri.getPath()));
                         showImages(bitmap);
                     }
                     break;
@@ -610,9 +748,111 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
         }
     }
 
+    /**
+     * 拍照/相册显示图片
+     *
+     * @param bitmap
+     */
     private void showImages(Bitmap bitmap) {
 //        mIvHeader.setImageBitmap(bitmap);
-        glide.onDisplayImageCircle(this,mIvHeader,bitmap);
+        glide.onDisplayImageCircle(this, mIvHeader, bitmap);
 
+    }
+
+    /**
+     * 文件上传
+     *
+     * @param file
+     */
+    private void uploadFile(File file) {
+        serverDao.uploadFile(file, new JsonCallback<BaseResponse<FileUploadModel>>() {
+            @Override
+            public void onSuccess(BaseResponse<FileUploadModel> baseResponse, Call call, Response response) {
+                photo = baseResponse.retData.filePath;
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                if (!e.getMessage().contains("No address"))
+                    showToast(e.getMessage());
+            }
+        });
+    }
+
+    /**
+     * 获取字典数据
+     *
+     * @param type
+     */
+    private void getDictionary(final String title, final String type) {
+
+        serverDao.getDictionaryData(type, new DialogCallback<BaseResponse<DictionaryResponse>>(this) {
+            @Override
+            public void onSuccess(BaseResponse<DictionaryResponse> baseResponse, Call call, Response response) {
+                dictionaryModels = new ArrayList<>();
+                dictionaryModels.addAll(baseResponse.retData.dictList);
+                showDialog(title, dictionaryModels);
+            }
+        });
+    }
+
+
+    /**
+     * loopview
+     *
+     * @param title
+     * @param data
+     */
+    private void showDialog(String title, List<DictionaryModel> data) {
+        //填充对话框的布局
+        View inflate = LayoutInflater.from(this).inflate(R.layout.layout_loopview, null);
+        List<String> strings = new ArrayList<>();
+        for (int i = 0; i < data.size(); i++) {
+            strings.add(data.get(i).label);
+        }
+        //初始化控件
+        TextView tv_cancel = (TextView) inflate.findViewById(R.id.tv_cancel);
+        TextView tv_confirm = (TextView) inflate.findViewById(R.id.tv_confirm);
+        TextView tv_title = (TextView) inflate.findViewById(R.id.tv_title);
+        tv_title.setText(title);
+        tv_cancel.setOnClickListener(this);
+        tv_confirm.setOnClickListener(this);
+
+        mLoopView = (LoopView) inflate.findViewById(R.id.loopView);
+        mLoopView.setItems(strings);
+        mLoopView.setNotLoop();
+        mLoopView.setCenterTextColor(getResources().getColor(R.color.txt_color));
+        mLoopView.setListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(int index) {
+
+            }
+        });
+        if (mPopupWindow != null) {
+            mPopupWindow.dismiss();
+        }
+        mPopupWindow = new PopupWindow(this);
+        // 设置视图
+        mPopupWindow.setContentView(inflate);
+        // 设置弹出窗体的宽和高
+        mPopupWindow.setHeight(RelativeLayout.LayoutParams.WRAP_CONTENT);
+        mPopupWindow.setWidth(RelativeLayout.LayoutParams.MATCH_PARENT);
+        // 设置弹出窗体可点击
+        mPopupWindow.setFocusable(true);
+        // 实例化一个ColorDrawable颜色为半透明
+        ColorDrawable dw = new ColorDrawable(0xb0000000);
+        // 设置弹出窗体的背景
+        mPopupWindow.setBackgroundDrawable(dw);
+        // 设置弹出窗体显示时的动画，从底部向上弹出
+        mPopupWindow.setAnimationStyle(R.style.popwin_comment_anim);
+        mPopupWindow.showAtLocation(mLayoutRoot, Gravity.BOTTOM, ScreenUtils.getScreenWidth(this), 0);
+        inflate.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                mPopupWindow.dismiss();
+                return false;
+            }
+        });
     }
 }

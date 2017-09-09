@@ -12,18 +12,22 @@ import java.io.Serializable;
 
 public class FamilyPersonModel implements Serializable, MultiItemEntity {
     private static final long serialVersionUID = -4337711009801627866L;
-    public String id;
-    public String avatar;
-    public int res;
-    public String name;
-    public String relativeId;
-    public String relative;
-    public String tag;
-    public int tagRes;
-    public boolean hasTag;
-    public int itemType;//1家庭成员标识 2家庭成员
     public static final int HEADER = 1;
     public static final int CONTENT = 2;
+    public int itemType=2;//1家庭成员标识 2家庭成员
+
+    public String id;
+    public String realName;//真实姓名
+    public String headRelation;//和户主关系
+    public String occupation;//职业
+    public String sex;//1-男 2-女  value-key
+    public String religion;//宗教信仰
+    public String nation;//民族
+    public String party;//党派
+    public String phone;//手机
+    public String photo;//头像
+    public String idNumber;//身份证
+    public String roomAddress;//地址
 
 
     @Override
@@ -34,16 +38,19 @@ public class FamilyPersonModel implements Serializable, MultiItemEntity {
     @Override
     public String toString() {
         return "FamilyPersonModel{" +
-                "id='" + id + '\'' +
-                ", avatar='" + avatar + '\'' +
-                ", res=" + res +
-                ", name='" + name + '\'' +
-                ", relativeId='" + relativeId + '\'' +
-                ", relative='" + relative + '\'' +
-                ", tag='" + tag + '\'' +
-                ", tagRes=" + tagRes +
-                ", hasTag=" + hasTag +
-                ", itemType=" + itemType +
+                "itemType=" + itemType +
+                ", id='" + id + '\'' +
+                ", realName='" + realName + '\'' +
+                ", headRelation='" + headRelation + '\'' +
+                ", occupation='" + occupation + '\'' +
+                ", sex='" + sex + '\'' +
+                ", religion='" + religion + '\'' +
+                ", nation='" + nation + '\'' +
+                ", party='" + party + '\'' +
+                ", phone='" + phone + '\'' +
+                ", photo='" + photo + '\'' +
+                ", idNumber='" + idNumber + '\'' +
+                ", roomAddress='" + roomAddress + '\'' +
                 '}';
     }
 }

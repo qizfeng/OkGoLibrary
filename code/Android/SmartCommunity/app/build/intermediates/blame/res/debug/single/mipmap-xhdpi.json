@@ -20,6 +20,10 @@
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xhdpi/icon_share.png"
     },
     {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xhdpi/pic_guidepage_2.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xhdpi/pic_guidepage_2.png"
+    },
+    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xhdpi/icon_pwd_eyes.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xhdpi/icon_pwd_eyes.png"
     },
@@ -64,12 +68,12 @@
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xhdpi/iv_back.png"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xhdpi/icon_qq_normal.png",
-        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xhdpi/icon_qq_normal.png"
-    },
-    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xhdpi/ranqi.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xhdpi/ranqi.png"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xhdpi/icon_qq_normal.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xhdpi/icon_qq_normal.png"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xhdpi/icon_close.png",
@@ -138,5 +142,9 @@
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xhdpi/icon_zan.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xhdpi/icon_zan.png"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xhdpi/pic_guidepage_1.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xhdpi/pic_guidepage_1.png"
     }
 ]

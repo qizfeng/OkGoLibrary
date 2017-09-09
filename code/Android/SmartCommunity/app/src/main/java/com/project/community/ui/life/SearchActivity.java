@@ -65,7 +65,8 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
     ImageView ivClear;
     @Bind(R.id.clear_history_btn)
     TextView mClearHistoryBtn;
-
+    @Bind(R.id.view_lin_top)
+    View mViewLineTop;
     private SearchAdapter mAdapter;
     private SearchHistoryAdapter mHistoryAdapter;
     private List<SearchModel> mData = new ArrayList<>();
@@ -172,6 +173,7 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
     private void initSearchHistory() {
         String cache = SearchHistoryCacheUtils.getCache(SearchActivity.this);
         if (cache != null) {
+            mViewLineTop.setVisibility(View.VISIBLE);
             historyRecordList = new ArrayList<>();
             for (String record : cache.split(",")) {
                 historyRecordList.add(record);
@@ -188,8 +190,10 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
                     mHistoryAdapter.notifyDataSetChanged();
                     if (mHistoryAdapter.getCount() > 0) {
                         mClearHistoryBtn.setText(getString(R.string.str_clearSearchHistory));
+                        mViewLineTop.setVisibility(View.VISIBLE);
                     } else {
                         mClearHistoryBtn.setText(getString(R.string.str_empty_history));
+                        mViewLineTop.setVisibility(View.GONE);
                     }
                 }
             });
@@ -209,6 +213,7 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
             }
         } else {
 //            llHistory.setVisibility(View.GONE);
+            mViewLineTop.setVisibility(View.GONE);
             mClearHistoryBtn.setText(getString(R.string.str_empty_history));
             historyRecordList.clear();
             if (mHistoryAdapter != null) {
@@ -274,7 +279,7 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
             public void onSuccess(BaseResponse<List<SearchModel>> baseResponse, Call call, Response response) {
                 mData = new ArrayList<>();
                 mData.addAll(baseResponse.retData);
-                LogUtils.e("search:"+baseResponse.retData.toString());
+                LogUtils.e("search:" + baseResponse.retData.toString());
                 if (llResult.getVisibility() == View.GONE) {
                     llResult.setVisibility(View.VISIBLE);
                 }

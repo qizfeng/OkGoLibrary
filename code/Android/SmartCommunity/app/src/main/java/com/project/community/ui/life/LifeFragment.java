@@ -70,8 +70,16 @@ public class LifeFragment extends BaseFragment implements View.OnClickListener {
         tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_title_life_zhengwu));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_title_life_wuye));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_title_life_minsheng));
+
         tabLayout.setupWithViewPager(viewPager);
-        TablayoutLineReflex.setIndicator(getActivity(),tabLayout,10,10);
+        tabLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                TablayoutLineReflex.setTabLine(getActivity(),tabLayout,15,15);
+//                TablayoutLineReflex.setTabLine(getActivity(),tabLayout,15,15);
+            }
+        });
+//        TablayoutLineReflex.setTabLine(getActivity(),tabLayout,30,30);
         viewPager.setNoScroll(true);
     }
 

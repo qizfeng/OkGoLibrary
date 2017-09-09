@@ -8,6 +8,7 @@
         android:id="@+id/contentTextView"
         style="@style/textview_style"
         android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_55"
         android:gravity="center_vertical"
         android:paddingLeft="10dp"
         android:textColor="@color/txt_gray_color"

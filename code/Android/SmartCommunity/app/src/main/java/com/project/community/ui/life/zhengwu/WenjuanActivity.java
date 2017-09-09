@@ -1,30 +1,26 @@
 package com.project.community.ui.life.zhengwu;
 
-import android.content.Intent;
-import android.graphics.Color;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
-import com.project.community.listener.RecycleItemClickListener;
-import com.project.community.model.WenjuanModel;
-import com.project.community.ui.adapter.WenjuanAdapter;
-import com.project.community.ui.life.SearchActivity;
-import com.project.community.view.SpacesItemDecoration;
-import com.project.community.view.VpSwipeRefreshLayout;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.project.community.constants.AppConstants;
+import com.project.community.view.Html5WebView;
 
 import butterknife.Bind;
 
@@ -33,108 +29,189 @@ import butterknife.Bind;
  * 问卷
  */
 
-public class WenjuanActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
-    @Bind(R.id.refreshLayout)
-    VpSwipeRefreshLayout refreshLayout;
-    @Bind(R.id.recyclerView)
-    RecyclerView recyclerView;
+public class WenjuanActivity extends BaseActivity {
+    private String mUrl;
+    private String mTitle;
+    private LinearLayout mLayout;
+    private WebView mWebView;
     @Bind(R.id.toolbar)
-    Toolbar mToolBar;
+    Toolbar toolbar;
+    @Bind(R.id.pb)
+    ProgressBar pb;
+    @Bind(R.id.appbar)
+    AppBarLayout mAppbar;
     @Bind(R.id.tv_title)
     TextView mTvTitle;
-    private WenjuanAdapter mAdapter;
-    private List<WenjuanModel> mData = new ArrayList<>();
+    private Menu mMenu;
 
+    @android.webkit.JavascriptInterface
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wenjuan);
-        initToolBar(mToolBar, mTvTitle, true, getString(R.string.title_wenjuan), R.mipmap.iv_back);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        SpacesItemDecoration decoration = new SpacesItemDecoration(2, false);
-        recyclerView.addItemDecoration(decoration);
-        refreshLayout.setOnRefreshListener(this);
-        refreshLayout.setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN);
-
-        initData();
-        mAdapter = new WenjuanAdapter(mData, new RecycleItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Intent intent = new Intent(WenjuanActivity.this, WenjuanDetailActivity.class);
-                startActivity(intent);
-            }
-
-            @Override
-            public void onCustomClick(View view, int position) {
-
-            }
-        });
-        recyclerView.setAdapter(mAdapter);
-        mAdapter.setEnableLoadMore(false);
-        mAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN);
-
-    }
-
-
-    private void initData() {
-        mData = new ArrayList<>();
-        WenjuanModel model1 = new WenjuanModel();
-        for (int i = 0; i < 20; i++) {
-            mData.add(model1);
+        Bundle bundle = getIntent().getBundleExtra("bundle");
+        if (bundle != null) {
+            mUrl = bundle.getString("url");
         }
-    }
+        initToolBar(toolbar, mTvTitle, true, getString(R.string.activity_wenjuan), R.mipmap.iv_back);
+        pb.setMax(100);
+        mLayout = (LinearLayout) findViewById(R.id.web_layout);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams
+                .MATCH_PARENT);
+        mWebView = new Html5WebView(getApplicationContext());
+        mWebView.setLayoutParams(params);
+        mLayout.addView(mWebView);
 
-    @Override
-    public void onRefresh() {
-        setRefreshing(false);
-    }
-
-    /**
-     * 设置是否刷新动画
-     *
-     * @param refreshing true开始刷新动画 false结束刷新动画
-     */
-    public void setRefreshing(final boolean refreshing) {
-        refreshLayout.post(new Runnable() {
+        mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
-            public void run() {
-                refreshLayout.setRefreshing(refreshing);
+            public void onProgressChanged(WebView view, int newProgress) {
+                LogUtils.e("progress:" + newProgress);
+                pb.setProgress(newProgress);
+                if (newProgress >= 100) {
+                    pb.setVisibility(View.GONE);
+                } else {
+                    pb.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onReceivedTitle(WebView view, String title) {
+                super.onReceivedTitle(view, title);
+                LogUtils.e("receive:" + view.getUrl() + "," + title);
+                String url = view.getUrl();
+                if (url.contains(AppConstants.URL_WENJUAN_LIST)) {
+                    mMenu.findItem(R.id.action_favorite).setIcon(R.mipmap.d2_sousuo);
+                    mTvTitle.setText(getString(R.string.activity_wenjuan));
+                } else if (url.contains(AppConstants.URL_WENJUAN_DETIAL) || url.contains(AppConstants.URL_WENJUAN_RESULT)) {
+                    mMenu.findItem(R.id.action_favorite).setIcon(null).setTitle("");
+                    mTvTitle.setText(getString(R.string.activity_write_wenjuan));
+                }
+            }
+        });
+        mWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                LogUtils.e("shouldOverrideUrlLoading:" + url);
+                return super.shouldOverrideUrlLoading(view, url);
+            }
+
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                try {
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+        });
+
+        if (getString(R.string.title_masses_guide).equals(mTitle)) {
+            mWebView.loadData(mUrl, "text/html;charset=utf-8", null);
+        } else {
+            if (mUrl != null)
+                if (!mUrl.startsWith("http"))
+                    mUrl = "http://" + mUrl;
+            mWebView.loadUrl(mUrl);
+            LogUtils.e("url:" + mUrl);
+        }
+        mWebView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                WebView.HitTestResult result = ((WebView) v).getHitTestResult();
+                if (null == result)
+                    return false;
+                int type = result.getType();
+                if (type == WebView.HitTestResult.UNKNOWN_TYPE)
+                    return false;
+
+                // 这里可以拦截很多类型，我们只处理图片类型就可以了
+                switch (type) {
+                    case WebView.HitTestResult.PHONE_TYPE: // 处理拨号
+                        break;
+                    case WebView.HitTestResult.EMAIL_TYPE: // 处理Email
+                        break;
+                    case WebView.HitTestResult.GEO_TYPE: // 地图类型
+                        break;
+                    case WebView.HitTestResult.SRC_ANCHOR_TYPE: // 超链接
+                        break;
+                    case WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE:
+                        break;
+                    case WebView.HitTestResult.IMAGE_TYPE: // 处理长按图片的菜单项
+                        // 获取图片的路径
+                        String saveImgUrl = result.getExtra();
+                        // 跳转到图片详情页，显示图片
+//                        Intent i = new Intent(this, ImageActivity.class);
+//                        i.putExtra("imgUrl", saveImgUrl);
+//                        startActivity(i);
+                        // ToastUtils.showShortToast(WebViewActivity.this, "长按了图片:" + saveImgUrl);
+                        break;
+                    default:
+                        break;
+                }
+                return false;
             }
         });
     }
 
 
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.findItem(R.id.action_favorite).setIcon(R.mipmap.d2_sousuo);
-        return super.onPrepareOptionsMenu(menu);
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            String url = mWebView.getUrl();
+            if (url.contains(AppConstants.URL_WENJUAN_LIST))
+                finish();
+            else {
+                mWebView.goBack();
+            }
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
     }
+
+    @Override
+    protected void onDestroy() {
+        if (mWebView != null) {
+            mWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
+            mWebView.clearHistory();
+
+            ((ViewGroup) mWebView.getParent()).removeView(mWebView);
+            mWebView.destroy();
+            mWebView = null;
+        }
+        super.onDestroy();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_actionbar, menu);
+//        inflater = getActivity().getMenuInflater();
+//        inflater.inflate(R.menu.menu_actionbar, menu);
+        getMenuInflater().inflate(R.menu.menu_category, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-           /* case R.id.action_settings:
-
-                // User chose the "Settings" item, show the app settings UI...
-                return true;*/
-
             case R.id.action_favorite:
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
                 Bundle bundle = new Bundle();
-                bundle.putString("type", "mobile");
-                bundle.putInt("index", 0);
-                SearchActivity.startActivity(WenjuanActivity.this, bundle);
+                bundle.putString("url", AppConstants.URL_WENJUAN_SEARCH);
+                WenjuanSearchActivity.startActivity(WenjuanActivity.this, bundle);
                 return true;
-
+            case android.R.id.home:
+                String url = mWebView.getUrl();
+                if (url.contains(AppConstants.URL_WENJUAN_LIST))
+                    finish();
+                else {
+                    mWebView.goBack();
+                }
+                return true;
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
@@ -142,4 +219,13 @@ public class WenjuanActivity extends BaseActivity implements SwipeRefreshLayout.
 
         }
     }
+
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.action_favorite).setIcon(R.mipmap.d2_sousuo);
+        mMenu = menu;
+        return super.onPrepareOptionsMenu(menu);
+    }
 }
+

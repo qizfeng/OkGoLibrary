@@ -12,20 +12,18 @@ import java.util.List;
 public class FamilyModel implements Serializable {
     private static final long serialVersionUID = -4337711009801627866L;
     public String id;
-    public String familyNo;
-    public String familyAddr;
     public String familyName;
-    public List<FamilyPersonModel> familyPersons = new ArrayList<>();
-
-
+    public String auditStatus;
+    public HouseModel room =null;
+    public List<FamilyPersonModel> memberList = new ArrayList<>();
     @Override
     public String toString() {
         return "FamilyModel{" +
                 "id='" + id + '\'' +
-                ", familyNo='" + familyNo + '\'' +
-                ", familyAddr='" + familyAddr + '\'' +
                 ", familyName='" + familyName + '\'' +
-                ", familyPersons=" + familyPersons +
+                ", auditStatus=" + auditStatus +
+                ", room=" + room +
+                ", memberList=" + memberList +
                 '}';
     }
 }

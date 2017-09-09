@@ -1,5 +1,6 @@
 package com.project.community.ui.life.wuye;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.model.BaseResponse;
 import com.library.okgo.utils.KeyBoardUtils;
+import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.model.HouseModel;
@@ -37,7 +39,10 @@ public class AddHouseNoActivity extends BaseActivity {
     @Bind(R.id.btn_next)
     Button mBtnNext;
     private String title;
-
+    public static Activity instance;
+    public static Activity getInstance(){
+        return instance;
+    }
     public static void startActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, AddHouseNoActivity.class);
         intent.putExtra("bundle", bundle);
@@ -48,6 +53,7 @@ public class AddHouseNoActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_house_no);
+        instance=this;
         initToolBar(mToolBar, mTvTitle, true, getString(R.string.activity_add_house), R.mipmap.iv_back);
         try {
             title = getIntent().getBundleExtra("bundle").getString("title");
@@ -92,8 +98,11 @@ public class AddHouseNoActivity extends BaseActivity {
                 bundle.putString("houseNo", baseResponse.retData.getRoomNo());
                 bundle.putString("address", baseResponse.retData.getAddress());
                 bundle.putString("title",title);
-                AddHouseNoDialogActivity.startActivity(AddHouseNoActivity.this, bundle);
-                finish();
+//                AddHouseNoDialogActivity.startActivity(AddHouseNoActivity.this, bundle);
+                Intent intent = new Intent(AddHouseNoActivity.this,AddHouseNoDialogActivity.class);
+                intent.putExtra("bundle",bundle);
+                startActivity(intent);
+//                finish();
             }
 
             @Override
