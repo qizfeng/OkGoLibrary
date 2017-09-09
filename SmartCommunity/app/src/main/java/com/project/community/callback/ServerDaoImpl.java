@@ -13,10 +13,13 @@ import com.project.community.R;
 import com.project.community.constants.AppConstants;
 import com.project.community.model.AgreementResponse;
 import com.project.community.model.ArticleModel;
+import com.project.community.model.AuditStatusModel;
 import com.project.community.model.BannerResponse;
 import com.project.community.model.CommentModel;
 import com.project.community.model.DictionaryResponse;
 import com.project.community.model.DistModel;
+import com.project.community.model.FamilyModel;
+import com.project.community.model.FamilyPersonModel;
 import com.project.community.model.FileUploadModel;
 import com.project.community.model.GuideModel;
 import com.project.community.model.HotlineModel;
@@ -245,10 +248,12 @@ public class ServerDaoImpl implements ServerDao {
     }
 
     @Override
-    public void submitSuggest(String phone, String title, String context, JsonCallback<BaseResponse<List>> callback) {
+    public void submitSuggest(String userId, String orgCode, String phone, String title, String context, JsonCallback<BaseResponse<List>> callback) {
         checkNet();
         OkGo.post(AppConstants.URL_SUGGEST)
                 .tag(mContext)
+                .params("userId", userId)
+                .params("orgCode", orgCode)
                 .params("phone", phone)
                 .params("title", title)
                 .params("content", context)
@@ -274,11 +279,12 @@ public class ServerDaoImpl implements ServerDao {
             url = AppConstants.URL_ZHENGWU_HOTLINE;
         else if ("2".equals(type))
             url = AppConstants.URL_WUYE_HOTLINE;
-        if (TextUtils.isEmpty(orgCode))
-            orgCode = "650422100007000";
+//        if (TextUtils.isEmpty(orgCode))
+//            orgCode = "650422100007000";
         OkGo.post(url)
                 .tag(mContext)
                 .params("orgCode", orgCode)
+                .params("type", type)
                 .execute(callback);
     }
 
@@ -432,8 +438,8 @@ public class ServerDaoImpl implements ServerDao {
     public void deleteHouse(String userId, String payRoomId, JsonCallback<BaseResponse<List>> callback) {
         OkGo.post(AppConstants.URL_DELETE_HOUSE)
                 .tag(mContext)
-                .params("userId",userId)
-                .params("payRoomId",payRoomId)
+                .params("userId", userId)
+                .params("payRoomId", payRoomId)
                 .execute(callback);
     }
 
@@ -441,8 +447,109 @@ public class ServerDaoImpl implements ServerDao {
     public void getPaymentDetailInfo(String paymentType, String roomNo, JsonCallback<BaseResponse<PaymentInfoModel>> callback) {
         OkGo.post(AppConstants.URL_SELECT_PAY_INFO)
                 .tag(mContext)
-                .params("paymentType",paymentType)
-                .params("roomNo",roomNo)
+                .params("paymentType", paymentType)
+                .params("roomNo", roomNo)
+                .execute(callback);
+    }
+
+    @Override
+    public void getFamilyListInfo(String userId, String phone, String roomNo, JsonCallback<BaseResponse<List<FamilyModel>>> callback) {
+        HttpParams params = new HttpParams();
+        params.put("userId", userId);
+        params.put("phone", phone);
+        params.put("roomNo", roomNo);
+        OkGo.post(AppConstants.URL_FAMILY_LIST)
+                .tag(mContext)
+                .params(params)
+                .execute(callback);
+    }
+
+    @Override
+    public void getFamilyInfo(String userId, String phone, String roomNo, String familyId, JsonCallback<BaseResponse<List<FamilyModel>>> callback) {
+        HttpParams params = new HttpParams();
+        params.put("userId", userId);
+        params.put("phone", phone);
+        params.put("roomNo", roomNo);
+        params.put("familyId", familyId);
+        OkGo.post(AppConstants.URL_FAMILY_LIST)
+                .tag(mContext)
+                .params(params)
+                .execute(callback);
+    }
+
+    @Override
+    public void checkOwner(String roomNo, String userId, String phone, JsonCallback<BaseResponse<AuditStatusModel>> callback) {
+        OkGo.post(AppConstants.URL_CHECK_OWNER)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("roomNo", roomNo)
+                .params("phone", phone)
+                .execute(callback);
+    }
+
+    @Override
+    public void addFamily(String userId, String roomNo, String familyName, JsonCallback<BaseResponse<HouseModel>> callback) {
+        OkGo.post(AppConstants.URL_ADD_FAMILY)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("roomNo", roomNo)
+                .params("familyName", familyName)
+                .execute(callback);
+    }
+
+    @Override
+    public void addPerson(HttpParams params, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.URL_ADD_PERSON)
+                .tag(mContext)
+                .params(params)
+                .execute(callback);
+    }
+
+    @Override
+    public void deletePerson(String userId, String memberId, String roomNo, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.URL_DELETE_PERSON)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("memberId", memberId)
+                .params("roomNo", roomNo)
+                .execute(callback);
+    }
+
+    @Override
+    public void getPerson(String memberId, JsonCallback<BaseResponse<FamilyPersonModel>> callback) {
+        OkGo.post(AppConstants.URL_GET_PERSON)
+                .tag(mContext)
+                .params("memberId", memberId)
+                .execute(callback);
+    }
+
+    @Override
+    public void deleteFamily(String userId, String roomNo, String familyId, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.URL_DELETE_FAMILY)
+                .tag(mContext)
+                .params("familyId", familyId)
+                .params("userId", userId)
+                .params("roomNo", roomNo)
+                .execute(callback);
+    }
+
+
+    @Override
+    public void auditFamily(String userId, String familyName, String familyNo, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.URL_FAMILY_AUDIT)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("familyName", familyName)
+                .params("roomNo", familyNo)
+                .execute(callback);
+    }
+
+    @Override
+    public void getPayOrderInfo(String userId, String paymentId, JsonCallback<BaseResponse<String>> callback) {
+        OkGo.post(AppConstants.URL_GET_PAY_ORDER)
+                .tag(mContext)
+                .params("userId",userId)
+                .params("paymentId",paymentId)
                 .execute(callback);
     }
 }

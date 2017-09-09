@@ -5,6 +5,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -47,8 +48,11 @@ public class WebViewActivity extends BaseActivity {
     Toolbar toolbar;
     @Bind(R.id.pb)
     ProgressBar pb;
+    @Bind(R.id.appbar)
+    AppBarLayout mAppbar;
     @Bind(R.id.tv_title)
     TextView mTvTitle;
+    private boolean hideNavigation = false;
 
     @android.webkit.JavascriptInterface
     @SuppressLint("SetJavaScriptEnabled")
@@ -61,17 +65,17 @@ public class WebViewActivity extends BaseActivity {
             mUrl = bundle.getString("url");
             mTitle = bundle.getString("title");
         }
+        hideNavigation = getIntent().getBooleanExtra("hideNavigation", false);
         if (TextUtils.isEmpty(mTitle)) {
-//            initToolBar(toolbar, true, "");
-//            toolbar.setNavigationIcon(R.mipmap.iv_back);
-            initToolBar(toolbar, mTvTitle,true,getString(R.string.app_name),R.mipmap.iv_back);
-        }else {
-            initToolBar(toolbar, mTvTitle,true,mTitle,R.mipmap.iv_back);
+            initToolBar(toolbar, mTvTitle, true, "", R.mipmap.iv_back);
+        } else {
+            initToolBar(toolbar, mTvTitle, true, mTitle, R.mipmap.iv_back);
         }
-
+        if (hideNavigation)
+            mAppbar.setVisibility(View.GONE);
+        else
+            mAppbar.setVisibility(View.VISIBLE);
         pb.setMax(100);
-
-
         mLayout = (LinearLayout) findViewById(R.id.web_layout);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams
                 .MATCH_PARENT);
@@ -82,20 +86,28 @@ public class WebViewActivity extends BaseActivity {
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
-                LogUtils.e("progress:"+newProgress);
+                LogUtils.e("progress:" + newProgress);
                 pb.setProgress(newProgress);
                 if (newProgress >= 100) {
                     pb.setVisibility(View.GONE);
-                }else {
+                } else {
                     pb.setVisibility(View.VISIBLE);
                 }
             }
+
         });
+
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                LogUtils.e("loadUrl:" + url);
                 view.loadUrl(url);
-                return true;
+                if (url.equals("http://zhihuishequ.zpftech.com/surveyList/history.back")) {
+                    LogUtils.e("shouldOverrideUrlLoading:" + url);
+                    finish();
+                    return true;
+                }
+                return super.shouldOverrideUrlLoading(view, url);
             }
 
             @Override
@@ -109,10 +121,14 @@ public class WebViewActivity extends BaseActivity {
             }
         });
 
-        if(getString(R.string.title_masses_guide).equals(mTitle)){
-            mWebView.loadData(mUrl,"text/html;charset=utf-8",null);
-        }else {
+        if (getString(R.string.title_masses_guide).equals(mTitle)) {
+            mWebView.loadData(mUrl, "text/html;charset=utf-8", null);
+        } else {
+            if (mUrl != null)
+                if (!mUrl.startsWith("http"))
+                    mUrl = "http://" + mUrl;
             mWebView.loadUrl(mUrl);
+            LogUtils.e("url:"+mUrl);
         }
         // 添加js交互接口类，并起别名 imageListener
         mWebView.addJavascriptInterface(new JavascriptInterface(this), "imageListener");
@@ -166,19 +182,19 @@ public class WebViewActivity extends BaseActivity {
     @SuppressLint("JavascriptInterface")
     private void addImageClickListner() {
         // 这段js函数的功能就是，遍历所有的img节点，并添加onclick函数，函数的功能是在图片点击的时候调用本地java接口并传递url过去
-        String jsStr = "javascript:(function(){" +
-                "var objs = document.getElementsByTagName(\"img\"); " +
-                "var imgs =new Array();" +
-                "for(var i=0;i<objs.length;i++){" +
-                "   objs[i].index = i;" +
-                "   var index=i;" +
-                "   imgs[index]=objs[index].src;" +
-                "   objs[i].onclick=function(){" +
-                "       window.imageListener.openImage(imgs[index],imgs,index);" +
-                "   }" +
-                "}" +
-                "})()";
-        mWebView.loadUrl(jsStr);
+//        String jsStr = "javascript:(function(){" +
+//                "var objs = document.getElementsByTagName(\"img\"); " +
+//                "var imgs =new Array();" +
+//                "for(var i=0;i<objs.length;i++){" +
+//                "   objs[i].index = i;" +
+//                "   var index=i;" +
+//                "   imgs[index]=objs[index].src;" +
+//                "   objs[i].onclick=function(){" +
+//                "       window.imageListener.openImage(imgs[index],imgs,index);" +
+//                "   }" +
+//                "}" +
+//                "})()";
+//        mWebView.loadUrl(jsStr);
     }
 
     // js通信接口
@@ -192,14 +208,12 @@ public class WebViewActivity extends BaseActivity {
 
         @android.webkit.JavascriptInterface
         public void openImage(String img, String[] imgs, int position) {
-            ToastUtils.showShortToast(WebViewActivity.this, "点击了图片:" + img);
-            LogUtils.e("size:" + imgs.length + ",position:" + position);
-            Intent intent = new Intent(WebViewActivity.this, ImageBrowseActivity.class);
-            ArrayList<String> imgArray = new ArrayList<>();
-            imgArray.addAll(Arrays.asList(imgs));
-            intent.putStringArrayListExtra("imgs", imgArray);
-            intent.putExtra("position", position);
-            startActivity(intent);
+//            Intent intent = new Intent(WebViewActivity.this, ImageBrowseActivity.class);
+//            ArrayList<String> imgArray = new ArrayList<>();
+//            imgArray.addAll(Arrays.asList(imgs));
+//            intent.putStringArrayListExtra("imgs", imgArray);
+//            intent.putExtra("position", position);
+//            startActivity(intent);
         }
     }
 

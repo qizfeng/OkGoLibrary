@@ -55,7 +55,7 @@ public class CategoryActivity extends BaseActivity {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
-        mRecyclerView.addItemDecoration(new DividerGridItemDecoration(this));
+        mRecyclerView.addItemDecoration(new DividerGridItemDecoration(this,15));
 //        mRecyclerView.addItemDecoration(new DividerItemDecoration(this,0));
         initData();
     }

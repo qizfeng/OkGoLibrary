@@ -6,8 +6,19 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/pic_guidepage_3"
-        />
+        android:scaleType="fitXY"
+        android:src="@mipmap/pic_guidepage_3" />
 
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="160dp"
+        android:layout_height="42dp"
+        style="@style/rectangle_guide_button"
+        android:layout_gravity="bottom|center_horizontal"
+        android:text="点击进入"
+        android:layout_marginBottom="@dimen/dp_40"
+        android:textColor="@color/white"
+        android:textSize="@dimen/common_txt_size"
+        android:visibility="visible" />
 </FrameLayout>

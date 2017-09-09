@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              style="@style/bg"
-              android:gravity="center"
-              android:orientation="vertical"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <ImageView
-        style="@style/empty_img"
-        android:src="@mipmap/empty_icon"/>
-
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@mipmap/d16_icon1"
+        android:layout_marginTop="180dp"
+        android:layout_gravity="center"/>
     <TextView
-        android:layout_marginTop="5dp"
+        android:id="@+id/tv_tips"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/empty_no_data"
-        android:textColor="@color/txt_color"/>
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/color_gray_b3c0d5"
+        android:textSize="@dimen/common_title_txt_size"
+        android:layout_marginTop="@dimen/dp_20"
+        android:text="@string/str_search_empty"/>
 </LinearLayout>

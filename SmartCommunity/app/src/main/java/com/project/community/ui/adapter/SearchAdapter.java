@@ -6,6 +6,7 @@ import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,14 +73,24 @@ public class SearchAdapter extends BaseQuickAdapter<SearchModel, BaseViewHolder>
         try {
             if (index == 1)
                 baseViewHolder.setText(R.id.tv_title, "【" + model.articleName + "】" + model.title);
-            else if(index==0)
-                baseViewHolder.setText(R.id.tv_content,"【" + model.articleName + "】" + model.title);
-            baseViewHolder.setText(R.id.tv_time, DateUtil.getStandardTime(Long.parseLong(model.createDate)));
+            else if (index == 0) {
+                baseViewHolder.setText(R.id.tv_content, "【" + model.articleName + "】" + model.title);
+                if (TextUtils.isEmpty(model.surveyId)) {
+                    baseViewHolder.setVisible(R.id.tv_wenjuan, false);
+                } else {
+                    if (!TextUtils.isEmpty(model.image))
+                        baseViewHolder.setVisible(R.id.tv_wenjuan, true);
+                    else
+                        baseViewHolder.setVisible(R.id.tv_wenjuan, false);
+                }
+            }
+            baseViewHolder.setText(R.id.tv_time, DateUtil.getCustomDateStr(Long.parseLong(model.createDate), "MM-dd HH:mm"));
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         GlideImageLoader glide = new GlideImageLoader();
-        glide.onDisplayImageWithDefault(mContext, (ImageView) baseViewHolder.getView(R.id.iv_image), AppConstants.HOST + model.image, R.mipmap.c1_image2);
+        glide.onDisplayImage(mContext, (ImageView) baseViewHolder.getView(R.id.iv_image), AppConstants.HOST + model.image);
         View view = baseViewHolder.getConvertView();
         final int position = baseViewHolder.getLayoutPosition() - 1;//去掉header的点击事件
         //item点击事件

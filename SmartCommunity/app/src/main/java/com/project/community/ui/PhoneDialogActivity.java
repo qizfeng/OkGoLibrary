@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
@@ -24,6 +25,7 @@ import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.model.HotlineModel;
 import com.project.community.util.ScreenUtils;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,6 +79,7 @@ public class PhoneDialogActivity extends BaseActivity implements View.OnClickLis
             mIvHeader.setVisibility(View.VISIBLE);
             mTvPhoneNumber.setGravity(Gravity.CENTER_VERTICAL);
         } else {
+            mTvTitle.setText(getString(R.string.txt_hot_line));
             mIvHeader.setVisibility(View.GONE);
             mTvPhoneNumber.setGravity(Gravity.CENTER);
         }
@@ -141,17 +144,26 @@ public class PhoneDialogActivity extends BaseActivity implements View.OnClickLis
     private void getData() {
         String orgCode = "";
         if (isLogin(this)) {
+            orgCode = getUser(this).orgCode;
         }
         serverDao.getHotLine(type, orgCode, new DialogCallback<BaseResponse<List<HotlineModel>>>(this) {
             @Override
             public void onSuccess(BaseResponse<List<HotlineModel>> baseResponse, Call call, Response response) {
                 try {
-                    List<HotlineModel> data = new ArrayList<HotlineModel>();
+                    List<HotlineModel> data = new ArrayList<>();
                     data = baseResponse.retData;
+                    if (hasHeader) {
+                        mTvTitle.setText(data.get(0).org_name);
+                    }
                     if (data.size() > 0) {
                         mTvPhoneNumber.setText(data.get(0).contact);
-                        mTvTime.setText(getString(R.string.txt_work_time) + data.get(0).work_start + "~" + data.get(0)
-                                .work_end);
+                        if (TextUtils.isEmpty(data.get(0).work_start) || TextUtils.isEmpty(data.get(0).work_end))
+                            mTvTime.setVisibility(View.GONE);
+                        else {
+                            mTvTime.setVisibility(View.VISIBLE);
+                            mTvTime.setText("(" + getString(R.string.txt_work_time) + data.get(0).work_start + "~" + data.get(0)
+                                    .work_end + ")");
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -1,13 +1,18 @@
 package com.project.community.callback;
 
+import com.baidu.platform.comapi.map.B;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
+import com.library.okgo.model.HttpParams;
 import com.project.community.model.AgreementResponse;
 import com.project.community.model.ArticleModel;
+import com.project.community.model.AuditStatusModel;
 import com.project.community.model.BannerResponse;
 import com.project.community.model.CommentModel;
 import com.project.community.model.DictionaryResponse;
 import com.project.community.model.DistModel;
+import com.project.community.model.FamilyModel;
+import com.project.community.model.FamilyPersonModel;
 import com.project.community.model.FileUploadModel;
 import com.project.community.model.GuideModel;
 import com.project.community.model.HotlineModel;
@@ -195,12 +200,14 @@ public interface ServerDao {
     /**
      * 提交居民意见
      *
+     * @param userId   用户id
+     * @param orgCode
      * @param phone    手机号
      * @param title    标题
      * @param context  内容
      * @param callback
      */
-    void submitSuggest(String phone, String title, String context, JsonCallback<BaseResponse<List>> callback);
+    void submitSuggest(String userId, String orgCode, String phone, String title, String context, JsonCallback<BaseResponse<List>> callback);
 
     /**
      * 办事指南列表
@@ -335,18 +342,131 @@ public interface ServerDao {
 
     /**
      * 删除缴费房屋
-     * @param userId 用户id
+     *
+     * @param userId    用户id
      * @param payRoomId 缴费房屋id
      * @param callback
      */
-    void deleteHouse(String userId,String payRoomId,JsonCallback<BaseResponse<List>>callback);
+    void deleteHouse(String userId, String payRoomId, JsonCallback<BaseResponse<List>> callback);
 
     /**
      * 获取缴费信息
+     *
      * @param paymentType
      * @param roomNo
      * @param callback
      */
-    void getPaymentDetailInfo(String paymentType, String roomNo, JsonCallback<BaseResponse<PaymentInfoModel>>callback);
+    void getPaymentDetailInfo(String paymentType, String roomNo, JsonCallback<BaseResponse<PaymentInfoModel>> callback);
 
+
+    /**
+     * 家庭信息 列表
+     *
+     * @param userId
+     * @param phone    手机号
+     * @param roomNo   个人信息房屋编号
+     * @param callback
+     */
+    void getFamilyListInfo(String userId, String phone, String roomNo, JsonCallback<BaseResponse<List<FamilyModel>>> callback);
+
+    /**
+     * 家庭信息
+     * @param userId 用户id
+     * @param phone 手机号
+     * @param roomNo 个人信息房屋编号
+     * @param familyId 家庭id
+     * @param callback
+     */
+    void getFamilyInfo(String userId,String phone,String roomNo,String familyId,JsonCallback<BaseResponse<List<FamilyModel>>>callback);
+
+    /**
+     * 检查业主状态
+     *
+     * @param roomNo
+     * @param userId
+     * @param callback
+     */
+    void checkOwner(String roomNo, String userId, String phone, JsonCallback<BaseResponse<AuditStatusModel>> callback);
+
+    /**
+     * 添加家庭
+     *
+     * @param userId     用户id
+     * @param roomNo     房屋编号
+     * @param familyName 家庭名称
+     * @param callback
+     */
+    void addFamily(String userId, String roomNo, String familyName, JsonCallback<BaseResponse<HouseModel>> callback);
+
+    /**
+     * 添加人口
+     *
+     * @param params   参数集合
+     *                 roomNo 房屋编号
+     *                 userId 用户id
+     *                 familyId 家庭编号
+     *                 memberId 成员id 为空则为新增 编辑时传入
+     *                 realName 真实姓名
+     *                 photo 头像
+     *                 phone 手机号
+     *                 headRelation 和户主关系
+     *                 occupation 职业
+     *                 sex 性别 1-男 2-女 0-未填写
+     *                 nation 民族
+     *                 religion 宗教信仰
+     *                 party 党派
+     *                 dateOfBirth 出生日期
+     *                 idNumber 身份证号
+     *                 roomAddress房屋地址
+     * @param callback
+     */
+    void addPerson(HttpParams params, JsonCallback<BaseResponse<List>> callback);
+
+    /**
+     * 删除家庭成员
+     *
+     * @param userId   用户id
+     * @param memberId 删除的成员id
+     * @param roomNo 房屋编号
+     * @param callback
+     */
+    void deletePerson(String userId, String memberId, String roomNo, JsonCallback<BaseResponse<List>> callback);
+
+
+    /**
+     * 获取家庭成员信息
+     *
+     * @param memberId 家庭成员id
+     * @param callback
+     */
+    void getPerson(String memberId, JsonCallback<BaseResponse<FamilyPersonModel>> callback);
+
+    /**
+     * 删除家庭
+     *
+     * @param userId 用户id
+     * @param roomNo 房屋编号
+     * @param familyId 家庭id
+     * @param callback
+     */
+    void deleteFamily(String userId, String roomNo, String familyId, JsonCallback<BaseResponse<List>> callback);
+
+    /**
+     * 提交房屋业主审核
+     *
+     * @param userId     用户id
+     * @param familyName 家庭名称
+     * @param familyNo   房屋编号
+     * @param callback
+     */
+    void auditFamily(String userId, String familyName, String familyNo, JsonCallback<BaseResponse<List>> callback);
+
+
+    /**
+     * 获取支付订单信息
+     * @param userId
+     * @param parmentId
+     * @param callback
+     */
+    void getPayOrderInfo(String userId,String parmentId,JsonCallback<BaseResponse<String>>callback);
 }

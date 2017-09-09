@@ -157,34 +157,104 @@ public class AppConstants {
     /**
      * 获取缴费类别
      */
-    public static final String URL_JIAOFEI_TYPE=URL_BASE+"m/propPayment/menu";
+    public static final String URL_JIAOFEI_TYPE = URL_BASE + "m/propPayment/menu";
 
     /**
      * 获取缴费编号列表
      */
-    public static final String URL_JIAOFEI_NO_LIST= URL_BASE+"m/propPayRoom/index";
+    public static final String URL_JIAOFEI_NO_LIST = URL_BASE + "m/propPayRoom/index";
 
     /**
      * 添加房屋
      */
-    public static final String URL_ADD_HOUSE=URL_BASE+"m/propPayRoom/save";
+    public static final String URL_ADD_HOUSE = URL_BASE + "m/propPayRoom/save";
 
     /**
      * 查询房屋信息
      */
-    public static final String URL_SELECT_HOUSE=URL_BASE+"m/propPayment/checkRoom";
+    public static final String URL_SELECT_HOUSE = URL_BASE + "m/propPayment/checkRoom";
     /**
      * 删除缴费房屋
      */
-    public static final String URL_DELETE_HOUSE= URL_BASE+"m/propPayRoom/delete";
+    public static final String URL_DELETE_HOUSE = URL_BASE + "m/propPayRoom/delete";
 
 
     /**
      * 查询缴费信息
      */
-    public static final String URL_SELECT_PAY_INFO=URL_BASE+"m/propPayment/index";
-    /*==========================*/
+    public static final String URL_SELECT_PAY_INFO = URL_BASE + "m/propPayment/index";
 
+    /**
+     * 问卷列表url h5
+     */
+    public static final String URL_WENJUAN_LIST = URL_BASE + "surveyList/d9_questionnaire.html";
+
+    /**
+     * 问卷搜索
+     */
+    public static final String URL_WENJUAN_SEARCH=URL_BASE+"surveyList/d9_questionnaire.html?keyword=";
+
+    /**
+     * 问卷详情页 h5
+     */
+    public static final String URL_WENJUAN_DETIAL = URL_BASE + "surveyList/d10_writeQuestionnaire.html";
+
+    /**
+     * 问卷结果页
+     */
+    public static final String URL_WENJUAN_RESULT=URL_BASE+"http://zhihuishequ.zpftech.com/surveyList/d11_results.html";
+
+    /**
+     * 家庭列表
+     */
+    public static final String URL_FAMILY_LIST = URL_BASE + "m/propFamily/index";
+
+    /**
+     * 检查业主审核状态
+     */
+    public static final String URL_CHECK_OWNER = URL_BASE + "m/ownerAudit/checkOwner";
+
+    /**
+     * 添加家庭
+     */
+    public static final String URL_ADD_FAMILY = URL_BASE + "m/propFamily/save";
+
+    /**
+     * 删除家庭
+     */
+    public static final String URL_DELETE_FAMILY = URL_BASE + "m/propFamily/delete";
+
+    /**
+     * 添加人口
+     */
+    public static final String URL_ADD_PERSON = URL_BASE + "m/propMember/save";
+
+    /**
+     * 刪除人口
+     */
+    public static final String URL_DELETE_PERSON = URL_BASE + "m/propMember/delete";
+
+
+    /**
+     * 获取家庭成员信息
+     */
+    public static final String URL_GET_PERSON = URL_BASE + "m/propMember/getMember";
+
+    /**
+     * 提交房屋业主申请
+     */
+    public static final String URL_FAMILY_AUDIT = URL_BASE + "m/ownerAudit/audit";
+
+
+    /**
+     * 获取支付订单
+     */
+    public static final String URL_GET_PAY_ORDER=URL_BASE+"m/propPayment/aliPay";
+
+    /*==========================*/
+    /**
+     * 分页大小
+     */
     public static final int PAGE_SIZE = 10;
 
     /**

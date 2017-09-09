@@ -103,7 +103,7 @@ public class AdPageInfo implements Parcelable,Serializable {
 
     public String imageUrl;//图片地址
     public String linkType;//0：无链接；1：链接；2：文章
-    public String link;
+    public String link;//外链接
     public String categoryId;//分类id
     public String articleId;//文章id
 

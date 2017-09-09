@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.model.BaseResponse;
+import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.model.HouseModel;
@@ -61,7 +62,7 @@ public class AddHouseNoDialogActivity extends BaseActivity {
         if (bundle != null) {
             houseNo = bundle.getString("houseNo");
             address = bundle.getString("address");
-            title = bundle.getString("bundle");
+            title = bundle.getString("title");
             try {
                 mTvContent.setText(houseNo + "\n" + address);
             } catch (Exception e) {
@@ -91,10 +92,13 @@ public class AddHouseNoDialogActivity extends BaseActivity {
                 showToast(baseResponse.message);
                 Bundle bundle = getIntent().getBundleExtra("bundle");
                 bundle.putString("title", bundle.getString("title"));
-                if ("物业费".equals(title))
+                LogUtils.e("title" + title);
+                AddHouseNoActivity.getInstance().finish();
+                if (title.contains("物业费")) {
                     PayDetailWuyeActivity.startActivity(AddHouseNoDialogActivity.this, bundle);
-                else
+                } else {
                     PayDetailActivity.startActivity(AddHouseNoDialogActivity.this, bundle);
+                }
                 finish();
             }
 

@@ -97,7 +97,7 @@ public class SuggestionActivity extends BaseActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_submit:
-                if(!ValidateUtil.isPhone(mEtPhone.getText().toString())){
+                if (!ValidateUtil.isPhone(mEtPhone.getText().toString())) {
                     showToast(getString(R.string.toast_error_phone));
                     return;
                 }
@@ -129,11 +129,11 @@ public class SuggestionActivity extends BaseActivity implements View.OnClickList
     /**
      * 提交
      */
-    private void submitData(){
+    private void submitData() {
         phone = mEtPhone.getText().toString();
         String title = mEtTitle.getText().toString();
         String content = mEtSuggest.getText().toString();
-        serverDao.submitSuggest(phone, title, content, new DialogCallback<BaseResponse<List>>(this) {
+        serverDao.submitSuggest(getUser(this).id, getUser(this).orgCode, phone, title, content, new DialogCallback<BaseResponse<List>>(this) {
             @Override
             public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
                 showToast(baseResponse.message);

@@ -76,6 +76,7 @@ public class ArticleModel implements Serializable {
     public String url;
     public int allowComment;
     public int allowCollection;
+    public int allowShare;
 
     public String createDate;
     public String weightDate;

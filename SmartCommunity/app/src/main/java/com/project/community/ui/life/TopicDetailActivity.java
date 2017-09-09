@@ -48,6 +48,7 @@ import com.project.community.listener.RecycleItemClickListener;
 import com.project.community.model.ArticleModel;
 import com.project.community.model.CommentModel;
 import com.project.community.ui.ImageBrowseActivity;
+import com.project.community.ui.WebViewActivity;
 import com.project.community.ui.adapter.CommentsApdater;
 import com.project.community.ui.adapter.CommentsPopwinAdapter;
 import com.project.community.ui.life.zhengwu.ZhengwuActivity;
@@ -56,10 +57,12 @@ import com.project.community.view.CommentPopWin;
 import com.project.community.view.SpacesItemDecoration;
 import com.project.community.view.VpSwipeRefreshLayout;
 import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
+import com.umeng.socialize.shareboard.ShareBoardConfig;
 
 import java.security.Key;
 import java.util.ArrayList;
@@ -92,6 +95,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
     CoordinatorLayout mCoordinatorLayout;
     @Bind(R.id.bottom_layout)
     LinearLayout mBottomLayout;
+
     private View header;
     private WebView mWebView;
     private TextView mTvCommentsTips;
@@ -104,6 +108,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
     private String targetId;//回復人id
     private MenuItem menuItem;
     private Dialog mDialog;
+    private ArticleModel mData = new ArticleModel();
 
     public static void startActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, TopicDetailActivity.class);
@@ -134,6 +139,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
         mWebView = (WebView) header.findViewById(R.id.webView);
         mBtnWenjuan = (Button) header.findViewById(R.id.btn_wenjuan);
         mTvCommentsTips = (TextView) header.findViewById(R.id.tv_comment_tips);
+        mBtnWenjuan.setOnClickListener(this);
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
@@ -171,7 +177,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
         mAdapter = new CommentsApdater(comments, new RecycleItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                position=position-1;//去掉头部
+                position = position - 1;//去掉头部
                 mBottomLayout.setVisibility(View.VISIBLE);
                 recStr = getString(R.string.txt_receive) + comments.get(position).userName + ":";
                 targetId = comments.get(position).userId;
@@ -181,7 +187,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
 
             @Override
             public void onCustomClick(View view, int position) {
-                position=position-1;//去除头部
+                position = position - 1;//去除头部
                 showAlertDialog(position);
             }
         });
@@ -273,6 +279,19 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
                 }
 //                recyclerView.smoothScrollToPosition(mAdapter.getItemCount() - 1);
                 break;
+            case R.id.btn_wenjuan:
+                if (isLogin(this)) {
+                    Intent intent = new Intent();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("url", AppConstants.URL_WENJUAN_DETIAL + "?uid=" + getUser(this).id + "&id=" + mData.surveyInfo.id);
+                    intent.putExtra("bundle", bundle);
+                    intent.putExtra("hideNavigation", true);
+                    intent.setClass(this, WebViewActivity.class);
+                    startActivity(intent);
+                } else {
+                    showToast(getString(R.string.toast_no_login));
+                }
+                break;
         }
     }
 
@@ -320,6 +339,10 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
             showToast(getString(R.string.toast_no_login));
             return;
         }
+        if (mData.allowComment == 0) {
+            showToast(getString(R.string.toast_no_comment));
+            return;
+        }
         serverDao.doComment(getUser(this).id, artId, content, targetId, new DialogCallback<BaseResponse<List>>(this) {
             @Override
             public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
@@ -361,27 +384,32 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
         serverDao.getTopicDetail(userId, artId, new DialogCallback<BaseResponse<ArticleModel>>(this) {
             @Override
             public void onSuccess(final BaseResponse<ArticleModel> baseResponse, Call call, Response response) {
-
-                if (0 == baseResponse.retData.status) {
-                    menuItem.setIcon(R.mipmap.d4_shoucang1);
-                } else if (1 == baseResponse.retData.status) {
-                    menuItem.setIcon(R.mipmap.d4_shoucang1_p);
+                mData = baseResponse.retData;
+                try {
+                    if (0 == baseResponse.retData.status) {
+                        menuItem.setIcon(R.mipmap.d4_shoucang1);
+                    } else if (1 == baseResponse.retData.status) {
+                        menuItem.setIcon(R.mipmap.d4_shoucang1_p);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+
                 if (baseResponse.retData.surveyInfo != null) {
                     if (!TextUtils.isEmpty(baseResponse.retData.surveyInfo.id))
                         mBtnWenjuan.setVisibility(View.VISIBLE);
                     else
                         mBtnWenjuan.setVisibility(View.GONE);
-                }else {
+                } else {
                     mBtnWenjuan.setVisibility(View.GONE);
                 }
                 new Handler().post(new Runnable() {
                     @Override
                     public void run() {
                         try {
-                            LogUtils.e("getTopicDetail:" + baseResponse.retData.url);
+                            LogUtils.e("url:"+AppConstants.HOST + baseResponse.retData.url);
                             mWebView.loadUrl(AppConstants.HOST + baseResponse.retData.url);
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -402,6 +430,10 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
     private void onCollect(final MenuItem item) {
         if (!isLogin(this)) {
             showToast(getString(R.string.toast_no_login));
+            return;
+        }
+        if (mData.allowCollection == 0) {
+            showToast(getString(R.string.toast_no_collect));
             return;
         }
         serverDao.doCollectTopic(getUser(this).id, artId, new JsonCallback<BaseResponse<List>>() {
@@ -464,6 +496,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
         });
 
     }
+
     /**
      * 删除评论
      */
@@ -518,18 +551,25 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
                 KeyBoardUtils.closeKeybord(mEtInput, TopicDetailActivity.this);
                 return true;
             case R.id.navigation_share:
+                if(mData.allowShare==0){
+                    showToast(getString(R.string.toast_no_share));
+                    return true;
+                }
                 KeyBoardUtils.closeKeybord(mEtInput, TopicDetailActivity.this);
-                UMWeb web = new UMWeb(mUrl);
-                web.setTitle("测试分享");//标题
+                UMWeb web = new UMWeb("https://www.mi.com/");
+                web.setTitle("智慧社区");//标题
                 web.setThumb(new UMImage(TopicDetailActivity.this, R.mipmap.ic_launcher_round));  //缩略图
-                web.setDescription("umeng分享是真坑,文档太菜");//描述
+                web.setDescription("发现了一个APP,快来下载吧");//描述
+                ShareBoardConfig config = new ShareBoardConfig();
+                config.setMenuItemBackgroundShape(ShareBoardConfig.BG_SHAPE_NONE);
+                config.setIndicatorVisibility(false);
                 new ShareAction(TopicDetailActivity.this)
-                        .withText("hello")
+                        .withText("智慧社区")
                         .withMedia(new UMImage(TopicDetailActivity.this, R.mipmap.ic_launcher_round))
                         .withMedia(web)
                         .setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN)
                         .setCallback(shareListener)
-                        .open();
+                        .open(config);
                 return true;
             default:
                 // If we got here, the user's action was not recognized.
@@ -583,5 +623,9 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
             KeyBoardUtils.closeKeybord(mEtInput, this);
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
 }

@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="房屋编号10001"
+                android:text=""
                 android:textSize="@dimen/common_sub_title_txt_size" />
 
             <TextView
@@ -41,7 +41,7 @@
                 style="@style/textview_style"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/dp_5"
-                android:text="一区2单元666户"
+                android:text=""
                 android:textColor="@color/color_gray_666666" />
 
         </LinearLayout>

@@ -112,7 +112,7 @@
             android:label="@string/activity_wenjuan"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.life.zhengwu.WenjuanDetailActivity"
+            android:name=".ui.life.zhengwu.WenjuanSearchActivity"
             android:label="@string/activity_write_wenjuan"
             android:screenOrientation="portrait" />
         <activity
@@ -283,13 +283,15 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!--umeng key-->
+        <!--59b142c0c895767dcb001b12-->
+        <!--59775d1665b6d6663a001638-->
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="59775d1665b6d6663a001638" />
+            android:value="59b142c0c895767dcb001b12" />
 
 
         <!-- 微信支付 -->
-        <activity
+       <!-- <activity
             android:name="com.jpay.weixin.WXPayEntryActivity"
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:launchMode="singleTop"
@@ -297,7 +299,7 @@
         <activity-alias
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
-            android:targetActivity="com.jpay.weixin.WXPayEntryActivity" />
+            android:targetActivity="com.jpay.weixin.WXPayEntryActivity" />-->
         <!-- 微信支付 end -->
 
 
@@ -308,13 +310,15 @@
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
+            android:windowSoftInputMode="adjustResize|stateHidden" >
+        </activity>
         <activity
             android:name="com.alipay.sdk.app.H5AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
+            android:windowSoftInputMode="adjustResize|stateHidden" >
+        </activity>
 
         <!-- alipay sdk end -->
 

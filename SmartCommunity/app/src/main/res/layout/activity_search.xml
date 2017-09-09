@@ -24,7 +24,6 @@
             android:background="@drawable/round_white_btn_bg"
             android:drawableLeft="@mipmap/d15_sousuo"
             android:drawablePadding="@dimen/dp_10"
-            android:textCursorDrawable="@drawable/edit_cursor_white"
             android:gravity="start|center_vertical"
             android:hint="@string/str_search_hint"
             android:imeOptions="actionSearch"
@@ -34,6 +33,7 @@
             android:singleLine="true"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
+            android:textCursorDrawable="@drawable/edit_cursor_white"
             android:textSize="@dimen/common_txt_size" />
 
         <ImageView
@@ -81,6 +81,7 @@
                 android:id="@+id/contentTextView"
                 style="@style/textview_style"
                 android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_55"
                 android:paddingBottom="4dp"
                 android:paddingLeft="10dp"
                 android:paddingTop="4dp"
@@ -88,10 +89,18 @@
                 android:textColor="@color/gray_line"
                 android:textSize="@dimen/common_txt_size" />
 
+            <View
+                android:id="@+id/view_lin_top"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_gray_e5e5e5" />
+
             <ListView
                 android:id="@+id/lv_search_history"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:divider="@color/color_gray_e5e5e5"
+                android:dividerHeight="1dp" />
 
             <View
                 android:layout_width="match_parent"
@@ -102,8 +111,8 @@
                 android:id="@+id/clear_history_btn"
                 style="@style/textview_style"
                 android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_55"
                 android:layout_gravity="center"
-                android:layout_marginTop="15dp"
                 android:gravity="center"
                 android:text="@string/str_clearSearchHistory"
                 android:textColor="@color/colorPrimary"

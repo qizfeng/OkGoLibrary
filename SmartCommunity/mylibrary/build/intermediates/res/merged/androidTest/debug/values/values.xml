@@ -414,13 +414,7 @@
             <enum name="add" value="16"/>
         </attr><attr name="android:textOn"/><attr name="android:textOff"/><attr format="dimension" name="thumbTextPadding"/><attr format="reference" name="switchTextAppearance"/><attr format="dimension" name="switchMinWidth"/><attr format="dimension" name="switchPadding"/><attr format="boolean" name="splitTrack"/><attr format="boolean" name="showText"/></declare-styleable>
     <declare-styleable name="TabItem"><attr name="android:text"/><attr name="android:icon"/><attr name="android:layout"/></declare-styleable>
-    <declare-styleable name="TabLayout"><attr format="color" name="tabIndicatorColor"/><attr format="dimension" name="tabIndicatorHeight"/><attr format="dimension" name="tabContentStart"/><attr format="reference" name="tabBackground"/><attr name="tabMode">
-            <enum name="scrollable" value="0"/>
-            <enum name="fixed" value="1"/>
-        </attr><attr name="tabGravity">
-            <enum name="fill" value="0"/>
-            <enum name="center" value="1"/>
-        </attr><attr format="dimension" name="tabMinWidth"/><attr format="dimension" name="tabMaxWidth"/><attr format="reference" name="tabTextAppearance"/><attr format="color" name="tabTextColor"/><attr format="color" name="tabSelectedTextColor"/><attr format="dimension" name="tabPaddingStart"/><attr format="dimension" name="tabPaddingTop"/><attr format="dimension" name="tabPaddingEnd"/><attr format="dimension" name="tabPaddingBottom"/><attr format="dimension" name="tabPadding"/></declare-styleable>
+    <declare-styleable name="TabLayout"><attr format="color" name="tabIndicatorColor"/><attr format="dimension" name="tabIndicatorHeight"/><attr format="boolean" name="tabIndicatorScrollable"/><attr format="dimension" name="tabContentStart"/><attr format="reference" name="tabBackground"/><attr name="tabMode"><enum name="scrollable" value="0"/><enum name="fixed" value="1"/></attr><attr name="tabGravity"><enum name="fill" value="0"/><enum name="center" value="1"/></attr><attr format="dimension" name="tabMinWidth"/><attr format="dimension" name="tabMaxWidth"/><attr format="reference" name="tabTextAppearance"/><attr format="color" name="tabTextColor"/><attr format="color" name="tabSelectedTextColor"/><attr format="dimension" name="tabPaddingStart"/><attr format="dimension" name="tabPaddingTop"/><attr format="dimension" name="tabPaddingEnd"/><attr format="dimension" name="tabPaddingBottom"/><attr format="dimension" name="tabPadding"/></declare-styleable>
     <declare-styleable name="TabTitleIndicator"><attr format="dimension" name="tti_indicatorHeight"/><attr format="color" name="tti_indicatorColor"/><attr format="dimension" name="tti_underlineHeight"/><attr format="color" name="tti_underlineColor"/><attr format="dimension" name="tti_dividerWidth"/><attr format="dimension" name="tti_dividerPaddingTopBottom"/><attr format="color" name="tti_dividerColor"/><attr format="dimension" name="tti_triangleHeight"/><attr format="dimension" name="tti_tabPaddingLeftRight"/><attr format="dimension" name="tti_tabTextSizeNormal"/><attr format="dimension" name="tti_tabTextSizeSelected"/><attr format="color" name="tti_tabTextColorNormal"/><attr format="color" name="tti_tabTextColorSelected"/><attr format="reference" name="tti_tabBackground"/><attr format="integer" name="tti_visibleCount"/><attr format="dimension" name="tti_scrollOffset"/></declare-styleable>
     <declare-styleable name="TextAppearance"><attr name="android:textSize"/><attr name="android:textColor"/><attr name="android:textColorHint"/><attr name="android:textStyle"/><attr name="android:typeface"/><attr name="textAllCaps"/><attr name="android:shadowColor"/><attr name="android:shadowDy"/><attr name="android:shadowDx"/><attr name="android:shadowRadius"/></declare-styleable>
     <declare-styleable name="TextInputLayout"><attr format="reference" name="hintTextAppearance"/><attr name="android:hint"/><attr format="boolean" name="hintEnabled"/><attr format="boolean" name="errorEnabled"/><attr format="reference" name="errorTextAppearance"/><attr format="boolean" name="counterEnabled"/><attr format="integer" name="counterMaxLength"/><attr format="reference" name="counterTextAppearance"/><attr format="reference" name="counterOverflowTextAppearance"/><attr name="android:textColorHint"/><attr format="boolean" name="hintAnimationEnabled"/><attr format="boolean" name="passwordToggleEnabled"/><attr format="reference" name="passwordToggleDrawable"/><attr format="string" name="passwordToggleContentDescription"/><attr format="color" name="passwordToggleTint"/><attr name="passwordToggleTintMode">
@@ -589,6 +583,7 @@
     <dimen name="dp_105">105dp</dimen>
     <dimen name="dp_15">15dp</dimen>
     <dimen name="dp_20">20dp</dimen>
+    <dimen name="dp_25">25dp</dimen>
     <dimen name="dp_30">30dp</dimen>
     <dimen name="dp_35">35dp</dimen>
     <dimen name="dp_4">4dp</dimen>
@@ -598,7 +593,7 @@
     <dimen name="dp_5">5dp</dimen>
     <dimen name="dp_50">50dp</dimen>
     <dimen name="dp_55">55dp</dimen>
-    <dimen name="dp_60">65dp</dimen>
+    <dimen name="dp_60">60dp</dimen>
     <dimen name="dp_65">65dp</dimen>
     <dimen name="dp_72">72dp</dimen>
     <dimen name="dp_80">80dp</dimen>

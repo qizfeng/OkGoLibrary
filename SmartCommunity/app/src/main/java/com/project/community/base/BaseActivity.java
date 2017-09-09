@@ -2,17 +2,13 @@ package com.project.community.base;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.LayoutRes;
-import android.support.v4.text.TextUtilsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,10 +18,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.library.okgo.utils.GlideImageLoader;
-import com.library.okgo.utils.KeyBoardUtils;
-import com.library.okgo.utils.SimpleJson;
 import com.library.okgo.utils.ToastUtils;
 import com.lzy.imagepicker.view.SystemBarTintManager;
 import com.project.community.R;
@@ -33,8 +26,6 @@ import com.project.community.callback.ServerDao;
 import com.project.community.callback.ServerDaoImpl;
 import com.project.community.constants.SharedPreferenceUtils;
 import com.project.community.model.UserModel;
-import com.project.community.ui.user.LoginActivity;
-import com.project.community.view.StatusBarCompat;
 
 import butterknife.ButterKnife;
 

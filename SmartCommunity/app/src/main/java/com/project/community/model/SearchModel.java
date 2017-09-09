@@ -23,6 +23,7 @@ public class SearchModel implements Serializable{
      "imageHeight": 0#图片高度
      "createDate": 1503969902000,#发布时间
      "weightDate": ""#过期时间
+     surveyId
      */
     public String imageWidth;
     public String image;
@@ -38,7 +39,7 @@ public class SearchModel implements Serializable{
     public String imageHeight;
     public String createDate;
     public String weightDate;
-
+    public String surveyId;
     @Override
     public String toString() {
         return "SearchModel{" +
@@ -56,6 +57,7 @@ public class SearchModel implements Serializable{
                 ", imageHeight='" + imageHeight + '\'' +
                 ", createDate='" + createDate + '\'' +
                 ", weightDate='" + weightDate + '\'' +
+                ", surveyId='" + surveyId + '\'' +
                 '}';
     }
 }

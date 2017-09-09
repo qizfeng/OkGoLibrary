@@ -32,13 +32,13 @@ public class WelcomeGuideActivity extends BaseActivity implements View.OnClickLi
 
     // 引导页图片资源
     private static final int[] pics = { R.layout.guid_view1,
-            R.layout.guid_view2, R.layout.guid_view3, R.layout.guid_view4 };
+            R.layout.guid_view2, R.layout.guid_view3};
 
     // 底部小点图片
-    private ImageView[] dots;
+//    private ImageView[] dots;
 
     // 记录当前选中位置
-    private int currentIndex;
+//    private int currentIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,20 +94,20 @@ public class WelcomeGuideActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void initDots() {
-        LinearLayout ll = (LinearLayout) findViewById(R.id.ll);
-        dots = new ImageView[pics.length];
-
-        // 循环取得小点图片
-        for (int i = 0; i < pics.length; i++) {
-            // 得到一个LinearLayout下面的每一个子元素
-            dots[i] = (ImageView) ll.getChildAt(i);
-            dots[i].setEnabled(false);// 都设为灰色
-            dots[i].setOnClickListener(this);
-            dots[i].setTag(i);// 设置位置tag，方便取出与当前位置对应
-        }
-
-        currentIndex = 0;
-        dots[currentIndex].setEnabled(true); // 设置为白色，即选中状态
+//        LinearLayout ll = (LinearLayout) findViewById(R.id.ll);
+//        dots = new ImageView[pics.length];
+//
+//        // 循环取得小点图片
+//        for (int i = 0; i < pics.length; i++) {
+//            // 得到一个LinearLayout下面的每一个子元素
+//            dots[i] = (ImageView) ll.getChildAt(i);
+//            dots[i].setEnabled(false);// 都设为灰色
+//            dots[i].setOnClickListener(this);
+//            dots[i].setTag(i);// 设置位置tag，方便取出与当前位置对应
+//        }
+//
+//        currentIndex = 0;
+//        dots[currentIndex].setEnabled(true); // 设置为白色，即选中状态
 
     }
 
@@ -129,12 +129,12 @@ public class WelcomeGuideActivity extends BaseActivity implements View.OnClickLi
      * @param position
      */
     private void setCurDot(int position) {
-        if (position < 0 || position > pics.length || currentIndex == position) {
-            return;
-        }
-        dots[position].setEnabled(true);
-        dots[currentIndex].setEnabled(false);
-        currentIndex = position;
+//        if (position < 0 || position > pics.length || currentIndex == position) {
+//            return;
+//        }
+//        dots[position].setEnabled(true);
+//        dots[currentIndex].setEnabled(false);
+//        currentIndex = position;
     }
 
     @Override

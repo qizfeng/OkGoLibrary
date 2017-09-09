@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="16"
-        android:targetSdkVersion="25" />
+        android:targetSdkVersion="26" />
 
     <application android:allowBackup="true" >
         <activity android:name="com.library.okgo.permission.PermissionActivity" />

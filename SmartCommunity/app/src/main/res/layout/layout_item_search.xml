@@ -14,7 +14,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/iv_image"
+            android:layout_toLeftOf="@+id/frameLayout"
             android:orientation="vertical">
 
             <TextView
@@ -39,24 +39,45 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/textview_style"
+                    android:layout_marginRight="@dimen/dp_5"
                     android:textColor="@color/color_gray_999999"
                     android:text="08-23 11:12"/>
                 <TextView
                     android:id="@+id/tv_comment_num"
                     style="@style/textview_style"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dp_20"
                     android:textColor="@color/color_gray_999999"
                     android:text="评论8"/>
             </LinearLayout>
         </LinearLayout>
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true">
 
-        <ImageView
-            android:id="@+id/iv_image"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_alignParentRight="true"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/default_image" />
+            <ImageView
+                android:id="@+id/iv_image"
+                android:layout_width="105dp"
+                android:layout_height="85dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/c1_image2" />
+            <TextView
+                android:id="@+id/tv_wenjuan"
+                android:background="@drawable/button_shape_alpha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="民调"
+                android:textSize="11dp"
+                android:textColor="@color/white"
+                android:layout_margin="@dimen/dp_5"
+                android:layout_gravity="right|bottom"
+                android:src="@mipmap/c1_bq1"/>
+        </FrameLayout>
     </RelativeLayout>
 </LinearLayout>
