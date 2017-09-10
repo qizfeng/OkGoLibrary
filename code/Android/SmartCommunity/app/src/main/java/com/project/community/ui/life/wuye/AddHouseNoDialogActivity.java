@@ -93,7 +93,6 @@ public class AddHouseNoDialogActivity extends BaseActivity {
                 Bundle bundle = getIntent().getBundleExtra("bundle");
                 bundle.putString("title", bundle.getString("title"));
                 LogUtils.e("title" + title);
-                AddHouseNoActivity.getInstance().finish();
                 if (title.contains("物业费")) {
                     PayDetailWuyeActivity.startActivity(AddHouseNoDialogActivity.this, bundle);
                 } else {
