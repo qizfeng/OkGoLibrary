@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
@@ -17,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alipay.sdk.app.AuthTask;
 import com.alipay.sdk.app.PayTask;
@@ -30,7 +28,6 @@ import com.project.community.aipay.OrderInfoUtil2_0;
 import com.project.community.base.BaseActivity;
 import com.project.community.util.ScreenUtils;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.Bind;
@@ -57,11 +54,11 @@ public class PaymentDialogActivity extends BaseActivity implements View.OnClickL
     @Bind(R.id.btn_weipay)
     RadioButton mBtnWeipay;
     private String paymentId;
-    private String params;
+    private String orderStr;
     /**
      * 支付宝支付业务：入参app_id
      */
-    public static final String APPID = "2017090708607524";
+    public static final String APPID = "";
 
     /**
      * 支付宝账户登录授权业务：入参pid值
@@ -80,7 +77,7 @@ public class PaymentDialogActivity extends BaseActivity implements View.OnClickL
     /**
      * 工具地址：https://doc.open.alipay.com/docs/doc.htm?treeId=291&articleId=106097&docType=1
      */
-    public static final String RSA2_PRIVATE = "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCxv2zoyXDtR0w4F1CFLzNfna0ij+yftrKDY/RqwnqON/EAEWHMITq8KzQdkYVvfepv5lOjW1oQ/MAK1N9gOIc9OPLxoZ8WwBhijIYxShXygs1ZCETGG6GaIqC/f1CFQSfBfNDUk15yibKktoKI0xgwgBVfo3o+tbbb9GFDJ623a6l6KTagIbRZ2nLT2DJnesh3nvZVgL6DBvYxXtZf0ePtrSmEUrdd5tzU8wxq7BrOlYeO1Uv8cdZdqbrEVLEXEP3ZwQgnQU8KPbmxWk7r5ExH362FZ0mCoyaleUqYmS7qkPHs63vQ7eMC3Y3Xd6odd4wsflcSsKCSlmy4peEGu0w3AgMBAAECggEBAJh9QVH0f40QvbLhTZL1C33cJ8ye7MGYW02dUvLEJaAdHgSQ5PXbDCiiZ/N2BKPBwn59ewOKO5qXO6oPNhO2a096q/HgVjuOUV06cWWXyXxj+weGsHnE+r7hNkcTUmD/pLu5+O5l/4ED4N6uNQ5tCzOQrsV92kIyYs4QueCDCeVwaEV8RF5aNrpwu27RneHGpqEF8W1k07XYc/+rQNyfmHdt2hNlk2B1Qt0IOcHRY8TeKovvvdzrrckNKa2aUqTfUvPv/1rhYn7gYPz2rSMUzL+S6NPTWHgrfMPy77U+iri4pAV2L2UPXseGF+gRtW77zU3rbhaVUgxPPOVm4vFiqwECgYEA6d7dBQh0CUyUw5ofsI4BuvpODLr0p+M6koJt2Wv+8cyDncCjKmbnzY+iMArXxO/Nb58892H5rOfI/UiPjbAysAxFVWZkv7QOGZNWd7/R8abaCD9h5kmaoiQ9b5BibDwZitFP7vRRdiKf7nYzj2UuT8SnwBkb8hotxNQnD6cmwt0CgYEAwpET6FQUJaO/1GG6x9gkEdNehkq/FFE1isSCQGCEK5PNPH8PrwgmYmJCn7eYm7TPdEP7p736OdSbl3qWEzuDRt3vJx7WKTKfFrtEMfk2apBEjQ5hRSfSgx+Kl2OBNv4BQKaicvLDdMkNQHZ+sDU4fz0uLOTgHceqU2/FJ4TayCMCgYAduOYsApQErofliAvo+1M6+R68PXJkd9t0zUC6th/ziQNdJCNYezWQiWWaZ3Zen/9i5UDxS7FYiSihD/y2jCMU/qo9HUNGndKA65m8pFNBO+xPygZeJxKQ8rwgFqB7kvPIEavv+Xr04Zejzb/lxH0rRBnxrv8/OJaCglfohFzHvQKBgGbnoGXSgk1eDAliHw2vjXQ4HNheFC3EvdLFGDbAVWdO5s/GTB9A6jxCyAX9bqN7v/U4N5OCcSPBBQHa/iDx6v7CRsikEJT9hxLYvLrJmjRGVVtdbajL5RUgy4ZCRIc3VKZC+8xcBXBxHacohNzhaR4y14c7DiXyAm3awaWjKKuNAoGBAJC2A4vxhc58TaK3L+Uk3y/PDgJ2Q5aY/Xn/R7thJNtkvsRkekZghB9iL1qKKXX0UP7gJOCkCaeethXXIX7ufArhcQ/nrhyJmoELHLL4wsl+5IXEbQpOeiibfhTKV6speA8V4qdwTys5bzGJQat4Biyw28ZWwTOPXCc9JIT8pDY3";
+    public static final String RSA2_PRIVATE = "";
     public static final String RSA_PRIVATE = "";
 
     private static final int SDK_PAY_FLAG = 1;
@@ -177,7 +174,7 @@ public class PaymentDialogActivity extends BaseActivity implements View.OnClickL
         serverDao.getPayOrderInfo(getUser(this).id, paymentId, new DialogCallback<BaseResponse<String>>(this) {
             @Override
             public void onSuccess(BaseResponse<String> baseResponse, Call call, Response response) {
-                params=baseResponse.retData;
+                orderStr=baseResponse.retData;
             }
 
             @Override
@@ -201,7 +198,7 @@ public class PaymentDialogActivity extends BaseActivity implements View.OnClickL
         if (mBtnWeipay.isChecked()) {
             showToast(getString(R.string.txt_wei_pay));
         } else if (mBtnAlipay.isChecked()) {
-            payV2(v,params);
+            payV2(v,orderStr);
         }
 
         this.finish();
@@ -231,33 +228,11 @@ public class PaymentDialogActivity extends BaseActivity implements View.OnClickL
      * @param v
      */
     public void payV2(View v,String param) {
-        if (TextUtils.isEmpty(APPID) || (TextUtils.isEmpty(RSA2_PRIVATE) && TextUtils.isEmpty(RSA_PRIVATE))) {
-            new AlertDialog.Builder(this).setTitle("警告").setMessage("需要配置APPID | RSA_PRIVATE")
-                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialoginterface, int i) {
-                            //
-                            finish();
-                        }
-                    }).show();
-            return;
-        }
 
         /**
-         * 这里只是为了方便直接向商户展示支付宝的整个支付流程；所以Demo中加签过程直接放在客户端完成；
-         * 真实App里，privateKey等数据严禁放在客户端，加签过程务必要放在服务端完成；
-         * 防止商户私密数据泄露，造成不必要的资金损失，及面临各种安全风险；
-         *
          * orderInfo的获取必须来自服务端；
          */
-        boolean rsa2 = (RSA2_PRIVATE.length() > 0);
-        Map<String, String> params = OrderInfoUtil2_0.buildOrderParamMap(param, rsa2);
-        String orderParam = OrderInfoUtil2_0.buildOrderParam(params);
-
-        String privateKey = rsa2 ? RSA2_PRIVATE : RSA_PRIVATE;
-        String sign = OrderInfoUtil2_0.getSign(params, privateKey, rsa2);
-        final String orderInfo = orderParam + "&" + sign;
-//        final String orderInfo = orderParam;
-        LogUtils.e("orderInfo:"+orderInfo);
+        final String orderInfo =orderStr;
         Runnable payRunnable = new Runnable() {
 
             @Override
@@ -329,14 +304,6 @@ public class PaymentDialogActivity extends BaseActivity implements View.OnClickL
         authThread.start();
     }
 
-    /**
-     * get the sdk version. 获取SDK版本号
-     */
-    public void getSDKVersion() {
-        PayTask payTask = new PayTask(this);
-        String version = payTask.getVersion();
-        Toast.makeText(this, version, Toast.LENGTH_SHORT).show();
-    }
 
 //    /**
 //     * 原生的H5（手机网页版支付切natvie支付） 【对应页面网页支付按钮】
