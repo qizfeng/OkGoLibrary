@@ -256,14 +256,15 @@ public class PaymentDialogActivity extends BaseActivity implements View.OnClickL
         String privateKey = rsa2 ? RSA2_PRIVATE : RSA_PRIVATE;
         String sign = OrderInfoUtil2_0.getSign(params, privateKey, rsa2);
         final String orderInfo = orderParam + "&" + sign;
-
+//        final String orderInfo = orderParam;
+        LogUtils.e("orderInfo:"+orderInfo);
         Runnable payRunnable = new Runnable() {
 
             @Override
             public void run() {
                 PayTask alipay = new PayTask(PaymentDialogActivity.this);
                 Map<String, String> result = alipay.payV2(orderInfo, true);
-                Log.i("msp", result.toString());
+                LogUtils.e("msp", result.toString());
 
                 Message msg = new Message();
                 msg.what = SDK_PAY_FLAG;
