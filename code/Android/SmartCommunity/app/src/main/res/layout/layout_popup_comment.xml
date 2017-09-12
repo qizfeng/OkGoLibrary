@@ -24,7 +24,10 @@
         android:layout_alignParentBottom="true"
         android:background="@color/white"
         android:orientation="vertical">
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_gray_eeeeee" />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_65"

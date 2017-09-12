@@ -159,7 +159,9 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
     private int choiseFlag = 1;//选择框标记
     private List<DictionaryModel> dictionaryModels = new ArrayList<>();
     private String familyId;//家庭id
-    private String personId;//成员id,如果是编辑
+    private String personId;//成员id,如果是编辑/查看则有值
+    private boolean isLook = false;//是查看人口
+
     private String photo;//头像
     private String realName;//真实姓名
     private String bind;//和户主关系
@@ -175,11 +177,6 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
     private String address;//地址
     private String roomNo;//房间编号
 
-//    private String headRelationId;//与户主关系id
-//    private String sexId;//性别id
-//    private String nationId;//民族id
-//    private String religionId;//宗教信仰id
-//    private String partyId;//党派id
 
     public static void startActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, FamilyAddPersonActivity.class);
@@ -207,7 +204,36 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
             initToolBar(mToolBar, mTvTitle, true, bundle.getString("title"), R.mipmap.iv_back);
             familyId = bundle.getString("familyId");
             personId = bundle.getString("personId");
-            roomNo=bundle.getString("roomNo");
+            roomNo = bundle.getString("roomNo");
+            isLook = bundle.getBoolean("isLook");
+            LogUtils.e("isLook:"+isLook);
+        }
+        if (isLook) {//查看
+            mEtAddress.setFocusable(false);
+            mEtIdcard.setFocusable(false);
+            mEtMobile.setFocusable(false);
+            mEtName.setFocusable(false);
+            mEtPosition.setFocusable(false);
+
+            mTvRelative.setClickable(false);
+            mTvGender.setClickable(false);
+            mTvNation.setClickable(false);
+            mTvReligion.setClickable(false);
+            mTvParty.setClickable(false);
+            mLayoutHeader.setClickable(false);
+        } else {//添加/编辑
+            mEtAddress.setFocusable(true);
+            mEtIdcard.setFocusable(true);
+            mEtMobile.setFocusable(true);
+            mEtName.setFocusable(true);
+            mEtPosition.setFocusable(true);
+
+            mTvRelative.setClickable(true);
+            mTvGender.setClickable(true);
+            mTvNation.setClickable(true);
+            mTvReligion.setClickable(true);
+            mTvParty.setClickable(true);
+            mLayoutHeader.setClickable(true);
         }
 
         if (!TextUtils.isEmpty(personId))
@@ -340,7 +366,9 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
                 onSave();
                 return true;
             case android.R.id.home:
-                if (checkValue()) {
+                if (isLook) {
+                    finish();
+                } else if (checkValue()) {
                     showAlertDialog(getString(R.string.txt_unsave));
                 } else {
                     finish();
@@ -356,6 +384,9 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.action_favorite).setTitle(getString(R.string.txt_save));
+        if (isLook) {
+            menu.findItem(R.id.action_favorite).setTitle("");
+        }
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -400,7 +431,7 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
             return;
         }
         HttpParams params = new HttpParams();
-        params.put("roomNo",roomNo);
+        params.put("roomNo", roomNo);
         params.put("userId", getUser(this).id);
         params.put("familyId", familyId);
         if (!TextUtils.isEmpty(personId))
@@ -457,65 +488,123 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
             public void onSuccess(BaseResponse<FamilyPersonModel> baseResponse, Call call, Response response) {
                 FamilyPersonModel personModel = baseResponse.retData;
                 if (personModel != null) {
+                    //头像
                     if (!TextUtils.isEmpty(personModel.photo)) {
                         Glide.with(FamilyAddPersonActivity.this)
-                                .load(AppConstants.HOST+personModel.photo)
+                                .load(AppConstants.HOST + personModel.photo)
                                 .placeholder(R.mipmap.d54_tx)
                                 .bitmapTransform(new CropCircleTransformation(FamilyAddPersonActivity.this))
                                 .into(mIvHeader);
                     }
+
+                    //真实姓名
                     if (!TextUtils.isEmpty(personModel.realName))
                         mEtName.setText(personModel.realName);
 
+
+                    //和户主关系
                     if (!TextUtils.isEmpty(personModel.headRelation)) {
                         String[] arr = personModel.headRelation.split("_");
                         if (arr.length == 2) {
                             bind = arr[0];
                             mTvRelative.setText(arr[1]);
                         }
+                    } else {
+                        if (isLook) {
+                            mTvRelative.setHint("");
+                        }
                     }
+
+                    //职业
                     if (!TextUtils.isEmpty(personModel.occupation))
                         mEtPosition.setText(personModel.occupation);
+                    else {
+                        if (isLook) {
+                            mEtPosition.setHint("");
+                        }
+                    }
+
+                    //性别
                     if (!TextUtils.isEmpty(personModel.sex)) {
                         String[] arr = personModel.sex.split("_");
                         if (arr.length == 2) {
                             mTvGender.setText(arr[1]);
                             sex = arr[0];
                         }
+                        if("1".equals(personModel.sex)){
+                            mTvGender.setText(getString(R.string.txt_gender_male));
+                            sex = "1";
+                        }else {
+                            mTvGender.setText(getString(R.string.txt_gender_male));
+                            sex = "2";
+                        }
+
+                    } else {
+                        if (isLook) {
+                            LogUtils.e("gender");
+                            mTvGender.setHint("");
+                        }
                     }
 
+                    //身份证号
                     if (!TextUtils.isEmpty(personModel.idNumber)) {
                         mEtIdcard.setText(personModel.idNumber);
                         mTvAge.setText(ValidateUtil.getUserAgeByCardId(personModel.idNumber));
                         mTvBirthday.setText(ValidateUtil.getUserBrithdayByCardId(personModel.idNumber));
                     }
 
+                    //民族
                     if (!TextUtils.isEmpty(personModel.nation)) {
                         String[] arr = personModel.nation.split("_");
                         if (arr.length == 2) {
                             mTvNation.setText(arr[1]);
                             nation = arr[0];
                         }
+                    } else {
+                        if (isLook) {
+                            mTvNation.setHint("");
+                        }
                     }
 
+
+                    //宗教信仰
                     if (!TextUtils.isEmpty(personModel.religion)) {
                         String[] arr = personModel.religion.split("_");
                         if (arr.length == 2) {
                             mTvReligion.setText(arr[1]);
                             religion = arr[0];
                         }
+                    } else {
+                        if (isLook) {
+                            mTvReligion.setHint("");
+                        }
                     }
+
+                    //党派
                     if (!TextUtils.isEmpty(personModel.party)) {
                         String[] arr = personModel.party.split("_");
                         if (arr.length == 2) {
                             mTvParty.setText(arr[1]);
                             party = arr[0];
                         }
+                    } else {
+                        if (isLook) {
+                            mTvParty.setHint("");
+                        }
                     }
+
+                    //手机号
                     if (!TextUtils.isEmpty(personModel.phone))
                         mEtMobile.setText(personModel.phone);
+
+                    //地址
                     if (!TextUtils.isEmpty(personModel.roomAddress))
                         mEtAddress.setText(personModel.roomAddress);
+                    else {
+                        if (isLook) {
+                            mEtAddress.setHint("");
+                        }
+                    }
                 }
             }
 
@@ -631,7 +720,9 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (checkValue()) {
+            if (isLook) {
+                finish();
+            } else if (checkValue()) {
                 showAlertDialog(getString(R.string.txt_unsave));
             } else {
                 finish();

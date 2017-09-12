@@ -2,12 +2,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
-    <WebView
+    <android.webkit.WebView
         android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="visible"
         android:background="@color/white"/>
+    <Button
+        android:id="@+id/btn_wenjuan"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_15"
+        android:layout_marginBottom="@dimen/dp_30"
+        style="@style/rectangle_info_input"
+        android:gravity="center_vertical"
+        android:drawableRight="@mipmap/iv_arrow_right"
+        android:textColor="@color/colorPrimary"
+        android:text="@string/txt_wenjuan"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_10"
+        android:visibility="visible"
+        android:background="@color/color_gray_eeeeee"/>
     <TextView
         android:id="@+id/tv_comment_tips"
         android:layout_width="match_parent"

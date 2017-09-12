@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="bg_blue">#ff0694f5</color>
+    <color name="colorAccent">#3067A8</color>
+    <color name="colorPrimary">#103375</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryLight">#3067A8</color>
     <color name="lv_divider">#dad9e2</color>
     <color name="shouye_lv_tv">#909090</color>
     <color name="shouye_renmen_tv">#2b2b2b</color>
@@ -144,6 +148,13 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowContentOverlay">@null</item>
+    </style>
+    <style name="Custom_Progress" parent="Base.Widget.AppCompat.ProgressBar">
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:indeterminateTint">@color/colorAccent</item>
+        <item name="android:indeterminateTintMode">src_atop</item>
     </style>
     <style name="Theme.UMDefault" parent="android:style/Theme.NoTitleBar"/>
     <style name="Theme.UMDialog" parent="android:style/Theme.Dialog">

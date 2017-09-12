@@ -119,7 +119,7 @@
     <color name="bright_foreground_material_light">@android:color/black</color>
     <color name="button_material_dark">#ff5a595b</color>
     <color name="button_material_light">#ffd6d7d7</color>
-    <color name="colorAccent">#ffffff</color>
+    <color name="colorAccent">#3067A8</color>
     <color name="colorPrimary">#103375</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorPrimaryLight">#3067A8</color>
@@ -918,6 +918,7 @@
     <string name="activity_family_add_person">添加人口</string>
     <string name="activity_family_edit_person">编辑人口</string>
     <string name="activity_family_info">家庭信息</string>
+    <string name="activity_family_look_person">查看人口</string>
     <string name="activity_forget">找回密码</string>
     <string name="activity_imageborwse">图片浏览</string>
     <string name="activity_login">登录</string>
@@ -942,6 +943,7 @@
     <string name="activity_webview">webView</string>
     <string name="activity_welcome">欢迎页</string>
     <string name="activity_wenjuan">问卷</string>
+    <string name="activity_wenjuan_search">问卷搜索</string>
     <string name="activity_write_wenjuan">填写问卷</string>
     <string name="activity_wuye">物业</string>
     <string name="activity_zhengwu">政务</string>
@@ -1073,6 +1075,7 @@
     <string name="toast_error_idcard">请输入正确的身份证号</string>
     <string name="toast_error_name">真实姓名不能超过25个字符</string>
     <string name="toast_error_new_pwd">请您输入6-16位新密码</string>
+    <string name="toast_error_pay">获取订单信息失败</string>
     <string name="toast_error_permission">您不是该家庭业主,无法进行此操作。</string>
     <string name="toast_error_phone">请输入正确的手机号</string>
     <string name="toast_error_pwd">请输入6-16位密码</string>
@@ -1081,6 +1084,7 @@
     <string name="toast_nickname_error">昵称不能超过25个字符</string>
     <string name="toast_no_collect">该文章不允许收藏</string>
     <string name="toast_no_comment">该文章不允许评论</string>
+    <string name="toast_no_data">暂无数据</string>
     <string name="toast_no_login">没有登录,无法进行此操作</string>
     <string name="toast_no_share">该文章不允许分享</string>
     <string name="translate_up_down_behavior">com.project.community.view.TranslateUpDownBehavior</string>
@@ -1144,6 +1148,8 @@
     <string name="txt_family_delete_family">删除此家庭</string>
     <string name="txt_family_info">家庭信息</string>
     <string name="txt_family_person">家庭成员</string>
+    <string name="txt_gender_female">女</string>
+    <string name="txt_gender_male">男</string>
     <string name="txt_go_pay">去缴费</string>
     <string name="txt_hint_detail">请输入详细</string>
     <string name="txt_hint_suggestion">请输入您的意见</string>
@@ -2294,6 +2300,13 @@
         <item name="tabBackground">?attr/selectableItemBackground</item>
         <item name="tabTextAppearance">@style/TextAppearance.Design.Tab</item>
         <item name="tabSelectedTextColor">?android:textColorPrimary</item>
+    </style>
+    <style name="Custom_Progress" parent="Base.Widget.AppCompat.ProgressBar">
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:indeterminateTint">@color/colorAccent</item>
+        <item name="android:indeterminateTintMode">src_atop</item>
     </style>
     <style name="DialogActivityStyle" parent="Theme.AppCompat.Dialog">
         <!--设置dialog的背景，此处为系统给定的透明值-->

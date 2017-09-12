@@ -1,12 +1,11 @@
 package com.library.okgo.callback;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.support.annotation.Nullable;
-import android.view.Window;
 
 import com.library.okgo.R;
 import com.library.okgo.request.BaseRequest;
+import com.library.okgo.view.CustomProgress;
 
 /**
  * ================================================
@@ -19,14 +18,9 @@ import com.library.okgo.request.BaseRequest;
  */
 public abstract class DialogCallback<T> extends JsonCallback<T> {
 
-    private ProgressDialog dialog;
-
+    private CustomProgress progressDialog;
     private void initDialog(Activity activity) {
-        dialog = new ProgressDialog(activity);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        dialog.setMessage("loading...");
+        progressDialog = new CustomProgress(activity,R.style.Custom_Progress);
     }
 
     public DialogCallback(Activity activity) {
@@ -39,8 +33,8 @@ public abstract class DialogCallback<T> extends JsonCallback<T> {
         super.onBefore(request);
         //网络请求前显示对话框
         try {
-            if (dialog != null && !dialog.isShowing()) {
-                dialog.show();
+            if (progressDialog != null && !progressDialog.isShowing()) {
+                progressDialog.show();
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -52,8 +46,8 @@ public abstract class DialogCallback<T> extends JsonCallback<T> {
     public void onAfter(@Nullable T t, @Nullable Exception e) {
         super.onAfter(t, e);
         //网络请求结束后关闭对话框
-        if (dialog != null && dialog.isShowing()) {
-            dialog.dismiss();
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
         }
     }
 }

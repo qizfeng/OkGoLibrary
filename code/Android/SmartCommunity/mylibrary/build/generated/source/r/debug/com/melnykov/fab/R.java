@@ -16,7 +16,7 @@ public final class R {
         public static int fab_type = 0x7f010101;
     }
     public static final class color {
-        public static int material_blue_500 = 0x7f0d002b;
+        public static int material_blue_500 = 0x7f0d002f;
     }
     public static final class dimen {
         public static int fab_elevation_lollipop = 0x7f09008f;

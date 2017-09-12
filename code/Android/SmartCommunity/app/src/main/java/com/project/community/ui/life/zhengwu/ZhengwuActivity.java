@@ -90,7 +90,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
     private String recStr = "";//回复评论
     private String targetId;//回復人id
     private int type = 0;
-
+    private int commentPosition=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,7 +131,8 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             public void onCommentClick(View view, int position) {//点击评论
                 //  popAwindow(view);
                 if (isLogin(ZhengwuActivity.this)) {
-                    getComments(mAdapter.getItem(position).id, view,position);
+                    commentPosition=position;
+                    getComments(mAdapter.getItem(position).id, view,commentPosition);
                 } else
                     showToast(getString(R.string.toast_no_login));
 
@@ -590,7 +591,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             @Override
             public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
                 popupWindow.et_comment.setText("");
-                getComments(artId, view,0);
+                getComments(artId, view,commentPosition);
                 showToast(baseResponse.message);
             }
 

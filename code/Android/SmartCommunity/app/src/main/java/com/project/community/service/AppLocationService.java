@@ -39,9 +39,9 @@ public class AppLocationService extends Service {
     public static final String ACTION_MY_LOCATION_SERVICE = "com.project.community.service.AppLocationService";
 
     /**
-     * 间隔时间为10秒
+     * 间隔时间为60秒
      */
-    private static final int DELAY_TIME = 5 *2* 1000;
+    private static final int DELAY_TIME = 60* 1000;
     /**
      * 开机一秒后开始检测网络
      */

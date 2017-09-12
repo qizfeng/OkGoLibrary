@@ -239,7 +239,6 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
                             break;
                         case CHOISE_NATION:
                             mTvNation.setText(mLoopView.getCurrentItem().toString());
-                            LogUtils.e("==" + dictionaryModels.get(mLoopView.getSelectedItem()).value);
                             doEditUserInfo(getUser(UserInfoActivity.this).id, "", "", "", "", "", "", "", dictionaryModels.get(mLoopView.getSelectedItem()).value, "", "");
                             break;
                         case CHOISE_RELIGION:

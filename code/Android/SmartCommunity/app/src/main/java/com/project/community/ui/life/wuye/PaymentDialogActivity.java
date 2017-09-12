@@ -198,9 +198,8 @@ public class PaymentDialogActivity extends BaseActivity implements View.OnClickL
         if (mBtnWeipay.isChecked()) {
             showToast(getString(R.string.txt_wei_pay));
         } else if (mBtnAlipay.isChecked()) {
-            payV2(v,orderStr);
+            payV2(v);
         }
-
         this.finish();
     }
 
@@ -227,11 +226,15 @@ public class PaymentDialogActivity extends BaseActivity implements View.OnClickL
      *
      * @param v
      */
-    public void payV2(View v,String param) {
-
+    public void payV2(View v) {
         /**
          * orderInfo的获取必须来自服务端；
          */
+        if(TextUtils.isEmpty(orderStr)){
+            showToast(getString(R.string.toast_error_pay));
+            finish();
+            return;
+        }
         final String orderInfo =orderStr;
         Runnable payRunnable = new Runnable() {
 
@@ -239,8 +242,6 @@ public class PaymentDialogActivity extends BaseActivity implements View.OnClickL
             public void run() {
                 PayTask alipay = new PayTask(PaymentDialogActivity.this);
                 Map<String, String> result = alipay.payV2(orderInfo, true);
-                LogUtils.e("msp", result.toString());
-
                 Message msg = new Message();
                 msg.what = SDK_PAY_FLAG;
                 msg.obj = result;

@@ -113,7 +113,6 @@ public class TablayoutLineReflex {
                 //因为我想要的效果是   字多宽线就多宽，所以测量mTextView的宽度
                 int width = 0;
                 width = mTextView.getWidth();
-                LogUtils.e("width:"+width);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1);
                 //修改两个tab的间距
 //                params.setMarginStart(DeviceUtil.dipToPx(context,left));

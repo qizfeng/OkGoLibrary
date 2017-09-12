@@ -76,6 +76,10 @@
         "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/layout/abc_list_menu_item_radio.xml"
     },
     {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/debug/layout/progress_dialog.xml",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/src/main/res/layout/progress_dialog.xml"
+    },
+    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/debug/layout/abc_expanded_menu_layout.xml",
         "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/layout/abc_expanded_menu_layout.xml"
     },

@@ -29,5 +29,13 @@
         <item name="android:dialogMessage">@string/loading</item>
         <item name="android:backgroundDimEnabled">false</item>
     </style>
+    <!-- 自定义Dialog -->
 
+    <style name="Custom_Progress" parent="Base.Widget.AppCompat.ProgressBar">
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:indeterminateTint">@color/colorAccent</item>
+        <item name="android:indeterminateTintMode">src_atop</item>
+    </style>
 </resources>

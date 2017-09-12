@@ -44,6 +44,10 @@
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/src/main/res/drawable/gray_radius.xml"
     },
     {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/debug/drawable/spinner.xml",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/src/main/res/drawable/spinner.xml"
+    },
+    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/debug/drawable/sw_thumb.xml",
         "source": "/Users/qizfeng/.android/build-cache/2cec8e7f24209e4d5c6d4f26e3593c73018afc58/output/res/drawable/sw_thumb.xml"
     },
@@ -54,6 +58,10 @@
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/debug/drawable/umeng_socialize_btn_bg.xml",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/src/main/res/drawable/umeng_socialize_btn_bg.xml"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/debug/drawable/progress_custom_bg.xml",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/src/main/res/drawable/progress_custom_bg.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/debug/drawable/weibosdk_common_shadow_top.9.png",

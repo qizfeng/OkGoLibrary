@@ -99,7 +99,6 @@ public class WenjuanSearchActivity extends BaseActivity implements View.OnKeyLis
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
-                LogUtils.e("progress:" + newProgress);
                 pb.setProgress(newProgress);
                 if (newProgress >= 100) {
                     pb.setVisibility(View.GONE);
@@ -113,10 +112,9 @@ public class WenjuanSearchActivity extends BaseActivity implements View.OnKeyLis
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                LogUtils.e("loadUrl:" + url);
                 view.loadUrl(url);
+                LogUtils.e("webUrl:"+view.getUrl());
                 if (url.equals("http://zhihuishequ.zpftech.com/surveyList/history.back")) {
-                    LogUtils.e("shouldOverrideUrlLoading:" + url);
                     finish();
                     return true;
                 }
@@ -141,7 +139,6 @@ public class WenjuanSearchActivity extends BaseActivity implements View.OnKeyLis
                 if (!mUrl.startsWith("http"))
                     mUrl = "http://" + mUrl;
             mWebView.loadUrl(mUrl);
-            LogUtils.e("url:" + mUrl);
         }
         // 添加js交互接口类，并起别名 imageListener
         mWebView.addJavascriptInterface(new JavascriptInterface(this), "imageListener");
@@ -304,6 +301,7 @@ public class WenjuanSearchActivity extends BaseActivity implements View.OnKeyLis
         //缓存搜索历史
         save(text);
         String url = AppConstants.URL_WENJUAN_SEARCH + text;
+        LogUtils.e("search:"+url);
         mWebView.loadUrl(url);
         llHistory.setVisibility(View.GONE);
         llResult.setVisibility(View.VISIBLE);

@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        release {
+            keyAlias 'zhihuishequ'
+            keyPassword 'zipingfang'
+            storeFile file('/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/keystore.jks')
+            storePassword 'zipingfang'
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion '25.0.3'
     defaultConfig {
@@ -15,6 +23,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     sourceSets {
@@ -26,7 +35,7 @@ android {
         abortOnError false
     }
     dexOptions {
-        jumboMode true
+        jumboMode false
     }
 }
 

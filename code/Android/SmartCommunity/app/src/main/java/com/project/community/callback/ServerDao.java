@@ -219,6 +219,13 @@ public interface ServerDao {
     void getWorkGuide(String guideTheme, String guidePart, JsonCallback<BaseResponse<List<GuideModel>>> callback);
 
     /**
+     * 办事指南搜索
+     * @param keywords
+     * @param callback
+     */
+    void searchGuide(String keywords,JsonCallback<BaseResponse<List<GuideModel>>>callback);
+
+    /**
      * 热线电话
      *
      * @param type     1政务 2物业

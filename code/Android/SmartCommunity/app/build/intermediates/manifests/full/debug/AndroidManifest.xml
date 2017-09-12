@@ -85,6 +85,17 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="http://zhihuishequ.zpftech.com"
+                    android:pathPrefix="/openapp"
+                    android:scheme="zhihuishequ" />
+            </intent-filter>
         </activity>
         <activity
             android:name="com.project.community.ui.guide.WelcomeGuideActivity"
@@ -133,6 +144,10 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.project.community.ui.life.zhengwu.WenjuanSearchActivity"
+            android:label="@string/activity_wenjuan_search"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.project.community.ui.life.zhengwu.WenjuanDetailActivity"
             android:label="@string/activity_write_wenjuan"
             android:screenOrientation="portrait" />
         <activity
@@ -153,6 +168,9 @@
         <activity
             android:name="com.project.community.ui.life.zhengwu.CompanionActivity"
             android:label="@string/title_masses_guide"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.project.community.ui.life.zhengwu.CompanionSearchActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.project.community.ui.user.ForgetPassActivity"

@@ -170,7 +170,6 @@ public class AgreementWebViewActivity extends BaseActivity {
 
         @android.webkit.JavascriptInterface
         public void openImage(String img, String[] imgs, int position) {
-            LogUtils.e("size:" + imgs.length + ",position:" + position);
             Intent intent = new Intent(AgreementWebViewActivity.this, ImageBrowseActivity.class);
             ArrayList<String> imgArray = new ArrayList<>();
             imgArray.addAll(Arrays.asList(imgs));
@@ -220,7 +219,7 @@ public class AgreementWebViewActivity extends BaseActivity {
             public void onSuccess(BaseResponse<AgreementResponse> baseResponse, Call call, Response response) {
                 try {
                     mUrl = baseResponse.retData.content;
-                    mWebView.loadData(mUrl, "text/html; charset=UTF-8", null);
+                    mWebView.loadData("<meta content=\"width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes\" name=\"viewport\" />\n"+mUrl, "text/html; charset=UTF-8", null);
                 }catch (Exception e){
                     e.printStackTrace();
                 }

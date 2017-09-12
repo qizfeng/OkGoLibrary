@@ -155,7 +155,13 @@ public class FamilyInfoActivity extends BaseActivity implements View.OnClickList
         mAdapter = new FamilyAdapter(personList, new FamilyAdapter.OnAdapterItemClickListener() {
             @Override
             public void onItemClick(FamilyPersonModel item, int position) {
-
+                Bundle bundle = new Bundle();
+                bundle.putString("title", getString(R.string.activity_family_look_person));
+                bundle.putString("familyId", mData.get(mTabLayout.getSelectedTabPosition()).id);
+                bundle.putString("personId", item.id);
+                bundle.putString("roomNo",mData.get(mTabLayout.getSelectedTabPosition()).room.roomNo);
+                bundle.putBoolean("isLook",true);
+                FamilyAddPersonActivity.startActivity(FamilyInfoActivity.this,bundle);
             }
 
             @Override
@@ -432,7 +438,6 @@ public class FamilyInfoActivity extends BaseActivity implements View.OnClickList
      * @param position
      */
     private void deletePerson(final int position) {
-        LogUtils.e("roomNo:"+ mData.get(mTabLayout.getSelectedTabPosition()).room.getRoomNo());
         serverDao.deletePerson(getUser(this).id, mAdapter.getItem(position).id,
                 mData.get(mTabLayout.getSelectedTabPosition()).room.getRoomNo(),
                 new DialogCallback<BaseResponse<List>>(this) {

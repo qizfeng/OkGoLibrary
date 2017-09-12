@@ -168,7 +168,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 startActivity(intent);
                 break;
             case R.id.tv_disc:
-                LogUtils.e("======");
                 getDist("选择小区");
                 break;
             case R.id.tv_cancel:
@@ -180,7 +179,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 if (mPopupWindow != null) {
                     mPopupWindow.dismiss();
                     mTvDisc.setText(mLoopView.getCurrentItem().toString());
-                    distId = distModels.get(mLoopView.getSelectedItem()).id;
+                    distId = distModels.get(mLoopView.getSelectedItem()).orgCode;
                 }
                 break;
         }
@@ -286,7 +285,11 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 String userStr = gson.toJson(stringBaseResponse.retData);
                 saveUser(RegisterActivity.this, userStr);
                 showToast(stringBaseResponse.message);
-                LoginActivity.getInstance().finish();//注册完成即登录状态,将登录页从堆栈里销毁
+                try {
+                    LoginActivity.getInstance().finish();//注册完成即登录状态,将登录页从堆栈里销毁
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 setResult(RESULT_OK);
                 finish();
             }
@@ -303,7 +306,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onPause() {
         super.onPause();
-        LogUtils.e("onPause");
         try {
             KeyBoardUtils.closeKeybord(mEtUsername, this);
         } catch (Exception e) {
@@ -314,7 +316,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        LogUtils.e("onDestroy");
         try {
             KeyBoardUtils.closeKeybord(mEtUsername, this);
         } catch (Exception e) {

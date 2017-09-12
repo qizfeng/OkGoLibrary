@@ -22,7 +22,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"/>
         </com.project.community.view.VpSwipeRefreshLayout>
 
         <LinearLayout
@@ -56,7 +56,7 @@
                     android:minHeight="45dp"
                     android:padding="10dp"
                     android:scrollHorizontally="false"
-                    android:textColor="@color/color_gray_999999"
+                    android:textColor="@color/txt_color"
                     android:textCursorDrawable="@drawable/edit_cursor_color">
 
                 </EditText>
