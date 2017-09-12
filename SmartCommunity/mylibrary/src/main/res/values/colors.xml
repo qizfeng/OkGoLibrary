@@ -7,5 +7,9 @@
     <color name="lv_divider">#dad9e2</color>
 
     <color name="shouye_lv_tv">#909090</color>
-
+    <color name="colorPrimary">#103375</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryLight">#3067A8</color>
+    <!--3F51B5-->
+    <color name="colorAccent">#3067A8</color>
 </resources>

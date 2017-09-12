@@ -215,7 +215,6 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                             .setOnPageClickListener(new AdPlayBanner.OnPageClickListener() {
                                 @Override
                                 public void onPageClick(AdPageInfo info, int postion) {
-                                    LogUtils.e("position:" + postion);
                                     info = mDatas.get(postion);
                                     if ("2".equals(info.linkType)) {//文章
                                         Bundle bundle = new Bundle();

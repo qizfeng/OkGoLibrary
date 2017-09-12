@@ -92,7 +92,6 @@ public class AddHouseNoDialogActivity extends BaseActivity {
                 showToast(baseResponse.message);
                 Bundle bundle = getIntent().getBundleExtra("bundle");
                 bundle.putString("title", bundle.getString("title"));
-                LogUtils.e("title" + title);
                 if (title.contains("物业费")) {
                     PayDetailWuyeActivity.startActivity(AddHouseNoDialogActivity.this, bundle);
                 } else {
@@ -106,6 +105,7 @@ public class AddHouseNoDialogActivity extends BaseActivity {
                 super.onError(call, response, e);
                 if (!e.getMessage().contains("No address"))
                     showToast(e.getMessage());
+                finish();
             }
         });
     }

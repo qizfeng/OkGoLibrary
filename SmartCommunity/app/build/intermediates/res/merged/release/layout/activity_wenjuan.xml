@@ -2,21 +2,31 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/common_gray_bg">
+    android:layout_height="match_parent">
 
-    <include layout="@layout/pub_layout_toolbar" />
+    <include
+        layout="@layout/pub_layout_toolbar"/>
 
-    <com.project.community.view.VpSwipeRefreshLayout
-        android:id="@+id/refreshLayout"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
+        <ProgressBar
+            android:id="@+id/pb"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="false"
+            android:minHeight="3dp"
+            android:progressDrawable="@drawable/progress_bar_states" />
+
+        <LinearLayout
+            android:id="@+id/web_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-    </com.project.community.view.VpSwipeRefreshLayout>
+            android:background="@android:color/white"
+            android:orientation="vertical" />
+    </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

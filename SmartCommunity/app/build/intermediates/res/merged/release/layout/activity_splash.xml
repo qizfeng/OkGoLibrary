@@ -8,6 +8,6 @@
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:contentDescription="@null"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         android:src="@mipmap/pic_startpage" />
 </LinearLayout>

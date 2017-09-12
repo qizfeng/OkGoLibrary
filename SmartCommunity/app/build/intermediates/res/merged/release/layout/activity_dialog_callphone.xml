@@ -16,8 +16,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
+            android:text="一个星期"
             android:gravity="center"
-            android:text="政府热线"
             android:textColor="@color/color_gray_999999"
             android:textSize="@dimen/common_title_txt_size" />
 
@@ -38,6 +38,7 @@
         android:layout_gravity="center"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginLeft="@dimen/dp_20"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -45,7 +46,7 @@
             android:id="@+id/iv_header"
             android:layout_width="@dimen/dp_55"
             android:layout_height="@dimen/dp_55"
-            android:src="@mipmap/weixin2" />
+            android:src="@mipmap/d54_tx" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,9 +58,9 @@
                 android:id="@+id/tv_phone_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="400-00000"
                 android:textColor="@color/color_gray_333333"
                 android:textSize="@dimen/common_title_txt_size"
+                android:text="15210213731"
                 android:textStyle="bold" />
 
             <TextView
@@ -68,7 +69,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:maxLines="1"
-                android:text="(工作时间:9:00~18:00)"
+
+                android:text="(工作时间:9:00 ~12:00)"
                 android:textColor="@color/color_gray_999999"
                 android:textSize="@dimen/common_txt_size" />
         </LinearLayout>

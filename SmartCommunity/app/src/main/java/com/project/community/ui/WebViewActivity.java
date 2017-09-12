@@ -86,7 +86,6 @@ public class WebViewActivity extends BaseActivity {
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
-                LogUtils.e("progress:" + newProgress);
                 pb.setProgress(newProgress);
                 if (newProgress >= 100) {
                     pb.setVisibility(View.GONE);
@@ -100,10 +99,8 @@ public class WebViewActivity extends BaseActivity {
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                LogUtils.e("loadUrl:" + url);
                 view.loadUrl(url);
                 if (url.equals("http://zhihuishequ.zpftech.com/surveyList/history.back")) {
-                    LogUtils.e("shouldOverrideUrlLoading:" + url);
                     finish();
                     return true;
                 }
@@ -121,14 +118,16 @@ public class WebViewActivity extends BaseActivity {
             }
         });
 
-        if (getString(R.string.title_masses_guide).equals(mTitle)) {
-            mWebView.loadData(mUrl, "text/html;charset=utf-8", null);
+        if (getString(R.string.title_masses_guide).equals(mTitle)||getString(R.string.activity_agreement).equals(mTitle)) {
+            mWebView.loadData("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes\" />\n"
+                    + mUrl, "text/html;charset=utf-8", null);
+            LogUtils.e("url:"+"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes\" />\n"
+                    + mUrl);
         } else {
             if (mUrl != null)
                 if (!mUrl.startsWith("http"))
                     mUrl = "http://" + mUrl;
             mWebView.loadUrl(mUrl);
-            LogUtils.e("url:"+mUrl);
         }
         // 添加js交互接口类，并起别名 imageListener
         mWebView.addJavascriptInterface(new JavascriptInterface(this), "imageListener");

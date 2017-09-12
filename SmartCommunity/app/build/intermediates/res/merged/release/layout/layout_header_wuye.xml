@@ -18,6 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:fillViewport="true"
+
         android:scrollbars="none">
 
         <LinearLayout
@@ -25,7 +26,6 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/dp_20"
             android:orientation="horizontal">
-
             <com.project.community.view.HorizaontalGridView
                 android:id="@+id/gridview"
                 android:layout_width="wrap_content"
@@ -48,10 +48,10 @@
         app:tabGravity="fill"
         app:tabIndicatorColor="@color/colorPrimary"
         app:tabIndicatorHeight="3dp"
-        style="@style/TabLayoutTextStyle"
+        app:tabTextAppearance="@style/WuyeTabLayoutTextStyle"
+        style="@style/WuyeTabLayoutTextStyle"
         app:tabMode="fixed"
         android:visibility="visible"
         app:tabSelectedTextColor="@color/colorPrimary"
         app:tabTextColor="@color/color_gray_666666" />
-
 </LinearLayout>

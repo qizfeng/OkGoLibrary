@@ -51,6 +51,8 @@ import com.project.community.ui.ImageBrowseActivity;
 import com.project.community.ui.WebViewActivity;
 import com.project.community.ui.adapter.CommentsApdater;
 import com.project.community.ui.adapter.CommentsPopwinAdapter;
+import com.project.community.ui.life.zhengwu.WenjuanActivity;
+import com.project.community.ui.life.zhengwu.WenjuanDetailActivity;
 import com.project.community.ui.life.zhengwu.ZhengwuActivity;
 import com.project.community.util.ScreenUtils;
 import com.project.community.view.CommentPopWin;
@@ -248,7 +250,6 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
 
         @android.webkit.JavascriptInterface
         public void openImage(String img, String[] imgs, int position) {
-            LogUtils.e("size:" + imgs.length + ",position:" + position);
             Intent intent = new Intent(TopicDetailActivity.this, ImageBrowseActivity.class);
             ArrayList<String> imgArray = new ArrayList<>();
             imgArray.addAll(Arrays.asList(imgs));
@@ -285,8 +286,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
                     Bundle bundle = new Bundle();
                     bundle.putString("url", AppConstants.URL_WENJUAN_DETIAL + "?uid=" + getUser(this).id + "&id=" + mData.surveyInfo.id);
                     intent.putExtra("bundle", bundle);
-                    intent.putExtra("hideNavigation", true);
-                    intent.setClass(this, WebViewActivity.class);
+                    intent.setClass(this, WenjuanDetailActivity.class);
                     startActivity(intent);
                 } else {
                     showToast(getString(R.string.toast_no_login));
@@ -297,6 +297,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
 
     @Override
     public void onRefresh() {
+        setRefreshing(true);
         loadData();
     }
 
@@ -381,7 +382,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
             userId = getUser(this).id;
         else
             userId = "";
-        serverDao.getTopicDetail(userId, artId, new DialogCallback<BaseResponse<ArticleModel>>(this) {
+        serverDao.getTopicDetail(userId, artId, new JsonCallback<BaseResponse<ArticleModel>>() {
             @Override
             public void onSuccess(final BaseResponse<ArticleModel> baseResponse, Call call, Response response) {
                 mData = baseResponse.retData;
@@ -407,7 +408,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
                     @Override
                     public void run() {
                         try {
-                            LogUtils.e("url:"+AppConstants.HOST + baseResponse.retData.url);
+                            LogUtils.e("url:" + AppConstants.HOST + baseResponse.retData.url);
                             mWebView.loadUrl(AppConstants.HOST + baseResponse.retData.url);
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -551,23 +552,24 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
                 KeyBoardUtils.closeKeybord(mEtInput, TopicDetailActivity.this);
                 return true;
             case R.id.navigation_share:
-                if(mData.allowShare==0){
+                if (mData.allowShare == 0) {
                     showToast(getString(R.string.toast_no_share));
                     return true;
                 }
                 KeyBoardUtils.closeKeybord(mEtInput, TopicDetailActivity.this);
-                UMWeb web = new UMWeb("https://www.mi.com/");
-                web.setTitle("智慧社区");//标题
+                UMWeb web = new UMWeb(mWebView.getUrl());
+                web.setTitle(mData.title);//标题
                 web.setThumb(new UMImage(TopicDetailActivity.this, R.mipmap.ic_launcher_round));  //缩略图
-                web.setDescription("发现了一个APP,快来下载吧");//描述
+                web.setDescription(mData.description);//描述
                 ShareBoardConfig config = new ShareBoardConfig();
                 config.setMenuItemBackgroundShape(ShareBoardConfig.BG_SHAPE_NONE);
                 config.setIndicatorVisibility(false);
                 new ShareAction(TopicDetailActivity.this)
-                        .withText("智慧社区")
+                        .withText(mData.description)
                         .withMedia(new UMImage(TopicDetailActivity.this, R.mipmap.ic_launcher_round))
                         .withMedia(web)
-                        .setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN)
+                        .setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ,SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE)
+//                        .setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN)
                         .setCallback(shareListener)
                         .open(config);
                 return true;

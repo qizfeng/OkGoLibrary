@@ -66,7 +66,6 @@ public class WenjuanActivity extends BaseActivity {
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
-                LogUtils.e("progress:" + newProgress);
                 pb.setProgress(newProgress);
                 if (newProgress >= 100) {
                     pb.setVisibility(View.GONE);
@@ -78,8 +77,8 @@ public class WenjuanActivity extends BaseActivity {
             @Override
             public void onReceivedTitle(WebView view, String title) {
                 super.onReceivedTitle(view, title);
-                LogUtils.e("receive:" + view.getUrl() + "," + title);
                 String url = view.getUrl();
+                LogUtils.e("onreceived:"+url);
                 if (url.contains(AppConstants.URL_WENJUAN_LIST)) {
                     mMenu.findItem(R.id.action_favorite).setIcon(R.mipmap.d2_sousuo);
                     mTvTitle.setText(getString(R.string.activity_wenjuan));
@@ -93,7 +92,6 @@ public class WenjuanActivity extends BaseActivity {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
-                LogUtils.e("shouldOverrideUrlLoading:" + url);
                 return super.shouldOverrideUrlLoading(view, url);
             }
 
@@ -102,6 +100,15 @@ public class WenjuanActivity extends BaseActivity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 try {
+                    String webViewurl = view.getUrl();
+                    LogUtils.e("onPageFinished:"+webViewurl);
+                    if (url.contains(AppConstants.URL_WENJUAN_LIST)) {
+                        mMenu.findItem(R.id.action_favorite).setIcon(R.mipmap.d2_sousuo);
+                        mTvTitle.setText(getString(R.string.activity_wenjuan));
+                    } else if (url.contains(AppConstants.URL_WENJUAN_DETIAL) || url.contains(AppConstants.URL_WENJUAN_RESULT)) {
+                        mMenu.findItem(R.id.action_favorite).setIcon(null).setTitle("");
+                        mTvTitle.setText(getString(R.string.activity_write_wenjuan));
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -117,7 +124,6 @@ public class WenjuanActivity extends BaseActivity {
                 if (!mUrl.startsWith("http"))
                     mUrl = "http://" + mUrl;
             mWebView.loadUrl(mUrl);
-            LogUtils.e("url:" + mUrl);
         }
         mWebView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override

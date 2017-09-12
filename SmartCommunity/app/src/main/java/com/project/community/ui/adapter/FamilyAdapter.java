@@ -49,7 +49,6 @@ public class FamilyAdapter extends BaseMultiItemQuickAdapter<FamilyPersonModel, 
                 }
             }
             helper.setText(R.id.tv_name, item.realName);
-            LogUtils.e("relative:" + item.headRelation);
             helper.setText(R.id.tv_relative, item.headRelation);
             Glide.with(mContext)
                     .load(AppConstants.HOST + item.photo)

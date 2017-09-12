@@ -56,6 +56,10 @@ public class PayIndexActivity extends BaseActivity {
                     showToast(getString(R.string.toast_no_login));
                     return;
                 }
+                if (position!=4){
+                    showToast("暂未开通");
+                    return;
+                }
                 Bundle bundle = new Bundle();
                 bundle.putString("title", mAdapter.getItem(position).label);
                 PayHistroyActivity.startActivity(PayIndexActivity.this, bundle);

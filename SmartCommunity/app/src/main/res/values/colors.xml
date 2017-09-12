@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorPrimaryLight">#3067A8</color>
     <!--3F51B5-->
-    <color name="colorAccent">#ffffff</color>
+    <color name="colorAccent">#3067A8</color>
     <color name="txt_color">#333333</color>
     <color name="gray_line">#999999</color>
     <color name="common_gray_bg">#eeeeee</color>

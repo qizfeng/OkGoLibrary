@@ -9,5 +9,10 @@
         android:layout_width="match_parent"
         android:paddingLeft="@dimen/dp_5"
         android:paddingRight="@dimen/dp_5"
+        android:layout_height="@dimen/dp_60"
         style="@style/textview_style"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_gray_eeeeee"/>
 </LinearLayout>

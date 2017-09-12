@@ -112,7 +112,7 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
         } else if (rawType == BaseResponse.class) {
             //有数据类型，表示有data
             String json = response.body().string();
-            LogUtils.e("json:" + json);
+            LogUtils.e("response:" + json);
             JSONObject obj = new JSONObject(json);
             if (obj.has("errNum")) {//先判断errNum,在解析,以防数据不规范报错
                 String errNum = obj.optString("errNum");

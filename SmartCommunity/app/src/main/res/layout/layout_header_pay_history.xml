@@ -37,8 +37,7 @@
                 android:layout_marginTop="@dimen/dp_10"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:gravity="center"
-                android:text="房屋编号6567899875\n一区十六号楼七单元601室\n应缴金额(元):52.8\n到期时间:2017年12月"/>
+                android:gravity="center"/>
         </LinearLayout>
 
         <EditText

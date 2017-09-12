@@ -8,20 +8,20 @@ import butterknife.ButterKnife.ViewBinder;
 public class WenjuanDetailActivity$$ViewBinder<T extends com.project.community.ui.life.zhengwu.WenjuanDetailActivity> implements ViewBinder<T> {
   @Override public void bind(final Finder finder, final T target, Object source) {
     View view;
-    view = finder.findRequiredView(source, 2131624105, "field 'mToolBar'");
-    target.mToolBar = finder.castView(view, 2131624105, "field 'mToolBar'");
+    view = finder.findRequiredView(source, 2131624105, "field 'toolbar'");
+    target.toolbar = finder.castView(view, 2131624105, "field 'toolbar'");
+    view = finder.findRequiredView(source, 2131624288, "field 'pb'");
+    target.pb = finder.castView(view, 2131624288, "field 'pb'");
+    view = finder.findRequiredView(source, 2131624172, "field 'mAppbar'");
+    target.mAppbar = finder.castView(view, 2131624172, "field 'mAppbar'");
     view = finder.findRequiredView(source, 2131624106, "field 'mTvTitle'");
     target.mTvTitle = finder.castView(view, 2131624106, "field 'mTvTitle'");
-    view = finder.findRequiredView(source, 2131624108, "field 'mRecyclerView'");
-    target.mRecyclerView = finder.castView(view, 2131624108, "field 'mRecyclerView'");
-    view = finder.findRequiredView(source, 2131624289, "field 'mTvSubmit'");
-    target.mTvSubmit = finder.castView(view, 2131624289, "field 'mTvSubmit'");
   }
 
   @Override public void unbind(T target) {
-    target.mToolBar = null;
+    target.toolbar = null;
+    target.pb = null;
+    target.mAppbar = null;
     target.mTvTitle = null;
-    target.mRecyclerView = null;
-    target.mTvSubmit = null;
   }
 }

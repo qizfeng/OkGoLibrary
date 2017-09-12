@@ -10,8 +10,10 @@ public class WebViewActivity$$ViewBinder<T extends com.project.community.ui.WebV
     View view;
     view = finder.findRequiredView(source, 2131624105, "field 'toolbar'");
     target.toolbar = finder.castView(view, 2131624105, "field 'toolbar'");
-    view = finder.findRequiredView(source, 2131624287, "field 'pb'");
-    target.pb = finder.castView(view, 2131624287, "field 'pb'");
+    view = finder.findRequiredView(source, 2131624288, "field 'pb'");
+    target.pb = finder.castView(view, 2131624288, "field 'pb'");
+    view = finder.findRequiredView(source, 2131624172, "field 'mAppbar'");
+    target.mAppbar = finder.castView(view, 2131624172, "field 'mAppbar'");
     view = finder.findRequiredView(source, 2131624106, "field 'mTvTitle'");
     target.mTvTitle = finder.castView(view, 2131624106, "field 'mTvTitle'");
   }
@@ -19,6 +21,7 @@ public class WebViewActivity$$ViewBinder<T extends com.project.community.ui.WebV
   @Override public void unbind(T target) {
     target.toolbar = null;
     target.pb = null;
+    target.mAppbar = null;
     target.mTvTitle = null;
   }
 }

@@ -14,7 +14,7 @@
 
         <TextView
             android:id="@+id/tv_pay_date"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_15"
             android:text="2017\n5月账单"
@@ -25,7 +25,6 @@
             android:id="@+id/tv_pay_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_55"
             android:text="328元"
             android:textColor="@color/txt_color"
             android:textSize="@dimen/common_txt_size" />

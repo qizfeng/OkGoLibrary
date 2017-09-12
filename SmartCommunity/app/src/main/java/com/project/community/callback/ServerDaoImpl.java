@@ -272,6 +272,15 @@ public class ServerDaoImpl implements ServerDao {
     }
 
     @Override
+    public void searchGuide(String keywords, JsonCallback<BaseResponse<List<GuideModel>>> callback) {
+        checkNet();
+        OkGo.post(AppConstants.URL_GUIDE_SEARCH)
+                .tag(mContext)
+                .params("keywords",keywords)
+                .execute(callback);
+    }
+
+    @Override
     public void getHotLine(String type, String orgCode, JsonCallback<BaseResponse<List<HotlineModel>>> callback) {
         checkNet();
         String url = AppConstants.URL_ZHENGWU_HOTLINE;

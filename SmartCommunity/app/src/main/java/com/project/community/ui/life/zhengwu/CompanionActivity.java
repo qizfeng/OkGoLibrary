@@ -119,8 +119,11 @@ public class CompanionActivity extends BaseActivity implements View.OnClickListe
         serverDao.getWorkGuide(theme, part, new DialogCallback<BaseResponse<List<GuideModel>>>(this) {
             @Override
             public void onSuccess(BaseResponse<List<GuideModel>> baseResponse, Call call, Response response) {
+
                 mData = new ArrayList<>();
                 mData.addAll(baseResponse.retData);
+                if(mData.size()==0)
+                    showToast(getString(R.string.toast_no_data));
                 mAdapter.setNewData(mData);
                 mAdapter.notifyDataSetChanged();
             }
@@ -248,6 +251,7 @@ public class CompanionActivity extends BaseActivity implements View.OnClickListe
                 // User chose the "Favorite" action, mark the current item
                 // as a favorite...
 //                finish();
+                CompanionSearchActivity.startActivity(CompanionActivity.this,null);
                 return true;
 
             default:

@@ -16,14 +16,14 @@ public class TopicDetailActivity$$ViewBinder<T extends com.project.community.ui.
     target.mToolBar = finder.castView(view, 2131624105, "field 'mToolBar'");
     view = finder.findRequiredView(source, 2131624106, "field 'mTvTitle'");
     target.mTvTitle = finder.castView(view, 2131624106, "field 'mTvTitle'");
-    view = finder.findRequiredView(source, 2131624270, "field 'mEtInput'");
-    target.mEtInput = finder.castView(view, 2131624270, "field 'mEtInput'");
-    view = finder.findRequiredView(source, 2131624271, "field 'mBtnSend'");
-    target.mBtnSend = finder.castView(view, 2131624271, "field 'mBtnSend'");
-    view = finder.findRequiredView(source, 2131624268, "field 'mCoordinatorLayout'");
-    target.mCoordinatorLayout = finder.castView(view, 2131624268, "field 'mCoordinatorLayout'");
-    view = finder.findRequiredView(source, 2131624269, "field 'mBottomLayout'");
-    target.mBottomLayout = finder.castView(view, 2131624269, "field 'mBottomLayout'");
+    view = finder.findRequiredView(source, 2131624271, "field 'mEtInput'");
+    target.mEtInput = finder.castView(view, 2131624271, "field 'mEtInput'");
+    view = finder.findRequiredView(source, 2131624272, "field 'mBtnSend'");
+    target.mBtnSend = finder.castView(view, 2131624272, "field 'mBtnSend'");
+    view = finder.findRequiredView(source, 2131624269, "field 'mCoordinatorLayout'");
+    target.mCoordinatorLayout = finder.castView(view, 2131624269, "field 'mCoordinatorLayout'");
+    view = finder.findRequiredView(source, 2131624270, "field 'mBottomLayout'");
+    target.mBottomLayout = finder.castView(view, 2131624270, "field 'mBottomLayout'");
   }
 
   @Override public void unbind(T target) {

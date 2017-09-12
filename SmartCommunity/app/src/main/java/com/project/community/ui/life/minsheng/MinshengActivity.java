@@ -291,7 +291,6 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
     }
 
     private void onDelete(List data){
-        LogUtils.e("->"+data.size());
         ItemTouchHelper helper = new ItemTouchHelper(new RecyclerItemTouchHelperCallBack(mRecyclerView,data));
         helper.attachToRecyclerView(mRecyclerView);
     }

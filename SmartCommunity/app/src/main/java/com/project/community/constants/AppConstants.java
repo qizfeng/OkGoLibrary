@@ -94,6 +94,11 @@ public class AppConstants {
     public static final String URL_GUIDE_LIST = URL_BASE + "m/gov/guide";
 
     /**
+     * 办事指南搜索
+     */
+    public static final String URL_GUIDE_SEARCH=URL_BASE+"m/gov/guide/search";
+
+    /**
      * 政务热线
      */
     public static final String URL_ZHENGWU_HOTLINE = URL_BASE + "m/gov/hotline";

@@ -25,7 +25,10 @@ public class PayHistoryAdapter extends BaseQuickAdapter<PaymentDetailHistoryMode
 
     @Override
     protected void convert(final BaseViewHolder baseViewHolder, final PaymentDetailHistoryModel model) {
-        baseViewHolder.setText(R.id.tv_pay_date, model.payMouth);
+        String month=model.payMouth;
+        if(month.contains("年"))
+            month=month.replace("年","\n");
+        baseViewHolder.setText(R.id.tv_pay_date, month);
         baseViewHolder.setText(R.id.tv_pay_money, model.payMoney + mContext.getResources().getString(R.string.txt_money_unit));
         baseViewHolder.setText(R.id.tv_pay_status, model.payStatus);
     }

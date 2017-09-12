@@ -68,7 +68,7 @@ public class PhoneDialogActivity extends BaseActivity implements View.OnClickLis
         setContentView(R.layout.activity_dialog_callphone);
         //设置Theme.Dialog View高度   在setContentView(id);之后添加以下代码
         android.view.WindowManager.LayoutParams p = getWindow().getAttributes();
-        p.width = (int) (ScreenUtils.getScreenWidth(this) * 0.7); // 宽度设置为屏幕的0.7
+        p.width = (int) (ScreenUtils.getScreenWidth(this) * 0.8); // 宽度设置为屏幕的0.7
         getWindow().setAttributes(p);
         mIvClose.setOnClickListener(this);
         mBtnCall.setOnClickListener(this);

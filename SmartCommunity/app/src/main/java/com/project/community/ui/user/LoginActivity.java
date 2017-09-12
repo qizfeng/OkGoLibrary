@@ -77,9 +77,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     private boolean isRemember = false;
 
     public static Activity instance;
-    public static Activity getInstance(){
+
+    public static Activity getInstance() {
         return instance;
     }
+
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);
@@ -90,7 +92,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        instance=this;
+        instance = this;
         mIvEyes.setOnClickListener(this);
         mLayoutRoot.setOnClickListener(this);
         mIvWechat.setOnClickListener(this);
@@ -192,8 +194,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 saveUsername(LoginActivity.this, phone);
                 Gson gson = new Gson();
                 String userStr = gson.toJson(userModelBaseResponse.retData);
-               // JSONObject object = JSONObject.fromObject(userModelBaseResponse.retData);
-                LogUtils.e("json:" + userStr);
+                // JSONObject object = JSONObject.fromObject(userModelBaseResponse.retData);
                 saveUser(LoginActivity.this, userStr);
                 saveLoginStatus(LoginActivity.this, true);
                 if (mCbRemember.isChecked()) {
@@ -205,6 +206,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 }
 
                 showToast(userModelBaseResponse.message);
+                KeyBoardUtils.closeKeybord(mEtPhone, LoginActivity.this);
 //                MainActivity.startActivity(LoginActivity.this);
                 setResult(RESULT_OK);
                 finish();
@@ -222,6 +224,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        KeyBoardUtils.closeKeybord(mEtPhone,this);
+        KeyBoardUtils.closeKeybord(mEtPhone, this);
     }
 }
