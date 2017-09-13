@@ -44,12 +44,14 @@ import com.project.community.model.ZhengwuIndexResponse;
 import com.project.community.ui.PhoneDialogActivity;
 import com.project.community.ui.WebViewActivity;
 import com.project.community.ui.adapter.ArticlePageAdapter;
+import com.project.community.ui.adapter.CommentsApdater;
 import com.project.community.ui.adapter.CommentsPopwinAdapter;
 import com.project.community.ui.adapter.ModuleAdapter;
 import com.project.community.ui.adapter.listener.IndexAdapterItemListener;
 import com.project.community.ui.life.TopicDetailActivity;
 import com.project.community.util.ScreenUtils;
 import com.project.community.view.CommentPopWin;
+import com.project.community.view.CommentPopwindow;
 import com.project.community.view.HorizaontalGridView;
 import com.project.community.view.SpacesItemDecoration;
 
@@ -80,8 +82,8 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
     private View header;
     private List<ModuleModel> moduleModels = new ArrayList<>();
     private List<CommentModel> comments = new ArrayList<>();//评论列表
-    private CommentsPopwinAdapter commentsPopwinAdapter;
-    private CommentPopWin popupWindow;
+    private CommentsApdater commentsPopwinAdapter;
+    private CommentPopwindow popupWindow;
     private List<MenuModel> mMenuData = new ArrayList<>();
     private List<ArticleModel> mArticleDate = new ArrayList<>();
     private ZhengwuIndexResponse mResponseData = new ZhengwuIndexResponse();
@@ -90,7 +92,8 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
     private String recStr = "";//回复评论
     private String targetId;//回復人id
     private int type = 0;
-    private int commentPosition=0;
+    private int commentPosition = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,8 +134,8 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             public void onCommentClick(View view, int position) {//点击评论
                 //  popAwindow(view);
                 if (isLogin(ZhengwuActivity.this)) {
-                    commentPosition=position;
-                    getComments(mAdapter.getItem(position).id, view,commentPosition);
+                    commentPosition = position;
+                    getComments(mAdapter.getItem(position).id, view, commentPosition);
                 } else
                     showToast(getString(R.string.toast_no_login));
 
@@ -141,7 +144,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             @Override
             public void onDiggClick(ImageView imageView, TextView textView, int position) {
                 if (isLogin(ZhengwuActivity.this)) {
-                    if(mAdapter.getItem(position).allowCollection==0){
+                    if (mAdapter.getItem(position).allowCollection == 0) {
                         showToast(getString(R.string.toast_no_collect));
                         return;
                     }
@@ -513,13 +516,13 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
      * @param artId
      * @param parent
      */
-    private void getComments(final String artId, final View parent,final int posistion) {
+    private void getComments(final String artId, final View parent, final int posistion) {
         serverDao.getComments(artId, new DialogCallback<BaseResponse<List<CommentModel>>>(this) {
             @Override
             public void onSuccess(BaseResponse<List<CommentModel>> baseResponse, Call call, Response response) {
                 comments = new ArrayList<>();
                 comments = baseResponse.retData;
-                commentsPopwinAdapter = new CommentsPopwinAdapter(ZhengwuActivity.this, comments, new RecycleItemClickListener() {
+                commentsPopwinAdapter = new CommentsApdater(comments, new RecycleItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
                         recStr = getString(R.string.txt_receive) + commentsPopwinAdapter.getItem(position).userName + ":";
@@ -534,22 +537,30 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
                     }
                 });
                 if (popupWindow == null)
-                    popupWindow = new CommentPopWin(ZhengwuActivity.this, new View.OnClickListener() {
+                    popupWindow = new CommentPopwindow(ZhengwuActivity.this, new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             popupWindow.dismiss();
                         }
                     });
-//                if (comments.size() > 5) {//超过5条评论,指定listView高度
-//                    popupWindow.lv_container.getLayoutParams().height = ScreenUtils.getScreenHeight(ZhengwuActivity.this) / 2 + 100;
-//                }
+                popupWindow.lv_container.getLayoutParams().height = (int) (ScreenUtils.getScreenHeight(ZhengwuActivity.this) * 0.8);
                 popupWindow.lv_container.setAdapter(commentsPopwinAdapter);
+                commentsPopwinAdapter.bindToRecyclerView(popupWindow.lv_container);
+                if (comments.size() > 0)
+                    popupWindow.lv_container.smoothScrollToPosition(0);
                 popupWindow.showAtLocation(parent, Gravity.BOTTOM, ScreenUtils.getScreenWidth(ZhengwuActivity.this), 0);
+                commentsPopwinAdapter.setNewData(comments);
+                if(comments.size()==0){
+                    commentsPopwinAdapter.setNewData(null);
+                    commentsPopwinAdapter.setEmptyView(R.layout.empty_view);
+                    TextView textView = (TextView) commentsPopwinAdapter.getEmptyView().findViewById(R.id.tv_tips);
+                    textView.setText(getString(R.string.empty_no_comment));
+                }
                 //发评论事件
                 popupWindow.btn_send.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(mAdapter.getItem(posistion).allowComment==0){
+                        if (mAdapter.getItem(posistion).allowComment == 0) {
                             showToast(getString(R.string.toast_no_comment));
                             return;
                         }
@@ -591,7 +602,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             @Override
             public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
                 popupWindow.et_comment.setText("");
-                getComments(artId, view,commentPosition);
+                getComments(artId, view, commentPosition);
                 showToast(baseResponse.message);
             }
 
@@ -613,7 +624,8 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             @Override
             public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
                 showToast(baseResponse.message);
-                commentsPopwinAdapter.removeItem(position);
+//                commentsPopwinAdapter.removeItem(position);
+                commentsPopwinAdapter.remove(position);
             }
 
             @Override

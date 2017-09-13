@@ -82,9 +82,11 @@ public class WenjuanActivity extends BaseActivity {
                 if (url.contains(AppConstants.URL_WENJUAN_LIST)) {
                     mMenu.findItem(R.id.action_favorite).setIcon(R.mipmap.d2_sousuo);
                     mTvTitle.setText(getString(R.string.activity_wenjuan));
-                } else if (url.contains(AppConstants.URL_WENJUAN_DETIAL) || url.contains(AppConstants.URL_WENJUAN_RESULT)) {
+                } else if (url.contains(AppConstants.URL_WENJUAN_DETIAL) ) {
                     mMenu.findItem(R.id.action_favorite).setIcon(null).setTitle("");
                     mTvTitle.setText(getString(R.string.activity_write_wenjuan));
+                }else if(url.contains(AppConstants.URL_WENJUAN_RESULT)){
+                    mTvTitle.setText(getString(R.string.activity_wenjuan_result));
                 }
             }
         });
@@ -105,9 +107,11 @@ public class WenjuanActivity extends BaseActivity {
                     if (url.contains(AppConstants.URL_WENJUAN_LIST)) {
                         mMenu.findItem(R.id.action_favorite).setIcon(R.mipmap.d2_sousuo);
                         mTvTitle.setText(getString(R.string.activity_wenjuan));
-                    } else if (url.contains(AppConstants.URL_WENJUAN_DETIAL) || url.contains(AppConstants.URL_WENJUAN_RESULT)) {
+                    } else if (url.contains(AppConstants.URL_WENJUAN_DETIAL) ) {
                         mMenu.findItem(R.id.action_favorite).setIcon(null).setTitle("");
                         mTvTitle.setText(getString(R.string.activity_write_wenjuan));
+                    }else if(url.contains(AppConstants.URL_WENJUAN_RESULT)){
+                        mTvTitle.setText(getString(R.string.activity_wenjuan_result));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -207,7 +211,8 @@ public class WenjuanActivity extends BaseActivity {
         switch (item.getItemId()) {
             case R.id.action_favorite:
                 Bundle bundle = new Bundle();
-                bundle.putString("url", AppConstants.URL_WENJUAN_SEARCH);
+                bundle.putString("url", AppConstants.URL_WENJUAN_SEARCH+"?uid="+getUser(this).id+"&keyword=");
+                LogUtils.e("wenjuan:"+AppConstants.URL_WENJUAN_SEARCH+"?uid="+getUser(this).id+"&keyword=");
                 WenjuanSearchActivity.startActivity(WenjuanActivity.this, bundle);
                 return true;
             case android.R.id.home:

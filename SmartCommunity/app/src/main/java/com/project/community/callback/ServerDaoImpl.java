@@ -97,9 +97,9 @@ public class ServerDaoImpl implements ServerDao {
         checkNet();
         OkGo.post(AppConstants.URL_REGISTER)
                 .tag(mContext)
-                .params("username", phone)
-                .params("name", username)
-                .params("phone", phone)
+                .params("username", phone)//15210213731
+                .params("name", username)//齐志峰
+                .params("phone", phone)//15210213731
                 .params("code", code)
                 .params("password", password)
                 .params("prepPassword", prepPassword)

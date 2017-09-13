@@ -45,14 +45,17 @@ import com.project.community.model.WuyeIndexResponse;
 import com.project.community.ui.PhoneDialogActivity;
 import com.project.community.ui.WebViewActivity;
 import com.project.community.ui.adapter.ArticlePageAdapter;
+import com.project.community.ui.adapter.CommentsApdater;
 import com.project.community.ui.adapter.CommentsPopwinAdapter;
 import com.project.community.ui.adapter.ModuleAdapter;
 import com.project.community.ui.adapter.listener.IndexAdapterItemListener;
 import com.project.community.ui.life.TopicDetailActivity;
 import com.project.community.ui.life.family.FamilyInfoActivity;
+import com.project.community.ui.life.zhengwu.ZhengwuActivity;
 import com.project.community.util.ScreenUtils;
 import com.project.community.util.TablayoutLineReflex;
 import com.project.community.view.CommentPopWin;
+import com.project.community.view.CommentPopwindow;
 import com.project.community.view.HorizaontalGridView;
 import com.project.community.view.SpacesItemDecoration;
 import com.project.community.view.VpSwipeRefreshLayout;
@@ -80,7 +83,7 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     @Bind(R.id.fab)
     ImageView fab;
     AdPlayBanner adPlayBanner;
-    private CommentPopWin popupWindow;
+    private CommentPopwindow popupWindow;
     private List<AdPageInfo> mDatas = new ArrayList<>();//模拟轮播图数据
     private ArticlePageAdapter mAdapter;
     private View header;
@@ -90,7 +93,7 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     private int pageIndex = 1;
     private List<ModuleModel> moduleModels = new ArrayList<>();
     private List<CommentModel> comments = new ArrayList<>();//评论列表
-    private CommentsPopwinAdapter commentsPopwinAdapter;
+    private CommentsApdater commentsPopwinAdapter;
     private List<ArticleModel> mArticleDate = new ArrayList<>();
     private WuyeIndexResponse mResponseData = new WuyeIndexResponse();
     private List<MenuModel> mMenuData = new ArrayList<>();
@@ -138,7 +141,6 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
             @Override
             public void onCommentClick(View view, int position) {//点击评论
-//                popAwindow(view, position);
                 position = position - 1;//去掉头部
                 if (isLogin(WuyeActivity.this))
                     getComments(mAdapter.getItem(position).id, view);
@@ -193,7 +195,6 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     }
 
     private void initBanner() {
-//
         mDatas = new ArrayList<>();
         getBannerData();
     }
@@ -202,7 +203,7 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         serverDao.getBannerData("1", "2", new JsonCallback<BaseResponse<BannerResponse>>() {
             @Override
             public void onSuccess(BaseResponse<BannerResponse> baseResponse, Call call, Response response) {
-                mDatas = new ArrayList<AdPageInfo>();
+                mDatas = new ArrayList<>();
                 mDatas = baseResponse.retData.imageList;
                 try {
                     //开始轮播
@@ -210,7 +211,6 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                             .setImageLoadType(AdPlayBanner.ImageLoaderType.GLIDE)
                             .setAutoPlay(true)
                             .setIndicatorType(AdPlayBanner.IndicatorType.POINT_INDICATOR)
-//                    .setNumberViewColor(0xffffffff, 0xccea0000, 0x103375)
                             .setInterval(5000)
                             .setOnPageClickListener(new AdPlayBanner.OnPageClickListener() {
                                 @Override
@@ -535,7 +535,7 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
             public void onSuccess(BaseResponse<List<CommentModel>> baseResponse, Call call, Response response) {
                 comments = new ArrayList<>();
                 comments = baseResponse.retData;
-                commentsPopwinAdapter = new CommentsPopwinAdapter(WuyeActivity.this, comments, new RecycleItemClickListener() {
+                commentsPopwinAdapter = new CommentsApdater(comments, new RecycleItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
                         recStr = getString(R.string.txt_receive) + commentsPopwinAdapter.getItem(position).userName + ":";
@@ -550,16 +550,25 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                     }
                 });
                 if (popupWindow == null)
-                    popupWindow = new CommentPopWin(WuyeActivity.this, new View.OnClickListener() {
+                    popupWindow = new CommentPopwindow(WuyeActivity.this, new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             popupWindow.dismiss();
                         }
                     });
-                if (comments.size() > 5) {//超过5条评论,指定listView高度
-                    popupWindow.lv_container.getLayoutParams().height = ScreenUtils.getScreenHeight(WuyeActivity.this) / 2 + 100;
-                }
+                popupWindow.lv_container.getLayoutParams().height = (int) (ScreenUtils.getScreenHeight(WuyeActivity.this) * 0.8);
                 popupWindow.lv_container.setAdapter(commentsPopwinAdapter);
+                commentsPopwinAdapter.bindToRecyclerView(popupWindow.lv_container);
+                if (comments.size() > 0)
+                    popupWindow.lv_container.smoothScrollToPosition(0);
+                popupWindow.showAtLocation(parent, Gravity.BOTTOM, ScreenUtils.getScreenWidth(WuyeActivity.this), 0);
+                commentsPopwinAdapter.setNewData(comments);
+                if (comments.size() == 0) {
+                    commentsPopwinAdapter.setNewData(null);
+                    commentsPopwinAdapter.setEmptyView(R.layout.empty_view);
+                    TextView textView = (TextView) commentsPopwinAdapter.getEmptyView().findViewById(R.id.tv_tips);
+                    textView.setText(getString(R.string.empty_no_comment));
+                }
                 popupWindow.showAtLocation(parent, Gravity.BOTTOM, ScreenUtils.getScreenWidth(WuyeActivity.this), 0);
                 //发评论事件
                 popupWindow.btn_send.setOnClickListener(new View.OnClickListener() {
@@ -625,7 +634,7 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
             @Override
             public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
                 showToast(baseResponse.message);
-                commentsPopwinAdapter.removeItem(position);
+                commentsPopwinAdapter.remove(position);
             }
 
             @Override

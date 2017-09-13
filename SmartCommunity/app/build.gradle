@@ -9,7 +9,7 @@ android {
             storePassword 'zipingfang'
         }
     }
-    compileSdkVersion 25
+    compileSdkVersion 26
     buildToolsVersion '25.0.3'
     defaultConfig {
         applicationId "com.project.community"
@@ -21,10 +21,12 @@ android {
     }
     buildTypes {
         release {
+            debuggable true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
+
     }
     sourceSets {
         main {

@@ -27,6 +27,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
@@ -274,9 +275,9 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
     public void showPhotoDialog() {
         //填充对话框的布局
         View inflate = LayoutInflater.from(this).inflate(R.layout.activity_dialog_photo, null);
-        TextView tv_take_photo = (TextView)inflate.findViewById(R.id.tv_take_photo);
-        TextView tv_pick_photo = (TextView)inflate.findViewById(R.id.tv_pick_photo);
-        TextView tv_cancel = (TextView)inflate.findViewById(R.id.tv_cancel);
+        TextView tv_take_photo = (TextView) inflate.findViewById(R.id.tv_take_photo);
+        TextView tv_pick_photo = (TextView) inflate.findViewById(R.id.tv_pick_photo);
+        TextView tv_cancel = (TextView) inflate.findViewById(R.id.tv_cancel);
         tv_cancel.setOnClickListener(this);
         tv_pick_photo.setOnClickListener(this);
         tv_take_photo.setOnClickListener(this);
@@ -312,9 +313,9 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
             strings.add(data.get(i).label);
         }
         //初始化控件
-        TextView tv_cancel = (TextView)inflate.findViewById(R.id.tv_cancel);
-        TextView tv_confirm = (TextView)inflate.findViewById(R.id.tv_confirm);
-        TextView tv_title =(TextView) inflate.findViewById(R.id.tv_title);
+        TextView tv_cancel = (TextView) inflate.findViewById(R.id.tv_cancel);
+        TextView tv_confirm = (TextView) inflate.findViewById(R.id.tv_confirm);
+        TextView tv_title = (TextView) inflate.findViewById(R.id.tv_title);
         tv_title.setText(title);
         tv_cancel.setOnClickListener(this);
         tv_confirm.setOnClickListener(this);
@@ -491,12 +492,16 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
         serverDao.getUserInfo(getUser(this).id, new DialogCallback<BaseResponse<UserModel>>(this) {
             @Override
             public void onSuccess(BaseResponse<UserModel> userResponseBaseResponse, Call call, Response response) {
+                Gson gson = new Gson();
+                String userStr = gson.toJson(userResponseBaseResponse.retData);
+                saveUser(UserInfoActivity.this, userStr);
                 bindData(userResponseBaseResponse.retData);
             }
         });
     }
 
     private void bindData(UserModel user) {
+
         glide.onDisplayImageWithDefault(UserInfoActivity.this, mIvHeader, AppConstants.HOST + user.photo, R.mipmap.d54_tx, true);
         //昵称
         if (!TextUtils.isEmpty(user.loginName)) {
@@ -599,25 +604,27 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
     /**
      * 修改个人信息
      *
-     * @param id 用户id
-     * @param photo 用户头像
-     * @param loginName 昵称
-     * @param name 姓名
-     * @param idCard 身份证
-     * @param roomNo 房屋编号
-     * @param isOwner 是否业主
+     * @param id         用户id
+     * @param photo      用户头像
+     * @param loginName  昵称
+     * @param name       姓名
+     * @param idCard     身份证
+     * @param roomNo     房屋编号
+     * @param isOwner    是否业主
      * @param occupation 职业
-     * @param nation 民族
-     * @param religion 宗教信仰
-     * @param party 党派
+     * @param nation     民族
+     * @param religion   宗教信仰
+     * @param party      党派
      */
-    private void doEditUserInfo(String id, String photo, String loginName, String name, String idCard,
+    private void doEditUserInfo(String id, final String photo, String loginName, String name, String idCard,
                                 String roomNo, String isOwner, String occupation, String nation,
                                 String religion, String party) {
         serverDao.doEditUserInfo(id, photo, loginName, name, idCard, roomNo, isOwner, occupation, nation, religion, party,
                 new JsonCallback<BaseResponse<List>>() {
                     @Override
                     public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
+                        if (!TextUtils.isEmpty(photo))
+                            getUser(UserInfoActivity.this).photo = photo;
                         showToast(baseResponse.message);
                     }
                 });

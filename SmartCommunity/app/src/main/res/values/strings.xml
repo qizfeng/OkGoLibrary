@@ -228,6 +228,7 @@
     <string name="recyclerview_view_behavior">android.support.v7.widget.RecyclerView</string>
     <string name="empty_no_data">没有数据,点击重试</string>
     <string name="toast_no_data">暂无数据</string>
+    <string name="empty_no_comment">暂无评论</string>
     <string name="empty_no_data_family">暂无家庭信息</string>
     <string name="network_error">似乎已断开与互联网的连接。</string>
     <string name="permission_tips">您拒绝了权限,部分功能将不可使用</string>
@@ -274,6 +275,7 @@
     <string name="activity_wenjuan">问卷</string>
     <string name="activity_write_wenjuan">填写问卷</string>
     <string name="activity_wenjuan_search">问卷搜索</string>
+    <string name="activity_wenjuan_result">投票结果</string>
     <string name="activity_topic_detail">正文</string>
     <string name="activity_forget">找回密码</string>
     <string name="activity_setting">设置</string>

@@ -25,8 +25,9 @@ public class CommentPopWin extends PopupWindow {
     private Context mContext;
     private View view;
     public EditText et_comment;
-    public  ListView lv_container;
+    public ListView lv_container;
     public Button btn_send;
+
     public CommentPopWin(final Context mContext, View.OnClickListener itemsOnClick) {
 
         this.view = LayoutInflater.from(mContext).inflate(R.layout.layout_popup_comment, null);
@@ -34,14 +35,14 @@ public class CommentPopWin extends PopupWindow {
         view.findViewById(R.id.pop_layout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                KeyBoardUtils.closeKeybord(et_comment,mContext);
+                KeyBoardUtils.closeKeybord(et_comment, mContext);
                 dismiss();
             }
         });
 
-        btn_send=(Button) view.findViewById(R.id.btn_send);
-        et_comment=(EditText)view.findViewById(R.id.et_input);
-       // KeyBoardUtils.openKeybord(et_comment,mContext);
+        btn_send = (Button) view.findViewById(R.id.btn_send);
+        et_comment = (EditText) view.findViewById(R.id.et_input);
+        // KeyBoardUtils.openKeybord(et_comment,mContext);
 
         //初始化listview，加载数据。
         lv_container = (ListView) view.findViewById(R.id.lv_container);
@@ -58,7 +59,7 @@ public class CommentPopWin extends PopupWindow {
 //                int y = (int) event.getY();
 //                if (event.getAction() == MotionEvent.ACTION_UP) {
 //                    if (y < height) {
-                KeyBoardUtils.closeKeybord(et_comment,mContext);
+                KeyBoardUtils.closeKeybord(et_comment, mContext);
                 dismiss();
 //                    }
 //                }

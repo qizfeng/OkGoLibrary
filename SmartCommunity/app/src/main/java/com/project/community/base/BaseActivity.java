@@ -236,6 +236,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
+
+
     /**
      * 获取用户名
      *

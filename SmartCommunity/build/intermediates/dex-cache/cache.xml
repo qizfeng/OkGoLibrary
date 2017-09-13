@@ -3,21 +3,21 @@
 
     <item
         is-multidex="true"
-        jar="/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/bundles/default/libs/open_sdk_r5788_lite.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="5fb543960b0a44ff943055ef03493a8e4ad7c3f8">
-        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/8/open_sdk_r5788_lite_868764bd3ace9e9132005578037cd0f0b0f0ce3e/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/bundles/default/libs/SocialSDK_alipay.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.3"
         sha1="a4826b7c66807a90ed57e1d559d402508ff3c775">
         <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/8/SocialSDK_alipay_405dabde74c3056b9a79f6675c4e49c50d8b04c5/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/bundles/default/libs/open_sdk_r5788_lite.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="5fb543960b0a44ff943055ef03493a8e4ad7c3f8">
+        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/8/open_sdk_r5788_lite_868764bd3ace9e9132005578037cd0f0b0f0ce3e/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -160,7 +160,7 @@
         jumboMode="false"
         optimize="true"
         revision="25.0.3"
-        sha1="6986e838ee099d850b54ad6264a6b18d5a97dae0">
+        sha1="bd7351e69b0e2f61ed62203d26abf204b5b81da8">
         <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/4/classes_45dff9af0ae41d5acb8f4e6c10b77a155f64a5b6/classes.dex" />
     </item>
     <item

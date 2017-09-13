@@ -255,7 +255,7 @@ public class FamilyAddActivity extends BaseActivity {
      */
     private void getHouseInfo() {
         String roomNo = mEtHouseNo.getText().toString();
-        serverDao.selectHouseInfo(roomNo, new JsonCallback<BaseResponse<HouseModel>>() {
+        serverDao.selectHouseInfo(roomNo, new DialogCallback<BaseResponse<HouseModel>>(this) {
             @Override
             public void onSuccess(BaseResponse<HouseModel> baseResponse, Call call, Response response) {
                 if (baseResponse.retData != null)

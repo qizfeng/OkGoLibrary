@@ -68,6 +68,7 @@ public class FamilyInfoActivity extends BaseActivity implements View.OnClickList
     private TextView mTvFamilyNo;
     private TextView mTvFamilyAddress;
     private Dialog mDialog;
+    private static int tabSelection = 0;
 
     public static void startActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, FamilyInfoActivity.class);
@@ -110,11 +111,15 @@ public class FamilyInfoActivity extends BaseActivity implements View.OnClickList
      * 初始化tabLayout
      */
     private void initTabLayout(List<FamilyModel> models) {
-        mTabLayout.removeAllTabs();
-        for (int i = 0; i < models.size(); i++) {
-            mTabLayout.addTab(mTabLayout.newTab().setText(models.get(i).familyName));
+        if (models.size() != mTabLayout.getTabCount()) {
+            mTabLayout.removeAllTabs();
+            if (mTabLayout.getTabCount() == 0) {
+                for (int i = 0; i < models.size(); i++) {
+                    mTabLayout.addTab(mTabLayout.newTab().setText(models.get(i).familyName));
+                }
+            }
         }
-        if (mTabLayout.getTabCount() > 4) {
+        if (mTabLayout.getTabCount() > 2) {
             mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
             mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         } else {
@@ -125,8 +130,9 @@ public class FamilyInfoActivity extends BaseActivity implements View.OnClickList
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                tabSelection = tab.getPosition();
                 switchData(tab.getPosition());
-                if (mTabLayout.getTabCount() > 4) {
+                if (mTabLayout.getTabCount() > 2) {
                     mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
                     mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
                 } else {
@@ -159,9 +165,9 @@ public class FamilyInfoActivity extends BaseActivity implements View.OnClickList
                 bundle.putString("title", getString(R.string.activity_family_look_person));
                 bundle.putString("familyId", mData.get(mTabLayout.getSelectedTabPosition()).id);
                 bundle.putString("personId", item.id);
-                bundle.putString("roomNo",mData.get(mTabLayout.getSelectedTabPosition()).room.roomNo);
-                bundle.putBoolean("isLook",true);
-                FamilyAddPersonActivity.startActivity(FamilyInfoActivity.this,bundle);
+                bundle.putString("roomNo", mData.get(mTabLayout.getSelectedTabPosition()).room.roomNo);
+                bundle.putBoolean("isLook", true);
+                FamilyAddPersonActivity.startActivity(FamilyInfoActivity.this, bundle);
             }
 
             @Override
@@ -184,7 +190,7 @@ public class FamilyInfoActivity extends BaseActivity implements View.OnClickList
                 bundle.putString("title", getString(R.string.activity_family_edit_person));
                 bundle.putString("familyId", mData.get(mTabLayout.getSelectedTabPosition()).id);
                 bundle.putString("personId", item.id);
-                bundle.putString("roomNo",mData.get(mTabLayout.getSelectedTabPosition()).room.roomNo);
+                bundle.putString("roomNo", mData.get(mTabLayout.getSelectedTabPosition()).room.roomNo);
                 FamilyAddPersonActivity.startActivity(FamilyInfoActivity.this, bundle);
             }
         });
@@ -207,8 +213,12 @@ public class FamilyInfoActivity extends BaseActivity implements View.OnClickList
 //        personList.addAll(mData.get(position).memberList);
 //        mAdapter.setNewData(personList);
 //        mAdapter.notifyDataSetChanged();
+        try {
+            getFamilyData(mData.get(position).room.roomNo, mData.get(position).id);
 
-        getFamilyData(mData.get(position).room.roomNo,mData.get(position).id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -338,7 +348,7 @@ public class FamilyInfoActivity extends BaseActivity implements View.OnClickList
         Bundle bundle = new Bundle();
         bundle.putString("title", getString(R.string.activity_family_add_person));
         bundle.putString("familyId", mData.get(mTabLayout.getSelectedTabPosition()).id);
-        bundle.putString("roomNo",mData.get(mTabLayout.getSelectedTabPosition()).room.roomNo);
+        bundle.putString("roomNo", mData.get(mTabLayout.getSelectedTabPosition()).room.roomNo);
         FamilyAddPersonActivity.startActivity(this, bundle);
     }
 
@@ -374,7 +384,7 @@ public class FamilyInfoActivity extends BaseActivity implements View.OnClickList
      * 加载数据
      */
     private void loadData() {
-        serverDao.getFamilyListInfo(getUser(this).id, getUsername(this), getUser(this).roomNo, new DialogCallback<BaseResponse<List<FamilyModel>>>(this) {
+        serverDao.getFamilyListInfo(getUser(this).id, getUsername(this), getUser(this).roomNo, new JsonCallback<BaseResponse<List<FamilyModel>>>() {
             @Override
             public void onSuccess(BaseResponse<List<FamilyModel>> baseResponse, Call call, Response response) {
                 mData = new ArrayList<>();
@@ -387,7 +397,8 @@ public class FamilyInfoActivity extends BaseActivity implements View.OnClickList
                     textView.setText(getString(R.string.empty_no_data_family));
                 } else {
                     initTabLayout(mData);
-                    switchData(0);
+                    LogUtils.e("pos:"+tabSelection);
+                    switchData(tabSelection);
                 }
 
             }
@@ -408,8 +419,8 @@ public class FamilyInfoActivity extends BaseActivity implements View.OnClickList
     /**
      * 切换选项卡获取单个家庭信息
      */
-    private void getFamilyData(String roomNo,String familyId){
-        serverDao.getFamilyInfo(getUser(this).id, getUsername(this), roomNo, familyId, new JsonCallback<BaseResponse<List<FamilyModel>>>() {
+    private void getFamilyData(String roomNo, String familyId) {
+        serverDao.getFamilyInfo(getUser(this).id, getUsername(this), roomNo, familyId, new DialogCallback<BaseResponse<List<FamilyModel>>>(this) {
             @Override
             public void onSuccess(BaseResponse<List<FamilyModel>> baseResponse, Call call, Response response) {
                 mTvFamilyNo.setText(baseResponse.retData.get(0).room.roomNo);
@@ -423,6 +434,7 @@ public class FamilyInfoActivity extends BaseActivity implements View.OnClickList
                 mAdapter.setNewData(personList);
                 mAdapter.notifyDataSetChanged();
             }
+
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
@@ -441,21 +453,22 @@ public class FamilyInfoActivity extends BaseActivity implements View.OnClickList
         serverDao.deletePerson(getUser(this).id, mAdapter.getItem(position).id,
                 mData.get(mTabLayout.getSelectedTabPosition()).room.getRoomNo(),
                 new DialogCallback<BaseResponse<List>>(this) {
-            @Override
-            public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
-                mAdapter.remove(position);
-                mAdapter.notifyDataSetChanged();
-                showToast(baseResponse.message);
-            }
+                    @Override
+                    public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
+                        mAdapter.remove(position);
+                        mAdapter.notifyDataSetChanged();
+                        showToast(baseResponse.message);
+                        switchData(0);
+                    }
 
-            @Override
-            public void onError(Call call, Response response, Exception e) {
-                super.onError(call, response, e);
-                if (!e.getMessage().contains("No address"))
-                    showToast(e.getMessage());
-            }
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        if (!e.getMessage().contains("No address"))
+                            showToast(e.getMessage());
+                    }
 
-        });
+                });
     }
 
 

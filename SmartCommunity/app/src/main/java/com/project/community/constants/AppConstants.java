@@ -96,7 +96,7 @@ public class AppConstants {
     /**
      * 办事指南搜索
      */
-    public static final String URL_GUIDE_SEARCH=URL_BASE+"m/gov/guide/search";
+    public static final String URL_GUIDE_SEARCH = URL_BASE + "m/gov/guide/search";
 
     /**
      * 政务热线
@@ -197,7 +197,7 @@ public class AppConstants {
     /**
      * 问卷搜索
      */
-    public static final String URL_WENJUAN_SEARCH=URL_BASE+"surveyList/d9_questionnaire.html?keyword=";
+    public static final String URL_WENJUAN_SEARCH = URL_BASE + "surveyList/d9_questionnaire.html";
 
     /**
      * 问卷详情页 h5
@@ -207,7 +207,7 @@ public class AppConstants {
     /**
      * 问卷结果页
      */
-    public static final String URL_WENJUAN_RESULT=URL_BASE+"http://zhihuishequ.zpftech.com/surveyList/d11_results.html";
+    public static final String URL_WENJUAN_RESULT = URL_BASE + "surveyList/d11_results.html";
 
     /**
      * 家庭列表
@@ -254,7 +254,7 @@ public class AppConstants {
     /**
      * 获取支付订单
      */
-    public static final String URL_GET_PAY_ORDER=URL_BASE+"m/propPayment/aliPay";
+    public static final String URL_GET_PAY_ORDER = URL_BASE + "m/propPayment/aliPay";
 
     /*==========================*/
     /**

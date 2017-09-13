@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -38,25 +39,29 @@ import butterknife.ButterKnife;
 public class LifeFragment extends BaseFragment implements View.OnClickListener {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-//    @Bind(R.id.tv_title)
+    //    @Bind(R.id.tv_title)
 //    TextView tv_title;
     @Bind(R.id.tabLayout)
     TabLayout tabLayout;
 
     @Bind(R.id.viewPager)
     NoScrollViewPager viewPager;
+
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_life,container,false);
+        View view = inflater.inflate(R.layout.activity_life, container, false);
         manager = new LocalActivityManager(getActivity(), true);
         manager.dispatchCreate(savedInstanceState);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
+//        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        //换成下面这句就OK了
+        toolbar.inflateMenu(R.menu.menu_actionbar);
         return view;
     }
 
     @Override
     protected void initData() {
-        initToolbar(toolbar,  "");
+        initToolbar(toolbar, "");
         setHasOptionsMenu(true);
         initTabLayout();
         AddActivitiesToViewPager();
@@ -75,7 +80,7 @@ public class LifeFragment extends BaseFragment implements View.OnClickListener {
         tabLayout.post(new Runnable() {
             @Override
             public void run() {
-                TablayoutLineReflex.setTabLine(getActivity(),tabLayout,15,15);
+                TablayoutLineReflex.setTabLine(getActivity(), tabLayout, 15, 15);
 //                TablayoutLineReflex.setTabLine(getActivity(),tabLayout,15,15);
             }
         });
@@ -100,17 +105,17 @@ public class LifeFragment extends BaseFragment implements View.OnClickListener {
                 // User chose the "Favorite" action, mark the current item
                 // as a favorite...
                 Bundle bundle = new Bundle();
-                if(viewPager.getCurrentItem()==0){
-                    bundle.putString("type","0");
-                    bundle.putInt("index",0);
-                }else if(viewPager.getCurrentItem()==1){
-                    bundle.putString("type","1");
-                    bundle.putInt("index",1);
-                }else if(viewPager.getCurrentItem()==2){
-                    bundle.putString("type","mobile");
-                    bundle.putInt("index",2);
+                if (viewPager.getCurrentItem() == 0) {
+                    bundle.putString("type", "0");
+                    bundle.putInt("index", 0);
+                } else if (viewPager.getCurrentItem() == 1) {
+                    bundle.putString("type", "1");
+                    bundle.putInt("index", 1);
+                } else if (viewPager.getCurrentItem() == 2) {
+                    bundle.putString("type", "mobile");
+                    bundle.putInt("index", 2);
                 }
-                SearchActivity.startActivity(getActivity(),bundle);
+                SearchActivity.startActivity(getActivity(), bundle);
                 return true;
 
             default:
@@ -135,13 +140,14 @@ public class LifeFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_actionbar,menu);
+        inflater.inflate(R.menu.menu_actionbar, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
     class MainFragmentPagerAdapter extends FragmentPagerAdapter {
         private List<Fragment> fragments;
         private String[] mTitles = new String[]{"政务", "物业", "民生"};
+
         public MainFragmentPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
             super(fm);
             this.fragments = fragments;
@@ -165,7 +171,6 @@ public class LifeFragment extends BaseFragment implements View.OnClickListener {
             return mTitles[position];
         }
     }
-
 
 
     private LocalActivityManager manager;
@@ -199,9 +204,11 @@ public class LifeFragment extends BaseFragment implements View.OnClickListener {
     private View getView(String id, Intent intent) {
         return manager.startActivity(id, intent).getDecorView();
     }
+
     class MainPagerAdapter extends PagerAdapter implements Serializable {
         private List<View> views;
         private String[] mTitles = new String[]{"政务", "物业", "民生"};
+
         public MainPagerAdapter(List<View> views) {
             this.views = views;
         }

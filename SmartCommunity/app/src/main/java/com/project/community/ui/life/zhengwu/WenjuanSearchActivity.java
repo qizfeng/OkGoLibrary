@@ -4,10 +4,14 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.library.okgo.utils.KeyBoardUtils;
@@ -32,6 +37,7 @@ import com.project.community.ui.adapter.SearchHistoryAdapter;
 import com.project.community.util.SearchHistoryCacheUtils;
 import com.project.community.view.Html5WebView;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,8 +54,16 @@ public class WenjuanSearchActivity extends BaseActivity implements View.OnKeyLis
     private String mTitle;
     private LinearLayout mLayout;
     private WebView mWebView;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
     @Bind(R.id.pb)
     ProgressBar pb;
+    @Bind(R.id.appbar)
+    AppBarLayout mAppbar;
+    @Bind(R.id.tv_title)
+    TextView mTvTitle;
+
+
     @Bind(R.id.et_search_content)
     EditText etSearchContent;
     @Bind(R.id.tv_cancel)
@@ -66,7 +80,7 @@ public class WenjuanSearchActivity extends BaseActivity implements View.OnKeyLis
     TextView mClearHistoryBtn;
     @Bind(R.id.view_lin_top)
     View mViewLineTop;
-
+    private RelativeLayout mSearchLayout;
     private SearchHistoryAdapter mHistoryAdapter;
     private List<SearchModel> mData = new ArrayList<>();
     private List<String> historyData = new ArrayList<>();
@@ -85,11 +99,13 @@ public class WenjuanSearchActivity extends BaseActivity implements View.OnKeyLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wenjuan_detail);
         Bundle bundle = getIntent().getBundleExtra("bundle");
+        initToolBar(toolbar, mTvTitle, true, getString(R.string.activity_wenjuan), R.mipmap.iv_back);
         if (bundle != null) {
             mUrl = bundle.getString("url");
         }
         pb.setMax(100);
         mLayout = (LinearLayout) findViewById(R.id.web_layout);
+        mSearchLayout = (RelativeLayout) findView(R.id.global_search_action_bar_rl);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams
                 .MATCH_PARENT);
         mWebView = new Html5WebView(getApplicationContext());
@@ -113,7 +129,7 @@ public class WenjuanSearchActivity extends BaseActivity implements View.OnKeyLis
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
-                LogUtils.e("webUrl:"+view.getUrl());
+                LogUtils.e("webUrl:" + view.getUrl());
                 if (url.equals("http://zhihuishequ.zpftech.com/surveyList/history.back")) {
                     finish();
                     return true;
@@ -125,11 +141,25 @@ public class WenjuanSearchActivity extends BaseActivity implements View.OnKeyLis
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 try {
-                    addImageClickListner();
+                    String webViewurl = view.getUrl();
+                    LogUtils.e("onPageFinished:" + webViewurl);
+                    if (url.contains(AppConstants.URL_WENJUAN_SEARCH)) {
+                        mSearchLayout.setVisibility(View.VISIBLE);
+                        mAppbar.setVisibility(View.GONE);
+                    } else if (url.contains(AppConstants.URL_WENJUAN_DETIAL)) {
+                        mTvTitle.setText(getString(R.string.activity_write_wenjuan));
+                        mSearchLayout.setVisibility(View.GONE);
+                        mAppbar.setVisibility(View.VISIBLE);
+                    } else if (url.contains(AppConstants.URL_WENJUAN_RESULT)) {
+                        mTvTitle.setText(getString(R.string.activity_wenjuan_result));
+                        mSearchLayout.setVisibility(View.GONE);
+                        mAppbar.setVisibility(View.VISIBLE);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
+
         });
 
         if (getString(R.string.title_masses_guide).equals(mTitle)) {
@@ -233,6 +263,7 @@ public class WenjuanSearchActivity extends BaseActivity implements View.OnKeyLis
             KeyBoardUtils.closeKeybord(etSearchContent, WenjuanSearchActivity.this);
             etSearchContent.setCursorVisible(false);
             //进行搜索操作的方法，在该方法中可以加入mEditSearchUser的非空判断
+            LogUtils.e("======" + mUrl);
             loadUrl();
         }
         return false;
@@ -300,9 +331,13 @@ public class WenjuanSearchActivity extends BaseActivity implements View.OnKeyLis
         }
         //缓存搜索历史
         save(text);
-        String url = AppConstants.URL_WENJUAN_SEARCH + text;
-        LogUtils.e("search:"+url);
-        mWebView.loadUrl(url);
+        try {
+            String url = mUrl + URLEncoder.encode(text, "utf-8");
+            LogUtils.e("search:" + url);
+            mWebView.loadUrl(url);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         llHistory.setVisibility(View.GONE);
         llResult.setVisibility(View.VISIBLE);
     }
@@ -388,30 +423,18 @@ public class WenjuanSearchActivity extends BaseActivity implements View.OnKeyLis
         }
     }
 
-    private long mOldTime;
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (System.currentTimeMillis() - mOldTime < 1500) {
-                mWebView.clearHistory();
-                mWebView.loadUrl(mUrl);
-            } else if (mWebView.canGoBack()) {
+            String url = mWebView.getUrl();
+            if (url.contains(AppConstants.URL_WENJUAN_SEARCH))
+                finish();
+            else {
                 mWebView.goBack();
-            } else {
-                this.finish();
             }
-            mOldTime = System.currentTimeMillis();
             return true;
         }
-//        else if (keyCode == KeyEvent.KEYCODE_ENTER) {
-//            // 先隐藏键盘
-//            KeyBoardUtils.closeKeybord(etSearchContent, WenjuanSearchActivity.this);
-//            etSearchContent.setCursorVisible(false);
-//            //进行搜索操作的方法，在该方法中可以加入mEditSearchUser的非空判断
-//            loadUrl();
-//        }
-
         return super.onKeyDown(keyCode, event);
     }
 
@@ -468,4 +491,40 @@ public class WenjuanSearchActivity extends BaseActivity implements View.OnKeyLis
             e.printStackTrace();
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+//        inflater = getActivity().getMenuInflater();
+//        inflater.inflate(R.menu.menu_actionbar, menu);
+        getMenuInflater().inflate(R.menu.menu_category, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                String url = mWebView.getUrl();
+                if (url.contains(AppConstants.URL_WENJUAN_SEARCH))
+                    finish();
+                else {
+                    mWebView.goBack();
+                }
+                return true;
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.action_favorite).setIcon(null).setTitle("");
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+
 }

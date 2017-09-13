@@ -20,9 +20,16 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.library.okgo.callback.DialogCallback;
+import com.library.okgo.callback.JsonCallback;
+import com.library.okgo.model.BaseResponse;
 import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
 import com.project.community.base.BaseFragment;
+import com.project.community.constants.AppConstants;
+import com.project.community.model.UserModel;
 import com.project.community.ui.user.LoginActivity;
 import com.project.community.ui.user.RegisterActivity;
 import com.project.community.ui.user.SettingActivity;
@@ -38,6 +45,9 @@ import com.umeng.socialize.media.UMWeb;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * Created by qizfeng on 17/7/12.
@@ -106,6 +116,7 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
     ImageView mIvSetting;
     @Bind(R.id.iv_toolbar_setting)
     ImageView mIvToolbarSetting;
+
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_me, container, false);
@@ -171,7 +182,12 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
             mLayoutLogin.setVisibility(View.GONE);
             mLayoutUnLogin.setVisibility(View.VISIBLE);
         }
-        onRefresh();
+        if (isLogin(getActivity())) {
+            setRefreshing(true);
+            onRefresh();
+        }else {
+            setRefreshing(false);
+        }
     }
 
     @Override
@@ -227,17 +243,6 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
             case R.id.action_favorite:
                 // User chose the "Favorite" action, mark the current item
                 // as a favorite...
-//                UMWeb web = new UMWeb("http://www.baidu.com");
-//                web.setTitle("测试分享");//标题
-//                web.setThumb(new UMImage(getActivity(), R.mipmap.ic_launcher));  //缩略图
-//                web.setDescription("umeng分享是真坑,文档太菜");//描述
-//                new ShareAction(getActivity())
-//                        .withText("hello")
-//                        .withMedia(new UMImage(getActivity(), R.mipmap.logo))
-//                        .withMedia(web)
-//                        .setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN)
-//                        .setCallback(shareListener)
-//                        .open();
                 SettingActivity.startActivity(getActivity());
                 return true;
 
@@ -249,69 +254,12 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
         }
     }
 
-    private UMShareListener shareListener = new UMShareListener() {
-        /**
-         * @descrption 分享开始的回调
-         * @param platform 平台类型
-         */
-        @Override
-        public void onStart(SHARE_MEDIA platform) {
-
-        }
-
-        /**
-         * @descrption 分享成功的回调
-         * @param platform 平台类型
-         */
-        @Override
-        public void onResult(SHARE_MEDIA platform) {
-        }
-
-        /**
-         * @descrption 分享失败的回调
-         * @param platform 平台类型
-         * @param t 错误原因
-         */
-        @Override
-        public void onError(SHARE_MEDIA platform, Throwable t) {
-        }
-
-        /**
-         * @descrption 分享取消的回调
-         * @param platform 平台类型
-         */
-        @Override
-        public void onCancel(SHARE_MEDIA platform) {
-
-        }
-    };
 
     @Override
     public void onRefresh() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                refreshLayout.setRefreshing(false);
-            }
-        }, 1500);
+        if (isLogin(getActivity()))
+            loadData();
     }
-
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        super.onPrepareOptionsMenu(menu);
-//        menu.clear();
-//        inflater = getActivity().getMenuInflater();
-//        inflater.inflate(R.menu.menu_actionbar, menu);
-//
-//        super.onCreateOptionsMenu(menu, inflater);
-//    }
-//
-//
-//    @Override
-//    public void onPrepareOptionsMenu(Menu menu) {
-//        super.onPrepareOptionsMenu(menu);
-//        menu.findItem(R.id.action_favorite).setIcon(R.mipmap.iv_setting);
-//    }
 
 
     /**
@@ -325,5 +273,53 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
         redPointDrawable.setGravity(Gravity.CENTER_VERTICAL);
         redPointDrawable.setShowRedPoint(isShowRedPoint);
         view.setBackground(redPointDrawable);
+    }
+
+    private void loadData() {
+        if (!isLogin(getActivity())) {
+            return;
+        }
+        serverDao.getUserInfo(getUser(getActivity()).id, new JsonCallback<BaseResponse<UserModel>>() {
+            @Override
+            public void onSuccess(BaseResponse<UserModel> userResponseBaseResponse, Call call, Response response) {
+                Gson gson = new Gson();
+                String userStr = gson.toJson(userResponseBaseResponse.retData);
+                saveUser(getActivity(), userStr);
+                Glide.with(getActivity())
+                        .load(AppConstants.HOST + getUser(getActivity()).photo)
+                        .placeholder(R.mipmap.d54_tx)
+                        .bitmapTransform(new CropCircleTransformation(getActivity()))
+                        .into(mIvHeader);
+                mTvName.setText(getUser(getActivity()).loginName);
+                LogUtils.e("name;" + getUser(getActivity()).loginName);
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                if (!e.getMessage().contains("No address"))
+                    showToast(e.getMessage());
+            }
+
+            @Override
+            public void onAfter(BaseResponse<UserModel> userModelBaseResponse, Exception e) {
+                super.onAfter(userModelBaseResponse, e);
+                setRefreshing(false);
+            }
+        });
+    }
+
+    /**
+     * 设置是否刷新动画
+     *
+     * @param refreshing true开始刷新动画 false结束刷新动画
+     */
+    public void setRefreshing(final boolean refreshing) {
+        refreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                refreshLayout.setRefreshing(refreshing);
+            }
+        });
     }
 }
