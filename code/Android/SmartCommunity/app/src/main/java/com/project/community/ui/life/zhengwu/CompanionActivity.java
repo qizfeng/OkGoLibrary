@@ -122,7 +122,7 @@ public class CompanionActivity extends BaseActivity implements View.OnClickListe
 
                 mData = new ArrayList<>();
                 mData.addAll(baseResponse.retData);
-                if(mData.size()==0)
+                if (mData.size() == 0)
                     showToast(getString(R.string.toast_no_data));
                 mAdapter.setNewData(mData);
                 mAdapter.notifyDataSetChanged();
@@ -181,12 +181,22 @@ public class CompanionActivity extends BaseActivity implements View.OnClickListe
      * @param type
      */
     private void getDictionary(final String title, final String type) {
-        serverDao.getDictionaryData(type + "", new JsonCallback<BaseResponse<DictionaryResponse>>() {
+        serverDao.getDictionaryData(type + "", new DialogCallback<BaseResponse<DictionaryResponse>>(this) {
             @Override
             public void onSuccess(BaseResponse<DictionaryResponse> baseResponse, Call call, Response response) {
                 dictionaryModels = new ArrayList<>();
                 dictionaryModels.addAll(baseResponse.retData.dictList);
-                showDialog(title, dictionaryModels);
+                try {
+                    showDialog(title, dictionaryModels);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                showToast(e.getMessage());
             }
         });
     }
@@ -251,7 +261,7 @@ public class CompanionActivity extends BaseActivity implements View.OnClickListe
                 // User chose the "Favorite" action, mark the current item
                 // as a favorite...
 //                finish();
-                CompanionSearchActivity.startActivity(CompanionActivity.this,null);
+                CompanionSearchActivity.startActivity(CompanionActivity.this, null);
                 return true;
 
             default:

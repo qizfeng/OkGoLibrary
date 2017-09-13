@@ -8,7 +8,6 @@ import java.io.Serializable;
 
 public class UserResponse implements Serializable{
     public UserModel user = new UserModel();
-
     @Override
     public String toString() {
         return "UserResponse{" +

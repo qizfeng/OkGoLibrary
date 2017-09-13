@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -51,7 +52,7 @@ public class CommentsApdater extends BaseQuickAdapter<CommentModel, BaseViewHold
         baseViewHolder.setOnClickListener(R.id.iv_delete, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemClickListener.onCustomClick(v,baseViewHolder.getLayoutPosition());
+                itemClickListener.onCustomClick(v, baseViewHolder.getLayoutPosition());
             }
         });
         if (((BaseActivity) mContext).isLogin(mContext)) {
@@ -64,9 +65,14 @@ public class CommentsApdater extends BaseQuickAdapter<CommentModel, BaseViewHold
         } else {
             baseViewHolder.setVisible(R.id.iv_delete, false);
         }
+
         baseViewHolder.setVisible(R.id.tv_comment_num, false);
+        if (baseViewHolder.getLayoutPosition() == 0) {
+            baseViewHolder.setVisible(R.id.tv_comment_num, true)
+                    .setText(R.id.tv_comment_num,"评论("+mData.size()+")");
+        }
         Glide.with(mContext)
-                .load(AppConstants.HOST+model.photo)
+                .load(AppConstants.HOST + model.photo)
                 .placeholder(R.mipmap.d54_tx)
                 .bitmapTransform(new CropCircleTransformation(mContext))
                 .into((ImageView) baseViewHolder.getView(R.id.iv_header));

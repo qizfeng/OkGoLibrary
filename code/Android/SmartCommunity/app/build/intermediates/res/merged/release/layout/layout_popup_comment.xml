@@ -52,7 +52,6 @@
                 android:inputType="textMultiLine"
                 android:padding="10dp"
                 android:scrollHorizontally="false">
-
                 <requestFocus></requestFocus>
             </EditText>
 

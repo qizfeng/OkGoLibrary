@@ -18,5 +18,5 @@
         android:textColor="@color/color_gray_b3c0d5"
         android:textSize="@dimen/common_title_txt_size"
         android:layout_marginTop="@dimen/dp_20"
-        android:text="@string/str_search_empty"/>
+        android:text="@string/toast_no_data"/>
 </LinearLayout>

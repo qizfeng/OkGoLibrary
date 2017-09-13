@@ -39,7 +39,7 @@ public class SuggestionActivity extends BaseActivity implements View.OnClickList
     @Bind(R.id.tv_title)
     TextView mTvTitle;
     @Bind(R.id.btn_submit)
-    Button mBtnSubmit;
+    TextView mBtnSubmit;
     @Bind(R.id.et_phone)
     EditText mEtPhone;
     @Bind(R.id.et_title)

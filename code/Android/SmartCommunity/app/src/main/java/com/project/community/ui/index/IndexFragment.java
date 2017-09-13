@@ -40,6 +40,7 @@ import com.project.community.model.CommentModel;
 import com.project.community.model.ModuleModel;
 import com.project.community.model.NewsModel;
 import com.project.community.ui.WebViewActivity;
+import com.project.community.ui.adapter.CommentsApdater;
 import com.project.community.ui.adapter.CommentsPopwinAdapter;
 import com.project.community.ui.adapter.NewsPageAdapter;
 import com.project.community.ui.adapter.listener.IndexAdapterItemListener;
@@ -49,6 +50,7 @@ import com.project.community.ui.life.zhengwu.ZhengwuActivity;
 import com.project.community.util.NetworkUtils;
 import com.project.community.util.ScreenUtils;
 import com.project.community.view.CommentPopWin;
+import com.project.community.view.CommentPopwindow;
 import com.project.community.view.SpacesItemDecoration;
 import com.project.community.view.VpSwipeRefreshLayout;
 import com.ryane.banner_lib.AdPageInfo;
@@ -82,14 +84,15 @@ public class IndexFragment extends BaseFragment implements GestureDetector.OnGes
 
     private View header;
     private TableLayout tableLayout;
-    private CommentPopWin popupWindow;
+    private CommentPopwindow popupWindow;
 
     private List<AdPageInfo> mDatas = new ArrayList<>();//模拟轮播图数据
     private int page = 1;//当前页码
     private NewsPageAdapter mAdapter;
     private boolean isInitCache = false;//是否缓存
     private List<CommentModel> comments = new ArrayList<>();//评论列表
-    private CommentsPopwinAdapter commentsPopwinAdapter;
+    //    private CommentsPopwinAdapter commentsPopwinAdapter;
+    private CommentsApdater commentsPopwinAdapter;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -216,9 +219,11 @@ public class IndexFragment extends BaseFragment implements GestureDetector.OnGes
                 comment.content = popupWindow.et_comment.getText().toString();
                 comment.photo = "https://d-image.i4.cn/i4web/image//upload/20170112/1484183249877077333.jpg";
                 comments.add(comment);
-                commentsPopwinAdapter.setData(comments);
+//                commentsPopwinAdapter.setData(comments);
+                commentsPopwinAdapter.setNewData(comments);
                 popupWindow.et_comment.setText("");
-                popupWindow.lv_container.setSelection(comments.size() - 1);
+//                popupWindow.lv_container.setSelection(comments.size() - 1);
+                popupWindow.lv_container.scrollToPosition(comments.size() - 1);
                 break;
         }
     }
@@ -285,10 +290,10 @@ public class IndexFragment extends BaseFragment implements GestureDetector.OnGes
         comment3.content = "王五:呵呵";
         comment3.photo = "https://d-image.i4.cn/i4web/image//upload/20170112/1484185403611050214.jpg";
         comments.add(comment1);
-        comments.add(comment2);
-        comments.add(comment3);
+//        comments.add(comment2);
+//        comments.add(comment3);
 
-        commentsPopwinAdapter = new CommentsPopwinAdapter(getActivity(), comments, new RecycleItemClickListener() {
+        commentsPopwinAdapter = new CommentsApdater(comments, new RecycleItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 popupWindow.et_comment.setText(getString(R.string.txt_receive) + comments.get(position).userName + ":");
@@ -300,18 +305,23 @@ public class IndexFragment extends BaseFragment implements GestureDetector.OnGes
 
             }
         });
-        popupWindow = new CommentPopWin(getActivity(), new View.OnClickListener() {
+        popupWindow = new CommentPopwindow(getActivity(), new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 popupWindow.dismiss();
             }
         });
-        if (comments.size() > 5) {//超过5条评论,指定listView高度
-            popupWindow.lv_container.getLayoutParams().height = ScreenUtils.getScreenHeight(getActivity()) / 2 + 100;
-        }
+        popupWindow.lv_container.getLayoutParams().height = (int) (ScreenUtils.getScreenHeight(getActivity()) * 0.8);
         popupWindow.lv_container.setAdapter(commentsPopwinAdapter);
-//        popupWindow.lv_container.smoothScrollToPosition(comments.size() - 1);
-//        popupWindow.lv_container.setSelection(comments.size() - 1);
+        commentsPopwinAdapter.bindToRecyclerView(popupWindow.lv_container);
+        if (comments.size() > 0)
+            popupWindow.lv_container.smoothScrollToPosition(comments.size() - 1);
+        if (comments.size() == 0) {
+            commentsPopwinAdapter.setNewData(null);
+            commentsPopwinAdapter.setEmptyView(R.layout.empty_view);
+            TextView textView = (TextView) commentsPopwinAdapter.getEmptyView().findViewById(R.id.tv_tips);
+            textView.setText(getString(R.string.empty_no_comment));
+        }
         popupWindow.showAtLocation(parent, Gravity.BOTTOM, ScreenUtils.getScreenWidth(getActivity()), 0);
         popupWindow.btn_send.setOnClickListener(this);
     }
@@ -587,7 +597,7 @@ public class IndexFragment extends BaseFragment implements GestureDetector.OnGes
                 //可能需要移除之前添加的布局
                 try {
                     mAdapter.removeAllFooterView();
-                }catch (Exception ex){
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
                 //结束刷新动画

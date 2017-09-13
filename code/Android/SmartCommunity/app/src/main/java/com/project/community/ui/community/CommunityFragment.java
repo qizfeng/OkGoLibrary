@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ZoomControls;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -95,7 +96,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_community, container, false);
-        mMapView =(TextureMapView) view.findViewById(R.id.bmapView);
+        mMapView = (TextureMapView) view.findViewById(R.id.bmapView);
         iv_current_poi = (ImageView) view.findViewById(R.id.iv_current_poi);
         return view;
     }
@@ -103,6 +104,15 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
     @Override
     protected void initData() {
         mBaiduMap = mMapView.getMap();
+        // 隐藏logo
+        try {
+            View child = mMapView.getChildAt(1);
+            if (child != null && (child instanceof ImageView || child instanceof ZoomControls)) {
+                child.setVisibility(View.INVISIBLE);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         mBaiduMap.setMyLocationEnabled(true);
         MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(16.0f);
         mBaiduMap.setMapStatus(msu);
@@ -420,7 +430,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
             if (location == null || mMapView == null) {
                 return;
             }
-           // LogUtils.e("onReceiveLocation lat:" + location.getLatitude() + ",long:" + location.getLongitude());
+            // LogUtils.e("onReceiveLocation lat:" + location.getLatitude() + ",long:" + location.getLongitude());
             mCurrentLat = location.getLatitude();
             mCurrentLon = location.getLongitude();
             mCurrentAccracy = location.getRadius();
