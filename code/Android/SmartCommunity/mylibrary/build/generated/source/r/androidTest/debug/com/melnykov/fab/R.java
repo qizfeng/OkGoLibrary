@@ -16,7 +16,7 @@ public final class R {
         public static final int fab_type = 0x7f01010c;
     }
     public static final class color {
-        public static final int material_blue_500 = 0x7f0d0033;
+        public static final int material_blue_500 = 0x7f0d0035;
     }
     public static final class dimen {
         public static final int fab_elevation_lollipop = 0x7f090092;
@@ -46,7 +46,7 @@ public final class R {
         public static final int library_FloatingActionButton_repositoryLink = 0x7f080031;
     }
     public static final class styleable {
-        public static final int[] FloatingActionButton = { 0x7f01001c, 0x7f010107, 0x7f010108, 0x7f010109, 0x7f01010a, 0x7f01010b, 0x7f01010c, 0x7f01010d, 0x7f01010e, 0x7f01010f, 0x7f010110, 0x7f010111, 0x7f0101d4, 0x7f0101d5 };
+        public static final int[] FloatingActionButton = { 0x7f01001c, 0x7f010107, 0x7f010108, 0x7f010109, 0x7f01010a, 0x7f01010b, 0x7f01010c, 0x7f01010d, 0x7f01010e, 0x7f01010f, 0x7f010110, 0x7f010111, 0x7f0101ef, 0x7f0101f0 };
         public static final int FloatingActionButton_fab_colorDisabled = 4;
         public static final int FloatingActionButton_fab_colorNormal = 2;
         public static final int FloatingActionButton_fab_colorPressed = 1;

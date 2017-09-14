@@ -4,12 +4,12 @@
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/bundles/default/res/drawable/umeng_socialize_edit_bg.xml"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/drawable/abc_item_background_holo_light.xml",
-        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_item_background_holo_light.xml"
-    },
-    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/drawable/umeng_socialize_menu_default.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/bundles/default/res/drawable/umeng_socialize_menu_default.png"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/drawable/abc_item_background_holo_light.xml",
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_item_background_holo_light.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/drawable/background_toolbar_gradient.xml",
@@ -366,10 +366,6 @@
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/drawable/abc_ic_arrow_drop_right_black_24dp.xml",
         "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_ic_arrow_drop_right_black_24dp.xml"
-    },
-    {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/drawable/test.jpg",
-        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/banner-lib/build/intermediates/bundles/default/res/drawable/test.jpg"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/drawable/umeng_socialize_qzone.png",

@@ -8,24 +8,24 @@
         "source": "/Users/qizfeng/.android/build-cache/b74436565907ad4a01d5cc39c1757e61c9886469/output/res/layout/activity_preview.xml"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/layout/layout_item_life_top.xml",
-        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/layout/layout_item_life_top.xml"
-    },
-    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/layout/activity_pay_detail.xml",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/layout/activity_pay_detail.xml"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/layout/layout_item_life_top.xml",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/layout/layout_item_life_top.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/layout/design_text_input_password_icon.xml",
         "source": "/Users/qizfeng/.android/build-cache/9947c25fdb2dbcb9a574b50a3dfff31183eb0654/output/res/layout/design_text_input_password_icon.xml"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/layout/activity_add_house_no.xml",
-        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/layout/activity_add_house_no.xml"
-    },
-    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/layout/notification_template_part_time.xml",
         "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/layout/notification_template_part_time.xml"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/layout/activity_add_house_no.xml",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/layout/activity_add_house_no.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/layout/abc_action_menu_item_layout.xml",
@@ -225,11 +225,11 @@
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/layout/view_number.xml",
-        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/banner-lib/build/intermediates/bundles/default/res/layout/view_number.xml"
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/bundles/default/res/layout/view_number.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/layout/view_indicator.xml",
-        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/banner-lib/build/intermediates/bundles/default/res/layout/view_indicator.xml"
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/bundles/default/res/layout/view_indicator.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/layout/banner.xml",
@@ -545,7 +545,7 @@
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/layout/view_title.xml",
-        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/banner-lib/build/intermediates/bundles/default/res/layout/view_title.xml"
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/bundles/default/res/layout/view_title.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/layout/layout_scroll_wheelview.xml",

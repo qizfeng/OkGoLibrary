@@ -81,8 +81,6 @@ ADDED from /Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunit
 application
 ADDED from /Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/AndroidManifest.xml:40:5-347:19
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/qizfeng/.android/build-cache/81c07d3a4899cd2654167ee23c1d8646b3df742b/output/AndroidManifest.xml:9:5-20
-MERGED from [SmartCommunity:jpaysdk:unspecified] /Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/jpaysdk/build/intermediates/bundles/default/AndroidManifest.xml:11:5-15:19
-MERGED from [SmartCommunity:banner-lib:unspecified] /Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/banner-lib/build/intermediates/bundles/default/AndroidManifest.xml:11:5-15:19
 MERGED from [SmartCommunity:mylibrary:unspecified] /Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/bundles/default/AndroidManifest.xml:11:5-13:19
 MERGED from [com.lzy.widget:ninegridview:0.2.1] /Users/qizfeng/.android/build-cache/b74436565907ad4a01d5cc39c1757e61c9886469/output/AndroidManifest.xml:15:5-19:19
 MERGED from [com.lzy.widget:imagepicker:0.3.2] /Users/qizfeng/.android/build-cache/7eb89d838084b30baf0fdee48ab5e8c9e06309e7/output/AndroidManifest.xml:20:5-35:19
@@ -609,13 +607,6 @@ uses-sdk
 INJECTED from /Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [com.android.support:multidex:1.0.1] /Users/qizfeng/.android/build-cache/42de5054db62cb773c8ddf6269df0bb7ea3868c6/output/AndroidManifest.xml:18:5-42
 MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/qizfeng/.android/build-cache/81c07d3a4899cd2654167ee23c1d8646b3df742b/output/AndroidManifest.xml:5:5-7:41
-MERGED from [SmartCommunity:jpaysdk:unspecified] /Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/jpaysdk/build/intermediates/bundles/default/AndroidManifest.xml:7:5-9:41
-MERGED from [SmartCommunity:banner-lib:unspecified] /Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/banner-lib/build/intermediates/bundles/default/AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.fresco:fresco:1.3.0] /Users/qizfeng/.android/build-cache/832217f32a04a6dd42b473a9301ad3090cd5db7f/output/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:drawee:1.3.0] /Users/qizfeng/.android/build-cache/c3d85ee695fd05100d7d068113366513f0075b33/output/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline:1.3.0] /Users/qizfeng/.android/build-cache/03973e3c13156b065ff9ee8ad26e25b2d59636d2/output/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-base:1.3.0] /Users/qizfeng/.android/build-cache/4a2d49380d1feb3b547191365273ef5956165b3d/output/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:fbcore:1.3.0] /Users/qizfeng/.android/build-cache/49109b62eba2e8d171dbac399399ff279d6853ef/output/AndroidManifest.xml:5:5-7:41
 MERGED from [SmartCommunity:mylibrary:unspecified] /Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/bundles/default/AndroidManifest.xml:7:5-9:41
 MERGED from [com.lzy.widget:ninegridview:0.2.1] /Users/qizfeng/.android/build-cache/b74436565907ad4a01d5cc39c1757e61c9886469/output/AndroidManifest.xml:7:5-9:41
 MERGED from [com.lzy.widget:imagepicker:0.3.2] /Users/qizfeng/.android/build-cache/7eb89d838084b30baf0fdee48ab5e8c9e06309e7/output/AndroidManifest.xml:7:5-9:41
@@ -642,6 +633,11 @@ MERGED from [com.android.support:animated-vector-drawable:26.0.0-alpha1] /Users/
 MERGED from [com.android.support:support-vector-drawable:26.0.0-alpha1] /Users/qizfeng/.android/build-cache/49b9b9c37f3f2a4306f6dff156b132d67cdf76d0/output/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-compat:26.0.0-alpha1] /Users/qizfeng/.android/build-cache/6567f75f4f098615f9ea40839a81527e674782a8/output/AndroidManifest.xml:21:5-23:58
 MERGED from [com.android.support:cardview-v7:26.0.0-alpha1] /Users/qizfeng/.android/build-cache/6f4fe102ee58cf091ade86d17cb6b817b94ae136/output/AndroidManifest.xml:20:5-44
+MERGED from [com.facebook.fresco:fresco:1.3.0] /Users/qizfeng/.android/build-cache/832217f32a04a6dd42b473a9301ad3090cd5db7f/output/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:1.3.0] /Users/qizfeng/.android/build-cache/c3d85ee695fd05100d7d068113366513f0075b33/output/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:1.3.0] /Users/qizfeng/.android/build-cache/03973e3c13156b065ff9ee8ad26e25b2d59636d2/output/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:1.3.0] /Users/qizfeng/.android/build-cache/4a2d49380d1feb3b547191365273ef5956165b3d/output/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fbcore:1.3.0] /Users/qizfeng/.android/build-cache/49109b62eba2e8d171dbac399399ff279d6853ef/output/AndroidManifest.xml:5:5-7:41
 	tools:overrideLibrary
 		ADDED from [com.android.support:design:26.0.0-alpha1] /Users/qizfeng/.android/build-cache/9947c25fdb2dbcb9a574b50a3dfff31183eb0654/output/AndroidManifest.xml:23:9-59
 	android:targetSdkVersion
