@@ -19,12 +19,12 @@ import android.widget.TextView;
 
 import com.alipay.sdk.app.AuthTask;
 import com.alipay.sdk.app.PayTask;
-import com.jpay.alipay.PayResult;
 import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.model.BaseResponse;
 import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
 import com.project.community.aipay.OrderInfoUtil2_0;
+import com.project.community.aipay.PayResult;
 import com.project.community.base.BaseActivity;
 import com.project.community.util.ScreenUtils;
 

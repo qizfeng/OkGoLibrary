@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="bg_blue">#ff0694f5</color>
+    <color name="black">#000000</color>
     <color name="colorAccent">#3067A8</color>
     <color name="colorPrimary">#103375</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorPrimaryLight">#3067A8</color>
+    <color name="green">#cc44ff18</color>
+    <color name="grey">#55000000</color>
     <color name="lv_divider">#dad9e2</color>
+    <color name="number_normal_color">#cc666666</color>
+    <color name="number_selected_color">#ccA500CC</color>
+    <color name="orange">#FF5809</color>
+    <color name="point_normal_color">#ffffff</color>
+    <color name="point_selected_color">#103375</color>
     <color name="shouye_lv_tv">#909090</color>
     <color name="shouye_renmen_tv">#2b2b2b</color>
+    <color name="test">#ccA500CC</color>
     <color name="umeng_socialize_color_group">#2c3035</color>
     <color name="umeng_socialize_comments_bg">#F4F4F4</color>
     <color name="umeng_socialize_divider">#E6E6E6</color>
@@ -24,6 +33,7 @@
     <color name="umeng_socialize_text_ucenter">#595959</color>
     <color name="umeng_socialize_ucenter_bg">#EEEEEE</color>
     <color name="umeng_socialize_web_bg">#F4F4F4</color>
+    <color name="white">#ffffff</color>
     <declare-styleable name="Banner"><attr format="integer" name="delay_time"/><attr format="integer" name="scroll_time"/><attr format="boolean" name="is_auto_play"/><attr format="color|reference" name="title_background"/><attr format="color" name="title_textcolor"/><attr format="dimension" name="title_textsize"/><attr format="dimension" name="title_height"/><attr format="dimension" name="indicator_width"/><attr format="dimension" name="indicator_height"/><attr format="dimension" name="indicator_margin"/><attr format="reference" name="indicator_drawable_selected"/><attr format="reference" name="indicator_drawable_unselected"/><attr format="reference" name="layout_id"/><attr format="enum" name="image_scale_type">
             <enum name="center" value="0"/>
             <enum name="center_crop" value="1"/>

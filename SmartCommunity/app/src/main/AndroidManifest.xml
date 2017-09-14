@@ -304,14 +304,14 @@
 
         <!-- 微信支付 -->
        <!-- <activity
-            android:name="com.jpay.weixin.WXPayEntryActivity"
+            android:name="com.jpay.com.project.community.wxapi.WXPayEntryActivity"
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity-alias
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
-            android:targetActivity="com.jpay.weixin.WXPayEntryActivity" />-->
+            android:targetActivity="com.jpay.com.project.community.wxapi.WXPayEntryActivity" />-->
         <!-- 微信支付 end -->
 
 
