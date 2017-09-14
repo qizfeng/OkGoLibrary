@@ -466,7 +466,7 @@ public final class R {
         public static final int bg_btn_dis = 0x7f020057;
         public static final int bg_btn_nor = 0x7f020058;
         public static final int bg_btn_pre = 0x7f020059;
-        public static final int notification_template_icon_bg = 0x7f0200c7;
+        public static final int notification_template_icon_bg = 0x7f0200c6;
         public static final int selector_back_press = 0x7f0200a1;
         public static final int selector_grid_camera_bg = 0x7f0200a2;
         public static final int selector_item_checked = 0x7f0200a3;

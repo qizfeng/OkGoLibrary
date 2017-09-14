@@ -503,7 +503,7 @@ public final class R {
         public static final int abc_textfield_search_material = 0x7f020051;
         public static final int abc_vector_test = 0x7f020052;
         public static final int ic_default_color = 0x7f02007f;
-        public static final int notification_template_icon_bg = 0x7f0200c7;
+        public static final int notification_template_icon_bg = 0x7f0200c6;
     }
     public static final class id {
         public static final int action0 = 0x7f0e01da;
