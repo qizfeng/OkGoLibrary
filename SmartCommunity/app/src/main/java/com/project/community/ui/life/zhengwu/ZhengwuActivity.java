@@ -144,7 +144,8 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             @Override
             public void onDiggClick(ImageView imageView, TextView textView, int position) {
                 if (isLogin(ZhengwuActivity.this)) {
-                    if (mAdapter.getItem(position).allowCollection == 0) {
+                    if (mAdapter.getItem(position).categoryAllowCollection == 0 ||
+                            mAdapter.getItem(position).allowCollection == 0) {
                         showToast(getString(R.string.toast_no_collect));
                         return;
                     }
@@ -516,7 +517,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
      * @param artId
      * @param parent
      */
-    private void getComments(final String artId, final View parent, final int posistion) {
+    private void getComments(final String artId, final View parent, final int position) {
         serverDao.getComments(artId, new DialogCallback<BaseResponse<List<CommentModel>>>(this) {
             @Override
             public void onSuccess(BaseResponse<List<CommentModel>> baseResponse, Call call, Response response) {
@@ -541,6 +542,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
                         @Override
                         public void onClick(View view) {
                             popupWindow.dismiss();
+                            popupWindow.et_comment.setText("");
                         }
                     });
                 popupWindow.lv_container.getLayoutParams().height = (int) (ScreenUtils.getScreenHeight(ZhengwuActivity.this) * 0.8);
@@ -550,7 +552,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
                     popupWindow.lv_container.smoothScrollToPosition(0);
                 popupWindow.showAtLocation(parent, Gravity.BOTTOM, ScreenUtils.getScreenWidth(ZhengwuActivity.this), 0);
                 commentsPopwinAdapter.setNewData(comments);
-                if(comments.size()==0){
+                if (comments.size() == 0) {
                     commentsPopwinAdapter.setNewData(null);
                     commentsPopwinAdapter.setEmptyView(R.layout.empty_view);
                     TextView textView = (TextView) commentsPopwinAdapter.getEmptyView().findViewById(R.id.tv_tips);
@@ -560,7 +562,12 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
                 popupWindow.btn_send.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (mAdapter.getItem(posistion).allowComment == 0) {
+                        if(!isLogin(ZhengwuActivity.this)){
+                            showToast(getString(R.string.toast_no_login));
+                            return;
+                        }
+                        if (mAdapter.getItem(position).categoryAllowComment == 0
+                                || mAdapter.getItem(position).allowComment == 0) {
                             showToast(getString(R.string.toast_no_comment));
                             return;
                         }
@@ -620,6 +627,10 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
      * 删除评论
      */
     private void deleteComment(final int position, String commentId, int type) {
+        if(!isLogin(this)){
+            showToast(getString(R.string.toast_no_login));
+            return;
+        }
         serverDao.doDeleteComment(getUser(this).id, commentId, type, new DialogCallback<BaseResponse<List>>(this) {
             @Override
             public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {

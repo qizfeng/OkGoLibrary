@@ -12,20 +12,20 @@ public class ForgetPassActivity$$ViewBinder<T extends com.project.community.ui.u
     target.mToolBar = finder.castView(view, 2131624105, "field 'mToolBar'");
     view = finder.findRequiredView(source, 2131624106, "field 'mTvTitle'");
     target.mTvTitle = finder.castView(view, 2131624106, "field 'mTvTitle'");
-    view = finder.findRequiredView(source, 2131624179, "field 'mBtnVerify'");
-    target.mBtnVerify = finder.castView(view, 2131624179, "field 'mBtnVerify'");
-    view = finder.findRequiredView(source, 2131624177, "field 'mEtPhone'");
-    target.mEtPhone = finder.castView(view, 2131624177, "field 'mEtPhone'");
-    view = finder.findRequiredView(source, 2131624178, "field 'mEtVerify'");
-    target.mEtVerify = finder.castView(view, 2131624178, "field 'mEtVerify'");
-    view = finder.findRequiredView(source, 2131624180, "field 'mEtPwd'");
-    target.mEtPwd = finder.castView(view, 2131624180, "field 'mEtPwd'");
-    view = finder.findRequiredView(source, 2131624181, "field 'mIvEyes'");
-    target.mIvEyes = finder.castView(view, 2131624181, "field 'mIvEyes'");
-    view = finder.findRequiredView(source, 2131624120, "field 'mBtnConfirm'");
-    target.mBtnConfirm = finder.castView(view, 2131624120, "field 'mBtnConfirm'");
-    view = finder.findRequiredView(source, 2131624133, "field 'mLayoutRoot'");
-    target.mLayoutRoot = finder.castView(view, 2131624133, "field 'mLayoutRoot'");
+    view = finder.findRequiredView(source, 2131624189, "field 'mBtnVerify'");
+    target.mBtnVerify = finder.castView(view, 2131624189, "field 'mBtnVerify'");
+    view = finder.findRequiredView(source, 2131624187, "field 'mEtPhone'");
+    target.mEtPhone = finder.castView(view, 2131624187, "field 'mEtPhone'");
+    view = finder.findRequiredView(source, 2131624188, "field 'mEtVerify'");
+    target.mEtVerify = finder.castView(view, 2131624188, "field 'mEtVerify'");
+    view = finder.findRequiredView(source, 2131624190, "field 'mEtPwd'");
+    target.mEtPwd = finder.castView(view, 2131624190, "field 'mEtPwd'");
+    view = finder.findRequiredView(source, 2131624191, "field 'mIvEyes'");
+    target.mIvEyes = finder.castView(view, 2131624191, "field 'mIvEyes'");
+    view = finder.findRequiredView(source, 2131624130, "field 'mBtnConfirm'");
+    target.mBtnConfirm = finder.castView(view, 2131624130, "field 'mBtnConfirm'");
+    view = finder.findRequiredView(source, 2131624143, "field 'mLayoutRoot'");
+    target.mLayoutRoot = finder.castView(view, 2131624143, "field 'mLayoutRoot'");
   }
 
   @Override public void unbind(T target) {

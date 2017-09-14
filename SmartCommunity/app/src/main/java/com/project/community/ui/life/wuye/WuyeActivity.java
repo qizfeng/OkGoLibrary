@@ -100,7 +100,7 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     private Dialog mDialog;
     private String recStr = "";//回复评论
     private String targetId;//回復人id
-
+    private int commentPosition = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,8 +142,9 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
             @Override
             public void onCommentClick(View view, int position) {//点击评论
                 position = position - 1;//去掉头部
+                commentPosition = position;
                 if (isLogin(WuyeActivity.this))
-                    getComments(mAdapter.getItem(position).id, view);
+                    getComments(mAdapter.getItem(position).id, view,commentPosition);
                 else
                     showToast(getString(R.string.toast_no_login));
             }
@@ -151,9 +152,14 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
             @Override
             public void onDiggClick(ImageView imageView, TextView textView, int position) {
                 position = position - 1;//去掉头部
-                if (isLogin(WuyeActivity.this))
+                if (isLogin(WuyeActivity.this)) {
+                    if (mAdapter.getItem(position).categoryAllowCollection == 0 ||
+                            mAdapter.getItem(position).allowCollection == 0) {
+                        showToast(getString(R.string.toast_no_collect));
+                        return;
+                    }
                     onCollect(textView, imageView, position);
-                else
+                } else
                     showToast(getString(R.string.toast_no_login));
             }
         });
@@ -529,7 +535,7 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
      * @param artId
      * @param parent
      */
-    private void getComments(final String artId, final View parent) {
+    private void getComments(final String artId, final View parent, final int position) {
         serverDao.getComments(artId, new DialogCallback<BaseResponse<List<CommentModel>>>(this) {
             @Override
             public void onSuccess(BaseResponse<List<CommentModel>> baseResponse, Call call, Response response) {
@@ -554,6 +560,7 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                         @Override
                         public void onClick(View view) {
                             popupWindow.dismiss();
+                            popupWindow.et_comment.setText("");
                         }
                     });
                 popupWindow.lv_container.getLayoutParams().height = (int) (ScreenUtils.getScreenHeight(WuyeActivity.this) * 0.8);
@@ -574,6 +581,15 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                 popupWindow.btn_send.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        if(!isLogin(WuyeActivity.this)){
+                            showToast(getString(R.string.toast_no_login));
+                            return;
+                        }
+                        if (mAdapter.getItem(position).categoryAllowComment == 0
+                                || mAdapter.getItem(position).allowComment == 0) {
+                            showToast(getString(R.string.toast_no_comment));
+                            return;
+                        }
                         if (TextUtils.isEmpty(recStr)) {
                             if (TextUtils.isEmpty(popupWindow.et_comment.getText().toString())) {
                                 return;
@@ -612,7 +628,7 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
             @Override
             public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
                 popupWindow.et_comment.setText("");
-                getComments(artId, view);
+                getComments(artId, view,commentPosition);
                 showToast(baseResponse.message);
             }
 
@@ -630,6 +646,10 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
      * 删除评论
      */
     private void deleteComment(final int position, String commentId, int type) {
+        if(!isLogin(this)){
+            showToast(getString(R.string.toast_no_login));
+            return;
+        }
         serverDao.doDeleteComment(getUser(this).id, commentId, type, new DialogCallback<BaseResponse<List>>(this) {
             @Override
             public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {

@@ -15,6 +15,7 @@ public class SharedPreferenceUtils {
     public static final String SP_IS_REMEMBER_PWD = "remember";
     public static final String SP_USER = "user";
     public static final String SP_LOGIN="is_login";
+    public static final String SP_WILL_PLAY="play";
     public static String getString(Context context, String strKey) {
         SharedPreferences setPreferences = context.getSharedPreferences(
                 spFileName, Context.MODE_PRIVATE);

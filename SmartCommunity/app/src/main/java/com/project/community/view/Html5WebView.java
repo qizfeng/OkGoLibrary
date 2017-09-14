@@ -38,7 +38,7 @@ public class Html5WebView extends WebView{
 
     private void init() {
         WebSettings mWebSettings = getSettings();
-        mWebSettings.setSupportZoom(true);
+        mWebSettings.setSupportZoom(false);
         mWebSettings.setLoadWithOverviewMode(true);
         mWebSettings.setUseWideViewPort(true);
         mWebSettings.setDefaultTextEncodingName("utf-8");
@@ -70,19 +70,19 @@ public class Html5WebView extends WebView{
     private void saveData(WebSettings mWebSettings) {
         //有时候网页需要自己保存一些关键数据,Android WebView 需要自己设置
 
-        if (NetworkUtils.isNetworkAvailable(mContext)) {
-            mWebSettings.setCacheMode(WebSettings.LOAD_DEFAULT);//根据cache-control决定是否从网络上取数据。
-        } else {
-            mWebSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//没网，则从本地获取，即离线加载
-        }
-        File cacheDir = mContext.getCacheDir();
-        if (cacheDir != null){
-            String appCachePath  = cacheDir.getAbsolutePath();
-            mWebSettings.setDomStorageEnabled(true);
-            mWebSettings.setDatabaseEnabled(true);
-            mWebSettings.setAppCacheEnabled(true);
-            mWebSettings.setAppCachePath(appCachePath);
-        }
+//        if (NetworkUtils.isNetworkAvailable(mContext)) {
+//            mWebSettings.setCacheMode(WebSettings.LOAD_DEFAULT);//根据cache-control决定是否从网络上取数据。
+//        } else {
+//            mWebSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//没网，则从本地获取，即离线加载
+//        }
+//        File cacheDir = mContext.getCacheDir();
+//        if (cacheDir != null){
+//            String appCachePath  = cacheDir.getAbsolutePath();
+//            mWebSettings.setDomStorageEnabled(true);
+//            mWebSettings.setDatabaseEnabled(true);
+//            mWebSettings.setAppCacheEnabled(true);
+//            mWebSettings.setAppCachePath(appCachePath);
+//        }
     }
 
     WebViewClient webViewClient = new WebViewClient() {

@@ -10,6 +10,8 @@
         android:paddingLeft="@dimen/dp_5"
         android:paddingRight="@dimen/dp_5"
         android:layout_height="@dimen/dp_60"
+        android:maxLines="1"
+        android:ellipsize="end"
         style="@style/textview_style"/>
     <View
         android:layout_width="match_parent"

@@ -72,6 +72,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     TextView mTvGuest;
     @Bind(R.id.tv_register)
     TextView mTvRegister;
+    @Bind(R.id.tv_phone)
+    TextView mTvPhone;
+    @Bind(R.id.tv_pwd)
+    TextView mTvPwd;
     private String phone;
     private String password;
     private boolean isRemember = false;
@@ -104,6 +108,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         mTvRegister.setOnClickListener(this);
         mScrollView.setOnTouchListener(this);
         mCbRemember.setOnCheckedChangeListener(this);
+        mTvPhone.setOnClickListener(this);
+        mTvPwd.setOnClickListener(this);
         isRemember = getIsRemember(this);
         phone = getUsername(this);
         password = getUserPwd(this);
@@ -165,6 +171,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             case R.id.tv_forget:
                 ForgetPassActivity.startActivity(LoginActivity.this);
                 break;
+            case R.id.tv_phone:
+                mEtPhone.requestFocus();
+                KeyBoardUtils.openKeybord(mEtPhone,LoginActivity.this);
+                break;
+            case R.id.tv_pwd:
+                mEtPwd.requestFocus();
+                KeyBoardUtils.openKeybord(mEtPwd,LoginActivity.this);
+                break;
         }
     }
 
@@ -204,7 +218,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     saveUserPwd(LoginActivity.this, "");
                     saveIsRemember(LoginActivity.this, false);
                 }
-
+                saveWillPlayAnim(LoginActivity.this, true);
                 showToast(userModelBaseResponse.message);
                 KeyBoardUtils.closeKeybord(mEtPhone, LoginActivity.this);
 //                MainActivity.startActivity(LoginActivity.this);

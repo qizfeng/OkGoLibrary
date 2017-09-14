@@ -309,6 +309,7 @@ public class IndexFragment extends BaseFragment implements GestureDetector.OnGes
             @Override
             public void onClick(View view) {
                 popupWindow.dismiss();
+                popupWindow.et_comment.setText("");
             }
         });
         popupWindow.lv_container.getLayoutParams().height = (int) (ScreenUtils.getScreenHeight(getActivity()) * 0.8);

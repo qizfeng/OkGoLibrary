@@ -25,5 +25,9 @@
     <color name="color_red_d54824">#d54824</color>
     <color name="color_grag_93b0cc">#9eb0cc</color>
     <color name="color_gray_cccccc">#cccccc</color>
-
+    <color name="color_map_community_5c5085c1">#5c5085c1</color>
+    <color name="color_map_community_5c33a07d">#5c33a07d</color>
+    <color name="color_map_community_5cfd5353">#5cfd5353</color>
+    <color name="color_map_community_5c894fb6">#5c894fb6</color>
+    <color name="color_map_community_5cff6e42">#5cff6e42</color>
 </resources>

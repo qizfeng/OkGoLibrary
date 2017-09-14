@@ -102,6 +102,7 @@ MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] /Users/qizfen
 MERGED from [com.android.support:animated-vector-drawable:26.0.0-alpha1] /Users/qizfeng/.android/build-cache/9b8e337238e59796d661ea59b3bdbc40c4d09263/output/AndroidManifest.xml:26:5-20
 MERGED from [com.android.support:support-vector-drawable:26.0.0-alpha1] /Users/qizfeng/.android/build-cache/49b9b9c37f3f2a4306f6dff156b132d67cdf76d0/output/AndroidManifest.xml:26:5-20
 MERGED from [com.android.support:support-compat:26.0.0-alpha1] /Users/qizfeng/.android/build-cache/6567f75f4f098615f9ea40839a81527e674782a8/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:cardview-v7:26.0.0-alpha1] /Users/qizfeng/.android/build-cache/6f4fe102ee58cf091ade86d17cb6b817b94ae136/output/AndroidManifest.xml:26:5-20
 	android:label
 		ADDED from /Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/AndroidManifest.xml:45:9-41
 	android:supportsRtl
@@ -640,6 +641,7 @@ MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] /Users/qizfen
 MERGED from [com.android.support:animated-vector-drawable:26.0.0-alpha1] /Users/qizfeng/.android/build-cache/9b8e337238e59796d661ea59b3bdbc40c4d09263/output/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-vector-drawable:26.0.0-alpha1] /Users/qizfeng/.android/build-cache/49b9b9c37f3f2a4306f6dff156b132d67cdf76d0/output/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-compat:26.0.0-alpha1] /Users/qizfeng/.android/build-cache/6567f75f4f098615f9ea40839a81527e674782a8/output/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:cardview-v7:26.0.0-alpha1] /Users/qizfeng/.android/build-cache/6f4fe102ee58cf091ade86d17cb6b817b94ae136/output/AndroidManifest.xml:20:5-44
 	tools:overrideLibrary
 		ADDED from [com.android.support:design:26.0.0-alpha1] /Users/qizfeng/.android/build-cache/9947c25fdb2dbcb9a574b50a3dfff31183eb0654/output/AndroidManifest.xml:23:9-59
 	android:targetSdkVersion
@@ -715,6 +717,7 @@ MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] /Users/qizfen
 MERGED from [com.android.support:animated-vector-drawable:26.0.0-alpha1] /Users/qizfeng/.android/build-cache/9b8e337238e59796d661ea59b3bdbc40c4d09263/output/AndroidManifest.xml:22:5-24:41
 MERGED from [com.android.support:support-vector-drawable:26.0.0-alpha1] /Users/qizfeng/.android/build-cache/49b9b9c37f3f2a4306f6dff156b132d67cdf76d0/output/AndroidManifest.xml:22:5-24:41
 MERGED from [com.android.support:support-compat:26.0.0-alpha1] /Users/qizfeng/.android/build-cache/6567f75f4f098615f9ea40839a81527e674782a8/output/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:cardview-v7:26.0.0-alpha1] /Users/qizfeng/.android/build-cache/6f4fe102ee58cf091ade86d17cb6b817b94ae136/output/AndroidManifest.xml:22:5-24:41
 	android:value
 		ADDED from [com.android.support:design:26.0.0-alpha1] /Users/qizfeng/.android/build-cache/9947c25fdb2dbcb9a574b50a3dfff31183eb0654/output/AndroidManifest.xml:27:9-38
 	android:name

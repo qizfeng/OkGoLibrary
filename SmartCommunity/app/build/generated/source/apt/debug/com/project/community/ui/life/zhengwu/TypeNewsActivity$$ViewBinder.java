@@ -14,10 +14,10 @@ public class TypeNewsActivity$$ViewBinder<T extends com.project.community.ui.lif
     target.mTvTitle = finder.castView(view, 2131624106, "field 'mTvTitle'");
     view = finder.findRequiredView(source, 2131624108, "field 'recyclerView'");
     target.recyclerView = finder.castView(view, 2131624108, "field 'recyclerView'");
-    view = finder.findRequiredView(source, 2131624197, "field 'refreshLayout'");
-    target.refreshLayout = finder.castView(view, 2131624197, "field 'refreshLayout'");
-    view = finder.findRequiredView(source, 2131624198, "field 'fab'");
-    target.fab = finder.castView(view, 2131624198, "field 'fab'");
+    view = finder.findRequiredView(source, 2131624207, "field 'refreshLayout'");
+    target.refreshLayout = finder.castView(view, 2131624207, "field 'refreshLayout'");
+    view = finder.findRequiredView(source, 2131624208, "field 'fab'");
+    target.fab = finder.castView(view, 2131624208, "field 'fab'");
   }
 
   @Override public void unbind(T target) {

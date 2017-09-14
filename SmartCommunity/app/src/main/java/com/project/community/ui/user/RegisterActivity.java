@@ -284,6 +284,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 Gson gson = new Gson();
                 String userStr = gson.toJson(stringBaseResponse.retData);
                 saveUser(RegisterActivity.this, userStr);
+                saveWillPlayAnim(RegisterActivity.this,true);
                 showToast(stringBaseResponse.message);
                 try {
                     LoginActivity.getInstance().finish();//注册完成即登录状态,将登录页从堆栈里销毁

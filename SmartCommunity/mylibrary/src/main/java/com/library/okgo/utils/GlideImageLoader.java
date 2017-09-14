@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Looper;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;

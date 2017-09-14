@@ -12,6 +12,10 @@
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/icon_marka.png"
     },
     {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d43_btn_3.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d43_btn_3.png"
+    },
+    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/c1_bq1.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/c1_bq1.png"
     },
@@ -26,6 +30,10 @@
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/icon_markb.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/icon_markb.png"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d45_btn1.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d45_btn1.png"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d30_btn1.png",
@@ -52,6 +60,10 @@
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d16_icon1.png"
     },
     {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d48_icon2.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d48_icon2.png"
+    },
+    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/c1_btn5.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/c1_btn5.png"
     },
@@ -60,12 +72,12 @@
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d21_dian.png"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/c3_icon_3.png",
-        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/c3_icon_3.png"
-    },
-    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d2_icon1.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d2_icon1.png"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/c3_icon_3.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/c3_icon_3.png"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/c1_icon10.png",
@@ -76,12 +88,28 @@
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/c1_icon1.png"
     },
     {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d45_icon1.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d45_icon1.png"
+    },
+    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/c1_icon4.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/c1_icon4.png"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d21_icon5.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d21_icon5.png"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d43_btn_1.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d43_btn_1.png"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d43_btn_4.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d43_btn_4.png"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d43_btn_3_p.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d43_btn_3_p.png"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d20_icon2.png",
@@ -100,12 +128,24 @@
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/icon_markd.png"
     },
     {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d50_icon2.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d50_icon2.png"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d50_icon1_p.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d50_icon1_p.png"
+    },
+    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/c1_btn3.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/c1_btn3.png"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/icon_marke.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/icon_marke.png"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d50_icon1.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d50_icon1.png"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d4_btn2_p.png",
@@ -132,8 +172,16 @@
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d2_icon2.png"
     },
     {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d53_dianhua.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d53_dianhua.png"
+    },
+    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/c3_icon_13.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/c3_icon_13.png"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d43_btn_2.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d43_btn_2.png"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d23_icon1.png",
@@ -144,8 +192,16 @@
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/c3_icon_10.png"
     },
     {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d45_icon2_p.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d45_icon2_p.png"
+    },
+    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/c1_icon5.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/c1_icon5.png"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d45_btn1_p.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d45_btn1_p.png"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d27_icon3.png",
@@ -164,12 +220,12 @@
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/c1_icon2.png"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d17_icon3.png",
-        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d17_icon3.png"
-    },
-    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d15_sousuo.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d15_sousuo.png"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d17_icon3.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d17_icon3.png"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/c3_icon_2.png",
@@ -180,8 +236,16 @@
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png"
     },
     {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d45_sanjiao.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d45_sanjiao.png"
+    },
+    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/c3_icon_5.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/c3_icon_5.png"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d43_btn_2_p.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d43_btn_2_p.png"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/icon_gcoding.png",
@@ -190,6 +254,10 @@
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/c1_icon8.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/c1_icon8.png"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d32_icon1.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d32_icon1.png"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d20_image.png",
@@ -280,6 +348,10 @@
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d10_btn1.png"
     },
     {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d45_icon1_p.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d45_icon1_p.png"
+    },
+    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d14_guanbi.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d14_guanbi.png"
     },
@@ -356,6 +428,10 @@
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d24_tianjia.png"
     },
     {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d43_fanhui.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d43_fanhui.png"
+    },
+    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/c1_image1.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/c1_image1.png"
     },
@@ -376,12 +452,24 @@
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/c1_icon11.png"
     },
     {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d50_icon3_p.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d50_icon3_p.png"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d50_icon2_p.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d50_icon2_p.png"
+    },
+    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/c1_icon9_p.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/c1_icon9_p.png"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/c3_icon_15.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/c3_icon_15.png"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d42_guohui.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d42_guohui.png"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/c1_shanchu_p.png",
@@ -404,6 +492,10 @@
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/c3_jian.png"
     },
     {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d48_icon1.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d48_icon1.png"
+    },
+    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d27_icon5.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d27_icon5.png"
     },
@@ -424,8 +516,24 @@
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/c1_icon6.png"
     },
     {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d48_icon2_p.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d48_icon2_p.png"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d48_icon1_p.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d48_icon1_p.png"
+    },
+    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/icon_markc.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/icon_markc.png"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d50_icon3.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d50_icon3.png"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d45_icon2.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d45_icon2.png"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/icon_markf.png",
@@ -460,31 +568,35 @@
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d2_icon6.png"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d21_icon6.png",
-        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d21_icon6.png"
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/c1_btn4_p_dian.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/c1_btn4_p_dian.png"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d10_btn1_p.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d10_btn1_p.png"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/c1_btn4_p_dian.png",
-        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/c1_btn4_p_dian.png"
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d21_icon6.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d21_icon6.png"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d2_icon3.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d2_icon3.png"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/popup.png",
-        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/popup.png"
-    },
-    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d20_icon3.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d20_icon3.png"
     },
     {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/popup.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/popup.png"
+    },
+    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d20_icon6.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d20_icon6.png"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d43_btn_4_p.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d43_btn_4_p.png"
     }
 ]
