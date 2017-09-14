@@ -90,7 +90,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
     private View header;
     private WebView mWebView;
     private TextView mTvCommentsTips;
-    private Button mBtnWenjuan;
+    private TextView mBtnWenjuan;
     private List<CommentModel> comments = new ArrayList<>();//评论列表
     private CommentsApdater mAdapter;
     private String mUrl;
@@ -128,7 +128,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
         }
         header = LayoutInflater.from(this).inflate(R.layout.layout_header_topic_detail, null);
         mWebView = (WebView) header.findViewById(R.id.webView);
-        mBtnWenjuan = (Button) header.findViewById(R.id.btn_wenjuan);
+        mBtnWenjuan = (TextView) header.findViewById(R.id.btn_wenjuan);
         mTvCommentsTips = (TextView) header.findViewById(R.id.tv_comment_tips);
         mBtnWenjuan.setOnClickListener(this);
         mWebView.setWebChromeClient(new WebChromeClient() {

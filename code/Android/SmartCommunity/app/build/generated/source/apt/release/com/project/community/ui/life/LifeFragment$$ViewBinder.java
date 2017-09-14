@@ -10,10 +10,10 @@ public class LifeFragment$$ViewBinder<T extends com.project.community.ui.life.Li
     View view;
     view = finder.findRequiredView(source, 2131624105, "field 'toolbar'");
     target.toolbar = finder.castView(view, 2131624105, "field 'toolbar'");
-    view = finder.findRequiredView(source, 2131624173, "field 'tabLayout'");
-    target.tabLayout = finder.castView(view, 2131624173, "field 'tabLayout'");
-    view = finder.findRequiredView(source, 2131624199, "field 'viewPager'");
-    target.viewPager = finder.castView(view, 2131624199, "field 'viewPager'");
+    view = finder.findRequiredView(source, 2131624183, "field 'tabLayout'");
+    target.tabLayout = finder.castView(view, 2131624183, "field 'tabLayout'");
+    view = finder.findRequiredView(source, 2131624209, "field 'viewPager'");
+    target.viewPager = finder.castView(view, 2131624209, "field 'viewPager'");
   }
 
   @Override public void unbind(T target) {

@@ -649,12 +649,12 @@ public final class R {
     public static final class mipmap {
         public static final int checkbox_checked = 0x7f030035;
         public static final int checkbox_normal = 0x7f030036;
-        public static final int default_image = 0x7f030089;
-        public static final int grid_camera = 0x7f03008d;
-        public static final int ic_back = 0x7f03008f;
-        public static final int ic_del = 0x7f030090;
-        public static final int list_selected = 0x7f0300b0;
-        public static final int text_indicator = 0x7f0300ba;
+        public static final int default_image = 0x7f03008b;
+        public static final int grid_camera = 0x7f03008f;
+        public static final int ic_back = 0x7f030091;
+        public static final int ic_del = 0x7f030092;
+        public static final int list_selected = 0x7f0300b2;
+        public static final int text_indicator = 0x7f0300bc;
     }
     public static final class string {
         public static final int abc_action_bar_home_description = 0x7f080000;

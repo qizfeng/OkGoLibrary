@@ -119,6 +119,10 @@
     <color name="bright_foreground_material_light">@android:color/black</color>
     <color name="button_material_dark">#ff5a595b</color>
     <color name="button_material_light">#ffd6d7d7</color>
+    <color name="cardview_dark_background">#FF424242</color>
+    <color name="cardview_light_background">#FFFFFFFF</color>
+    <color name="cardview_shadow_end_color">#03000000</color>
+    <color name="cardview_shadow_start_color">#37000000</color>
     <color name="colorAccent">#3067A8</color>
     <color name="colorPrimary">#103375</color>
     <color name="colorPrimaryDark">#303F9F</color>
@@ -131,6 +135,11 @@
     <color name="color_gray_cccccc">#cccccc</color>
     <color name="color_gray_e5e5e5">#e5e5e5</color>
     <color name="color_gray_eeeeee">#eeeeee</color>
+    <color name="color_map_community_5c33a07d">#5c33a07d</color>
+    <color name="color_map_community_5c5085c1">#5c5085c1</color>
+    <color name="color_map_community_5c894fb6">#5c894fb6</color>
+    <color name="color_map_community_5cfd5353">#5cfd5353</color>
+    <color name="color_map_community_5cff6e42">#5cff6e42</color>
     <color name="color_red_d54824">#d54824</color>
     <color name="common_gray_bg">#eeeeee</color>
     <color name="design_bottom_navigation_shadow_color">#14000000</color>
@@ -316,6 +325,7 @@
             <enum name="auto" value="-1"/>
         </attr><attr format="boolean" name="behavior_hideable"/><attr format="boolean" name="behavior_skipCollapsed"/></declare-styleable>
     <declare-styleable name="ButtonBarLayout"><attr format="boolean" name="allowStacking"/></declare-styleable>
+    <declare-styleable name="CardView"><attr format="color" name="cardBackgroundColor"/><attr format="dimension" name="cardCornerRadius"/><attr format="dimension" name="cardElevation"/><attr format="dimension" name="cardMaxElevation"/><attr format="boolean" name="cardUseCompatPadding"/><attr format="boolean" name="cardPreventCornerOverlap"/><attr format="dimension" name="contentPadding"/><attr format="dimension" name="contentPaddingLeft"/><attr format="dimension" name="contentPaddingRight"/><attr format="dimension" name="contentPaddingTop"/><attr format="dimension" name="contentPaddingBottom"/><attr name="android:minWidth"/><attr name="android:minHeight"/></declare-styleable>
     <declare-styleable name="CircleFlowIndicator"><attr format="color" name="activeColor"/><attr format="color" name="inactiveColor"/><attr format="dimension" name="radius"/><attr format="dimension" name="spacing"/><attr format="boolean" name="centered"/><attr format="integer" name="fadeOut"/><attr name="inactiveType">
             <flag name="stroke" value="0"/>
             <flag name="fill" value="1"/>
@@ -730,6 +740,9 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="alphabet_size">12dip</dimen>
+    <dimen name="cardview_compat_inset_shadow">1dp</dimen>
+    <dimen name="cardview_default_elevation">2dp</dimen>
+    <dimen name="cardview_default_radius">2dp</dimen>
     <dimen name="common_sub_title_txt_size">18sp</dimen>
     <dimen name="common_title_txt_size">20sp</dimen>
     <dimen name="common_txt_size">16sp</dimen>
@@ -976,7 +989,7 @@
     <string name="dialog_network_content">没有找到可用的网络，请确认WLAN、3G、2G网络至少有一项可以使用。</string>
     <string name="empty_no_comment">暂无评论</string>
     <string name="empty_no_data">没有数据,点击重试</string>
-    <string name="empty_no_data_family">暂无家庭信息</string>
+    <string name="empty_no_data_family">暂无家庭信息~</string>
     <string name="folder_image_count">共%1$d张</string>
     <string name="forget_phone_hint">请您输入手机号</string>
     <string name="library_FloatingActionButton_author">Oleksandr Melnykov</string>
@@ -1030,8 +1043,8 @@
     <string name="register_code_hint">请您输入验证码</string>
     <string name="register_get_code">获取验证码</string>
     <string name="register_newpassword_hint">重新输入密码</string>
-    <string name="register_password_hint">输入6-16位新密码</string>
-    <string name="register_password_re">输入6-16位新密码</string>
+    <string name="register_password_hint">输入6–16位新密码</string>
+    <string name="register_password_re">输入6–16位新密码</string>
     <string name="register_phone_hint">请您输入手机号</string>
     <string name="register_service_hint">《服务条款》</string>
     <string name="register_service_title">服务条款</string>
@@ -1077,11 +1090,11 @@
     <string name="toast_empty_username">用户名不能为空</string>
     <string name="toast_error_idcard">请输入正确的身份证号</string>
     <string name="toast_error_name">真实姓名不能超过25个字符</string>
-    <string name="toast_error_new_pwd">请您输入6-16位新密码</string>
+    <string name="toast_error_new_pwd">请您输入6–16位新密码</string>
     <string name="toast_error_pay">获取订单信息失败</string>
     <string name="toast_error_permission">您不是该家庭业主,无法进行此操作。</string>
     <string name="toast_error_phone">请输入正确的手机号</string>
-    <string name="toast_error_pwd">请输入6-16位密码</string>
+    <string name="toast_error_pwd">请输入6–16位密码</string>
     <string name="toast_menu_setting">设置</string>
     <string name="toast_modify_success">修改成功</string>
     <string name="toast_nickname_error">昵称不能超过25个字符</string>
@@ -1095,7 +1108,7 @@
     <string name="txt_add">添加</string>
     <string name="txt_add_family_name_hint">请您输入房屋名称</string>
     <string name="txt_add_family_no_hint">请您输入房屋编号</string>
-    <string name="txt_add_house_no_desc">说明:\n房屋编号是指您缴费的房屋编码,无房屋编码客服电话:400-0000进行查询。</string>
+    <string name="txt_add_house_no_desc">说明:\n房屋编号是指您缴费的房屋编码,无房屋编码客服电话:400–0000进行查询。</string>
     <string name="txt_add_house_no_hint">请您输入房屋编号</string>
     <string name="txt_add_house_no_next">下一步</string>
     <string name="txt_add_person_address">房屋地址</string>
@@ -1164,6 +1177,18 @@
     <string name="txt_language">语言版本</string>
     <string name="txt_leave">离开</string>
     <string name="txt_logout">退出登录</string>
+    <string name="txt_map_check_ing">审核中的</string>
+    <string name="txt_map_check_pass">已通过的</string>
+    <string name="txt_map_check_status">状态</string>
+    <string name="txt_map_scope">范围</string>
+    <string name="txt_map_scope_10km">10公里范围内</string>
+    <string name="txt_map_scope_1km">1公里范围内</string>
+    <string name="txt_map_scope_3km">3公里范围内</string>
+    <string name="txt_map_scope_50km">50公里范围内</string>
+    <string name="txt_map_scope_5km">5公里范围内</string>
+    <string name="txt_map_tag">标签</string>
+    <string name="txt_map_tag_all">全部</string>
+    <string name="txt_map_utility">物业设施</string>
     <string name="txt_modify_pwd">修改密码</string>
     <string name="txt_money_unit">元</string>
     <string name="txt_move">上移</string>
@@ -1172,7 +1197,7 @@
     <string name="txt_my_repair_order">我的维修单</string>
     <string name="txt_my_topic">我的帖子</string>
     <string name="txt_name">姓名</string>
-    <string name="txt_new_pwd_hint">输入6-16位新密码</string>
+    <string name="txt_new_pwd_hint">输入6–16位新密码</string>
     <string name="txt_nickname">昵称</string>
     <string name="txt_nickname_hint">请输入昵称</string>
     <string name="txt_no_payment_info">暂无缴费信息</string>
@@ -1296,6 +1321,13 @@
     <style name="Base.Animation.AppCompat.DropDownUp" parent="android:Animation">
         <item name="android:windowEnterAnimation">@anim/abc_grow_fade_in_from_bottom</item>
         <item name="android:windowExitAnimation">@anim/abc_shrink_fade_out_from_bottom</item>
+    </style>
+    <style name="Base.CardView" parent="android:Widget">
+        <item name="cardCornerRadius">@dimen/cardview_default_radius</item>
+        <item name="cardElevation">@dimen/cardview_default_elevation</item>
+        <item name="cardMaxElevation">@dimen/cardview_default_elevation</item>
+        <item name="cardUseCompatPadding">false</item>
+        <item name="cardPreventCornerOverlap">true</item>
     </style>
     <style name="Base.DialogWindowTitle.AppCompat" parent="android:Widget">
         <item name="android:maxLines">1</item>
@@ -2303,6 +2335,14 @@
         <item name="tabBackground">?attr/selectableItemBackground</item>
         <item name="tabTextAppearance">@style/TextAppearance.Design.Tab</item>
         <item name="tabSelectedTextColor">?android:textColorPrimary</item>
+    </style>
+    <style name="CardView" parent="Base.CardView">
+    </style>
+    <style name="CardView.Dark">
+        <item name="cardBackgroundColor">@color/cardview_dark_background</item>
+    </style>
+    <style name="CardView.Light">
+        <item name="cardBackgroundColor">@color/cardview_light_background</item>
     </style>
     <style name="Custom_Progress" parent="Base.Widget.AppCompat.ProgressBar">
         <item name="android:backgroundDimEnabled">false</item>
