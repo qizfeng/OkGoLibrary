@@ -61,7 +61,9 @@ public class ArticleModel implements Serializable {
        "status",0,#收藏状态
        "url": "/f/view-3-299f2f4f5e84415f98b03606bf6427d9.html",#文章URL地址
        "posidList": []
-       surveyId 问卷id
+       "surveyId" 问卷id
+       "categoryAllowComment":'1'#是否允许评论
+       "categoryAllowCollection": 1#允许收藏 1：允许 0：不允许
        */
     public String id;
     public String image;
@@ -88,4 +90,7 @@ public class ArticleModel implements Serializable {
     public String surveyId;
     public SysOrgModel sysOrg = new SysOrgModel();
     public SurveyInfoModel surveyInfo = null;
+    public int categoryAllowComment;
+    public int categoryAllowCollection;
+
 }

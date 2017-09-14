@@ -79,6 +79,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     protected int setStatusBarColor() {
         return getColorPrimary();
+//        return Color.TRANSPARENT;
     }
 
     /**
@@ -97,10 +98,11 @@ public abstract class BaseActivity extends AppCompatActivity {
             // 设置状态栏全透明
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-                window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+                window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
                 window.setStatusBarColor(Color.TRANSPARENT);
-                window.setNavigationBarColor(Color.TRANSPARENT);
+//                window.setNavigationBarColor(Color.TRANSPARENT);
             } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             }
@@ -119,6 +121,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             tintManager.setStatusBarTintEnabled(true);
             tintManager.setStatusBarTintColor(setStatusBarColor());
         }
+
     }
 
     /**
@@ -214,7 +217,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @return
      */
     public UserModel getUser(Context context) {
-        UserModel userModel=null;
+        UserModel userModel = null;
         Gson gson = new Gson();
         try {
             userModel = gson.fromJson(SharedPreferenceUtils.getString(context, SharedPreferenceUtils.SP_USER), UserModel.class);
@@ -234,8 +237,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void saveUser(Context context, String user) {
         SharedPreferenceUtils.putString(context, SharedPreferenceUtils.SP_USER, user);
     }
-
-
 
 
     /**
@@ -294,17 +295,37 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * 保存是否记住密码
+     *
      * @param context
      * @param isRemember
      */
-    public void saveIsRemember(Context context,boolean isRemember){
+    public void saveIsRemember(Context context, boolean isRemember) {
         SharedPreferenceUtils.putBoolean(context, SharedPreferenceUtils.SP_IS_REMEMBER_PWD, isRemember);
     }
+
     /**
      * 检查设备是否存在SDCard的工具方法
      */
     public static boolean hasSdcard() {
         String state = Environment.getExternalStorageState();
         return state.equals(Environment.MEDIA_MOUNTED);
+    }
+
+    /**
+     * 获取是否播放动画
+     * @param context
+     * @return
+     */
+    public static boolean willPlayAnim(Context context) {
+        return SharedPreferenceUtils.getBoolean(context, SharedPreferenceUtils.SP_WILL_PLAY);
+    }
+
+    /**
+     * 保存是否播放动画
+     * @param context
+     * @param willPlay
+     */
+    public static void saveWillPlayAnim(Context context,boolean willPlay){
+        SharedPreferenceUtils.putBoolean(context,SharedPreferenceUtils.SP_WILL_PLAY,willPlay);
     }
 }

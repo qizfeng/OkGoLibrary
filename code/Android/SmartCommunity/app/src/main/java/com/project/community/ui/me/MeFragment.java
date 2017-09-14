@@ -179,14 +179,13 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
             mLayoutLogin.setVisibility(View.VISIBLE);
             mLayoutUnLogin.setVisibility(View.GONE);
         } else {
+            mIvHeader.setImageResource(R.mipmap.d54_tx);
             mLayoutLogin.setVisibility(View.GONE);
             mLayoutUnLogin.setVisibility(View.VISIBLE);
         }
         if (isLogin(getActivity())) {
             setRefreshing(true);
             onRefresh();
-        }else {
-            setRefreshing(false);
         }
     }
 
@@ -259,6 +258,8 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
     public void onRefresh() {
         if (isLogin(getActivity()))
             loadData();
+        else
+            setRefreshing(false);
     }
 
 

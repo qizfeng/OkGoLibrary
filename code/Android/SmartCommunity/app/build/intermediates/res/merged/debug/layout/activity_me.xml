@@ -4,8 +4,8 @@
     android:id="@+id/refreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/common_gray_bg"
     android:addStatesFromChildren="true"
+    android:background="@color/common_gray_bg"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <android.support.design.widget.CoordinatorLayout
@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:clipChildren="false"
+
             app:theme="@style/AppTheme.AppBarOverlay">
 
             <android.support.design.widget.CollapsingToolbarLayout
@@ -40,7 +41,8 @@
                     android:layout_height="200dp"
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/background_toolbar_gradient"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/dp_25">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -70,17 +72,17 @@
 
                                 <Button
                                     android:id="@+id/btn_login"
+                                    style="@style/rectangle_info_button"
                                     android:layout_width="85dp"
                                     android:layout_height="40dp"
-                                    style="@style/rectangle_info_button"
                                     android:layout_marginRight="10dp"
                                     android:text="登录" />
 
                                 <Button
                                     android:id="@+id/btn_register"
+                                    style="@style/rectangle_info_button"
                                     android:layout_width="85dp"
                                     android:layout_height="40dp"
-                                    style="@style/rectangle_info_button"
                                     android:text="注册" />
                             </LinearLayout>
                             <!--登录-->
@@ -160,32 +162,33 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
+                    android:background="@color/transparent"
                     android:titleTextColor="@color/colorPrimary"
                     app:layout_collapseMode="pin"
-                    android:background="@color/transparent"
                     app:popupTheme="@style/AppTheme.PopupOverlay"
                     app:title="" />
+
                 <ImageView
                     android:id="@+id/iv_toolbar_setting"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:layout_gravity="right"
                     android:layout_alignParentRight="true"
+                    android:layout_gravity="right"
                     android:layout_margin="@dimen/dp_10"
-                    android:src="@mipmap/iv_setting"/>
+                    android:src="@mipmap/iv_setting" />
             </android.support.design.widget.CollapsingToolbarLayout>
         </android.support.design.widget.AppBarLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="-100dp"
+            android:elevation="10dp"
             app:layout_behavior="@string/simple_view_behavior"
             app:svb_dependOn="@id/appbar"
             app:svb_dependType="y"
             app:svb_targetAlpha="1"
-            app:svb_targetY="0dp"
-            android:layout_marginTop="-100dp"
-            android:elevation="10dp">
+            app:svb_targetY="0dp">
 
             <TextView
                 android:id="@+id/tv_title"
@@ -196,16 +199,16 @@
                 android:text="@string/app_name"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
-                android:textStyle="bold"
-             />
+                android:textStyle="bold" />
+
             <ImageView
                 android:id="@+id/iv_setting"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:layout_gravity="right"
                 android:layout_alignParentRight="true"
+                android:layout_gravity="right"
                 android:layout_margin="@dimen/dp_10"
-                android:src="@mipmap/iv_setting"/>
+                android:src="@mipmap/iv_setting" />
         </RelativeLayout>
 
         <android.support.v4.widget.NestedScrollView
@@ -311,7 +314,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
-                    android:background="@color/common_gray_bg"/>
+                    android:background="@color/common_gray_bg" />
 
                 <!--即时聊天-->
                 <RelativeLayout

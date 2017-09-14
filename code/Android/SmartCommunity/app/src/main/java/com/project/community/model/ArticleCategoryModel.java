@@ -21,7 +21,11 @@ public class ArticleCategoryModel implements Serializable{
       "url": "/f/list-3.html",
       "ids": "3",
       "root": false,
-      "parentId": "0"*/
+      "parentId": "0"
+      "allowComment": "1",#是否允许评论
+      "allowShare":"1" 是否允許分享
+      "allowCollection":"1"#是否允许收藏
+      */
     public String id;
     public String name;
     public String sort;
@@ -29,11 +33,13 @@ public class ArticleCategoryModel implements Serializable{
     public String inMenu;
     public String inList;
     public String showModes;
-    public String allowComment;
     public String isAudit;
     public String categoryType;
     public String url;
     public String ids;
+    public int allowComment;
+    public int allowCollection;
+    public int allowShare;
 
     @Override
     public String toString() {
@@ -45,11 +51,13 @@ public class ArticleCategoryModel implements Serializable{
                 ", inMenu='" + inMenu + '\'' +
                 ", inList='" + inList + '\'' +
                 ", showModes='" + showModes + '\'' +
-                ", allowComment='" + allowComment + '\'' +
                 ", isAudit='" + isAudit + '\'' +
                 ", categoryType='" + categoryType + '\'' +
                 ", url='" + url + '\'' +
                 ", ids='" + ids + '\'' +
+                ", allowComment=" + allowComment +
+                ", allowCollection=" + allowCollection +
+                ", allowShare=" + allowShare +
                 '}';
     }
 }

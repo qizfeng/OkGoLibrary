@@ -253,6 +253,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_send:
+
                 if (TextUtils.isEmpty(recStr)) {
                     if (TextUtils.isEmpty(mEtInput.getText().toString())) {
                         return;
@@ -329,7 +330,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
             showToast(getString(R.string.toast_no_login));
             return;
         }
-        if (mData.allowComment == 0) {
+        if (mData.category.allowComment == 0 || mData.allowComment == 0) {
             showToast(getString(R.string.toast_no_comment));
             return;
         }
@@ -422,7 +423,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
             showToast(getString(R.string.toast_no_login));
             return;
         }
-        if (mData.allowCollection == 0) {
+        if (mData.category.allowCollection == 0 || mData.allowCollection == 0) {
             showToast(getString(R.string.toast_no_collect));
             return;
         }
@@ -480,6 +481,10 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!isLogin(TopicDetailActivity.this)){
+                    showToast(getString(R.string.toast_no_login));
+                    return;
+                }
                 deleteComment(position, mAdapter.getItem(position).id, 1);
                 mDialog.dismiss();
             }
@@ -541,7 +546,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
                 KeyBoardUtils.closeKeybord(mEtInput, TopicDetailActivity.this);
                 return true;
             case R.id.navigation_share:
-                if (mData.allowShare == 0) {
+                if (mData.category.allowShare == 0 || mData.allowShare == 0) {
                     showToast(getString(R.string.toast_no_share));
                     return true;
                 }
@@ -557,7 +562,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
                         .withText(mData.description)
                         .withMedia(new UMImage(TopicDetailActivity.this, R.mipmap.ic_launcher_round))
                         .withMedia(web)
-                        .setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ,SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE)
+                        .setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE)
 //                        .setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN)
                         .setCallback(shareListener)
                         .open(config);

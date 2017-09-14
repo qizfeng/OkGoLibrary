@@ -260,4 +260,21 @@ public abstract class BaseFragment extends Fragment {
         String state = Environment.getExternalStorageState();
         return state.equals(Environment.MEDIA_MOUNTED);
     }
+    /**
+     * 获取是否播放动画
+     * @param context
+     * @return
+     */
+    public static boolean willPlayAnim(Context context) {
+        return SharedPreferenceUtils.getBoolean(context, SharedPreferenceUtils.SP_WILL_PLAY);
+    }
+
+    /**
+     * 保存是否播放动画
+     * @param context
+     * @param willPlay
+     */
+    public static void saveWillPlayAnim(Context context,boolean willPlay){
+        SharedPreferenceUtils.putBoolean(context,SharedPreferenceUtils.SP_WILL_PLAY,willPlay);
+    }
 }

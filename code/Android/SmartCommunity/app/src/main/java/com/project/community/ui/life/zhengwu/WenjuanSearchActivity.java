@@ -146,6 +146,9 @@ public class WenjuanSearchActivity extends BaseActivity implements View.OnKeyLis
                     if (url.contains(AppConstants.URL_WENJUAN_SEARCH)) {
                         mSearchLayout.setVisibility(View.VISIBLE);
                         mAppbar.setVisibility(View.GONE);
+//                        if(etSearchContent.getText().toString().length()>0){
+//                            loadUrl();
+//                        }
                     } else if (url.contains(AppConstants.URL_WENJUAN_DETIAL)) {
                         mTvTitle.setText(getString(R.string.activity_write_wenjuan));
                         mSearchLayout.setVisibility(View.GONE);

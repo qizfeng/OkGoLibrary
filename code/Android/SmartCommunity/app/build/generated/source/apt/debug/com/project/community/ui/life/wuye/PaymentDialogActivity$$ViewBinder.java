@@ -10,8 +10,8 @@ public class PaymentDialogActivity$$ViewBinder<T extends com.project.community.u
     View view;
     view = finder.findRequiredView(source, 2131624106, "field 'mTvTitle'");
     target.mTvTitle = finder.castView(view, 2131624106, "field 'mTvTitle'");
-    view = finder.findRequiredView(source, 2131624117, "field 'mIvClose' and method 'onCancelClick'");
-    target.mIvClose = finder.castView(view, 2131624117, "field 'mIvClose'");
+    view = finder.findRequiredView(source, 2131624127, "field 'mIvClose' and method 'onCancelClick'");
+    target.mIvClose = finder.castView(view, 2131624127, "field 'mIvClose'");
     view.setOnClickListener(
       new butterknife.internal.DebouncingOnClickListener() {
         @Override public void doClick(
@@ -20,15 +20,15 @@ public class PaymentDialogActivity$$ViewBinder<T extends com.project.community.u
           target.onCancelClick(p0);
         }
       });
-    view = finder.findRequiredView(source, 2131624125, "field 'mLayoutAlipay'");
-    target.mLayoutAlipay = finder.castView(view, 2131624125, "field 'mLayoutAlipay'");
-    view = finder.findRequiredView(source, 2131624128, "field 'mLayoutWeipay'");
-    target.mLayoutWeipay = finder.castView(view, 2131624128, "field 'mLayoutWeipay'");
-    view = finder.findRequiredView(source, 2131624127, "field 'mBtnAlipay'");
-    target.mBtnAlipay = finder.castView(view, 2131624127, "field 'mBtnAlipay'");
-    view = finder.findRequiredView(source, 2131624129, "field 'mBtnWeipay'");
-    target.mBtnWeipay = finder.castView(view, 2131624129, "field 'mBtnWeipay'");
-    view = finder.findRequiredView(source, 2131624119, "method 'onCancelClick'");
+    view = finder.findRequiredView(source, 2131624135, "field 'mLayoutAlipay'");
+    target.mLayoutAlipay = finder.castView(view, 2131624135, "field 'mLayoutAlipay'");
+    view = finder.findRequiredView(source, 2131624138, "field 'mLayoutWeipay'");
+    target.mLayoutWeipay = finder.castView(view, 2131624138, "field 'mLayoutWeipay'");
+    view = finder.findRequiredView(source, 2131624137, "field 'mBtnAlipay'");
+    target.mBtnAlipay = finder.castView(view, 2131624137, "field 'mBtnAlipay'");
+    view = finder.findRequiredView(source, 2131624139, "field 'mBtnWeipay'");
+    target.mBtnWeipay = finder.castView(view, 2131624139, "field 'mBtnWeipay'");
+    view = finder.findRequiredView(source, 2131624129, "method 'onCancelClick'");
     view.setOnClickListener(
       new butterknife.internal.DebouncingOnClickListener() {
         @Override public void doClick(
@@ -37,7 +37,7 @@ public class PaymentDialogActivity$$ViewBinder<T extends com.project.community.u
           target.onCancelClick(p0);
         }
       });
-    view = finder.findRequiredView(source, 2131624120, "method 'onConfirm'");
+    view = finder.findRequiredView(source, 2131624130, "method 'onConfirm'");
     view.setOnClickListener(
       new butterknife.internal.DebouncingOnClickListener() {
         @Override public void doClick(

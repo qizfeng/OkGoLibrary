@@ -5,14 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:addStatesFromChildren="true"
-    android:background="@color/common_gray_bg"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -23,6 +21,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:titleTextColor="@color/colorPrimary"
                 app:layout_collapseMode="pin"
+                android:fitsSystemWindows="true"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
                 app:title="" />
 

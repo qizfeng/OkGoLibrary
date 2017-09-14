@@ -33,6 +33,7 @@
                 android:layout_marginTop="40dp">
 
                 <TextView
+                    android:id="@+id/tv_phone"
                     style="@style/rectangle_login_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -60,6 +61,7 @@
                 android:layout_marginTop="20dp">
 
                 <TextView
+                    android:id="@+id/tv_pwd"
                     style="@style/rectangle_login_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />

@@ -14,6 +14,7 @@ import android.os.RemoteException;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.library.okgo.utils.LogUtils;
+import com.library.okgo.utils.ToastUtils;
 import com.project.community.R;
 import com.project.community.constants.AppConstants;
 import com.project.community.listener.AppLocationListener;
@@ -318,7 +319,6 @@ public class AppLocationService extends Service {
 
             // 开启定位服务
             mLocationClient.start();
-
         } else {
             // 通知用户网络不可用
             mNotificationUtil.sendNetworkNotification();

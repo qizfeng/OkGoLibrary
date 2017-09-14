@@ -12,12 +12,12 @@ public class ModifyPwdActivity$$ViewBinder<T extends com.project.community.ui.us
     target.mToolBar = finder.castView(view, 2131624105, "field 'mToolBar'");
     view = finder.findRequiredView(source, 2131624106, "field 'mTvTitle'");
     target.mTvTitle = finder.castView(view, 2131624106, "field 'mTvTitle'");
-    view = finder.findRequiredView(source, 2131624230, "field 'mEtOldPwd'");
-    target.mEtOldPwd = finder.castView(view, 2131624230, "field 'mEtOldPwd'");
-    view = finder.findRequiredView(source, 2131624231, "field 'mEtNewPwd'");
-    target.mEtNewPwd = finder.castView(view, 2131624231, "field 'mEtNewPwd'");
-    view = finder.findRequiredView(source, 2131624232, "field 'mBtnSave' and method 'onSave'");
-    target.mBtnSave = finder.castView(view, 2131624232, "field 'mBtnSave'");
+    view = finder.findRequiredView(source, 2131624242, "field 'mEtOldPwd'");
+    target.mEtOldPwd = finder.castView(view, 2131624242, "field 'mEtOldPwd'");
+    view = finder.findRequiredView(source, 2131624243, "field 'mEtNewPwd'");
+    target.mEtNewPwd = finder.castView(view, 2131624243, "field 'mEtNewPwd'");
+    view = finder.findRequiredView(source, 2131624244, "field 'mBtnSave' and method 'onSave'");
+    target.mBtnSave = finder.castView(view, 2131624244, "field 'mBtnSave'");
     view.setOnClickListener(
       new butterknife.internal.DebouncingOnClickListener() {
         @Override public void doClick(
@@ -26,8 +26,8 @@ public class ModifyPwdActivity$$ViewBinder<T extends com.project.community.ui.us
           target.onSave(p0);
         }
       });
-    view = finder.findRequiredView(source, 2131624181, "field 'mIvEyes' and method 'onShowPwd'");
-    target.mIvEyes = finder.castView(view, 2131624181, "field 'mIvEyes'");
+    view = finder.findRequiredView(source, 2131624191, "field 'mIvEyes' and method 'onShowPwd'");
+    target.mIvEyes = finder.castView(view, 2131624191, "field 'mIvEyes'");
     view.setOnClickListener(
       new butterknife.internal.DebouncingOnClickListener() {
         @Override public void doClick(
