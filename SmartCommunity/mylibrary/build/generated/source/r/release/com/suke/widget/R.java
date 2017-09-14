@@ -8,27 +8,27 @@ package com.suke.widget;
 
 public final class R {
     public static final class attr {
-        public static int sb_background = 0x7f010179;
-        public static int sb_border_width = 0x7f01016e;
-        public static int sb_button_color = 0x7f010177;
-        public static int sb_checked = 0x7f010174;
-        public static int sb_checked_color = 0x7f01016d;
-        public static int sb_checkline_color = 0x7f01016f;
-        public static int sb_checkline_width = 0x7f010170;
-        public static int sb_effect_duration = 0x7f010176;
-        public static int sb_enable_effect = 0x7f01017a;
-        public static int sb_shadow_color = 0x7f01016b;
-        public static int sb_shadow_effect = 0x7f010175;
-        public static int sb_shadow_offset = 0x7f01016a;
-        public static int sb_shadow_radius = 0x7f010169;
-        public static int sb_show_indicator = 0x7f010178;
-        public static int sb_uncheck_color = 0x7f01016c;
-        public static int sb_uncheckcircle_color = 0x7f010171;
-        public static int sb_uncheckcircle_radius = 0x7f010173;
-        public static int sb_uncheckcircle_width = 0x7f010172;
+        public static int sb_background = 0x7f010194;
+        public static int sb_border_width = 0x7f010189;
+        public static int sb_button_color = 0x7f010192;
+        public static int sb_checked = 0x7f01018f;
+        public static int sb_checked_color = 0x7f010188;
+        public static int sb_checkline_color = 0x7f01018a;
+        public static int sb_checkline_width = 0x7f01018b;
+        public static int sb_effect_duration = 0x7f010191;
+        public static int sb_enable_effect = 0x7f010195;
+        public static int sb_shadow_color = 0x7f010186;
+        public static int sb_shadow_effect = 0x7f010190;
+        public static int sb_shadow_offset = 0x7f010185;
+        public static int sb_shadow_radius = 0x7f010184;
+        public static int sb_show_indicator = 0x7f010193;
+        public static int sb_uncheck_color = 0x7f010187;
+        public static int sb_uncheckcircle_color = 0x7f01018c;
+        public static int sb_uncheckcircle_radius = 0x7f01018e;
+        public static int sb_uncheckcircle_width = 0x7f01018d;
     }
     public static final class styleable {
-        public static int[] SwitchButton = { 0x7f010169, 0x7f01016a, 0x7f01016b, 0x7f01016c, 0x7f01016d, 0x7f01016e, 0x7f01016f, 0x7f010170, 0x7f010171, 0x7f010172, 0x7f010173, 0x7f010174, 0x7f010175, 0x7f010176, 0x7f010177, 0x7f010178, 0x7f010179, 0x7f01017a };
+        public static int[] SwitchButton = { 0x7f010184, 0x7f010185, 0x7f010186, 0x7f010187, 0x7f010188, 0x7f010189, 0x7f01018a, 0x7f01018b, 0x7f01018c, 0x7f01018d, 0x7f01018e, 0x7f01018f, 0x7f010190, 0x7f010191, 0x7f010192, 0x7f010193, 0x7f010194, 0x7f010195 };
         public static int SwitchButton_sb_background = 16;
         public static int SwitchButton_sb_border_width = 5;
         public static int SwitchButton_sb_button_color = 14;

@@ -148,6 +148,10 @@
         "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/layout/abc_action_mode_bar.xml"
     },
     {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/layout/view_indicator.xml",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/src/main/res/layout/view_indicator.xml"
+    },
+    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/layout/adapter_camera_item.xml",
         "source": "/Users/qizfeng/.android/build-cache/7eb89d838084b30baf0fdee48ab5e8c9e06309e7/output/res/layout/adapter_camera_item.xml"
     },
@@ -162,6 +166,10 @@
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/layout/design_navigation_menu_item.xml",
         "source": "/Users/qizfeng/.android/build-cache/9947c25fdb2dbcb9a574b50a3dfff31183eb0654/output/res/layout/design_navigation_menu_item.xml"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/layout/view_title.xml",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/src/main/res/layout/view_title.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/layout/quick_view_load_more_2.xml",
@@ -252,6 +260,10 @@
         "source": "/Users/qizfeng/.android/build-cache/9947c25fdb2dbcb9a574b50a3dfff31183eb0654/output/res/layout/design_layout_snackbar.xml"
     },
     {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/layout/view_number.xml",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/src/main/res/layout/view_number.xml"
+    },
+    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/layout/quick_view_load_more.xml",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/src/main/res/layout/quick_view_load_more.xml"
     },
@@ -284,15 +296,15 @@
         "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/layout/abc_select_dialog_material.xml"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/layout/abc_action_bar_up_container.xml",
-        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/layout/abc_action_bar_up_container.xml"
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/layout/design_layout_tab_text.xml",
+        "source": "/Users/qizfeng/.android/build-cache/9947c25fdb2dbcb9a574b50a3dfff31183eb0654/output/res/layout/design_layout_tab_text.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/layout/abc_screen_simple_overlay_action_mode.xml",
         "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/layout/abc_screen_simple_overlay_action_mode.xml"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/layout/design_layout_tab_text.xml",
-        "source": "/Users/qizfeng/.android/build-cache/9947c25fdb2dbcb9a574b50a3dfff31183eb0654/output/res/layout/design_layout_tab_text.xml"
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/layout/abc_action_bar_up_container.xml",
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/layout/abc_action_bar_up_container.xml"
     }
 ]

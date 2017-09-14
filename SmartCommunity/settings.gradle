@@ -1,1 +1,1 @@
-include ':app', ':mylibrary','banner-lib'
+include ':app', ':mylibrary'
