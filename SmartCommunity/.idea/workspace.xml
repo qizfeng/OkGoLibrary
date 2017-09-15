@@ -167,7 +167,25 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/annotations/release/annotations.zip" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/annotations/release/annotations.zip" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/outputs/aar/mylibrary-debug.aar" afterPath="$PROJECT_DIR$/mylibrary/build/outputs/aar/mylibrary-debug.aar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/outputs/aar/mylibrary-release.aar" afterPath="$PROJECT_DIR$/mylibrary/build/outputs/aar/mylibrary-release.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/SwipeMenuRecyclerView_1_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/SwipeMenuRecyclerView_1_1_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/alanapi_switchbutton_0_0_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/alanapi_switchbutton_0_0_3.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/blur_2_0_0_beta4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/blur_2_0_0_beta4.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/drawee_1_3_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/drawee_1_3_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/fbcore_1_3_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/fbcore_1_3_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/floatingactionbutton_1_3_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/floatingactionbutton_1_3_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/fresco_1_3_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/fresco_1_3_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/glide_transformations_2_0_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/glide_transformations_2_0_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/imagepicker_0_3_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/imagepicker_0_3_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/imagepipeline_1_3_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/imagepipeline_1_3_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/imagepipeline_base_1_3_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/imagepipeline_base_1_3_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/library_1_0_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/library_1_0_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/library_1_2_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/library_1_2_4.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/ninegridview_0_2_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/ninegridview_0_2_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/rxandroid_1_2_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/rxandroid_1_2_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/switch_button_0_0_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/switch_button_0_0_3.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/view_core_0_2_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/view_core_0_2_1.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/apt/debug/com/project/community/ui/CommonDialogActivity$$ViewBinder.java" afterPath="$PROJECT_DIR$/app/build/generated/source/apt/debug/com/project/community/ui/CommonDialogActivity$$ViewBinder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/apt/debug/com/project/community/ui/MainActivity$$ViewBinder.java" afterPath="$PROJECT_DIR$/app/build/generated/source/apt/debug/com/project/community/ui/MainActivity$$ViewBinder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/apt/debug/com/project/community/ui/PhoneDialogActivity$$ViewBinder.java" afterPath="$PROJECT_DIR$/app/build/generated/source/apt/debug/com/project/community/ui/PhoneDialogActivity$$ViewBinder.java" />
@@ -762,6 +780,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/incremental/packageDebugResources/merger.xml" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/incremental/packageDebugResources/merger.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/incremental/packageReleaseResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/incremental/packageReleaseResources/compile-file-map.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/incremental/packageReleaseResources/merger.xml" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/incremental/packageReleaseResources/merger.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/mylibrary.iml" afterPath="$PROJECT_DIR$/mylibrary/mylibrary.iml" />
     </list>
     <ignored path="SmartCommunity.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -902,8 +921,8 @@
       <file leaf-file-name="activity_community_persion.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_community_persion.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="541">
-              <caret line="424" column="15" selection-start-line="424" selection-start-column="15" selection-end-line="424" selection-end-column="15" />
+            <state relative-caret-position="466">
+              <caret line="419" column="51" selection-start-line="419" selection-start-column="51" selection-end-line="419" selection-end-column="51" />
               <folding>
                 <element signature="e#493#507#0" expanded="true" />
                 <element signature="e#541#555#0" expanded="true" />
@@ -5518,8 +5537,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_community_persion.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="541">
-          <caret line="424" column="15" selection-start-line="424" selection-start-column="15" selection-end-line="424" selection-end-column="15" />
+        <state relative-caret-position="466">
+          <caret line="419" column="51" selection-start-line="419" selection-start-column="51" selection-end-line="419" selection-end-column="51" />
           <folding>
             <element signature="e#493#507#0" expanded="true" />
             <element signature="e#541#555#0" expanded="true" />
