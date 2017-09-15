@@ -602,8 +602,8 @@ ADDED from /Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app
 		ADDED from /Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/src/main/AndroidManifest.xml:344:17-67
 uses-sdk
 INJECTED from /Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
-MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/qizfeng/.android/build-cache/81c07d3a4899cd2654167ee23c1d8646b3df742b/output/AndroidManifest.xml:5:5-7:41
 MERGED from [com.android.support:multidex:1.0.1] /Users/qizfeng/.android/build-cache/42de5054db62cb773c8ddf6269df0bb7ea3868c6/output/AndroidManifest.xml:18:5-42
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/qizfeng/.android/build-cache/81c07d3a4899cd2654167ee23c1d8646b3df742b/output/AndroidManifest.xml:5:5-7:41
 MERGED from [SmartCommunity:mylibrary:unspecified] /Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/bundles/default/AndroidManifest.xml:7:5-9:41
 MERGED from [com.lzy.widget:ninegridview:0.2.1] /Users/qizfeng/.android/build-cache/f962e02b09ee69b99b54175f1d916cf1b4359ea2/output/AndroidManifest.xml:7:5-9:41
 MERGED from [com.lzy.widget:imagepicker:0.3.2] /Users/qizfeng/.android/build-cache/8fbbdb7e2b1f4bbdf1f25569eab43864ab09c5f8/output/AndroidManifest.xml:7:5-9:41
