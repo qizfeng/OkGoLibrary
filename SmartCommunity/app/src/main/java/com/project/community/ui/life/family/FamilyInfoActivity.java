@@ -423,7 +423,7 @@ public class FamilyInfoActivity extends BaseActivity implements View.OnClickList
         serverDao.getFamilyInfo(getUser(this).id, getUsername(this), roomNo, familyId, new DialogCallback<BaseResponse<List<FamilyModel>>>(this) {
             @Override
             public void onSuccess(BaseResponse<List<FamilyModel>> baseResponse, Call call, Response response) {
-                mTvFamilyNo.setText(baseResponse.retData.get(0).room.roomNo);
+                mTvFamilyNo.setText("房屋编号"+baseResponse.retData.get(0).room.roomNo);
                 mTvFamilyAddress.setText(baseResponse.retData.get(0).room.address);
 
                 personList = new ArrayList<>();

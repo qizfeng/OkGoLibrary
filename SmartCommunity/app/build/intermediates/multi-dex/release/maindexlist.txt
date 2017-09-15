@@ -46,8 +46,8 @@ android/support/multidex/MultiDex.class
 com/facebook/imagepipeline/producers/MultiplexProducer$Multiplexer.class
 android/support/v4/app/FragmentActivity.class
 android/support/v4/media/session/MediaSessionCompat$1.class
-android/support/v4/app/FragmentTabHost.class
 com/facebook/common/media/MediaUtils.class
+android/support/v4/app/FragmentTabHost.class
 com/facebook/imagepipeline/common/RotationOptions$RotationAngle.class
 android/support/design/widget/FloatingActionButton$1.class
 android/support/v4/util/ArrayMap.class
@@ -207,8 +207,8 @@ com/project/community/ui/user/AgreementWebViewActivity$JavascriptInterface.class
 android/support/annotation/FloatRange.class
 android/support/v4/view/ViewPager$MyAccessibilityDelegate.class
 android/support/v4/app/NotificationCompat$MessagingStyle.class
-okhttp3/Address.class
 rx/observers/TestObserver.class
+okhttp3/Address.class
 android/support/annotation/StringDef.class
 com/sina/weibo/sdk/net/WeiboParameters.class
 android/support/v4/media/RatingCompatKitkat.class
@@ -305,8 +305,8 @@ android/support/v4/media/session/MediaButtonReceiver.class
 com/facebook/drawee/generic/GenericDraweeHierarchyInflater.class
 android/support/v4/net/ConnectivityManagerCompat.class
 android/support/annotation/RequiresPermission.class
-android/support/v4/view/MenuItemCompat.class
 com/facebook/imagepipeline/core/ImagePipelineConfig.class
+android/support/v4/view/MenuItemCompat.class
 com/umeng/socialize/UMShareAPI.class
 com/chad/library/adapter/base/animation/AlphaInAnimation.class
 com/project/community/ui/life/zhengwu/WenjuanSearchActivity$JavascriptInterface.class
@@ -329,6 +329,7 @@ com/facebook/cache/disk/DynamicDefaultDiskStorage$State.class
 android/support/v4/text/util/LinkifyCompat$LinkifyMask.class
 butterknife/BindInt.class
 rx/plugins/RxJavaPlugins.class
+com/library/okgo/view/expandrecyclerview/ExpandableAdapter.class
 android/support/v7/widget/RecyclerView$OnScrollListener.class
 com/tigerliang/tablayout/TabLayout.class
 android/support/v4/view/ViewPager$1.class
@@ -792,8 +793,8 @@ android/support/v7/appcompat/R$dimen.class
 android/support/v4/app/FragmentManager.class
 android/support/design/widget/CoordinatorLayout$1.class
 android/support/annotation/Px.class
-uk/co/senab/photoview/PhotoView.class
 com/squareup/picasso/Picasso.class
+uk/co/senab/photoview/PhotoView.class
 android/support/v4/net/ConnectivityManagerCompat$ConnectivityManagerCompatApi16Impl.class
 android/support/annotation/AttrRes.class
 okhttp3/ConnectionSpec$Builder.class

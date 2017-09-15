@@ -554,6 +554,10 @@
             <enum name="invisible" value="1"/>
         </attr></declare-styleable>
     <declare-styleable name="PagerSlidingTabStrip"><attr format="color" name="pstsIndicatorColor"/><attr format="color" name="pstsUnderlineColor"/><attr format="color" name="pstsDividerColor"/><attr format="dimension" name="pstsIndicatorHeight"/><attr format="dimension" name="pstsUnderlineHeight"/><attr format="dimension" name="pstsDividerPadding"/><attr format="dimension" name="pstsTabPaddingLeftRight"/><attr format="dimension" name="pstsScrollOffset"/><attr format="reference" name="pstsTabBackground"/><attr format="boolean" name="pstsShouldExpand"/><attr format="boolean" name="pstsTextAllCaps"/></declare-styleable>
+    <declare-styleable name="PatchedRecyclerView"><attr format="boolean|reference" name="hasFixedSize"/><attr format="boolean|reference" name="nestedScrollingEnabled"/><attr format="enum" name="orientation">
+            <enum name="horizontal" value="0x0"/>
+            <enum name="vertical" value="0x1"/>
+        </attr></declare-styleable>
     <declare-styleable name="PopupWindow"><attr format="boolean" name="overlapAnchor"/><attr name="android:popupBackground"/><attr name="android:popupAnimationStyle"/></declare-styleable>
     <declare-styleable name="PopupWindowBackgroundState"><attr format="boolean" name="state_above_anchor"/></declare-styleable>
     <declare-styleable name="ProgressPieView"><attr name="android:text"/><attr name="android:textSize"/><attr name="android:textColor"/><attr format="integer" name="ppvProgress"/><attr format="integer" name="ppvMax"/><attr format="integer" name="ppvStartAngle"/><attr format="boolean" name="ppvInverted"/><attr format="boolean" name="ppvCounterclockwise"/><attr format="dimension" name="ppvStrokeWidth"/><attr format="reference|color" name="ppvBackgroundColor"/><attr format="reference|color" name="ppvProgressColor"/><attr format="reference|color" name="ppvStrokeColor"/><attr format="boolean" name="ppvShowStroke"/><attr format="boolean" name="ppvShowText"/><attr format="string" name="ppvTypeface"/><attr format="reference" name="ppvImage"/><attr format="enum" name="ppvProgressFillType">
@@ -779,6 +783,7 @@
     <dimen name="dp_1">1dp</dimen>
     <dimen name="dp_10">10dp</dimen>
     <dimen name="dp_105">105dp</dimen>
+    <dimen name="dp_12">12dp</dimen>
     <dimen name="dp_15">15dp</dimen>
     <dimen name="dp_20">20dp</dimen>
     <dimen name="dp_25">25dp</dimen>

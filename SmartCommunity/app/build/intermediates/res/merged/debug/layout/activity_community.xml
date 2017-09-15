@@ -50,7 +50,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="@dimen/dp_5"
-                    app:cardElevation="@dimen/dp_5"
+                    app:cardElevation="@dimen/dp_1"
                     app:cardPreventCornerOverlap="true"
                     app:cardUseCompatPadding="true">
 
@@ -59,7 +59,7 @@
                         android:layout_width="@dimen/dp_50"
                         android:layout_height="@dimen/dp_50"
                         android:layout_gravity="center"
-                        android:padding="@dimen/dp_15"
+                        android:padding="@dimen/dp_12"
                         android:scaleType="centerCrop"
                         android:src="@mipmap/d43_btn_1" />
                 </android.support.v7.widget.CardView>
@@ -67,9 +67,8 @@
                 <android.support.v7.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_10"
                     app:cardCornerRadius="@dimen/dp_5"
-                    app:cardElevation="@dimen/dp_5"
+                    app:cardElevation="@dimen/dp_1"
                     app:cardPreventCornerOverlap="true"
                     app:cardUseCompatPadding="true">
 
@@ -83,7 +82,7 @@
                         <ImageView
                             android:layout_width="@dimen/dp_50"
                             android:layout_height="@dimen/dp_50"
-                            android:padding="@dimen/dp_15"
+                            android:padding="@dimen/dp_12"
                             android:scaleType="centerCrop"
                             android:src="@mipmap/d43_btn_2" />
 
@@ -95,7 +94,7 @@
                         <ImageView
                             android:layout_width="@dimen/dp_50"
                             android:layout_height="@dimen/dp_50"
-                            android:padding="@dimen/dp_15"
+                            android:padding="@dimen/dp_12"
                             android:scaleType="centerCrop"
                             android:src="@mipmap/d43_btn_3" />
 
@@ -107,7 +106,7 @@
                         <ImageView
                             android:layout_width="@dimen/dp_50"
                             android:layout_height="@dimen/dp_50"
-                            android:padding="@dimen/dp_15"
+                            android:padding="@dimen/dp_12"
                             android:scaleType="centerCrop"
                             android:src="@mipmap/d43_btn_4" />
                     </LinearLayout>
