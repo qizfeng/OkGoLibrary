@@ -1,0 +1,324 @@
+<resources>
+    <string name="app_name" translatable="true">智慧社区</string>
+    <string name="app_title">吐鲁番阳光园智慧社区</string>
+    <!--底部导航栏标题-->
+    <string name="bottom_title_index">首页</string>
+    <string name="bottom_title_life">生活</string>
+    <string name="bottom_title_community">社区</string>
+    <string name="bottom_title_me">我</string>
+
+    <!--生活首页tabLayout-->
+    <string name="tab_title_life_zhengwu">政务</string>
+    <string name="tab_title_life_wuye">物业</string>
+    <string name="tab_title_life_minsheng">民生</string>
+
+
+    <!--物业选项卡标题-->
+    <string name="tab_title_wuye_all">全部</string>
+    <string name="tab_title_wuye_gonggao">社区公告</string>
+    <string name="tab_title_wuye_kuaixun">社区快讯</string>
+
+    <!--我的-->
+    <string name="txt_my_order">我的订单</string>
+    <string name="txt_my_collect">我的收藏</string>
+    <string name="txt_chat">即时聊天</string>
+    <string name="txt_my_topic">我的帖子</string>
+    <string name="txt_repair_record">报修记录</string>
+    <string name="txt_family_info">家庭信息</string>
+    <string name="txt_shop_manage">商铺管理</string>
+    <string name="txt_apply_shop">+申请商铺</string>
+    <string name="txt_my_repair_order">我的维修单</string>
+    <string name="txt_system_message">系统消息</string>
+
+    <string name="toast_menu_setting">设置</string>
+
+    <!--政务-->
+    <string name="title_wenjuan">问卷</string>
+    <string name="txt_wenjuan">问卷调查</string>
+    <string name="txt_submit">提交</string>
+    <string name="txt_know">我知道了</string>
+    <string name="txt_phone">手机号</string>
+    <string name="txt_work_time">工作时间:</string>
+    <string name="txt_hot_line">政府热线</string>
+    <!--民生-->
+    <string name="tab_title_minsheng_nearby">附近商家</string>
+    <string name="tab_title_minsheng_bbs">社区论坛</string>
+    <string name="txt_name">姓名</string>
+    <string name="txt_title">标题</string>
+    <string name="txt_suggestion">意见</string>
+    <string name="txt_hint_suggestion">请输入您的意见</string>
+    <string name="txt_hint_detail">请输入详细</string>
+    <string name="txt_call">呼叫</string>
+    <string name="txt_collect">收藏</string>
+    <string name="txt_share">分享</string>
+    <string name="title_topic_detail">正文</string>
+    <string name="txt_choise">请选择</string>
+    <string name="txt_theme">主题</string>
+    <string name="txt_depart">部门</string>
+    <string name="txt_choise_depart">选择部门</string>
+    <string name="txt_choise_theme">选择主题</string>
+    <string name="title_masses_guide">办事指南</string>
+    <string name="title_communication_notice">社区公告</string>
+    <!--登录-->
+    <string name="login_phone_hint">请输入手机号</string>
+    <string name="forget_phone_hint">请您输入手机号</string>
+    <string name="login_password_hint">请输入密码</string>
+    <string name="login_username_hint">请您输入用户名</string>
+    <string name="login_idcard_no_hint">请您输入身份证号</string>
+    <string name="login_button_login">登录</string>
+    <string name="login_button_register">注册</string>
+    <string name="login_remeber_pwd">&#160;记住密码</string>
+    <string name="login_forget_pwd">忘记密码?</string>
+    <string name="login_guest">游客方式登录</string>
+    <string name="login_other">快速登录</string>
+    <string name="login_no_account">没有账号?去注册</string>
+    <string name="login_username">用户名</string>
+    <string name="login_idcard_no">身份证号</string>
+    <string name="login_choise_disc">选择小区</string>
+    <!--注册-->
+    <string name="register_username_hint">请您输入真实姓名</string>
+    <string name="register_phone_hint">请您输入手机号</string>
+    <string name="register_code_hint">请您输入验证码</string>
+    <string name="register_password_hint">输入6&#8211;16位新密码</string>
+    <string name="register_tips">点击注册即表示同意</string>
+    <string name="register_service_hint">《服务条款》</string>
+    <string name="register_button_register">注册</string>
+    <string name="register_get_code">获取验证码</string>
+    <string name="register_password_re">输入6&#8211;16位新密码</string>
+    <string name="register_choise_area">选择小区</string>
+    <string name="register_service_title">服务条款</string>
+    <string name="register_newpassword_hint">重新输入密码</string>
+    <!--首页-->
+    <string name="txt_write_comment">写评论</string>
+    <string name="txt_button_send">发送</string>
+    <string name="title_category">分类</string>
+    <string name="txt_cancel">取消</string>
+    <string name="txt_move">上移</string>
+    <string name="txt_add">添加</string>
+    <string name="txt_added">已添加</string>
+
+    <!--设置-->
+    <string name="txt_clear_cache">清除缓存</string>
+    <string name="txt_about">关于我们</string>
+    <string name="txt_language">语言版本</string>
+    <string name="txt_push">消息推送</string>
+    <string name="txt_logout">退出登录</string>
+
+    <!--搜索-->
+    <string name="search">搜索</string>
+    <string name="searchHistory">搜索历史</string>
+    <string name="clearSearchHistory">清除历史记录</string>
+    <string name="str_search_hint">搜索</string>
+    <string name="str_searchHistory">搜索历史</string>
+    <string name="str_clearSearchHistory">清空搜索记录</string>
+    <string name="str_search_empty">没有搜索结果~</string>
+    <string name="str_empty_history">暂无搜索历史</string>
+
+    <!--缴费-->
+    <string name="txt_payway_water">水费</string>
+    <string name="txt_payway_gas">燃气费</string>
+    <string name="txt_payway_electric">电费</string>
+    <string name="txt_payway_property">物业费</string>
+    <string name="txt_payway_tv">有线电视费</string>
+    <string name="txt_payway_cooling">供冷费</string>
+    <string name="txt_pay_center">缴费中心</string>
+
+    <string name="button_add">+添加</string>
+
+    <string name="txt_go_pay">去缴费</string>
+    <string name="txt_pay_moeny_hint">请输入缴费金额(元)</string>
+    <string name="txt_alipay">支付宝</string>
+    <string name="txt_wei_pay">微信支付</string>
+    <!--添加房屋编号-->
+    <string name="txt_add_house_no_hint">请您输入房屋编号</string>
+    <string name="txt_add_house_no_next">下一步</string>
+    <string name="txt_add_house_no_desc">说明:\n房屋编号是指您缴费的房屋编码,无房屋编码客服电话:400&#8211;0000进行查询。</string>
+    <string name="txt_house_no">房屋编码</string>
+    <string name="txt_no_payment_info">暂无缴费信息</string>
+    <!--意见-->
+    <string name="txt_suggest_phone">请输入您的手机号</string>
+
+
+    <!--添加家庭-->
+    <string name="txt_family_add_person">添加人口</string>
+    <string name="txt_family_delete_family">删除此家庭</string>
+    <string name="txt_delete">删除</string>
+    <string name="txt_edit">编辑</string>
+    <string name="txt_family_person">家庭成员</string>
+    <string name="txt_add_family_name_hint">请您输入房屋名称</string>
+    <string name="txt_add_family_no_hint">请您输入房屋编号</string>
+    <string name="txt_family_delete_confirm">确定删除此家庭？</string>
+    <string name="txt_dialog_tips">该房屋未审核,是否提交房屋审核?</string>
+    <string name="txt_family_auditing">该房屋业主审核中</string>
+    <string name="txt_family_audit_error">该房屋业主审核未通过</string>
+    <string name="toast_error_permission">您不是该家庭业主,无法进行此操作。</string>
+    <!--添加人口-->
+    <string name="txt_add_person_name">真实姓名</string>
+    <string name="txt_add_person_header">头像</string>
+    <string name="txt_add_person_relative">和户主关系</string>
+    <string name="txt_add_person_position">职业</string>
+    <string name="txt_add_person_gender">性别</string>
+    <string name="txt_add_person_idcard">身份证号</string>
+    <string name="txt_add_person_age">年龄</string>
+    <string name="txt_add_person_birthday">出生日期</string>
+    <string name="txt_add_person_nation">民族</string>
+    <string name="txt_add_person_religion">宗教信仰</string>
+    <string name="txt_add_person_party">党派</string>
+    <string name="txt_add_person_mobile">手机号</string>
+    <string name="txt_add_person_address">房屋地址</string>
+    <string name="txt_add_person_name_hint">请输入姓名</string>
+    <string name="txt_add_person_position_hint">请输入职业</string>
+    <string name="txt_add_person_idcard_hint">请输入身份证号</string>
+    <string name="txt_add_person_mobile_hint">请输入手机号</string>
+    <string name="txt_add_person_address_hint">请输入房屋地址</string>
+    <string name="txt_add_person_choise_hint">请选择</string>
+
+    <string name="toast_empty_name">真实姓名不能为空</string>
+    <string name="toast_empty_mobile">手机号不能为空</string>
+    <string name="toast_empty_idcard">身份证号不能为空</string>
+    <string name="toast_error_name">真实姓名不能超过25个字符</string>
+
+    <string name="txt_gender_male">男</string>
+    <string name="txt_gender_female">女</string>
+    <!--个人信息-->
+    <string name="txt_nickname">昵称</string>
+    <string name="txt_bind_mobile">绑定手机号</string>
+    <string name="txt_modify_pwd">修改密码</string>
+    <string name="txt_write_houseno">填写房屋编号</string>
+    <string name="txt_is_owner">是否是业主</string>
+    <string name="txt_takephoto">拍照</string>
+    <string name="txt_pickphoto">从手机相册选择</string>
+    <string name="txt_choise_gender">选择性别</string>
+
+    <!--修改个人信息-->
+    <string name="txt_nickname_hint">请输入昵称</string>
+    <string name="txt_houseno_hint">请输入房屋编号</string>
+    <string name="txt_position_hint">请输入职业</string>
+    <string name="txt_choise_owner">选择业主</string>
+    <string name="txt_choise_relative">选择关系</string>
+    <string name="txt_choise_religion">选择宗教信仰</string>
+    <string name="txt_choise_party">选择党派</string>
+    <string name="txt_chose_nation">选择民族</string>
+    <string name="toast_nickname_error">昵称不能超过25个字符</string>
+    <string name="toast_modify_success">修改成功</string>
+    <string name="txt_ori_pwd_hint">请您输入原密码</string>
+    <string name="txt_new_pwd_hint">输入6&#8211;16位新密码</string>
+    <string name="toast_empty_new_pwd">请您输入新密码</string>
+    <string name="toast_error_new_pwd">请您输入6&#8211;16位新密码</string>
+    
+    
+    <!--社区-->
+    <!--范围筛选-->
+    <string name="txt_map_scope">范围</string>
+    <string name="txt_map_scope_1km">1公里范围内</string>
+    <string name="txt_map_scope_3km">3公里范围内</string>
+    <string name="txt_map_scope_5km">5公里范围内</string>
+    <string name="txt_map_scope_10km">10公里范围内</string>
+    <string name="txt_map_scope_50km">50公里范围内</string>
+
+    <!--审核状态-->
+    <string name="txt_map_check_status">状态</string>
+    <string name="txt_map_check_ing">审核中的</string>
+    <string name="txt_map_check_pass">已通过的</string>
+
+    <!--问题标签-->
+    <string name="txt_map_tag">标签</string>
+    <string name="txt_map_tag_all">全部</string>
+    <!--物业设施-->
+    <string name="txt_map_utility">物业设施</string>
+
+    
+    <!--通用-->
+    <string name="toast_error_pay">获取订单信息失败</string>
+    <string name="toast_error_phone">请输入正确的手机号</string>
+    <string name="toast_empty_phone">手机号码不能为空</string>
+    <string name="toast_empty_pwd">密码不能为空</string>
+    <string name="toast_error_pwd">请输入6&#8211;16位密码</string>
+    <string name="toast_empty_code">验证码不能为空</string>
+    <string name="toast_diff_pwd">两次密码不一致</string>
+    <string name="toast_empty_repwd">确认密码不能为空</string>
+    <string name="toast_add_category_nothing">已添加过,无需再次添加</string>
+    <string name="toast_empty_idcardno">身份证号不能为空</string>
+    <string name="toast_empty_username">用户名不能为空</string>
+    <string name="toast_error_idcard">请输入正确的身份证号</string>
+    <string name="toast_no_login">没有登录,无法进行此操作</string>
+
+    <string name="txt_save">保存</string>
+    <string name="txt_confirm">确定</string>
+    <string name="simple_view_behavior">com.project.community.view.SimpleViewBehavior</string>
+    <string name="translate_up_down_behavior">com.project.community.view.TranslateUpDownBehavior</string>
+    <string name="collasping_view_behavior">android.support.design.widget.CollapsingToolbarLayout</string>
+    <string name="recyclerview_view_behavior">android.support.v7.widget.RecyclerView</string>
+    <string name="empty_no_data">没有数据,点击重试</string>
+    <string name="toast_no_data">暂无数据</string>
+    <string name="empty_no_comment">暂无评论</string>
+    <string name="empty_no_data_family">暂无家庭信息~</string>
+    <string name="network_error">似乎已断开与互联网的连接。</string>
+    <string name="permission_tips">您拒绝了权限,部分功能将不可使用</string>
+    <string name="txt_confirm_delete">您是否确定要删除?</string>
+    <string name="txt_unsave">离开本页,填写的内容将不保留,您是否确定离开?</string>
+    <string name="txt_dialog_house_no">房屋编码</string>
+    <string name="btn_bindService">bindService</string>
+    <string name="btn_unbindService">UnbindService</string>
+    <string name="loaction_prod_name">移动定位器，随时随地确认我当前的位置</string>
+    <string name="dialog_name_gps">GPS定位</string>
+    <string name="dialog_gps_content">您的GPS没有开启，是否去开启？（开启后可以为您提供更精确的定位服务。）</string>
+    <string name="dialog_btn_open">去开启</string>
+    <string name="dialog_btn_cancel">否，谢谢</string>
+    <string name="dialog_name_network">网络异常</string>
+    <string name="dialog_network_content">没有找到可用的网络，请确认WLAN、3G、2G网络至少有一项可以使用。</string>
+    <string name="dialog_btn_setting">设置</string>
+    <string name="dialog_btn_exit">退出</string>
+    <string name="notification_network_title">网络不可用，请确认WLAN、3G、2G网络至少有一项可以使用。</string>
+    <string name="notification_network_name">移动定位器提醒您</string>
+    <string name="notification_network_content">网络异常，请确认WLAN、3G、2G网络至少有一项可以使用</string>
+    <string name="notification_gps_title">您的GPS没有开启，开启后可以为您提供更精确的定位服务。</string>
+    <string name="notification_gps_name">移动定位器提醒您</string>
+    <string name="notification_gps_content">您的GPS没有开启，开启后可以为您提供更精确的定位服务。</string>
+
+    <string name="txt_dont_leave">不离开</string>
+    <string name="txt_leave">离开</string>
+    <string name="txt_money_unit">元</string>
+    <string name="txt_receive">回复 </string>
+    <string name="toast_no_comment">该文章不允许评论</string>
+    <string name="toast_no_collect">该文章不允许收藏</string>
+    <string name="toast_no_share">该文章不允许分享</string>
+    <!--activity label name-->
+    <string name="activity_splash">启动动画</string>
+    <string name="activity_imageborwse">图片浏览</string>
+    <string name="activity_main">首页</string>
+    <string name="activity_webview">webView</string>
+    <string name="activity_welcome">欢迎页</string>
+    <string name="activity_category">分类</string>
+    <string name="activity_minsheng">民生</string>
+    <string name="activity_wuye">物业</string>
+    <string name="activity_zhengwu">政务</string>
+    <string name="activity_login">登录</string>
+    <string name="activity_register">注册</string>
+    <string name="activity_wenjuan">问卷</string>
+    <string name="activity_write_wenjuan">填写问卷</string>
+    <string name="activity_wenjuan_search">问卷搜索</string>
+    <string name="activity_wenjuan_result">投票结果</string>
+    <string name="activity_topic_detail">正文</string>
+    <string name="activity_forget">找回密码</string>
+    <string name="activity_setting">设置</string>
+    <string name="activity_search">搜索</string>
+    <string name="activity_payment">缴费</string>
+    <string name="activity_pay_electric">缴电费</string>
+    <string name="activity_pay_wuye">缴物业费</string>
+    <string name="activity_pay_water">缴水费</string>
+    <string name="activity_pay_history">缴费历史</string>
+    <string name="activity_add_house">添加</string>
+    <string name="activity_pay_detail">缴费详情</string>
+    <string name="activity_family_info">家庭信息</string>
+    <string name="activity_family_add">添加家庭</string>
+    <string name="activity_family_add_person">添加人口</string>
+    <string name="activity_family_edit_person">编辑人口</string>
+    <string name="activity_family_look_person">查看人口</string>
+    <string name="activity_userinfo">个人信息</string>
+    <string name="activity_modify_nickname">修改昵称</string>
+    <string name="activity_modify_houseno">修改房屋编号</string>
+    <string name="activity_modify_position">修改职业</string>
+    <string name="activity_modify_pwd">修改登录密码</string>
+    <string name="activity_agreement">服务条款</string>
+</resources>
