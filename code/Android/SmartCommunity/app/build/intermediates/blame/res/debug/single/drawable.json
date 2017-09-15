@@ -140,16 +140,16 @@
         "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_btn_check_material.xml"
     },
     {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/drawable/umeng_socialize_alipay.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/bundles/default/res/drawable/umeng_socialize_alipay.png"
+    },
+    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/drawable/abc_btn_radio_material.xml",
         "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_btn_radio_material.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/drawable/notification_bg.xml",
         "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/notification_bg.xml"
-    },
-    {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/drawable/umeng_socialize_alipay.png",
-        "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/bundles/default/res/drawable/umeng_socialize_alipay.png"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/drawable/umeng_socialize_delete.png",
