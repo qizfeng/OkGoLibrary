@@ -541,8 +541,8 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
                     popupWindow = new CommentPopwindow(ZhengwuActivity.this, new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            popupWindow.dismiss();
                             popupWindow.et_comment.setText("");
+                            popupWindow.dismiss();
                         }
                     });
                 popupWindow.lv_container.getLayoutParams().height = (int) (ScreenUtils.getScreenHeight(ZhengwuActivity.this) * 0.8);

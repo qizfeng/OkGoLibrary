@@ -60,6 +60,7 @@ public class CommentPopwindow extends PopupWindow {
 //                if (event.getAction() == MotionEvent.ACTION_UP) {
 //                    if (y < height) {
                 KeyBoardUtils.closeKeybord(et_comment, mContext);
+                et_comment.setText("");
                 dismiss();
 //                    }
 //                }

@@ -12,141 +12,6 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/qizfeng/.android/build-cache/7667dfc101d016027d55fea8096b17cf454b9925/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="8a97b6603c0e43c7cd97612f3735a36928a61c6e">
-        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_9fb829ffb265e0a8e9834d3a9e8b14d674b44822/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/qizfeng/.android/build-cache/d9d0566f4d202544819ec07d102e287004c425d3/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="48c7f54c2515a2312d3a4481d10c43fbb807f3af">
-        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_6ac08d18fd039bbd9d0ca2c0cb5b5922ab66c5a2/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/bundles/default/libs/umeng_social_tool.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="8b17b7c71ac912fb54ad4df2c5d1f3b36ec95837">
-        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/8/umeng_social_tool_2b5fa3bd6b2fe5777e2da8c5562074d23ce817b9/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/qizfeng/.android/build-cache/e40b82232b5c45b02b750b417c74662e46ec375b/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="df451c6f391e3e32022fc964ed87bd57a5869128">
-        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_64d94df0fceeae308c6ae12ca4d384b46bd7c537/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/qizfeng/.android/build-cache/8fbbdb7e2b1f4bbdf1f25569eab43864ab09c5f8/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="1243c9e226ac87fe21d086e346604f3e66a1e21b">
-        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_1106af0623b76484ac49ba389ac3c966b9756997/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/libs/baidumapapi_util_v4_3_1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="f35f848bd2d9c4fadaa9410b4de1756c58cc7bfd">
-        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/2/baidumapapi_util_v4_3_1_7705deaa8a6ec53ea3c2288e5bc5b8e5ec7d97df/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/libs/locSDK_6.13.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="2cdb37444b41b42e1ce5a8a27e5d3c22e1c57479">
-        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/2/locSDK_6.13_5e63d3f88d1edc22c0a928fad9cdb8b683193b3b/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/libs/baidumapapi_radar_v4_3_1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="1fc076f176eb31a019a30c9e335c4b2960abfbc2">
-        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/2/baidumapapi_radar_v4_3_1_23e41d26387fb9761775c95eb57556230ff90429/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/bundles/default/libs/SocialSDK_Sina_Full.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="d641412ff474551fca6bb372b4f9d8004aceaa71">
-        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/8/SocialSDK_Sina_Full_456674c1de369e6287a2d03fe9307991906eb5be/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/qizfeng/.android/build-cache/930e7dea723e1eb61f709ba606529445887037f2/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="c65a2e39d54023bac3aef64a2f0cff89289c7ff6">
-        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_c751d87483e93c1d5f92b6b33c9ee6eb983c299e/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/bundles/default/libs/SocialSDK_alipay.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="a4826b7c66807a90ed57e1d559d402508ff3c775">
-        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/8/SocialSDK_alipay_9a1ef2a27d8c23b963517a9122459369ec22b647/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/qizfeng/.android/build-cache/f962e02b09ee69b99b54175f1d916cf1b4359ea2/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="19556fcd27f540abd2e6e8179107fcbae4d983fa">
-        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_a3ccabbad61315ff772d479ca9dfbe388d4ebf86/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/bundles/default/libs/umeng_social_shareboard.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="a13ad9b35bb4d7057d0f3bbacc335ba0ad55f267">
-        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/8/umeng_social_shareboard_77d908ad8e56c93489f2a481aca462583116f6e4/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/bundles/default/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="cbf5aeaff3f03df31dc03652091bac070e5d6645">
-        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/4/classes_0bbf7d6522af0ef3e5741cdea2624702c02626d8/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/qizfeng/.android/build-cache/ed7b5c64c1f70e45ace3a93ead37ee68e584ee97/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="62e9322b0ed4fadcbd50c95741f1cd50ce5c7e12">
-        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_721dd7dbb185fd8ec72021b12d1ebb6eb0485f70/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/bundles/default/libs/SocialSDK_QQ_Full.jar"
         jumboMode="false"
         optimize="true"
@@ -165,12 +30,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/qizfeng/.android/build-cache/b19d110f7ab2d48c75914be14111f845b1285258/output/jars/classes.jar"
+        jar="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/bundles/default/libs/umeng_social_tool.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.3"
-        sha1="98b5309c8d368a7c83ca5f90e0c905044c195edd">
-        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_3389a2e8965cbf273aeb92968cbfec6393e7ed5e/classes.dex" />
+        sha1="8b17b7c71ac912fb54ad4df2c5d1f3b36ec95837">
+        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/8/umeng_social_tool_2b5fa3bd6b2fe5777e2da8c5562074d23ce817b9/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -180,6 +45,15 @@
         revision="25.0.3"
         sha1="83e507bfde7b744e7bee0bb68575275bf7112f95">
         <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/8/alipaySdk-20170725_816f64fd32359612794002d790aa0a9834b43b83/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/libs/baidumapapi_util_v4_3_1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="f35f848bd2d9c4fadaa9410b4de1756c58cc7bfd">
+        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/2/baidumapapi_util_v4_3_1_7705deaa8a6ec53ea3c2288e5bc5b8e5ec7d97df/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -210,12 +84,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/qizfeng/.android/build-cache/bf00932ffdaf5a3a248efd4607ef39ee43897137/output/jars/classes.jar"
+        jar="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/libs/locSDK_6.13.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.3"
-        sha1="37345de2ed2772f385eaeec37a9c2ff0fea99ad7">
-        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_6956c111b6341af97e53762b7901c08c551c9fc2/classes.dex" />
+        sha1="2cdb37444b41b42e1ce5a8a27e5d3c22e1c57479">
+        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/2/locSDK_6.13_5e63d3f88d1edc22c0a928fad9cdb8b683193b3b/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -246,30 +120,21 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/qizfeng/.android/build-cache/516ae1d3ddbbad0788784603e10ddae7b87b00a1/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="5e7a3524803c85661f1197509b3ec9caff4816d9">
-        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_fd84357e192b832c8c55135a7867e00135e63909/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/qizfeng/.android/build-cache/310414fb2ba1136a007b7ba78c5d725aa67b7827/output/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.3"
-        sha1="972a82257700c4870306ec1e79263e6b704e154e">
-        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_5cd67560f03c51cd12049a76e37fcc82013c9c44/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/bundles/default/libs/SocialSDK_WeiXin_Full.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.3"
         sha1="e48e59b478dc9d5341e7805a6a79c6a0a00ff8a2">
         <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/8/SocialSDK_WeiXin_Full_620dc8e26e646ede3f8fab344b5b1bfa10610f27/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/libs/baidumapapi_radar_v4_3_1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="1fc076f176eb31a019a30c9e335c4b2960abfbc2">
+        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/2/baidumapapi_radar_v4_3_1_23e41d26387fb9761775c95eb57556230ff90429/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -282,12 +147,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/qizfeng/.android/build-cache/8a6b8264351b6c82bdcd1828b98f31ad0058e55a/output/jars/classes.jar"
+        jar="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/bundles/default/libs/SocialSDK_Sina_Full.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.3"
-        sha1="5a2386ad9bfff580b206a7fe305cdccd00798159">
-        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d7c0072a4b2016b299ba9e0ea50384bb4ebdbdf9/classes.dex" />
+        sha1="d641412ff474551fca6bb372b4f9d8004aceaa71">
+        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/8/SocialSDK_Sina_Full_456674c1de369e6287a2d03fe9307991906eb5be/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -300,21 +165,30 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/qizfeng/.android/build-cache/6acf25118917c36fe776521956bff03753ccacbd/output/jars/classes.jar"
+        jar="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/bundles/default/libs/SocialSDK_alipay.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.3"
-        sha1="72128af126ddd7d6252da9357fe560d3abcdfb0c">
-        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_5da26102245f8ab84feb1b5f70d68f62ee6d025c/classes.dex" />
+        sha1="a4826b7c66807a90ed57e1d559d402508ff3c775">
+        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/8/SocialSDK_alipay_9a1ef2a27d8c23b963517a9122459369ec22b647/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/qizfeng/.android/build-cache/ac598269815d9db1a04a952384375a2db0d45929/output/jars/classes.jar"
+        jar="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/bundles/default/libs/umeng_social_shareboard.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.3"
-        sha1="fe85b87215e405f5917d40ae4960488ac9224b74">
-        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_8cf1fb82397823e57770ea01678d3c247a50c47e/classes.dex" />
+        sha1="a13ad9b35bb4d7057d0f3bbacc335ba0ad55f267">
+        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/8/umeng_social_shareboard_77d908ad8e56c93489f2a481aca462583116f6e4/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/bundles/default/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="6ceb486b6544f4b10bec159ec916363f3625281d">
+        <dex dex="/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/transforms/dex/debug/folders/1000/4/classes_0bbf7d6522af0ef3e5741cdea2624702c02626d8/classes.dex" />
     </item>
     <item
         is-multidex="true"

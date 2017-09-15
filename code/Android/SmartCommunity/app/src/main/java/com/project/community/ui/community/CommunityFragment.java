@@ -163,9 +163,9 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
             R.string.txt_map_check_ing,
             R.string.txt_map_check_pass
     };
-    private String [] tagArr = new String []{
+    private String[] tagArr = new String[]{
             "问题人员",
-           "吸毒"
+            "吸毒"
     };
 
     private List<TextView> mScopeBtnArr = new ArrayList<>();
@@ -591,19 +591,13 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                 .newMapStatus(mMapStatus);
         mBaiduMap.setMapStatus(u);
 
-//        mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
-//            @Override
-//            public boolean onMarkerClick(Marker marker) {
-//                MapStatus mMapStatus = new MapStatus.Builder()
-//                        .target(marker.getPosition())
-//                        .zoom(20)
-//                        .build();
-//                MapStatusUpdate u = MapStatusUpdateFactory
-//                        .newMapStatus(mMapStatus);
-//                mBaiduMap.setMapStatus(u);
-//                return false;
-//            }
-//        });
+        mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                CommunityFamilyActivity.startActivity(getActivity(), new Bundle());
+                return false;
+            }
+        });
 
 
         mBaiduMap.setOnMarkerDragListener(new BaiduMap.OnMarkerDragListener() {

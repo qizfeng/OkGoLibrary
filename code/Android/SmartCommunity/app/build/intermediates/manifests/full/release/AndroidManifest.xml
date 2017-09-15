@@ -240,6 +240,10 @@
         <activity
             android:name="com.project.community.ui.user.AgreementWebViewActivity"
             android:label="@string/activity_add_house" />
+        <activity
+            android:name="com.project.community.ui.community.CommunityFamilyActivity"
+            android:label="社区家庭人员列表"
+            android:screenOrientation="portrait" />
         <!-- 自定义service -->
         <service
             android:name="com.project.community.service.AppLocationService"
