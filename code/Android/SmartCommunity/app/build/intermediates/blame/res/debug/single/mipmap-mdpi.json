@@ -1,10 +1,10 @@
 [
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-mdpi/ic_launcher_round.png",
-        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-mdpi/ic_launcher_round.png"
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-mdpi/ic_launcher_round.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/src/main/res/mipmap-mdpi/ic_launcher_round.png"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-mdpi/ic_launcher.png",
-        "source": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/src/main/res/mipmap-mdpi/ic_launcher.png"
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-mdpi/ic_launcher.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/src/main/res/mipmap-mdpi/ic_launcher.png"
     }
 ]

@@ -1,46 +1,46 @@
 [
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/color-v23/abc_tint_switch_track.xml",
-        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/color-v23/abc_tint_switch_track.xml"
-    },
-    {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/color-v23/abc_tint_seek_thumb.xml",
-        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/color-v23/abc_tint_seek_thumb.xml"
-    },
-    {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/color-v23/abc_btn_colored_borderless_text_material.xml",
-        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/color-v23/abc_btn_colored_borderless_text_material.xml"
-    },
-    {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/color-v23/abc_tint_switch_thumb.xml",
-        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/color-v23/abc_tint_switch_thumb.xml"
-    },
-    {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/color-v23/abc_tint_default.xml",
-        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/color-v23/abc_tint_default.xml"
-    },
-    {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/color-v23/abc_tint_edittext.xml",
-        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/color-v23/abc_tint_edittext.xml"
-    },
-    {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/color-v23/abc_tint_btn_checkable.xml",
-        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/color-v23/abc_tint_btn_checkable.xml"
-    },
-    {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/color-v23/design_tint_password_toggle.xml",
-        "source": "/Users/qizfeng/.android/build-cache/9947c25fdb2dbcb9a574b50a3dfff31183eb0654/output/res/color-v23/design_tint_password_toggle.xml"
-    },
-    {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/color-v23/abc_color_highlight_material.xml",
-        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/color-v23/abc_color_highlight_material.xml"
-    },
-    {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/color-v23/abc_tint_spinner.xml",
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/color-v23/abc_tint_spinner.xml",
         "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/color-v23/abc_tint_spinner.xml"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/app/build/intermediates/res/merged/debug/color-v23/abc_btn_colored_text_material.xml",
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/color-v23/abc_tint_seek_thumb.xml",
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/color-v23/abc_tint_seek_thumb.xml"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/color-v23/abc_btn_colored_text_material.xml",
         "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/color-v23/abc_btn_colored_text_material.xml"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/color-v23/abc_tint_default.xml",
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/color-v23/abc_tint_default.xml"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/color-v23/abc_tint_edittext.xml",
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/color-v23/abc_tint_edittext.xml"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/color-v23/abc_tint_btn_checkable.xml",
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/color-v23/abc_tint_btn_checkable.xml"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/color-v23/abc_btn_colored_borderless_text_material.xml",
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/color-v23/abc_btn_colored_borderless_text_material.xml"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/color-v23/abc_color_highlight_material.xml",
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/color-v23/abc_color_highlight_material.xml"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/color-v23/abc_tint_switch_thumb.xml",
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/color-v23/abc_tint_switch_thumb.xml"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/color-v23/abc_tint_switch_track.xml",
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/color-v23/abc_tint_switch_track.xml"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/color-v23/design_tint_password_toggle.xml",
+        "source": "/Users/qizfeng/.android/build-cache/9947c25fdb2dbcb9a574b50a3dfff31183eb0654/output/res/color-v23/design_tint_password_toggle.xml"
     }
 ]
