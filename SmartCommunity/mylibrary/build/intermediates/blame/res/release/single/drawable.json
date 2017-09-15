@@ -4,10 +4,6 @@
         "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_seekbar_track_material.xml"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/sw_thumb_miui_drawable.xml",
-        "source": "/Users/qizfeng/.android/build-cache/7f61f17f092bdee881e5bb9ecb43834444a4f6e3/output/res/drawable/sw_thumb_miui_drawable.xml"
-    },
-    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/umeng_socialize_back_icon.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/src/main/res/drawable/umeng_socialize_back_icon.png"
     },
@@ -188,20 +184,12 @@
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/src/main/res/drawable/umeng_socialize_edit_bg.xml"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/sw_thumb_flyme_drawable.xml",
-        "source": "/Users/qizfeng/.android/build-cache/7f61f17f092bdee881e5bb9ecb43834444a4f6e3/output/res/drawable/sw_thumb_flyme_drawable.xml"
-    },
-    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/notification_tile_bg.xml",
         "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/notification_tile_bg.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/design_fab_background.xml",
         "source": "/Users/qizfeng/.android/build-cache/9947c25fdb2dbcb9a574b50a3dfff31183eb0654/output/res/drawable/design_fab_background.xml"
-    },
-    {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/sw_back_flyme_drawable.xml",
-        "source": "/Users/qizfeng/.android/build-cache/7f61f17f092bdee881e5bb9ecb43834444a4f6e3/output/res/drawable/sw_back_flyme_drawable.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/selector_top_ok.xml",
@@ -264,10 +252,6 @@
         "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_ic_arrow_drop_right_black_24dp.xml"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/sw_thumb.xml",
-        "source": "/Users/qizfeng/.android/build-cache/7f61f17f092bdee881e5bb9ecb43834444a4f6e3/output/res/drawable/sw_thumb.xml"
-    },
-    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/shape_bottom_top_line.xml",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/src/main/res/drawable/shape_bottom_top_line.xml"
     },
@@ -284,16 +268,8 @@
         "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_btn_colored_material.xml"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/sw_back_ios_drawable.xml",
-        "source": "/Users/qizfeng/.android/build-cache/7f61f17f092bdee881e5bb9ecb43834444a4f6e3/output/res/drawable/sw_back_ios_drawable.xml"
-    },
-    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/design_password_eye.xml",
         "source": "/Users/qizfeng/.android/build-cache/9947c25fdb2dbcb9a574b50a3dfff31183eb0654/output/res/drawable/design_password_eye.xml"
-    },
-    {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/sw_back_miui_drawable.xml",
-        "source": "/Users/qizfeng/.android/build-cache/7f61f17f092bdee881e5bb9ecb43834444a4f6e3/output/res/drawable/sw_back_miui_drawable.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/umeng_socialize_qq.png",

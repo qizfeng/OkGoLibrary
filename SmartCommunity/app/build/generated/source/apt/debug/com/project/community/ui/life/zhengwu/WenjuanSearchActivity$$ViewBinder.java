@@ -10,14 +10,14 @@ public class WenjuanSearchActivity$$ViewBinder<T extends com.project.community.u
     View view;
     view = finder.findRequiredView(source, 2131624105, "field 'toolbar'");
     target.toolbar = finder.castView(view, 2131624105, "field 'toolbar'");
-    view = finder.findRequiredView(source, 2131624300, "field 'pb'");
-    target.pb = finder.castView(view, 2131624300, "field 'pb'");
-    view = finder.findRequiredView(source, 2131624183, "field 'mAppbar'");
-    target.mAppbar = finder.castView(view, 2131624183, "field 'mAppbar'");
+    view = finder.findRequiredView(source, 2131624303, "field 'pb'");
+    target.pb = finder.castView(view, 2131624303, "field 'pb'");
+    view = finder.findRequiredView(source, 2131624186, "field 'mAppbar'");
+    target.mAppbar = finder.castView(view, 2131624186, "field 'mAppbar'");
     view = finder.findRequiredView(source, 2131624106, "field 'mTvTitle'");
     target.mTvTitle = finder.castView(view, 2131624106, "field 'mTvTitle'");
-    view = finder.findRequiredView(source, 2131624258, "field 'etSearchContent'");
-    target.etSearchContent = finder.castView(view, 2131624258, "field 'etSearchContent'");
+    view = finder.findRequiredView(source, 2131624261, "field 'etSearchContent'");
+    target.etSearchContent = finder.castView(view, 2131624261, "field 'etSearchContent'");
     view = finder.findRequiredView(source, 2131624107, "field 'tvCancel' and method 'onCancel'");
     target.tvCancel = finder.castView(view, 2131624107, "field 'tvCancel'");
     view.setOnClickListener(
@@ -28,14 +28,14 @@ public class WenjuanSearchActivity$$ViewBinder<T extends com.project.community.u
           target.onCancel(p0);
         }
       });
-    view = finder.findRequiredView(source, 2131624263, "field 'mListViewHistory'");
-    target.mListViewHistory = finder.castView(view, 2131624263, "field 'mListViewHistory'");
-    view = finder.findRequiredView(source, 2131624260, "field 'llHistory'");
-    target.llHistory = finder.castView(view, 2131624260, "field 'llHistory'");
-    view = finder.findRequiredView(source, 2131624265, "field 'llResult'");
-    target.llResult = finder.castView(view, 2131624265, "field 'llResult'");
-    view = finder.findRequiredView(source, 2131624259, "field 'ivClear' and method 'ClearContent'");
-    target.ivClear = finder.castView(view, 2131624259, "field 'ivClear'");
+    view = finder.findRequiredView(source, 2131624266, "field 'mListViewHistory'");
+    target.mListViewHistory = finder.castView(view, 2131624266, "field 'mListViewHistory'");
+    view = finder.findRequiredView(source, 2131624263, "field 'llHistory'");
+    target.llHistory = finder.castView(view, 2131624263, "field 'llHistory'");
+    view = finder.findRequiredView(source, 2131624268, "field 'llResult'");
+    target.llResult = finder.castView(view, 2131624268, "field 'llResult'");
+    view = finder.findRequiredView(source, 2131624262, "field 'ivClear' and method 'ClearContent'");
+    target.ivClear = finder.castView(view, 2131624262, "field 'ivClear'");
     view.setOnClickListener(
       new butterknife.internal.DebouncingOnClickListener() {
         @Override public void doClick(
@@ -44,8 +44,8 @@ public class WenjuanSearchActivity$$ViewBinder<T extends com.project.community.u
           target.ClearContent(p0);
         }
       });
-    view = finder.findRequiredView(source, 2131624264, "field 'mClearHistoryBtn' and method 'ClearSearchHistory'");
-    target.mClearHistoryBtn = finder.castView(view, 2131624264, "field 'mClearHistoryBtn'");
+    view = finder.findRequiredView(source, 2131624267, "field 'mClearHistoryBtn' and method 'ClearSearchHistory'");
+    target.mClearHistoryBtn = finder.castView(view, 2131624267, "field 'mClearHistoryBtn'");
     view.setOnClickListener(
       new butterknife.internal.DebouncingOnClickListener() {
         @Override public void doClick(
@@ -54,7 +54,7 @@ public class WenjuanSearchActivity$$ViewBinder<T extends com.project.community.u
           target.ClearSearchHistory(p0);
         }
       });
-    view = finder.findRequiredView(source, 2131624262, "field 'mViewLineTop'");
+    view = finder.findRequiredView(source, 2131624265, "field 'mViewLineTop'");
     target.mViewLineTop = view;
   }
 

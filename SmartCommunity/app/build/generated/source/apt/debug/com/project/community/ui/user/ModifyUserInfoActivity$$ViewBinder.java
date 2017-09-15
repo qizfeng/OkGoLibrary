@@ -12,10 +12,10 @@ public class ModifyUserInfoActivity$$ViewBinder<T extends com.project.community.
     target.mToolBar = finder.castView(view, 2131624105, "field 'mToolBar'");
     view = finder.findRequiredView(source, 2131624106, "field 'mTvTitle'");
     target.mTvTitle = finder.castView(view, 2131624106, "field 'mTvTitle'");
-    view = finder.findRequiredView(source, 2131624246, "field 'mEtContent'");
-    target.mEtContent = finder.castView(view, 2131624246, "field 'mEtContent'");
-    view = finder.findRequiredView(source, 2131624245, "field 'mBtnSave' and method 'onSave'");
-    target.mBtnSave = finder.castView(view, 2131624245, "field 'mBtnSave'");
+    view = finder.findRequiredView(source, 2131624249, "field 'mEtContent'");
+    target.mEtContent = finder.castView(view, 2131624249, "field 'mEtContent'");
+    view = finder.findRequiredView(source, 2131624248, "field 'mBtnSave' and method 'onSave'");
+    target.mBtnSave = finder.castView(view, 2131624248, "field 'mBtnSave'");
     view.setOnClickListener(
       new butterknife.internal.DebouncingOnClickListener() {
         @Override public void doClick(

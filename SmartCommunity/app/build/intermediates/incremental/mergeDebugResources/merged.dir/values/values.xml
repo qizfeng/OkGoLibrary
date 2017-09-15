@@ -172,7 +172,6 @@
     <color name="login_input_color">#799CC5</color>
     <color name="logout_txt_color">#D65432</color>
     <color name="lv_divider">#dad9e2</color>
-    <color name="material_blue_500">#5677fc</color>
     <color name="material_blue_grey_800">#ff37474f</color>
     <color name="material_blue_grey_900">#ff263238</color>
     <color name="material_blue_grey_950">#ff21272b</color>
@@ -210,16 +209,6 @@
     <color name="shouye_lv_tv">#909090</color>
     <color name="shouye_renmen_tv">#2b2b2b</color>
     <color name="status_bar">#303135</color>
-    <color name="sw_bg_checked">#A6D3CF</color>
-    <color name="sw_bg_unChecked">#A6A6A6</color>
-    <color name="sw_bg_unEnabled">#A6A6A6</color>
-    <color name="sw_ripple_checked">#33019285</color>
-    <color name="sw_ripple_normal">#1E000000</color>
-    <color name="sw_solid_checked">#019285</color>
-    <color name="sw_solid_checked_disable">#AAAAAA</color>
-    <color name="sw_solid_disable">#FFFFFF</color>
-    <color name="sw_solid_normal">#ECECEC</color>
-    <color name="sw_solid_shadow">#33000000</color>
     <color name="switch_button_color">#48B759</color>
     <color name="switch_thumb_disabled_material_dark">#ff616161</color>
     <color name="switch_thumb_disabled_material_light">#ffbdbdbd</color>
@@ -467,7 +456,7 @@
     <declare-styleable name="CropImageView"><attr format="color" name="cropMaskColor"/><attr format="color" name="cropBorderColor"/><attr format="dimension" name="cropBorderWidth"/><attr format="dimension" name="cropFocusWidth"/><attr format="dimension" name="cropFocusHeight"/><attr format="enum" name="cropStyle"><enum name="rectangle" value="0"/><enum name="circle" value="1"/></attr></declare-styleable>
     <declare-styleable name="DesignTheme"><attr format="reference" name="bottomSheetDialogTheme"/><attr format="reference" name="bottomSheetStyle"/><attr format="color" name="textColorError"/></declare-styleable>
     <declare-styleable name="DrawerArrowToggle"><attr format="color" name="color"/><attr format="boolean" name="spinBars"/><attr format="dimension" name="drawableSize"/><attr format="dimension" name="gapBetweenBars"/><attr format="dimension" name="arrowHeadLength"/><attr format="dimension" name="arrowShaftLength"/><attr format="dimension" name="barLength"/><attr format="dimension" name="thickness"/></declare-styleable>
-    <declare-styleable name="FloatingActionButton"><attr format="color" name="fab_colorPressed"/><attr format="color" name="fab_colorNormal"/><attr format="color" name="fab_colorRipple"/><attr format="color" name="fab_colorDisabled"/><attr format="boolean" name="fab_shadow"/><attr format="enum" name="fab_type"><enum name="normal" value="0"/><enum name="mini" value="1"/></attr><attr name="backgroundTint"/><attr name="backgroundTintMode"/><attr format="color" name="rippleColor"/><attr name="fabSize">
+    <declare-styleable name="FloatingActionButton"><attr name="backgroundTint"/><attr name="backgroundTintMode"/><attr format="color" name="rippleColor"/><attr name="fabSize">
             
             <enum name="auto" value="-1"/>
             
@@ -658,7 +647,6 @@
             <enum name="right" value="2"/>
         </attr></declare-styleable>
     <declare-styleable name="androidWheelView"><attr format="integer" name="awv_textsize"/><attr format="float" name="awv_lineSpace"/><attr format="integer" name="awv_centerTextColor"/><attr format="integer" name="awv_outerTextColor"/><attr format="integer" name="awv_dividerTextColor"/><attr format="integer" name="awv_itemsVisibleCount"/><attr format="boolean" name="awv_isLoop"/><attr format="integer" name="awv_initialPosition"/><attr format="float" name="awv_scaleX"/></declare-styleable>
-    <declare-styleable name="sw_SwitchButton"><attr format="reference" name="sw_thumbDrawable"/><attr format="color|reference" name="sw_thumbColor"/><attr format="dimension|reference" name="sw_thumbMargin"/><attr format="dimension|reference" name="sw_thumbMarginTop"/><attr format="dimension|reference" name="sw_thumbMarginBottom"/><attr format="dimension|reference" name="sw_thumbMarginLeft"/><attr format="dimension|reference" name="sw_thumbMarginRight"/><attr format="dimension|reference" name="sw_thumbWidth"/><attr format="dimension|reference" name="sw_thumbHeight"/><attr format="dimension|reference" name="sw_thumbRadius"/><attr format="dimension|reference" name="sw_backRadius"/><attr format="reference" name="sw_backDrawable"/><attr format="color|reference" name="sw_backColor"/><attr format="float" name="sw_backMeasureRatio"/><attr format="boolean" name="sw_fadeBack"/><attr format="integer" name="sw_animationDuration"/><attr format="color|reference" name="sw_tintColor"/><attr format="string" name="sw_textOn"/><attr format="string" name="sw_textOff"/><attr format="dimension" name="sw_textMarginH"/><attr format="boolean" name="sw_autoAdjustTextPosition"/></declare-styleable>
     <dimen name="WheelIndicatorSize">1.5dp</dimen>
     <dimen name="WheelItemSpace">0dp</dimen>
     <dimen name="WheelItemTextSize">18sp</dimen>
@@ -807,11 +795,6 @@
     <dimen name="dp_65">65dp</dimen>
     <dimen name="dp_72">72dp</dimen>
     <dimen name="dp_80">80dp</dimen>
-    <dimen name="fab_elevation_lollipop">8dp</dimen>
-    <dimen name="fab_scroll_threshold">4dp</dimen>
-    <dimen name="fab_shadow_size">12dp</dimen>
-    <dimen name="fab_size_mini">40dp</dimen>
-    <dimen name="fab_size_normal">56dp</dimen>
     <dimen name="fastscroll_default_thickness">8dp</dimen>
     <dimen name="fastscroll_margin">0dp</dimen>
     <dimen name="fastscroll_minimum_range">50dp</dimen>
@@ -845,11 +828,6 @@
     <dimen name="sp_12">12sp</dimen>
     <dimen name="sp_14">14sp</dimen>
     <dimen name="sp_16">16sp</dimen>
-    <dimen name="sw_thumb_ripple_size">25dp</dimen>
-    <dimen name="sw_thumb_shadow_inset">2dp</dimen>
-    <dimen name="sw_thumb_shadow_inset_bottom">2dp</dimen>
-    <dimen name="sw_thumb_shadow_inset_top">2dp</dimen>
-    <dimen name="sw_thumb_solid_inset">2dp</dimen>
     <dimen name="swipe_item_height">80dp</dimen>
     <dimen name="swipe_item_menu_width">120dp</dimen>
     <dimen name="umeng_socialize_pad_window_height">350dip</dimen>
@@ -978,7 +956,6 @@
     <string name="clearSearchHistory">清除历史记录</string>
     <string name="collasping_view_behavior">android.support.design.widget.CollapsingToolbarLayout</string>
     <string name="complete">完成</string>
-    <string name="define_FloatingActionButton"/>
     <string name="dialog_btn_cancel">否，谢谢</string>
     <string name="dialog_btn_exit">退出</string>
     <string name="dialog_btn_open">去开启</string>
@@ -992,15 +969,6 @@
     <string name="empty_no_data_family">暂无家庭信息~</string>
     <string name="folder_image_count">共%1$d张</string>
     <string name="forget_phone_hint">请您输入手机号</string>
-    <string name="library_FloatingActionButton_author">Oleksandr Melnykov</string>
-    <string name="library_FloatingActionButton_authorWebsite">https://github.com/makovkastar/FloatingActionButton</string>
-    <string name="library_FloatingActionButton_isOpenSource">true</string>
-    <string name="library_FloatingActionButton_libraryDescription">Android Google+ like floating action button which reacts on the list view scrolling events. Becomes visible when the list view is scrolled up and invisible when scrolled down.</string>
-    <string name="library_FloatingActionButton_libraryName">FloatingActionButton</string>
-    <string name="library_FloatingActionButton_libraryVersion">1.0.0</string>
-    <string name="library_FloatingActionButton_libraryWebsite">https://github.com/makovkastar/FloatingActionButton</string>
-    <string name="library_FloatingActionButton_licenseId">mit</string>
-    <string name="library_FloatingActionButton_repositoryLink">https://github.com/makovkastar/FloatingActionButton</string>
     <string name="loaction_prod_name">移动定位器，随时随地确认我当前的位置</string>
     <string name="load_end">没有更多数据</string>
     <string name="load_failed">加载失败，请点我重试</string>
@@ -3007,41 +2975,6 @@
         <item name="android:textSize">@dimen/common_txt_size</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:background">@drawable/button_round_blue</item>
-    </style>
-    <style name="sw_SwitchButtonFlyme">
-        <item name="sw_backDrawable">@drawable/sw_back_flyme_drawable</item>
-        <item name="sw_backMeasureRatio">2.2</item>
-        <item name="sw_thumbDrawable">@drawable/sw_thumb_flyme_drawable</item>
-        <item name="sw_thumbWidth">16dp</item>
-        <item name="sw_thumbHeight">16dp</item>
-    </style>
-    <style name="sw_SwitchButtonIOS">
-        <item name="sw_animationDuration">300</item>
-        <item name="sw_backDrawable">@drawable/sw_back_ios_drawable</item>
-        <item name="sw_backMeasureRatio">1.5</item>
-        <item name="sw_thumbDrawable">@drawable/sw_thumb_ios_drawable</item>
-        <item name="sw_thumbMarginLeft">-5dp</item>
-        <item name="sw_thumbMarginTop">-2.5dp</item>
-        <item name="sw_thumbMarginRight">-5dp</item>
-        <item name="sw_thumbMarginBottom">-8dp</item>
-    </style>
-    <style name="sw_SwitchButtonMD">
-        <item name="sw_backColor">@color/sw_back_color</item>
-        <item name="sw_backMeasureRatio">1.8</item>
-        <item name="sw_thumbDrawable">@drawable/sw_thumb</item>
-        <item name="sw_thumbMarginLeft">-6dp</item>
-        <item name="sw_thumbMarginTop">-5dp</item>
-        <item name="sw_thumbMarginRight">-6dp</item>
-        <item name="sw_thumbMarginBottom">-5dp</item>
-        <item name="sw_thumbWidth">@dimen/sw_thumb_ripple_size</item>
-        <item name="sw_thumbHeight">@dimen/sw_thumb_ripple_size</item>
-    </style>
-    <style name="sw_SwitchButtonMiui">
-        <item name="sw_backDrawable">@drawable/sw_back_miui_drawable</item>
-        <item name="sw_backMeasureRatio">2</item>
-        <item name="sw_thumbDrawable">@drawable/sw_thumb_miui_drawable</item>
-        <item name="sw_thumbWidth">18dp</item>
-        <item name="sw_thumbHeight">18dp</item>
     </style>
     <style name="switchCompat_style">
         <!-- Active thumb color & Active track color(30% transparency) switch 打开时的拇指按钮的颜色 轨迹颜色默认为30%这个颜色 -->

@@ -10,8 +10,8 @@ public class AgreementWebViewActivity$$ViewBinder<T extends com.project.communit
     View view;
     view = finder.findRequiredView(source, 2131624105, "field 'toolbar'");
     target.toolbar = finder.castView(view, 2131624105, "field 'toolbar'");
-    view = finder.findRequiredView(source, 2131624300, "field 'pb'");
-    target.pb = finder.castView(view, 2131624300, "field 'pb'");
+    view = finder.findRequiredView(source, 2131624303, "field 'pb'");
+    target.pb = finder.castView(view, 2131624303, "field 'pb'");
     view = finder.findRequiredView(source, 2131624106, "field 'mTvTitle'");
     target.mTvTitle = finder.castView(view, 2131624106, "field 'mTvTitle'");
   }
