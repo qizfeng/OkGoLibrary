@@ -1,34 +1,34 @@
 [
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/mipmap-xxhdpi-v4/checkbox_checked.png",
-        "source": "/Users/qizfeng/.android/build-cache/cbc53131fc8970a4cb7569787d638eb4906b1e8f/output/res/mipmap-xxhdpi-v4/checkbox_checked.png"
-    },
-    {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/mipmap-xxhdpi-v4/checkbox_normal.png",
-        "source": "/Users/qizfeng/.android/build-cache/cbc53131fc8970a4cb7569787d638eb4906b1e8f/output/res/mipmap-xxhdpi-v4/checkbox_normal.png"
-    },
-    {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/mipmap-xxhdpi-v4/grid_camera.png",
-        "source": "/Users/qizfeng/.android/build-cache/cbc53131fc8970a4cb7569787d638eb4906b1e8f/output/res/mipmap-xxhdpi-v4/grid_camera.png"
-    },
-    {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/mipmap-xxhdpi-v4/ic_del.png",
-        "source": "/Users/qizfeng/.android/build-cache/cbc53131fc8970a4cb7569787d638eb4906b1e8f/output/res/mipmap-xxhdpi-v4/ic_del.png"
-    },
-    {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/mipmap-xxhdpi-v4/list_selected.png",
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/mipmap-xxhdpi-v4/list_selected.png",
         "source": "/Users/qizfeng/.android/build-cache/cbc53131fc8970a4cb7569787d638eb4906b1e8f/output/res/mipmap-xxhdpi-v4/list_selected.png"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/mipmap-xxhdpi-v4/text_indicator.png",
-        "source": "/Users/qizfeng/.android/build-cache/cbc53131fc8970a4cb7569787d638eb4906b1e8f/output/res/mipmap-xxhdpi-v4/text_indicator.png"
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/mipmap-xxhdpi-v4/checkbox_checked.png",
+        "source": "/Users/qizfeng/.android/build-cache/cbc53131fc8970a4cb7569787d638eb4906b1e8f/output/res/mipmap-xxhdpi-v4/checkbox_checked.png"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/mipmap-xxhdpi-v4/default_image.png",
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/mipmap-xxhdpi-v4/checkbox_normal.png",
+        "source": "/Users/qizfeng/.android/build-cache/cbc53131fc8970a4cb7569787d638eb4906b1e8f/output/res/mipmap-xxhdpi-v4/checkbox_normal.png"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/mipmap-xxhdpi-v4/default_image.png",
         "source": "/Users/qizfeng/.android/build-cache/cbc53131fc8970a4cb7569787d638eb4906b1e8f/output/res/mipmap-xxhdpi-v4/default_image.png"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/code/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/mipmap-xxhdpi-v4/ic_back.png",
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/mipmap-xxhdpi-v4/text_indicator.png",
+        "source": "/Users/qizfeng/.android/build-cache/cbc53131fc8970a4cb7569787d638eb4906b1e8f/output/res/mipmap-xxhdpi-v4/text_indicator.png"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/mipmap-xxhdpi-v4/grid_camera.png",
+        "source": "/Users/qizfeng/.android/build-cache/cbc53131fc8970a4cb7569787d638eb4906b1e8f/output/res/mipmap-xxhdpi-v4/grid_camera.png"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/mipmap-xxhdpi-v4/ic_del.png",
+        "source": "/Users/qizfeng/.android/build-cache/cbc53131fc8970a4cb7569787d638eb4906b1e8f/output/res/mipmap-xxhdpi-v4/ic_del.png"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/mipmap-xxhdpi-v4/ic_back.png",
         "source": "/Users/qizfeng/.android/build-cache/cbc53131fc8970a4cb7569787d638eb4906b1e8f/output/res/mipmap-xxhdpi-v4/ic_back.png"
     }
 ]

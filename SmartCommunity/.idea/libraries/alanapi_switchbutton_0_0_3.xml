@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="alanapi-switchbutton-0.0.3">
     <CLASSES>
-      <root url="file://$USER_HOME$/.android/build-cache/2cec8e7f24209e4d5c6d4f26e3593c73018afc58/output/res" />
-      <root url="jar://$USER_HOME$/.android/build-cache/2cec8e7f24209e4d5c6d4f26e3593c73018afc58/output/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.android/build-cache/7f61f17f092bdee881e5bb9ecb43834444a4f6e3/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/7f61f17f092bdee881e5bb9ecb43834444a4f6e3/output/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

@@ -12,8 +12,8 @@ public class SettingActivity$$ViewBinder<T extends com.project.community.ui.user
     target.mToolBar = finder.castView(view, 2131624105, "field 'mToolBar'");
     view = finder.findRequiredView(source, 2131624106, "field 'mTvTitle'");
     target.mTvTitle = finder.castView(view, 2131624106, "field 'mTvTitle'");
-    view = finder.findRequiredView(source, 2131624273, "field 'mTvLogout'");
-    target.mTvLogout = finder.castView(view, 2131624273, "field 'mTvLogout'");
+    view = finder.findRequiredView(source, 2131624274, "field 'mTvLogout'");
+    target.mTvLogout = finder.castView(view, 2131624274, "field 'mTvLogout'");
   }
 
   @Override public void unbind(T target) {
