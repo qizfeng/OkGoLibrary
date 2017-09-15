@@ -8,10 +8,6 @@
         "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable-xxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4/fab_shadow_mini.png",
-        "source": "/Users/qizfeng/.android/build-cache/048c126242609f74fe6eff5b7c347fffadf82017/output/res/drawable-xxhdpi-v4/fab_shadow_mini.png"
-    },
-    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4/weibosdk_empty_failed.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/bundles/default/res/drawable-xxhdpi-v4/weibosdk_empty_failed.png"
     },
@@ -210,10 +206,6 @@
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4/abc_scrubber_control_off_mtrl_alpha.png",
         "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable-xxhdpi-v4/abc_scrubber_control_off_mtrl_alpha.png"
-    },
-    {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4/fab_shadow.png",
-        "source": "/Users/qizfeng/.android/build-cache/048c126242609f74fe6eff5b7c347fffadf82017/output/res/drawable-xxhdpi-v4/fab_shadow.png"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4/abc_ic_star_half_black_36dp.png",

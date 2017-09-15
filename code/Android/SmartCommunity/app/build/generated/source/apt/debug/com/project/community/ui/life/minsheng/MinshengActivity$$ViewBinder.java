@@ -10,8 +10,8 @@ public class MinshengActivity$$ViewBinder<T extends com.project.community.ui.lif
     View view;
     view = finder.findRequiredView(source, 2131624108, "field 'mRecyclerView'");
     target.mRecyclerView = finder.castView(view, 2131624108, "field 'mRecyclerView'");
-    view = finder.findRequiredView(source, 2131624208, "field 'refreshLayout'");
-    target.refreshLayout = finder.castView(view, 2131624208, "field 'refreshLayout'");
+    view = finder.findRequiredView(source, 2131624211, "field 'refreshLayout'");
+    target.refreshLayout = finder.castView(view, 2131624211, "field 'refreshLayout'");
   }
 
   @Override public void unbind(T target) {
