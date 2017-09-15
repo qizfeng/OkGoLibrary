@@ -1,23 +1,23 @@
 [
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/default_image.png",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/b7a60152deb15c629f32ffebcf272468d995c2a5/output/res/mipmap-xxhdpi-v4/default_image.png"
+        "source": "/Users/qizfeng/.android/build-cache/8fbbdb7e2b1f4bbdf1f25569eab43864ab09c5f8/output/res/mipmap-xxhdpi-v4/default_image.png"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/ic_back.png",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/b7a60152deb15c629f32ffebcf272468d995c2a5/output/res/mipmap-xxhdpi-v4/ic_back.png"
+        "source": "/Users/qizfeng/.android/build-cache/8fbbdb7e2b1f4bbdf1f25569eab43864ab09c5f8/output/res/mipmap-xxhdpi-v4/ic_back.png"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/ic_del.png",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/b7a60152deb15c629f32ffebcf272468d995c2a5/output/res/mipmap-xxhdpi-v4/ic_del.png"
+        "source": "/Users/qizfeng/.android/build-cache/8fbbdb7e2b1f4bbdf1f25569eab43864ab09c5f8/output/res/mipmap-xxhdpi-v4/ic_del.png"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/list_selected.png",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/b7a60152deb15c629f32ffebcf272468d995c2a5/output/res/mipmap-xxhdpi-v4/list_selected.png"
+        "source": "/Users/qizfeng/.android/build-cache/8fbbdb7e2b1f4bbdf1f25569eab43864ab09c5f8/output/res/mipmap-xxhdpi-v4/list_selected.png"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/checkbox_checked.png",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/b7a60152deb15c629f32ffebcf272468d995c2a5/output/res/mipmap-xxhdpi-v4/checkbox_checked.png"
+        "source": "/Users/qizfeng/.android/build-cache/8fbbdb7e2b1f4bbdf1f25569eab43864ab09c5f8/output/res/mipmap-xxhdpi-v4/checkbox_checked.png"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/yeats.jpg",
@@ -25,10 +25,10 @@
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/text_indicator.png",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/b7a60152deb15c629f32ffebcf272468d995c2a5/output/res/mipmap-xxhdpi-v4/text_indicator.png"
+        "source": "/Users/qizfeng/.android/build-cache/8fbbdb7e2b1f4bbdf1f25569eab43864ab09c5f8/output/res/mipmap-xxhdpi-v4/text_indicator.png"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/grid_camera.png",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/b7a60152deb15c629f32ffebcf272468d995c2a5/output/res/mipmap-xxhdpi-v4/grid_camera.png"
+        "source": "/Users/qizfeng/.android/build-cache/8fbbdb7e2b1f4bbdf1f25569eab43864ab09c5f8/output/res/mipmap-xxhdpi-v4/grid_camera.png"
     }
 ]
