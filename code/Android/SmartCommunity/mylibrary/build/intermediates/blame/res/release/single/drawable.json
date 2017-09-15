@@ -1,23 +1,23 @@
 [
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_seekbar_track_material.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_seekbar_track_material.xml"
-    },
-    {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/umeng_socialize_sina.png",
-        "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/src/main/res/drawable/umeng_socialize_sina.png"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_seekbar_track_material.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/umeng_socialize_back_icon.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/src/main/res/drawable/umeng_socialize_back_icon.png"
     },
     {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/umeng_socialize_sina.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/src/main/res/drawable/umeng_socialize_sina.png"
+    },
+    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/notification_bg_low.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/notification_bg_low.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/notification_bg_low.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_textfield_search_material.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_textfield_search_material.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_textfield_search_material.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/spinner.xml",
@@ -25,7 +25,7 @@
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_ic_clear_material.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_ic_clear_material.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_ic_clear_material.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/gray_radius.xml",
@@ -33,7 +33,7 @@
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_ic_ab_back_material.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_ic_ab_back_material.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_ic_ab_back_material.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/umeng_socialize_share_music.png",
@@ -41,7 +41,7 @@
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_ratingbar_material.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_ratingbar_material.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_ratingbar_material.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/umeng_socialize_qzone.png",
@@ -57,11 +57,11 @@
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_ic_voice_search_api_material.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_ic_voice_search_api_material.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_ic_voice_search_api_material.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_list_selector_background_transition_holo_light.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_list_selector_background_transition_holo_light.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_list_selector_background_transition_holo_light.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/umeng_socialize_wxcircle.png",
@@ -69,11 +69,11 @@
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_btn_radio_material.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_btn_radio_material.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_btn_radio_material.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/selector_item_checked.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/b7a60152deb15c629f32ffebcf272468d995c2a5/output/res/drawable/selector_item_checked.xml"
+        "source": "/Users/qizfeng/.android/build-cache/8fbbdb7e2b1f4bbdf1f25569eab43864ab09c5f8/output/res/drawable/selector_item_checked.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/sample_footer_loading.png",
@@ -89,7 +89,7 @@
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/tab_background_selector.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/80a30e11401f8de7958a587d83083b110ac32ce4/output/res/drawable/tab_background_selector.xml"
+        "source": "/Users/qizfeng/.android/build-cache/516ae1d3ddbbad0788784603e10ddae7b87b00a1/output/res/drawable/tab_background_selector.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/umeng_socialize_btn_bg.xml",
@@ -97,15 +97,15 @@
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_ratingbar_indicator_material.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_ratingbar_indicator_material.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_ratingbar_indicator_material.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_ic_menu_overflow_material.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_ic_menu_overflow_material.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_ic_menu_overflow_material.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_cab_background_top_material.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_cab_background_top_material.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_cab_background_top_material.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/umeng_socialize_copyurl.png",
@@ -117,19 +117,19 @@
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_list_selector_holo_light.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_list_selector_holo_light.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_list_selector_holo_light.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_edit_text_material.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_edit_text_material.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_edit_text_material.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_spinner_textfield_background_material.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_spinner_textfield_background_material.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_spinner_textfield_background_material.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_list_selector_holo_dark.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_list_selector_holo_dark.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_list_selector_holo_dark.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/black_background.xml",
@@ -137,7 +137,7 @@
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_text_cursor_material.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_text_cursor_material.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_text_cursor_material.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/sample_footer_loading_progress.xml",
@@ -149,19 +149,19 @@
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_vector_test.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_vector_test.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_vector_test.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_ic_search_api_material.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_ic_search_api_material.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_ic_search_api_material.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_item_background_holo_light.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_item_background_holo_light.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_item_background_holo_light.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_btn_check_material.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_btn_check_material.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_btn_check_material.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/umeng_socialize_fav.png",
@@ -169,7 +169,7 @@
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_ic_go_search_api_material.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_ic_go_search_api_material.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_ic_go_search_api_material.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/umeng_socialize_wechat.png",
@@ -177,7 +177,7 @@
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_item_background_holo_dark.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_item_background_holo_dark.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_item_background_holo_dark.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/umeng_socialize_edit_bg.xml",
@@ -185,27 +185,27 @@
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/notification_tile_bg.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/notification_tile_bg.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/notification_tile_bg.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/design_fab_background.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/9947c25fdb2dbcb9a574b50a3dfff31183eb0654/output/res/drawable/design_fab_background.xml"
+        "source": "/Users/qizfeng/.android/build-cache/9947c25fdb2dbcb9a574b50a3dfff31183eb0654/output/res/drawable/design_fab_background.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/selector_top_ok.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/b7a60152deb15c629f32ffebcf272468d995c2a5/output/res/drawable/selector_top_ok.xml"
+        "source": "/Users/qizfeng/.android/build-cache/8fbbdb7e2b1f4bbdf1f25569eab43864ab09c5f8/output/res/drawable/selector_top_ok.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_ratingbar_small_material.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_ratingbar_small_material.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_ratingbar_small_material.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_seekbar_thumb_material.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_seekbar_thumb_material.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_seekbar_thumb_material.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/navigation_empty_icon.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/9947c25fdb2dbcb9a574b50a3dfff31183eb0654/output/res/drawable/navigation_empty_icon.xml"
+        "source": "/Users/qizfeng/.android/build-cache/9947c25fdb2dbcb9a574b50a3dfff31183eb0654/output/res/drawable/navigation_empty_icon.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/umeng_socialize_share_video.png",
@@ -213,7 +213,7 @@
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/notification_bg.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/notification_bg.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/notification_bg.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/white_radius.xml",
@@ -225,7 +225,7 @@
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_list_selector_background_transition_holo_dark.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_list_selector_background_transition_holo_dark.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_list_selector_background_transition_holo_dark.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/retry_btn_default.xml",
@@ -241,15 +241,15 @@
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/ic_default_color.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/0ffad3066c4fec6ca675312932607fc2691b01db/output/res/drawable/ic_default_color.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f962e02b09ee69b99b54175f1d916cf1b4359ea2/output/res/drawable/ic_default_color.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/notification_icon_background.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/notification_icon_background.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/notification_icon_background.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_ic_arrow_drop_right_black_24dp.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_ic_arrow_drop_right_black_24dp.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_ic_arrow_drop_right_black_24dp.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/shape_bottom_top_line.xml",
@@ -257,19 +257,19 @@
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_tab_indicator_material.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_tab_indicator_material.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_tab_indicator_material.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/selector_grid_camera_bg.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/b7a60152deb15c629f32ffebcf272468d995c2a5/output/res/drawable/selector_grid_camera_bg.xml"
+        "source": "/Users/qizfeng/.android/build-cache/8fbbdb7e2b1f4bbdf1f25569eab43864ab09c5f8/output/res/drawable/selector_grid_camera_bg.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_btn_colored_material.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_btn_colored_material.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_btn_colored_material.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/design_password_eye.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/9947c25fdb2dbcb9a574b50a3dfff31183eb0654/output/res/drawable/design_password_eye.xml"
+        "source": "/Users/qizfeng/.android/build-cache/9947c25fdb2dbcb9a574b50a3dfff31183eb0654/output/res/drawable/design_password_eye.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/umeng_socialize_qq.png",
@@ -277,23 +277,23 @@
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/design_bottom_navigation_item_background.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/9947c25fdb2dbcb9a574b50a3dfff31183eb0654/output/res/drawable/design_bottom_navigation_item_background.xml"
+        "source": "/Users/qizfeng/.android/build-cache/9947c25fdb2dbcb9a574b50a3dfff31183eb0654/output/res/drawable/design_bottom_navigation_item_background.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_seekbar_tick_mark_material.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_seekbar_tick_mark_material.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_seekbar_tick_mark_material.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_dialog_material_background.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_dialog_material_background.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_dialog_material_background.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_cab_background_internal_bg.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_cab_background_internal_bg.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_cab_background_internal_bg.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_btn_default_mtrl_shape.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_btn_default_mtrl_shape.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_btn_default_mtrl_shape.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/retry_btn_selector.xml",
@@ -301,18 +301,18 @@
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_btn_borderless_material.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_btn_borderless_material.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_btn_borderless_material.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/abc_switch_thumb_material.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_switch_thumb_material.xml"
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_switch_thumb_material.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/design_snackbar_background.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/9947c25fdb2dbcb9a574b50a3dfff31183eb0654/output/res/drawable/design_snackbar_background.xml"
+        "source": "/Users/qizfeng/.android/build-cache/9947c25fdb2dbcb9a574b50a3dfff31183eb0654/output/res/drawable/design_snackbar_background.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/release/drawable/selector_back_press.xml",
-        "source": "/Users/Shared/Jenkins/.android/build-cache/b7a60152deb15c629f32ffebcf272468d995c2a5/output/res/drawable/selector_back_press.xml"
+        "source": "/Users/qizfeng/.android/build-cache/8fbbdb7e2b1f4bbdf1f25569eab43864ab09c5f8/output/res/drawable/selector_back_press.xml"
     }
 ]

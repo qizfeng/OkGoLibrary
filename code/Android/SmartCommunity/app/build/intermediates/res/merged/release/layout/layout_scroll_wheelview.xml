@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/pop_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:gravity="bottom"
+    android:layout_alignParentBottom="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_above="@+id/scroll_choice"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/txt_cancel"
+            android:textColor="@color/gray_line"
+            android:textSize="@dimen/common_txt_size" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/txt_choise_depart"
+            android:background="@drawable/press_selector"
+            android:textColor="@color/txt_color"
+            android:textSize="@dimen/common_title_txt_size" />
+
+        <TextView
+            android:id="@+id/tv_confirm"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/press_selector"
+            android:gravity="center"
+            android:text="@string/txt_confirm"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/common_txt_size" />
+    </RelativeLayout>
+
+
+    <com.library.okgo.view.ScrollChoice
+        android:id="@+id/scroll_choice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:scroll_atmospheric="true"
+        app:scroll_background_color="@color/white"
+        app:scroll_indicator="true"
+        app:scroll_indicator_color="@color/common_gray_bg"
+        app:scroll_item_align="center"
+
+        app:scroll_item_text_size="@dimen/common_txt_size"
+        app:scroll_item_text_color="@color/gray_line"
+        app:scroll_selected_item_background="@color/white"
+        app:scroll_selected_item_text_color="@color/txt_color" />
+
+
+</RelativeLayout>

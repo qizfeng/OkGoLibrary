@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="@dimen/dp_80"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_map_community"
+        android:gravity="left|center_vertical"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/dp_10">
+
+        <TextView
+            android:id="@+id/tv_building_no"
+            style="@style/textview_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="一栋"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/common_sub_title_txt_size" />
+
+        <TextView
+            style="@style/textview_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_1"
+            android:layout_marginTop="@dimen/dp_5"
+            android:text="30户"
+            android:textColor="@color/color_gray_666666" />
+
+        <TextView
+            style="@style/textview_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="120人"
+            android:textColor="@color/color_gray_666666" />
+    </LinearLayout>
+</LinearLayout>
