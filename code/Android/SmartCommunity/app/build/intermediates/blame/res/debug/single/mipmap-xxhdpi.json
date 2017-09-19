@@ -516,12 +516,12 @@
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/d23_icon1.png"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/c1_icon4.png",
-        "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/c1_icon4.png"
-    },
-    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/login_top_bg.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/login_top_bg.png"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/c1_icon4.png",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/src/main/res/mipmap-xxhdpi/c1_icon4.png"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/mipmap-xxhdpi/d10_btn1.png",

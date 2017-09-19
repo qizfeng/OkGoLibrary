@@ -92,10 +92,6 @@
         "source": "/Users/qizfeng/.android/build-cache/9947c25fdb2dbcb9a574b50a3dfff31183eb0654/output/res/drawable/navigation_empty_icon.xml"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/drawable/duo_shape_circled_white.xml",
-        "source": "/Users/qizfeng/.android/build-cache/a919db1eab1cc82a35cb6973947f9985c55bdadf/output/res/drawable/duo_shape_circled_white.xml"
-    },
-    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/drawable/rectangle_button_transparent.xml",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/src/main/res/drawable/rectangle_button_transparent.xml"
     },
@@ -404,10 +400,6 @@
         "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_cab_background_top_material.xml"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/drawable/duo_shape_rectangled_red.xml",
-        "source": "/Users/qizfeng/.android/build-cache/a919db1eab1cc82a35cb6973947f9985c55bdadf/output/res/drawable/duo_shape_rectangled_red.xml"
-    },
-    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/drawable/round_point_red.xml",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/src/main/res/drawable/round_point_red.xml"
     },
@@ -446,10 +438,6 @@
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/drawable/bg_title_custom_dialog.xml",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/src/main/res/drawable/bg_title_custom_dialog.xml"
-    },
-    {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/drawable/duo_shape_rectangled_rounded_color_accent.xml",
-        "source": "/Users/qizfeng/.android/build-cache/a919db1eab1cc82a35cb6973947f9985c55bdadf/output/res/drawable/duo_shape_rectangled_rounded_color_accent.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/drawable/umeng_socialize_qq.png",
