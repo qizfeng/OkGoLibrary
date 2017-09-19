@@ -178,7 +178,6 @@ public class ForgetPassActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                if (!e.getMessage().contains("No address"))
                     showToast(e.getMessage());
             }
         });

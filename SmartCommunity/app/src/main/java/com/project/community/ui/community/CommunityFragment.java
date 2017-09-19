@@ -472,6 +472,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                 mIvDevice.setImageResource(R.mipmap.d43_btn_4);
                 break;
             case R.id.iv_shop:
+                mIvBack.setVisibility(View.VISIBLE);
                 mIvDrawer.setVisibility(View.VISIBLE);
                 mIvShop.setImageResource(R.mipmap.d43_btn_2_p);
                 mIvPerson.setImageResource(R.mipmap.d43_btn_3);
@@ -493,6 +494,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                 initMarker();
                 break;
             case R.id.iv_person:
+                mIvBack.setVisibility(View.VISIBLE);
                 mIvDrawer.setVisibility(View.VISIBLE);
                 mIvShop.setImageResource(R.mipmap.d43_btn_2);
                 mIvPerson.setImageResource(R.mipmap.d43_btn_3_p);
@@ -515,6 +517,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                 initMarker();
                 break;
             case R.id.iv_device:
+                mIvBack.setVisibility(View.VISIBLE);
                 mIvDrawer.setVisibility(View.VISIBLE);
                 mIvShop.setImageResource(R.mipmap.d43_btn_2);
                 mIvPerson.setImageResource(R.mipmap.d43_btn_3);
