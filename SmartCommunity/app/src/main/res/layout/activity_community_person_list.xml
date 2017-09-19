@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_gray_eeeeee"
+    android:orientation="vertical">
+
+    <include layout="@layout/pub_layout_toolbar" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/textview_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:layout_marginLeft="@dimen/dp_30"
+                    android:text="@string/txt_map_house_no"
+                    android:textColor="@color/color_gray_999999"
+                    android:textSize="@dimen/common_txt_size_small" />
+
+                <TextView
+                    style="@style/textview_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:text="@string/txt_name"
+                    android:textColor="@color/color_gray_999999"
+                    android:textSize="@dimen/common_txt_size_small" />
+
+                <TextView
+                    style="@style/textview_style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="@string/txt_map_phone"
+                    android:textColor="@color/color_gray_999999"
+                    android:textSize="@dimen/common_txt_size_small" />
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewSelect"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#5c000000"
+            android:visibility="gone"/>
+    </FrameLayout>
+</LinearLayout>

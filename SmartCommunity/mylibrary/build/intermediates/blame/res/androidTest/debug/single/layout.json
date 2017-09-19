@@ -4,16 +4,16 @@
         "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/layout/abc_action_bar_title_item.xml"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/androidTest/debug/layout/design_text_input_password_icon.xml",
-        "source": "/Users/qizfeng/.android/build-cache/9947c25fdb2dbcb9a574b50a3dfff31183eb0654/output/res/layout/design_text_input_password_icon.xml"
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/androidTest/debug/layout/notification_template_part_time.xml",
+        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/layout/notification_template_part_time.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/androidTest/debug/layout/dialog_delete.xml",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/bundles/debug/res/layout/dialog_delete.xml"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/androidTest/debug/layout/notification_template_part_time.xml",
-        "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/layout/notification_template_part_time.xml"
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/androidTest/debug/layout/design_text_input_password_icon.xml",
+        "source": "/Users/qizfeng/.android/build-cache/9947c25fdb2dbcb9a574b50a3dfff31183eb0654/output/res/layout/design_text_input_password_icon.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/androidTest/debug/layout/abc_search_dropdown_item_icons_2line.xml",
@@ -100,10 +100,6 @@
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/bundles/debug/res/layout/refresh_header.xml"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/androidTest/debug/layout/duo_view_option.xml",
-        "source": "/Users/qizfeng/.android/build-cache/a919db1eab1cc82a35cb6973947f9985c55bdadf/output/res/layout/duo_view_option.xml"
-    },
-    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/androidTest/debug/layout/progress_dialog.xml",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/bundles/debug/res/layout/progress_dialog.xml"
     },
@@ -168,10 +164,6 @@
         "source": "/Users/qizfeng/.android/build-cache/8fbbdb7e2b1f4bbdf1f25569eab43864ab09c5f8/output/res/layout/activity_image_preview.xml"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/androidTest/debug/layout/duo_view_menu.xml",
-        "source": "/Users/qizfeng/.android/build-cache/a919db1eab1cc82a35cb6973947f9985c55bdadf/output/res/layout/duo_view_menu.xml"
-    },
-    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/androidTest/debug/layout/design_navigation_item_separator.xml",
         "source": "/Users/qizfeng/.android/build-cache/9947c25fdb2dbcb9a574b50a3dfff31183eb0654/output/res/layout/design_navigation_item_separator.xml"
     },
@@ -192,10 +184,6 @@
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/bundles/debug/res/layout/activity_base.xml"
     },
     {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/androidTest/debug/layout/duo_overlay.xml",
-        "source": "/Users/qizfeng/.android/build-cache/a919db1eab1cc82a35cb6973947f9985c55bdadf/output/res/layout/duo_overlay.xml"
-    },
-    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/androidTest/debug/layout/notification_template_lines_media.xml",
         "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/layout/notification_template_lines_media.xml"
     },
@@ -210,10 +198,6 @@
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/androidTest/debug/layout/include_top_bar.xml",
         "source": "/Users/qizfeng/.android/build-cache/8fbbdb7e2b1f4bbdf1f25569eab43864ab09c5f8/output/res/layout/include_top_bar.xml"
-    },
-    {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/androidTest/debug/layout/duo_view_footer.xml",
-        "source": "/Users/qizfeng/.android/build-cache/a919db1eab1cc82a35cb6973947f9985c55bdadf/output/res/layout/duo_view_footer.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/androidTest/debug/layout/design_bottom_navigation_item.xml",
@@ -262,10 +246,6 @@
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/androidTest/debug/layout/quick_view_load_more.xml",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/bundles/debug/res/layout/quick_view_load_more.xml"
-    },
-    {
-        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/androidTest/debug/layout/duo_view_header.xml",
-        "source": "/Users/qizfeng/.android/build-cache/a919db1eab1cc82a35cb6973947f9985c55bdadf/output/res/layout/duo_view_header.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/androidTest/debug/layout/dialog_permission.xml",
