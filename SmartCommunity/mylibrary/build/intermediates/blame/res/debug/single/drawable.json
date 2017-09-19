@@ -76,6 +76,10 @@
         "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_btn_colored_material.xml"
     },
     {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/debug/drawable/duo_shape_rectangled_red.xml",
+        "source": "/Users/qizfeng/.android/build-cache/a919db1eab1cc82a35cb6973947f9985c55bdadf/output/res/drawable/duo_shape_rectangled_red.xml"
+    },
+    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/debug/drawable/navigation_empty_icon.xml",
         "source": "/Users/qizfeng/.android/build-cache/9947c25fdb2dbcb9a574b50a3dfff31183eb0654/output/res/drawable/navigation_empty_icon.xml"
     },
@@ -232,6 +236,10 @@
         "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/notification_bg.xml"
     },
     {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/debug/drawable/duo_shape_circled_white.xml",
+        "source": "/Users/qizfeng/.android/build-cache/a919db1eab1cc82a35cb6973947f9985c55bdadf/output/res/drawable/duo_shape_circled_white.xml"
+    },
+    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/debug/drawable/sample_footer_loading.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/src/main/res/drawable/sample_footer_loading.png"
     },
@@ -250,6 +258,10 @@
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/debug/drawable/umeng_socialize_alipay.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/src/main/res/drawable/umeng_socialize_alipay.png"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/debug/drawable/duo_shape_rectangled_rounded_color_accent.xml",
+        "source": "/Users/qizfeng/.android/build-cache/a919db1eab1cc82a35cb6973947f9985c55bdadf/output/res/drawable/duo_shape_rectangled_rounded_color_accent.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/debug/drawable/abc_btn_borderless_material.xml",

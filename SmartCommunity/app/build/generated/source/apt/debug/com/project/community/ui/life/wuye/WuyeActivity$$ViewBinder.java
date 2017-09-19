@@ -10,10 +10,10 @@ public class WuyeActivity$$ViewBinder<T extends com.project.community.ui.life.wu
     View view;
     view = finder.findRequiredView(source, 2131624108, "field 'recyclerView'");
     target.recyclerView = finder.castView(view, 2131624108, "field 'recyclerView'");
-    view = finder.findRequiredView(source, 2131624211, "field 'refreshLayout'");
-    target.refreshLayout = finder.castView(view, 2131624211, "field 'refreshLayout'");
-    view = finder.findRequiredView(source, 2131624212, "field 'fab'");
-    target.fab = finder.castView(view, 2131624212, "field 'fab'");
+    view = finder.findRequiredView(source, 2131624215, "field 'refreshLayout'");
+    target.refreshLayout = finder.castView(view, 2131624215, "field 'refreshLayout'");
+    view = finder.findRequiredView(source, 2131624216, "field 'fab'");
+    target.fab = finder.castView(view, 2131624216, "field 'fab'");
   }
 
   @Override public void unbind(T target) {

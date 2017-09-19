@@ -12,12 +12,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.library.okgo.utils.DateUtil;
 import com.library.okgo.utils.GlideImageLoader;
-import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
 import com.project.community.constants.AppConstants;
 import com.project.community.listener.DiggClickListener;
 import com.project.community.model.ArticleModel;
-import com.project.community.model.NewsModel;
 import com.project.community.ui.adapter.listener.IndexAdapterItemListener;
 import com.project.community.util.StringUtils;
 
@@ -30,7 +28,6 @@ import java.util.List;
 public class ArticlePageAdapter extends BaseQuickAdapter<ArticleModel, BaseViewHolder> {
     public IndexAdapterItemListener itemClickListener;//点击事件
     private DiggClickListener diggClickListener;//点赞
-
     public ArticlePageAdapter(List<ArticleModel> data, IndexAdapterItemListener itemClick, DiggClickListener diggClickListener) {
         super(R.layout.layout_item_news, data);
         itemClickListener = itemClick;
@@ -110,6 +107,7 @@ public class ArticlePageAdapter extends BaseQuickAdapter<ArticleModel, BaseViewH
 
         GlideImageLoader glide = new GlideImageLoader();
         glide.onDisplayImage(mContext, (ImageView) baseViewHolder.getView(R.id.iv_imageView), AppConstants.HOST + model.image);
+
         View view = baseViewHolder.getConvertView();
         final int position = baseViewHolder.getLayoutPosition();//去掉header的点击事件
         //item点击事件
@@ -138,5 +136,6 @@ public class ArticlePageAdapter extends BaseQuickAdapter<ArticleModel, BaseViewH
 
 
     }
+
 
 }

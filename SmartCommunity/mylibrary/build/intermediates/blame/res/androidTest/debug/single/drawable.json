@@ -12,6 +12,10 @@
         "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_ic_menu_overflow_material.xml"
     },
     {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/androidTest/debug/drawable/duo_shape_rectangled_red.xml",
+        "source": "/Users/qizfeng/.android/build-cache/a919db1eab1cc82a35cb6973947f9985c55bdadf/output/res/drawable/duo_shape_rectangled_red.xml"
+    },
+    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/androidTest/debug/drawable/umeng_socialize_sina.png",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/bundles/debug/res/drawable/umeng_socialize_sina.png"
     },
@@ -50,6 +54,10 @@
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/androidTest/debug/drawable/abc_ic_arrow_drop_right_black_24dp.xml",
         "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_ic_arrow_drop_right_black_24dp.xml"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/androidTest/debug/drawable/duo_shape_circled_white.xml",
+        "source": "/Users/qizfeng/.android/build-cache/a919db1eab1cc82a35cb6973947f9985c55bdadf/output/res/drawable/duo_shape_circled_white.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/androidTest/debug/drawable/umeng_socialize_back_icon.png",
@@ -154,6 +162,10 @@
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/androidTest/debug/drawable/abc_cab_background_internal_bg.xml",
         "source": "/Users/qizfeng/.android/build-cache/f3556f4e7ccf55d0d4450d04d962490b14cee96c/output/res/drawable/abc_cab_background_internal_bg.xml"
+    },
+    {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/androidTest/debug/drawable/duo_shape_rectangled_rounded_color_accent.xml",
+        "source": "/Users/qizfeng/.android/build-cache/a919db1eab1cc82a35cb6973947f9985c55bdadf/output/res/drawable/duo_shape_rectangled_rounded_color_accent.xml"
     },
     {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/mylibrary/build/intermediates/res/merged/androidTest/debug/drawable/notification_tile_bg.xml",

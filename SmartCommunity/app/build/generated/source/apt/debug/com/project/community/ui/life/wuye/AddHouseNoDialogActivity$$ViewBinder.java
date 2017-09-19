@@ -10,8 +10,8 @@ public class AddHouseNoDialogActivity$$ViewBinder<T extends com.project.communit
     View view;
     view = finder.findRequiredView(source, 2131624106, "field 'mTvTitle'");
     target.mTvTitle = finder.castView(view, 2131624106, "field 'mTvTitle'");
-    view = finder.findRequiredView(source, 2131624168, "field 'mIvClose' and method 'onCancelClick'");
-    target.mIvClose = finder.castView(view, 2131624168, "field 'mIvClose'");
+    view = finder.findRequiredView(source, 2131624172, "field 'mIvClose' and method 'onCancelClick'");
+    target.mIvClose = finder.castView(view, 2131624172, "field 'mIvClose'");
     view.setOnClickListener(
       new butterknife.internal.DebouncingOnClickListener() {
         @Override public void doClick(
@@ -20,9 +20,9 @@ public class AddHouseNoDialogActivity$$ViewBinder<T extends com.project.communit
           target.onCancelClick(p0);
         }
       });
-    view = finder.findRequiredView(source, 2131624169, "field 'mTvContent'");
-    target.mTvContent = finder.castView(view, 2131624169, "field 'mTvContent'");
-    view = finder.findRequiredView(source, 2131624170, "method 'onCancelClick'");
+    view = finder.findRequiredView(source, 2131624173, "field 'mTvContent'");
+    target.mTvContent = finder.castView(view, 2131624173, "field 'mTvContent'");
+    view = finder.findRequiredView(source, 2131624174, "method 'onCancelClick'");
     view.setOnClickListener(
       new butterknife.internal.DebouncingOnClickListener() {
         @Override public void doClick(
@@ -31,7 +31,7 @@ public class AddHouseNoDialogActivity$$ViewBinder<T extends com.project.communit
           target.onCancelClick(p0);
         }
       });
-    view = finder.findRequiredView(source, 2131624171, "method 'onConfirm'");
+    view = finder.findRequiredView(source, 2131624175, "method 'onConfirm'");
     view.setOnClickListener(
       new butterknife.internal.DebouncingOnClickListener() {
         @Override public void doClick(

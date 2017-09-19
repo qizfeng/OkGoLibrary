@@ -10,12 +10,12 @@ public class ZhengwuActivity$$ViewBinder<T extends com.project.community.ui.life
     View view;
     view = finder.findRequiredView(source, 2131624108, "field 'recyclerView'");
     target.recyclerView = finder.castView(view, 2131624108, "field 'recyclerView'");
-    view = finder.findRequiredView(source, 2131624211, "field 'refreshLayout'");
-    target.refreshLayout = finder.castView(view, 2131624211, "field 'refreshLayout'");
-    view = finder.findRequiredView(source, 2131624212, "field 'fab'");
-    target.fab = finder.castView(view, 2131624212, "field 'fab'");
-    view = finder.findRequiredView(source, 2131624203, "field 'gridView'");
-    target.gridView = finder.castView(view, 2131624203, "field 'gridView'");
+    view = finder.findRequiredView(source, 2131624215, "field 'refreshLayout'");
+    target.refreshLayout = finder.castView(view, 2131624215, "field 'refreshLayout'");
+    view = finder.findRequiredView(source, 2131624216, "field 'fab'");
+    target.fab = finder.castView(view, 2131624216, "field 'fab'");
+    view = finder.findRequiredView(source, 2131624207, "field 'gridView'");
+    target.gridView = finder.castView(view, 2131624207, "field 'gridView'");
   }
 
   @Override public void unbind(T target) {
