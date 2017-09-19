@@ -153,6 +153,7 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
     LinearLayout mLayoutRoot;
     @Bind(R.id.scrollView)
     NestedScrollView mScrollView;
+
     private PopupWindow mPopupWindow;
     private LoopView mLoopView;
     private Dialog mDialog;
