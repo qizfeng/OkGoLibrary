@@ -329,7 +329,6 @@ public class FamilyInfoActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                if (!e.getMessage().contains("No address"))
                     showToast(e.getMessage());
             }
         });
@@ -410,7 +409,6 @@ public class FamilyInfoActivity extends BaseActivity implements View.OnClickList
                 mAdapter.setEmptyView(R.layout.empty_view);
                 TextView textView = (TextView) mAdapter.getEmptyView().findViewById(R.id.tv_tips);
                 textView.setText(getString(R.string.empty_no_data_family));
-                if (!e.getMessage().contains("No address"))
                     showToast(e.getMessage());
             }
         });
@@ -438,7 +436,6 @@ public class FamilyInfoActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                if (!e.getMessage().contains("No address"))
                     showToast(e.getMessage());
             }
         });
@@ -464,7 +461,6 @@ public class FamilyInfoActivity extends BaseActivity implements View.OnClickList
                     @Override
                     public void onError(Call call, Response response, Exception e) {
                         super.onError(call, response, e);
-                        if (!e.getMessage().contains("No address"))
                             showToast(e.getMessage());
                     }
 

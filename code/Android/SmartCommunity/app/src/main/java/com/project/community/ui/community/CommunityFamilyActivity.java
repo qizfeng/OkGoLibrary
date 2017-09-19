@@ -161,7 +161,6 @@ public class CommunityFamilyActivity extends BaseActivity {
                 mAdapter.setEmptyView(R.layout.empty_view);
                 TextView textView = (TextView) mAdapter.getEmptyView().findViewById(R.id.tv_tips);
                 textView.setText(getString(R.string.empty_no_data_family));
-                if (!e.getMessage().contains("No address"))
                     showToast(e.getMessage());
             }
         });

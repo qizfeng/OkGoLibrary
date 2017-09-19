@@ -646,7 +646,6 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                if (!e.getMessage().contains("No address"))
                     showToast(e.getMessage());
             }
         });
@@ -662,7 +661,6 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                if (!e.getMessage().contains("No address"))
                     showToast(e.getMessage());
             }
         });

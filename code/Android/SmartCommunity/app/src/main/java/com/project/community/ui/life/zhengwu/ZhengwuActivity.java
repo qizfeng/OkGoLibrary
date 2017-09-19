@@ -294,7 +294,6 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                if (!e.getMessage().contains("No address"))
                     showToast(e.getMessage());
             }
         });
@@ -334,7 +333,6 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                if (!e.getMessage().contains("No address"))
                     showToast(e.getMessage());
             }
 
@@ -500,7 +498,6 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                if (!e.getMessage().contains("No address"))
                     showToast(e.getMessage());
             }
 
@@ -601,7 +598,6 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                if (!e.getMessage().contains("No address"))
                     showToast(e.getMessage());
             }
         });
@@ -625,7 +621,6 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                if (!e.getMessage().contains("No address"))
                     showToast(e.getMessage());
             }
         });

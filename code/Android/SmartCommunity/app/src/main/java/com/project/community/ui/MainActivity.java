@@ -110,6 +110,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 return true;//注意!!! 不要break,否则BottomNavigationView无切换效果
             case R.id.navigation_community:
                 //社区
+                if(!isLogin(this)){
+                    showToast(getString(R.string.toast_no_login));
+                    return false;
+                }
                 checkFragment=INDEX_COMMUNITY_FRAGMENT;
                 switchFragment(checkFragment);
                 initForMessageCenterIcon(bottom_navigation,false);

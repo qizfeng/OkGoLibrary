@@ -229,7 +229,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                if (!e.getMessage().contains("No address"))
                     showToast(e.getMessage());
             }
         });
