@@ -12,12 +12,12 @@ public class FamilyInfoActivity$$ViewBinder<T extends com.project.community.ui.l
     target.mToolBar = finder.castView(view, 2131624105, "field 'mToolBar'");
     view = finder.findRequiredView(source, 2131624106, "field 'mTvTitle'");
     target.mTvTitle = finder.castView(view, 2131624106, "field 'mTvTitle'");
-    view = finder.findRequiredView(source, 2131624187, "field 'mTabLayout'");
-    target.mTabLayout = finder.castView(view, 2131624187, "field 'mTabLayout'");
+    view = finder.findRequiredView(source, 2131624191, "field 'mTabLayout'");
+    target.mTabLayout = finder.castView(view, 2131624191, "field 'mTabLayout'");
     view = finder.findRequiredView(source, 2131624108, "field 'mRecyclerView'");
     target.mRecyclerView = finder.castView(view, 2131624108, "field 'mRecyclerView'");
-    view = finder.findRequiredView(source, 2131624189, "field 'mIvAdd'");
-    target.mIvAdd = finder.castView(view, 2131624189, "field 'mIvAdd'");
+    view = finder.findRequiredView(source, 2131624193, "field 'mIvAdd'");
+    target.mIvAdd = finder.castView(view, 2131624193, "field 'mIvAdd'");
   }
 
   @Override public void unbind(T target) {

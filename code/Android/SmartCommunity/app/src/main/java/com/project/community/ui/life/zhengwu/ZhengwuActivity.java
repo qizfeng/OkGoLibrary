@@ -105,13 +105,22 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
     protected void initView() {
         ButterKnife.bind(this);
         header = LayoutInflater.from(ZhengwuActivity.this).inflate(R.layout.layout_header_zhengwu, null);
-//        gridView = header.findViewById(R.id.gridview);
     }
 
     protected void initData() {
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        final StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                layoutManager.invalidateSpanAssignments(); //防止第一行到顶部有空白区域
+            }
+        });
+
+        recyclerView.setLayoutManager(layoutManager);
 
 
         mAdapter = new ArticlePageAdapter(null, new IndexAdapterItemListener() {
@@ -562,7 +571,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
                 popupWindow.btn_send.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(!isLogin(ZhengwuActivity.this)){
+                        if (!isLogin(ZhengwuActivity.this)) {
                             showToast(getString(R.string.toast_no_login));
                             return;
                         }
@@ -627,7 +636,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
      * 删除评论
      */
     private void deleteComment(final int position, String commentId, int type) {
-        if(!isLogin(this)){
+        if (!isLogin(this)) {
             showToast(getString(R.string.toast_no_login));
             return;
         }

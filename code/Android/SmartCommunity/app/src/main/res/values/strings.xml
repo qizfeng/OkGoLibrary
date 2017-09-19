@@ -205,8 +205,8 @@
     <string name="txt_new_pwd_hint">输入6&#8211;16位新密码</string>
     <string name="toast_empty_new_pwd">请您输入新密码</string>
     <string name="toast_error_new_pwd">请您输入6&#8211;16位新密码</string>
-    
-    
+
+
     <!--社区-->
     <!--范围筛选-->
     <string name="txt_map_scope">范围</string>
@@ -227,7 +227,35 @@
     <!--物业设施-->
     <string name="txt_map_utility">物业设施</string>
 
+    <string name="txt_map_house_no">门牌号</string>
+    <string name="txt_map_phone">电话</string>
+    <string name="txt_map_person_info">资料</string>
+
+    <string name="txt_map_person_reletive">和户主关系：</string>
+    <string name="txt_map_person_position">职业&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;：</string>
+    <string name="txt_map_person_gender">性别&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;：</string>
+    <string name="txt_map_person_idcard">身份证号：</string>
+    <string name="txt_map_person_age">年龄&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;：</string>
+    <string name="txt_map_person_birthday">出生日期：</string>
+    <string name="txt_map_person_nation">民族&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;：</string>
+    <string name="txt_map_person_religion">宗教信仰：</string>
+    <string name="txt_map_person_party">党派&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;：</string>
+    <string name="txt_map_person_mobile">手机号&#160;&#160;&#160;&#160;：</string>
+    <string name="txt_map_person_address">房屋地址：</string>
+
+
+    <string name="txt_map_shop_sort">分类</string>
+    <string name="txt_map_shop_main_bissness">主营业务</string>
+    <string name="txt_map_shop_company">企业名称</string>
+    <string name="txt_map_shop_license">营业执照号：</string>
+    <string name="txt_map_shop_legal_name">法人姓名</string>
+    <string name="txt_map_shop_license_photo">营业执照</string>
+    <string name="txt_map_shop_legal_idcard">法人身份证(正反)</string>
     
+    
+    <string name="txt_map_device_pull_date">报废时间</string>
+    <string name="txt_map_device_belong_company">所属单位</string>
+    <string name="txt_map_device_remark">备注</string>
     <!--通用-->
     <string name="toast_error_pay">获取订单信息失败</string>
     <string name="toast_error_phone">请输入正确的手机号</string>

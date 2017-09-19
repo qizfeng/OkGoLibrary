@@ -8,8 +8,8 @@ import butterknife.ButterKnife.ViewBinder;
 public class MainActivity$$ViewBinder<T extends com.project.community.ui.MainActivity> implements ViewBinder<T> {
   @Override public void bind(final Finder finder, final T target, Object source) {
     View view;
-    view = finder.findRequiredView(source, 2131624224, "field 'bottom_navigation'");
-    target.bottom_navigation = finder.castView(view, 2131624224, "field 'bottom_navigation'");
+    view = finder.findRequiredView(source, 2131624228, "field 'bottom_navigation'");
+    target.bottom_navigation = finder.castView(view, 2131624228, "field 'bottom_navigation'");
   }
 
   @Override public void unbind(T target) {

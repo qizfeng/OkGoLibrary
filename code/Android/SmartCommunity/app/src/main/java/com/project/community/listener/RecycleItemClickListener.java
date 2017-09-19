@@ -15,7 +15,6 @@ public interface RecycleItemClickListener {
      * @param position
      */
     void onItemClick(View view, int position);
-
     /**
      * 文字部分点击事件
      * @param view

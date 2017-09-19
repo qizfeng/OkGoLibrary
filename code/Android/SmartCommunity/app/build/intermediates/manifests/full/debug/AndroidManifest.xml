@@ -244,6 +244,10 @@
             android:name="com.project.community.ui.community.CommunityFamilyActivity"
             android:label="社区家庭人员列表"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.project.community.ui.community.CommunityPersonActivity"
+            android:label="@string/txt_map_person_info"
+            android:screenOrientation="portrait" />
         <!-- 自定义service -->
         <service
             android:name="com.project.community.service.AppLocationService"

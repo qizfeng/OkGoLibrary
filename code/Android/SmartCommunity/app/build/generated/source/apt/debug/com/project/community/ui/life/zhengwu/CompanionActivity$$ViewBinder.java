@@ -12,20 +12,20 @@ public class CompanionActivity$$ViewBinder<T extends com.project.community.ui.li
     target.mToolBar = finder.castView(view, 2131624105, "field 'mToolBar'");
     view = finder.findRequiredView(source, 2131624106, "field 'mTvTitle'");
     target.mTvTitle = finder.castView(view, 2131624106, "field 'mTvTitle'");
-    view = finder.findRequiredView(source, 2131624163, "field 'mLayoutTheme'");
-    target.mLayoutTheme = finder.castView(view, 2131624163, "field 'mLayoutTheme'");
-    view = finder.findRequiredView(source, 2131624165, "field 'mLayoutDepart'");
-    target.mLayoutDepart = finder.castView(view, 2131624165, "field 'mLayoutDepart'");
-    view = finder.findRequiredView(source, 2131624162, "field 'layout_parent'");
-    target.layout_parent = finder.castView(view, 2131624162, "field 'layout_parent'");
-    view = finder.findRequiredView(source, 2131624166, "field 'mTvDepart'");
-    target.mTvDepart = finder.castView(view, 2131624166, "field 'mTvDepart'");
-    view = finder.findRequiredView(source, 2131624164, "field 'mTvTheme'");
-    target.mTvTheme = finder.castView(view, 2131624164, "field 'mTvTheme'");
+    view = finder.findRequiredView(source, 2131624167, "field 'mLayoutTheme'");
+    target.mLayoutTheme = finder.castView(view, 2131624167, "field 'mLayoutTheme'");
+    view = finder.findRequiredView(source, 2131624169, "field 'mLayoutDepart'");
+    target.mLayoutDepart = finder.castView(view, 2131624169, "field 'mLayoutDepart'");
+    view = finder.findRequiredView(source, 2131624166, "field 'layout_parent'");
+    target.layout_parent = finder.castView(view, 2131624166, "field 'layout_parent'");
+    view = finder.findRequiredView(source, 2131624170, "field 'mTvDepart'");
+    target.mTvDepart = finder.castView(view, 2131624170, "field 'mTvDepart'");
+    view = finder.findRequiredView(source, 2131624168, "field 'mTvTheme'");
+    target.mTvTheme = finder.castView(view, 2131624168, "field 'mTvTheme'");
     view = finder.findRequiredView(source, 2131624108, "field 'recyclerView'");
     target.recyclerView = finder.castView(view, 2131624108, "field 'recyclerView'");
-    view = finder.findRequiredView(source, 2131624167, "field 'mBtnSubmit'");
-    target.mBtnSubmit = finder.castView(view, 2131624167, "field 'mBtnSubmit'");
+    view = finder.findRequiredView(source, 2131624171, "field 'mBtnSubmit'");
+    target.mBtnSubmit = finder.castView(view, 2131624171, "field 'mBtnSubmit'");
   }
 
   @Override public void unbind(T target) {

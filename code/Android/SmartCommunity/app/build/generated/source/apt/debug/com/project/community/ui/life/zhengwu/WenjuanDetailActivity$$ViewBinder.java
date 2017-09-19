@@ -10,10 +10,10 @@ public class WenjuanDetailActivity$$ViewBinder<T extends com.project.community.u
     View view;
     view = finder.findRequiredView(source, 2131624105, "field 'toolbar'");
     target.toolbar = finder.castView(view, 2131624105, "field 'toolbar'");
-    view = finder.findRequiredView(source, 2131624303, "field 'pb'");
-    target.pb = finder.castView(view, 2131624303, "field 'pb'");
-    view = finder.findRequiredView(source, 2131624186, "field 'mAppbar'");
-    target.mAppbar = finder.castView(view, 2131624186, "field 'mAppbar'");
+    view = finder.findRequiredView(source, 2131624307, "field 'pb'");
+    target.pb = finder.castView(view, 2131624307, "field 'pb'");
+    view = finder.findRequiredView(source, 2131624190, "field 'mAppbar'");
+    target.mAppbar = finder.castView(view, 2131624190, "field 'mAppbar'");
     view = finder.findRequiredView(source, 2131624106, "field 'mTvTitle'");
     target.mTvTitle = finder.castView(view, 2131624106, "field 'mTvTitle'");
   }

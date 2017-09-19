@@ -16,6 +16,10 @@
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/src/main/res/menu/menu_topic_detail.xml"
     },
     {
+        "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/menu/menu_community_toolbar_choise.xml",
+        "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/src/main/res/menu/menu_community_toolbar_choise.xml"
+    },
+    {
         "merged": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/build/intermediates/res/merged/debug/menu/menu_actionbar.xml",
         "source": "/Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/src/main/res/menu/menu_actionbar.xml"
     }

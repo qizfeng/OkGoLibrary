@@ -2,25 +2,34 @@ package com.project.community.ui.community;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.nfc.tech.NfcV;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.ZoomControls;
 
@@ -44,10 +53,12 @@ import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.model.LatLngBounds;
+import com.library.okgo.utils.DeviceUtil;
 import com.library.okgo.utils.LogUtils;
 import com.library.okgo.utils.ToastUtils;
 import com.project.community.R;
 import com.project.community.base.BaseFragment;
+import com.project.community.util.ScreenUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,15 +88,15 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
 
     // 初始化全局 bitmap 信息，不用时及时 recycle
     BitmapDescriptor bdA = BitmapDescriptorFactory
-            .fromResource(R.mipmap.icon_marka);
+            .fromResource(R.mipmap.d45_icon1);
     BitmapDescriptor bdB = BitmapDescriptorFactory
-            .fromResource(R.mipmap.icon_markb);
+            .fromResource(R.mipmap.d45_icon2);
     BitmapDescriptor bdC = BitmapDescriptorFactory
-            .fromResource(R.mipmap.icon_markc);
+            .fromResource(R.mipmap.d50_icon1);
     BitmapDescriptor bdD = BitmapDescriptorFactory
-            .fromResource(R.mipmap.icon_markd);
+            .fromResource(R.mipmap.d50_icon2);
     BitmapDescriptor bd = BitmapDescriptorFactory
-            .fromResource(R.mipmap.icon_gcoding);
+            .fromResource(R.mipmap.d50_icon3);
 
     BitmapDescriptor bdGround;
     BitmapDescriptor bdGround2 = BitmapDescriptorFactory
@@ -116,8 +127,17 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
     LinearLayout mDrawerRightContent;
     @Bind(R.id.drawerBottom)
     LinearLayout mDrawerBottom;
+    @Bind(R.id.iv_shop)
+    ImageView mIvShop;
+    @Bind(R.id.iv_person)
+    ImageView mIvPerson;
+    @Bind(R.id.iv_device)
+    ImageView mIvDevice;
     private double lastLat;
     private double lastLon;
+    private int currentIndex = 0;//0未选择 1商铺 2人员 3设施
+
+    private PopupWindow mPopupWindow;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -128,22 +148,26 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
         iv_current_poi.setOnClickListener(this);
         mIvBack.setOnClickListener(this);
         mIvDrawer.setOnClickListener(this);
+        mIvShop.setOnClickListener(this);
+        mIvPerson.setOnClickListener(this);
+        mIvDevice.setOnClickListener(this);
         DisplayMetrics metric = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(metric);
 
         ViewGroup.LayoutParams rightParams = mDrawerRight.getLayoutParams();
         rightParams.width = metric.widthPixels / 2;
-//        rightParams.height = metric.heightPixels;
+        rightParams.height = metric.heightPixels - mDrawerBottom.getLayoutParams().height - 56;
         mDrawerRight.setLayoutParams(rightParams);
         mDrawerBottom.getLayoutParams().width = rightParams.width;
         //关闭手动滑出
         mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         //mDrawerLayout.openDrawer(Gravity.RIGHT);//侧滑打开  不设置则不会默认打开
+        mIvDrawer.setVisibility(View.GONE);
         return view;
     }
 
     private void showDrawerLayout() {
-        initDrawerData(1);
+        initDrawerData(currentIndex);
         if (!mDrawerLayout.isDrawerOpen(Gravity.END)) {
             mDrawerLayout.openDrawer(Gravity.END);
         } else {
@@ -164,13 +188,22 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
             R.string.txt_map_check_pass
     };
     private String[] tagArr = new String[]{
+            "全选",
             "问题人员",
+            "吸毒",
+            "吸毒",
             "吸毒"
     };
 
-    private List<TextView> mScopeBtnArr = new ArrayList<>();
-    private List<TextView> mCheckBtnArr = new ArrayList<>();
-    private List<TextView> mTagBtnArr = new ArrayList<>();
+
+    private String[] deviceArr = new String[]{
+            "消防栓", "摄像头", "电子门禁"
+    };
+
+    private List<RadioButton> mScopeBtnArr = new ArrayList<>();
+    private List<RadioButton> mCheckBtnArr = new ArrayList<>();
+    private List<ImageView> mTagBtnArr = new ArrayList<>();
+    private List<RadioButton> mDeviceBtnArr = new ArrayList<>();
 
     private void initDrawerData(int type) {
         mDrawerRightContent.removeAllViews();
@@ -183,7 +216,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                 mScopeBtnArr = new ArrayList<>();
                 for (int j = 0; j < 5; j++) {
                     View contentView = LayoutInflater.from(getActivity()).inflate(R.layout.layout_item_map_single, null);
-                    TextView button = contentView.findViewById(R.id.button);
+                    RadioButton button = contentView.findViewById(R.id.button);
                     button.setText(scopeArr[j]);
                     final Drawable nav_up = getResources().getDrawable(R.mipmap.d10_btn1_p);
                     nav_up.setBounds(0, 0, nav_up.getMinimumWidth(), nav_up.getMinimumHeight());
@@ -213,14 +246,14 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                 }
                 mDrawerRightContent.addView(inflater);
             } else {
-                if (type == 1) {
+                if (type == 1) {//商铺
                     TextView tv_map_title = inflater.findViewById(R.id.tv_map_title);
                     LinearLayout layout_map_content = inflater.findViewById(R.id.layout_map_content);
                     tv_map_title.setText(R.string.txt_map_check_status);
                     mCheckBtnArr = new ArrayList<>();
                     for (int j = 0; j < 2; j++) {
                         View contentView = LayoutInflater.from(getActivity()).inflate(R.layout.layout_item_map_single, null);
-                        TextView button = contentView.findViewById(R.id.button);
+                        RadioButton button = contentView.findViewById(R.id.button);
                         button.setText(checkArr[j]);
                         final Drawable nav_up = getResources().getDrawable(R.mipmap.d10_btn1_p);
                         nav_up.setBounds(0, 0, nav_up.getMinimumWidth(), nav_up.getMinimumHeight());
@@ -248,16 +281,64 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                         layout_map_content.addView(contentView);
                     }
                     mDrawerRightContent.addView(inflater);
-                } else if (type == 2) {
+                } else if (type == 2) {//人员
                     TextView tv_map_title = inflater.findViewById(R.id.tv_map_title);
                     LinearLayout layout_map_content = inflater.findViewById(R.id.layout_map_content);
-                    tv_map_title.setText(R.string.txt_map_check_status);
+                    tv_map_title.setText(R.string.txt_map_tag);
                     mTagBtnArr = new ArrayList<>();
+                    for (int j = 0; j < tagArr.length; j++) {
+                        View contentView = LayoutInflater.from(getActivity()).inflate(R.layout.layout_item_map_multiple, null);
+                        final ImageView button = contentView.findViewById(R.id.button);
+                        TextView tv_area = contentView.findViewById(R.id.tv_area);
+                        tv_area.setText(tagArr[j]);
+                        final Drawable nav_up = getResources().getDrawable(R.mipmap.d10_btn2_p);
+                        mTagBtnArr.add(button);
+                        final int clickPosition = j;
+                        contentView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if (clickPosition == 0) {
+                                    if (button.getDrawable() == null) {
+                                        for (int i = 0; i < mTagBtnArr.size(); i++) {
+                                            mTagBtnArr.get(i).setImageDrawable(nav_up);
+                                        }
+                                    } else {
+                                        for (int i = 0; i < mTagBtnArr.size(); i++) {
+                                            mTagBtnArr.get(i).setImageDrawable(null);
+                                        }
+                                    }
+                                } else {
+                                    if (button.getDrawable() == null) {
+                                        int count = 1;
+                                        button.setImageDrawable(nav_up);
+                                        for (int i = 0; i < mTagBtnArr.size(); i++) {
+                                            if (mTagBtnArr.get(i).getDrawable() != null) {
+                                                count++;
+                                            }
+                                        }
+                                        if (count == mTagBtnArr.size())
+                                            mTagBtnArr.get(0).setImageDrawable(nav_up);
+                                    } else {
+                                        mTagBtnArr.get(0).setImageDrawable(null);
+                                        button.setImageDrawable(null);
+                                    }
+                                }
+                            }
+                        });
+                        layout_map_content.addView(contentView);
+                    }
+                    mDrawerRightContent.addView(inflater);
+
+                } else if (type == 3) {
+                    TextView tv_map_title = inflater.findViewById(R.id.tv_map_title);
+                    LinearLayout layout_map_content = inflater.findViewById(R.id.layout_map_content);
+                    tv_map_title.setText(R.string.txt_map_utility);
+                    mDeviceBtnArr = new ArrayList<>();
                     for (int j = 0; j < 2; j++) {
                         View contentView = LayoutInflater.from(getActivity()).inflate(R.layout.layout_item_map_single, null);
-                        TextView button = contentView.findViewById(R.id.button);
-                        button.setText(tagArr[j]);
-                        final Drawable nav_up = getResources().getDrawable(R.mipmap.d10_btn2_p);
+                        RadioButton button = contentView.findViewById(R.id.button);
+                        button.setText(deviceArr[j]);
+                        final Drawable nav_up = getResources().getDrawable(R.mipmap.d10_btn1_p);
                         nav_up.setBounds(0, 0, nav_up.getMinimumWidth(), nav_up.getMinimumHeight());
                         if (j == 0) {
                             button.setCompoundDrawables(null, null, nav_up, null);
@@ -267,17 +348,17 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                             button.setTextColor(getResources().getColor(R.color.color_gray_666666));
                         }
 
-                        mTagBtnArr.add(button);
+                        mDeviceBtnArr.add(button);
                         final int clickPosition = j;
                         button.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                for (int j = 0; j < mCheckBtnArr.size(); j++) {
-                                    mTagBtnArr.get(j).setCompoundDrawables(null, null, null, null);
-                                    mTagBtnArr.get(j).setTextColor(getResources().getColor(R.color.color_gray_666666));
+                                for (int j = 0; j < mDeviceBtnArr.size(); j++) {
+                                    mDeviceBtnArr.get(j).setCompoundDrawables(null, null, null, null);
+                                    mDeviceBtnArr.get(j).setTextColor(getResources().getColor(R.color.color_gray_666666));
                                 }
-                                mTagBtnArr.get(clickPosition).setCompoundDrawables(null, null, nav_up, null);
-                                mTagBtnArr.get(clickPosition).setTextColor(getResources().getColor(R.color.colorPrimary));
+                                mDeviceBtnArr.get(clickPosition).setCompoundDrawables(null, null, nav_up, null);
+                                mDeviceBtnArr.get(clickPosition).setTextColor(getResources().getColor(R.color.colorPrimary));
                             }
                         });
                         layout_map_content.addView(contentView);
@@ -307,56 +388,6 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
         MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(16.0f);
         mBaiduMap.setMapStatus(msu);
         initOverlay();
-        mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
-            public boolean onMarkerClick(final Marker marker) {
-                Button button = new Button(getActivity());
-                button.setBackgroundResource(R.mipmap.popup);
-                InfoWindow.OnInfoWindowClickListener listener = null;
-                if (marker == mMarkerA || marker == mMarkerD) {
-                    button.setText("更改位置");
-                    button.setTextColor(Color.BLACK);
-                    button.setWidth(300);
-
-                    listener = new InfoWindow.OnInfoWindowClickListener() {
-                        public void onInfoWindowClick() {
-                            LatLng ll = marker.getPosition();
-                            LatLng llNew = new LatLng(ll.latitude + 0.005,
-                                    ll.longitude + 0.005);
-                            marker.setPosition(llNew);
-                            mBaiduMap.hideInfoWindow();
-                        }
-                    };
-                    LatLng ll = marker.getPosition();
-                    mInfoWindow = new InfoWindow(BitmapDescriptorFactory.fromView(button), ll, -47, listener);
-                    mBaiduMap.showInfoWindow(mInfoWindow);
-                } else if (marker == mMarkerB) {
-                    button.setText("更改图标");
-                    button.setTextColor(Color.BLACK);
-                    button.setOnClickListener(new View.OnClickListener() {
-                        public void onClick(View v) {
-                            marker.setIcon(bd);
-                            mBaiduMap.hideInfoWindow();
-                        }
-                    });
-                    LatLng ll = marker.getPosition();
-                    mInfoWindow = new InfoWindow(button, ll, -47);
-                    mBaiduMap.showInfoWindow(mInfoWindow);
-                } else if (marker == mMarkerC) {
-                    button.setText("删除");
-                    button.setTextColor(Color.BLACK);
-                    button.setOnClickListener(new View.OnClickListener() {
-                        public void onClick(View v) {
-                            marker.remove();
-                            mBaiduMap.hideInfoWindow();
-                        }
-                    });
-                    LatLng ll = marker.getPosition();
-                    mInfoWindow = new InfoWindow(button, ll, -47);
-                    mBaiduMap.showInfoWindow(mInfoWindow);
-                }
-                return true;
-            }
-        });
 
 
         // 开启定位图层
@@ -422,8 +453,10 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                 MapStatusUpdate u = MapStatusUpdateFactory
                         .newMapStatus(mMapStatus);
                 mBaiduMap.setMapStatus(u);
+
                 break;
             case R.id.iv_back:
+                mIvDrawer.setVisibility(View.GONE);
                 mMapStatus = new MapStatus.Builder()
                         .target(new LatLng(lastLat, lastLon))
                         .zoom(16)
@@ -432,18 +465,75 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                         .newMapStatus(mMapStatus);
                 mBaiduMap.setMapStatus(u);
                 mIvBack.setVisibility(View.GONE);
-//                mMarkerE.remove();
-//                mMarkerF.remove();
-//                mMarkerG.remove();
+                clearOverlay();
+                currentIndex = 0;
+                mIvShop.setImageResource(R.mipmap.d43_btn_2);
+                mIvPerson.setImageResource(R.mipmap.d43_btn_3);
+                mIvDevice.setImageResource(R.mipmap.d43_btn_4);
+                break;
+            case R.id.iv_shop:
+                mIvDrawer.setVisibility(View.VISIBLE);
+                mIvShop.setImageResource(R.mipmap.d43_btn_2_p);
+                mIvPerson.setImageResource(R.mipmap.d43_btn_3);
+                mIvDevice.setImageResource(R.mipmap.d43_btn_4);
+                MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(13.0f);
+                mBaiduMap.setMapStatus(msu);
+                bdA = BitmapDescriptorFactory
+                        .fromResource(R.mipmap.d45_icon1);
+                bdB = BitmapDescriptorFactory
+                        .fromResource(R.mipmap.d45_icon1);
+                bdC = BitmapDescriptorFactory
+                        .fromResource(R.mipmap.d45_icon1);
+                bdD = BitmapDescriptorFactory
+                        .fromResource(R.mipmap.d45_icon1);
+                bd = BitmapDescriptorFactory
+                        .fromResource(R.mipmap.d45_icon1);
+                currentIndex = 1;
+                clearOverlay();
+                initMarker();
+                break;
+            case R.id.iv_person:
+                mIvDrawer.setVisibility(View.VISIBLE);
+                mIvShop.setImageResource(R.mipmap.d43_btn_2);
+                mIvPerson.setImageResource(R.mipmap.d43_btn_3_p);
+                mIvDevice.setImageResource(R.mipmap.d43_btn_4);
+                msu = MapStatusUpdateFactory.zoomTo(13.0f);
+                mBaiduMap.setMapStatus(msu);
 
-                List<Marker> markers1 = mBaiduMap.getMarkersInBounds(bounds);
-                for (int i = 0; i < markers1.size(); i++) {
-                    markers1.get(i).remove();
-                }
-                List<Marker> markers2 = mBaiduMap.getMarkersInBounds(bounds2);
-                for (int i = 0; i < markers2.size(); i++) {
-                    markers2.get(i).remove();
-                }
+                bdA = BitmapDescriptorFactory
+                        .fromResource(R.mipmap.d48_icon1);
+                bdB = BitmapDescriptorFactory
+                        .fromResource(R.mipmap.d48_icon2);
+                bdC = BitmapDescriptorFactory
+                        .fromResource(R.mipmap.d48_icon1);
+                bdD = BitmapDescriptorFactory
+                        .fromResource(R.mipmap.d48_icon1);
+                bd = BitmapDescriptorFactory
+                        .fromResource(R.mipmap.d48_icon2);
+                currentIndex = 2;
+                clearOverlay();
+                initMarker();
+                break;
+            case R.id.iv_device:
+                mIvDrawer.setVisibility(View.VISIBLE);
+                mIvShop.setImageResource(R.mipmap.d43_btn_2);
+                mIvPerson.setImageResource(R.mipmap.d43_btn_3);
+                mIvDevice.setImageResource(R.mipmap.d43_btn_4_p);
+                msu = MapStatusUpdateFactory.zoomTo(13.0f);
+                mBaiduMap.setMapStatus(msu);
+                bdA = BitmapDescriptorFactory
+                        .fromResource(R.mipmap.d50_icon1);
+                bdB = BitmapDescriptorFactory
+                        .fromResource(R.mipmap.d50_icon1);
+                bdC = BitmapDescriptorFactory
+                        .fromResource(R.mipmap.d50_icon1);
+                bdD = BitmapDescriptorFactory
+                        .fromResource(R.mipmap.d50_icon2);
+                bd = BitmapDescriptorFactory
+                        .fromResource(R.mipmap.d50_icon3);
+                currentIndex = 3;
+                clearOverlay();
+                initMarker();
                 break;
         }
     }
@@ -451,7 +541,24 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
     LatLngBounds bounds;
     LatLngBounds bounds2;
 
-    public void initOverlay() {
+    private void clearOverlay() {
+        try {
+
+            List<Marker> markers1 = mBaiduMap.getMarkersInBounds(bounds);
+            for (int i = 0; i < markers1.size(); i++) {
+                markers1.get(i).remove();
+            }
+            List<Marker> markers2 = mBaiduMap.getMarkersInBounds(bounds2);
+            for (int i = 0; i < markers2.size(); i++) {
+                markers2.get(i).remove();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initMarker() {
+        mBaiduMap.hideInfoWindow();
         // add marker overlay
         LatLng llA = new LatLng(39.963175, 116.400244);
         LatLng llB = new LatLng(39.942821, 116.369199);
@@ -461,28 +568,48 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
         MarkerOptions ooA = new MarkerOptions().position(llA).icon(bdA)
                 .zIndex(9).draggable(true);
         // 掉下动画
-        ooA.animateType(MarkerOptions.MarkerAnimateType.drop);
+        ooA.animateType(MarkerOptions.MarkerAnimateType.none);
+        if (mMarkerA != null)
+            mMarkerA.remove();
         mMarkerA = (Marker) (mBaiduMap.addOverlay(ooA));
+
+
         MarkerOptions ooB = new MarkerOptions().position(llB).icon(bdB)
                 .zIndex(5);
         // 掉下动画
-        ooB.animateType(MarkerOptions.MarkerAnimateType.drop);
+        ooB.animateType(MarkerOptions.MarkerAnimateType.none);
+        if (mMarkerB != null)
+            mMarkerB.remove();
         mMarkerB = (Marker) (mBaiduMap.addOverlay(ooB));
-        MarkerOptions ooC = new MarkerOptions().position(llC).icon(bdC)
-                .perspective(false).anchor(0.5f, 0.5f).rotate(30).zIndex(7);
-        // 生长动画
-        ooC.animateType(MarkerOptions.MarkerAnimateType.grow);
-        mMarkerC = (Marker) (mBaiduMap.addOverlay(ooC));
-        ArrayList<BitmapDescriptor> giflist = new ArrayList<BitmapDescriptor>();
-        giflist.add(bdA);
-        giflist.add(bdB);
-        giflist.add(bdC);
-        MarkerOptions ooD = new MarkerOptions().position(llD).icons(giflist)
-                .zIndex(0).period(10);
-        // 生长动画
-        ooD.animateType(MarkerOptions.MarkerAnimateType.grow);
-        mMarkerD = (Marker) (mBaiduMap.addOverlay(ooD));
 
+
+        MarkerOptions ooC = new MarkerOptions().position(llC).icon(bdC)
+                // .perspective(false).anchor(0.5f, 0.5f).rotate(30)
+                .zIndex(7);
+        // 生长动画
+        ooC.animateType(MarkerOptions.MarkerAnimateType.none);
+        if (mMarkerC != null)
+            mMarkerC.remove();
+        mMarkerC = (Marker) (mBaiduMap.addOverlay(ooC));
+
+
+        ArrayList<BitmapDescriptor> giflist = new ArrayList<BitmapDescriptor>();
+//        giflist.add(bdA);
+//        giflist.add(bdB);
+//        giflist.add(bdC);
+        MarkerOptions ooD = new MarkerOptions().position(llD)
+                .icon(bdD)
+                //.icons(giflist)
+                .zIndex(7);
+//                .period(10);
+        // 生长动画
+//        ooD.animateType(MarkerOptions.MarkerAnimateType.none);
+        if (mMarkerD != null)
+            mMarkerD.remove();
+        mMarkerD = (Marker) (mBaiduMap.addOverlay(ooD));
+    }
+
+    public void initOverlay() {
         // add ground overlay
         final LatLng ooGrond1Southwest = new LatLng(39.92235, 116.380338);
         final LatLng ooGroud1Northeast = new LatLng(39.926246, 116.384977);
@@ -593,8 +720,43 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
 
         mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
             @Override
-            public boolean onMarkerClick(Marker marker) {
-                CommunityFamilyActivity.startActivity(getActivity(), new Bundle());
+            public boolean onMarkerClick(final Marker marker) {
+                InfoWindow.OnInfoWindowClickListener listener = null;
+                if (marker == mMarkerA || marker == mMarkerB || marker == mMarkerC || marker == mMarkerD) {
+                    if (currentIndex == 1) {//商铺
+                        View pop = LayoutInflater.from(getActivity()).inflate(R.layout.layout_popup_map_shop, null);
+                        listener = new InfoWindow.OnInfoWindowClickListener() {
+                            public void onInfoWindowClick() {
+                                showShop();
+                            }
+                        };
+                        LatLng ll = marker.getPosition();
+                        mInfoWindow = new InfoWindow(BitmapDescriptorFactory.fromView(pop), ll, -120, listener);
+                        mBaiduMap.showInfoWindow(mInfoWindow);
+                    } else if (currentIndex == 2) {//人员
+                        View pop = LayoutInflater.from(getActivity()).inflate(R.layout.layout_popup_map_person, null);
+                        listener = new InfoWindow.OnInfoWindowClickListener() {
+                            public void onInfoWindowClick() {
+                                showPerson();
+                            }
+                        };
+                        LatLng ll = marker.getPosition();
+                        mInfoWindow = new InfoWindow(BitmapDescriptorFactory.fromView(pop), ll, -120, listener);
+                        mBaiduMap.showInfoWindow(mInfoWindow);
+                    } else if (currentIndex == 3) {//设施
+                        View pop = LayoutInflater.from(getActivity()).inflate(R.layout.layout_popup_map_device, null);
+                        listener = new InfoWindow.OnInfoWindowClickListener() {
+                            public void onInfoWindowClick() {
+                                showDevice();
+                            }
+                        };
+                        LatLng ll = marker.getPosition();
+                        mInfoWindow = new InfoWindow(BitmapDescriptorFactory.fromView(pop), ll, -120, listener);
+                        mBaiduMap.showInfoWindow(mInfoWindow);
+                    }
+                } else {
+                    CommunityFamilyActivity.startActivity(getActivity(), new Bundle());
+                }
                 return false;
             }
         });
@@ -613,6 +775,102 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
             }
         });
     }
+
+
+    /**
+     * 点击人员marker弹窗信息窗
+     */
+    private void showPerson() {
+        //填充对话框的布局
+        View inflate = LayoutInflater.from(getActivity()).inflate(R.layout.layout_popup_community_person, null);
+        if (mPopupWindow == null)
+            mPopupWindow = new PopupWindow(getActivity());
+        // 设置视图
+        mPopupWindow.setContentView(inflate);
+        // 设置弹出窗体的宽和高
+        mPopupWindow.setHeight((int) (DeviceUtil.getDeviceHeight(getActivity()) * 0.8));
+        mPopupWindow.setWidth(RelativeLayout.LayoutParams.MATCH_PARENT);
+        // 设置弹出窗体可点击
+        mPopupWindow.setFocusable(true);
+        // 实例化一个ColorDrawable颜色为半透明
+        ColorDrawable dw = new ColorDrawable(0x00000000);
+        // 设置弹出窗体的背景
+        mPopupWindow.setBackgroundDrawable(dw);
+        // 设置弹出窗体显示时的动画，从底部向上弹出
+        mPopupWindow.setAnimationStyle(R.style.popwin_comment_anim);
+        mPopupWindow.showAtLocation(mDrawerLayout, Gravity.BOTTOM, ScreenUtils.getScreenWidth(getActivity()), 0);
+        inflate.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                mPopupWindow.dismiss();
+                return false;
+            }
+        });
+    }
+
+    /**
+     * 点击商铺marker弹出窗
+     */
+    private void showShop() {
+        //填充对话框的布局
+        View inflate = LayoutInflater.from(getActivity()).inflate(R.layout.layout_popup_community_shop, null);
+        if (mPopupWindow == null)
+            mPopupWindow = new PopupWindow(getActivity());
+        // 设置视图
+        mPopupWindow.setContentView(inflate);
+        // 设置弹出窗体的宽和高
+        mPopupWindow.setHeight((int) (DeviceUtil.getDeviceHeight(getActivity()) * 0.8));
+        mPopupWindow.setWidth(RelativeLayout.LayoutParams.MATCH_PARENT);
+        // 设置弹出窗体可点击
+        mPopupWindow.setFocusable(true);
+        // 实例化一个ColorDrawable颜色为半透明
+        ColorDrawable dw = new ColorDrawable(0x00000000);
+        // 设置弹出窗体的背景
+        mPopupWindow.setBackgroundDrawable(dw);
+        // 设置弹出窗体显示时的动画，从底部向上弹出
+        mPopupWindow.setAnimationStyle(R.style.popwin_comment_anim);
+        mPopupWindow.showAtLocation(mDrawerLayout, Gravity.BOTTOM, ScreenUtils.getScreenWidth(getActivity()), 0);
+        inflate.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                mPopupWindow.dismiss();
+                return false;
+            }
+        });
+    }
+
+
+    /**
+     * 点击设施marker弹窗
+     */
+    private void showDevice() {
+        //填充对话框的布局
+        View inflate = LayoutInflater.from(getActivity()).inflate(R.layout.layout_popup_community_device, null);
+        if (mPopupWindow == null)
+            mPopupWindow = new PopupWindow(getActivity());
+        // 设置视图
+        mPopupWindow.setContentView(inflate);
+        // 设置弹出窗体的宽和高
+        mPopupWindow.setHeight(RelativeLayout.LayoutParams.WRAP_CONTENT);
+        mPopupWindow.setWidth(RelativeLayout.LayoutParams.MATCH_PARENT);
+        // 设置弹出窗体可点击
+        mPopupWindow.setFocusable(true);
+        // 实例化一个ColorDrawable颜色为半透明
+        ColorDrawable dw = new ColorDrawable(0x00000000);
+        // 设置弹出窗体的背景
+        mPopupWindow.setBackgroundDrawable(dw);
+        // 设置弹出窗体显示时的动画，从底部向上弹出
+        mPopupWindow.setAnimationStyle(R.style.popwin_comment_anim);
+        mPopupWindow.showAtLocation(mDrawerLayout, Gravity.BOTTOM, ScreenUtils.getScreenWidth(getActivity()), 0);
+        inflate.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                mPopupWindow.dismiss();
+                return false;
+            }
+        });
+    }
+
 
     @Override
     public void onStop() {
@@ -633,14 +891,6 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
         super.onResume();
         mMapView.setVisibility(View.VISIBLE);
         mMapView.onResume();
-//        LogUtils.e("onresume");
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//                mIvFlash.setVisibility(View.GONE);
-//            }
-//        },2000);
     }
 
     @Override
