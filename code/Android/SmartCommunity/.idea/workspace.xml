@@ -4,25 +4,25 @@
     <shared>
       <config>
         <devices>
+          <device id="Nexus 6" />
           <device id="Nexus 5X" />
           <device id="Nexus One" />
           <device id="pixel" />
           <device id="Nexus 5" />
           <device id="Nexus 4" />
           <device id="Galaxy Nexus" />
-          <device id="Nexus 6" />
           <device id="Nexus 6P" />
         </devices>
       </config>
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
     <option name="TOOL_WINDOW_REGEXP_FILTER" value="false" />
   </component>
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/com/project/community/ui/community/CommunityFragment.java" line="117" mnemonic="0" />
+    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/com/project/community/ui/community/CommunityFragment.java" line="120" mnemonic="0" />
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="57461c2a-95a7-4d94-a478-3cf2bc850e39" name="Default" comment="">
@@ -32,21 +32,28 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_mylibrary_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_mylibrary_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_mylibrary_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_mylibrary_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_mylibrary_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_mylibrary_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_mylibrary_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_mylibrary_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/MainActivity$MainFragmentPagerAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/MainActivity$MainFragmentPagerAdapter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/MainActivity$MainPagerAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/MainActivity$MainPagerAdapter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/MainActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/MainActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/PhoneDialogActivity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/PhoneDialogActivity$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/PhoneDialogActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/PhoneDialogActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFamilyActivity$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFamilyActivity$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFamilyActivity$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFamilyActivity$4.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app-release.apk" afterPath="$PROJECT_DIR$/app/app-release.apk" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/constants/AppConstants.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/constants/AppConstants.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/SplashActivity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/SplashActivity$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/SplashActivity$InComingHandler.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/SplashActivity$InComingHandler.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/SplashActivity$LocationServiceConnection.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/SplashActivity$LocationServiceConnection.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/SplashActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/SplashActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$$ViewBinder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$$ViewBinder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$10.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$10.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$11$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$11$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$11.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$11.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$2.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$3.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$4.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$5.class" />
@@ -58,28 +65,11 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$9.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$9.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$MyLocationListenner.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$MyLocationListenner.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/SearchActivity$6.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/SearchActivity$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/SearchActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/SearchActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/TopicDetailActivity$10.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/TopicDetailActivity$10.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/TopicDetailActivity$11.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/TopicDetailActivity$11.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/TopicDetailActivity$12.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/TopicDetailActivity$12.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/TopicDetailActivity$13.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/TopicDetailActivity$13.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/TopicDetailActivity$14.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/TopicDetailActivity$14.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/TopicDetailActivity$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/TopicDetailActivity$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/TopicDetailActivity$6.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/TopicDetailActivity$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/TopicDetailActivity$7.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/TopicDetailActivity$7.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/TopicDetailActivity$8$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/TopicDetailActivity$8$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/TopicDetailActivity$8.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/TopicDetailActivity$8.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/TopicDetailActivity$9.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/TopicDetailActivity$9.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/TopicDetailActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/TopicDetailActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddActivity$10.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddActivity$10.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddActivity$7.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddActivity$7.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddActivity$8.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddActivity$8.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddActivity$9.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddActivity$9.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$10.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$10.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$11.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$11.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$12.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$12.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$2.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$3.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$4.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$5.class" />
@@ -88,214 +78,47 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$8.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$8.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$9.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$9.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyInfoActivity$10.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyInfoActivity$10.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyInfoActivity$11.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyInfoActivity$11.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyInfoActivity$12.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyInfoActivity$12.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyInfoActivity$9.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyInfoActivity$9.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyInfoActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyInfoActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/AddHouseNoActivity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/AddHouseNoActivity$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/AddHouseNoActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/AddHouseNoActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/AddHouseNoDialogActivity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/AddHouseNoDialogActivity$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/AddHouseNoDialogActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/AddHouseNoDialogActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/PayDetailWuyeActivity$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/PayDetailWuyeActivity$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/PayDetailWuyeActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/PayDetailWuyeActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/PayHistroyActivity$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/PayHistroyActivity$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/PayHistroyActivity$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/PayHistroyActivity$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/PayHistroyActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/PayHistroyActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/PayIndexActivity$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/PayIndexActivity$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/PayIndexActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/PayIndexActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/PaymentDialogActivity$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/PaymentDialogActivity$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/PaymentDialogActivity$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/PaymentDialogActivity$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/PaymentDialogActivity$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/PaymentDialogActivity$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/PaymentDialogActivity$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/PaymentDialogActivity$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/PaymentDialogActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/PaymentDialogActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/WuyeActivity$10.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/WuyeActivity$10.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/WuyeActivity$11.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/WuyeActivity$11.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/WuyeActivity$12.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/WuyeActivity$12.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/WuyeActivity$13.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/WuyeActivity$13.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/WuyeActivity$14.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/WuyeActivity$14.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/WuyeActivity$6.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/WuyeActivity$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/WuyeActivity$7.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/WuyeActivity$7.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/WuyeActivity$8$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/WuyeActivity$8$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/WuyeActivity$8$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/WuyeActivity$8$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/WuyeActivity$8$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/WuyeActivity$8$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/WuyeActivity$8.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/WuyeActivity$8.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/WuyeActivity$9.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/WuyeActivity$9.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/WuyeActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/wuye/WuyeActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/CompanionActivity$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/CompanionActivity$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/CompanionActivity$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/CompanionActivity$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/CompanionActivity$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/CompanionActivity$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/CompanionActivity$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/CompanionActivity$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/CompanionActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/CompanionActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/CompanionSearchActivity$6.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/CompanionSearchActivity$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/CompanionSearchActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/CompanionSearchActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/SuggestionActivity$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/SuggestionActivity$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/SuggestionActivity$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/SuggestionActivity$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/SuggestionActivity$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/SuggestionActivity$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/SuggestionActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/SuggestionActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/ZhengwuActivity$10.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/ZhengwuActivity$10.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/ZhengwuActivity$11.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/ZhengwuActivity$11.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/ZhengwuActivity$12.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/ZhengwuActivity$12.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/ZhengwuActivity$13.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/ZhengwuActivity$13.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/ZhengwuActivity$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/ZhengwuActivity$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/ZhengwuActivity$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/ZhengwuActivity$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/ZhengwuActivity$6.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/ZhengwuActivity$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/ZhengwuActivity$7.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/ZhengwuActivity$7.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/ZhengwuActivity$8$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/ZhengwuActivity$8$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/ZhengwuActivity$8$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/ZhengwuActivity$8$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/ZhengwuActivity$8$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/ZhengwuActivity$8$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/ZhengwuActivity$8.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/ZhengwuActivity$8.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/ZhengwuActivity$9.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/ZhengwuActivity$9.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/ZhengwuActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/ZhengwuActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/me/MeFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/me/MeFragment$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/me/MeFragment$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/me/MeFragment$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/me/MeFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/me/MeFragment.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/ForgetPassActivity$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/ForgetPassActivity$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/ForgetPassActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/ForgetPassActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/LoginActivity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/LoginActivity$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/LoginActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/LoginActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/ModifyPwdActivity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/ModifyPwdActivity$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/ModifyPwdActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/ModifyPwdActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/ModifyUserInfoActivity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/ModifyUserInfoActivity$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/ModifyUserInfoActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/ModifyUserInfoActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/RegisterActivity$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/RegisterActivity$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/RegisterActivity$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/RegisterActivity$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/RegisterActivity$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/RegisterActivity$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/RegisterActivity$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/RegisterActivity$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/RegisterActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/RegisterActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanActivity$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanActivity$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity$4.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity$5.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity$6.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity$6.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity$7.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity$7.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity$JavascriptInterface.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity$JavascriptInterface.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/UserInfoActivity$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/UserInfoActivity$4.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/UserInfoActivity$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/UserInfoActivity$5.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/UserInfoActivity$6.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/UserInfoActivity$6.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/UserInfoActivity$7.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/UserInfoActivity$7.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/UserInfoActivity$8.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/UserInfoActivity$8.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/UserInfoActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/UserInfoActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dex/debug/folders/1000/1/debug_472bb1dff390f4721446f6a00e6e2dd60f3d9efd/classes.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dex/debug/folders/1000/1/debug_472bb1dff390f4721446f6a00e6e2dd60f3d9efd/classes.dex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/project/community/ui/adapter" afterPath="$PROJECT_DIR$/app/src/main/java/com/project/community/ui/adapter" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout" afterPath="$PROJECT_DIR$/app/src/main/res/layout" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/res/resources-debug.ap_" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/android-profile/profile-2017-09-19-12-06-00-835.rawproto" afterPath="$PROJECT_DIR$/build/android-profile/profile-2017-09-19-12-06-00-835.rawproto" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/android-profile/profile-2017-09-19-20-48-10-920.rawproto" afterPath="$PROJECT_DIR$/build/android-profile/profile-2017-09-19-20-48-10-920.rawproto" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/generated/mockable-android-26.jar" afterPath="$PROJECT_DIR$/build/generated/mockable-android-26.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/annotations/debug/annotations.zip" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/annotations/debug/annotations.zip" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/annotations/release/annotations.zip" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/annotations/release/annotations.zip" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/bundles/debug/classes.jar" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/bundles/debug/classes.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/android/support/design/R$attr.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/android/support/design/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/android/support/design/R$dimen.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/android/support/design/R$dimen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/android/support/design/R$styleable.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/android/support/design/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/android/support/v7/appcompat/R$attr.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/android/support/v7/appcompat/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/android/support/v7/appcompat/R$dimen.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/android/support/v7/appcompat/R$dimen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/android/support/v7/appcompat/R$styleable.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/android/support/v7/appcompat/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/android/support/v7/recyclerview/R$attr.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/android/support/v7/recyclerview/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/android/support/v7/recyclerview/R$dimen.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/android/support/v7/recyclerview/R$dimen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/android/support/v7/recyclerview/R$styleable.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/android/support/v7/recyclerview/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/aitsuki/swipe/R$attr.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/aitsuki/swipe/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/aitsuki/swipe/R$dimen.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/aitsuki/swipe/R$dimen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/aitsuki/swipe/R$styleable.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/aitsuki/swipe/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/facebook/drawee/R$attr.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/facebook/drawee/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/facebook/drawee/R$styleable.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/facebook/drawee/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/facebook/drawee/backends/pipeline/R$attr.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/facebook/drawee/backends/pipeline/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/facebook/drawee/backends/pipeline/R$styleable.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/facebook/drawee/backends/pipeline/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/R$attr.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/R$bool.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/R$bool.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/R$color.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/R$color.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/R$dimen.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/R$dimen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/R$drawable.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/R$drawable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/R$id.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/R$id.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/R$integer.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/R$integer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/R$layout.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/R$layout.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/R$mipmap.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/R$mipmap.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/R$string.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/R$style.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/R$style.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/R$styleable.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/R$xml.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/R$xml.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/test/R$attr.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/test/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/test/R$bool.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/test/R$bool.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/test/R$color.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/test/R$color.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/test/R$dimen.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/test/R$dimen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/test/R$drawable.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/test/R$drawable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/test/R$id.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/test/R$id.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/test/R$integer.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/test/R$integer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/test/R$layout.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/test/R$layout.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/test/R$mipmap.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/test/R$mipmap.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/test/R$string.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/test/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/test/R$style.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/test/R$style.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/test/R$styleable.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/test/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/test/R$xml.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/library/okgo/test/R$xml.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/lzy/imagepicker/R$attr.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/lzy/imagepicker/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/lzy/imagepicker/R$dimen.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/lzy/imagepicker/R$dimen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/lzy/imagepicker/R$styleable.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/lzy/imagepicker/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/lzy/ninegrid/R$attr.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/lzy/ninegrid/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/lzy/ninegrid/R$dimen.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/lzy/ninegrid/R$dimen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/lzy/ninegrid/R$styleable.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/lzy/ninegrid/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/lzy/widget/R$attr.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/lzy/widget/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/lzy/widget/R$dimen.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/lzy/widget/R$dimen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/lzy/widget/R$styleable.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/lzy/widget/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/suke/widget/R$attr.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/suke/widget/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/suke/widget/R$styleable.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/suke/widget/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/tigerliang/tablayout/R$attr.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/tigerliang/tablayout/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/tigerliang/tablayout/R$styleable.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/androidTest/debug/com/tigerliang/tablayout/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/android/support/design/R$attr.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/android/support/design/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/android/support/design/R$dimen.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/android/support/design/R$dimen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/android/support/design/R$styleable.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/android/support/design/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/android/support/v7/appcompat/R$attr.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/android/support/v7/appcompat/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/android/support/v7/appcompat/R$dimen.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/android/support/v7/appcompat/R$dimen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/android/support/v7/appcompat/R$styleable.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/android/support/v7/appcompat/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/android/support/v7/recyclerview/R$attr.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/android/support/v7/recyclerview/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/android/support/v7/recyclerview/R$dimen.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/android/support/v7/recyclerview/R$dimen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/android/support/v7/recyclerview/R$styleable.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/android/support/v7/recyclerview/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/aitsuki/swipe/R$attr.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/aitsuki/swipe/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/aitsuki/swipe/R$dimen.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/aitsuki/swipe/R$dimen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/aitsuki/swipe/R$styleable.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/aitsuki/swipe/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/chad/library/adapter/base/BaseQuickAdapter$3.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/chad/library/adapter/base/BaseQuickAdapter$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/chad/library/adapter/base/BaseQuickAdapter$4.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/chad/library/adapter/base/BaseQuickAdapter$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/chad/library/adapter/base/BaseQuickAdapter$5.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/chad/library/adapter/base/BaseQuickAdapter$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/chad/library/adapter/base/BaseQuickAdapter$6.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/chad/library/adapter/base/BaseQuickAdapter$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/chad/library/adapter/base/BaseQuickAdapter$7.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/chad/library/adapter/base/BaseQuickAdapter$7.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/chad/library/adapter/base/BaseQuickAdapter.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/chad/library/adapter/base/BaseQuickAdapter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/facebook/drawee/R$attr.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/facebook/drawee/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/facebook/drawee/R$styleable.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/facebook/drawee/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/facebook/drawee/backends/pipeline/R$attr.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/facebook/drawee/backends/pipeline/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/facebook/drawee/backends/pipeline/R$styleable.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/facebook/drawee/backends/pipeline/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/library/okgo/R$attr.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/library/okgo/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/library/okgo/R$bool.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/library/okgo/R$bool.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/library/okgo/R$color.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/library/okgo/R$color.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/library/okgo/R$dimen.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/library/okgo/R$dimen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/library/okgo/R$drawable.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/library/okgo/R$drawable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/library/okgo/R$id.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/library/okgo/R$id.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/library/okgo/R$integer.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/library/okgo/R$integer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/library/okgo/R$layout.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/library/okgo/R$layout.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/library/okgo/R$mipmap.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/library/okgo/R$mipmap.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/library/okgo/R$string.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/library/okgo/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/library/okgo/R$style.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/library/okgo/R$style.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/library/okgo/R$styleable.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/library/okgo/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/library/okgo/R$xml.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/library/okgo/R$xml.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/lzy/imagepicker/R$attr.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/lzy/imagepicker/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/lzy/imagepicker/R$dimen.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/lzy/imagepicker/R$dimen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/lzy/imagepicker/R$styleable.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/lzy/imagepicker/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/lzy/ninegrid/R$attr.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/lzy/ninegrid/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/lzy/ninegrid/R$dimen.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/lzy/ninegrid/R$dimen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/lzy/ninegrid/R$styleable.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/lzy/ninegrid/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/lzy/widget/R$attr.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/lzy/widget/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/lzy/widget/R$dimen.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/lzy/widget/R$dimen.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/lzy/widget/R$styleable.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/lzy/widget/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/suke/widget/R$attr.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/suke/widget/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/suke/widget/R$styleable.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/suke/widget/R$styleable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/tigerliang/tablayout/R$attr.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/tigerliang/tablayout/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/tigerliang/tablayout/R$styleable.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/tigerliang/tablayout/R$styleable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/bundles/default/classes.jar" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/bundles/default/classes.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/library/okgo/utils/photo/PhotoUtils.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/library/okgo/utils/photo/PhotoUtils.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/release/com/library/okgo/utils/photo/PhotoUtils.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/release/com/library/okgo/utils/photo/PhotoUtils.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/outputs/aar/mylibrary-debug.aar" afterPath="$PROJECT_DIR$/mylibrary/build/outputs/aar/mylibrary-debug.aar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/outputs/aar/mylibrary-release.aar" afterPath="$PROJECT_DIR$/mylibrary/build/outputs/aar/mylibrary-release.aar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/src/main/java/com/library/okgo/view" afterPath="$PROJECT_DIR$/mylibrary/src/main/java/com/library/okgo/view" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/drawable.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/drawable.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/layout.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/layout.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/mipmap-xxhdpi.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/mipmap-xxhdpi.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/apt/debug/com/project/community/ui/community/CommunityFragment$$ViewBinder.java" afterPath="$PROJECT_DIR$/app/build/generated/source/apt/debug/com/project/community/ui/community/CommunityFragment$$ViewBinder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugAndroidTestResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugAndroidTestResources/compile-file-map.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/dex-renamer-state.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/dex-renamer-state.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/file-input-save-data.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/file-input-save-data.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/blame/res/androidTest/debug/single/drawable.json" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/blame/res/androidTest/debug/single/drawable.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/blame/res/androidTest/debug/single/layout.json" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/blame/res/androidTest/debug/single/layout.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/blame/res/debug/single/drawable.json" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/blame/res/debug/single/drawable.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/blame/res/debug/single/layout.json" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/blame/res/debug/single/layout.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/layout_item_map_multiple.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/layout_item_map_multiple.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/layout_item_map_single.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/layout_item_map_single.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/layout_map_drawer_right.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/layout_map_drawer_right.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/layout_popup_community_device.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/layout_popup_community_device.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/layout_popup_community_person.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/layout_popup_community_person.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/layout_popup_community_shop.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/layout_popup_community_shop.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/layout_popup_map_device.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/layout_popup_map_device.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/incremental/mergeDebugAndroidTestResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/incremental/mergeDebugAndroidTestResources/compile-file-map.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/incremental/mergeReleaseResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/incremental/mergeReleaseResources/compile-file-map.properties" />
@@ -343,7 +166,111 @@
     <fileColor scope="All" color="Green" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="CommunityFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/community/ui/community/CommunityFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="471">
+              <caret line="502" column="58" selection-start-line="502" selection-start-column="58" selection-end-line="502" selection-end-column="58" />
+              <folding>
+                <element signature="e#35165#35371#0" expanded="true" />
+                <element signature="e#35370#35371#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PhotoUtils.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mylibrary/src/main/java/com/library/okgo/utils/photo/PhotoUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="62">
+              <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserInfoActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/community/ui/user/UserInfoActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="342">
+              <caret line="465" column="69" selection-start-line="465" selection-start-column="69" selection-end-line="465" selection-end-column="69" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WenjuanActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/community/ui/life/zhengwu/WenjuanActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="342">
+              <caret line="183" column="13" selection-start-line="183" selection-start-column="13" selection-end-line="183" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WenjuanSearchActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/community/ui/life/zhengwu/WenjuanSearchActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="432">
+              <caret line="447" column="13" selection-start-line="447" selection-start-column="13" selection-end-line="447" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/mylibrary/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="309">
+              <caret line="38" column="22" selection-start-line="38" selection-start-column="22" selection-end-line="38" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AppConstants.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/community/constants/AppConstants.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="209" column="49" selection-start-line="209" selection-start-column="31" selection-end-line="209" selection-end-column="49" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SharedPreferenceUtils.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/community/constants/SharedPreferenceUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="91">
+              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MeFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/community/ui/me/MeFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="91">
+              <caret line="287" column="0" selection-start-line="287" selection-start-column="0" selection-end-line="287" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SplashActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/community/ui/SplashActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="100" column="161" selection-start-line="100" selection-start-column="161" selection-end-line="100" selection-end-column="161" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -3563,31 +3490,17 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/project/community/ui/adapter/CommunityUnitSingleChoiceAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_community_toolbar_choise.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_toolbar_community_choise.xml" />
-        <option value="$PROJECT_DIR$/mylibrary/src/main/java/com/chad/library/adapter/base/BaseQuickAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_item_communtiy_family_select.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/project/community/ui/adapter/CommunityFamilyAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/project/community/listener/RecycleItemClickListener.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_community_person.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_community_person_list.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_popup_community_person.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_popup_map_marker.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_popup_map_shop.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_popup_map_person.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_popup_map_device.xml" />
         <option value="$PROJECT_DIR$/mylibrary/src/main/res/values/dimens.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_popup_community_shop.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/bg_map_community_device_person.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_popup_community_device.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_item_map_single.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/project/community/ui/adapter/ArticlePageAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_community.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_item_map_multiple.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/project/community/ui/community/CommunityFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/project/community/ui/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/project/community/ui/life/zhengwu/SuggestionActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/project/community/ui/life/zhengwu/CompanionSearchActivity.java" />
@@ -3599,7 +3512,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/project/community/ui/PhoneDialogActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/project/community/ui/life/zhengwu/CompanionActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/project/community/ui/life/family/FamilyInfoActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/project/community/ui/user/UserInfoActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/project/community/ui/user/ModifyPwdActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/project/community/ui/life/zhengwu/ZhengwuActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/project/community/ui/life/family/FamilyAddActivity.java" />
@@ -3613,7 +3525,22 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/project/community/ui/life/wuye/PayDetailWuyeActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/project/community/ui/life/wuye/PayHistroyActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/project/community/ui/life/wuye/AddHouseNoDialogActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_map_drawer_right.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_item_map_single.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/project/community/ui/life/family/FamilyAddPersonActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_community_person.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_popup_community_shop.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_popup_community_person.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_item_map_multiple.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_popup_map_device.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_popup_community_device.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/project/community/ui/SplashActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/project/community/ui/community/CommunityFragment.java" />
+        <option value="$PROJECT_DIR$/mylibrary/src/main/java/com/library/okgo/utils/photo/PhotoUtils.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/project/community/ui/user/UserInfoActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/project/community/constants/AppConstants.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/project/community/ui/life/zhengwu/WenjuanActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/project/community/ui/life/zhengwu/WenjuanSearchActivity.java" />
       </list>
     </option>
   </component>
@@ -3862,7 +3789,7 @@
     <property name="android.project.structure.last.selected" value="mylibrary" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../demo/PowerRecyclerView-master" />
-    <property name="device.picker.selection" value="Nexus_6_API_23" />
+    <property name="device.picker.selection" value="Nexus_5X_API_23" />
     <property name="AL_OverrideCheckBoxStatus" value="false" />
     <property name="AL_SupportedLanguageCheckStatus_ar" value="false" />
     <property name="AL_SupportedLanguageCheckStatus_bg" value="false" />
@@ -3913,12 +3840,10 @@
     <property name="ExportApk.SignV1" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi" />
-      <recent name="$PROJECT_DIR$/mylibrary/src/main/java/com/library/okgo/view/expandrecyclerview" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/mylibrary/src/main/res/drawable" />
       <recent name="$PROJECT_DIR$/mylibrary/src/main/res/layout" />
-      <recent name="$PROJECT_DIR$/app/src/main/java" />
-      <recent name="$PROJECT_DIR$/mylibrary/libs" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/anim" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.project.community.aipay" />
@@ -3927,10 +3852,12 @@
       <recent name="com.project.community.listener" />
       <recent name="com.project.community.view" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/mylibrary/src/main/res/drawable" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi" />
+      <recent name="$PROJECT_DIR$/mylibrary/src/main/java/com/library/okgo/view/expandrecyclerview" />
       <recent name="$PROJECT_DIR$/mylibrary/src/main/res/layout" />
-      <recent name="$PROJECT_DIR$/app/src/main/res/anim" />
+      <recent name="$PROJECT_DIR$/app/src/main/java" />
+      <recent name="$PROJECT_DIR$/mylibrary/libs" />
     </key>
   </component>
   <component name="RunManager" selected="Android App.app">
@@ -4407,7 +4334,28 @@
       <option name="project" value="LOCAL" />
       <updated>1505793176106</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="9月19 改bug">
+      <created>1505808322109</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1505808322109</updated>
+    </task>
+    <task id="LOCAL-00004" summary="9月19 改bug">
+      <created>1505825360109</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1505825360109</updated>
+    </task>
+    <task id="LOCAL-00005" summary="9月19 改bug">
+      <created>1505825670105</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1505825670105</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -4419,11 +4367,12 @@
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36310396" sideWeight="0.49498567" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5695461" sideWeight="0.44197708" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27818447" sideWeight="0.51790833" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32064423" sideWeight="0.46919772" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35744986" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32798833" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32796487" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27818447" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27818447" sideWeight="0.4820917" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.68228406" sideWeight="0.5200573" order="11" side_tool="true" content_ui="tabs" />
@@ -4440,7 +4389,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27363896" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32503662" sideWeight="0.49713466" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -4486,7 +4434,8 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="9月19 改bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="9月19 改bug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -4498,118 +4447,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_popup_map_shop.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="54" selection-start-line="9" selection-start-column="54" selection-end-line="9" selection-end-column="54" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_popup_map_person.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="52" selection-start-line="0" selection-start-column="0" selection-end-line="46" selection-end-column="15" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_popup_map_device.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="android-dummy:///Users/qizfeng/Desktop/项目/智慧社区/Android/SmartCommunity/app/Translations Editor">
-      <provider selected="true" editor-type-id="string-resource-editor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="43" selection-start-line="27" selection-start-column="37" selection-end-line="27" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_map_community.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="8" selection-start-line="0" selection-start-column="0" selection-end-line="6" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_bottom_custom_dialog.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_map_community_device_person.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="47" selection-start-line="5" selection-start-column="47" selection-end-line="5" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_popup_community_shop.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6610">
-          <caret line="18" column="43" selection-start-line="18" selection-start-column="43" selection-end-line="18" selection-end-column="43" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_popup_community_device.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="545">
-          <caret line="140" column="40" selection-start-line="140" selection-start-column="40" selection-end-line="140" selection-end-column="40" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/background_toolbar_gradient.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/Library/Android/sdk/platforms/android-26/android.jar!/android/widget/ImageView.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="267" column="20" selection-start-line="267" selection-start-column="20" selection-end-line="267" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/d10_btn1_p.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_item_map_single.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="15" selection-start-line="0" selection-start-column="0" selection-end-line="24" selection-end-column="15" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/community/ui/adapter/ArticlePageAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
@@ -4621,23 +4458,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3360">
           <caret line="224" column="29" selection-start-line="224" selection-start-column="18" selection-end-line="224" selection-end-column="29" />
+          <folding>
+            <element signature="e#10591#10597#0" expanded="false" />
+            <element signature="e#10597#10603#0" expanded="false" />
+            <element signature="e#10750#10756#0" expanded="false" />
+            <element signature="e#10756#10762#0" expanded="false" />
+            <element signature="e#10762#10768#0" expanded="false" />
+            <element signature="e#10768#10774#0" expanded="false" />
+            <element signature="e#10774#10780#0" expanded="false" />
+            <element signature="e#10780#10786#0" expanded="false" />
+            <element signature="e#10786#10792#0" expanded="false" />
+            <element signature="e#10792#10798#0" expanded="false" />
+            <element signature="e#10853#10859#0" expanded="false" />
+            <element signature="e#10859#10865#0" expanded="false" />
+            <element signature="e#10865#10871#0" expanded="false" />
+            <element signature="e#10871#10877#0" expanded="false" />
+          </folding>
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_popup_community_person.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2475">
-          <caret line="165" column="0" selection-start-line="124" selection-start-column="11" selection-end-line="165" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mylibrary/src/main/res/values/dimens.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="21" column="36" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -4648,43 +4492,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_community.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="41" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="41" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_item_map_multiple.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/community/ui/community/CommunityPersonActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="33" column="45" selection-start-line="33" selection-start-column="45" selection-end-line="33" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mylibrary/build/intermediates/res/merged/release/drawable/sw_thumb.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/community/ui/community/CommunityFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="503" column="0" selection-start-line="503" selection-start-column="0" selection-end-line="503" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#13153#14972#0" expanded="true" />
-            <element signature="e#14971#14972#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -4692,6 +4504,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="114" column="32" selection-start-line="114" selection-start-column="32" selection-end-line="114" selection-end-column="32" />
+          <folding>
+            <element signature="e#4291#4325#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -4699,6 +4514,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
           <caret line="145" column="42" selection-start-line="145" selection-start-column="42" selection-end-line="145" selection-end-column="42" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -4706,6 +4522,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
           <caret line="291" column="44" selection-start-line="291" selection-start-column="44" selection-end-line="291" selection-end-column="44" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -4713,6 +4530,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
           <caret line="392" column="46" selection-start-line="392" selection-start-column="46" selection-end-line="392" selection-end-column="46" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -4720,6 +4538,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
           <caret line="127" column="35" selection-start-line="127" selection-start-column="35" selection-end-line="127" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -4727,6 +4546,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
           <caret line="180" column="42" selection-start-line="180" selection-start-column="42" selection-end-line="180" selection-end-column="42" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -4734,6 +4554,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
           <caret line="231" column="41" selection-start-line="231" selection-start-column="41" selection-end-line="231" selection-end-column="41" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -4741,6 +4562,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
           <caret line="442" column="45" selection-start-line="442" selection-start-column="45" selection-end-line="442" selection-end-column="45" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -4748,6 +4570,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="175" column="35" selection-start-line="175" selection-start-column="35" selection-end-line="175" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -4755,6 +4578,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="133" column="45" selection-start-line="133" selection-start-column="45" selection-end-line="133" selection-end-column="45" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -4762,13 +4586,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="463" column="38" selection-start-line="463" selection-start-column="38" selection-end-line="463" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/community/ui/user/UserInfoActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="663" column="37" selection-start-line="663" selection-start-column="37" selection-end-line="663" selection-end-column="37" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -4776,6 +4594,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="90" column="40" selection-start-line="90" selection-start-column="40" selection-end-line="90" selection-end-column="40" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -4783,20 +4602,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="623" column="45" selection-start-line="623" selection-start-column="45" selection-end-line="623" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/community/ui/life/family/FamilyAddActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="267" column="46" selection-start-line="267" selection-start-column="46" selection-end-line="267" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/community/ui/me/MeFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="300" column="45" selection-start-line="300" selection-start-column="45" selection-end-line="300" selection-end-column="45" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -4811,6 +4617,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="295" column="46" selection-start-line="295" selection-start-column="46" selection-end-line="295" selection-end-column="46" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -4818,6 +4625,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="163" column="46" selection-start-line="163" selection-start-column="46" selection-end-line="163" selection-end-column="46" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -4832,6 +4640,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="691" column="45" selection-start-line="691" selection-start-column="45" selection-end-line="691" selection-end-column="45" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -4870,10 +4679,260 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_toolbar_community_choise.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_map_drawer_right.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="42" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
+          <folding>
+            <element signature="e#435#449#0" expanded="true" />
+            <element signature="e#601#615#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_item_map_single.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="15" selection-start-line="24" selection-start-column="15" selection-end-line="24" selection-end-column="15" />
+          <folding>
+            <element signature="e#533#547#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/community/ui/life/family/FamilyAddActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3480">
+          <caret line="292" column="13" selection-start-line="292" selection-start-column="13" selection-end-line="292" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_community.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="171" column="53" selection-start-line="171" selection-start-column="37" selection-end-line="171" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/community/ui/life/family/FamilyAddPersonActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="863" column="76" selection-start-line="863" selection-start-column="76" selection-end-line="863" selection-end-column="76" />
+        <state relative-caret-position="135">
+          <caret line="202" column="32" selection-start-line="202" selection-start-column="32" selection-end-line="202" selection-end-column="32" />
+          <folding>
+            <element signature="e#26480#26697#0" expanded="false" />
+            <element signature="e#26696#26697#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_community_person.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="495" column="41" selection-start-line="495" selection-start-column="41" selection-end-line="495" selection-end-column="41" />
+          <folding>
+            <element signature="e#2535#2549#0" expanded="true" />
+            <element signature="e#2981#2995#0" expanded="true" />
+            <element signature="e#5171#5204#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_popup_community_shop.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding>
+            <element signature="e#16278#16292#0" expanded="true" />
+            <element signature="e#19759#19773#0" expanded="true" />
+            <element signature="e#19810#19824#0" expanded="true" />
+            <element signature="e#19862#19876#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_popup_community_person.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="485">
+          <caret line="63" column="14" selection-start-line="63" selection-start-column="14" selection-end-line="63" selection-end-column="14" />
+          <folding>
+            <element signature="e#452#466#0" expanded="true" />
+            <element signature="e#2567#2581#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_item_map_multiple.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="37" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
+          <folding>
+            <element signature="e#180#194#0" expanded="true" />
+            <element signature="e#485#499#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_popup_map_device.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="e#515#529#0" expanded="true" />
+            <element signature="e#584#598#0" expanded="true" />
+            <element signature="e#633#647#0" expanded="true" />
+            <element signature="e#883#897#0" expanded="true" />
+            <element signature="e#1018#1042#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mylibrary/build/intermediates/res/merged/release/drawable/sw_thumb.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/community/ui/SplashActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="100" column="161" selection-start-line="100" selection-start-column="161" selection-end-line="100" selection-end-column="161" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_popup_community_device.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="234" column="55" selection-start-line="234" selection-start-column="55" selection-end-line="234" selection-end-column="55" />
+          <folding>
+            <element signature="e#992#1006#0" expanded="true" />
+            <element signature="e#1051#1065#0" expanded="true" />
+            <element signature="e#3616#3630#0" expanded="true" />
+            <element signature="e#4530#4544#0" expanded="true" />
+            <element signature="e#5920#5934#0" expanded="true" />
+            <element signature="e#6095#6108#0" expanded="true" />
+            <element signature="e#6416#6430#0" expanded="true" />
+            <element signature="e#6474#6488#0" expanded="true" />
+            <element signature="e#6617#6631#0" expanded="true" />
+            <element signature="e#10404#10417#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/community/ui/community/CommunityFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="471">
+          <caret line="502" column="58" selection-start-line="502" selection-start-column="58" selection-end-line="502" selection-end-column="58" />
+          <folding>
+            <element signature="e#35165#35371#0" expanded="true" />
+            <element signature="e#35370#35371#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/community/constants/SharedPreferenceUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="91">
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/community/ui/me/MeFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="91">
+          <caret line="287" column="0" selection-start-line="287" selection-start-column="0" selection-end-line="287" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mylibrary/src/main/java/com/library/okgo/utils/photo/PhotoUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="62">
+          <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/community/ui/user/UserInfoActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="465" column="69" selection-start-line="465" selection-start-column="69" selection-end-line="465" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/community/constants/AppConstants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="209" column="49" selection-start-line="209" selection-start-column="31" selection-end-line="209" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/community/ui/life/zhengwu/WenjuanActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="183" column="13" selection-start-line="183" selection-start-column="13" selection-end-line="183" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/community/ui/life/zhengwu/WenjuanSearchActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="447" column="13" selection-start-line="447" selection-start-column="13" selection-end-line="447" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mylibrary/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="38" column="22" selection-start-line="38" selection-start-column="22" selection-end-line="38" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>

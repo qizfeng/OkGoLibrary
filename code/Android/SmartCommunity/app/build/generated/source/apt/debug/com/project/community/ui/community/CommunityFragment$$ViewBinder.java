@@ -28,6 +28,10 @@ public class CommunityFragment$$ViewBinder<T extends com.project.community.ui.co
     target.mIvPerson = finder.castView(view, 2131624116, "field 'mIvPerson'");
     view = finder.findRequiredView(source, 2131624117, "field 'mIvDevice'");
     target.mIvDevice = finder.castView(view, 2131624117, "field 'mIvDevice'");
+    view = finder.findRequiredView(source, 2131624122, "field 'mTvDrawerCancel'");
+    target.mTvDrawerCancel = finder.castView(view, 2131624122, "field 'mTvDrawerCancel'");
+    view = finder.findRequiredView(source, 2131624123, "field 'mTvDrawerConfirm'");
+    target.mTvDrawerConfirm = finder.castView(view, 2131624123, "field 'mTvDrawerConfirm'");
   }
 
   @Override public void unbind(T target) {
@@ -41,5 +45,7 @@ public class CommunityFragment$$ViewBinder<T extends com.project.community.ui.co
     target.mIvShop = null;
     target.mIvPerson = null;
     target.mIvDevice = null;
+    target.mTvDrawerCancel = null;
+    target.mTvDrawerConfirm = null;
   }
 }
