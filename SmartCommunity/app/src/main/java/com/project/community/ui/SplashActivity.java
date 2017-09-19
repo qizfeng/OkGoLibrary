@@ -17,6 +17,7 @@ import android.os.RemoteException;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+
 import com.library.okgo.utils.LogUtils;
 import com.library.okgo.utils.ToastUtils;
 import com.project.community.R;
@@ -86,7 +87,7 @@ public class SplashActivity extends BaseActivity {
         super.onDestroy();
         try {
             unbindService(myServiceConnection);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -97,6 +98,7 @@ public class SplashActivity extends BaseActivity {
         switch (requestCode) {
             case REQUEST_PERMISSION_CODE:
                 if (ContextCompat.checkSelfPermission(SplashActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(SplashActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
                     // 没有权限，申请权限。
                 } else {
@@ -134,7 +136,7 @@ public class SplashActivity extends BaseActivity {
 
         @Override
         public void handleMessage(Message msg) {
-           // LogUtils.e("接收到消息:");
+            // LogUtils.e("接收到消息:");
             int result = msg.what;
             switch (result) {
                 case AppConstants.MSG_SET_VALUE: // 交互数据类型
@@ -143,7 +145,7 @@ public class SplashActivity extends BaseActivity {
                     Bundle b = msg.getData();
                     // 记得设置bundle时，将Location 键的值设为对应的location
                     String myLocation = b.getString("LocationData");
-                  //  LogUtils.e("位置信息:" + myLocation);
+                    //  LogUtils.e("位置信息:" + myLocation);
                     /**
                      * 上传位置信息
                      * 上传位置信息
@@ -295,10 +297,10 @@ public class SplashActivity extends BaseActivity {
             PERMISSION_READ_PHONE_STATE,
             PERMISSION_CALL_PHONE,
             PERMISSION_CAMERA,
-            PERMISSION_ACCESS_FINE_LOCATION,
-            PERMISSION_ACCESS_COARSE_LOCATION,
             PERMISSION_READ_EXTERNAL_STORAGE,
             PERMISSION_WRITE_EXTERNAL_STORAGE,
+            PERMISSION_ACCESS_FINE_LOCATION,
+            PERMISSION_ACCESS_COARSE_LOCATION,
 //            PERMISSION_READ_LOGS,
 //            PERMISSION_SET_DEBUG_APP,
 //            PERMISSION_SYSTEM_ALERT_WINDOW,

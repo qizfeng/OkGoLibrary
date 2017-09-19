@@ -130,6 +130,7 @@ public class WenjuanSearchActivity extends BaseActivity implements View.OnKeyLis
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
                 LogUtils.e("webUrl:" + view.getUrl());
+                AppConstants.LAST_WEB_URL = url;
                 if (url.equals("http://zhihuishequ.zpftech.com/surveyList/history.back")) {
                     finish();
                     return true;
@@ -510,7 +511,10 @@ public class WenjuanSearchActivity extends BaseActivity implements View.OnKeyLis
                 String url = mWebView.getUrl();
                 if (url.contains(AppConstants.URL_WENJUAN_SEARCH))
                     finish();
-                else {
+                else if (url.contains(AppConstants.URL_WENJUAN_RESULT)) {
+                    mWebView.goBack();
+                    mWebView.goBack();
+                } else {
                     mWebView.goBack();
                 }
                 return true;

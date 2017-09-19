@@ -478,7 +478,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
             case R.id.iv_back:
                 mIvDrawer.setVisibility(View.GONE);
                 mMapStatus = new MapStatus.Builder()
-                        .target(new LatLng(lastLat, lastLon))
+                        .target(new LatLng(39.935029, 116.383877))
                         .zoom(16)
                         .build();
                 u = MapStatusUpdateFactory
@@ -718,8 +718,8 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                             MapStatusUpdate u = MapStatusUpdateFactory
                                     .newMapStatus(mMapStatus);
                             mBaiduMap.setMapStatus(u);
-                            lastLat = latLngBoundsList.get(i).getCenter().latitude;
-                            lastLon = latLngBoundsList.get(i).getCenter().longitude;
+                            lastLat = southwestLatLng.latitude;
+                            lastLon = southwestLatLng.longitude;
                             mIvBack.setVisibility(View.VISIBLE);
                         }
                     }

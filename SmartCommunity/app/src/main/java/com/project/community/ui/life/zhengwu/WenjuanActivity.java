@@ -78,14 +78,14 @@ public class WenjuanActivity extends BaseActivity {
             public void onReceivedTitle(WebView view, String title) {
                 super.onReceivedTitle(view, title);
                 String url = view.getUrl();
-                LogUtils.e("onreceived:"+url);
+                LogUtils.e("onreceived:" + url);
                 if (url.contains(AppConstants.URL_WENJUAN_LIST)) {
                     mMenu.findItem(R.id.action_favorite).setIcon(R.mipmap.d2_sousuo);
                     mTvTitle.setText(getString(R.string.activity_wenjuan));
-                } else if (url.contains(AppConstants.URL_WENJUAN_DETIAL) ) {
+                } else if (url.contains(AppConstants.URL_WENJUAN_DETIAL)) {
                     mMenu.findItem(R.id.action_favorite).setIcon(null).setTitle("");
                     mTvTitle.setText(getString(R.string.activity_write_wenjuan));
-                }else if(url.contains(AppConstants.URL_WENJUAN_RESULT)){
+                } else if (url.contains(AppConstants.URL_WENJUAN_RESULT)) {
                     mTvTitle.setText(getString(R.string.activity_wenjuan_result));
                 }
             }
@@ -103,14 +103,14 @@ public class WenjuanActivity extends BaseActivity {
                 super.onPageFinished(view, url);
                 try {
                     String webViewurl = view.getUrl();
-                    LogUtils.e("onPageFinished:"+webViewurl);
+                    LogUtils.e("onPageFinished:" + webViewurl);
                     if (url.contains(AppConstants.URL_WENJUAN_LIST)) {
                         mMenu.findItem(R.id.action_favorite).setIcon(R.mipmap.d2_sousuo);
                         mTvTitle.setText(getString(R.string.activity_wenjuan));
-                    } else if (url.contains(AppConstants.URL_WENJUAN_DETIAL) ) {
+                    } else if (url.contains(AppConstants.URL_WENJUAN_DETIAL)) {
                         mMenu.findItem(R.id.action_favorite).setIcon(null).setTitle("");
                         mTvTitle.setText(getString(R.string.activity_write_wenjuan));
-                    }else if(url.contains(AppConstants.URL_WENJUAN_RESULT)){
+                    } else if (url.contains(AppConstants.URL_WENJUAN_RESULT)) {
                         mTvTitle.setText(getString(R.string.activity_wenjuan_result));
                     }
                 } catch (Exception e) {
@@ -128,6 +128,7 @@ public class WenjuanActivity extends BaseActivity {
                 if (!mUrl.startsWith("http"))
                     mUrl = "http://" + mUrl;
             mWebView.loadUrl(mUrl);
+            AppConstants.LAST_WEB_URL = mUrl;
         }
         mWebView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -211,15 +212,17 @@ public class WenjuanActivity extends BaseActivity {
         switch (item.getItemId()) {
             case R.id.action_favorite:
                 Bundle bundle = new Bundle();
-                bundle.putString("url", AppConstants.URL_WENJUAN_SEARCH+"?uid="+getUser(this).id+"&keyword=");
-                LogUtils.e("wenjuan:"+AppConstants.URL_WENJUAN_SEARCH+"?uid="+getUser(this).id+"&keyword=");
+                bundle.putString("url", AppConstants.URL_WENJUAN_SEARCH + "?uid=" + getUser(this).id + "&keyword=");
                 WenjuanSearchActivity.startActivity(WenjuanActivity.this, bundle);
                 return true;
             case android.R.id.home:
                 String url = mWebView.getUrl();
                 if (url.contains(AppConstants.URL_WENJUAN_LIST))
                     finish();
-                else {
+                else if (url.contains(AppConstants.URL_WENJUAN_RESULT)) {
+                    mWebView.goBack();
+                    mWebView.goBack();
+                } else {
                     mWebView.goBack();
                 }
                 return true;

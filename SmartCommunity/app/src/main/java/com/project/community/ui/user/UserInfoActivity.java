@@ -449,8 +449,13 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                             newUri = FileProvider.getUriForFile(this, "com.project.community", new File(newUri.getPath()));
                         }
-                        PhotoUtils.cropImageUri(this, newUri, cropImageUri, 1, 1, output_X, output_Y, CODE_RESULT_REQUEST);
-//                        uploadFile(new File(newUri.getPath()));
+                        try {
+                            PhotoUtils.cropImageUri(this, newUri, cropImageUri, 1, 1, output_X, output_Y, CODE_RESULT_REQUEST);
+                        }catch (Exception e){
+                            e.printStackTrace();
+                            showToast("无法获取该相册路径,请选择其他相册");
+                        }
+//                        uploadFile(new File( Uri.parse(PhotoUtils.getPath(this, data.getData())).getPath()));
                     } else {
                         showToast("设备没有SD卡！");
                     }
