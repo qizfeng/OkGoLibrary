@@ -25,100 +25,41 @@
     <bookmark url="file://$PROJECT_DIR$/app/src/main/java/com/project/community/ui/community/CommunityFragment.java" line="120" mnemonic="0" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="57461c2a-95a7-4d94-a478-3cf2bc850e39" name="Default" comment="">
+    <list default="true" readonly="true" id="57461c2a-95a7-4d94-a478-3cf2bc850e39" name="Default" comment="9月19 改bug">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app-release.apk" afterPath="$PROJECT_DIR$/app/app-release.apk" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" />
+    </list>
+    <list id="efc63e1c-3e4b-4ec0-9fa3-f5b528564e55" name="Failed commit: Default" comment="9月19 改bug">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_mylibrary_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_mylibrary_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_mylibrary_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_mylibrary_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_mylibrary_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_mylibrary_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_mylibrary_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_mylibrary_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app-release.apk" afterPath="$PROJECT_DIR$/app/app-release.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/constants/AppConstants.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/constants/AppConstants.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/SplashActivity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/SplashActivity$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/SplashActivity$InComingHandler.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/SplashActivity$InComingHandler.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/SplashActivity$LocationServiceConnection.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/SplashActivity$LocationServiceConnection.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/SplashActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/SplashActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$$ViewBinder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$$ViewBinder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$10.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$10.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$11$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$11$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$11.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$11.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$6$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$6$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$6$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$6$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$6$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$6$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$6.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$7.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$7.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$9.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$9.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$MyLocationListenner.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment$MyLocationListenner.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/community/CommunityFragment.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$10.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$10.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$11.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$11.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$12.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$12.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$6.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$7.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$7.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$8.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$8.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$9.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity$9.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/family/FamilyAddPersonActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanActivity$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanActivity$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity$6.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity$7.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity$7.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity$JavascriptInterface.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity$JavascriptInterface.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/life/zhengwu/WenjuanSearchActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/UserInfoActivity$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/UserInfoActivity$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/UserInfoActivity$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/UserInfoActivity$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/UserInfoActivity$6.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/UserInfoActivity$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/UserInfoActivity$7.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/UserInfoActivity$7.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/UserInfoActivity$8.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/UserInfoActivity$8.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/UserInfoActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/project/community/ui/user/UserInfoActivity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/zip-cache/7_qRRqJtmSC2udLbX08NCBK2FZs=" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/zip-cache/7_qRRqJtmSC2udLbX08NCBK2FZs=" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/res/resources-debug.ap_" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dex/debug/folders/1000/1/debug_472bb1dff390f4721446f6a00e6e2dd60f3d9efd/classes.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dex/debug/folders/1000/1/debug_472bb1dff390f4721446f6a00e6e2dd60f3d9efd/classes.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dex/debug/folders/1000/4/classes_0bbf7d6522af0ef3e5741cdea2624702c02626d8/classes.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dex/debug/folders/1000/4/classes_0bbf7d6522af0ef3e5741cdea2624702c02626d8/classes.dex" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/android-profile/profile-2017-09-19-12-06-00-835.rawproto" afterPath="$PROJECT_DIR$/build/android-profile/profile-2017-09-19-12-06-00-835.rawproto" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/android-profile/profile-2017-09-19-20-48-10-920.rawproto" afterPath="$PROJECT_DIR$/build/android-profile/profile-2017-09-19-20-48-10-920.rawproto" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/android-profile/profile-2017-09-19-21-06-06-575.rawproto" afterPath="$PROJECT_DIR$/build/android-profile/profile-2017-09-19-21-06-06-575.rawproto" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/generated/mockable-android-26.jar" afterPath="$PROJECT_DIR$/build/generated/mockable-android-26.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/annotations/debug/annotations.zip" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/annotations/debug/annotations.zip" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/annotations/release/annotations.zip" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/annotations/release/annotations.zip" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/bundles/debug/classes.jar" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/bundles/debug/classes.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/bundles/default/classes.jar" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/bundles/default/classes.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/library/okgo/utils/photo/PhotoUtils.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/debug/com/library/okgo/utils/photo/PhotoUtils.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/release/com/library/okgo/utils/photo/PhotoUtils.class" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/classes/release/com/library/okgo/utils/photo/PhotoUtils.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/outputs/aar/mylibrary-debug.aar" afterPath="$PROJECT_DIR$/mylibrary/build/outputs/aar/mylibrary-debug.aar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/outputs/aar/mylibrary-release.aar" afterPath="$PROJECT_DIR$/mylibrary/build/outputs/aar/mylibrary-release.aar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/apt/debug/com/project/community/ui/community/CommunityFragment$$ViewBinder.java" afterPath="$PROJECT_DIR$/app/build/generated/source/apt/debug/com/project/community/ui/community/CommunityFragment$$ViewBinder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugAndroidTestResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugAndroidTestResources/compile-file-map.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/layout_item_map_multiple.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/layout_item_map_multiple.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/layout_item_map_single.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/layout_item_map_single.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/layout_map_drawer_right.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/layout_map_drawer_right.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/layout_popup_community_device.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/layout_popup_community_device.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/layout_popup_community_person.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/layout_popup_community_person.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/layout_popup_community_shop.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/layout_popup_community_shop.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/layout_popup_map_device.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/layout_popup_map_device.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/dex-renamer-state.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/dex-renamer-state.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/file-input-save-data.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/file-input-save-data.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/blame/res/androidTest/debug/single/drawable-xhdpi-v4.json" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/blame/res/androidTest/debug/single/drawable-xhdpi-v4.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/blame/res/androidTest/debug/single/drawable-xxxhdpi-v4.json" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/blame/res/androidTest/debug/single/drawable-xxxhdpi-v4.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/incremental/mergeDebugAndroidTestResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/incremental/mergeDebugAndroidTestResources/compile-file-map.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mylibrary/build/intermediates/incremental/mergeReleaseResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/mylibrary/build/intermediates/incremental/mergeReleaseResources/compile-file-map.properties" />
@@ -128,6 +69,7 @@
     <ignored path="SmartCommunity.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <file path="$PROJECT_DIR$/.idea/workspace.xml" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -200,11 +142,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WenjuanActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="WenjuanActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/community/ui/life/zhengwu/WenjuanActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="183" column="13" selection-start-line="183" selection-start-column="13" selection-end-line="183" selection-end-column="13" />
+            <state relative-caret-position="231">
+              <caret line="172" column="13" selection-start-line="172" selection-start-column="13" selection-end-line="172" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -213,18 +155,8 @@
       <file leaf-file-name="WenjuanSearchActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/community/ui/life/zhengwu/WenjuanSearchActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="447" column="13" selection-start-line="447" selection-start-column="13" selection-end-line="447" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/mylibrary/build.gradle">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="489">
-              <caret line="50" column="48" selection-start-line="50" selection-start-column="48" selection-end-line="50" selection-end-column="48" />
+            <state relative-caret-position="261">
+              <caret line="432" column="47" selection-start-line="432" selection-start-column="47" selection-end-line="432" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -4370,7 +4302,7 @@
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36310396" sideWeight="0.5050143" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36310396" sideWeight="0.5050143" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -4830,14 +4762,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mylibrary/build/intermediates/res/merged/release/drawable/sw_thumb.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/community/ui/SplashActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -4919,26 +4843,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/community/ui/life/zhengwu/WenjuanActivity.java">
+    <entry file="file://$PROJECT_DIR$/mylibrary/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="183" column="13" selection-start-line="183" selection-start-column="13" selection-end-line="183" selection-end-column="13" />
+        <state relative-caret-position="489">
+          <caret line="50" column="48" selection-start-line="50" selection-start-column="48" selection-end-line="50" selection-end-column="48" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/community/ui/life/zhengwu/WenjuanSearchActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="447" column="13" selection-start-line="447" selection-start-column="13" selection-end-line="447" selection-end-column="13" />
+        <state relative-caret-position="261">
+          <caret line="432" column="47" selection-start-line="432" selection-start-column="47" selection-end-line="432" selection-end-column="47" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mylibrary/build.gradle">
+    <entry file="file://$PROJECT_DIR$/mylibrary/build/intermediates/res/merged/release/drawable/sw_thumb.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="489">
-          <caret line="50" column="48" selection-start-line="50" selection-start-column="48" selection-end-line="50" selection-end-column="48" />
+        <state relative-caret-position="120">
+          <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/community/ui/life/zhengwu/WenjuanActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="172" column="13" selection-start-line="172" selection-start-column="13" selection-end-line="172" selection-end-column="13" />
           <folding />
         </state>
       </provider>
