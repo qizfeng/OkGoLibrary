@@ -282,6 +282,9 @@ public class AppConstants {
      */
     public static final int WUYE_GONGGAO = 6;
 
+
+    public static String LAST_WEB_URL="";
+
     /**
      * 是否是第一次打开APP
      */
