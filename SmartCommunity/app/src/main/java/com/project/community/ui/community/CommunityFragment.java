@@ -48,6 +48,7 @@ import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.TextureMapView;
@@ -71,6 +72,8 @@ import butterknife.ButterKnife;
  */
 
 public class CommunityFragment extends BaseFragment implements View.OnClickListener {
+    private static final int accuracyCircleFillColor = 0xAAFFFF88;
+    private static final int accuracyCircleStrokeColor = 0xAA00FF00;
     private ImageView iv_current_poi;//点击回到当前位置
     /**
      * MapView 是地图主控件
@@ -133,6 +136,10 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
     ImageView mIvPerson;
     @Bind(R.id.iv_device)
     ImageView mIvDevice;
+    @Bind(R.id.tv_drawer_cancel)
+    TextView mTvDrawerCancel;
+    @Bind(R.id.tv_drawer_confirm)
+    TextView mTvDrawerConfirm;
     private double lastLat;
     private double lastLon;
     private int currentIndex = 0;//0未选择 1商铺 2人员 3设施
@@ -151,6 +158,8 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
         mIvShop.setOnClickListener(this);
         mIvPerson.setOnClickListener(this);
         mIvDevice.setOnClickListener(this);
+        mTvDrawerCancel.setOnClickListener(this);
+        mTvDrawerConfirm.setOnClickListener(this);
         DisplayMetrics metric = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(metric);
 
@@ -159,6 +168,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
         rightParams.height = metric.heightPixels - mDrawerBottom.getLayoutParams().height - 56;
         mDrawerRight.setLayoutParams(rightParams);
         mDrawerBottom.getLayoutParams().width = rightParams.width;
+        mDrawerRightContent.getLayoutParams().width = rightParams.width;
         //关闭手动滑出
         mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         //mDrawerLayout.openDrawer(Gravity.RIGHT);//侧滑打开  不设置则不会默认打开
@@ -400,6 +410,10 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
         option.setCoorType("bd09ll"); // 设置坐标类型
         option.setScanSpan(1000);
         mLocClient.setLocOption(option);
+        mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(
+                MyLocationConfiguration.LocationMode.NORMAL, true, BitmapDescriptorFactory
+                .fromResource(R.mipmap.d32_icon1),
+                accuracyCircleFillColor, accuracyCircleStrokeColor));
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             // 没有权限，申请权限。
@@ -442,6 +456,12 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.tv_drawer_cancel:
+                showDrawerLayout();
+                break;
+            case R.id.tv_drawer_confirm:
+                showDrawerLayout();
+                break;
             case R.id.iv_drawer:
                 showDrawerLayout();
                 break;
@@ -734,7 +754,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                             }
                         };
                         LatLng ll = marker.getPosition();
-                        mInfoWindow = new InfoWindow(BitmapDescriptorFactory.fromView(pop), ll, -120, listener);
+                        mInfoWindow = new InfoWindow(BitmapDescriptorFactory.fromView(pop), ll, -110, listener);
                         mBaiduMap.showInfoWindow(mInfoWindow);
                     } else if (currentIndex == 2) {//人员
                         View pop = LayoutInflater.from(getActivity()).inflate(R.layout.layout_popup_map_person, null);
@@ -744,7 +764,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                             }
                         };
                         LatLng ll = marker.getPosition();
-                        mInfoWindow = new InfoWindow(BitmapDescriptorFactory.fromView(pop), ll, -120, listener);
+                        mInfoWindow = new InfoWindow(BitmapDescriptorFactory.fromView(pop), ll, -110, listener);
                         mBaiduMap.showInfoWindow(mInfoWindow);
                     } else if (currentIndex == 3) {//设施
                         View pop = LayoutInflater.from(getActivity()).inflate(R.layout.layout_popup_map_device, null);
@@ -754,7 +774,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                             }
                         };
                         LatLng ll = marker.getPosition();
-                        mInfoWindow = new InfoWindow(BitmapDescriptorFactory.fromView(pop), ll, -120, listener);
+                        mInfoWindow = new InfoWindow(BitmapDescriptorFactory.fromView(pop), ll, -110, listener);
                         mBaiduMap.showInfoWindow(mInfoWindow);
                     }
                 } else {
@@ -822,7 +842,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
         // 设置视图
         mPopupWindow.setContentView(inflate);
         // 设置弹出窗体的宽和高
-        mPopupWindow.setHeight((int) (DeviceUtil.getDeviceHeight(getActivity()) * 0.8));
+        mPopupWindow.setHeight(RelativeLayout.LayoutParams.WRAP_CONTENT);
         mPopupWindow.setWidth(RelativeLayout.LayoutParams.MATCH_PARENT);
         // 设置弹出窗体可点击
         mPopupWindow.setFocusable(true);

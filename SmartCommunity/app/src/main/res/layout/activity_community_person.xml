@@ -65,7 +65,7 @@
                         style="@style/rectangle_category_button"
                         android:layout_width="@dimen/dp_40"
                         android:layout_height="@dimen/dp_20"
-                        android:layout_marginLeft="@dimen/dp_5"
+                        android:layout_marginLeft="@dimen/dp_10"
                         android:gravity="center"
                         android:text="业主"
                         android:textSize="10sp" />
@@ -114,6 +114,7 @@
                     <TextView
                         style="@style/textview_style"
                         android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
                         android:text="@string/txt_add_person_relative"
                         android:textColor="@color/color_gray_999999" />
                 </LinearLayout>
@@ -122,6 +123,7 @@
                     android:id="@+id/tv_relative"
                     style="@style/textview_style"
                     android:layout_marginRight="@dimen/dp_15"
+                    android:layout_height="match_parent"
                     android:layout_toRightOf="@+id/layout_left_relative"
                     android:gravity="left|center_vertical"
                     android:textColor="@color/color_gray_333333" />
@@ -150,6 +152,7 @@
                     <TextView
                         style="@style/textview_style"
                         android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
                         android:text="@string/txt_add_person_position"
                         android:textColor="@color/color_gray_999999" />
                 </LinearLayout>
@@ -159,6 +162,7 @@
                     style="@style/textview_style"
                     android:layout_toRightOf="@+id/layout_left_position"
                     android:background="@null"
+                    android:layout_height="match_parent"
                     android:textColor="@color/color_gray_333333" />
             </RelativeLayout>
 
@@ -185,6 +189,7 @@
                         style="@style/textview_style"
                         android:layout_width="wrap_content"
                         android:text="@string/txt_add_person_gender"
+                        android:layout_height="match_parent"
                         android:textColor="@color/color_gray_999999" />
                 </LinearLayout>
 
@@ -192,6 +197,7 @@
                     android:id="@+id/tv_gender"
                     style="@style/textview_style"
                     android:layout_marginRight="@dimen/dp_15"
+                    android:layout_height="match_parent"
                     android:layout_toRightOf="@+id/layout_left_gender"
                     android:textColor="@color/color_gray_333333" />
 
@@ -220,6 +226,7 @@
                         style="@style/textview_style"
                         android:layout_width="wrap_content"
                         android:drawablePadding="@dimen/dp_10"
+                        android:layout_height="match_parent"
                         android:text="@string/txt_add_person_idcard"
                         android:textColor="@color/color_gray_999999" />
                 </LinearLayout>
@@ -229,6 +236,7 @@
                     style="@style/textview_style"
                     android:layout_toRightOf="@+id/layout_left_idcard"
                     android:background="@null"
+                    android:layout_height="match_parent"
                     android:textColor="@color/color_gray_333333" />
             </RelativeLayout>
 
@@ -255,12 +263,14 @@
                         style="@style/textview_style"
                         android:layout_width="wrap_content"
                         android:text="@string/txt_add_person_age"
+                        android:layout_height="match_parent"
                         android:textColor="@color/color_gray_999999" />
                 </LinearLayout>
 
                 <TextView
                     android:id="@+id/tv_age"
                     style="@style/textview_style"
+                    android:layout_height="match_parent"
                     android:layout_toRightOf="@+id/layout_left_age"
                     android:textColor="@color/color_gray_333333" />
             </RelativeLayout>
@@ -287,12 +297,14 @@
                         style="@style/textview_style"
                         android:layout_width="wrap_content"
                         android:text="@string/txt_add_person_birthday"
+                        android:layout_height="match_parent"
                         android:textColor="@color/color_gray_999999" />
                 </LinearLayout>
 
                 <TextView
                     android:id="@+id/tv_birthday"
                     style="@style/textview_style"
+                    android:layout_height="match_parent"
                     android:layout_toRightOf="@+id/layout_left_birthday"
                     android:textColor="@color/color_gray_999999" />
             </RelativeLayout>
@@ -319,6 +331,7 @@
                     <TextView
                         style="@style/textview_style"
                         android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
                         android:text="@string/txt_add_person_nation"
                         android:textColor="@color/color_gray_999999" />
                 </LinearLayout>
@@ -327,6 +340,7 @@
                     android:id="@+id/tv_nation"
                     style="@style/textview_style"
                     android:layout_marginRight="@dimen/dp_15"
+                    android:layout_height="match_parent"
                     android:layout_toRightOf="@+id/layout_left_nation"
                     android:textColor="@color/color_gray_333333" />
 
@@ -354,7 +368,7 @@
                         style="@style/textview_style"
                         android:layout_width="wrap_content"
                         android:text="@string/txt_add_person_religion"
-
+                        android:layout_height="match_parent"
                         android:textColor="@color/color_gray_999999" />
                 </LinearLayout>
 
@@ -362,6 +376,7 @@
                     android:id="@+id/tv_religion"
                     style="@style/textview_style"
                     android:layout_marginRight="@dimen/dp_15"
+                    android:layout_height="match_parent"
                     android:layout_toRightOf="@+id/layout_left_religion"
                     android:textColor="@color/color_gray_333333" />
 
@@ -389,6 +404,7 @@
                     <TextView
                         style="@style/textview_style"
                         android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
                         android:text="@string/txt_add_person_party"
                         android:textColor="@color/color_gray_999999" />
                 </LinearLayout>
@@ -397,6 +413,7 @@
                     android:id="@+id/tv_party"
                     style="@style/textview_style"
                     android:layout_marginRight="@dimen/dp_15"
+                    android:layout_height="match_parent"
                     android:layout_toRightOf="@+id/layout_left_party"
                     android:textColor="@color/color_gray_333333" />
 
@@ -424,6 +441,7 @@
                         style="@style/textview_style"
                         android:layout_width="wrap_content"
                         android:drawablePadding="@dimen/dp_10"
+                        android:layout_height="match_parent"
                         android:text="@string/txt_add_person_mobile"
                         android:textColor="@color/color_gray_999999" />
                 </LinearLayout>
@@ -434,6 +452,7 @@
                     android:layout_toRightOf="@+id/layout_left_mobile"
                     android:background="@null"
                     android:inputType="number"
+                    android:layout_height="match_parent"
                     android:textColor="@color/color_gray_333333" />
             </RelativeLayout>
 
@@ -459,6 +478,7 @@
                         style="@style/textview_style"
                         android:layout_width="wrap_content"
                         android:text="@string/txt_add_person_address"
+                        android:layout_height="match_parent"
                         android:textColor="@color/color_gray_999999" />
                 </LinearLayout>
 
@@ -467,6 +487,7 @@
                     style="@style/textview_style"
                     android:layout_toRightOf="@+id/layout_left_address"
                     android:background="@null"
+                    android:layout_height="match_parent"
                     android:textColor="@color/color_gray_333333" />
             </RelativeLayout>
 

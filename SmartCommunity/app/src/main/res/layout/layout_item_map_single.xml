@@ -11,7 +11,7 @@
         android:layout_height="@dimen/dp_55"
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/common_txt_size"
-        android:paddingLeft="@dimen/dp_15"
+        android:paddingLeft="@dimen/dp_25"
         android:button="@null"
         android:gravity="center_vertical"
         android:background="@color/white"

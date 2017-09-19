@@ -42,7 +42,8 @@ public class PhotoUtils {
      * @param requestCode 打开相册的请求码
      */
     public static void openPic(Activity activity, int requestCode) {
-        Intent photoPickerIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        Intent photoPickerIntent = new Intent();
+        photoPickerIntent.setAction(Intent.ACTION_GET_CONTENT);
         photoPickerIntent.setType("image/*");
         activity.startActivityForResult(photoPickerIntent, requestCode);
     }
@@ -58,10 +59,11 @@ public class PhotoUtils {
      * @param requestCode 剪裁图片的请求码
      */
     public static void cropImageUri(Activity activity, Uri orgUri, Uri desUri, int aspectX, int aspectY, int width, int height, int requestCode) {
-        Intent intent = new Intent("com.android.camera.action.CROP");
+        Intent intent = new Intent();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         }
+        intent.setAction("com.android.camera.action.CROP");
         intent.setDataAndType(orgUri, "image/*");
         intent.putExtra("crop", "true");
         intent.putExtra("aspectX", aspectX);
