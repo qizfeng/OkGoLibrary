@@ -176,7 +176,10 @@ public class WenjuanActivity extends BaseActivity {
             String url = mWebView.getUrl();
             if (url.contains(AppConstants.URL_WENJUAN_LIST))
                 finish();
-            else {
+            else if (url.contains(AppConstants.URL_WENJUAN_RESULT)) {
+                mWebView.goBack();
+                mWebView.goBack();
+            } else {
                 mWebView.goBack();
             }
             return true;
