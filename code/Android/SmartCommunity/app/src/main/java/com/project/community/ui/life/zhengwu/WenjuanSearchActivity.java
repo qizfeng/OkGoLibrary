@@ -434,7 +434,10 @@ public class WenjuanSearchActivity extends BaseActivity implements View.OnKeyLis
             String url = mWebView.getUrl();
             if (url.contains(AppConstants.URL_WENJUAN_SEARCH))
                 finish();
-            else {
+            else if (url.contains(AppConstants.URL_WENJUAN_RESULT)) {
+                mWebView.goBack();
+                mWebView.goBack();
+            } else {
                 mWebView.goBack();
             }
             return true;
