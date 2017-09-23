@@ -57,8 +57,8 @@ public class WenjuanDetailActivity extends BaseActivity {
         initToolBar(toolbar, mTvTitle, true, getString(R.string.activity_write_wenjuan), R.mipmap.iv_back);
         pb.setMax(100);
         mLayout = (LinearLayout) findViewById(R.id.web_layout);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams
-                .MATCH_PARENT);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
         mWebView = new Html5WebView(getApplicationContext());
         mWebView.setLayoutParams(params);
         mLayout.addView(mWebView);

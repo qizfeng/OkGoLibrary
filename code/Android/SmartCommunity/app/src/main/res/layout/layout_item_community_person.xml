@@ -27,12 +27,26 @@
             android:layout_marginLeft="@dimen/dp_15"
             android:gravity="center_vertical"
             android:orientation="horizontal">
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
 
-            <ImageView
-                android:id="@+id/iv_header"
-                android:layout_width="@dimen/dp_45"
-                android:layout_height="@dimen/dp_45"
-                android:src="@mipmap/d54_tx" />
+                <ImageView
+                    android:id="@+id/iv_header"
+                    android:layout_width="@dimen/dp_45"
+                    android:layout_height="@dimen/dp_45"
+                    android:src="@mipmap/d54_tx" />
+
+                <ImageView
+                    android:id="@+id/iv_tag"
+                    android:layout_width="@dimen/dp_15"
+                    android:layout_height="@dimen/dp_15"
+                    android:layout_gravity="bottom|right"
+                    android:src="@mipmap/d24_renzhen" />
+            </FrameLayout>
+
+
 
             <TextView
                 android:id="@+id/tv_name"

@@ -14,10 +14,14 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.library.okgo.callback.DialogCallback;
+import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.listener.RecycleItemClickListener;
+import com.project.community.model.CommunityFamilyModel;
+import com.project.community.model.DictionaryModel;
+import com.project.community.model.DictionaryResponse;
 import com.project.community.model.FamilyModel;
 import com.project.community.model.UnitModel;
 import com.project.community.ui.adapter.CommunityFamilyAdapter;
@@ -45,10 +49,15 @@ public class CommunityFamilyActivity extends BaseActivity {
     RecyclerView mRecyclerView;
     @Bind(R.id.recyclerViewSelect)
     RecyclerView mRecyclerViewSelect;
-    private List<FamilyModel> mData = new ArrayList<>();
-    private List<UnitModel> unitModelList = new ArrayList<>();
+    private List<CommunityFamilyModel> mData = new ArrayList<>();
+    private List<DictionaryModel> unitModelList = new ArrayList<>();
     private CommunityFamilyAdapter mAdapter;
     private CommunityUnitSingleChoiceAdapter singleChoiceAdapter;
+    private String floorId;//楼栋id
+    private String floorName;//楼栋名称
+    private String disName;//小区名
+
+    private String unitId;//单元id
 
     public static void startActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, CommunityFamilyActivity.class);
@@ -60,13 +69,21 @@ public class CommunityFamilyActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community_person_list);
-        initToolBar(mToolBar, mTvTitle, true, "一区一栋居民", R.mipmap.iv_back);
+
         initView();
         initData();
         loadData();
     }
 
     private void initView() {
+        Intent intent = getIntent();
+        if (intent != null) {
+            Bundle bundle = intent.getBundleExtra("bundle");
+            floorId = bundle.getString("floorId");
+            floorName = bundle.getString("floorName");
+            disName = bundle.getString("disName");
+            initToolBar(mToolBar, mTvTitle, true, disName + floorName + "居民", R.mipmap.iv_back);
+        }
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -78,9 +95,9 @@ public class CommunityFamilyActivity extends BaseActivity {
     public void initData() {
         mAdapter = new CommunityFamilyAdapter(mData, new CommunityFamilyAdapter.AdapterItemClickListener() {
             @Override
-            public void onItemClick(View view, int position,int childPosition) {
+            public void onItemClick(View view, int position, int childPosition) {
                 Bundle bundle = new Bundle();
-                bundle.putString("id",mData.get(position).memberList.get(childPosition).id);
+                bundle.putString("memberId", mData.get(position).memberList.get(childPosition).id);
                 CommunityPersonActivity.startActivity(CommunityFamilyActivity.this, bundle);
             }
 
@@ -95,58 +112,55 @@ public class CommunityFamilyActivity extends BaseActivity {
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.bindToRecyclerView(mRecyclerView);
 
+        getUnitData();
 
-        initTestUnitData();
-        singleChoiceAdapter = new CommunityUnitSingleChoiceAdapter(this, unitModelList, new CommunityUnitSingleChoiceAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position, long id) {
-                singleChoiceAdapter.check(position);
-                loadData();
-            }
-        });
-        // 默认选中第一个item
-        singleChoiceAdapter.setDefaultCheckedItemPosition(0);
         // 这个方法不能忘，指定显示布局
         mRecyclerViewSelect.setLayoutManager(new LinearLayoutManager(this));
         // 添加分隔线，DividerItemDecoration这个类是系统提供的，在support包中
         decoration = new SpacesItemDecoration(0, false);
         mRecyclerViewSelect.addItemDecoration(decoration);
-        mRecyclerViewSelect.setAdapter(singleChoiceAdapter);
+
     }
 
-    private void initTestUnitData() {
-        unitModelList = new ArrayList<>();
-        UnitModel unitModel1 = new UnitModel();
-        unitModel1.unit = "一单元";
-        UnitModel unitModel2 = new UnitModel();
-        unitModel2.unit = "二单元";
-        UnitModel unitModel3 = new UnitModel();
-        unitModel3.unit = "三单元";
-        UnitModel unitModel4 = new UnitModel();
-        unitModel4.unit = "四单元";
-        UnitModel unitModel5 = new UnitModel();
-        unitModel5.unit = "五单元";
-        unitModelList.add(unitModel1);
-        unitModelList.add(unitModel2);
-        unitModelList.add(unitModel3);
-        unitModelList.add(unitModel4);
-        unitModelList.add(unitModel5);
+
+    private void getUnitData() {
+        serverDao.getDictionaryData("prop_room_unit", new JsonCallback<BaseResponse<DictionaryResponse>>() {
+            @Override
+            public void onSuccess(BaseResponse<DictionaryResponse> baseResponse, Call call, Response response) {
+                unitModelList = new ArrayList<>();
+                unitModelList = baseResponse.retData.dictList;
+                singleChoiceAdapter = new CommunityUnitSingleChoiceAdapter(CommunityFamilyActivity.this, unitModelList, new CommunityUnitSingleChoiceAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position, long id) {
+                        singleChoiceAdapter.check(position);
+                        unitId = unitModelList.get(position).value;
+//                        loadData();
+                    }
+                });
+                // 默认选中第一个item
+//                singleChoiceAdapter.setDefaultCheckedItemPosition(0);
+                mRecyclerViewSelect.setAdapter(singleChoiceAdapter);
+            }
+        });
     }
 
     /**
+     * userId
+     * unit
+     * floor
      * 加载数据
      */
     private void loadData() {
-        serverDao.getFamilyListInfo(getUser(this).id, getUsername(this), getUser(this).roomNo, new DialogCallback<BaseResponse<List<FamilyModel>>>(this) {
+        serverDao.getCommunityFamilyPersonList(getUser(this).id, unitId, floorId, new DialogCallback<BaseResponse<List<CommunityFamilyModel>>>(this) {
             @Override
-            public void onSuccess(BaseResponse<List<FamilyModel>> baseResponse, Call call, Response response) {
+            public void onSuccess(BaseResponse<List<CommunityFamilyModel>> baseResponse, Call call, Response response) {
                 mData = new ArrayList<>();
                 mData = baseResponse.retData;
                 if (mData.size() == 0) {
                     mAdapter.setNewData(null);
                     mAdapter.setEmptyView(R.layout.empty_view);
                     TextView textView = mAdapter.getEmptyView().findViewById(R.id.tv_tips);
-                    textView.setText(getString(R.string.empty_no_data_family));
+                    textView.setText(getString(R.string.empty_no_data_person));
                 } else {
                     mAdapter.setNewData(mData);
                     mAdapter.notifyDataSetChanged();
@@ -159,10 +173,11 @@ public class CommunityFamilyActivity extends BaseActivity {
                 super.onError(call, response, e);
                 mAdapter.setNewData(null);
                 mAdapter.setEmptyView(R.layout.empty_view);
-                TextView textView = (TextView) mAdapter.getEmptyView().findViewById(R.id.tv_tips);
-                textView.setText(getString(R.string.empty_no_data_family));
-                    showToast(e.getMessage());
+                TextView textView = mAdapter.getEmptyView().findViewById(R.id.tv_tips);
+                textView.setText(getString(R.string.empty_no_data_person));
+                showToast(e.getMessage());
             }
+
         });
     }
 
@@ -182,12 +197,14 @@ public class CommunityFamilyActivity extends BaseActivity {
                     drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
                     TextView tvChoice = item.getActionView().findViewById(R.id.tv_choice);
                     tvChoice.setCompoundDrawables(null, null, drawable, null);
+                    loadData();
                 } else if (mRecyclerViewSelect.getVisibility() == View.GONE) {
                     mRecyclerViewSelect.setVisibility(View.VISIBLE);
                     Drawable drawable = getResources().getDrawable(R.mipmap.d44_shangla);
                     drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
                     TextView tvChoice = item.getActionView().findViewById(R.id.tv_choice);
                     tvChoice.setCompoundDrawables(null, null, drawable, null);
+
                 }
                 return true;
 

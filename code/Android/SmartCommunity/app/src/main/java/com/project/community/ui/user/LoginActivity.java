@@ -209,6 +209,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 Gson gson = new Gson();
                 String userStr = gson.toJson(userModelBaseResponse.retData);
                 // JSONObject object = JSONObject.fromObject(userModelBaseResponse.retData);
+                LogUtils.e("user:"+userStr);
                 saveUser(LoginActivity.this, userStr);
                 saveLoginStatus(LoginActivity.this, true);
                 if (mCbRemember.isChecked()) {

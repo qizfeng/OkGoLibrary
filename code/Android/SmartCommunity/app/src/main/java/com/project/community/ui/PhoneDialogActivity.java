@@ -131,10 +131,6 @@ public class PhoneDialogActivity extends BaseActivity implements View.OnClickLis
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     finish();
-//                    } else {
-//                        // 权限被用户拒绝了，洗洗睡吧。
-//                        ToastUtils.showShortToast(PhoneDialogActivity.this, getString(R.string.permission_tips));
-//                    }
                 }
 
                 return;

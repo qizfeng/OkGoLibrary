@@ -35,7 +35,7 @@ public class AppLocationListener implements BDLocationListener {
         if (location == null) {
             return;
         }
-        LogUtils.e("onReceiveLocation lat:" + location.getLatitude() + ",long:" + location.getLongitude());
+      //  LogUtils.e("onReceiveLocation lat:" + location.getLatitude() + ",long:" + location.getLongitude());
         /*
          * location.getLocType()的返回值含义： 61 ： GPS定位结果 62 ： 扫描整合定位依据失败。此时定位结果无效。
 		 * 63 ： 网络异常，没有成功向服务器发起请求。此时定位结果无效。 65 ： 定位缓存的结果。 66 ：

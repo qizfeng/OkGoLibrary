@@ -8,7 +8,9 @@
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:layout_marginBottom="@dimen/dp_55">
 
         <LinearLayout
             android:id="@+id/layout_root"
@@ -35,8 +37,8 @@
 
                     <ImageView
                         android:id="@+id/iv_header"
-                        android:layout_width="@dimen/dp_105"
-                        android:layout_height="wrap_content"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
                         android:scaleType="fitXY"
                         android:src="@mipmap/c1_image2" />
 
@@ -52,11 +54,11 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/tv_name"
+                                android:id="@+id/tv_shop_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dp_15"
-                                android:text="香河肉饼"
+                                android:text=""
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="@dimen/common_txt_size" />
 
@@ -74,6 +76,21 @@
                                 android:text="物业认证"
                                 android:textSize="10sp" />
 
+                            <TextView
+                                android:id="@+id/tv_tag2"
+                                style="@style/rectangle_red_tag"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dp_5"
+                                android:gravity="center"
+                                android:paddingBottom="2dp"
+                                android:paddingLeft="@dimen/dp_5"
+                                android:paddingRight="@dimen/dp_5"
+                                android:paddingTop="2dp"
+                                android:text="物业认证"
+                                android:visibility="gone"
+                                android:textColor="@color/color_red_d54824"
+                                android:textSize="10sp" />
                         </LinearLayout>
 
                         <RelativeLayout
@@ -110,18 +127,10 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:background="@null"
-                                    android:text="黄埔军"
+                                    android:text=""
                                     android:textColor="@color/color_gray_666666"
                                     android:textSize="@dimen/common_txt_size" />
 
-                                <TextView
-                                    android:id="@+id/tv_person_mobile"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/dp_15"
-                                    android:background="@null"
-                                    android:textColor="@color/color_gray_666666"
-                                    android:textSize="@dimen/common_txt_size" />
                             </LinearLayout>
 
                         </RelativeLayout>
@@ -167,7 +176,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:background="@null"
-                                    android:text="15210213731"
+                                    android:text=""
                                     android:textColor="@color/color_gray_666666"
                                     android:textSize="@dimen/common_txt_size" />
 
@@ -179,6 +188,7 @@
                             android:id="@+id/layout_shop_address"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/dp_15"
                             android:layout_marginLeft="@dimen/dp_15">
 
                             <LinearLayout
@@ -188,9 +198,10 @@
                                 android:orientation="horizontal">
 
                                 <TextView
+                                    android:id="@+id/tv_address"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="营业地址：安徽省阜阳市颍泉区圈河桥北"
+                                    android:text="营业地址："
                                     android:textColor="@color/color_gray_666666"
                                     android:textSize="@dimen/common_txt_size" />
 
@@ -244,7 +255,7 @@
                     android:layout_marginRight="@dimen/dp_15"
                     android:layout_toRightOf="@+id/layout_left_sort"
                     android:gravity="left|center_vertical"
-                    android:text="餐饮"
+                    android:text=""
                     android:textColor="@color/color_gray_666666"
                     android:textSize="@dimen/common_txt_size" />
 
@@ -287,7 +298,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/layout_left_business"
                     android:background="@null"
-                    android:text="手抓饼、蛋炒饭"
+                    android:text=""
                     android:textColor="@color/color_gray_666666"
                     android:textSize="@dimen/common_txt_size" />
             </RelativeLayout>
@@ -335,7 +346,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/dp_15"
                     android:layout_toRightOf="@+id/layout_left_company"
-                    android:text="北京紫平方信息技术股份有限公司"
+                    android:text=""
                     android:textColor="@color/color_gray_666666"
                     android:textSize="@dimen/common_txt_size" />
 
@@ -371,7 +382,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/layout_left_license"
                     android:background="@null"
-                    android:text="2108403288"
+                    android:text=""
                     android:textColor="@color/color_gray_666666"
                     android:textSize="@dimen/common_txt_size" />
             </RelativeLayout>
@@ -412,7 +423,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/layout_left_legal_name"
-                    android:text="齐志峰"
+                    android:text=""
                     android:textColor="@color/color_gray_666666"
                     android:textSize="@dimen/common_txt_size" />
 
@@ -422,8 +433,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:background="@color/white"
+                android:orientation="horizontal"
                 android:paddingBottom="@dimen/dp_15"
                 android:paddingLeft="@dimen/dp_15"
                 android:paddingRight="@dimen/dp_15">
@@ -446,12 +457,14 @@
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:id="@+id/iv_licensePositive"
                             android:layout_width="@dimen/dp_80"
                             android:layout_height="@dimen/dp_80"
                             android:layout_weight="1"
                             android:background="@color/color_gray_eeeeee" />
 
                         <ImageView
+                            android:id="@+id/iv_licenseReverse"
                             android:layout_width="@dimen/dp_80"
                             android:layout_height="@dimen/dp_80"
                             android:layout_marginLeft="@dimen/dp_5"
@@ -479,12 +492,14 @@
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:id="@+id/iv_legalCardPositive"
                             android:layout_width="@dimen/dp_80"
                             android:layout_height="@dimen/dp_80"
                             android:layout_weight="1"
                             android:background="@color/color_gray_eeeeee" />
 
                         <ImageView
+                            android:id="@+id/iv_legalCardReverse"
                             android:layout_width="@dimen/dp_80"
                             android:layout_height="@dimen/dp_80"
                             android:layout_marginLeft="@dimen/dp_5"

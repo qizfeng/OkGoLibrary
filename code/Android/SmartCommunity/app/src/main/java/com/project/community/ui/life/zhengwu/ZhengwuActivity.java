@@ -109,9 +109,10 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
 
     protected void initData() {
         recyclerView.setHasFixedSize(true);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
         final StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
+
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -121,7 +122,6 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
         });
 
         recyclerView.setLayoutManager(layoutManager);
-
 
         mAdapter = new ArticlePageAdapter(null, new IndexAdapterItemListener() {
             @Override
@@ -149,20 +149,22 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
                     showToast(getString(R.string.toast_no_login));
 
             }
-        }, new DiggClickListener() {
-            @Override
-            public void onDiggClick(ImageView imageView, TextView textView, int position) {
-                if (isLogin(ZhengwuActivity.this)) {
-                    if (mAdapter.getItem(position).categoryAllowCollection == 0 ||
-                            mAdapter.getItem(position).allowCollection == 0) {
-                        showToast(getString(R.string.toast_no_collect));
-                        return;
+        }, new
+
+                DiggClickListener() {
+                    @Override
+                    public void onDiggClick(ImageView imageView, TextView textView, int position) {
+                        if (isLogin(ZhengwuActivity.this)) {
+                            if (mAdapter.getItem(position).categoryAllowCollection == 0 ||
+                                    mAdapter.getItem(position).allowCollection == 0) {
+                                showToast(getString(R.string.toast_no_collect));
+                                return;
+                            }
+                            onCollect(textView, imageView, position);
+                        } else
+                            showToast(getString(R.string.toast_no_login));
                     }
-                    onCollect(textView, imageView, position);
-                } else
-                    showToast(getString(R.string.toast_no_login));
-            }
-        });
+                });
 
         SpacesItemDecoration decoration = new SpacesItemDecoration(20, false);
         recyclerView.addItemDecoration(decoration);
@@ -180,9 +182,11 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
 //        mAdapter.addHeaderView(header);
         //开启loading,获取数据
         setRefreshing(true);
+
         onRefresh();
         fab.setOnClickListener(this);
         gridView.setOnItemClickListener(this);
+
         setData();
 
     }
@@ -274,6 +278,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
      * @param imageView
      * @param position
      */
+
     private void onCollect(final TextView textView, final ImageView imageView, final int position) {
         serverDao.doCollectTopic(getUser(this).id, mAdapter.getItem(position).id, new DialogCallback<BaseResponse<List>>(this) {
             @Override
@@ -294,7 +299,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                    showToast(e.getMessage());
+                showToast(e.getMessage());
             }
         });
     }
@@ -333,7 +338,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                    showToast(e.getMessage());
+                showToast(e.getMessage());
             }
 
             @Override
@@ -498,7 +503,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                    showToast(e.getMessage());
+                showToast(e.getMessage());
             }
 
             @Override
@@ -598,7 +603,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                    showToast(e.getMessage());
+                showToast(e.getMessage());
             }
         });
     }
@@ -621,7 +626,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                    showToast(e.getMessage());
+                showToast(e.getMessage());
             }
         });
     }

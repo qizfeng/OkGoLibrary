@@ -10,8 +10,9 @@
         android:background="@drawable/bg_map_community"
         android:orientation="horizontal">
         <ImageView
-            android:layout_width="@dimen/dp_35"
-            android:layout_height="@dimen/dp_35"
+            android:id="@+id/iv_header"
+            android:layout_width="@dimen/dp_45"
+            android:layout_height="@dimen/dp_45"
             android:src="@mipmap/d54_tx"/>
         <LinearLayout
             android:layout_width="wrap_content"

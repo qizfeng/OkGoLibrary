@@ -12,6 +12,13 @@ public class DictionaryModel implements Serializable{
     public String label;
     public String type;
 
+    public DictionaryModel() {
+    }
+
+    public DictionaryModel(String label) {
+        this.label = label;
+    }
+
     @Override
     public String toString() {
         return "DictionaryModel{" +

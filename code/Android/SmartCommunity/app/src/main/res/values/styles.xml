@@ -98,7 +98,14 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:background">@drawable/button_round_red</item>
     </style>
-
+    <!--圆角Button 红色-->
+    <style name="rectangle_red_tag">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/tag_round_red</item>
+    </style>
     <!--圆角Button 发送-->
     <style name="rectangle_send_button">
         <item name="android:layout_width">match_parent</item>
@@ -116,6 +123,7 @@
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:background">@drawable/button_round_category</item>
     </style>
+
     <!--圆角Button 资料-->
     <style name="rectangle_info_button">
         <item name="android:layout_width">match_parent</item>
