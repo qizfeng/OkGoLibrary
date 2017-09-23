@@ -256,6 +256,71 @@ public class AppConstants {
      */
     public static final String URL_GET_PAY_ORDER = URL_BASE + "m/propPayment/aliPay";
 
+    /**
+     * 社区-小区列表census
+     */
+    public static final String URL_COMMUNITY_LIST = URL_BASE + "m/sys/communityList";
+
+    /**
+     *社区-小区统计信息
+     */
+    public static final String URL_COMMUNITY_CENSUS=URL_BASE+"m/community/floor/getFloors";
+
+    /**
+     * 小区楼栋人员列表
+     */
+    public static final String URL_COMMUNITY_MEMBER_LIST = URL_BASE+"m/community/floor/getFloorMember";
+
+    /**
+     * 小区人员信息
+     */
+    public static final String URL_COMMUNITY_MEMBER_INFO=URL_BASE+"m/propMember/getMemberByMap";
+
+    /**
+     * 商铺坐标
+     */
+    public static final String URL_COMMUNITY_SHOP_LIST=URL_BASE+"m/community/shops/shopsList";
+
+    /**
+     * 商铺筛选
+     */
+    public static final String URL_COMMUNITY_SHOP_FILTER=URL_BASE+"m/community/shops/searchData";
+
+    /**
+     * 商铺详细信息
+     */
+    public static final String URL_COMMUNITY_SHOP_DETAIL=URL_BASE+"m/community/shops/get";
+
+    /**
+     * 居民筛选
+     */
+    public static final String URL_COMMUNITY_PERSON_FILTER=URL_BASE+"m/community/comyUser/searchData";
+
+    /**
+     * 居民坐标
+     */
+    public static final String URL_COMMUNITY_PERSON_LIST=URL_BASE+"m/community/comyUser/userList";
+
+    /**
+     * 居民详情
+     */
+    public static final String URL_COMMUNITY_PERSON_DETAIL=URL_BASE+"m/community/comyUser/get";
+
+    /**
+     * 设施坐标
+     */
+    public static final String URL_COMMUNITY_DEVICE_LIST=URL_BASE+"m/community/facilities/facilitiesList";
+
+    /**
+     * 设施筛选
+     */
+    public static final String URL_COMMUNITY_DEVICE_FILTER=URL_BASE+"m/community/facilities/searchData";
+
+    /**
+     * 设施详情
+     */
+    public static final String URL_COMMUNITY_DEVICE_DETAIL=URL_BASE+"m/community/facilities/get";
+
     /*==========================*/
     /**
      * 分页大小
@@ -283,7 +348,7 @@ public class AppConstants {
     public static final int WUYE_GONGGAO = 6;
 
 
-    public static String LAST_WEB_URL="";
+    public static String LAST_WEB_URL = "";
 
     /**
      * 是否是第一次打开APP

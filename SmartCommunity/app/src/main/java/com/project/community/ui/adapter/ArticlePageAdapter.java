@@ -5,21 +5,29 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.library.okgo.utils.DateUtil;
 import com.library.okgo.utils.GlideImageLoader;
+import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
 import com.project.community.constants.AppConstants;
 import com.project.community.listener.DiggClickListener;
 import com.project.community.model.ArticleModel;
 import com.project.community.ui.adapter.listener.IndexAdapterItemListener;
+import com.project.community.util.ScreenUtils;
 import com.project.community.util.StringUtils;
+import com.project.community.util.Utils;
 
+import java.util.HashMap;
 import java.util.List;
+
+import static com.umeng.socialize.utils.DeviceConfig.context;
 
 /**
  * Created by qizfeng on 17/8/28.
@@ -28,10 +36,17 @@ import java.util.List;
 public class ArticlePageAdapter extends BaseQuickAdapter<ArticleModel, BaseViewHolder> {
     public IndexAdapterItemListener itemClickListener;//点击事件
     private DiggClickListener diggClickListener;//点赞
+    private final static float SIZE_SCALE_01 = 4 / 3f;
+    private final static float SIZE_SCALE_02 = 4 / 4f;
+    private int screenWidth;
+    private HashMap<Integer, Float> indexMap = new HashMap<Integer, Float>();
+
     public ArticlePageAdapter(List<ArticleModel> data, IndexAdapterItemListener itemClick, DiggClickListener diggClickListener) {
         super(R.layout.layout_item_news, data);
         itemClickListener = itemClick;
         this.diggClickListener = diggClickListener;
+//            screenWidth = Utils.getScreenSize(context)[0] - Utils.dp2px(context, 8) * 3;
+
 
     }
 
@@ -107,7 +122,7 @@ public class ArticlePageAdapter extends BaseQuickAdapter<ArticleModel, BaseViewH
 
         GlideImageLoader glide = new GlideImageLoader();
         glide.onDisplayImage(mContext, (ImageView) baseViewHolder.getView(R.id.iv_imageView), AppConstants.HOST + model.image);
-
+        resizeItemView((ImageView) baseViewHolder.getView(R.id.iv_imageView), getScaleType(baseViewHolder.getLayoutPosition()));
         View view = baseViewHolder.getConvertView();
         final int position = baseViewHolder.getLayoutPosition();//去掉header的点击事件
         //item点击事件
@@ -137,5 +152,39 @@ public class ArticlePageAdapter extends BaseQuickAdapter<ArticleModel, BaseViewH
 
     }
 
+    private float getScaleType(int position) {
+        if (!indexMap.containsKey(position)) {
+            float scaleType;
+            LogUtils.e("header:"+getHeaderLayoutCount());
+            if (getHeaderLayoutCount()>0) {
+                if (position == 1) {
+                    scaleType = SIZE_SCALE_01;
+                } else if (position == 2) {
+                    scaleType = SIZE_SCALE_02;
+                } else {
+                    scaleType = Utils.getRandomInt() % 2 == 0 ? SIZE_SCALE_01 : SIZE_SCALE_02;
+                }
+            } else {
+                if (position == 0) {
+                    scaleType = SIZE_SCALE_01;
+                } else if (position == 1) {
+                    scaleType = SIZE_SCALE_02;
+                } else {
+                    scaleType = Utils.getRandomInt() % 2 == 0 ? SIZE_SCALE_01 : SIZE_SCALE_02;
+                }
+            }
+            indexMap.put(position, scaleType);
+        }
+
+        return indexMap.get(position);
+    }
+
+    private void resizeItemView(ImageView frontCoverImage, float scaleType) {
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) frontCoverImage.getLayoutParams();
+        screenWidth= ScreenUtils.getScreenWidth(mContext)- Utils.dp2px(mContext, 8) * 3;
+        params.width = screenWidth / 2;
+        params.height = (int) (params.width / scaleType) - Utils.dp2px(context, 8);
+        frontCoverImage.setLayoutParams(params);
+    }
 
 }

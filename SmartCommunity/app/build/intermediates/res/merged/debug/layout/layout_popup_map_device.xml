@@ -14,6 +14,7 @@
         android:padding="@dimen/dp_10">
 
         <ImageView
+            android:id="@+id/iv_header"
             android:layout_width="@dimen/dp_45"
             android:layout_height="@dimen/dp_45"
             android:src="@mipmap/d54_tx" />

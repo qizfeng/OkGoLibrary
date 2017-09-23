@@ -42,7 +42,7 @@ import okhttp3.OkHttpClient;
  * ================================================
  */
 public class OkGo {
-    public static final int DEFAULT_MILLISECONDS = 60000;       //默认的超时时间
+    public static final int DEFAULT_MILLISECONDS = 30*1000;       //默认的超时时间
     public static int REFRESH_TIME = 100;                       //回调刷新时间（单位ms）
 
     private Handler mDelivery;                                  //用于在主线程执行的调度器
@@ -51,7 +51,7 @@ public class OkGo {
     private HttpParams mCommonParams;                           //全局公共请求参数
     private HttpHeaders mCommonHeaders;                         //全局公共请求头
     private CacheMode mCacheMode;                               //全局缓存模式
-    private int mRetryCount = 3;                                //全局超时重试次数
+    private int mRetryCount = 0;                                //全局超时重试次数
     private long mCacheTime = CacheEntity.CACHE_NEVER_EXPIRE;   //全局缓存过期时间,默认永不过期
     private static Application context;                         //全局上下文
     private CookieJarImpl cookieJar;                            //全局 Cookie 实例

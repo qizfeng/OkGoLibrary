@@ -16,6 +16,13 @@ import com.project.community.model.ArticleModel;
 import com.project.community.model.AuditStatusModel;
 import com.project.community.model.BannerResponse;
 import com.project.community.model.CommentModel;
+import com.project.community.model.CommunityCensusModel;
+import com.project.community.model.CommunityDeviceFilterModel;
+import com.project.community.model.CommunityFamilyModel;
+import com.project.community.model.CommunityModel;
+import com.project.community.model.CommunityPersonFilterModel;
+import com.project.community.model.CommunityShopFilterModel;
+import com.project.community.model.DeviceModel;
 import com.project.community.model.DictionaryResponse;
 import com.project.community.model.DistModel;
 import com.project.community.model.FamilyModel;
@@ -30,6 +37,7 @@ import com.project.community.model.PaymentHouseHistroyModel;
 import com.project.community.model.PaymentInfoModel;
 import com.project.community.model.PaymentWayModel;
 import com.project.community.model.SearchModel;
+import com.project.community.model.ShopModel;
 import com.project.community.model.UserModel;
 import com.project.community.model.WuyeIndexResponse;
 import com.project.community.model.ZhengwuIndexResponse;
@@ -559,6 +567,124 @@ public class ServerDaoImpl implements ServerDao {
                 .tag(mContext)
                 .params("userId",userId)
                 .params("paymentId",paymentId)
+                .execute(callback);
+    }
+
+    @Override
+    public void getCommunityList(String userId, String orgCode, JsonCallback<BaseResponse<List<CommunityModel>>> callback) {
+        OkGo.post(AppConstants.URL_COMMUNITY_LIST)
+                .tag(mContext)
+                .params("userId",userId)
+                .params("orgCode",orgCode)
+                .execute(callback);
+    }
+
+    @Override
+    public void getCommunityCensusInfo(String userId, String orgCode, JsonCallback<BaseResponse<List<CommunityCensusModel>>> callback) {
+        OkGo.post(AppConstants.URL_COMMUNITY_CENSUS)
+                .tag(mContext)
+                .params("userId",userId)
+                .params("orgCode",orgCode)
+                .execute(callback);
+    }
+
+    @Override
+    public void getCommunityFamilyPersonList(String userId, String unit, String floor, JsonCallback<BaseResponse<List<CommunityFamilyModel>>> callback) {
+        OkGo.post(AppConstants.URL_COMMUNITY_MEMBER_LIST)
+                .tag(mContext)
+                .params("userId",userId)
+                .params("unit",unit)
+                .params("floor",floor)
+                .execute(callback);
+    }
+
+    @Override
+    public void getCommunityFamilyPersonInfo(String memberId, JsonCallback<BaseResponse<FamilyPersonModel>> callback) {
+        OkGo.post(AppConstants.URL_COMMUNITY_MEMBER_INFO)
+                .tag(mContext)
+                .params("memberId",memberId)
+                .execute(callback);
+    }
+
+    @Override
+    public void getCommunityShopList(String userId, String coordinate, String distance, String auditStatus, JsonCallback<BaseResponse<List<ShopModel>>> callback) {
+        OkGo.post(AppConstants.URL_COMMUNITY_SHOP_LIST)
+                .tag(mContext)
+                .params("userId",userId)
+                .params("coordinate",coordinate)
+                .params("distance",distance)
+                .params("auditStatus",auditStatus)
+                .execute(callback);
+    }
+
+    @Override
+    public void getCommunityShopFilter(JsonCallback<BaseResponse<CommunityShopFilterModel>> callback) {
+        OkGo.post(AppConstants.URL_COMMUNITY_SHOP_FILTER)
+                .tag(mContext)
+                .execute(callback);
+    }
+
+    @Override
+    public void getCommunityPersonFilter(JsonCallback<BaseResponse<CommunityPersonFilterModel>> callback) {
+        OkGo.post(AppConstants.URL_COMMUNITY_PERSON_FILTER)
+                .tag(mContext)
+                .execute(callback);
+    }
+
+    @Override
+    public void getCommunityPersonList(String userId, String coordinate, String distance, String memberTag, JsonCallback<BaseResponse<List<FamilyPersonModel>>> callback) {
+        OkGo.post(AppConstants.URL_COMMUNITY_PERSON_LIST)
+                .tag(mContext)
+                .params("userId",userId)
+                .params("coordinate",coordinate)
+                .params("distance",distance)
+                .params("memberTag",memberTag)
+                .execute(callback);
+    }
+
+    @Override
+    public void getCommunityDeviceFilter(JsonCallback<BaseResponse<CommunityDeviceFilterModel>> callback) {
+        OkGo.post(AppConstants.URL_COMMUNITY_DEVICE_FILTER)
+                .tag(mContext)
+                .execute(callback);
+    }
+
+    @Override
+    public void getCommunityDeviceList(String userId, String coordinate, String userCode, String distance, String facilitiesType, JsonCallback<BaseResponse<List<DeviceModel>>> callback) {
+        OkGo.post(AppConstants.URL_COMMUNITY_DEVICE_LIST)
+                .tag(mContext)
+                .params("userId",userId)
+                .params("coordinate",coordinate)
+                .params("orgCode",userCode)
+                .params("distance",distance)
+                .params("facilitiesType",facilitiesType)
+                .execute(callback);
+    }
+
+    @Override
+    public void getCommunityShopDetail(String userId, String shopId, JsonCallback<BaseResponse<ShopModel>> callback) {
+        OkGo.post(AppConstants.URL_COMMUNITY_SHOP_DETAIL)
+                .tag(mContext)
+                .params("userId",userId)
+                .params("shopId",shopId)
+                .execute(callback);
+    }
+
+    @Override
+    public void getCommunityPersonDetail(String userId, String id, JsonCallback<BaseResponse<FamilyPersonModel>> callback) {
+        OkGo.post(AppConstants.URL_COMMUNITY_PERSON_DETAIL)
+                .tag(mContext)
+                .params("userId",userId)
+                .params("id",id)
+                .execute(callback);
+    }
+
+    @Override
+    public void getCommunityDeviceDetail(String userId, String faiId, JsonCallback<BaseResponse<DeviceModel>> callback) {
+        OkGo.post(AppConstants.URL_COMMUNITY_DEVICE_DETAIL)
+                .tag(mContext)
+                .params("userId",userId)
+                .params("faiId",faiId)
                 .execute(callback);
     }
 }

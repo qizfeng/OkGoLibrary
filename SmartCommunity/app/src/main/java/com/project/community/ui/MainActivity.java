@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,16 +41,16 @@ import butterknife.ButterKnife;
 public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     @Bind(R.id.bottom_navigation)
     BottomNavigationView bottom_navigation;//底部导航栏
-//    @Bind(R.id.viewPager)
+    //    @Bind(R.id.viewPager)
 //    NoScrollViewPager viewPager;//viewPager
     private static final int INDEX_HOME_FRAGMENT = 0;
     private static final int INDEX_LIFE_FRAGMENT = 1;
     private static final int INDEX_COMMUNITY_FRAGMENT = 2;
-    private static final int INDEX_MY_FRAGMENT=3;
+    private static final int INDEX_MY_FRAGMENT = 3;
     private int checkFragment = INDEX_HOME_FRAGMENT;//当前选中
 
-    public static void startActivity(Context context){
-        Intent intent = new Intent(context,MainActivity.class);
+    public static void startActivity(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
         context.startActivity(intent);
     }
 
@@ -64,12 +65,13 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         BottomNavigationViewHelper.disableShiftMode(bottom_navigation);
         bottom_navigation.setOnNavigationItemSelectedListener(this);
         initFragments();
-        initForMessageCenterIcon(bottom_navigation,false);
+        initForMessageCenterIcon(bottom_navigation, false);
     }
 
-    private List<Fragment> fragments  =new ArrayList<>();
-    private void initFragments(){
-        fragments  =new ArrayList<>();
+    private List<Fragment> fragments = new ArrayList<>();
+
+    private void initFragments() {
+        fragments = new ArrayList<>();
         fragments.add(new IndexFragment());
         fragments.add(new LifeFragment());
         fragments.add(new CommunityFragment());
@@ -100,29 +102,29 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 //首页
                 checkFragment = INDEX_HOME_FRAGMENT;
                 switchFragment(checkFragment);
-                initForMessageCenterIcon(bottom_navigation,false);
+                initForMessageCenterIcon(bottom_navigation, false);
                 return true;//注意!!! 不要break,否则BottomNavigationView无切换效果
             case R.id.navigation_life:
                 //生活
-                checkFragment= INDEX_LIFE_FRAGMENT;
+                checkFragment = INDEX_LIFE_FRAGMENT;
                 switchFragment(checkFragment);
-                initForMessageCenterIcon(bottom_navigation,false);
+                initForMessageCenterIcon(bottom_navigation, false);
                 return true;//注意!!! 不要break,否则BottomNavigationView无切换效果
             case R.id.navigation_community:
                 //社区
-                if(!isLogin(this)){
+                if (!isLogin(this)) {
                     showToast(getString(R.string.toast_no_login));
                     return false;
                 }
-                checkFragment=INDEX_COMMUNITY_FRAGMENT;
+                checkFragment = INDEX_COMMUNITY_FRAGMENT;
                 switchFragment(checkFragment);
-                initForMessageCenterIcon(bottom_navigation,false);
+                initForMessageCenterIcon(bottom_navigation, false);
                 return true;//注意!!! 不要break,否则BottomNavigationView无切换效果
             case R.id.navigation_me:
                 //我的
-                checkFragment=INDEX_MY_FRAGMENT;
+                checkFragment = INDEX_MY_FRAGMENT;
                 switchFragment(checkFragment);
-                initForMessageCenterIcon(bottom_navigation,true);
+                initForMessageCenterIcon(bottom_navigation, true);
                 return true;//注意!!! 不要break,否则BottomNavigationView无切换效果
             default:
                 break;
@@ -132,7 +134,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     }
 
     //切换fragment
-    private void switchFragment(int index){
+    private void switchFragment(int index) {
         //切换Fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -207,8 +209,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         }
     }
 
-    class MainFragmentPagerAdapter extends FragmentPagerAdapter{
+    class MainFragmentPagerAdapter extends FragmentPagerAdapter {
         private List<Fragment> fragments;
+
         public MainFragmentPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
             super(fm);
             this.fragments = fragments;
@@ -216,7 +219,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
-          //  super.destroyItem(container, position, object);
+            //  super.destroyItem(container, position, object);
         }
 
         @Override
@@ -231,18 +234,18 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         }
     }
 
-    private void initForMessageCenterIcon(BottomNavigationView navigationView,boolean isShowRedPoint) {
+    private void initForMessageCenterIcon(BottomNavigationView navigationView, boolean isShowRedPoint) {
         Menu menu = navigationView.getMenu();
         int size = menu.size();
         for (int i = 0; i < size; i++) {
             MenuItem item = menu.getItem(i);
             if (item.getItemId() == R.id.navigation_me) {
                 RedPointDrawable redPointDrawable;
-                if(checkFragment==INDEX_MY_FRAGMENT){
-                    redPointDrawable=RedPointDrawable.wrap(MainActivity.this,getResources().getDrawable(R.mipmap.c1_btn4_p_dian),getResources()
+                if (checkFragment == INDEX_MY_FRAGMENT) {
+                    redPointDrawable = RedPointDrawable.wrap(MainActivity.this, getResources().getDrawable(R.mipmap.c1_btn4_p_dian), getResources()
                             .getDimensionPixelSize(R.dimen.red_point_radius_small));
-                }else {
-                    redPointDrawable=RedPointDrawable.wrap(MainActivity.this,getResources().getDrawable(R.mipmap.c1_btn4_dian),getResources()
+                } else {
+                    redPointDrawable = RedPointDrawable.wrap(MainActivity.this, getResources().getDrawable(R.mipmap.c1_btn4_dian), getResources()
                             .getDimensionPixelSize(R.dimen.red_point_radius_small));
                 }
                 redPointDrawable.setGravity(Gravity.LEFT);
@@ -258,6 +261,31 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     protected void onDestroy() {
         super.onDestroy();
         UMShareAPI.get(this).release();
+    }
+
+    private long mOldTime;
+
+    //退出时的时间
+    private long mExitTime;
+
+    //对返回键进行监听
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            exit();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    public void exit() {
+        if ((System.currentTimeMillis() - mExitTime) > 2000) {
+            showToast(getString(R.string.toast_exit));
+            mExitTime = System.currentTimeMillis();
+        } else {
+            finish();
+            System.exit(0);
+        }
     }
 
 }

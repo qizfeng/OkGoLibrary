@@ -3,6 +3,7 @@ package com.library.okgo.adapter;
 import android.graphics.Bitmap;
 
 import com.library.okgo.OkGo;
+import com.library.okgo.R;
 import com.library.okgo.cache.CacheEntity;
 import com.library.okgo.cache.CacheManager;
 import com.library.okgo.cache.CacheMode;
@@ -15,6 +16,7 @@ import com.library.okgo.request.BaseRequest;
 import com.library.okgo.utils.HeaderParser;
 import com.library.okgo.utils.HttpUtils;
 import com.library.okgo.utils.LogUtils;
+import com.library.okgo.utils.ToastUtils;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -123,6 +125,7 @@ public class CacheCall<T> implements Call<T> {
                     currentRetryCount++;
                     okhttp3.Call newCall = baseRequest.generateCall(call.request());
                     newCall.enqueue(this);
+//                    sendFailResultCallback(false,call,null,e);
                 } else {
                     mCallback.parseError(call, e);
                     //请求失败，一般为url地址错误，网络错误等,并且过滤用户主动取消的网络请求
@@ -193,7 +196,9 @@ public class CacheCall<T> implements Call<T> {
         }
     }
 
-    /** 失败回调，发送到主线程 */
+    /**
+     * 失败回调，发送到主线程
+     */
     @SuppressWarnings("unchecked")
     private void sendFailResultCallback(final boolean isFromCache, final okhttp3.Call call, final okhttp3.Response response, final Exception e) {
         final CacheMode cacheMode = baseRequest.getCacheMode();
@@ -207,7 +212,14 @@ public class CacheCall<T> implements Call<T> {
                         mCallback.onAfter(null, e);              //请求结束回调 （UI线程）
                     }
                 } else {
-                    mCallback.onError(call, response, e);        //请求失败回调 （UI线程）
+                    String message = e.getMessage();
+                    if (message.contains("No address") || message.contains("Failed to connect to")) {
+                        message = "服务器已关闭。";
+                        mCallback.onError(call, response, new IllegalStateException(message));        //请求失败回调 （UI线程）
+                    } else if (e instanceof SocketTimeoutException) {
+                        mCallback.onError(call, response, new IllegalStateException("请求超时"));
+                    } else
+                        mCallback.onError(call, response, e);        //请求失败回调 （UI线程）
                     if (cacheMode != CacheMode.REQUEST_FAILED_READ_CACHE) {
                         mCallback.onAfter(null, e);              //请求结束回调 （UI线程）
                     }
@@ -232,7 +244,9 @@ public class CacheCall<T> implements Call<T> {
         }
     }
 
-    /** 成功回调，发送到主线程 */
+    /**
+     * 成功回调，发送到主线程
+     */
     private void sendSuccessResultCallback(final boolean isFromCache, final T t, final okhttp3.Call call, final okhttp3.Response response) {
         final CacheMode cacheMode = baseRequest.getCacheMode();
 

@@ -28,7 +28,11 @@ public class FamilyPersonModel implements Serializable, MultiItemEntity {
     public String photo;//头像
     public String idNumber;//身份证
     public String roomAddress;//地址
-
+    public String memberTag;//人员标签
+    public String coordinate;//坐标
+    public String name;
+    public String idCard;
+    public String  isOwner;
 
     @Override
     public int getItemType() {
@@ -51,6 +55,11 @@ public class FamilyPersonModel implements Serializable, MultiItemEntity {
                 ", photo='" + photo + '\'' +
                 ", idNumber='" + idNumber + '\'' +
                 ", roomAddress='" + roomAddress + '\'' +
+                ", memberTag='" + memberTag + '\'' +
+                ", coordinate='" + coordinate + '\'' +
+                ", name='" + name + '\'' +
+                ", idCard='" + idCard + '\'' +
+                ", isOwner='" + isOwner + '\'' +
                 '}';
     }
 }

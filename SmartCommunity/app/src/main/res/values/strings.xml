@@ -220,12 +220,21 @@
     <string name="txt_map_check_status">状态</string>
     <string name="txt_map_check_ing">审核中的</string>
     <string name="txt_map_check_pass">已通过的</string>
+    <string name="txt_map_check_nopass">审核未通过</string>
 
+    <string name="txt_map_shop_check_pass">物业认证</string>
+    <string name="txt_map_shop_check_ing">认证中...</string>
+    <string name="txt_map_shop_check_nopass">未认证</string>
+    <string name="txt_map_shop_prefix_address">营业地址：</string>
     <!--问题标签-->
     <string name="txt_map_tag">标签</string>
     <string name="txt_map_tag_all">全部</string>
     <!--物业设施-->
     <string name="txt_map_utility">物业设施</string>
+    <string name="txt_map_device_status_normal">正常运行</string>
+    <string name="txt_map_device_status_unusual">故障中</string>
+    <string name="txt_map_device_no_prefix">设施编号:</string>
+
 
     <string name="txt_map_house_no">门牌号</string>
     <string name="txt_map_phone">电话</string>
@@ -251,12 +260,13 @@
     <string name="txt_map_shop_legal_name">法人姓名</string>
     <string name="txt_map_shop_license_photo">营业执照</string>
     <string name="txt_map_shop_legal_idcard">法人身份证(正反)</string>
-    
-    
+
+
     <string name="txt_map_device_pull_date">报废时间</string>
     <string name="txt_map_device_belong_company">所属单位</string>
     <string name="txt_map_device_remark">备注</string>
     <!--通用-->
+    <string name="toast_exit">再按一次退出程序</string>
     <string name="toast_error_pay">获取订单信息失败</string>
     <string name="toast_error_phone">请输入正确的手机号</string>
     <string name="toast_empty_phone">手机号码不能为空</string>
@@ -281,6 +291,7 @@
     <string name="toast_no_data">暂无数据</string>
     <string name="empty_no_comment">暂无评论</string>
     <string name="empty_no_data_family">暂无家庭信息~</string>
+    <string name="empty_no_data_person">暂无居民信息~</string>
     <string name="network_error">似乎已断开与互联网的连接。</string>
     <string name="permission_tips">您拒绝了权限,部分功能将不可使用</string>
     <string name="txt_confirm_delete">您是否确定要删除?</string>

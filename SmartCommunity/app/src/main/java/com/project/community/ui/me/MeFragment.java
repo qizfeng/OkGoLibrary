@@ -283,9 +283,9 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
         serverDao.getUserInfo(getUser(getActivity()).id, new JsonCallback<BaseResponse<UserModel>>() {
             @Override
             public void onSuccess(BaseResponse<UserModel> userResponseBaseResponse, Call call, Response response) {
-                Gson gson = new Gson();
-                String userStr = gson.toJson(userResponseBaseResponse.retData);
-                saveUser(getActivity(), userStr);
+//                Gson gson = new Gson();
+//                String userStr = gson.toJson(userResponseBaseResponse.retData);
+//                saveUser(getActivity(), userStr);
                 Glide.with(getActivity())
                         .load(AppConstants.HOST + getUser(getActivity()).photo)
                         .placeholder(R.mipmap.d54_tx)

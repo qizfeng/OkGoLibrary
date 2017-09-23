@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.project.community.R;
+import com.project.community.model.DictionaryModel;
 import com.project.community.model.UnitModel;
 import com.project.community.model.UserModel;
 
@@ -22,21 +23,21 @@ import java.util.List;
 
 public class CommunityUnitSingleChoiceAdapter extends RecyclerView.Adapter<CommunityUnitSingleChoiceAdapter.InternalViewHolder> {
     private final LayoutInflater layoutInflater;
-    private List<UnitModel> data;
+    private List<DictionaryModel> data;
     /**
      * 默认为-1，没有选择任何item
      */
     private int currentCheckedItemPosition;
     private OnItemClickListener onItemClickListener;
 
-    public CommunityUnitSingleChoiceAdapter(Context context, List<UnitModel> data,OnItemClickListener onItemClickListener) {
+    public CommunityUnitSingleChoiceAdapter(Context context, List<DictionaryModel> data,OnItemClickListener onItemClickListener) {
         layoutInflater = LayoutInflater.from(context);
         this.data = data;
         currentCheckedItemPosition = -1;
         this.onItemClickListener=onItemClickListener;
     }
 
-    public UnitModel getItem(int position) {
+    public DictionaryModel getItem(int position) {
         return data.get(position);
     }
 
@@ -60,9 +61,9 @@ public class CommunityUnitSingleChoiceAdapter extends RecyclerView.Adapter<Commu
             holder.ivCheck.setImageResource(R.mipmap.d10_btn1_p);
             holder.ivCheck.setVisibility(View.VISIBLE);
         } else {
-            holder.ivCheck.setVisibility(View.GONE);
+            holder.ivCheck.setVisibility(View.INVISIBLE);
         }
-        holder.textView.setText(getItem(position).unit);
+        holder.textView.setText(getItem(position).label);
     }
 
     @Override

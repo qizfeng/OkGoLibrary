@@ -36,11 +36,25 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@+id/iv_header"
-                        android:layout_width="@dimen/dp_60"
-                        android:layout_height="@dimen/dp_60"
-                        android:src="@mipmap/d54_tx" />
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <ImageView
+                            android:id="@+id/iv_header"
+                            android:layout_width="@dimen/dp_60"
+                            android:layout_height="@dimen/dp_60"
+                            android:src="@mipmap/d54_tx" />
+
+                        <ImageView
+                            android:id="@+id/iv_tag"
+                            android:layout_width="@dimen/dp_15"
+                            android:layout_height="@dimen/dp_15"
+                            android:layout_gravity="bottom|right"
+                            android:src="@mipmap/d24_renzhen" />
+                    </FrameLayout>
+
 
                     <TextView
                         android:id="@+id/tv_name"
@@ -48,7 +62,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_15"
                         android:textSize="@dimen/common_txt_size"
-                        android:text="张3"
+                        android:text=""
                         android:textColor="@color/colorPrimary" />
 
                     <TextView
@@ -91,6 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_15"
                 android:layout_marginRight="@dimen/dp_15"
+                android:visibility="gone"
                 android:layout_marginTop="@dimen/dp_5">
 
                 <LinearLayout
@@ -404,7 +419,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/dp_15"
                     android:textSize="@dimen/common_txt_size"
-                    android:layout_marginTop="@dimen/dp_15"
                     android:layout_toRightOf="@+id/layout_left_religion"
                     android:textColor="@color/color_gray_666666" />
 
@@ -417,6 +431,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_15"
                 android:layout_marginRight="@dimen/dp_15">
 
                 <LinearLayout
@@ -503,11 +518,11 @@
                 android:id="@+id/layout_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:layout_marginLeft="@dimen/dp_15"
                 android:layout_marginRight="@dimen/dp_15"
-                android:paddingBottom="@dimen/dp_25"
-
-                android:layout_marginTop="@dimen/dp_15">
+                android:layout_marginTop="@dimen/dp_15"
+                android:paddingBottom="@dimen/dp_15">
 
                 <LinearLayout
                     android:id="@+id/layout_left_address"

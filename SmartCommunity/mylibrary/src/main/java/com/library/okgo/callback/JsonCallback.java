@@ -3,6 +3,7 @@ package com.library.okgo.callback;
 import android.text.TextUtils;
 
 import com.google.gson.stream.JsonReader;
+import com.library.okgo.exception.OkGoException;
 import com.library.okgo.model.BaseResponse;
 import com.library.okgo.model.SimpleResponse;
 import com.library.okgo.request.BaseRequest;
@@ -123,9 +124,12 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
                     return (T) baseResponse;
                 } else {
                     LogUtils.e("error:" + message);
-                    if (message.contains("No address"))
-                        message = "似乎已断开与互联网的链接。";
-                    throw new IllegalStateException(message);
+                    if (message.contains("No address")||message.contains("Failed to connect to")) {
+                        message = "服务器已关闭。";
+                        throw new IllegalStateException(message);
+                    } else {
+                        throw new IllegalStateException(message);
+                    }
                 }
             } else {
                 BaseResponse baseResponse = Convert.fromJson(json, type);

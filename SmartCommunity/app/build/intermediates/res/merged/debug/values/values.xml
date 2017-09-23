@@ -974,6 +974,7 @@
     <string name="empty_no_comment">暂无评论</string>
     <string name="empty_no_data">没有数据,点击重试</string>
     <string name="empty_no_data_family">暂无家庭信息~</string>
+    <string name="empty_no_data_person">暂无居民信息~</string>
     <string name="folder_image_count">共%1$d张</string>
     <string name="forget_phone_hint">请您输入手机号</string>
     <string name="loaction_prod_name">移动定位器，随时随地确认我当前的位置</string>
@@ -1031,6 +1032,7 @@
     <string name="select">%1$s/%2$s</string>
     <string name="select_complete">完成(%1$s/%2$s)</string>
     <string name="select_limit">最多选择%1$s张图片</string>
+    <string name="server_error">服务器已关闭。</string>
     <string name="simple_view_behavior">com.project.community.view.SimpleViewBehavior</string>
     <string name="status_bar_notification_info_overflow">999+</string>
     <string name="str_clearSearchHistory">清空搜索记录</string>
@@ -1070,6 +1072,7 @@
     <string name="toast_error_permission">您不是该家庭业主,无法进行此操作。</string>
     <string name="toast_error_phone">请输入正确的手机号</string>
     <string name="toast_error_pwd">请输入6–16位密码</string>
+    <string name="toast_exit">再按一次退出程序</string>
     <string name="toast_menu_setting">设置</string>
     <string name="toast_modify_success">修改成功</string>
     <string name="toast_nickname_error">昵称不能超过25个字符</string>
@@ -1153,11 +1156,15 @@
     <string name="txt_leave">离开</string>
     <string name="txt_logout">退出登录</string>
     <string name="txt_map_check_ing">审核中的</string>
+    <string name="txt_map_check_nopass">审核未通过</string>
     <string name="txt_map_check_pass">已通过的</string>
     <string name="txt_map_check_status">状态</string>
     <string name="txt_map_device_belong_company">所属单位</string>
+    <string name="txt_map_device_no_prefix">设施编号:</string>
     <string name="txt_map_device_pull_date">报废时间</string>
     <string name="txt_map_device_remark">备注</string>
+    <string name="txt_map_device_status_normal">正常运行</string>
+    <string name="txt_map_device_status_unusual">故障中</string>
     <string name="txt_map_house_no">门牌号</string>
     <string name="txt_map_person_address">房屋地址：</string>
     <string name="txt_map_person_age">年龄        ：</string>
@@ -1178,12 +1185,16 @@
     <string name="txt_map_scope_3km">3公里范围内</string>
     <string name="txt_map_scope_50km">50公里范围内</string>
     <string name="txt_map_scope_5km">5公里范围内</string>
+    <string name="txt_map_shop_check_ing">认证中...</string>
+    <string name="txt_map_shop_check_nopass">未认证</string>
+    <string name="txt_map_shop_check_pass">物业认证</string>
     <string name="txt_map_shop_company">企业名称</string>
     <string name="txt_map_shop_legal_idcard">法人身份证(正反)</string>
     <string name="txt_map_shop_legal_name">法人姓名</string>
     <string name="txt_map_shop_license">营业执照号：</string>
     <string name="txt_map_shop_license_photo">营业执照</string>
     <string name="txt_map_shop_main_bissness">主营业务</string>
+    <string name="txt_map_shop_prefix_address">营业地址：</string>
     <string name="txt_map_shop_sort">分类</string>
     <string name="txt_map_tag">标签</string>
     <string name="txt_map_tag_all">全部</string>
@@ -2992,6 +3003,13 @@
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:background">@drawable/button_round_red</item>
+    </style>
+    <style name="rectangle_red_tag">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/tag_round_red</item>
     </style>
     <style name="rectangle_register_button">
         <item name="android:layout_width">match_parent</item>
