@@ -591,4 +591,11 @@ public interface ServerDao {
      */
     void getCommunityDeviceDetail(String userId,String faiId,JsonCallback<BaseResponse<DeviceModel>>callback);
 
+    /**
+     *上传定位表座
+     * @param userId 用户id
+     * @param coordinate 经度,纬度
+     * @param callback
+     */
+    void doUploadLocation(String userId,String coordinate,JsonCallback<BaseResponse<List>>callback );
 }

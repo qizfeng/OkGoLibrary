@@ -13,11 +13,16 @@ import android.os.RemoteException;
 
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+import com.google.gson.Gson;
 import com.library.okgo.utils.LogUtils;
 import com.library.okgo.utils.ToastUtils;
 import com.project.community.R;
+import com.project.community.callback.ServerDao;
+import com.project.community.callback.ServerDaoImpl;
 import com.project.community.constants.AppConstants;
+import com.project.community.constants.SharedPreferenceUtils;
 import com.project.community.listener.AppLocationListener;
+import com.project.community.model.UserModel;
 import com.project.community.util.GPSUtil;
 import com.project.community.util.NetworkUtils;
 import com.project.community.util.NotificationUtil;
@@ -42,7 +47,7 @@ public class AppLocationService extends Service {
     /**
      * 间隔时间为60秒
      */
-    private static final int DELAY_TIME = 60* 1000;
+    private static final int DELAY_TIME = 15* 1000;
     /**
      * 开机一秒后开始检测网络
      */
@@ -175,8 +180,8 @@ public class AppLocationService extends Service {
         // 将MSG发送给已经绑定的客户端
         for (int i = mClients.size() - 1; i >= 0; i--) {
             try {
-                LogUtils.i("将定位信息发送给客户端:" + i + "！");
-                // LogUtils.i("msg.what:"+msg.what);
+                LogUtils.e("将定位信息发送给客户端:" + i + "！");
+                 LogUtils.e("msg.what:"+msg.what);
                 // 将消息发送给客户端
                 mClients.get(i).send(msg);
             } catch (RemoteException e) {
@@ -185,8 +190,31 @@ public class AppLocationService extends Service {
                 mClients.remove(i);
             }
         }
-        // LogUtils.i("定位信息:"+myLocation);
+//         LogUtils.i("定位信息:"+myLocation);
         // txt_LocationView.setText(myLocation);
+        ServerDao serverDao =new ServerDaoImpl(getApplicationContext());
+        if( SharedPreferenceUtils.getBoolean(getApplicationContext(), SharedPreferenceUtils.SP_LOGIN, false)){
+//            serverDao.doUploadLocation(getUser(getApplicationContext()).id,myl);
+
+        }
+
+
+    }
+    /**
+     * 获取登录用户信息
+     *
+     * @param context
+     * @return
+     */
+    public UserModel getUser(Context context) {
+        UserModel userModel = new UserModel();
+        Gson gson = new Gson();
+        try {
+            userModel = gson.fromJson(SharedPreferenceUtils.getString(context, SharedPreferenceUtils.SP_USER), UserModel.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return userModel;
     }
 
     @Override

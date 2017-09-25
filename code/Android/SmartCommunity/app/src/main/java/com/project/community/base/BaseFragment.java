@@ -297,4 +297,27 @@ public abstract class BaseFragment extends Fragment {
             progressDialog.dismiss();
         }
     }
+
+    /**
+     * 保存定位经纬度
+     * @param context
+     * @param latitude
+     * @param longitede
+     */
+    public void saveLocation(Context context,String latitude,String longitede){
+        SharedPreferenceUtils.putString(context,"lat",latitude);
+        SharedPreferenceUtils.putString(context,"long",longitede);
+    }
+
+    /**
+     * 取保存的经纬度
+     * @param context
+     * @return
+     */
+    public String[] getLocation(Context context){
+        String [] locData = new String[2];
+        locData[0]=SharedPreferenceUtils.getString(context,"lat");
+        locData[1]=SharedPreferenceUtils.getString(context,"long");
+        return locData;
+    }
 }

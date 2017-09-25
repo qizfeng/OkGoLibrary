@@ -17,7 +17,10 @@ import android.os.RemoteException;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 
+import com.library.okgo.callback.JsonCallback;
+import com.library.okgo.model.BaseResponse;
 import com.library.okgo.utils.LogUtils;
 import com.library.okgo.utils.ToastUtils;
 import com.project.community.R;
@@ -27,6 +30,11 @@ import com.project.community.constants.SharedPreferenceUtils;
 import com.project.community.service.AppLocationService;
 import com.project.community.ui.guide.WelcomeGuideActivity;
 import com.project.community.util.ServiceUtil;
+
+import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * Created by qizfeng on 17/7/4.
@@ -86,7 +94,7 @@ public class SplashActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         try {
-            unbindService(myServiceConnection);
+//            unbindService(myServiceConnection);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -145,12 +153,30 @@ public class SplashActivity extends BaseActivity {
                     Bundle b = msg.getData();
                     // 记得设置bundle时，将Location 键的值设为对应的location
                     String myLocation = b.getString("LocationData");
-                    //  LogUtils.e("位置信息:" + myLocation);
+                    String latitute = b.getString("latitute");
+                    String longitute = b.getString("longitute");
+                    LogUtils.e("location:" + longitute + "," + latitute);
+
                     /**
                      * 上传位置信息
                      * 上传位置信息
                      * 上传位置信息
                      */
+                    if (!TextUtils.isEmpty(latitute) && !TextUtils.isEmpty(longitute)) {
+                        saveLocation(SplashActivity.this,latitute,longitute);
+                        serverDao.doUploadLocation(getUser(SplashActivity.this).id, longitute + "," + latitute, new JsonCallback<BaseResponse<List>>() {
+                            @Override
+                            public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
+                                LogUtils.e(baseResponse.message);
+                            }
+
+                            @Override
+                            public void onError(Call call, Response response, Exception e) {
+                                super.onError(call, response, e);
+                                LogUtils.e(e.getMessage());
+                            }
+                        });
+                    }
                     break;
                 default:
                     break;

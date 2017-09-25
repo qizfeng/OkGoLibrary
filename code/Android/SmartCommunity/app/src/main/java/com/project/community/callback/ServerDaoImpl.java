@@ -687,4 +687,13 @@ public class ServerDaoImpl implements ServerDao {
                 .params("faiId",faiId)
                 .execute(callback);
     }
+
+    @Override
+    public void doUploadLocation(String userId, String coordinate, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.URL_UPLOAD_LATLNG)
+                .tag(mContext)
+                .params("userId",userId)
+                .params("coordinate",coordinate)
+                .execute(callback);
+    }
 }
