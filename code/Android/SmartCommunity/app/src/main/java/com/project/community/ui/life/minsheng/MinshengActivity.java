@@ -194,6 +194,21 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+        Intent intent;
+        switch (position){
+            case 3:
+                intent = new Intent(MinshengActivity.this, PublicTransportationActivity.class);
+                startActivity(intent);
+                break;
+            case 4:
+                intent = new Intent(MinshengActivity.this, ArticleDetailsActivity.class);
+                startActivity(intent);
+                break;
+            case 2:
+                intent = new Intent(MinshengActivity.this, RegistrationAppActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 
 
