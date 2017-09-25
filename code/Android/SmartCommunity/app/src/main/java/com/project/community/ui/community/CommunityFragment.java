@@ -652,6 +652,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
             final TextView tv_mobile = pop.findViewById(R.id.tv_mobile);
             final FamilyPersonModel model = (FamilyPersonModel) marker.getExtraInfo().getSerializable("bundle");
             final LatLng ll = marker.getPosition();
+
             Glide.with(getActivity())
                     .load(AppConstants.HOST + model.photo)
                     .asBitmap()
@@ -669,6 +670,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                             };
                             mInfoWindow = new InfoWindow(BitmapDescriptorFactory.fromView(pop), ll, -110, listener);
                             mBaiduMap.showInfoWindow(mInfoWindow);
+                            dismissDialog();
                         }
 
                         @Override
@@ -684,7 +686,15 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                             };
                             mInfoWindow = new InfoWindow(BitmapDescriptorFactory.fromView(pop), ll, -110, listener);
                             mBaiduMap.showInfoWindow(mInfoWindow);
+                            dismissDialog();
                         }
+
+                        @Override
+                        public void onStart() {
+                            super.onStart();
+                            showLoading();
+                        }
+
                     });
 
         } else if (currentIndex == 3) {
@@ -795,8 +805,8 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                     GradientDrawable drawable = (GradientDrawable) getActivity().getResources().getDrawable(R.drawable.bg_dash_border);
 //                    drawable.setColor(getResources().getColor(R.color.color_map_community_5c5085c1));
                     try {
-                        if (!TextUtils.isEmpty(models.get(i).color) && models.get(i).color.length() == 9)
-                            drawable.setColor(Color.parseColor(models.get(i).color));
+                        if (!TextUtils.isEmpty(models.get(i).color) && models.get(i).color.length() == 6)
+                            drawable.setColor(Color.parseColor("#5c"+models.get(i).color));
                         else
                             drawable.setColor(getResources().getColor(R.color.color_map_community_5c5085c1));
                     } catch (Exception e) {

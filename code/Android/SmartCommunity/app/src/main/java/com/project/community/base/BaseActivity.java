@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.library.okgo.utils.GlideImageLoader;
 import com.library.okgo.utils.ToastUtils;
+import com.library.okgo.view.CustomProgress;
 import com.lzy.imagepicker.view.SystemBarTintManager;
 import com.project.community.R;
 import com.project.community.callback.ServerDao;
@@ -32,7 +33,7 @@ import butterknife.ButterKnife;
 public abstract class BaseActivity extends AppCompatActivity {
     public ServerDao serverDao;
     public GlideImageLoader glide;
-
+    public CustomProgress progressDialog;
     @SuppressWarnings("unchecked")
     public <T extends View> T findView(int id) {
         return (T) findViewById(id);
@@ -43,6 +44,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         serverDao = new ServerDaoImpl(this);
         glide = new GlideImageLoader();
+        progressDialog = new CustomProgress(this, com.library.okgo.R.style.Custom_Progress);
         initSystemBarTint();
     }
 
@@ -171,23 +173,23 @@ public abstract class BaseActivity extends AppCompatActivity {
         ToastUtils.showShortToast(this, msg);
     }
 
-    private ProgressDialog dialog;
-
-    public void showLoading() {
-        if (dialog != null && dialog.isShowing()) return;
-        dialog = new ProgressDialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        dialog.setMessage("请求网络中...");
-        dialog.show();
-    }
-
-    public void dismissLoading() {
-        if (dialog != null && dialog.isShowing()) {
-            dialog.dismiss();
-        }
-    }
+//    private ProgressDialog dialog;
+//
+//    public void showLoading() {
+//        if (dialog != null && dialog.isShowing()) return;
+//        dialog = new ProgressDialog(this);
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        dialog.setCanceledOnTouchOutside(false);
+//        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//        dialog.setMessage("请求网络中...");
+//        dialog.show();
+//    }
+//
+//    public void dismissLoading() {
+//        if (dialog != null && dialog.isShowing()) {
+//            dialog.dismiss();
+//        }
+//    }
 
     /**
      * 是否登录
@@ -327,5 +329,22 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     public static void saveWillPlayAnim(Context context,boolean willPlay){
         SharedPreferenceUtils.putBoolean(context,SharedPreferenceUtils.SP_WILL_PLAY,willPlay);
+    }
+    public  void  showLoading(){
+        //网络请求前显示对话框
+        try {
+            if (progressDialog != null && !progressDialog.isShowing()) {
+                progressDialog.show();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void dismissDialog(){
+        //网络请求结束后关闭对话框
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
     }
 }

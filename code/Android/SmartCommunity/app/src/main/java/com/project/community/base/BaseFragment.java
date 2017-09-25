@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.library.okgo.utils.GlideImageLoader;
 import com.library.okgo.utils.ToastUtils;
+import com.library.okgo.view.CustomProgress;
 import com.project.community.callback.ServerDao;
 import com.project.community.callback.ServerDaoImpl;
 import com.project.community.constants.SharedPreferenceUtils;
@@ -39,11 +40,12 @@ public abstract class BaseFragment extends Fragment {
     protected LayoutInflater inflater;
     public GlideImageLoader glide;
     public ServerDao serverDao;
-
+    public  CustomProgress progressDialog;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.inflater = inflater;
         isFirstLoad = true;
+        progressDialog = new CustomProgress(getActivity(), com.library.okgo.R.style.Custom_Progress);
         serverDao = new ServerDaoImpl(getActivity());
         View view = initView(inflater, container, savedInstanceState);
         isPrepared = true;
@@ -276,5 +278,23 @@ public abstract class BaseFragment extends Fragment {
      */
     public static void saveWillPlayAnim(Context context,boolean willPlay){
         SharedPreferenceUtils.putBoolean(context,SharedPreferenceUtils.SP_WILL_PLAY,willPlay);
+    }
+
+    public  void  showLoading(){
+        //网络请求前显示对话框
+        try {
+            if (progressDialog != null && !progressDialog.isShowing()) {
+                progressDialog.show();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void dismissDialog(){
+        //网络请求结束后关闭对话框
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
     }
 }
