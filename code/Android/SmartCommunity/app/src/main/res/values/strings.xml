@@ -261,7 +261,7 @@
     <string name="txt_map_shop_license_photo">营业执照</string>
     <string name="txt_map_shop_legal_idcard">法人身份证(正反)</string>
 
-
+    <string name="txt_map_shop_install_date">安装时间：</string>
     <string name="txt_map_device_pull_date">报废时间</string>
     <string name="txt_map_device_belong_company">所属单位</string>
     <string name="txt_map_device_remark">备注</string>

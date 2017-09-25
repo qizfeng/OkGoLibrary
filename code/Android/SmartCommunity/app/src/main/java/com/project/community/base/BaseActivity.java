@@ -370,4 +370,22 @@ public abstract class BaseActivity extends AppCompatActivity {
         locData[1]=SharedPreferenceUtils.getString(context,"long");
         return locData;
     }
+
+    /**
+     * 社区启动页
+     * @param context
+     * @param url
+     */
+    public void saveCommunityStartPage(Context context,String url){
+        SharedPreferenceUtils.putString(context,"communityStartPage",url);
+    }
+
+    /**
+     * 获取社区启动页
+     * @param context
+     * @return
+     */
+    public String getCommunityStartPage(Context context){
+        return SharedPreferenceUtils.getString(context,"communityStartPage");
+    }
 }

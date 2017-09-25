@@ -1,6 +1,7 @@
 package com.project.community.ui.community;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -18,6 +19,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -142,8 +144,6 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
     TextView mTvDrawerCancel;
     @Bind(R.id.tv_drawer_confirm)
     TextView mTvDrawerConfirm;
-    private double lastLat;
-    private double lastLon;
     private int currentIndex = 0;//0未选择 1商铺 2人员 3设施
     private List<LatLngBounds> latLngBoundsList = new ArrayList<>();
     private List<CommunityModel> communityModels = new ArrayList<>();
@@ -155,7 +155,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
     private CommunityDeviceFilterModel deviceFilterModel = new CommunityDeviceFilterModel();
     private PopupWindow mPopupWindow;
     private List<BitmapDescriptor> bitmaps = new ArrayList<>();
-
+    DisplayMetrics metric = new DisplayMetrics();
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_community, container, false);
@@ -170,7 +170,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
         mIvDevice.setOnClickListener(this);
         mTvDrawerCancel.setOnClickListener(this);
         mTvDrawerConfirm.setOnClickListener(this);
-        DisplayMetrics metric = new DisplayMetrics();
+
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(metric);
 
         ViewGroup.LayoutParams rightParams = mDrawerRight.getLayoutParams();
@@ -185,11 +185,13 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
         //mDrawerLayout.openDrawer(Gravity.RIGHT);//侧滑打开  不设置则不会默认打开
         mIvDrawer.setVisibility(View.GONE);
         try {
-            mCurrentLat=Double.parseDouble(getLocation(getActivity())[0]);
-            mCurrentLon=Double.parseDouble(getLocation(getActivity())[1]);
-        }catch (Exception e){
+            mCurrentLat = Double.parseDouble(getLocation(getActivity())[0]);
+            mCurrentLon = Double.parseDouble(getLocation(getActivity())[1]);
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
+
         return view;
     }
 
@@ -220,7 +222,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
     private int lastDeviceSelect = -1;//设备类型
     private String scopeId;//范围id
     private String statusId;//审核状态id
-    private String tagId;
+    private String[] tagIdArr = new String[]{};
     private String deviceId;
 
     private void initDrawerData(int type) {
@@ -317,24 +319,39 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                         TextView tv_area = contentView.findViewById(R.id.tv_area);
                         tv_area.setText(personFilterModel.tag.get(j).label);
                         final Drawable nav_up = getResources().getDrawable(R.mipmap.d10_btn2_p);
+                        if (tagIdArr.length > 0) {
+                            if (tagIdArr.length == personFilterModel.tag.size()) {
+                                for (int index = 0; index < tagIdArr.length; index++) {
+                                    button.setImageDrawable(nav_up);
+                                }
+                            } else {
+                                for (int index = 0; index < tagIdArr.length; index++) {
+                                    if (j != 0) {
+                                        if (personFilterModel.tag.get(j).value.equals(tagIdArr[index])) {
+                                            button.setImageDrawable(nav_up);
+                                        }
+                                    }
+                                }
+                            }
+                        }
                         mTagBtnArr.add(button);
+
                         final int clickPosition = j;
                         contentView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                tagId = "";
+                                tagIdArr = new String[]{};
                                 if (clickPosition == 0) {
                                     if (button.getDrawable() == null) {
-
                                         for (int i = 0; i < mTagBtnArr.size(); i++) {
                                             mTagBtnArr.get(i).setImageDrawable(nav_up);
-                                            tagId = personFilterModel.tag.get(i).value + "," + tagId;
+                                            tagIdArr[i] = personFilterModel.tag.get(i).value;
                                         }
                                     } else {
                                         for (int i = 0; i < mTagBtnArr.size(); i++) {
                                             mTagBtnArr.get(i).setImageDrawable(null);
                                         }
-                                        tagId = "";
+                                        tagIdArr = new String[]{};
                                     }
                                 } else {
                                     if (button.getDrawable() == null) {
@@ -342,7 +359,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                                         button.setImageDrawable(nav_up);
                                         for (int i = 0; i < mTagBtnArr.size(); i++) {
                                             if (mTagBtnArr.get(i).getDrawable() != null) {
-                                                tagId = personFilterModel.tag.get(i).value + "," + tagId;
+                                                tagIdArr[i] = personFilterModel.tag.get(i).value;
                                                 count++;
                                             }
                                         }
@@ -354,7 +371,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                                         button.setImageDrawable(null);
                                         for (int i = 0; i < mTagBtnArr.size(); i++) {
                                             if (mTagBtnArr.get(i).getDrawable() != null) {
-                                                tagId = personFilterModel.tag.get(i).value + "," + tagId;
+                                                tagIdArr[i] = personFilterModel.tag.get(i).value;
                                             }
                                         }
                                     }
@@ -435,7 +452,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
         LocationClientOption option = new LocationClientOption();
         option.setOpenGps(true); // 打开gps
         option.setCoorType("bd09ll"); // 设置坐标类型
-        option.setScanSpan(1000 * 15);
+        option.setScanSpan(1000 * 30);
         mLocClient.setLocOption(option);
         mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(
                 MyLocationConfiguration.LocationMode.NORMAL, true, BitmapDescriptorFactory
@@ -544,13 +561,14 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                 getCommunityData();
                 break;
             case R.id.iv_shop:
-                //lastScopeSelect = -1;//范围
+                if (currentIndex != 1)
+                    lastScopeSelect = -1;//范围
                 //lastStatusSelect = -1;//审核状态
                 lastDeviceSelect = -1;//设备类型
 
                 //scopeId = "";//范围id
                 // statusId = "";//审核状态id
-                tagId = "";
+                tagIdArr = new String[]{};
                 deviceId = "";
                 getShopFilter();
                 mIvBack.setVisibility(View.VISIBLE);
@@ -571,7 +589,8 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
 
                 break;
             case R.id.iv_person:
-                //lastScopeSelect = -1;//范围
+                if (currentIndex != 2)
+                    lastScopeSelect = -1;//范围
                 lastStatusSelect = -1;//审核状态
                 lastDeviceSelect = -1;//设备类型
 
@@ -604,7 +623,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
 
                 //scopeId = "";//范围id
                 statusId = "";//审核状态id
-                tagId = "";
+                tagIdArr = new String[]{};
                 //deviceId = "";
                 getDeviceFilter();
                 mIvBack.setVisibility(View.VISIBLE);
@@ -722,7 +741,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                             iv_header.setImageBitmap(resource);
                             tv_name.setText(model.dutyPeople);
                             tv_mobile.setText(model.dutyPhone);
-                            tv_date.setText("安装时间:"+model.installDate);
+                            tv_date.setText(getString(R.string.txt_map_shop_install_date) + model.installDate);
                             InfoWindow.OnInfoWindowClickListener listener = new InfoWindow.OnInfoWindowClickListener() {
                                 public void onInfoWindowClick() {
                                     getDeviceDetail(model.id);
@@ -758,6 +777,8 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                 if (lon >= southwestLatLng.longitude && lon <= northeastLatLng.longitude) {
                     getCommunityCensusInfo(communityModels.get(i), latLngBoundsList.get(i).getCenter());
                 }
+            }else {
+                mBaiduMap.hideInfoWindow();
             }
         }
     }
@@ -813,7 +834,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
 //                    drawable.setColor(getResources().getColor(R.color.color_map_community_5c5085c1));
                     try {
                         if (!TextUtils.isEmpty(models.get(i).color) && models.get(i).color.length() == 6)
-                            drawable.setColor(Color.parseColor("#5c"+models.get(i).color));
+                            drawable.setColor(Color.parseColor("#5c" + models.get(i).color));
                         else
                             drawable.setColor(getResources().getColor(R.color.color_map_community_5c5085c1));
                     } catch (Exception e) {
@@ -870,6 +891,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
         Glide.with(getActivity())
                 .load(AppConstants.HOST + model.photo)
                 .bitmapTransform(new CropCircleTransformation(getActivity()))
+                .placeholder(R.mipmap.d54_tx)
                 .into(iv_header);
         tv_name.setText(model.name);
         if (!TextUtils.isEmpty(model.memberTag)) {
@@ -997,6 +1019,8 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
         glide.onDisplayImage(getActivity(), iv_licenseReverse, AppConstants.HOST + model.licenseReverse);
         glide.onDisplayImage(getActivity(), iv_legalCardPositive, AppConstants.HOST + model.legalCardPositive);
         glide.onDisplayImage(getActivity(), iv_legalCardReverse, AppConstants.HOST + model.legalCardReverse);
+
+
         if (mPopupWindow == null)
             mPopupWindow = new PopupWindow(getActivity());
         // 设置视图
@@ -1134,37 +1158,105 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
     protected void onVisible() {
         super.onVisible();
         getCommunityData();
-        Animation anim = new AnimationUtils().loadAnimation(getActivity(), R.anim.image_enlarge_anim);
-        anim.setFillAfter(true);//动画执行完毕后停留在最后一帧
-        if (willPlayAnim(getActivity()))
-            mIvFlash.startAnimation(anim);
-        anim.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-                mIvFlash.setVisibility(View.VISIBLE);
-            }
+        if (willPlayAnim(getActivity())) {
+           final Dialog dialog = new Dialog(getActivity(), R.style.custom_dialog2);
+            dialog.show();
+            LayoutInflater inflater = LayoutInflater.from(getActivity());
+            View viewDialog = inflater.inflate(R.layout.layout_community_start_page, null);
+            final ImageView imageView=viewDialog.findViewById(R.id.iv_image);
+            int width = metric.widthPixels;
+            int height = metric.heightPixels;
+            //设置dialog的宽高为屏幕的宽高
+            ViewGroup.LayoutParams layoutParams = new  ViewGroup.LayoutParams(width, height);
+            dialog.setContentView(viewDialog, layoutParams);
+            Glide.with(getActivity())
+                    .load(AppConstants.HOST + getCommunityStartPage(getActivity()))
+                    .asBitmap()
+                    .into(new SimpleTarget<Bitmap>() {
+                        @Override
+                        public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                            imageView.setImageBitmap(resource);
+                            Animation anim = new AnimationUtils().loadAnimation(getActivity(), R.anim.image_enlarge_anim);
+                            anim.setFillAfter(true);//动画执行完毕后停留在最后一帧
+                            imageView.startAnimation(anim);
+                            anim.setAnimationListener(new Animation.AnimationListener() {
+                                @Override
+                                public void onAnimationStart(Animation animation) {
+                                    imageView.setVisibility(View.VISIBLE);
+                                }
 
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (mIvFlash.getAnimation() != null && !mIvFlash.getAnimation().getFillAfter()) {
-                            mIvFlash.clearAnimation();
+                                @Override
+                                public void onAnimationEnd(Animation animation) {
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            if (imageView.getAnimation() != null && !imageView.getAnimation().getFillAfter()) {
+                                                imageView.clearAnimation();
+                                            }
+                                            imageView.setAnimation(null);
+                                            imageView.setVisibility(View.GONE);
+                                            saveWillPlayAnim(getActivity(), false);
+                                            dialog.dismiss();
+                                        }
+                                    }, 2000);
+
+                                }
+
+                                @Override
+                                public void onAnimationRepeat(Animation animation) {
+
+                                }
+                            });
+                            dismissDialog();
                         }
-                        mIvFlash.setAnimation(null);
-                        mIvFlash.setVisibility(View.GONE);
-                        saveWillPlayAnim(getActivity(), false);
-                    }
-                }, 2000);
 
-            }
+                        @Override
+                        public void onLoadFailed(Exception e, Drawable errorDrawable) {
+                            super.onLoadFailed(e, errorDrawable);
+                            imageView.setImageResource(R.mipmap.d42_guohui);
+                            Animation anim = new AnimationUtils().loadAnimation(getActivity(), R.anim.image_enlarge_anim);
+                            anim.setFillAfter(true);//动画执行完毕后停留在最后一帧
+                            imageView.startAnimation(anim);
+                            anim.setAnimationListener(new Animation.AnimationListener() {
+                                @Override
+                                public void onAnimationStart(Animation animation) {
+                                    imageView.setVisibility(View.VISIBLE);
+                                }
 
-            @Override
-            public void onAnimationRepeat(Animation animation) {
+                                @Override
+                                public void onAnimationEnd(Animation animation) {
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            if (imageView.getAnimation() != null && !imageView.getAnimation().getFillAfter()) {
+                                                imageView.clearAnimation();
+                                            }
+                                            imageView.setAnimation(null);
+                                            imageView.setVisibility(View.GONE);
+                                            saveWillPlayAnim(getActivity(), false);
+                                            dialog.dismiss();
+                                        }
+                                    }, 2000);
 
-            }
-        });
+                                }
+
+                                @Override
+                                public void onAnimationRepeat(Animation animation) {
+
+                                }
+                            });
+                            dismissDialog();
+                        }
+
+                        @Override
+                        public void onStart() {
+                            super.onStart();
+                            showLoading();
+                        }
+
+                    });
+        }
+
 
     }
 
@@ -1239,8 +1331,6 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                             MapStatusUpdate u = MapStatusUpdateFactory
                                     .newMapStatus(mMapStatus);
                             mBaiduMap.setMapStatus(u);
-                            lastLat = center.latitude;
-                            lastLon = center.longitude;
                             mIvBack.setVisibility(View.VISIBLE);
                         }
                     }
@@ -1487,7 +1577,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                         bitmapDescriptor = BitmapDescriptorFactory
                                 .fromResource(R.mipmap.d50_icon1);
                         bitmaps.add(bitmapDescriptor);
-                    } else if ("3".equals(model.facilitiesType)) {
+                    } else if ("3".equals(model.facilitiesType)) {//电子门禁
                         bitmapDescriptor = BitmapDescriptorFactory
                                 .fromResource(R.mipmap.d50_icon3);
                         bitmaps.add(bitmapDescriptor);
@@ -1577,7 +1667,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
             if (location == null || mMapView == null) {
                 return;
             }
-           // LogUtils.e("location:"+location.getLatitude()+","+location.getLongitude());
+            LogUtils.e("location:" + location.getLatitude() + "," + location.getLongitude());
             mCurrentLat = location.getLatitude();
             mCurrentLon = location.getLongitude();
             mCurrentAccracy = location.getRadius();

@@ -94,7 +94,7 @@ public class SplashActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         try {
-//            unbindService(myServiceConnection);
+            unbindService(myServiceConnection);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -164,6 +164,8 @@ public class SplashActivity extends BaseActivity {
                      */
                     if (!TextUtils.isEmpty(latitute) && !TextUtils.isEmpty(longitute)) {
                         saveLocation(SplashActivity.this,latitute,longitute);
+                        if(!isLogin(SplashActivity.this))
+                            return;
                         serverDao.doUploadLocation(getUser(SplashActivity.this).id, longitute + "," + latitute, new JsonCallback<BaseResponse<List>>() {
                             @Override
                             public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {

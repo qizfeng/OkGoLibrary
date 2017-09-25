@@ -47,7 +47,7 @@ public class AppLocationService extends Service {
     /**
      * 间隔时间为60秒
      */
-    private static final int DELAY_TIME = 15* 1000;
+    private static final int DELAY_TIME = 30* 1000;
     /**
      * 开机一秒后开始检测网络
      */

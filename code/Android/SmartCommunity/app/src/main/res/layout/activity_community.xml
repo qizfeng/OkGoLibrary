@@ -120,10 +120,11 @@
 
         <ImageView
             android:id="@+id/iv_flash"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:src="@mipmap/d42_guohui"
+            android:scaleType="fitXY"
             android:visibility="gone" />
     </FrameLayout>
 
