@@ -66,6 +66,8 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                         //设置缓存为未登录
                         SharedPreferenceUtils.putBoolean(SettingActivity.this, SharedPreferenceUtils.SP_LOGIN, false);
 //                        LoginActivity.startActivity(SettingActivity.this);
+                        saveUser(SettingActivity.this,"");
+                        saveLoginStatus(SettingActivity.this,false);
                         setResult(RESULT_OK);
                         finish();
                     }

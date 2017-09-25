@@ -178,14 +178,13 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
         if (isLogin(getActivity())) {
             mLayoutLogin.setVisibility(View.VISIBLE);
             mLayoutUnLogin.setVisibility(View.GONE);
+//            setRefreshing(true);
+            loadData();
+//            onRefresh();
         } else {
             mIvHeader.setImageResource(R.mipmap.d54_tx);
             mLayoutLogin.setVisibility(View.GONE);
             mLayoutUnLogin.setVisibility(View.VISIBLE);
-        }
-        if (isLogin(getActivity())) {
-            setRefreshing(true);
-            onRefresh();
         }
     }
 
@@ -278,27 +277,27 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
 
     private void loadData() {
         if (!isLogin(getActivity())) {
+            setRefreshing(false);
             return;
         }
         serverDao.getUserInfo(getUser(getActivity()).id, new JsonCallback<BaseResponse<UserModel>>() {
             @Override
             public void onSuccess(BaseResponse<UserModel> userResponseBaseResponse, Call call, Response response) {
-//                Gson gson = new Gson();
-//                String userStr = gson.toJson(userResponseBaseResponse.retData);
-//                saveUser(getActivity(), userStr);
+                Gson gson = new Gson();
+                String userStr = gson.toJson(userResponseBaseResponse.retData);
+                saveUser(getActivity(), userStr);
                 Glide.with(getActivity())
-                        .load(AppConstants.HOST + getUser(getActivity()).photo)
+                        .load(AppConstants.HOST + userResponseBaseResponse.retData.photo)
                         .placeholder(R.mipmap.d54_tx)
                         .bitmapTransform(new CropCircleTransformation(getActivity()))
                         .into(mIvHeader);
                 mTvName.setText(getUser(getActivity()).loginName);
-                LogUtils.e("name;" + getUser(getActivity()).loginName);
             }
 
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                    showToast(e.getMessage());
+                showToast(e.getMessage());
             }
 
             @Override

@@ -18,8 +18,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.library.okgo.callback.JsonCallback;
+import com.library.okgo.model.BaseResponse;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
+import com.project.community.model.BannerResponse;
 import com.project.community.ui.community.CommunityFragment;
 import com.project.community.ui.index.IndexFragment;
 import com.project.community.ui.life.LifeFragment;
@@ -34,6 +37,8 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * 首页activity
@@ -66,6 +71,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         bottom_navigation.setOnNavigationItemSelectedListener(this);
         initFragments();
         initForMessageCenterIcon(bottom_navigation, false);
+        getCommunityStartPage();
     }
 
     private List<Fragment> fragments = new ArrayList<>();
@@ -288,4 +294,17 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         }
     }
 
+
+    /**
+     * 提前获取社区启动页
+     */
+    private void getCommunityStartPage() {
+        serverDao.getBannerData("2", "3", new JsonCallback<BaseResponse<BannerResponse>>() {
+            @Override
+            public void onSuccess(BaseResponse<BannerResponse> baseResponse, Call call, Response response) {
+                if (baseResponse.retData.imageList.size() > 0)
+                    saveCommunityStartPage(MainActivity.this, baseResponse.retData.imageList.get(0).imageUrl);
+            }
+        });
+    }
 }
