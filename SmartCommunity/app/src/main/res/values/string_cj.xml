@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>'
+    <!--挂号申请-->
+    <string name="registration_hospital">医院</string>
+    <string name="registration_administrative">科室</string>
+    <string name="registration_doctor">医生</string>
+    <string name="registration_appointment_time">预约时间</string>
+    <string name="registration_change">请选择</string>
+    <string name="registration_apply">挂号申请</string>
+    <!--文章详情-->
+    <string name="articledetails_title">文章详情</string>
+    <string name="public_transportation">公交</string>
+
+
+</resources>
