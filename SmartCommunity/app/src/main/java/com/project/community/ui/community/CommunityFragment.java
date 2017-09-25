@@ -61,6 +61,7 @@ import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
 import com.library.okgo.utils.DeviceUtil;
+import com.library.okgo.utils.LogUtils;
 import com.library.okgo.utils.ToastUtils;
 import com.library.okgo.utils.ValidateUtil;
 import com.project.community.R;
@@ -183,6 +184,12 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
         mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         //mDrawerLayout.openDrawer(Gravity.RIGHT);//侧滑打开  不设置则不会默认打开
         mIvDrawer.setVisibility(View.GONE);
+        try {
+            mCurrentLat=Double.parseDouble(getLocation(getActivity())[0]);
+            mCurrentLon=Double.parseDouble(getLocation(getActivity())[1]);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return view;
     }
 
@@ -428,7 +435,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
         LocationClientOption option = new LocationClientOption();
         option.setOpenGps(true); // 打开gps
         option.setCoorType("bd09ll"); // 设置坐标类型
-        option.setScanSpan(1000 * 10);
+        option.setScanSpan(1000 * 15);
         mLocClient.setLocOption(option);
         mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(
                 MyLocationConfiguration.LocationMode.NORMAL, true, BitmapDescriptorFactory
@@ -552,8 +559,8 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                 mIvPerson.setImageResource(R.mipmap.d43_btn_3);
                 mIvDevice.setImageResource(R.mipmap.d43_btn_4);
                 mMapStatus = new MapStatus.Builder()
-                        .target(new LatLng(39.948961, 116.491081))
-                        .zoom(17)
+                        .target(new LatLng(mCurrentLat, mCurrentLon))//39.948961, 116.491081
+                        .zoom(12)
                         .build();
                 u = MapStatusUpdateFactory
                         .newMapStatus(mMapStatus);
@@ -580,8 +587,8 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                 mIvDevice.setImageResource(R.mipmap.d43_btn_4);
 
                 mMapStatus = new MapStatus.Builder()
-                        .target(new LatLng(39.961461, 116.526366))//116.526366,39.961461
-                        .zoom(17)
+                        .target(new LatLng(mCurrentLat, mCurrentLon))//116.526366,39.961461
+                        .zoom(12)
                         .build();
                 u = MapStatusUpdateFactory
                         .newMapStatus(mMapStatus);
@@ -606,7 +613,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                 mIvPerson.setImageResource(R.mipmap.d43_btn_3);
                 mIvDevice.setImageResource(R.mipmap.d43_btn_4_p);
                 mMapStatus = new MapStatus.Builder()
-                        .target(new LatLng(39.912583, 116.405293))//116.405293,39.912583
+                        .target(new LatLng(mCurrentLat, mCurrentLon))//39.912583, 116.405293
                         .zoom(12)
                         .build();
                 u = MapStatusUpdateFactory
@@ -1254,7 +1261,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
      */
     private void getShopList() {
         String coordinate = mCurrentLon + "," + mCurrentLat;
-        coordinate = "116.491081,39.948961";
+//        coordinate = "116.491081,39.948961";
         serverDao.getCommunityShopList(getUser(getActivity()).id, coordinate, scopeId, statusId, new DialogCallback<BaseResponse<List<ShopModel>>>(getActivity()) {
             @Override
             public void onSuccess(BaseResponse<List<ShopModel>> baseResponse, Call call, Response response) {
@@ -1352,7 +1359,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
      */
     private void getPersonList() {
         String coordinate = mCurrentLon + "," + mCurrentLat;
-        coordinate = "116.526366,39.961461";
+//        coordinate = "116.526366,39.961461";
         serverDao.getCommunityPersonList(getUser(getActivity()).id, coordinate, scopeId, "", new JsonCallback<BaseResponse<List<FamilyPersonModel>>>() {
             @Override
             public void onSuccess(BaseResponse<List<FamilyPersonModel>> baseResponse, Call call, Response response) {
@@ -1440,7 +1447,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
      */
     private void getDeviceList() {
         String coordinate = mCurrentLon + "," + mCurrentLat;
-        coordinate = "116.405293,39.912583";
+//        coordinate = "116.405293,39.912583";
         serverDao.getCommunityDeviceList(getUser(getActivity()).id, coordinate, getUser(getActivity()).orgCode, scopeId, deviceId, new JsonCallback<BaseResponse<List<DeviceModel>>>() {
             @Override
             public void onSuccess(BaseResponse<List<DeviceModel>> baseResponse, Call call, Response response) {
@@ -1570,6 +1577,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
             if (location == null || mMapView == null) {
                 return;
             }
+           // LogUtils.e("location:"+location.getLatitude()+","+location.getLongitude());
             mCurrentLat = location.getLatitude();
             mCurrentLon = location.getLongitude();
             mCurrentAccracy = location.getRadius();

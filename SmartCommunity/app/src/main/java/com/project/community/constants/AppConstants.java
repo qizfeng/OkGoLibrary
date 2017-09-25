@@ -321,6 +321,11 @@ public class AppConstants {
      */
     public static final String URL_COMMUNITY_DEVICE_DETAIL=URL_BASE+"m/community/facilities/get";
 
+    /**
+     * 上传用户坐标
+     */
+    public static final String URL_UPLOAD_LATLNG=URL_BASE+"m/community/comyUser/updateCoordinate";
+
     /*==========================*/
     /**
      * 分页大小

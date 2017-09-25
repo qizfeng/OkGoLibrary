@@ -11,6 +11,8 @@ import com.project.community.callback.ServerDao;
 import com.project.community.callback.ServerDaoImpl;
 import com.project.community.constants.AppConstants;
 
+import java.util.HashMap;
+
 /**
  * Created by qizfeng on 17/7/26.
  */
@@ -84,7 +86,8 @@ public class AppLocationListener implements BDLocationListener {
                 }
             });
             // 发送给本地Service
-            sendMsg(sb.toString());
+//            sendMsg(sb.toString());
+            sendMsg(latitude+"",longitude+"");
         } else if (locType == AppConstants.LOCATION_NETWORK_EXCEPTION
                 || locType == AppConstants.LOCATION_NETWORK_CONNECT_FAIL) {
             // 网络异常，没有成功向服务器发起请求。
@@ -101,6 +104,18 @@ public class AppLocationListener implements BDLocationListener {
         msg.what = AppConstants.SEND_LOCATION_TO_SERVICE;// what表示正常发送数据
         // 设置数据
         b.putString("LocationData", sb);
+        msg.setData(b);
+        // 传消息给主线程
+        mHandler.sendMessage(msg);
+    }
+    private void sendMsg(String latitute,String longitute) {
+        Message msg = mHandler.obtainMessage();
+        // Bundle是message中的数据
+        Bundle b = new Bundle();
+        msg.what = AppConstants.SEND_LOCATION_TO_SERVICE;// what表示正常发送数据
+        // 设置数据
+        b.putString("latitute", latitute);
+        b.putString("longitute",longitute);
         msg.setData(b);
         // 传消息给主线程
         mHandler.sendMessage(msg);
