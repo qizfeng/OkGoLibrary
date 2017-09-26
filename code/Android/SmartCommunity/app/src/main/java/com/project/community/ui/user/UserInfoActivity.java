@@ -450,7 +450,6 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                                 newUri = FileProvider.getUriForFile(this, "com.project.community", new File(newUri.getPath()));
                             }
-                            LogUtils.e("cropImageUri>>:"+newUri.toString()+","+cropImageUri.toString());
                             PhotoUtils.cropImageUri(this, newUri, cropImageUri, 1, 1, output_X, output_Y, CODE_RESULT_REQUEST);
                         }catch (Exception e){
                             e.printStackTrace();
