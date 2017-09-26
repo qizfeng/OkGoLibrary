@@ -1084,8 +1084,9 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
         // 设置视图
         mPopupWindow.setContentView(inflate);
         // 设置弹出窗体的宽和高
-        mPopupWindow.setHeight(RelativeLayout.LayoutParams.WRAP_CONTENT);
+//        mPopupWindow.setHeight(RelativeLayout.LayoutParams.WRAP_CONTENT);
         mPopupWindow.setWidth(RelativeLayout.LayoutParams.MATCH_PARENT);
+        mPopupWindow.setHeight((int)(ScreenUtils.getScreenHeight(getActivity())*0.8));
         // 设置弹出窗体可点击
         mPopupWindow.setFocusable(true);
         // 实例化一个ColorDrawable颜色为半透明
