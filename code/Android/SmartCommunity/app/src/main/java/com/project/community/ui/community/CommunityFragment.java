@@ -78,6 +78,7 @@ import com.project.community.model.DeviceModel;
 import com.project.community.model.DictionaryModel;
 import com.project.community.model.FamilyPersonModel;
 import com.project.community.model.ShopModel;
+import com.project.community.ui.ImageBrowseActivity;
 import com.project.community.ui.PhoneDialogActivity;
 import com.project.community.util.ScreenUtils;
 
@@ -190,7 +191,6 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
         return view;
     }
@@ -468,6 +468,22 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
         }
         mBaiduMap.setOnMapClickListener(this);
         mBaiduMap.setOnMarkerClickListener(this);
+        mBaiduMap.setOnMapStatusChangeListener(new BaiduMap.OnMapStatusChangeListener() {
+            @Override
+            public void onMapStatusChangeStart(MapStatus mapStatus) {
+
+            }
+
+            @Override
+            public void onMapStatusChange(MapStatus mapStatus) {
+
+            }
+
+            @Override
+            public void onMapStatusChangeFinish(MapStatus mapStatus) {
+                mBaiduMap.hideInfoWindow();
+            }
+        });
     }
 
 
@@ -973,7 +989,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
     /**
      * 点击商铺marker弹出窗
      */
-    private void showShop(ShopModel model) {
+    private void showShop(final ShopModel model) {
         //填充对话框的布局
         View inflate = LayoutInflater.from(getActivity()).inflate(R.layout.layout_popup_community_shop, null);
         ImageView iv_header = inflate.findViewById(R.id.iv_header);
@@ -1020,7 +1036,38 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
         glide.onDisplayImage(getActivity(), iv_legalCardPositive, AppConstants.HOST + model.legalCardPositive);
         glide.onDisplayImage(getActivity(), iv_legalCardReverse, AppConstants.HOST + model.legalCardReverse);
 
-
+        View.OnClickListener onClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayList imgs = new ArrayList();
+                switch (view.getId()){
+                    case R.id.iv_licensePositive:
+                        imgs=new ArrayList();
+                        imgs.add(AppConstants.HOST+model.licensePositive);
+                        ImageBrowseActivity.startActivity(getActivity(),imgs);
+                        break;
+                    case R.id.iv_licenseReverse:
+                        imgs=new ArrayList();
+                        imgs.add(AppConstants.HOST+model.licenseReverse);
+                        ImageBrowseActivity.startActivity(getActivity(),imgs);
+                        break;
+                    case R.id.iv_legalCardPositive:
+                        imgs=new ArrayList();
+                        imgs.add(AppConstants.HOST+model.legalCardPositive);
+                        ImageBrowseActivity.startActivity(getActivity(),imgs);
+                        break;
+                    case R.id.iv_legalCardReverse:
+                        imgs=new ArrayList();
+                        imgs.add(AppConstants.HOST+model.legalCardReverse);
+                        ImageBrowseActivity.startActivity(getActivity(),imgs);
+                        break;
+                }
+            }
+        };
+        iv_legalCardPositive.setOnClickListener(onClickListener);
+        iv_legalCardReverse.setOnClickListener(onClickListener);
+        iv_licensePositive.setOnClickListener(onClickListener);
+        iv_licenseReverse.setOnClickListener(onClickListener);
         if (mPopupWindow == null)
             mPopupWindow = new PopupWindow(getActivity());
         // 设置视图
