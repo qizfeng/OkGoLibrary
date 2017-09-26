@@ -462,7 +462,6 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
                     }
                     break;
                 case CODE_RESULT_REQUEST:
-
                     Bitmap bitmap = PhotoUtils.getBitmapFromUri(cropImageUri, this);
                     if (bitmap != null) {
                         uploadFile(new File(cropImageUri.getPath()));
