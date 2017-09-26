@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context="com.project.community.ui.me.ServiesClauseActivity">
+    <include layout="@layout/pub_layout_toolbar" />
+    <TextView
+        android:id="@+id/serves_clause"
+        android:textColor="@color/color_gray_666666"
+        android:textSize="14sp"
+        android:layout_marginTop="11dp"
+        android:padding="15dp"
+        android:lineSpacingExtra="5dp"
+        android:text="南京的妇女解放火炬大厦附近是否接受对方接收大部分都是白富美是别的目的是不错目的是v的v南京的妇女解放火炬大厦附近是否接受对方接收大部分都是白富美是别的目的是不错目的是v的v南京的妇女解放火炬大厦附近是否接受对方接收大部分都是白富美是别的目的是不错目的是v的v南京的妇女解放火炬大厦附近是否接受对方接收大部分都是白富美是别的目的是不错目的是v的v南京的妇女解放火炬大厦附近是否接受对方接收大部分都是白富美是别的目的是不错目的是v的v"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

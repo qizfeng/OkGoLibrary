@@ -38,6 +38,8 @@ import com.project.community.ui.adapter.MinshengAdapter;
 import com.project.community.ui.adapter.ModuleAdapter;
 import com.project.community.ui.adapter.listener.MinshengAdapterItemListener;
 import com.project.community.ui.life.TopicDetailActivity;
+import com.project.community.ui.me.CommunityActivity;
+import com.project.community.ui.me.OrderDetailActivity;
 import com.project.community.util.ScreenUtils;
 import com.project.community.view.HorizaontalGridView;
 import com.project.community.view.SpacesItemDecoration;
@@ -196,6 +198,14 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         Intent intent;
         switch (position){
+            case 0:
+                intent = new Intent(MinshengActivity.this, CommunityActivity.class);
+                startActivity(intent);
+                break;
+            case 1:
+                intent = new Intent(MinshengActivity.this, OrderDetailActivity.class);
+                startActivity(intent);
+                break;
             case 3:
                 intent = new Intent(MinshengActivity.this, PublicTransportationActivity.class);
                 startActivity(intent);

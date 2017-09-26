@@ -1,5 +1,6 @@
 package com.project.community.ui.me;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -183,6 +184,8 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_header://头像
+                Intent intent = new Intent(getActivity(),MyActivity.class);
+                startActivity(intent);
                 break;
             case R.id.btn_info://编辑资料
                 UserInfoActivity.startActivity(getActivity());

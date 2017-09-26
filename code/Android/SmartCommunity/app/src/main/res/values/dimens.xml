@@ -10,4 +10,5 @@
     <dimen name="red_point_radius_small">16dp</dimen>
 
     <dimen name="layout_item_height">50dp</dimen>
+    <dimen name="dp_100">100dp</dimen>
 </resources>
