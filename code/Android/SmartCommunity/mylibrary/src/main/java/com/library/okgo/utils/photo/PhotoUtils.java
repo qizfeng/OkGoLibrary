@@ -13,6 +13,8 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 
+import com.library.okgo.utils.LogUtils;
+
 /**
  * Created by:zheng zhong on 2016/8/6 16:16
  * Email zheng_zhong@163.com
@@ -58,8 +60,8 @@ public class PhotoUtils {
      * @param requestCode 剪裁图片的请求码
      */
     public static void cropImageUri(Activity activity, Uri orgUri, Uri desUri, int aspectX, int aspectY, int width, int height, int requestCode) {
+        LogUtils.e("cropImageUri:"+orgUri.toString()+","+desUri.toString());
         Intent intent = new Intent("com.android.camera.action.CROP");
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         }
