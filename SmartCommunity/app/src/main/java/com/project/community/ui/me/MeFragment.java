@@ -1,16 +1,12 @@
 package com.project.community.ui.me;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +21,6 @@ import com.google.gson.Gson;
 import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
-import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
 import com.project.community.base.BaseFragment;
 import com.project.community.constants.AppConstants;
@@ -37,11 +32,6 @@ import com.project.community.ui.user.UserInfoActivity;
 import com.project.community.util.ScreenUtils;
 import com.project.community.view.RedPointDrawable;
 import com.project.community.view.VpSwipeRefreshLayout;
-import com.umeng.socialize.ShareAction;
-import com.umeng.socialize.UMShareListener;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.media.UMImage;
-import com.umeng.socialize.media.UMWeb;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -175,6 +165,7 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
     @Override
     public void onResume() {
         super.onResume();
+        dismissDialog();
         if (isLogin(getActivity())) {
             mLayoutLogin.setVisibility(View.VISIBLE);
             mLayoutUnLogin.setVisibility(View.GONE);
@@ -304,6 +295,9 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
             public void onAfter(BaseResponse<UserModel> userModelBaseResponse, Exception e) {
                 super.onAfter(userModelBaseResponse, e);
                 setRefreshing(false);
+                dismissDialog();
+
+
             }
         });
     }

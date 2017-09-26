@@ -203,4 +203,29 @@
         <!-- Inactive track color(30% transparency) switch关闭时的轨迹的颜色  30%这个颜色 -->
         <item name="android:colorForeground">@color/common_gray_bg</item>
     </style>
+
+    <!--商铺未通过-->
+    <style name="rectangle_me_shop_red_button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/color_red_d54824</item>
+        <item name="android:background">@drawable/button_me_shop_red</item>
+    </style>
+    <!--商铺审核中-->
+    <style name="rectangle_me_shop_green_button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/color_green_aac62d</item>
+        <item name="android:background">@drawable/button_me_shop_green</item>
+    </style>
+    <!--申请商铺-->
+    <style name="rectangle_me_shop_gray_button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/color_gray_666666</item>
+        <item name="android:background">@drawable/button_me_shop_gray</item>
+    </style>
 </resources>

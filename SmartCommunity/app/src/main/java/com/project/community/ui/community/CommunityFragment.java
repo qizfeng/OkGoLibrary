@@ -157,6 +157,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
     private PopupWindow mPopupWindow;
     private List<BitmapDescriptor> bitmaps = new ArrayList<>();
     DisplayMetrics metric = new DisplayMetrics();
+
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_community, container, false);
@@ -484,6 +485,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                 mBaiduMap.hideInfoWindow();
             }
         });
+        getCommunityData();
     }
 
 
@@ -557,7 +559,8 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                 break;
             case R.id.iv_back:
                 mIvDrawer.setVisibility(View.GONE);
-                mIvBack.setVisibility(View.GONE);
+                mIvBack.setVisibility(View.VISIBLE);
+                mIvBack.setImageResource(R.mipmap.d43_shuxin);
                 currentIndex = 0;
                 mIvShop.setImageResource(R.mipmap.d43_btn_2);
                 mIvPerson.setImageResource(R.mipmap.d43_btn_3);
@@ -588,6 +591,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                 deviceId = "";
                 getShopFilter();
                 mIvBack.setVisibility(View.VISIBLE);
+                mIvBack.setImageResource(R.mipmap.d43_fanhui);
                 mIvDrawer.setVisibility(View.VISIBLE);
                 mIvShop.setImageResource(R.mipmap.d43_btn_2_p);
                 mIvPerson.setImageResource(R.mipmap.d43_btn_3);
@@ -616,6 +620,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                 deviceId = "";
                 getPersonFilter();
                 mIvBack.setVisibility(View.VISIBLE);
+                mIvBack.setImageResource(R.mipmap.d43_fanhui);
                 mIvDrawer.setVisibility(View.VISIBLE);
                 mIvShop.setImageResource(R.mipmap.d43_btn_2);
                 mIvPerson.setImageResource(R.mipmap.d43_btn_3_p);
@@ -643,13 +648,14 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                 //deviceId = "";
                 getDeviceFilter();
                 mIvBack.setVisibility(View.VISIBLE);
+                mIvBack.setImageResource(R.mipmap.d43_fanhui);
                 mIvDrawer.setVisibility(View.VISIBLE);
                 mIvShop.setImageResource(R.mipmap.d43_btn_2);
                 mIvPerson.setImageResource(R.mipmap.d43_btn_3);
                 mIvDevice.setImageResource(R.mipmap.d43_btn_4_p);
                 mMapStatus = new MapStatus.Builder()
                         .target(new LatLng(mCurrentLat, mCurrentLon))//39.912583, 116.405293
-                        .zoom(12)
+                        .zoom(10)
                         .build();
                 u = MapStatusUpdateFactory
                         .newMapStatus(mMapStatus);
@@ -793,7 +799,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                 if (lon >= southwestLatLng.longitude && lon <= northeastLatLng.longitude) {
                     getCommunityCensusInfo(communityModels.get(i), latLngBoundsList.get(i).getCenter());
                 }
-            }else {
+            } else {
                 mBaiduMap.hideInfoWindow();
             }
         }
@@ -802,6 +808,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
     private void clearOverlayMarker() {
         if (latLngBoundsList.size() == 0)
             return;
+        LogUtils.e("latLngBoundsList:" + latLngBoundsList.size());
         for (int i = 0; i < latLngBoundsList.size(); i++) {
             List<Marker> markers = mBaiduMap.getMarkersInBounds(latLngBoundsList.get(i));
             try {
@@ -839,9 +846,13 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
 
             if (!TextUtils.isEmpty(southwestStr)) {//西南坐标
                 southwestArr = southwestStr.split(",");
+                if (southwestArr.length == 0)
+                    return;
                 ooGrondSouthwest = new LatLng(Double.parseDouble(southwestArr[1]), Double.parseDouble(southwestArr[0]));
                 if (!TextUtils.isEmpty(northeastStr)) {//东北坐标
                     northeastArr = northeastStr.split(",");
+                    if(northeastArr.length==0)
+                        return;
                     ooGroudNortheast = new LatLng(Double.parseDouble(northeastArr[1]), Double.parseDouble(northeastArr[0]));
                     bounds = new LatLngBounds.Builder().include(ooGroudNortheast)
                             .include(ooGrondSouthwest).build();
@@ -1009,11 +1020,11 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
         ImageView iv_legalCardPositive = inflate.findViewById(R.id.iv_legalCardPositive);
         ImageView iv_legalCardReverse = inflate.findViewById(R.id.iv_legalCardReverse);
         tv_shop_name.setText(model.shopsName);
-        if ("1".equals(model.auditStatus)) {
+        if ("2".equals(model.auditStatus)) {
             tv_tag1.setText(R.string.txt_map_shop_check_pass);
             tv_tag2.setVisibility(View.GONE);
             tv_tag1.setVisibility(View.VISIBLE);
-        } else if ("2".equals(model.auditStatus)) {
+        } else if ("1".equals(model.auditStatus)) {
             tv_tag2.setText(R.string.txt_map_shop_check_ing);
             tv_tag1.setVisibility(View.GONE);
             tv_tag2.setVisibility(View.VISIBLE);
@@ -1024,7 +1035,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
         }
         tv_person.setText(model.contactName);
         tv_shop_mobile.setText(model.contactPhone);
-        tv_address.setText(getString(R.string.txt_map_shop_prefix_address) + model.businessAddress);
+        tv_address.setText(model.businessAddress);
         tv_sort.setText(model.shopsCategory);
         tv_business.setText(model.mainBusiness);
         tv_company.setText(model.entName);
@@ -1040,26 +1051,26 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
             @Override
             public void onClick(View view) {
                 ArrayList imgs = new ArrayList();
-                switch (view.getId()){
+                switch (view.getId()) {
                     case R.id.iv_licensePositive:
-                        imgs=new ArrayList();
-                        imgs.add(AppConstants.HOST+model.licensePositive);
-                        ImageBrowseActivity.startActivity(getActivity(),imgs);
+                        imgs = new ArrayList();
+                        imgs.add(AppConstants.HOST + model.licensePositive);
+                        ImageBrowseActivity.startActivity(getActivity(), imgs);
                         break;
                     case R.id.iv_licenseReverse:
-                        imgs=new ArrayList();
-                        imgs.add(AppConstants.HOST+model.licenseReverse);
-                        ImageBrowseActivity.startActivity(getActivity(),imgs);
+                        imgs = new ArrayList();
+                        imgs.add(AppConstants.HOST + model.licenseReverse);
+                        ImageBrowseActivity.startActivity(getActivity(), imgs);
                         break;
                     case R.id.iv_legalCardPositive:
-                        imgs=new ArrayList();
-                        imgs.add(AppConstants.HOST+model.legalCardPositive);
-                        ImageBrowseActivity.startActivity(getActivity(),imgs);
+                        imgs = new ArrayList();
+                        imgs.add(AppConstants.HOST + model.legalCardPositive);
+                        ImageBrowseActivity.startActivity(getActivity(), imgs);
                         break;
                     case R.id.iv_legalCardReverse:
-                        imgs=new ArrayList();
-                        imgs.add(AppConstants.HOST+model.legalCardReverse);
-                        ImageBrowseActivity.startActivity(getActivity(),imgs);
+                        imgs = new ArrayList();
+                        imgs.add(AppConstants.HOST + model.legalCardReverse);
+                        ImageBrowseActivity.startActivity(getActivity(), imgs);
                         break;
                 }
             }
@@ -1082,7 +1093,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
         // 设置弹出窗体的背景
         mPopupWindow.setBackgroundDrawable(dw);
         // 设置弹出窗体显示时的动画，从底部向上弹出
-        mPopupWindow.setAnimationStyle(R.style.popwin_comment_anim);
+//        mPopupWindow.setAnimationStyle(R.style.popwin_comment_anim);
         mPopupWindow.showAtLocation(mMapView, Gravity.BOTTOM, ScreenUtils.getScreenWidth(getActivity()), 0);
         inflate.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -1190,6 +1201,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
         // MapView的生命周期与Activity同步，当activity挂起时需调用MapView.onPause()
         mMapView.setVisibility(View.INVISIBLE);
         mMapView.onPause();
+        dismissDialog();
         super.onPause();
     }
 
@@ -1204,17 +1216,17 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
     @Override
     protected void onVisible() {
         super.onVisible();
-        getCommunityData();
+
         if (willPlayAnim(getActivity())) {
-           final Dialog dialog = new Dialog(getActivity(), R.style.custom_dialog2);
+            final Dialog dialog = new Dialog(getActivity(), R.style.custom_dialog2);
             dialog.show();
             LayoutInflater inflater = LayoutInflater.from(getActivity());
             View viewDialog = inflater.inflate(R.layout.layout_community_start_page, null);
-            final ImageView imageView=viewDialog.findViewById(R.id.iv_image);
+            final ImageView imageView = viewDialog.findViewById(R.id.iv_image);
             int width = metric.widthPixels;
             int height = metric.heightPixels;
             //设置dialog的宽高为屏幕的宽高
-            ViewGroup.LayoutParams layoutParams = new  ViewGroup.LayoutParams(width, height);
+            ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(width, height);
             dialog.setContentView(viewDialog, layoutParams);
             Glide.with(getActivity())
                     .load(AppConstants.HOST + getCommunityStartPage(getActivity()))
@@ -1373,12 +1385,13 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                             //定位到该区域中心
                             MapStatus mMapStatus = new MapStatus.Builder()
                                     .target(center)
-                                    .zoom(18.7f)
+                                    .zoom(18.5f)
                                     .build();
                             MapStatusUpdate u = MapStatusUpdateFactory
                                     .newMapStatus(mMapStatus);
                             mBaiduMap.setMapStatus(u);
                             mIvBack.setVisibility(View.VISIBLE);
+                            mIvBack.setImageResource(R.mipmap.d43_fanhui);
                         }
                     }
                 }

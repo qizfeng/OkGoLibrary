@@ -110,36 +110,54 @@
                                         android:textStyle="bold" />
 
                                     <LinearLayout
-                                        android:layout_width="match_parent"
+                                        android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:gravity="center"
                                         android:orientation="horizontal">
 
-                                        <ImageView
-                                            android:layout_width="30dp"
-                                            android:layout_height="30dp"
-                                            android:layout_gravity="center_vertical"
-                                            android:layout_marginRight="5dp"
-                                            android:src="@mipmap/ic_launcher_round" />
+                                        <TextView
+                                            android:id="@+id/tv_tag1"
+                                            style="@style/rectangle_info_button"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="@dimen/dp_15"
+                                            android:layout_gravity="center"
+                                            android:gravity="center"
+                                            android:paddingBottom="0dp"
+                                            android:paddingLeft="3dp"
+                                            android:paddingRight="3dp"
+                                            android:paddingTop="0dp"
+                                            android:text="业主"
+                                            android:textSize="11dp" />
 
-                                        <ImageView
-                                            android:layout_width="30dp"
-                                            android:layout_height="30dp"
-                                            android:layout_gravity="center_vertical"
-                                            android:layout_marginRight="5dp"
-                                            android:src="@mipmap/ic_launcher_round" />
+                                        <TextView
+                                            android:id="@+id/tv_tag2"
+                                            style="@style/rectangle_info_button"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="@dimen/dp_15"
+                                            android:layout_gravity="center"
+                                            android:layout_marginLeft="@dimen/dp_5"
+                                            android:gravity="center"
+                                            android:paddingBottom="0dp"
+                                            android:paddingLeft="3dp"
+                                            android:paddingRight="3dp"
+                                            android:paddingTop="0dp"
+                                            android:text="物业"
+                                            android:textSize="11dp" />
 
-                                        <ImageView
-                                            android:layout_width="30dp"
-                                            android:layout_height="30dp"
-                                            android:layout_gravity="center_vertical"
-                                            android:layout_marginRight="5dp"
-                                            android:src="@mipmap/ic_launcher_round" />
-
-                                        <ImageView
-                                            android:layout_width="30dp"
-                                            android:layout_height="30dp"
-                                            android:layout_gravity="center_vertical"
-                                            android:src="@mipmap/ic_launcher_round" />
+                                        <TextView
+                                            android:id="@+id/tv_tag3"
+                                            style="@style/rectangle_info_button"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="@dimen/dp_15"
+                                            android:layout_gravity="center"
+                                            android:layout_marginLeft="@dimen/dp_5"
+                                            android:gravity="center"
+                                            android:paddingBottom="0dp"
+                                            android:paddingLeft="3dp"
+                                            android:paddingRight="3dp"
+                                            android:paddingTop="0dp"
+                                            android:text="管理"
+                                            android:textSize="11dp" />
                                     </LinearLayout>
                                 </LinearLayout>
 
@@ -148,6 +166,7 @@
                                     style="@style/rectangle_info_button"
                                     android:layout_width="85dp"
                                     android:layout_height="40dp"
+
                                     android:layout_alignParentRight="true"
                                     android:layout_centerVertical="true"
                                     android:layout_marginRight="10dp"
@@ -241,7 +260,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
-                            android:src="@mipmap/weixin2" />
+                            android:src="@mipmap/d54_icon1" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -249,7 +268,7 @@
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:text="@string/txt_my_order"
-                            android:textColor="@color/black"
+                            android:textColor="@color/color_gray_666666"
                             android:textSize="@dimen/common_txt_size" />
                     </LinearLayout>
 
@@ -268,7 +287,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
-                            android:src="@mipmap/weixin2" />
+                            android:src="@mipmap/d54_icon2" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -276,7 +295,7 @@
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:text="@string/txt_my_collect"
-                            android:textColor="@color/black"
+                            android:textColor="@color/color_gray_666666"
                             android:textSize="@dimen/common_txt_size" />
 
 
@@ -296,15 +315,16 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
-                            android:src="@mipmap/weixin2" />
+                            android:src="@mipmap/d54_icon3" />
 
                         <TextView
+                            android:id="@+id/textView2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:text="@string/txt_my_topic"
-                            android:textColor="@color/black"
+                            android:textColor="@color/color_gray_666666"
                             android:textSize="@dimen/common_txt_size" />
 
 
@@ -325,7 +345,8 @@
                     android:background="@drawable/press_selector"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
-                    android:paddingRight="10dp">
+                    android:paddingRight="10dp"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/tv_chat"
@@ -364,9 +385,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:drawableLeft="@mipmap/d54_icon5"
+                        android:drawablePadding="@dimen/dp_10"
                         android:gravity="center_vertical"
                         android:text="@string/txt_repair_record"
-                        android:textColor="@color/black"
+                        android:textColor="@color/txt_color"
                         android:textSize="@dimen/common_txt_size" />
 
                     <ImageView
@@ -396,9 +419,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:drawableLeft="@mipmap/d54_icon6"
+                        android:drawablePadding="@dimen/dp_10"
                         android:gravity="center_vertical"
                         android:text="@string/txt_family_info"
-                        android:textColor="@color/black"
+                        android:textColor="@color/txt_color"
                         android:textSize="@dimen/common_txt_size" />
 
                     <ImageView
@@ -428,18 +453,27 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:drawableLeft="@mipmap/d54_icon7"
+                        android:drawablePadding="@dimen/dp_10"
                         android:gravity="center_vertical"
                         android:text="@string/txt_shop_manage"
-                        android:textColor="@color/black"
+                        android:textColor="@color/txt_color"
                         android:textSize="@dimen/common_txt_size" />
 
                     <Button
                         android:id="@+id/btn_apply_shop"
+                        android:background="@drawable/button_me_shop_gray"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="50dp"
+                        android:layout_marginRight="@dimen/dp_25"
+                        android:textColor="@color/color_gray_666666"
+                        android:textSize="@dimen/common_txt_size_small"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
                         android:text="@string/txt_apply_shop" />
 
                     <ImageView
@@ -469,9 +503,11 @@
                         android:id="@+id/tv_my_repair_order"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:drawableLeft="@mipmap/d54_icon8"
+                        android:drawablePadding="@dimen/dp_10"
                         android:gravity="center_vertical"
                         android:text="@string/txt_my_repair_order"
-                        android:textColor="@color/black"
+                        android:textColor="@color/txt_color"
                         android:textSize="@dimen/common_txt_size" />
 
                     <ImageView
@@ -501,9 +537,11 @@
                         android:id="@+id/tv_system_message"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:drawableLeft="@mipmap/d54_icon9"
+                        android:drawablePadding="@dimen/dp_10"
                         android:gravity="center_vertical"
                         android:text="@string/txt_system_message"
-                        android:textColor="@color/black"
+                        android:textColor="@color/txt_color"
                         android:textSize="@dimen/common_txt_size" />
 
                     <ImageView
