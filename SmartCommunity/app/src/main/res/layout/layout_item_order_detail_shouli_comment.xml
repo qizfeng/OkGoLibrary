@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_header"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/d54_tx" />
+
+        <LinearLayout
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/item_order_detail_shouli_comment_name"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/login_bottom_txt"
+                    android:textSize="14sp"
+                    android:text="吕乐乐"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/item_order_detail_shouli_comment_pro"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="5dp"
+                    android:background="@drawable/table_frame_blue"
+                    android:textColor="@color/login_bottom_txt"
+                    android:textSize="14sp"
+                    android:text="水工"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/item_order_detail_shouli_comment_time"
+                    android:textColor="@color/color_gray_999999"
+                    android:textSize="14sp"
+                    android:text="2017/01/01   16:00"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/item_order_detail_shouli_comment_num"
+                android:textColor="@color/color_gray_999999"
+                android:textSize="14sp"
+                android:layout_marginTop="2dp"
+                android:text="工号： 266231311312"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/item_order_detail_shouli_comment_comment"
+        android:textColor="@color/color_gray_999999"
+        android:textSize="14sp"
+        android:layout_marginRight="15dp"
+        android:lineSpacingExtra="5dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="10dp"
+        android:text="最新评论： 266231311312"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:id="@+id/view_line"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/common_gray_bg"/>
+
+
+</LinearLayout>

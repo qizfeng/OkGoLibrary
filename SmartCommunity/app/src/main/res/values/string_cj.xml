@@ -10,6 +10,13 @@
     <!--文章详情-->
     <string name="articledetails_title">文章详情</string>
     <string name="public_transportation">公交</string>
+    <string name="community">阳光园智慧社区</string>
+    <string name="order_detail">订单详情</string>
+    <string name="tel">电话</string>
+    <string name="my_kefu">联系平台客服</string>
+    <string name="my_fuwu">服务条款</string>
+    <string name="my_zhinan">使用指南</string>
+    <string name="menu_off_duty">下班</string>
 
 
 </resources>

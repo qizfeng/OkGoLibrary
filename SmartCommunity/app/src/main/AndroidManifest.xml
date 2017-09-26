@@ -364,7 +364,11 @@
         <activity android:name=".ui.life.minsheng.ArticleDetailsActivity" />
         <activity android:name=".ui.life.minsheng.PublicTransportationActivity" />
         <activity android:name=".ui.life.minsheng.TransportationDetailsActivity" />
-        <activity android:name=".ui.life.minsheng.TransportationBaiduMapActivity"></activity>
+        <activity android:name=".ui.life.minsheng.TransportationBaiduMapActivity" />
+        <activity android:name=".ui.me.CommunityActivity" />
+        <activity android:name=".ui.me.OrderDetailActivity" />
+        <activity android:name=".ui.me.MyActivity" />
+        <activity android:name=".ui.me.ServiesClauseActivity"></activity>
     </application>
 
 </manifest>

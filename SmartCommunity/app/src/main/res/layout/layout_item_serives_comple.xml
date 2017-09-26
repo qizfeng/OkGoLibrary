@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.mcxtzhang.swipemenulib.SwipeMenuLayout
+            android:id="@+id/swipelayout"
+            android:clickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:id="@+id/rl_content"
+                android:paddingLeft="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="90dp">
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/item_title"
+                        android:layout_centerVertical="true"
+                        android:text="一区一栋1单元1001"
+                        android:textSize="14sp"
+                        android:textColor="@color/color_gray_333333"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/item_data"
+                        android:layout_centerVertical="true"
+                        android:text="2007-06-20  19:00"
+                        android:textSize="12sp"
+                        android:layout_marginTop="13dp"
+                        android:textColor="@color/color_gray_666666"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/item_type"
+                        android:text="【电】"
+                        android:textSize="14sp"
+                        android:textColor="@color/login_bottom_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+
+                        android:layout_marginRight="15dp"
+                        android:layout_marginLeft="@dimen/dp_60"
+                        android:src="@mipmap/d53_dianhua"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+            <LinearLayout
+                android:background="@color/color_red_d54824"
+                android:gravity="center"
+                android:layout_width="60dp"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/item_del"
+                    android:gravity="center"
+                    android:text="删除"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </com.mcxtzhang.swipemenulib.SwipeMenuLayout>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_gray_eeeeee"/>
+</LinearLayout>

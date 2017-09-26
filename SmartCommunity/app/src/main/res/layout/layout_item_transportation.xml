@@ -1,30 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <LinearLayout
+    android:orientation="horizontal"
     android:background="@color/white"
-    android:orientation="horizontal">
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
     <TextView
-        android:id="@+id/item_name"
-        android:textColor="@color/black"
-        android:layout_weight="1"
-        android:paddingRight="15dp"
-        android:paddingLeft="15dp"
-        android:textSize="14sp"
-        android:gravity="center_vertical"
-        android:drawablePadding="8dp"
-        android:drawableLeft="@mipmap/d39_icn2"
-        android:text="1路公交车路线"
+        android:layout_height="60dp"
         android:layout_width="wrap_content"
-        android:layout_height="60dp" />
-    <TextView
-        android:layout_marginRight="15dp"
-        android:layout_gravity="center_vertical"
+        android:text="1路公交车路线"
+        android:drawableLeft="@mipmap/d39_icn2"
+        android:drawablePadding="8dp"
         android:gravity="center_vertical"
-        android:drawableTop="@mipmap/d39_icn1"
+        android:textSize="14sp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_weight="1"
+        android:textColor="@color/black"
+        android:id="@+id/item_name"/>
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
         android:text="路线"
+        android:gravity="center_vertical"
         android:textSize="12sp"
         android:textColor="#999999"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:drawableTop="@mipmap/d39_icn1"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="15dp"/>
+
 </LinearLayout>

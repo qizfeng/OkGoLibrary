@@ -16,8 +16,10 @@
             android:id="@+id/bmapView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/color_gray_e5e5e5" />
+            android:clickable="true"
+            />
         <LinearLayout
+            android:id="@+id/snmnds"
             android:background="@color/white"
             android:paddingRight="30dp"
             android:paddingBottom="16dp"
