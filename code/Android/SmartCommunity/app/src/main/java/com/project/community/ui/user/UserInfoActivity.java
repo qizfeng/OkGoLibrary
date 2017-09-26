@@ -444,16 +444,17 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
                     break;
                 case CODE_GALLERY_REQUEST://访问相册完成回调
                     if (hasSdcard()) {
-                        cropImageUri = Uri.fromFile(fileCropUri);
-                        Uri newUri = Uri.parse(PhotoUtils.getPath(this, data.getData()));
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                            newUri = FileProvider.getUriForFile(this, "com.project.community", new File(newUri.getPath()));
-                        }
                         try {
+                            cropImageUri = Uri.fromFile(fileCropUri);
+                            Uri newUri = Uri.parse(PhotoUtils.getPath(this, data.getData()));
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                newUri = FileProvider.getUriForFile(this, "com.project.community", new File(newUri.getPath()));
+                            }
+                            LogUtils.e("cropImageUri>>:"+newUri.toString()+","+cropImageUri.toString());
                             PhotoUtils.cropImageUri(this, newUri, cropImageUri, 1, 1, output_X, output_Y, CODE_RESULT_REQUEST);
                         }catch (Exception e){
                             e.printStackTrace();
-                            showToast("无法获取该相册路径,请选择其他相册");
+                            showToast(getString(R.string.toast_error_photo));
                         }
 //                        uploadFile(new File( Uri.parse(PhotoUtils.getPath(this, data.getData())).getPath()));
                     } else {
@@ -461,6 +462,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
                     }
                     break;
                 case CODE_RESULT_REQUEST:
+
                     Bitmap bitmap = PhotoUtils.getBitmapFromUri(cropImageUri, this);
                     if (bitmap != null) {
                         uploadFile(new File(cropImageUri.getPath()));

@@ -122,6 +122,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                     showToast(getString(R.string.toast_no_login));
                     return false;
                 }
+                if(!"2".equals(getUser(this).roleType)){
+                    showToast(getString(R.string.toast_no_permission));
+                    return false;
+                }
                 checkFragment = INDEX_COMMUNITY_FRAGMENT;
                 switchFragment(checkFragment);
                 initForMessageCenterIcon(bottom_navigation, false);

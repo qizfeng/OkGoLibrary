@@ -26,7 +26,7 @@
     <string name="txt_repair_record">报修记录</string>
     <string name="txt_family_info">家庭信息</string>
     <string name="txt_shop_manage">商铺管理</string>
-    <string name="txt_apply_shop">+申请商铺</string>
+    <string name="txt_apply_shop">申请商铺</string>
     <string name="txt_my_repair_order">我的维修单</string>
     <string name="txt_system_message">系统消息</string>
 
@@ -280,7 +280,8 @@
     <string name="toast_empty_username">用户名不能为空</string>
     <string name="toast_error_idcard">请输入正确的身份证号</string>
     <string name="toast_no_login">没有登录,无法进行此操作</string>
-
+    <string name="toast_no_permission">没有权限进行此操作,请联系管理员</string>
+    <string name="toast_error_photo">无法获取该相册路径,请选择其他相册</string>
     <string name="txt_save">保存</string>
     <string name="txt_confirm">确定</string>
     <string name="simple_view_behavior">com.project.community.view.SimpleViewBehavior</string>

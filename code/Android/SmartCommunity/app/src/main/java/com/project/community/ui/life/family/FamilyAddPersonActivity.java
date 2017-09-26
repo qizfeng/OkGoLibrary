@@ -818,11 +818,17 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
                     break;
                 case CODE_GALLERY_REQUEST://访问相册完成回调
                     if (hasSdcard()) {
-                        cropImageUri = Uri.fromFile(fileCropUri);
-                        Uri newUri = Uri.parse(PhotoUtils.getPath(this, data.getData()));
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-                            newUri = FileProvider.getUriForFile(this, "com.project.community", new File(newUri.getPath()));
-                        PhotoUtils.cropImageUri(this, newUri, cropImageUri, 1, 1, output_X, output_Y, CODE_RESULT_REQUEST);
+                        try {
+                            cropImageUri = Uri.fromFile(fileCropUri);
+                            Uri newUri = Uri.parse(PhotoUtils.getPath(this, data.getData()));
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                newUri = FileProvider.getUriForFile(this, "com.project.community", new File(newUri.getPath()));
+                            }
+                            PhotoUtils.cropImageUri(this, newUri, cropImageUri, 1, 1, output_X, output_Y, CODE_RESULT_REQUEST);
+                        }catch (Exception e){
+                            e.printStackTrace();
+                            showToast(getString(R.string.toast_error_photo));
+                        }
                     } else {
                         showToast("设备没有SD卡！");
                     }
