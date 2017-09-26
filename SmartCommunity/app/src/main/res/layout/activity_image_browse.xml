@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="@color/color_gray_333333"
     android:orientation="vertical">
 
     <android.support.v4.view.ViewPager
@@ -17,13 +17,14 @@
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:onClick="onBack"
-        android:padding="5dp"
+        android:padding="@dimen/dp_10"
         android:src="@mipmap/iv_back" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:textSize="@dimen/common_txt_size"
+        android:visibility="gone"
         android:textColor="@color/black"
         android:text="@string/txt_save"
         android:layout_gravity="right"/>

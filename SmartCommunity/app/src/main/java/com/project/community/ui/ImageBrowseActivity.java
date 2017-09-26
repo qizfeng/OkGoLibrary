@@ -1,14 +1,18 @@
 package com.project.community.ui;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.ui.adapter.ImageBrowserAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.OnClick;
@@ -26,6 +30,12 @@ public class ImageBrowseActivity extends BaseActivity {
 
     private int position;
 
+    public static void startActivity(Context context,ArrayList<String> imgs){
+        Intent intent = new Intent(context,ImageBrowseActivity.class);
+        intent.putStringArrayListExtra("imgs",imgs);
+        context.startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +51,13 @@ public class ImageBrowseActivity extends BaseActivity {
         PagerAdapter adapter = new ImageBrowserAdapter(this, imgs);
         search_viewpager.setAdapter(adapter);
         search_viewpager.setCurrentItem(position);
+        search_viewpager.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                finish();
+                return false;
+            }
+        });
     }
 
     public void onBack(View view) {
