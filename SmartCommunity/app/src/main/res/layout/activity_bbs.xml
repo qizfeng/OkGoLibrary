@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@color/common_gray_bg"
+    tools:context="com.project.community.ui.life.minsheng.BBSActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/pub_layout_toolbar"/>
+        <android.support.design.widget.TabLayout
+            android:id="@+id/bbs_tablayout"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingRight="15dp"
+            android:paddingLeft="15dp"
+            app:tabIndicatorColor="@color/login_bottom_txt"
+            app:tabSelectedTextColor="@color/login_bottom_txt"
+            app:tabTextColor="@color/color_gray_666666"
+            app:tabMode="scrollable"
+            app:tabGravity="fill"
+            app:tabTextAppearance="@style/MyTabLayoutTextAppearance">
+
+        </android.support.design.widget.TabLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/bbs_viewpager"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/bbs_btn_send_message"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_gravity="bottom|right"
+        android:background="@drawable/press_bbs_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+</FrameLayout>

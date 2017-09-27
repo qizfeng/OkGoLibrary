@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/common_gray_bg"
+    tools:context="com.project.community.ui.life.minsheng.AdrressActivity">
+
+    <include layout="@layout/pub_layout_toolbar"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.baidu.mapapi.map.TextureMapView
+            android:id="@+id/bmapView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_gray_e5e5e5" />
+
+        <ImageView
+            android:id="@+id/iv_current_poi"
+            android:layout_width="@dimen/dp_45"
+            android:layout_height="@dimen/dp_45"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/dp_20"
+            android:src="@mipmap/d30_btn1" />
+        <ImageView
+            android:id="@+id/imgs_datouzheng"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/d32_icon1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+</LinearLayout>

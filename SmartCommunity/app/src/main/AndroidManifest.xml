@@ -368,7 +368,14 @@
         <activity android:name=".ui.me.CommunityActivity" />
         <activity android:name=".ui.me.OrderDetailActivity" />
         <activity android:name=".ui.me.MyActivity" />
-        <activity android:name=".ui.me.ServiesClauseActivity"></activity>
+        <activity android:name=".ui.me.ServiesClauseActivity" />
+        <activity
+            android:name=".ui.life.minsheng.ApplyStoreActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".ui.life.minsheng.AdrressActivity" />
+        <activity android:name=".ui.life.minsheng.BBSActivity" />
+        <activity android:name=".ui.life.minsheng.SendMessageActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
     </application>
 
 </manifest>

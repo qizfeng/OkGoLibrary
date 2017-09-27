@@ -45,11 +45,13 @@ public class OrderDetailShouliApdater extends BaseQuickAdapter<CommentModel, Bas
                 view1.setVisibility(View.INVISIBLE);
                 baseViewHolder.setImageResource(R.id.item_cirimags,R.mipmap.d41_dian_p)
                         .setVisible(R.id.item_iscurrt,false)
+                        .setVisible(R.id.item_view_line_, true)
                         .setVisible(R.id.item_iscurrt_evaluate,false)
                         .setVisible(R.id.item_iscurrt_reylerview,false);
             } else if (baseViewHolder.getLayoutPosition() == 6) {
                 baseViewHolder.setVisible(R.id.item_iscurrt,true)
                         .setVisible(R.id.item_iscurrt,true)
+                        .setVisible(R.id.item_view_line_, true)
                         .setVisible(R.id.item_iscurrt_evaluate,false)
                         .setVisible(R.id.item_iscurrt_reylerview,true);
                 List<CommentModel> data=new ArrayList<>();
@@ -61,11 +63,10 @@ public class OrderDetailShouliApdater extends BaseQuickAdapter<CommentModel, Bas
                 recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
                 recyclerView.setAdapter(orderDetailShouliCommentApdater);
 
-            } else {
-                if (baseViewHolder.getLayoutPosition() == getItemCount() - 1) {
-                    view2.setVisibility(View.INVISIBLE);
+            } else if (baseViewHolder.getLayoutPosition() == getItemCount() - 1) {
                     baseViewHolder.setImageResource(R.id.item_cirimags, R.mipmap.d41_dian_p)
                             .setVisible(R.id.item_iscurrt, true)
+                            .setVisible(R.id.item_view_line_, false)
                             .setVisible(R.id.item_iscurrt_evaluate, true)
                             .setVisible(R.id.item_iscurrt_reylerview, false);
                 } else {
@@ -73,10 +74,9 @@ public class OrderDetailShouliApdater extends BaseQuickAdapter<CommentModel, Bas
                     view2.setVisibility(View.VISIBLE);
                     baseViewHolder.setImageResource(R.id.item_cirimags, R.mipmap.d41_dian)
                             .setVisible(R.id.item_iscurrt, false)
+                            .setVisible(R.id.item_view_line_, true)
                             .setVisible(R.id.item_iscurrt_evaluate, false)
                             .setVisible(R.id.item_iscurrt_reylerview, false);
                 }
-            }
-
     }
 }

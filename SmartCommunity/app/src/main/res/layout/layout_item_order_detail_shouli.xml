@@ -79,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
-                android:visibility="gone"
+                android:visibility="visible"
                 android:id="@+id/item_iscurrt_evaluate"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -152,6 +152,7 @@
 
         </LinearLayout>
         <View
+            android:id="@+id/item_view_line_"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#E7E7E7"/>

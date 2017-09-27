@@ -3,7 +3,6 @@ package com.project.community.ui.me;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -13,21 +12,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
-
-import com.library.okgo.utils.KeyBoardUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.listener.RecycleItemClickListener;
 import com.project.community.model.CommentModel;
 import com.project.community.ui.adapter.ArticleDetailsImagsAdapter;
 import com.project.community.ui.adapter.OrderDetailShouliApdater;
-import com.project.community.ui.life.TopicDetailActivity;
-import com.project.community.view.SpacesItemDecoration;
-import com.umeng.socialize.ShareAction;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.media.UMImage;
-import com.umeng.socialize.media.UMWeb;
-import com.umeng.socialize.shareboard.ShareBoardConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,10 +99,10 @@ public class OrderDetailActivity extends BaseActivity {
 
             }
         });
-        orderDetailRecylerview.setItemAnimator(new DefaultItemAnimator());
+//        orderDetailRecylerview.setItemAnimator(new DefaultItemAnimator());
         orderDetailRecylerview.setLayoutManager(new LinearLayoutManager(this));
-        SpacesItemDecoration decoration = new SpacesItemDecoration(0, false);
-        orderDetailRecylerview.addItemDecoration(decoration);
+//        SpacesItemDecoration decoration = new SpacesItemDecoration(0, false);
+//        orderDetailRecylerview.addItemDecoration(decoration);
         orderDetailRecylerview.setAdapter(orderDetailShouliApdater);
 
         grid_photoAdapter=new ArticleDetailsImagsAdapter(this,mImages);
