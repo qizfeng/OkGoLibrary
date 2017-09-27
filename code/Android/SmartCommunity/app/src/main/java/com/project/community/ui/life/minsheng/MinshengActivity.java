@@ -141,22 +141,22 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
         serverDao.getNewsList(type, new JsonCallback<BaseResponse<List<NewsModel>>>() {
             @Override
             public void onSuccess(BaseResponse<List<NewsModel>> baseResponse, Call call, Response response) {
-                    if (page == 1) {
+                if (page == 1) {
+                    List<NewsModel> data = new ArrayList<>();
+                    data.addAll(baseResponse.newslist);
+                    mAdapter.setNewData(data);
+                    mAdapter.setEnableLoadMore(true);
+                } else {
+                    //显示没有更多数据
+                    if (page == 3) {
+                        mAdapter.loadMoreEnd();         //加载完成
+                    } else {
                         List<NewsModel> data = new ArrayList<>();
                         data.addAll(baseResponse.newslist);
-                        mAdapter.setNewData(data);
-                        mAdapter.setEnableLoadMore(true);
-                    } else {
-                        //显示没有更多数据
-                        if (page == 3) {
-                            mAdapter.loadMoreEnd();         //加载完成
-                        } else {
-                            List<NewsModel> data = new ArrayList<>();
-                            data.addAll(baseResponse.newslist);
-                            mAdapter.addData(data);
-                            mAdapter.loadMoreComplete();
-                        }
+                        mAdapter.addData(data);
+                        mAdapter.loadMoreComplete();
                     }
+                }
             }
 
             @Override

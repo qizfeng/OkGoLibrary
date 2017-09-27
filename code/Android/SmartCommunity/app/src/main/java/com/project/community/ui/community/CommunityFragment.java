@@ -956,6 +956,8 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
         } else {
             iv_tag.setVisibility(View.GONE);
         }
+
+
         tv_relative.setText(model.headRelation);
         tv_position.setText(model.occupation);
         if ("1".equals(model.sex))
@@ -1257,6 +1259,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                                             imageView.setVisibility(View.GONE);
                                             saveWillPlayAnim(getActivity(), false);
                                             dialog.dismiss();
+                                            getCommunityData();
                                         }
                                     }, 2000);
 
