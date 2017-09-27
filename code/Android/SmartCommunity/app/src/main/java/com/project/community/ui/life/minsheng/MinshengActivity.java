@@ -82,6 +82,13 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
 
     private void initData() {
         header = LayoutInflater.from(this).inflate(R.layout.layout_header_minsheng, null);
+        header.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MinshengActivity.this,ApplyStoreActivity.class);
+                startActivity(intent);
+            }
+        });
         gridView = (HorizaontalGridView) header.findViewById(R.id.gridview);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -211,7 +218,8 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
                 startActivity(intent);
                 break;
             case 4:
-                intent = new Intent(MinshengActivity.this, ArticleDetailsActivity.class);
+//                intent = new Intent(MinshengActivity.this, ArticleDetailsActivity.class);
+                intent = new Intent(MinshengActivity.this, BBSActivity.class);
                 startActivity(intent);
                 break;
             case 2:

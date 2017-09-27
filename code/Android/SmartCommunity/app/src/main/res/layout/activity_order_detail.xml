@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <com.project.community.ui.me.MyScrollview
+        <com.project.community.view.MyScrollview
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <LinearLayout
@@ -239,15 +239,20 @@
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="50dp" />
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/order_detail_recylerview"
-                    android:background="@color/white"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginBottom="1dp"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/order_detail_recylerview"
+                        android:background="@color/white"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                </android.support.v7.widget.RecyclerView>
+                    </android.support.v7.widget.RecyclerView>
+                </RelativeLayout>
+
 
                 <LinearLayout
                     android:paddingTop="15dp"
@@ -297,9 +302,9 @@
                     android:background="@color/white"
                     android:numColumns="3"/>
             </LinearLayout>
-        </com.project.community.ui.me.MyScrollview>
+        </com.project.community.view.MyScrollview>
 
-        <com.project.community.ui.life.minsheng.MyButton
+        <com.project.community.view.MyButton
             android:id="@+id/order_detail_complete"
             android:text="已完成"
             android:gravity="center"

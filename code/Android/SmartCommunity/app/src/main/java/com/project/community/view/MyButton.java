@@ -1,4 +1,4 @@
-package com.project.community.ui.life.minsheng;
+package com.project.community.view;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;

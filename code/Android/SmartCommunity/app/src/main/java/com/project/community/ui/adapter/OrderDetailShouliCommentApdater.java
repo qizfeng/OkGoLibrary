@@ -47,6 +47,6 @@ public class OrderDetailShouliCommentApdater extends BaseQuickAdapter<CommentMod
                     baseViewHolder .setVisible(R.id.item_order_detail_shouli_comment_pro,false)
                                         .setVisible(R.id.view_line,true)
                                         .setVisible(R.id.item_order_detail_shouli_comment_time,true);
-                }
+            }
     }
 }

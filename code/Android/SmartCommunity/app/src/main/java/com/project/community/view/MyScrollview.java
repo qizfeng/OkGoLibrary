@@ -1,4 +1,4 @@
-package com.project.community.ui.me;
+package com.project.community.view;
 
 import android.content.Context;
 import android.util.AttributeSet;

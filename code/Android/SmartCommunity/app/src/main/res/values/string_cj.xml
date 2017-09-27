@@ -19,4 +19,47 @@
     <string name="menu_off_duty">下班</string>
 
 
+    <!--店铺申请-->
+    <string name="btn_confire">确认并提交</string>
+    <string name="store_Apply">申请店铺</string>
+    <string name="store_apply_title">店铺名称</string>
+    <string name="store_apply_title_hit">请输入店铺名称</string>
+    <string name="store_apply_name">联系人</string>
+    <string name="store_apply_name_hit">请输入联系人</string>
+    <string name="store_apply_tel">联系电话</string>
+    <string name="store_apply_tel_hit">请输入联系电话</string>
+    <string name="store_apply_address">营业地址</string>
+    <string name="store_apply_type">分类</string>
+    <string name="store_apply_important">主营业务</string>
+    <string name="store_apply_important_hit">请输入主营业务</string>
+    <string name="store_apply_info">填写主体信息</string>
+    <string name="store_apply_company_name">企业名称</string>
+    <string name="store_apply_company_name_hit">请输入企业名称</string>
+    <string name="store_apply_business_license">营业执照号</string>
+    <string name="store_apply_business_license_hit">请输入营业执照号</string>
+    <string name="store_apply_business_license_photo">营业执照(正/反)</string>
+    <string name="store_apply_photo_hit">(jpg、png格式)</string>
+    <string name="store_apply_legal_person">法人姓名</string>
+    <string name="store_apply_legal_person_hit">请输入法人姓名</string>
+    <string name="store_apply_legal_person_photo">法人身份证(正/反)</string>
+    <string name="store_apply_predict">预计在7个工作日完成审核</string>
+
+
+    <!--地址页面-->
+    <string name="address">地址</string>
+    <string name="address_confire">确定</string>
+
+    <!--社区论坛页面页面-->
+    <string name="bbs">社区论坛</string>
+
+    <!--发信息页面-->
+    <string name="send_message">发信息</string>
+    <string name="send_message_type">分类</string>
+    <string name="send_message_type_hit">请选择</string>
+    <string name="send_message_title_hit">请输入标题</string>
+    <string name="send_message_content_hit">亲~来说点什么吧!</string>
+    <string name="send_message_uoload_img">上传图片</string>
+    <string name="send_message_commit">立即发布</string>
+    <string name="send_message_photo_hit">(支持jpg、png格式.)</string>
+
 </resources>

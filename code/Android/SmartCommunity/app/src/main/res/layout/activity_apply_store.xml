@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/common_gray_bg"
+    tools:context="com.project.community.ui.life.minsheng.ApplyStoreActivity">
+
+    <include layout="@layout/pub_layout_toolbar"/>
+    <com.project.community.view.MyScrollview
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+                <TextView
+                    style="@style/apply_store_tv_title"
+                    android:text="@string/store_apply_title"
+                    android:layout_width="105dp"
+                    android:layout_height="match_parent" />
+                <EditText
+                    android:id="@+id/apply_store_et_title"
+                    style="@style/apply_store_et_title"
+                    android:hint="@string/store_apply_title_hit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/common_gray_bg"/>
+            <LinearLayout
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+                <TextView
+                    style="@style/apply_store_tv_title"
+                    android:text="@string/store_apply_name"
+                    android:layout_width="105dp"
+                    android:layout_height="match_parent" />
+                <EditText
+                    android:id="@+id/apply_store_et_name"
+                    style="@style/apply_store_et_title"
+                    android:hint="@string/store_apply_name_hit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/common_gray_bg"/>
+            <LinearLayout
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+                <TextView
+                    style="@style/apply_store_tv_title"
+                    android:text="@string/store_apply_tel"
+                    android:layout_width="105dp"
+                    android:layout_height="match_parent" />
+                <EditText
+                    android:id="@+id/apply_store_et_tel"
+                    style="@style/apply_store_et_title"
+                    android:hint="@string/store_apply_tel_hit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/common_gray_bg"/>
+            <LinearLayout
+                android:id="@+id/ll_apply_store_tv_address"
+                android:background="@drawable/press_selector"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+                <TextView
+                    style="@style/apply_store_tv_title"
+                    android:text="@string/store_apply_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:id="@+id/apply_store_tv_address"
+                    style="@style/apply_store_tv_title"
+                    android:gravity="right|center_vertical"
+                    android:paddingRight="12dp"
+                    android:hint="@string/registration_change"
+                    android:drawablePadding="7dp"
+                    android:drawableRight="@mipmap/iv_arrow_right"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/common_gray_bg"/>
+            <LinearLayout
+                android:id="@+id/ll_apply_store_tv_type"
+                android:background="@drawable/press_selector"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+                <TextView
+                    style="@style/apply_store_tv_title"
+                    android:text="@string/store_apply_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:id="@+id/apply_store_tv_type"
+                    style="@style/apply_store_tv_title"
+                    android:gravity="right|center_vertical"
+                    android:paddingRight="12dp"
+                    android:hint="@string/registration_change"
+                    android:drawablePadding="7dp"
+                    android:drawableRight="@mipmap/iv_arrow_right"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/common_gray_bg"/>
+            <LinearLayout
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+                <TextView
+                    style="@style/apply_store_tv_title"
+                    android:text="@string/store_apply_important"
+                    android:layout_width="105dp"
+                    android:layout_height="match_parent" />
+                <EditText
+                    android:id="@+id/apply_store_et_important"
+                    style="@style/apply_store_et_title"
+                    android:hint="@string/store_apply_important_hit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/white"/>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                style="@style/apply_store_tv_title"
+                android:textStyle="bold"
+                android:textColor="@color/login_bottom_txt"
+                android:text="@string/store_apply_info"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="45dp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/common_gray_bg"/>
+            <LinearLayout
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+            <TextView
+                style="@style/apply_store_tv_title"
+                android:text="@string/store_apply_company_name"
+                android:layout_width="105dp"
+                android:layout_height="match_parent" />
+            <EditText
+                android:id="@+id/apply_store_et_company_name"
+                style="@style/apply_store_et_title"
+                android:hint="@string/store_apply_company_name_hit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/common_gray_bg"/>
+            <LinearLayout
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+                <TextView
+                    style="@style/apply_store_tv_title"
+                    android:text="@string/store_apply_business_license"
+                    android:layout_width="105dp"
+                    android:layout_height="match_parent" />
+                <EditText
+                    android:id="@+id/apply_store_et_business_license"
+                    style="@style/apply_store_et_title"
+                    android:hint="@string/store_apply_business_license_hit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/common_gray_bg"/>
+            <LinearLayout
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+                <TextView
+                    style="@style/apply_store_tv_title"
+                    android:text="@string/store_apply_business_license_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+                <TextView
+                    style="@style/apply_store_et_title"
+                    android:hint="@string/store_apply_photo_hit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+
+            <com.project.community.view.MyGridView
+                android:id="@+id/apply_store_gv_business_license"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingBottom="15dp"
+                android:horizontalSpacing="8dp"
+                android:numColumns="2">
+
+            </com.project.community.view.MyGridView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/common_gray_bg"/>
+            <LinearLayout
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+                <TextView
+                    style="@style/apply_store_tv_title"
+                    android:text="@string/store_apply_legal_person"
+                    android:layout_width="105dp"
+                    android:layout_height="match_parent" />
+                <EditText
+                    android:id="@+id/apply_store_et_legal_person"
+                    style="@style/apply_store_et_title"
+                    android:hint="@string/store_apply_legal_person_hit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/common_gray_bg"/>
+
+            <LinearLayout
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+                <TextView
+                    style="@style/apply_store_tv_title"
+                    android:text="@string/store_apply_legal_person_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+                <TextView
+                    style="@style/apply_store_et_title"
+                    android:hint="@string/store_apply_photo_hit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <com.project.community.view.MyGridView
+                android:id="@+id/apply_store_gv_legal_person"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingBottom="15dp"
+                android:horizontalSpacing="8dp"
+                android:numColumns="2">
+
+            </com.project.community.view.MyGridView>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/common_gray_bg"/>
+            <TextView
+                style="@style/apply_store_tv_title"
+                android:gravity="center"
+                android:text="@string/store_apply_predict"
+                android:textColor="@color/color_red_d54824"
+                android:layout_width="match_parent"
+                android:layout_height="42dp" />
+        </LinearLayout>
+    </com.project.community.view.MyScrollview>
+    <com.project.community.view.MyButton
+        android:id="@+id/apply_store_btn_confire"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:background="@color/login_bottom_txt"
+        android:text="@string/btn_confire"
+        android:layout_width="match_parent"
+        android:layout_height="44dp" />
+</LinearLayout>

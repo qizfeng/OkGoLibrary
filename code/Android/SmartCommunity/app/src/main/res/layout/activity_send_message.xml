@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/common_gray_bg"
+    tools:context="com.project.community.ui.life.minsheng.SendMessageActivity">
+
+    <include layout="@layout/pub_layout_toolbar" />
+    <com.project.community.view.MyScrollview
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:id="@+id/send_message_ll_type"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_item_height"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/press_selector"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:drawablePadding="@dimen/dp_10"
+                    android:gravity="center_vertical"
+                    android:text="@string/send_message_type"
+                    android:textColor="@color/txt_color"
+                    android:textSize="@dimen/common_txt_size_small" />
+
+                <TextView
+                    android:id="@+id/send_message_tv_type"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/common_txt_size_small"
+                    android:text=""
+                    android:hint="@string/send_message_type_hit"
+                    android:textColorHint="@color/color_gray_999999"
+                    android:textColor="@color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawablePadding="7dp"
+                    android:drawableRight="@mipmap/iv_arrow_right" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:background="@color/common_gray_bg" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/send_message_et_title"
+                    android:textSize="@dimen/common_txt_size_small"
+                    android:gravity="top"
+                    android:maxLength="35"
+                    android:hint="@string/send_message_title_hit"
+                    android:paddingRight="10dp"
+                    android:paddingTop="15dp"
+                    android:paddingLeft="10dp"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp" />
+                <TextView
+                    android:id="@+id/send_message_tv_title_num"
+                    android:background="@color/white"
+                    android:text="0/35"
+                    android:textSize="12sp"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="10dp"
+                    android:gravity="right"
+                    android:textColor="@color/color_gray_999999"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/common_gray_bg"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/send_message_et_content"
+                    android:textSize="@dimen/common_txt_size_small"
+                    android:gravity="top"
+                    android:hint="@string/send_message_content_hit"
+                    android:maxLength="350"
+                    android:paddingRight="10dp"
+                    android:paddingTop="15dp"
+                    android:paddingLeft="10dp"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp" />
+                <TextView
+                    android:id="@+id/send_message_tv_content_num"
+                    android:background="@color/white"
+                    android:text="0/350"
+                    android:textSize="12sp"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="10dp"
+                    android:gravity="right"
+                    android:textColor="@color/color_gray_999999"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/common_gray_bg"/>
+            <LinearLayout
+                android:background="@color/white"
+                android:padding="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/txt_color"
+                    android:textSize="@dimen/common_txt_size_small"
+                    android:text="@string/send_message_uoload_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:background="@color/white"
+                    android:text="@string/send_message_photo_hit"
+                    android:textSize="12sp"
+                    android:gravity="right"
+                    android:textColor="@color/color_gray_999999"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <com.project.community.view.MyGridView
+                android:id="@+id/send_message_gv"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="15dp"
+                android:horizontalSpacing="4dp"
+                android:verticalSpacing="4dp"
+                android:numColumns="3">
+
+            </com.project.community.view.MyGridView>
+            <com.project.community.view.MyButton
+                android:id="@+id/send_message_summit"
+                android:background="@drawable/press_button_rad10dp"
+                android:gravity="center"
+                android:textSize="15sp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="30dp"
+                android:textColor="@color/white"
+                android:text="@string/send_message_commit"
+                android:layout_width="match_parent"
+                android:layout_height="41dp" />
+        </LinearLayout>
+    </com.project.community.view.MyScrollview>
+  
+
+</LinearLayout>
