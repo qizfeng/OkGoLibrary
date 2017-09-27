@@ -490,10 +490,10 @@
             <RelativeLayout
                 android:id="@+id/layout_address"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_50"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/dp_50"
                 android:background="@color/white"
-                android:paddingLeft="@dimen/dp_15"
-                android:paddingRight="@dimen/dp_15">
+                android:paddingLeft="@dimen/dp_15">
 
                 <LinearLayout
                     android:id="@+id/layout_left_address"
@@ -513,8 +513,11 @@
                     android:id="@+id/tv_address"
                     style="@style/textview_style"
                     android:layout_height="match_parent"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
                     android:layout_toRightOf="@+id/layout_left_address"
                     android:background="@null"
+                    android:text="啊的客服杰拉德看手机发 打扫房间看哒哒哒的点点滴滴"
                     android:textColor="@color/color_gray_333333" />
             </RelativeLayout>
 

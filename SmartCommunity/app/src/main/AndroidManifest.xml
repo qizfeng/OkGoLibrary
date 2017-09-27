@@ -24,7 +24,7 @@
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <!-- 震动 -->
     <uses-permission android:name="android.permission.VIBRATE" />
-
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
@@ -233,6 +233,7 @@
             android:name=".ui.community.CommunityPersonActivity"
             android:label="@string/txt_map_person_info"
             android:screenOrientation="portrait" />
+        <activity android:name=".view.crop.CropImageActivity"/>
         <!-- 自定义service -->
         <service
             android:name=".service.AppLocationService"

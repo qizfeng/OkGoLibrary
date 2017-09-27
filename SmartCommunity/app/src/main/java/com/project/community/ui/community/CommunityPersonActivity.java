@@ -17,6 +17,7 @@ import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.constants.AppConstants;
 import com.project.community.model.FamilyPersonModel;
+import com.project.community.util.StringUtils;
 
 import butterknife.Bind;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
@@ -153,8 +154,7 @@ public class CommunityPersonActivity extends BaseActivity {
             if(TextUtils.isEmpty(model.roomAddress))
                 mTvAddress.setText("");
             else
-                mTvAddress.setText(model.roomAddress);
-
+                mTvAddress.setText(StringUtils.ToDBC(model.roomAddress));
             if (!TextUtils.isEmpty(model.memberTag)) {
                 String[] tagArr = model.memberTag.split(",");
                 if(tagArr.length==0){

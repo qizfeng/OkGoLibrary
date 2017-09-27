@@ -45,6 +45,7 @@ import com.project.community.model.FileUploadModel;
 import com.project.community.model.UserModel;
 import com.project.community.model.UserResponse;
 import com.project.community.util.ScreenUtils;
+import com.project.community.view.crop.CropImageActivity;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -450,7 +451,8 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                                 newUri = FileProvider.getUriForFile(this, "com.project.community", new File(newUri.getPath()));
                             }
-                            PhotoUtils.cropImageUri(this, newUri, cropImageUri, 1, 1, output_X, output_Y, CODE_RESULT_REQUEST);
+//                            PhotoUtils.cropImageUri(this, newUri, cropImageUri, 1, 1, output_X, output_Y, CODE_RESULT_REQUEST);
+                            CropImageActivity.startCrop(this,newUri.toString(),output_X,output_Y,CODE_RESULT_REQUEST);
                         }catch (Exception e){
                             e.printStackTrace();
                             showToast(getString(R.string.toast_error_photo));
@@ -461,7 +463,8 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
                     }
                     break;
                 case CODE_RESULT_REQUEST:
-                    Bitmap bitmap = PhotoUtils.getBitmapFromUri(cropImageUri, this);
+//                    Bitmap bitmap = PhotoUtils.getBitmapFromUri(cropImageUri, this);
+                   Bitmap bitmap=data.getExtras().getParcelable("bitmap");
                     if (bitmap != null) {
                         uploadFile(new File(cropImageUri.getPath()));
                         showImages(bitmap);

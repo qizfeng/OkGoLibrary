@@ -266,6 +266,7 @@
     <string name="txt_map_device_belong_company">所属单位</string>
     <string name="txt_map_device_remark">备注</string>
     <!--通用-->
+    <string name="txt_finish">完成</string>
     <string name="toast_exit">再按一次退出程序</string>
     <string name="toast_error_pay">获取订单信息失败</string>
     <string name="toast_error_phone">请输入正确的手机号</string>
