@@ -1,6 +1,10 @@
 package com.project.community.ui.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,14 +58,18 @@ public class ArticleDetailsImagsAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.layout_item_imags, null);
             holder = new ViewHolder(convertView);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            layoutParams.width = (App.W-30) / 3;
-            layoutParams.height = (App.W-30) / 3;
+            layoutParams.width = (App.W-84) / 3;
+//            layoutParams.height = (int) getRawSize(TypedValue.COMPLEX_UNIT_DIP, (App.W-84) / 3);
+            layoutParams.height = (App.W-84) / 3;
+
+            Log.e("cjcjcj_", App.W+"");
+            Log.e("cjcjcj_", (App.W-84) / 3+"");
+            Log.e("cjcjcj_",  layoutParams.height+"");
             holder.imagPhoto.setLayoutParams(layoutParams);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-
 
         return convertView;
     }
@@ -73,5 +81,10 @@ public class ArticleDetailsImagsAdapter extends BaseAdapter {
         ViewHolder(View view) {
             ButterKnife.bind(this,view);
         }
+    }
+    // 方法一
+    public float getRawSize(int unit, float value) {
+        Resources res = context.getResources();
+        return TypedValue.applyDimension(unit, value, res.getDisplayMetrics());
     }
 }

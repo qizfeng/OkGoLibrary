@@ -22,6 +22,7 @@
     <!--店铺申请-->
     <string name="btn_confire">确认并提交</string>
     <string name="store_Apply">申请店铺</string>
+    <string name="store_apply_upcover">上传店铺封面</string>
     <string name="store_apply_title">店铺名称</string>
     <string name="store_apply_title_hit">请输入店铺名称</string>
     <string name="store_apply_name">联系人</string>

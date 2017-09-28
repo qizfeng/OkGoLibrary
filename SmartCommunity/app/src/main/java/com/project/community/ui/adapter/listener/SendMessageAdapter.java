@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.library.okgo.utils.GlideImageLoader;
 import com.project.community.R;
 
 import java.util.List;
@@ -75,6 +76,8 @@ public class SendMessageAdapter extends BaseAdapter {
         } else {
             mImagsAdd.setVisibility(View.GONE);
             mImagsDel.setVisibility(View.VISIBLE);
+            new GlideImageLoader().onDisplayImageWithDefault(context,mImagsPhoto,datas.get(position),R.mipmap.default_image);
+
         }
         return convertView;
     }
