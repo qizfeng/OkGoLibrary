@@ -63,10 +63,10 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+import static com.project.community.R.id.linearLayout;
+
 public class TransportationBaiduMapActivity extends BaseActivity implements OnGetPoiSearchResultListener, OnGetBusLineSearchResultListener,
         BaiduMap.OnMapClickListener {
-    private static final int accuracyCircleFillColor = 0xAAFFFF88;
-    private static final int accuracyCircleStrokeColor = 0xAA00FF00;
 
     @Bind(R.id.snmnds)
     LinearLayout snmnds;
@@ -99,7 +99,6 @@ public class TransportationBaiduMapActivity extends BaseActivity implements OnGe
      */
     private BaiduMap mBaiduMap;
     private BusLineSearch mBusLineSearch = null;
-//    private InfoWindow mInfoWindow;
     /**
      * 用于显示一条公交详情结果的Overlay
      * */
@@ -107,17 +106,7 @@ public class TransportationBaiduMapActivity extends BaseActivity implements OnGe
 
 
     PoiSearch mSearch = null; // 搜索模块，也可去掉地图模块独立使用
-//    LocationListener loc_listener;
-//    static boolean flag = false;
 
-    // 定位相关
-    private MyLocationData locData;
-    LocationClient mLocClient;
-//    public MyLocationListenner myListener = new MyLocationListenner();
-    private float mCurrentAccracy;
-
-    private List<LatLngBounds> latLngBoundsList = new ArrayList<>();
-    private List<BitmapDescriptor> bitmaps = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -182,37 +171,37 @@ public class TransportationBaiduMapActivity extends BaseActivity implements OnGe
          * */
         mBaiduMap.setOnMarkerClickListener(overlay);
 
-        snmnds.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ToastUtils.showLongToast(TransportationBaiduMapActivity.this,"aaa");
-                busLineIDList.clear();
-                busLineIndex = 0;
-                //发起poi检索，从得到所有poi中找到公交线路类型的poi，再使用该poi的uid进行公交详情搜索
-                /**
-                 * public boolean searchInCity(PoiCitySearchOption option)
-                 * 城市内检索
-                 * @param option - 请求参数
-                 * @return 成功发起检索返回true , 失败返回false
-                 *
-                 * public PoiCitySearchOption city(java.lang.String city)
-                 * 检索城市
-                 * @param city - 检索城市
-                 * @return 该poi城市内检索参数对象
-                 *
-                 * public PoiCitySearchOption keyword(java.lang.String key)
-                 * 搜索关键字
-                 * @param key - 搜索关键字
-                 * @return 该poi城市内检索参数对象
-                 * */
-                mSearch.searchInCity((new PoiCitySearchOption())
-                        .city("北京")
-                        .keyword("717"));
-            }
-        });
+        startSearch("成都","118");
+
 
 
     }
+
+    private void startSearch(String City,String line){
+        busLineIDList.clear();
+        busLineIndex = 0;
+        //发起poi检索，从得到所有poi中找到公交线路类型的poi，再使用该poi的uid进行公交详情搜索
+        /**
+         * public boolean searchInCity(PoiCitySearchOption option)
+         * 城市内检索
+         * @param option - 请求参数
+         * @return 成功发起检索返回true , 失败返回false
+         *
+         * public PoiCitySearchOption city(java.lang.String city)
+         * 检索城市
+         * @param city - 检索城市
+         * @return 该poi城市内检索参数对象
+         *
+         * public PoiCitySearchOption keyword(java.lang.String key)
+         * 搜索关键字
+         * @param key - 搜索关键字
+         * @return 该poi城市内检索参数对象
+         * */
+        mSearch.searchInCity((new PoiCitySearchOption())
+                .city(City)
+                .keyword(line));
+    }
+
 
     @TargetApi(Build.VERSION_CODES.M)
     private void initData() {
@@ -268,58 +257,10 @@ public class TransportationBaiduMapActivity extends BaseActivity implements OnGe
 //        }
 //        addDeviceMarker(mDeviceModels);
     }
-    public static final int REQUEST_PERMISSION_CODE = 123;
-    public static final int REQUEST_CALL_PERMISSION_CODE = 234;
-    public static final String PERMISSION_CALL_PHONE = Manifest.permission.CALL_PHONE;
-    public static final String PERMISSION_ACCESS_FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
-    public static final String PERMISSION_ACCESS_COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
 
-    private static final String[] requestPermissions = {
-            PERMISSION_ACCESS_FINE_LOCATION,
-            PERMISSION_ACCESS_COARSE_LOCATION,
-            PERMISSION_CALL_PHONE
-    };
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case REQUEST_PERMISSION_CODE:
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // 权限被用户同意，可以去放肆了。
-                    if (mLocClient != null)
-                        mLocClient.start();
-                } else {
-                    // 权限被用户拒绝了，洗洗睡吧。
-                    ToastUtils.showShortToast(this, getString(R.string.permission_tips));
-                }
-                break;
-
-        }
-    }
 
     @Override
     public void onMapClick(LatLng latLng) {
-//        double lat = latLng.latitude;//点击位置的维度
-//        double lon = latLng.longitude;//点击位置的经度
-//        for (int i = 0; i < latLngBoundsList.size(); i++) {
-//            //西南坐标
-//            LatLng southwestLatLng = new LatLng(latLngBoundsList.get(i).southwest.latitude, latLngBoundsList.get(i).southwest.longitude);
-//            //东北坐标
-//            LatLng northeastLatLng = new LatLng(latLngBoundsList.get(i).northeast.latitude, latLngBoundsList.get(i).northeast.longitude);
-//            //点击位置在某区域范围两维度之间
-//            if (lat >= southwestLatLng.latitude && lat <= northeastLatLng.latitude) {
-//                //点击位置在某区域范围两经度之间
-//                if (lon >= southwestLatLng.longitude && lon <= northeastLatLng.longitude) {
-////                    getCommunityCensusInfo(communityModels.get(i), latLngBoundsList.get(i).getCenter());
-//                }
-//            }
-//        }
-
-        /**
-         * 隐藏当前 InfoWindow
-         * */
-        mBaiduMap.hideInfoWindow();
     }
 
     @Override
@@ -327,35 +268,6 @@ public class TransportationBaiduMapActivity extends BaseActivity implements OnGe
         return false;
     }
 
-//    /**
-//     * 定位SDK监听函数
-//     */
-//    public class MyLocationListenner implements BDLocationListener {
-//
-//        @Override
-//        public void onReceiveLocation(BDLocation location) {
-//            // map view 销毁后不在处理新接收的位置
-//            if (location == null || mMapView == null) {
-//                return;
-//            }
-//            // LogUtils.e("location:"+location.getLatitude()+","+location.getLongitude());
-//            mCurrentLat = location.getLatitude();
-//            mCurrentLon = location.getLongitude();
-//            mCurrentAccracy = location.getRadius();
-//            locData = new MyLocationData.Builder()
-//                    .accuracy(location.getRadius())
-//                    // 此处设置开发者获取到的方向信息，顺时针0-360
-//                    .accuracy(0)
-//                    .direction(mCurrentDirection)
-//                    .latitude(location.getLatitude())
-//                    .longitude(location.getLongitude())
-//                    .build();
-//            mBaiduMap.setMyLocationData(locData);
-//        }
-//
-//        public void onReceivePoi(BDLocation poiLocation) {
-//        }
-//    }
 
     @Override
     protected void onDestroy() {
@@ -368,53 +280,76 @@ public class TransportationBaiduMapActivity extends BaseActivity implements OnGe
          * */
         mBusLineSearch.destroy();
         super.onDestroy();
-//        try {
-//            // MapView的生命周期与Activity同步，当activity销毁时需调用MapView.destroy()
-//            // 退出时销毁定位
-//            if (mLocClient != null)
-//                mLocClient.stop();
-//            // 关闭定位图层
-//            mBaiduMap.setMyLocationEnabled(false);
-//            mMapView.onDestroy();
-//            mMapView = null;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
     }
 
     @Override
     public void onGetPoiResult(PoiResult result) {
-
-        if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
-            Toast.makeText(TransportationBaiduMapActivity.this, "抱歉，未找到结果",
+        if (result == null
+                || result.error == SearchResult.ERRORNO.RESULT_NOT_FOUND) {// 没有找到检索结果
+            Toast.makeText(TransportationBaiduMapActivity.this, "未找到结果",
                     Toast.LENGTH_LONG).show();
             return;
         }
-        // 遍历所有poi，找到类型为公交线路的poi
-        busLineIDList.clear();
-        /**
-         *public java.util.List<PoiInfo> getAllPoi()
-         *获取Poi检索结果
-         *@return Poi检索结果
-         **/
-        for (PoiInfo poi : result.getAllPoi()) {
-            Log.e("onGetPoiResult: ", poi.name);
-            /**
-             * public PoiInfo.POITYPE type
-             * poi类型，0：普通点，1：公交站，2：公交线路，3：地铁站，4：地铁线路,
-             * */
-            if (poi.type == PoiInfo.POITYPE.BUS_LINE
-                    || poi.type == PoiInfo.POITYPE.SUBWAY_LINE) {
+
+        if (result.error == SearchResult.ERRORNO.NO_ERROR) {// 检索结果正常返回
+            // 遍历所有poi，找到类型为公交线路的poi
+            busLineIDList.clear();
+
+            for (PoiInfo poi : result.getAllPoi()) {
+                Log.e("onGetPoiResult: ", poi.name);
                 /**
-                 * poi id 如果为isPano为true，可用此参数调用街景组件PanoramaService类的
-                 * requestPanoramaWithPoiUId方法检索街景数据
+                 * public PoiInfo.POITYPE type
+                 * poi类型，0：普通点，1：公交站，2：公交线路，3：地铁站，4：地铁线路,
                  * */
-                busLineIDList.add(poi.uid);
+                Log.e("onGetPoiResult: ", "----"+poi.type);
+                if (poi.type == PoiInfo.POITYPE.BUS_LINE
+                        || poi.type == PoiInfo.POITYPE.SUBWAY_LINE) {
+
+                    /**
+                     * poi id 如果为isPano为true，可用此参数调用街景组件PanoramaService类的
+                     * requestPanoramaWithPoiUId方法检索街景数据
+                     * */
+                    Log.e("onGetPoiResult: ","----"+ poi.uid);
+                    busLineIDList.add(poi.uid);
+                }
             }
+            searchBusline();
         }
-        SearchNextBusline(null);
+
         route = null;
     }
+
+    private void searchBusline() {
+
+        //公交的站点大于，该路线的长度。
+        if (busLineIndex >= busLineIDList.size()) {
+            busLineIndex = 0;
+        }
+        //公交站点 小于这个路线的长度
+        if (busLineIndex >= 0 && busLineIndex < busLineIDList.size()
+                && busLineIDList.size() > 0) {
+            //定义并设置公交信息结果监听者（与POI类似），并发起公交详情检索；
+            //如下代码为发起检索代码，定义监听者和设置监听器的方法与POI中的类似
+            //参数city和这个keyword路线的UID
+            // 公交检索入口
+            Log.e("searchBusline: ", "---"+busLineIDList.get(busLineIndex));
+            boolean flag = mBusLineSearch
+                    .searchBusLine((new BusLineSearchOption().city("成都")
+                            .uid(busLineIDList.get(busLineIndex))));
+            //是否成功检索
+            if (flag) {
+                //把布局隐藏
+//                linearLayout.setVisibility(View.GONE);
+                Toast.makeText(TransportationBaiduMapActivity.this, "检索成功~", Toast.LENGTH_LONG)
+                        .show();
+            } else {
+                Toast.makeText(TransportationBaiduMapActivity.this, "检索失败~", Toast.LENGTH_LONG)
+                        .show();
+            }
+            busLineIndex++;
+        }
+    }
+
     /**
      * 下一条按钮点击事件
      * */
@@ -451,14 +386,13 @@ public class TransportationBaiduMapActivity extends BaseActivity implements OnGe
         }
 
     }
+
     @Override
     public void onGetPoiDetailResult(PoiDetailResult poiDetailResult) {
-
     }
 
     @Override
     public void onGetPoiIndoorResult(PoiIndoorResult poiIndoorResult) {
-
     }
 
     @Override
@@ -468,7 +402,6 @@ public class TransportationBaiduMapActivity extends BaseActivity implements OnGe
                     Toast.LENGTH_LONG).show();
             return;
         }
-        Log.e("dsddsds", "2313131");
         mBaiduMap.clear();
         route = result;
         nodeIndex = -1;
@@ -502,45 +435,4 @@ public class TransportationBaiduMapActivity extends BaseActivity implements OnGe
         Toast.makeText(TransportationBaiduMapActivity.this, result.getBusLineName(),
                 Toast.LENGTH_SHORT).show();
     }
-//    /**
-//     * 描绘设备marker
-//     */
-//    private void addDeviceMarker(List<DeviceModel> data) {
-//        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.mipmap.d50_icon1);
-//        mBaiduMap.hideInfoWindow();
-//        for (int i = 0; i < data.size(); i++) {
-//            DeviceModel model = data.get(i);
-//            if (!TextUtils.isEmpty(model.coordinate)) {
-//                String[] coordinateArr = model.coordinate.split(",");
-//                if (coordinateArr.length == 2) {
-//                    LatLng latLng = new LatLng(Double.parseDouble(coordinateArr[1]), Double.parseDouble(coordinateArr[0]));
-//                    MarkerOptions markerOptions = new MarkerOptions();
-//                    if ("1".equals(model.facilitiesType)) {//消防栓
-//                        bitmapDescriptor = BitmapDescriptorFactory
-//                                .fromResource(R.mipmap.d50_icon2);
-//                        bitmaps.add(bitmapDescriptor);
-//                    } else if ("2".equals(model.facilitiesType)) {//摄像头
-//                        bitmapDescriptor = BitmapDescriptorFactory
-//                                .fromResource(R.mipmap.d50_icon1);
-//                        bitmaps.add(bitmapDescriptor);
-//                    } else if ("3".equals(model.facilitiesType)) {
-//                        bitmapDescriptor = BitmapDescriptorFactory
-//                                .fromResource(R.mipmap.d50_icon3);
-//                        bitmaps.add(bitmapDescriptor);
-//                    } else {
-//                        bitmapDescriptor = BitmapDescriptorFactory
-//                                .fromResource(R.mipmap.d50_icon1);
-//                        bitmaps.add(bitmapDescriptor);
-//                    }
-//
-//                    markerOptions.icon(bitmapDescriptor)
-//                            .position(latLng);
-//                    Bundle bundle = new Bundle();
-//                    bundle.putSerializable("bundle", model);
-//                    markerOptions.extraInfo(bundle);
-//                    mBaiduMap.addOverlay(markerOptions);
-//                }
-//            }
-//        }
-//    }
 }

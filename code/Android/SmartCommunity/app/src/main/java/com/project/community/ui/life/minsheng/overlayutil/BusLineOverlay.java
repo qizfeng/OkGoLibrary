@@ -12,6 +12,7 @@ import com.baidu.mapapi.map.Polyline;
 import com.baidu.mapapi.map.PolylineOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.busline.BusLineResult;
+import com.project.community.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,8 +56,9 @@ public class BusLineOverlay extends OverlayManager {
                     .position(station.getLocation())
                             .zIndex(10)
                                     .anchor(0.5f, 0.5f)
-                                            .icon(BitmapDescriptorFactory
-                                                    .fromAssetWithDpi("Icon_bus_station.png")));
+                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.d41_dian_p)));
+//                                            .icon(BitmapDescriptorFactory
+//                                                    .fromAssetWithDpi("Icon_bus_station.png")));
         }
 
         List<LatLng> points = new ArrayList<LatLng>();
@@ -68,7 +70,8 @@ public class BusLineOverlay extends OverlayManager {
         if (points.size() > 0) {
             overlayOptionses
                     .add(new PolylineOptions().width(10)
-                            .color(Color.argb(178, 0, 78, 255)).zIndex(0)
+//                            .color(Color.argb(178, 0, 78, 255)).zIndex(0)
+                            .color(Color.argb(255, 46, 102, 167)).zIndex(0)
                                     .points(points));
         }
         return overlayOptionses;

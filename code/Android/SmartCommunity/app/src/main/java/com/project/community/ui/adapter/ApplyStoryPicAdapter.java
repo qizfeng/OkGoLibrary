@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.project.community.App;
 import com.project.community.R;
 
 import java.util.List;
@@ -62,20 +64,14 @@ public class ApplyStoryPicAdapter extends BaseAdapter {
             public void onClick(View v) {
                 datas.remove(position);
                 isVisble=true;
-//                if (datas.size()>=2){
-//                    setGoneAdd(0);
-//                }else {
-//                    setGoneAdd(1);
-//                }
                 notifyDataSetChanged();
 //                onUrlListener.uoData(position);
             }
         });
 
 //        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-////        layoutParams.width = (screens[0] - 30 * 2 - 20) / 5;
-//        layoutParams.height = (screens[0] - 30 * 2 - 32) / 5;
-//        iv_f36_zhuanjia_renzheng.setLayoutParams(layoutParams);
+//        layoutParams.height = (App.W - 30 * 2 - 32) / 5;
+//        mImagsPhoto.setLayoutParams(layoutParams);
 
         if (position == getCount() - 1 && isVisble==true) {
             mImagsAdd.setVisibility(View.VISIBLE);

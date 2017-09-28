@@ -1,24 +1,50 @@
 package com.project.community.ui.me;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.library.okgo.utils.GlideImageLoader;
+import com.library.okgo.utils.photo.PhotoUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.listener.RecycleItemClickListener;
 import com.project.community.model.CommentModel;
+import com.project.community.ui.adapter.ApplyStoryPicAdapter;
 import com.project.community.ui.adapter.ArticleDetailsImagsAdapter;
 import com.project.community.ui.adapter.OrderDetailShouliApdater;
+import com.project.community.ui.adapter.listener.SendMessageAdapter;
+import com.project.community.util.ScreenUtils;
+import com.project.community.view.MyGridView;
+import com.project.community.view.crop.CropImageActivity;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +52,17 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class OrderDetailActivity extends BaseActivity {
+public class OrderDetailActivity extends BaseActivity implements View.OnClickListener {
+
+    private static final int CODE_GALLERY_REQUEST = 0xa0;
+    private static final int CODE_CAMERA_REQUEST = 0xa1;
+    private static final int CODE_RESULT_REQUEST = 0xa2;
+    private static final int CAMERA_PERMISSIONS_REQUEST_CODE = 0x03;
+    private static final int STORAGE_PERMISSIONS_REQUEST_CODE = 0x04;
+    private File fileUri = new File(Environment.getExternalStorageDirectory().getPath() + "/photo.jpg");
+    private File fileCropUri = new File(Environment.getExternalStorageDirectory().getPath() + "/crop_photo.jpg");
+    private Uri imageUri;
+    private Uri cropImageUri;
 
     @Bind(R.id.toolbar)
     Toolbar mToolBar;
@@ -55,14 +91,14 @@ public class OrderDetailActivity extends BaseActivity {
     @Bind(R.id.order_detail_et_dispose)
     EditText orderDetailEtDispose;
     @Bind(R.id.order_detail_add_imgs)
-    GridView orderDetailAddImgs;
-    @Bind(R.id.coordinatorLayout)
-    CoordinatorLayout coordinatorLayout;
+    MyGridView orderDetailAddImgs;
+    @Bind(R.id.layout_root)
+    CoordinatorLayout mLayoutRoot;
     private List<String> mImages = new ArrayList<>();
     private List<String> mAddImages = new ArrayList<>();
     private List<CommentModel> mShouliList =new ArrayList<>();
     ArticleDetailsImagsAdapter grid_photoAdapter;
-    ArticleDetailsImagsAdapter grid_photoAdapterAdd;
+    SendMessageAdapter grid_photoAdapterAdd;
     OrderDetailShouliApdater orderDetailShouliApdater;
     private MenuItem menuItem;
     @Override
@@ -77,7 +113,7 @@ public class OrderDetailActivity extends BaseActivity {
         initToolBar(mToolBar, mTvTitle, true, getString(R.string.order_detail), R.mipmap.iv_back);
         for (int i = 0; i < 6; i++) {
             mImages.add("");
-            mAddImages.add("");
+//            mAddImages.add("");
         }
         for (int i = 0; i < 10; i++) {
             CommentModel commentModel =new CommentModel();
@@ -106,9 +142,20 @@ public class OrderDetailActivity extends BaseActivity {
         orderDetailRecylerview.setAdapter(orderDetailShouliApdater);
 
         grid_photoAdapter=new ArticleDetailsImagsAdapter(this,mImages);
-        grid_photoAdapterAdd=new ArticleDetailsImagsAdapter(this,mAddImages);
+        grid_photoAdapterAdd=new SendMessageAdapter(mAddImages,this);
         orderDetailImgs.setAdapter(grid_photoAdapter);
         orderDetailAddImgs.setAdapter(grid_photoAdapterAdd);
+        orderDetailAddImgs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (mAddImages.size() >= 9) {
+                    return;
+                }
+                if (i == grid_photoAdapterAdd.getCount() - 1) {
+                    showPhotoDialog();
+                }
+            }
+        });
 
     }
 
@@ -141,4 +188,147 @@ public class OrderDetailActivity extends BaseActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case CODE_CAMERA_REQUEST://拍照完成回调
+                    cropImageUri = Uri.fromFile(fileCropUri);
+//                    PhotoUtils.cropImageUri(this, imageUri, cropImageUri, 1, 1, output_X, output_Y, CODE_RESULT_REQUEST);
+//                    uploadFile(fileCropUri);//上传图片
+                    CropImageActivity.startCrop(this, imageUri.toString(), output_X, output_Y, CODE_RESULT_REQUEST);
+                    break;
+                case CODE_GALLERY_REQUEST://访问相册完成回调
+                    if (hasSdcard()) {
+                        try {
+                            cropImageUri = Uri.fromFile(fileCropUri);
+                            Uri newUri = Uri.parse(PhotoUtils.getPath(this, data.getData()));
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                newUri = FileProvider.getUriForFile(this, "com.project.community", new File(newUri.getPath()));
+                            }
+//                            PhotoUtils.cropImageUri(this, newUri, cropImageUri, 1, 1, output_X, output_Y, CODE_RESULT_REQUEST);
+                            CropImageActivity.startCrop(this, newUri.toString(), output_X, output_Y, CODE_RESULT_REQUEST);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            showToast(getString(R.string.toast_error_photo));
+                        }
+//                        uploadFile(new File( Uri.parse(PhotoUtils.getPath(this, data.getData())).getPath()));
+                    } else {
+                        showToast("设备没有SD卡！");
+                    }
+                    break;
+                case CODE_RESULT_REQUEST:
+                    if (data != null) {
+                        mAddImages.add(data.getStringExtra("uri"));
+                        if (mAddImages.size() >= 9) {
+                            grid_photoAdapterAdd.setGoneAdd(0);
+                        } else {
+                            grid_photoAdapterAdd.setGoneAdd(1);
+                        }
+                        grid_photoAdapterAdd.notifyDataSetChanged();
+                    }
+
+                    break;
+            }
+        }
+    }
+
+    /**
+     * 自动获取相机权限
+     */
+    private void autoObtainCameraPermission() {
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
+                showToast("您已经拒绝过一次");
+            }
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE}, CAMERA_PERMISSIONS_REQUEST_CODE);
+        } else {//有权限直接调用系统相机拍照
+            if (hasSdcard()) {
+                imageUri = Uri.fromFile(fileUri);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+                    imageUri = FileProvider.getUriForFile(this, "com.project.community", fileUri);//通过FileProvider创建一个content类型的Uri
+                PhotoUtils.takePicture(this, imageUri, CODE_CAMERA_REQUEST);
+            } else {
+                showToast("设备没有SD卡！");
+            }
+        }
+    }
+    /**
+     * 自动获取sdk权限
+     */
+
+    private void autoObtainStoragePermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSIONS_REQUEST_CODE);
+        } else {
+            PhotoUtils.openPic(this, CODE_GALLERY_REQUEST);
+        }
+
+    }
+
+    private static final int output_X = 480;
+    private static final int output_Y = 480;
+    private PopupWindow mPopupWindow;
+
+
+    public void showPhotoDialog() {
+        //填充对话框的布局
+        View inflate = LayoutInflater.from(this).inflate(R.layout.activity_dialog_photo, null);
+        TextView tv_take_photo = (TextView) inflate.findViewById(R.id.tv_take_photo);
+        TextView tv_pick_photo = (TextView) inflate.findViewById(R.id.tv_pick_photo);
+        TextView tv_cancel = (TextView) inflate.findViewById(R.id.tv_cancel);
+        tv_cancel.setOnClickListener(this);
+        tv_pick_photo.setOnClickListener(this);
+        tv_take_photo.setOnClickListener(this);
+        mPopupWindow = new PopupWindow(this);
+        // 设置视图
+        mPopupWindow.setContentView(inflate);
+        // 设置弹出窗体的宽和高
+        mPopupWindow.setHeight(RelativeLayout.LayoutParams.WRAP_CONTENT);
+        mPopupWindow.setWidth(RelativeLayout.LayoutParams.MATCH_PARENT);
+        // 设置弹出窗体可点击
+        mPopupWindow.setFocusable(true);
+        // 实例化一个ColorDrawable颜色为半透明
+        ColorDrawable dw = new ColorDrawable(0xb0000000);
+        // 设置弹出窗体的背景
+        mPopupWindow.setBackgroundDrawable(dw);
+        // 设置弹出窗体显示时的动画，从底部向上弹出
+        mPopupWindow.setAnimationStyle(R.style.popwin_comment_anim);
+        mPopupWindow.showAtLocation(mLayoutRoot, Gravity.BOTTOM, ScreenUtils.getScreenWidth(this), 0);
+        inflate.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                mPopupWindow.dismiss();
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.tv_take_photo:
+                if (mPopupWindow != null) {
+                    mPopupWindow.dismiss();
+                }
+                autoObtainCameraPermission();
+                break;
+            case R.id.tv_pick_photo:
+                if (mPopupWindow != null) {
+                    mPopupWindow.dismiss();
+                }
+                autoObtainStoragePermission();
+                break;
+            case R.id.tv_cancel:
+                if (mPopupWindow != null) {
+                    mPopupWindow.dismiss();
+                }
+                break;
+        }
+    }
 }

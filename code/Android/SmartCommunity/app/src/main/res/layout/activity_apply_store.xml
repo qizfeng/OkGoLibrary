@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/layout_root"
     android:background="@color/common_gray_bg"
     tools:context="com.project.community.ui.life.minsheng.ApplyStoreActivity">
 
@@ -19,6 +20,66 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <LinearLayout
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+                <TextView
+                    style="@style/apply_store_tv_title"
+                    android:text="@string/store_apply_upcover"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:textSize="14sp"
+                    android:gravity="center_vertical"
+                    android:hint="@string/store_apply_photo_hit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <LinearLayout
+                android:paddingBottom="15dp"
+                android:paddingLeft="12dp"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <FrameLayout
+                    android:orientation="vertical"
+                    android:layout_width="111dp"
+                    android:layout_height="111dp">
+                    <ImageView
+                        android:id="@+id/apply_store_img_cover"
+                        android:src="@color/color_gray_eeeeee"
+                        android:layout_width="111dp"
+                        android:layout_height="111dp"
+                        android:layout_centerInParent="true"
+                        android:scaleType="centerCrop"/>
+                    <ImageView
+                        android:id="@+id/apply_store_img_del"
+                        android:visibility="gone"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_gravity="right"
+                        android:src="@mipmap/d31_shanchu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <FrameLayout
+                        android:id="@+id/apply_store_img_add"
+                        android:background="@color/color_gray_eeeeee"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:src="@mipmap/d31_jia"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </FrameLayout>
+
+                </FrameLayout>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/common_gray_bg"/>
             <LinearLayout
                 android:background="@color/white"
                 android:layout_width="match_parent"
@@ -219,19 +280,96 @@
                     android:layout_height="match_parent" />
             </LinearLayout>
 
-
-            <com.project.community.view.MyGridView
-                android:id="@+id/apply_store_gv_business_license"
-                android:background="@color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <LinearLayout
+                android:paddingBottom="15dp"
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
-                android:paddingBottom="15dp"
-                android:horizontalSpacing="8dp"
-                android:numColumns="2">
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <FrameLayout
+                    android:layout_weight="1"
+                    android:layout_marginRight="8dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/apply_store_img_business_license_zheng"
+                        android:src="@color/color_gray_eeeeee"
+                        android:layout_width="match_parent"
+                        android:layout_height="140dp"
+                        android:layout_centerInParent="true"
+                        android:scaleType="centerCrop"/>
+                    <ImageView
+                        android:id="@+id/apply_store_del_business_license_zheng"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_gravity="right"
+                        android:visibility="gone"
+                        android:src="@mipmap/d31_shanchu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <FrameLayout
+                        android:id="@+id/apply_store_img_add_business_license_zheng"
+                        android:background="@color/color_gray_eeeeee"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:src="@mipmap/d31_jia"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </FrameLayout>
+                </FrameLayout>
+                <FrameLayout
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/apply_store_img_business_license_fan"
+                        android:src="@color/color_gray_eeeeee"
+                        android:layout_width="match_parent"
+                        android:layout_height="140dp"
+                        android:layout_centerInParent="true"
+                        android:scaleType="centerCrop"/>
+                    <ImageView
+                        android:id="@+id/apply_store_del_business_license_fan"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_gravity="right"
+                        android:visibility="gone"
+                        android:src="@mipmap/d31_shanchu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <FrameLayout
+                        android:id="@+id/apply_store_img_add_business_license_fan"
+                        android:background="@color/color_gray_eeeeee"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:src="@mipmap/d31_jia"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </FrameLayout>
+                </FrameLayout>
+            </LinearLayout>
 
-            </com.project.community.view.MyGridView>
+
+            <!--<com.project.community.view.MyGridView-->
+                <!--android:id="@+id/apply_store_gv_business_license"-->
+                <!--android:background="@color/white"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:paddingLeft="12dp"-->
+                <!--android:paddingRight="12dp"-->
+                <!--android:paddingBottom="15dp"-->
+                <!--android:horizontalSpacing="8dp"-->
+                <!--android:numColumns="2">-->
+
+            <!--</com.project.community.view.MyGridView>-->
 
             <View
                 android:layout_width="match_parent"
@@ -274,18 +412,94 @@
                     android:layout_height="match_parent" />
             </LinearLayout>
 
-            <com.project.community.view.MyGridView
-                android:id="@+id/apply_store_gv_legal_person"
-                android:background="@color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <LinearLayout
+                android:paddingBottom="15dp"
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
-                android:paddingBottom="15dp"
-                android:horizontalSpacing="8dp"
-                android:numColumns="2">
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <FrameLayout
+                    android:layout_weight="1"
+                    android:layout_marginRight="8dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/apply_store_img_legal_person_zheng"
+                        android:src="@color/color_gray_eeeeee"
+                        android:layout_width="match_parent"
+                        android:layout_height="140dp"
+                        android:layout_centerInParent="true"
+                        android:scaleType="centerCrop"/>
+                    <ImageView
+                        android:id="@+id/apply_store_del_legal_person_zheng"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_gravity="right"
+                        android:visibility="gone"
+                        android:src="@mipmap/d31_shanchu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <FrameLayout
+                        android:id="@+id/apply_store_img_add_legal_person_zheng"
+                        android:background="@color/color_gray_eeeeee"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:src="@mipmap/d31_jia"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </FrameLayout>
+                </FrameLayout>
+                <FrameLayout
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/apply_store_img_legal_person_fan"
+                        android:src="@color/color_gray_eeeeee"
+                        android:layout_width="match_parent"
+                        android:layout_height="140dp"
+                        android:layout_centerInParent="true"
+                        android:scaleType="centerCrop"/>
+                    <ImageView
+                        android:id="@+id/apply_store_del_legal_person_fan"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_gravity="right"
+                        android:visibility="gone"
+                        android:src="@mipmap/d31_shanchu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <FrameLayout
+                        android:id="@+id/apply_store_img_add_legal_person_fan"
+                        android:background="@color/color_gray_eeeeee"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:src="@mipmap/d31_jia"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </FrameLayout>
+                </FrameLayout>
+            </LinearLayout>
+            <!--<com.project.community.view.MyGridView-->
+                <!--android:id="@+id/apply_store_gv_legal_person"-->
+                <!--android:background="@color/white"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:paddingLeft="12dp"-->
+                <!--android:paddingRight="12dp"-->
+                <!--android:paddingBottom="15dp"-->
+                <!--android:horizontalSpacing="8dp"-->
+                <!--android:numColumns="2">-->
 
-            </com.project.community.view.MyGridView>
+            <!--</com.project.community.view.MyGridView>-->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
