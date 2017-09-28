@@ -176,6 +176,8 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/layout_left_position"
                     android:background="@null"
+                    android:singleLine="true"
+                    android:ellipsize="end"
                     android:textColor="@color/color_gray_666666"
                     android:textSize="@dimen/common_txt_size" />
             </RelativeLayout>
@@ -256,6 +258,8 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/layout_left_idcard"
                     android:background="@null"
+                    android:singleLine="true"
+                    android:ellipsize="end"
                     android:textColor="@color/color_gray_666666"
                     android:textSize="@dimen/common_txt_size" />
             </RelativeLayout>

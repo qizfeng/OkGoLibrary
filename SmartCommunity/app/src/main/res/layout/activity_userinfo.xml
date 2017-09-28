@@ -77,6 +77,8 @@
                     android:layout_toRightOf="@+id/layout_left_nickname"
                     android:background="@null"
                     android:gravity="right|center_vertical"
+                    android:singleLine="true"
+                    android:ellipsize="end"
                     android:paddingRight="@dimen/dp_15"
                     android:textColor="@color/txt_color" />
 
@@ -117,6 +119,8 @@
                     android:layout_toRightOf="@+id/layout_left_name"
                     android:background="@null"
                     android:gravity="right|center_vertical"
+                    android:singleLine="true"
+                    android:ellipsize="end"
                     android:paddingRight="@dimen/dp_15"
                     android:textColor="@color/txt_color" />
 
@@ -359,6 +363,8 @@
                     android:background="@null"
                     android:gravity="right|center_vertical"
                     android:paddingRight="@dimen/dp_15"
+                    android:singleLine="true"
+                    android:ellipsize="end"
                     android:textColor="@color/txt_color" />
                 <ImageView
                     android:layout_width="wrap_content"
@@ -399,6 +405,8 @@
                     android:layout_toRightOf="@+id/layout_left_idcard"
                     android:background="@null"
                     android:gravity="right|center_vertical"
+                    android:singleLine="true"
+                    android:ellipsize="end"
                     android:paddingRight="@dimen/dp_15"
                     android:textColor="@color/txt_color" />
             </RelativeLayout>
