@@ -236,7 +236,7 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
     private void setGridData() {
 
         ModuleModel moduleModel1 = new ModuleModel();
-        moduleModel1.title = "附近商家";
+        moduleModel1.title = "附近商圈";
         moduleModel1.res = R.mipmap.d27_icon1;
         moduleModel1.hasRedPoint = true;
         moduleModels.add(moduleModel1);
@@ -275,7 +275,7 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
         moduleModel7.title = "更多";
         moduleModel7.res = R.mipmap.d27_icon6;
         moduleModel7.hasRedPoint = false;
-        moduleModels.add(moduleModel6);
+        moduleModels.add(moduleModel7);
 
 
     }
