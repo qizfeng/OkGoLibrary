@@ -58,7 +58,10 @@ import com.project.community.model.DictionaryModel;
 import com.project.community.model.DictionaryResponse;
 import com.project.community.model.FamilyPersonModel;
 import com.project.community.model.FileUploadModel;
+import com.project.community.ui.user.UserInfoActivity;
 import com.project.community.util.ScreenUtils;
+import com.project.community.util.StringUtils;
+import com.project.community.view.crop.CropImageActivity;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -207,7 +210,7 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
             personId = bundle.getString("personId");
             roomNo = bundle.getString("roomNo");
             isLook = bundle.getBoolean("isLook");
-            LogUtils.e("isLook:"+isLook);
+            LogUtils.e("isLook:" + isLook);
         }
         if (isLook) {//查看
             mEtAddress.setFocusable(false);
@@ -472,7 +475,7 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                    showToast(e.getMessage());
+                showToast(e.getMessage());
             }
         });
 
@@ -531,10 +534,10 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
                             mTvGender.setText(arr[1]);
                             sex = arr[0];
                         }
-                        if("1".equals(personModel.sex)){
+                        if ("1".equals(personModel.sex)) {
                             mTvGender.setText(getString(R.string.txt_gender_male));
                             sex = "1";
-                        }else {
+                        } else {
                             mTvGender.setText(getString(R.string.txt_gender_male));
                             sex = "2";
                         }
@@ -611,7 +614,7 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                    showToast(e.getMessage());
+                showToast(e.getMessage());
             }
         });
     }
@@ -812,9 +815,39 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
 
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
+//                case CODE_CAMERA_REQUEST://拍照完成回调
+//                    cropImageUri = Uri.fromFile(fileCropUri);
+//                    PhotoUtils.cropImageUri(this, imageUri, cropImageUri, 1, 1, output_X, output_Y, CODE_RESULT_REQUEST);
+//                    break;
+//                case CODE_GALLERY_REQUEST://访问相册完成回调
+//                    if (hasSdcard()) {
+//                        try {
+//                            cropImageUri = Uri.fromFile(fileCropUri);
+//                            Uri newUri = Uri.parse(PhotoUtils.getPath(this, data.getData()));
+//                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//                                newUri = FileProvider.getUriForFile(this, "com.project.community", new File(newUri.getPath()));
+//                            }
+//                            PhotoUtils.cropImageUri(this, newUri, cropImageUri, 1, 1, output_X, output_Y, CODE_RESULT_REQUEST);
+//                        }catch (Exception e){
+//                            e.printStackTrace();
+//                            showToast(getString(R.string.toast_error_photo));
+//                        }
+//                    } else {
+//                        showToast("设备没有SD卡！");
+//                    }
+//                    break;
+//                case CODE_RESULT_REQUEST:
+//                    Bitmap bitmap = PhotoUtils.getBitmapFromUri(cropImageUri, this);
+//                    if (bitmap != null) {
+//                        uploadFile(new File(cropImageUri.getPath()));
+//                        showImages(bitmap);
+//                    }
+//                    break;
                 case CODE_CAMERA_REQUEST://拍照完成回调
                     cropImageUri = Uri.fromFile(fileCropUri);
-                    PhotoUtils.cropImageUri(this, imageUri, cropImageUri, 1, 1, output_X, output_Y, CODE_RESULT_REQUEST);
+//                    PhotoUtils.cropImageUri(this, imageUri, cropImageUri, 1, 1, output_X, output_Y, CODE_RESULT_REQUEST);
+//                    uploadFile(fileCropUri);//上传图片
+                    CropImageActivity.startCrop(this, imageUri.toString(), output_X, output_Y, CODE_RESULT_REQUEST);
                     break;
                 case CODE_GALLERY_REQUEST://访问相册完成回调
                     if (hasSdcard()) {
@@ -824,20 +857,26 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                                 newUri = FileProvider.getUriForFile(this, "com.project.community", new File(newUri.getPath()));
                             }
-                            PhotoUtils.cropImageUri(this, newUri, cropImageUri, 1, 1, output_X, output_Y, CODE_RESULT_REQUEST);
-                        }catch (Exception e){
+//                            PhotoUtils.cropImageUri(this, newUri, cropImageUri, 1, 1, output_X, output_Y, CODE_RESULT_REQUEST);
+                            CropImageActivity.startCrop(this, newUri.toString(), output_X, output_Y, CODE_RESULT_REQUEST);
+                        } catch (Exception e) {
                             e.printStackTrace();
                             showToast(getString(R.string.toast_error_photo));
                         }
+//                        uploadFile(new File( Uri.parse(PhotoUtils.getPath(this, data.getData())).getPath()));
                     } else {
                         showToast("设备没有SD卡！");
                     }
                     break;
                 case CODE_RESULT_REQUEST:
-                    Bitmap bitmap = PhotoUtils.getBitmapFromUri(cropImageUri, this);
-                    if (bitmap != null) {
-                        uploadFile(new File(cropImageUri.getPath()));
-                        showImages(bitmap);
+                    if (data != null) {
+                        Uri uri = Uri.parse(data.getStringExtra("uri"));
+                        Bitmap bitmap = PhotoUtils.getBitmapFromUri(uri, this);
+                        if (bitmap != null) {
+                            uploadFile(new File(StringUtils.getRealFilePath(FamilyAddPersonActivity.this, uri)));
+                            LogUtils.e("uri:" + StringUtils.getRealFilePath(FamilyAddPersonActivity.this, uri));
+                            showImages(bitmap);
+                        }
                     }
                     break;
             }
@@ -870,7 +909,7 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                    showToast(e.getMessage());
+                showToast(e.getMessage());
             }
         });
     }

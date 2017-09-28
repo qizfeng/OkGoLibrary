@@ -2,18 +2,25 @@ package com.library.okgo.utils.photo;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 
+import com.library.okgo.R;
 import com.library.okgo.utils.LogUtils;
+import com.library.okgo.utils.ToastUtils;
+
+import java.io.FileNotFoundException;
 
 /**
  * Created by:zheng zhong on 2016/8/6 16:16
@@ -60,24 +67,29 @@ public class PhotoUtils {
      * @param requestCode 剪裁图片的请求码
      */
     public static void cropImageUri(Activity activity, Uri orgUri, Uri desUri, int aspectX, int aspectY, int width, int height, int requestCode) {
-        Intent intent = new Intent("com.android.camera.action.CROP");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        try {
+            Intent intent = new Intent("com.android.camera.action.CROP");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            }
+            intent.setDataAndType(orgUri, "image/*");
+            intent.putExtra("crop", "true");
+            intent.putExtra("aspectX", aspectX);
+            intent.putExtra("aspectY", aspectY);
+            intent.putExtra("outputX", width);
+            intent.putExtra("outputY", height);
+            intent.putExtra("scale", true);
+            //将剪切的图片保存到目标Uri中
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, desUri);
+            intent.putExtra("return-data", false);
+            intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+            intent.putExtra("noFaceDetection", true);
+            activity.startActivityForResult(intent, requestCode);
+        } catch (Exception e) {
+            e.printStackTrace();
+            ToastUtils.showShortToast(activity, "无法获取该相册路径,请选择其他相册");
         }
-        intent.setDataAndType(orgUri, "image/*");
-//        intent.setType("image/*");
-        intent.putExtra("crop", "true");
-        intent.putExtra("aspectX", aspectX);
-        intent.putExtra("aspectY", aspectY);
-        intent.putExtra("outputX", width);
-        intent.putExtra("outputY", height);
-        intent.putExtra("scale", true);
-        //将剪切的图片保存到目标Uri中
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, desUri);
-        intent.putExtra("return-data", false);
-        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
-        intent.putExtra("noFaceDetection", true);
-        activity.startActivityForResult(intent, requestCode);
     }
 
     /**
@@ -96,6 +108,18 @@ public class PhotoUtils {
             return null;
         }
     }
+
+    public static Drawable bitmapToDrawable(Bitmap bitmap) {
+        Drawable drawable;
+        try {
+            drawable = new BitmapDrawable(bitmap);
+            return drawable;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     /**
      * @param context 上下文对象

@@ -213,8 +213,11 @@ public class CacheCall<T> implements Call<T> {
                     }
                 } else {
                     String message = e.getMessage();
-                    if (message.contains("No address") || message.contains("Failed to connect to")) {
-                        message = "服务器已关闭。";
+                    if (message.contains("Failed to connect to")) {
+                        message = "网络请求失败";
+                        mCallback.onError(call, response, new IllegalStateException(message));
+                    } else if (message.contains("No address")) {
+                        message = "服务器已关闭";
                         mCallback.onError(call, response, new IllegalStateException(message));        //请求失败回调 （UI线程）
                     } else if (e instanceof SocketTimeoutException) {
                         mCallback.onError(call, response, new IllegalStateException("请求超时"));
