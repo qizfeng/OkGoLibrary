@@ -107,20 +107,15 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
     private InfoWindow mInfoWindow;
 
     BitmapDescriptor bdGround;
-    BitmapDescriptor bdGround2 = BitmapDescriptorFactory
-            .fromResource(R.mipmap.yeats);
-    BitmapDescriptor bdE = BitmapDescriptorFactory
-            .fromResource(R.mipmap.transparent_bg);
     // 定位相关
     LocationClient mLocClient;
     private int mCurrentDirection = 0;
     private double mCurrentLat = 0.0;
     private double mCurrentLon = 0.0;
     public MyLocationListenner myListener = new MyLocationListenner();
-    private float mCurrentAccracy;
-
-
     private MyLocationData locData;
+    LatLngBounds bounds;
+    private List<Marker> markers = new ArrayList<>();
     @Bind(R.id.iv_flash)
     ImageView mIvFlash;
     @Bind(R.id.iv_back)
@@ -667,7 +662,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
         }
     }
 
-    LatLngBounds bounds;
+
 
     private void clearOverlay() {
         try {
@@ -808,31 +803,13 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
     private void clearOverlayMarker() {
         if (latLngBoundsList.size() == 0)
             return;
-        LogUtils.e("latLngBoundsList:" + latLngBoundsList.size());
-        for (int i = 0; i < latLngBoundsList.size(); i++) {
-            List<Marker> markers = mBaiduMap.getMarkersInBounds(latLngBoundsList.get(i));
-            try {
-                if (markers != null) {
-                    if (markers.size() > 0) {
-                        for (int j = 0; j < markers.size(); j++) {
-                            markers.get(j).remove();
-                        }
-                    } else {
-                        break;
-                    }
-                } else {
-                    break;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
+        for (int i = 0; i < markers.size(); i++) {
+            markers.get(i).remove();
         }
     }
 
 
     private void initOverlay(List<CommunityModel> models) {
-//        clearOverlay();
         mBaiduMap.clear();
         latLngBoundsList = new ArrayList<>();
         for (int i = 0; i < models.size(); i++) {
@@ -851,7 +828,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                 ooGrondSouthwest = new LatLng(Double.parseDouble(southwestArr[1]), Double.parseDouble(southwestArr[0]));
                 if (!TextUtils.isEmpty(northeastStr)) {//东北坐标
                     northeastArr = northeastStr.split(",");
-                    if(northeastArr.length==0)
+                    if (northeastArr.length == 0)
                         return;
                     ooGroudNortheast = new LatLng(Double.parseDouble(northeastArr[1]), Double.parseDouble(northeastArr[0]));
                     bounds = new LatLngBounds.Builder().include(ooGroudNortheast)
@@ -1088,7 +1065,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
         // 设置弹出窗体的宽和高
 //        mPopupWindow.setHeight(RelativeLayout.LayoutParams.WRAP_CONTENT);
         mPopupWindow.setWidth(RelativeLayout.LayoutParams.MATCH_PARENT);
-        mPopupWindow.setHeight((int)(ScreenUtils.getScreenHeight(getActivity())*0.8));
+        mPopupWindow.setHeight((int) (ScreenUtils.getScreenHeight(getActivity()) * 0.8));
         // 设置弹出窗体可点击
         mPopupWindow.setFocusable(true);
         // 实例化一个ColorDrawable颜色为半透明
@@ -1347,6 +1324,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
     }
 
 
+
     /**
      * 小区统计信息
      *
@@ -1385,7 +1363,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                                     .zIndex(0)
                                     .extraInfo(bundle)
                                     .period(10);
-                            mBaiduMap.addOverlay(ooE);
+                            markers.add((Marker) mBaiduMap.addOverlay(ooE));
                             //定位到该区域中心
                             MapStatus mMapStatus = new MapStatus.Builder()
                                     .target(center)
@@ -1734,7 +1712,6 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
             LogUtils.e("location:" + location.getLatitude() + "," + location.getLongitude());
             mCurrentLat = location.getLatitude();
             mCurrentLon = location.getLongitude();
-            mCurrentAccracy = location.getRadius();
             locData = new MyLocationData.Builder()
                     .accuracy(location.getRadius())
                     // 此处设置开发者获取到的方向信息，顺时针0-360

@@ -40,7 +40,7 @@
             android:layout_marginLeft="15dp"
             android:gravity="center"
             android:text="@string/tab_title_minsheng_nearby"
-            android:textColor="@color/txt_color"
+            android:textColor="@color/color_gray_999999"
             android:textSize="@dimen/common_txt_size" />
 
         <TextView
@@ -51,7 +51,6 @@
             android:layout_marginRight="15dp"
             android:background="@null"
             android:gravity="center"
-            android:textStyle="bold"
             android:text="@string/txt_apply_shop"
             android:textColor="@color/colorPrimary" />
     </RelativeLayout>

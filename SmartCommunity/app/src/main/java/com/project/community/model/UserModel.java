@@ -81,7 +81,7 @@ public class UserModel implements Serializable {
     public String roomNo;//房屋编号
     public String orgCode;
     public boolean ownerAuditStatus;
-    public String roleType;//1普通用户 2管理员,可以进入社区
+    public String roleType;//1普通用户 2管理员,可以进入社区 3维修工
     @Override
     public String toString() {
         return "UserModel{" +

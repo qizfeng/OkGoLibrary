@@ -64,7 +64,6 @@
                     <TextView
                         style="@style/textview_style"
                         android:layout_width="wrap_content"
-
                         android:drawablePadding="@dimen/dp_10"
                         android:drawableRight="@mipmap/d26_icon1"
                         android:text="@string/txt_add_person_name" />
@@ -75,6 +74,8 @@
                     style="@style/textview_style"
                     android:layout_toRightOf="@+id/layout_left_name"
                     android:background="@null"
+                    android:maxLines="1"
+                    android:singleLine="true"
                     android:hint="@string/txt_add_person_name_hint"
                     android:textColor="@color/color_gray_999999" />
             </RelativeLayout>
@@ -147,9 +148,12 @@
                 <EditText
                     android:id="@+id/tv_position"
                     style="@style/textview_style"
+                    android:layout_height="match_parent"
                     android:layout_toRightOf="@+id/layout_left_position"
                     android:background="@null"
                     android:hint="@string/txt_add_person_position_hint"
+                    android:singleLine="true"
+                    android:ellipsize="end"
                     android:textColor="@color/color_gray_999999" />
             </RelativeLayout>
 
@@ -227,6 +231,8 @@
                     android:layout_toRightOf="@+id/layout_left_idcard"
                     android:background="@null"
                     android:hint="@string/txt_add_person_idcard_hint"
+                    android:singleLine="true"
+                    android:maxLines="1"
                     android:textColor="@color/color_gray_999999" />
             </RelativeLayout>
 

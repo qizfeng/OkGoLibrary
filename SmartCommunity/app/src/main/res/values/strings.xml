@@ -26,7 +26,7 @@
     <string name="txt_repair_record">报修记录</string>
     <string name="txt_family_info">家庭信息</string>
     <string name="txt_shop_manage">商铺管理</string>
-    <string name="txt_apply_shop">申请商铺</string>
+    <string name="txt_apply_shop">+申请开店</string>
     <string name="txt_my_repair_order">我的维修单</string>
     <string name="txt_system_message">系统消息</string>
 
