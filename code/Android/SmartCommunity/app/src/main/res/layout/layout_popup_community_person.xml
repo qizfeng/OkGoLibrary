@@ -15,9 +15,9 @@
             android:id="@+id/layout_root"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/dp_10"
             android:background="@color/white"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="@dimen/dp_10">
             <!--=========头像=========-->
             <RelativeLayout
                 android:id="@+id/layout_header"
@@ -149,7 +149,7 @@
 
                 <LinearLayout
                     android:id="@+id/layout_left_position"
-                    android:layout_width="@dimen/dp_105"
+                    android:layout_width="80.5dp"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
@@ -164,7 +164,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
-                        android:paddingRight="@dimen/dp_25"
                         android:text="："
                         android:textColor="@color/color_gray_666666"
                         android:textSize="@dimen/common_txt_size" />
@@ -176,8 +175,9 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/layout_left_position"
                     android:background="@null"
-                    android:singleLine="true"
                     android:ellipsize="end"
+                    android:text="职业"
+                    android:singleLine="true"
                     android:textColor="@color/color_gray_666666"
                     android:textSize="@dimen/common_txt_size" />
             </RelativeLayout>
@@ -194,7 +194,7 @@
 
                 <LinearLayout
                     android:id="@+id/layout_left_gender"
-                    android:layout_width="@dimen/dp_105"
+                    android:layout_width="80.5dp"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
@@ -210,7 +210,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
-                        android:paddingRight="@dimen/dp_25"
                         android:text="："
                         android:textColor="@color/color_gray_666666"
                         android:textSize="@dimen/common_txt_size" />
@@ -221,6 +220,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/dp_15"
+                    android:text="男"
                     android:layout_toRightOf="@+id/layout_left_gender"
                     android:textColor="@color/color_gray_666666"
                     android:textSize="@dimen/common_txt_size" />
@@ -239,7 +239,7 @@
 
                 <LinearLayout
                     android:id="@+id/layout_left_idcard"
-                    android:layout_width="@dimen/dp_105"
+                    android:layout_width="80.5dp"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
@@ -250,6 +250,13 @@
                         android:text="@string/txt_map_person_idcard"
                         android:textColor="@color/color_gray_666666"
                         android:textSize="@dimen/common_txt_size" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="："
+                        android:textColor="@color/color_gray_666666"
+                        android:textSize="@dimen/common_txt_size" />
                 </LinearLayout>
 
                 <TextView
@@ -258,8 +265,8 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/layout_left_idcard"
                     android:background="@null"
-                    android:singleLine="true"
                     android:ellipsize="end"
+                    android:singleLine="true"
                     android:textColor="@color/color_gray_666666"
                     android:textSize="@dimen/common_txt_size" />
             </RelativeLayout>
@@ -276,7 +283,7 @@
 
                 <LinearLayout
                     android:id="@+id/layout_left_age"
-                    android:layout_width="@dimen/dp_105"
+                    android:layout_width="80.5dp"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
@@ -291,7 +298,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
-                        android:paddingRight="@dimen/dp_25"
                         android:text="："
                         android:textColor="@color/color_gray_666666"
                         android:textSize="@dimen/common_txt_size" />
@@ -318,7 +324,7 @@
 
                 <LinearLayout
                     android:id="@+id/layout_left_birthday"
-                    android:layout_width="@dimen/dp_105"
+                    android:layout_width="80.5dp"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
@@ -358,7 +364,7 @@
 
                 <LinearLayout
                     android:id="@+id/layout_left_nation"
-                    android:layout_width="@dimen/dp_105"
+                    android:layout_width="80.5dp"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
@@ -373,7 +379,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
-                        android:paddingRight="@dimen/dp_25"
                         android:text="："
                         android:textColor="@color/color_gray_666666"
                         android:textSize="@dimen/common_txt_size" />
@@ -400,7 +405,7 @@
 
                 <LinearLayout
                     android:id="@+id/layout_left_religion"
-                    android:layout_width="@dimen/dp_105"
+                    android:layout_width="80.5dp"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
@@ -442,7 +447,7 @@
 
                 <LinearLayout
                     android:id="@+id/layout_left_party"
-                    android:layout_width="@dimen/dp_105"
+                    android:layout_width="80.5dp"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
@@ -457,7 +462,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
-                        android:paddingRight="@dimen/dp_25"
                         android:text="："
                         android:textColor="@color/color_gray_666666"
                         android:textSize="@dimen/common_txt_size" />
@@ -485,7 +489,7 @@
 
                 <LinearLayout
                     android:id="@+id/layout_left_mobile"
-                    android:layout_width="@dimen/dp_105"
+                    android:layout_width="80.5dp"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
@@ -501,7 +505,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
-                        android:paddingRight="@dimen/dp_25"
                         android:text="："
                         android:textColor="@color/color_gray_666666"
                         android:textSize="@dimen/common_txt_size" />
@@ -532,7 +535,7 @@
 
                 <LinearLayout
                     android:id="@+id/layout_left_address"
-                    android:layout_width="@dimen/dp_105"
+                    android:layout_width="80.5dp"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
