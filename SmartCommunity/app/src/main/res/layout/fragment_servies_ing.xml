@@ -4,10 +4,17 @@
     android:layout_height="match_parent"
     tools:context="com.project.community.ui.me.ServiesIngFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.project.community.view.VpSwipeRefreshLayout
+        android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_above="@+id/bottom_layout">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.project.community.view.VpSwipeRefreshLayout>
+
 
 </FrameLayout>

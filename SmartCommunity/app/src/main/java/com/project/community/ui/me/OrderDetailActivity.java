@@ -25,21 +25,22 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.library.okgo.utils.GlideImageLoader;
 import com.library.okgo.utils.photo.PhotoUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
+import com.project.community.constants.AppConstants;
 import com.project.community.listener.RecycleItemClickListener;
 import com.project.community.model.CommentModel;
-import com.project.community.ui.adapter.ApplyStoryPicAdapter;
+import com.project.community.ui.ImageBrowseActivity;
+import com.project.community.ui.PhoneDialogActivity;
 import com.project.community.ui.adapter.ArticleDetailsImagsAdapter;
 import com.project.community.ui.adapter.OrderDetailShouliApdater;
-import com.project.community.ui.adapter.listener.SendMessageAdapter;
+import com.project.community.ui.adapter.SendMessageAdapter;
+import com.project.community.ui.life.zhengwu.ZhengwuActivity;
 import com.project.community.util.ScreenUtils;
 import com.project.community.view.MyGridView;
 import com.project.community.view.crop.CropImageActivity;
@@ -100,6 +101,8 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     ArticleDetailsImagsAdapter grid_photoAdapter;
     SendMessageAdapter grid_photoAdapterAdd;
     OrderDetailShouliApdater orderDetailShouliApdater;
+    ArrayList<String> imgs = new ArrayList();
+
     private MenuItem menuItem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,6 +127,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
             }
             mShouliList.add(commentModel);
         }
+        imgs.add("");
         orderDetailShouliApdater=new OrderDetailShouliApdater(mShouliList, new RecycleItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -144,6 +148,12 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
         grid_photoAdapter=new ArticleDetailsImagsAdapter(this,mImages);
         grid_photoAdapterAdd=new SendMessageAdapter(mAddImages,this);
         orderDetailImgs.setAdapter(grid_photoAdapter);
+        orderDetailImgs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                ImageBrowseActivity.startActivity(OrderDetailActivity.this, imgs);
+            }
+        });
         orderDetailAddImgs.setAdapter(grid_photoAdapterAdd);
         orderDetailAddImgs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -179,6 +189,11 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.navigation_tel:
+                Intent intent = new Intent();
+                intent.putExtra("hasHeader", false);
+                intent.putExtra("type", "1");
+                intent.setClass(OrderDetailActivity.this, PhoneDialogActivity.class);
+                startActivity(intent);
                 return true;
             default:
                 // If we got here, the user's action was not recognized.

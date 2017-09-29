@@ -1,4 +1,4 @@
-package com.project.community.ui.adapter.listener;
+package com.project.community.ui.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

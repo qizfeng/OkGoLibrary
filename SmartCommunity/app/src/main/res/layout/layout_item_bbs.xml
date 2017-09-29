@@ -73,8 +73,11 @@
     <TextView
         android:id="@+id/bbs_item_content"
         android:textSize="14sp"
+        android:maxLines="2"
+        android:ellipsize="end"
         android:textColor="@color/color_gray_333333"
         android:paddingLeft="15dp"
+        android:paddingRight="15dp"
         android:layout_marginTop="17dp"
         android:lineSpacingExtra="2dp"
         android:text="毕加索的就是百度就是百度是膜拜毕加索的就是百度就是百度是膜拜毕加索的就是百度就是百度是膜拜毕加索的就是百度就是百度是膜拜"

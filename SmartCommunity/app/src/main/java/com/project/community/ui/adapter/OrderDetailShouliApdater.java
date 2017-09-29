@@ -64,6 +64,8 @@ public class OrderDetailShouliApdater extends BaseQuickAdapter<CommentModel, Bas
                 recyclerView.setAdapter(orderDetailShouliCommentApdater);
 
             } else if (baseViewHolder.getLayoutPosition() == getItemCount() - 1) {
+                view1.setVisibility(View.VISIBLE);
+                view2.setVisibility(View.INVISIBLE);
                     baseViewHolder.setImageResource(R.id.item_cirimags, R.mipmap.d41_dian_p)
                             .setVisible(R.id.item_iscurrt, true)
                             .setVisible(R.id.item_view_line_, false)

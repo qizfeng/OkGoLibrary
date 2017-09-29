@@ -3,7 +3,6 @@ package com.project.community.ui.life.minsheng;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -14,7 +13,9 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -26,15 +27,14 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.library.okgo.utils.LogUtils;
+import com.library.okgo.utils.ToastUtils;
 import com.library.okgo.utils.photo.PhotoUtils;
+import com.library.okgo.view.loopview.LoopView;
+import com.library.okgo.view.loopview.OnItemSelectedListener;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
-import com.project.community.ui.adapter.ApplyStoryPicAdapter;
-import com.project.community.ui.adapter.listener.SendMessageAdapter;
-import com.project.community.ui.user.UserInfoActivity;
+import com.project.community.ui.adapter.SendMessageAdapter;
 import com.project.community.util.ScreenUtils;
-import com.project.community.util.StringUtils;
 import com.project.community.view.MyButton;
 import com.project.community.view.MyGridView;
 import com.project.community.view.crop.CropImageActivity;
@@ -47,7 +47,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SendMessageActivity extends BaseActivity implements View.OnClickListener {
+public class SendMessageActivity extends BaseActivity implements View.OnClickListener, View.OnTouchListener {
 
     private static final int CODE_GALLERY_REQUEST = 0xa0;
     private static final int CODE_CAMERA_REQUEST = 0xa1;
@@ -58,6 +58,8 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
     private File fileCropUri = new File(Environment.getExternalStorageDirectory().getPath() + "/crop_photo.jpg");
     private Uri imageUri;
     private Uri cropImageUri;
+
+    private LoopView mLoopView;
 
     @Bind(R.id.layout_root)
     LinearLayout mLayoutRoot;
@@ -104,7 +106,7 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
         sendMessageGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if (mImags.size() >= 9) {
+                if (mImags.size() >= 3) {
                     return;
                 }
                 if (i == mApplyStoryPicAdapter.getCount() - 1) {
@@ -114,7 +116,8 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
 
             }
         });
-
+        sendMessageEtContent.setOnTouchListener(this);
+        sendMessageEtTitle.setOnTouchListener(this);
         sendMessageEtTitle.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -222,7 +225,7 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
                 case CODE_RESULT_REQUEST:
                     if (data != null) {
                         mImags.add(data.getStringExtra("uri"));
-                        if (mImags.size() >= 9) {
+                        if (mImags.size() >= 3) {
                             mApplyStoryPicAdapter.setGoneAdd(0);
                         } else {
                             mApplyStoryPicAdapter.setGoneAdd(1);
@@ -235,8 +238,27 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
         }
     }
 
-    @OnClick(R.id.send_message_ll_type)
-    public void onViewClicked() {
+    List<String> data = new ArrayList<>();
+    @OnClick({R.id.send_message_ll_type,R.id.send_message_summit})
+    public void onViewClicked(View view) {
+        switch (view.getId()){
+            case R.id.send_message_ll_type:
+                data.clear();
+                data.add("邻居互动");
+                data.add("供求信息");
+                data.add("二手市场");
+                data.add("房屋出租");
+                showDialog(getResources().getString(R.string.send_message_change_type),data);
+                break;
+            case R.id.send_message_summit:
+
+               if (TextUtils.isEmpty(sendMessageTvType.getText().toString())){
+                    ToastUtils.showLongToast(this,getResources().getString(R.string.send_message));
+                   return;
+               }
+
+                break;
+        }
     }
 
     private PopupWindow mPopupWindow;
@@ -297,4 +319,105 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
                 break;
         }
     }
+
+    private int mCurrtindex=0;
+    private void showDialog(String title, final List<String> strings) {
+        //填充对话框的布局
+        View inflate = LayoutInflater.from(this).inflate(R.layout.layout_loopview, null);
+        if (!TextUtils.isEmpty(sendMessageTvType.getText().toString()))
+            for (int i = 0; i < strings.size(); i++) {
+                if (strings.get(i).equals(sendMessageTvType.getText().toString())){
+                    mCurrtindex=i;
+                }
+            }
+        //初始化控件
+        TextView tv_cancel = (TextView) inflate.findViewById(R.id.tv_cancel);
+        TextView tv_confirm = (TextView) inflate.findViewById(R.id.tv_confirm);
+        TextView tv_title = (TextView) inflate.findViewById(R.id.tv_title);
+        tv_title.setText(title);
+        tv_cancel.setOnClickListener(this);
+        tv_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendMessageTvType.setText(strings.get(mCurrtindex));
+                mPopupWindow.dismiss();
+            }
+        });
+
+        mLoopView = (LoopView) inflate.findViewById(R.id.loopView);
+        mLoopView.setItems(strings);
+        mLoopView.setInitPosition(mCurrtindex);
+        mLoopView.setNotLoop();
+        mLoopView.setCenterTextColor(getResources().getColor(R.color.txt_color));
+        mLoopView.setListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(int index) {
+                mCurrtindex=index;
+
+            }
+        });
+        if (mPopupWindow != null) {
+            mPopupWindow.dismiss();
+        }
+        mPopupWindow = new PopupWindow(this);
+        // 设置视图
+        mPopupWindow.setContentView(inflate);
+        // 设置弹出窗体的宽和高
+        mPopupWindow.setHeight(RelativeLayout.LayoutParams.WRAP_CONTENT);
+        mPopupWindow.setWidth(RelativeLayout.LayoutParams.MATCH_PARENT);
+        // 设置弹出窗体可点击
+        mPopupWindow.setFocusable(true);
+        // 实例化一个ColorDrawable颜色为半透明
+        ColorDrawable dw = new ColorDrawable(0xb0000000);
+        // 设置弹出窗体的背景
+        mPopupWindow.setBackgroundDrawable(dw);
+        // 设置弹出窗体显示时的动画，从底部向上弹出
+        mPopupWindow.setAnimationStyle(R.style.popwin_comment_anim);
+        mPopupWindow.showAtLocation(mLayoutRoot, Gravity.BOTTOM, ScreenUtils.getScreenWidth(this), 0);
+        inflate.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                mPopupWindow.dismiss();
+                return false;
+            }
+        });
+    }
+
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        Log.e("onTouch---->",canVerticalScroll(sendMessageEtContent)+"" );
+        //触摸的是EditText并且当前EditText可以滚动则将事件交给EditText处理；否则将事件交由其父类处理
+        if ( ((view.getId() == R.id.send_message_et_content && canVerticalScroll(sendMessageEtContent))) ||
+                ((view.getId() == R.id.send_message_et_title && canVerticalScroll(sendMessageEtTitle)))) {
+            view.getParent().requestDisallowInterceptTouchEvent(true);
+            if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                view.getParent().requestDisallowInterceptTouchEvent(false);
+            }
+        }
+        return false;
+    }
+
+    /**
+     * EditText竖直方向是否可以滚动
+     * @param editText  需要判断的EditText
+     * @return  true：可以滚动   false：不可以滚动
+     */
+    private boolean canVerticalScroll(EditText editText) {
+        //滚动的距离
+        int scrollY = editText.getScrollY();
+        //控件内容的总高度
+        int scrollRange = editText.getLayout().getHeight();
+        //控件实际显示的高度
+        int scrollExtent = editText.getHeight() - editText.getCompoundPaddingTop() -editText.getCompoundPaddingBottom();
+        //控件内容总高度与实际显示高度的差值
+        int scrollDifference = scrollRange - scrollExtent;
+
+        if(scrollDifference == 0) {
+            return false;
+        }
+
+        return (scrollY > 0) || (scrollY < scrollDifference - 1);
+    }
+
 }

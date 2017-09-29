@@ -1,5 +1,6 @@
 package com.project.community.ui.me;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -51,6 +52,8 @@ public class CommunityActivity extends BaseActivity {
     LinearLayout llServersCommplet;
     @Bind(R.id.line)
     View line;
+    @Bind(R.id.community_off)
+    TextView community_off;
     @Bind(R.id.viewpager)
     NoScrollViewPager mViewpager;
     private List<Fragment> mFragmentsList;
@@ -59,6 +62,7 @@ public class CommunityActivity extends BaseActivity {
     Fragment mServiesIngFragment;
     Fragment mServiesCompFragment;
 
+    private boolean isType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,8 +73,8 @@ public class CommunityActivity extends BaseActivity {
 
     private void initData() {
         mFragmentsList = new ArrayList<>();
-        mServiesWaitFragment = new ServiesCompFragment();
-        mServiesIngFragment = new ServiesCompFragment();
+        mServiesWaitFragment = new ServiesWaitFragment();
+        mServiesIngFragment = new ServiesIngFragment();
         mServiesCompFragment = new ServiesCompFragment();
         mFragmentsList.add(mServiesWaitFragment);
         mFragmentsList.add(mServiesIngFragment);
@@ -147,10 +151,16 @@ public class CommunityActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.community_friends:
-
+                Intent intent = new Intent(this,MyActivity.class);
+                startActivity(intent);
                 break;
             case R.id.community_off:
-
+                if (!isType){
+                    community_off.setText("上班");
+                }else {
+                    community_off.setText("下班");
+                }
+                isType=!isType;
                 break;
         }
     }

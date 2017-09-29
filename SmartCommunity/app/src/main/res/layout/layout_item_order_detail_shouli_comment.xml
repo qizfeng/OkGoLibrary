@@ -17,7 +17,7 @@
             android:layout_height="30dp"
             android:layout_gravity="center_vertical"
             android:scaleType="centerCrop"
-            android:src="@mipmap/d54_tx" />
+            android:src="@mipmap/beibeiku" />
 
         <LinearLayout
             android:layout_marginLeft="10dp"
