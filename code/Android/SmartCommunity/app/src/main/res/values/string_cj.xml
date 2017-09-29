@@ -62,5 +62,6 @@
     <string name="send_message_uoload_img">上传图片</string>
     <string name="send_message_commit">立即发布</string>
     <string name="send_message_photo_hit">(支持jpg、png格式.)</string>
+    <string name="send_message_change_type">选择分类</string>
 
 </resources>

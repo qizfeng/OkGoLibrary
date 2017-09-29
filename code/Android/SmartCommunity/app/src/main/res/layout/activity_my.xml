@@ -24,7 +24,7 @@
             android:layout_marginBottom="12dp"
             android:layout_marginTop="22dp"
             android:scaleType="fitXY"
-            android:src="@mipmap/c1_icon1" />
+            android:src="@mipmap/beibeiku" />
 
         <TextView
             android:id="@+id/my_name"

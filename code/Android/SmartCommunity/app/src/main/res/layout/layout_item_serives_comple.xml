@@ -59,6 +59,7 @@
                         android:layout_height="wrap_content" />
                     <ImageView
 
+                        android:visibility="invisible"
                         android:layout_marginRight="15dp"
                         android:layout_marginLeft="@dimen/dp_60"
                         android:src="@mipmap/d53_dianhua"

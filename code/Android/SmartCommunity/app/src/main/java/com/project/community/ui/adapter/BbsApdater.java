@@ -33,6 +33,19 @@ public class BbsApdater extends BaseQuickAdapter<CommentModel, BaseViewHolder> {
             }
         });
 
+        baseViewHolder.setOnClickListener(R.id.bbs_item_like_comment, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemClickListener.onCustomClick(view, baseViewHolder.getLayoutPosition());
+            }
+        }).setOnClickListener(R.id.bbs_item_like, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemClickListener.onCustomClick(view, baseViewHolder.getLayoutPosition());
+            }
+        });
+
+
         if (baseViewHolder.getLayoutPosition()==0){
             baseViewHolder
                     .setVisible(R.id.bbs_item_big_img,true)
