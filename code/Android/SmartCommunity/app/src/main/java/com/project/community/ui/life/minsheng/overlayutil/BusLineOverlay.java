@@ -51,15 +51,31 @@ public class BusLineOverlay extends OverlayManager {
             return null;
         }
         List<OverlayOptions> overlayOptionses = new ArrayList<OverlayOptions>();
-        for (BusLineResult.BusStation station : mBusLineResult.getStations()) {
-            overlayOptionses.add(new MarkerOptions()
-                    .position(station.getLocation())
-                            .zIndex(10)
-                                    .anchor(0.5f, 0.5f)
-                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.d41_dian_p)));
-//                                            .icon(BitmapDescriptorFactory
-//                                                    .fromAssetWithDpi("Icon_bus_station.png")));
+
+        for (int i = 0; i < mBusLineResult.getStations().size() ; i++) {
+            if (i==0 || i==mBusLineResult.getStations().size()-1){
+                overlayOptionses.add(new MarkerOptions()
+                        .position(mBusLineResult.getStations().get(i).getLocation())
+                        .zIndex(10)
+                        .anchor(0.5f, 0.5f)
+                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.map_start_end)));
+            }else{
+                overlayOptionses.add(new MarkerOptions()
+                        .position(mBusLineResult.getStations().get(i).getLocation())
+                        .zIndex(10)
+                        .anchor(0.5f, 0.5f)
+                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.map_zhijian)));
+            }
         }
+//        for (BusLineResult.BusStation station : mBusLineResult.getStations()) {
+//            overlayOptionses.add(new MarkerOptions()
+//                    .position(station.getLocation())
+//                            .zIndex(10)
+//                                    .anchor(0.5f, 0.5f)
+//                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.map_zhijian)));
+////                                            .icon(BitmapDescriptorFactory
+////                                                    .fromAssetWithDpi("Icon_bus_station.png")));
+//        }
 
         List<LatLng> points = new ArrayList<LatLng>();
         for (BusLineResult.BusStep step : mBusLineResult.getSteps()) {

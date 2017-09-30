@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
+import com.project.community.ui.PhoneDialogActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -63,12 +64,17 @@ public class MyActivity extends BaseActivity {
 
     @OnClick({R.id.rl_my_kefu, R.id.rl_my_fuwu, R.id.rl_my_zhinan})
     public void onViewClicked(View view) {
+        Intent intent;
         switch (view.getId()) {
             case R.id.rl_my_kefu:
+                intent= new Intent();
+                intent.putExtra("hasHeader", false);
+                intent.putExtra("type", "1");
+                intent.setClass(MyActivity.this, PhoneDialogActivity.class);
+                startActivity(intent);
                 break;
             case R.id.rl_my_fuwu:
-                Intent intent
-                        =new Intent(this,ServiesClauseActivity.class);
+                intent=new Intent(this,ServiesClauseActivity.class);
                 startActivity(intent);
                 break;
             case R.id.rl_my_zhinan:

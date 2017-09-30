@@ -29,6 +29,8 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.jakewharton.rxbinding.view.RxView;
+import com.library.okgo.utils.ToastUtils;
 import com.library.okgo.utils.photo.PhotoUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
@@ -42,16 +44,19 @@ import com.project.community.ui.adapter.OrderDetailShouliApdater;
 import com.project.community.ui.adapter.SendMessageAdapter;
 import com.project.community.ui.life.zhengwu.ZhengwuActivity;
 import com.project.community.util.ScreenUtils;
+import com.project.community.view.MyButton;
 import com.project.community.view.MyGridView;
 import com.project.community.view.crop.CropImageActivity;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.functions.Action1;
 
 public class OrderDetailActivity extends BaseActivity implements View.OnClickListener {
 
@@ -95,6 +100,8 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     MyGridView orderDetailAddImgs;
     @Bind(R.id.layout_root)
     CoordinatorLayout mLayoutRoot;
+    @Bind(R.id.order_detail_complete)
+    MyButton mOrderDetailComplete;
     private List<String> mImages = new ArrayList<>();
     private List<String> mAddImages = new ArrayList<>();
     private List<CommentModel> mShouliList =new ArrayList<>();
@@ -166,11 +173,20 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
                 }
             }
         });
+        RxView.clicks(mOrderDetailComplete)
+                .throttleFirst(2, TimeUnit.SECONDS)
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        onViewClicked();
+                    }
+                });
 
     }
 
-    @OnClick(R.id.order_detail_complete)
+//    @OnClick(R.id.order_detail_complete)
     public void onViewClicked() {
+        ToastUtils.showLongToast(this,"点了");
     }
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.ui.adapter.PageFragmentAdapter;
+import com.project.community.ui.life.SearchActivity;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -171,7 +172,10 @@ public class BBSActivity extends BaseActivity implements ViewPager.OnPageChangeL
                 return true;*/
 
             case R.id.action_favorite:
-
+                Bundle bundle = new Bundle();
+                bundle.putString("type", "mobile");
+                bundle.putInt("index", 3);
+                SearchActivity.startActivity(BBSActivity.this,bundle);
                 return true;
 
             default:

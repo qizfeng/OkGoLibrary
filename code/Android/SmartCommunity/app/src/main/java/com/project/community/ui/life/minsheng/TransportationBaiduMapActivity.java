@@ -1,45 +1,21 @@
 package com.project.community.ui.life.minsheng;
 
-import android.Manifest;
 import android.annotation.TargetApi;
-
-import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
-import android.location.Location;
-
-import android.location.LocationListener;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CoordinatorLayout;
-
 import android.support.v7.widget.Toolbar;
-
 import android.util.Log;
-
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ZoomControls;
-
-
-import com.baidu.location.LocationClient;
-
-import com.baidu.mapapi.BMapManager;
-import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.BaiduMap;
-import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.MapPoi;
-import com.baidu.mapapi.map.Marker;
-import com.baidu.mapapi.map.MyLocationData;
-import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.model.LatLngBounds;
-import com.baidu.mapapi.model.inner.GeoPoint;
 import com.baidu.mapapi.search.busline.BusLineResult;
 import com.baidu.mapapi.search.busline.BusLineSearch;
 import com.baidu.mapapi.search.busline.BusLineSearchOption;
@@ -52,7 +28,6 @@ import com.baidu.mapapi.search.poi.PoiDetailResult;
 import com.baidu.mapapi.search.poi.PoiIndoorResult;
 import com.baidu.mapapi.search.poi.PoiResult;
 import com.baidu.mapapi.search.poi.PoiSearch;
-import com.library.okgo.utils.ToastUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.ui.life.minsheng.overlayutil.BusLineOverlay;
@@ -68,8 +43,6 @@ import static com.project.community.R.id.linearLayout;
 public class TransportationBaiduMapActivity extends BaseActivity implements OnGetPoiSearchResultListener, OnGetBusLineSearchResultListener,
         BaiduMap.OnMapClickListener {
 
-    @Bind(R.id.snmnds)
-    LinearLayout snmnds;
     @Bind(R.id.toolbar)
     Toolbar mToolBar;
     @Bind(R.id.tv_title)
@@ -82,8 +55,6 @@ public class TransportationBaiduMapActivity extends BaseActivity implements OnGe
     TextView headName;
     @Bind(R.id.head_banci)
     TextView headBanci;
-    @Bind(R.id.coordinatorLayout)
-    CoordinatorLayout coordinatorLayout;
 
     private int nodeIndex = -2;// 节点索引,供浏览节点时使用
     /**
@@ -206,6 +177,7 @@ public class TransportationBaiduMapActivity extends BaseActivity implements OnGe
     @TargetApi(Build.VERSION_CODES.M)
     private void initData() {
         initToolBar(mToolBar, mTvTitle, true, "1路", R.mipmap.iv_back);
+        mMapView.showZoomControls(false);
         mBaiduMap = mMapView.getMap();
         // 隐藏logo
         try {

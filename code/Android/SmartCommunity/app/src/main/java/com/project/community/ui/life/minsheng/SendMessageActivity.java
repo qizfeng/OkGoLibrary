@@ -27,6 +27,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.jakewharton.rxbinding.view.RxView;
 import com.library.okgo.utils.ToastUtils;
 import com.library.okgo.utils.photo.PhotoUtils;
 import com.library.okgo.view.loopview.LoopView;
@@ -42,10 +43,12 @@ import com.project.community.view.crop.CropImageActivity;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.functions.Action1;
 
 public class SendMessageActivity extends BaseActivity implements View.OnClickListener, View.OnTouchListener {
 
@@ -116,6 +119,22 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
 
             }
         });
+        RxView.clicks(sendMessageLlType)
+                .throttleFirst(2, TimeUnit.SECONDS)
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        onViewClicked(sendMessageLlType);
+                    }
+                });
+        RxView.clicks(sendMessageSummit)
+                .throttleFirst(2, TimeUnit.SECONDS)
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        onViewClicked(sendMessageSummit);
+                    }
+                });
         sendMessageEtContent.setOnTouchListener(this);
         sendMessageEtTitle.setOnTouchListener(this);
         sendMessageEtTitle.addTextChangedListener(new TextWatcher() {
@@ -253,10 +272,22 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
             case R.id.send_message_summit:
 
                if (TextUtils.isEmpty(sendMessageTvType.getText().toString())){
-                    ToastUtils.showLongToast(this,getResources().getString(R.string.send_message));
+                    ToastUtils.showLongToast(this,getResources().getString(R.string.send_message_type_toast));
                    return;
                }
-
+               if (TextUtils.isEmpty(sendMessageEtTitle.getText().toString())){
+                    ToastUtils.showLongToast(this,getResources().getString(R.string.send_message_title_toast));
+                   return;
+               }
+               if (TextUtils.isEmpty(sendMessageEtContent.getText().toString())){
+                    ToastUtils.showLongToast(this,getResources().getString(R.string.send_message_content_toast));
+                   return;
+               }
+               if (mImags.size()<1){
+                    ToastUtils.showLongToast(this,getResources().getString(R.string.send_message_uoload_img_toast));
+                   return;
+               }
+                finish();
                 break;
         }
     }
