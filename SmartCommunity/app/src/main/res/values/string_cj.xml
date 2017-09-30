@@ -39,11 +39,26 @@
     <string name="store_apply_business_license">营业执照号</string>
     <string name="store_apply_business_license_hit">请输入营业执照号</string>
     <string name="store_apply_business_license_photo">营业执照(正/反)</string>
-    <string name="store_apply_photo_hit">(jpg、png格式)</string>
+    <string name="store_apply_photo_hit">（支持jpg、png）</string>
     <string name="store_apply_legal_person">法人姓名</string>
     <string name="store_apply_legal_person_hit">请输入法人姓名</string>
     <string name="store_apply_legal_person_photo">法人身份证(正/反)</string>
     <string name="store_apply_predict">预计在7个工作日完成审核</string>
+
+    <string name="store_apply_upcover_toast">请上传店铺封面</string>
+    <string name="store_apply_title_toast">请输入店铺名称</string>
+    <string name="store_apply_name_toast">请输入联系人</string>
+    <string name="store_apply_tel_toast">请输入联系电话</string>
+    <string name="store_apply_address_toast">请选择营业地址</string>
+    <string name="store_apply_type_toast">请选择分类</string>
+    <string name="store_apply_important_toast">请输入主营业务</string>
+    <string name="store_apply_company_name_toast">请输入企业名称</string>
+    <string name="store_apply_business_license_toast">请输入营业执照号</string>
+    <string name="store_apply_business_license_photo_zheng_toast">请上传营业执照正面照</string>
+    <string name="store_apply_business_license_photo_fan_toast">请上传营业执照反面照</string>
+    <string name="store_apply_legal_person_toast">请输入法人姓名</string>
+    <string name="store_apply_legal_person_photo_zheng_toast">请上传法人身份证正面照</string>
+    <string name="store_apply_legal_person_photo_fan_toast">请上传法人身份证反面照</string>
 
 
     <!--地址页面-->
@@ -56,12 +71,16 @@
     <!--发信息页面-->
     <string name="send_message">发信息</string>
     <string name="send_message_type">分类</string>
+    <string name="send_message_type_toast">请选择分类</string>
     <string name="send_message_type_hit">请选择</string>
     <string name="send_message_title_hit">请输入标题</string>
+    <string name="send_message_title_toast">请输入标题</string>
     <string name="send_message_content_hit">亲~来说点什么吧!</string>
+    <string name="send_message_content_toast">亲~来说点什么吧!</string>
     <string name="send_message_uoload_img">上传图片</string>
+    <string name="send_message_uoload_img_toast">请上传图片</string>
     <string name="send_message_commit">立即发布</string>
-    <string name="send_message_photo_hit">(支持jpg、png格式.)</string>
+    <string name="send_message_photo_hit">（支持jpg、png）</string>
     <string name="send_message_change_type">选择分类</string>
 
 </resources>

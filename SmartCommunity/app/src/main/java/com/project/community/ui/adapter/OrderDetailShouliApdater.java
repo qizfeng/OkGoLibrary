@@ -39,16 +39,22 @@ public class OrderDetailShouliApdater extends BaseQuickAdapter<CommentModel, Bas
 
         RecyclerView recyclerView=baseViewHolder.getView(R.id.item_iscurrt_reylerview);
 
-        View view1 = baseViewHolder.getView(R.id.item_view_1);
-        View view2 = baseViewHolder.getView(R.id.item_view_2);
+        View view1 = baseViewHolder.getView(R.id.item_view_1);//上线
+        View view2 = baseViewHolder.getView(R.id.item_view_2);//下线
+        View lastView = baseViewHolder.getView(R.id.last_view);//下下线
             if (baseViewHolder.getLayoutPosition()==0){
                 view1.setVisibility(View.INVISIBLE);
+                view2.setVisibility(View.VISIBLE);
+                lastView.setVisibility(View.INVISIBLE);
                 baseViewHolder.setImageResource(R.id.item_cirimags,R.mipmap.d41_dian_p)
                         .setVisible(R.id.item_iscurrt,false)
                         .setVisible(R.id.item_view_line_, true)
                         .setVisible(R.id.item_iscurrt_evaluate,false)
                         .setVisible(R.id.item_iscurrt_reylerview,false);
             } else if (baseViewHolder.getLayoutPosition() == 6) {
+                view1.setVisibility(View.VISIBLE);
+                view2.setVisibility(View.VISIBLE);
+                lastView.setVisibility(View.VISIBLE);
                 baseViewHolder.setVisible(R.id.item_iscurrt,true)
                         .setVisible(R.id.item_iscurrt,true)
                         .setVisible(R.id.item_view_line_, true)
@@ -66,6 +72,7 @@ public class OrderDetailShouliApdater extends BaseQuickAdapter<CommentModel, Bas
             } else if (baseViewHolder.getLayoutPosition() == getItemCount() - 1) {
                 view1.setVisibility(View.VISIBLE);
                 view2.setVisibility(View.INVISIBLE);
+                lastView.setVisibility(View.INVISIBLE);
                     baseViewHolder.setImageResource(R.id.item_cirimags, R.mipmap.d41_dian_p)
                             .setVisible(R.id.item_iscurrt, true)
                             .setVisible(R.id.item_view_line_, false)
@@ -74,6 +81,7 @@ public class OrderDetailShouliApdater extends BaseQuickAdapter<CommentModel, Bas
                 } else {
                     view1.setVisibility(View.VISIBLE);
                     view2.setVisibility(View.VISIBLE);
+                    lastView.setVisibility(View.VISIBLE);
                     baseViewHolder.setImageResource(R.id.item_cirimags, R.mipmap.d41_dian)
                             .setVisible(R.id.item_iscurrt, false)
                             .setVisible(R.id.item_view_line_, true)

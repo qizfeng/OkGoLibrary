@@ -116,6 +116,7 @@ public class AdrressActivity extends BaseActivity implements BaiduMap.OnMapClick
         } catch (Exception e) {
             e.printStackTrace();
         }
+        mMapView.showZoomControls(false);
         mBaiduMap.setMyLocationEnabled(true);
         mBaiduMap.getUiSettings().setCompassEnabled(true);
         MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(16.0f);
@@ -136,7 +137,7 @@ public class AdrressActivity extends BaseActivity implements BaiduMap.OnMapClick
         mLocClient.setLocOption(option);
         mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(
                 MyLocationConfiguration.LocationMode.NORMAL, true, BitmapDescriptorFactory
-                .fromResource(R.mipmap.b1_btn1),
+                .fromResource(R.mipmap.k),
                 accuracyCircleFillColor, accuracyCircleStrokeColor));
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {

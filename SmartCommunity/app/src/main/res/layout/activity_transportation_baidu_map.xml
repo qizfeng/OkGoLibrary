@@ -19,7 +19,6 @@
             android:clickable="true"
             />
         <LinearLayout
-            android:id="@+id/snmnds"
             android:background="@color/white"
             android:paddingRight="30dp"
             android:paddingBottom="16dp"

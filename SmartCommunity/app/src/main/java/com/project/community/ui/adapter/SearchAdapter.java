@@ -45,6 +45,8 @@ public class SearchAdapter extends BaseQuickAdapter<SearchModel, BaseViewHolder>
             return super.createBaseViewHolder(parent, R.layout.layout_item_search);
         else if (index == 1)
             return super.createBaseViewHolder(parent, R.layout.layout_item_search2);
+        else if (index == 3)
+            return super.createBaseViewHolder(parent, R.layout.layout_item_search3);
         return super.createBaseViewHolder(parent, R.layout.layout_item_search);
     }
 

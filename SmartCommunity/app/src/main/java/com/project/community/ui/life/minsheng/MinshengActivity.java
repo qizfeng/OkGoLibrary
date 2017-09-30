@@ -328,6 +328,4 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
         helper.attachToRecyclerView(mRecyclerView);
     }
 
-
-
 }

@@ -12,6 +12,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -24,8 +26,13 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.jakewharton.rxbinding.view.RxView;
 import com.library.okgo.utils.GlideImageLoader;
+import com.library.okgo.utils.ToastUtils;
+import com.library.okgo.utils.ValidateUtil;
 import com.library.okgo.utils.photo.PhotoUtils;
+import com.library.okgo.view.loopview.LoopView;
+import com.library.okgo.view.loopview.OnItemSelectedListener;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.util.ScreenUtils;
@@ -33,12 +40,16 @@ import com.project.community.view.MyButton;
 import com.project.community.view.crop.CropImageActivity;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.functions.Action1;
 
-public class ApplyStoreActivity extends BaseActivity implements View.OnClickListener {
+public class ApplyStoreActivity extends BaseActivity implements View.OnClickListener, View.OnTouchListener {
 
 
     private static final int CODE_GALLERY_REQUEST = 0xa0;
@@ -81,6 +92,15 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
 
     private int iSCode = 0; // 1点击店铺,2点击营业执照正面,3.点击营业执照反面4,点击法人身份证正面5.点击法人身份证反面
 
+    private String mStoreCoverUri;
+    private String mBusinessLicenseZUri;
+    private String mBusinessLicenseFUri;
+    private String mLegalPersonZUri;
+    private String mLegalPersonFUri;
+
+
+
+
     @Bind(R.id.layout_root)
     LinearLayout mLayoutRoot;
     @Bind(R.id.toolbar)
@@ -122,6 +142,8 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
     @Bind(R.id.apply_store_btn_confire)
     MyButton applyStoreBtnConfire;
 
+    private LoopView mLoopView;
+
 //    private ApplyStoryPicAdapter mApplyStoryPicAdapterBusinessLicense;
 //    private ApplyStoryPicAdapter mApplyStoryPicAdapterGvLegalPerson;
 //    private List<String> mImagsBusinessLicense = new ArrayList<>(); // 营业执照照片集合
@@ -137,6 +159,33 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
 
     private void initData() {
         initToolBar(mToolBar, mTvTitle, true, getString(R.string.store_Apply), R.mipmap.iv_back);
+
+        applyStoreEtImportant.setOnTouchListener(this);
+
+        RxView.clicks(applyStoreBtnConfire)
+                .throttleFirst(2, TimeUnit.SECONDS)
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        onViewClicked(applyStoreBtnConfire);
+                    }
+                });
+        RxView.clicks(llApplyStoreTvType)
+                .throttleFirst(2, TimeUnit.SECONDS)
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        onViewClicked(llApplyStoreTvType);
+                    }
+                });
+        RxView.clicks(llApplyStoreTvAddress)
+                .throttleFirst(2, TimeUnit.SECONDS)
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        onViewClicked(llApplyStoreTvAddress);
+                    }
+                });
 
 //        /**
 //         * 营业执照照片
@@ -189,6 +238,7 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
 
     }
 
+    List<String> data = new ArrayList<>();
     @OnClick({R.id.ll_apply_store_tv_address, R.id.ll_apply_store_tv_type, R.id.apply_store_btn_confire, R.id.apply_store_img_add, R.id.apply_store_img_del,
             R.id.apply_store_del_business_license_zheng, R.id.apply_store_img_add_business_license_zheng, R.id.apply_store_del_business_license_fan,
             R.id.apply_store_img_add_business_license_fan, R.id.apply_store_del_legal_person_zheng, R.id.apply_store_img_add_legal_person_zheng,
@@ -200,8 +250,75 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
                 startActivityForResult(intent, 100);
                 break;
             case R.id.ll_apply_store_tv_type:
+                data.clear();
+                data.add("餐饮");
+                data.add("外卖");
+                data.add("家政");
+                data.add("美容美化");
+                data.add("便利店");
+                showDialog(getResources().getString(R.string.send_message_change_type),data);
                 break;
             case R.id.apply_store_btn_confire:
+                if (TextUtils.isEmpty(mStoreCoverUri)){
+                    ToastUtils.showLongToast(this,getResources().getString(R.string.store_apply_upcover_toast));
+                    return;
+                }
+                if (TextUtils.isEmpty(applyStoreEtTitle.getText().toString())){
+                    ToastUtils.showLongToast(this,getResources().getString(R.string.store_apply_title_toast));
+                    return;
+                }
+                if (TextUtils.isEmpty(applyStoreEtName.getText().toString())){
+                    ToastUtils.showLongToast(this,getResources().getString(R.string.store_apply_name_toast));
+                    return;
+                }
+                if (TextUtils.isEmpty(applyStoreEtTel.getText().toString())){
+                    ToastUtils.showLongToast(this,getResources().getString(R.string.store_apply_tel_toast));
+                    return;
+                }
+                if (!ValidateUtil.isPhone(applyStoreEtTel.getText().toString())) {
+                    showToast(getString(R.string.toast_error_phone));
+                    return;
+                }
+                if (TextUtils.isEmpty(applyStoreTvAddress.getText().toString())){
+                    ToastUtils.showLongToast(this,getResources().getString(R.string.store_apply_address_toast));
+                    return;
+                }
+                if (TextUtils.isEmpty(applyStoreTvType.getText().toString())){
+                    ToastUtils.showLongToast(this,getResources().getString(R.string.store_apply_type_toast));
+                    return;
+                }
+                if (TextUtils.isEmpty(applyStoreEtImportant.getText().toString())){
+                    ToastUtils.showLongToast(this,getResources().getString(R.string.store_apply_important_toast));
+                    return;
+                }
+                if (TextUtils.isEmpty(applyStoreEtCompanyName.getText().toString())){
+                    ToastUtils.showLongToast(this,getResources().getString(R.string.store_apply_company_name_toast));
+                    return;
+                }
+                if (TextUtils.isEmpty(applyStoreEtBusinessLicense.getText().toString())){
+                    ToastUtils.showLongToast(this,getResources().getString(R.string.store_apply_business_license_toast));
+                    return;
+                }
+                if (TextUtils.isEmpty(mBusinessLicenseZUri)){
+                    ToastUtils.showLongToast(this,getResources().getString(R.string.store_apply_business_license_photo_zheng_toast));
+                    return;
+                }
+                if (TextUtils.isEmpty(mBusinessLicenseFUri)){
+                    ToastUtils.showLongToast(this,getResources().getString(R.string.store_apply_business_license_photo_fan_toast));
+                    return;
+                }
+                if (TextUtils.isEmpty(applyStoreEtLegalPerson.getText().toString())){
+                    ToastUtils.showLongToast(this,getResources().getString(R.string.store_apply_legal_person_toast));
+                    return;
+                }
+                if (TextUtils.isEmpty(mLegalPersonZUri)){
+                    ToastUtils.showLongToast(this,getResources().getString(R.string.store_apply_legal_person_photo_zheng_toast));
+                    return;
+                }
+                if (TextUtils.isEmpty(mLegalPersonFUri)){
+                    ToastUtils.showLongToast(this,getResources().getString(R.string.store_apply_legal_person_photo_fan_toast));
+                    return;
+                }
                 finish();
                 break;
             case R.id.apply_store_img_add: //点击添加店铺封面
@@ -309,27 +426,32 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
                     if (data != null) {
                         switch (iSCode){
                             case 1:
-                                new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgCover, data.getStringExtra("uri"), R.mipmap.default_image);
+                                mStoreCoverUri=data.getStringExtra("uri");
+                                new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgCover, data.getStringExtra("uri"), R.mipmap.c1_image2);
                                 applyStoreImgAdd.setVisibility(View.GONE);
                                 applyStoreImgDel.setVisibility(View.VISIBLE);
                                 break;
                             case 2:
-                                new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgBusinessLicenseZheng, data.getStringExtra("uri"), R.mipmap.default_image);
+                                mBusinessLicenseZUri=data.getStringExtra("uri");
+                                new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgBusinessLicenseZheng, data.getStringExtra("uri"), R.mipmap.c1_image2);
                                 applyStoreImgAddBusinessLicenseZheng.setVisibility(View.GONE);
                                 applyStoreDelBusinessLicenseZheng.setVisibility(View.VISIBLE);
                                 break;
                             case 3:
-                                new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgBusinessLicenseFan, data.getStringExtra("uri"), R.mipmap.default_image);
+                                mBusinessLicenseFUri=data.getStringExtra("uri");
+                                new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgBusinessLicenseFan, data.getStringExtra("uri"), R.mipmap.c1_image2);
                                 applyStoreImgAddBusinessLicenseFan.setVisibility(View.GONE);
                                 applyStoreDelBusinessLicenseFan.setVisibility(View.VISIBLE);
                                 break;
                             case 4:
-                                new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgLegalPersonZheng, data.getStringExtra("uri"), R.mipmap.default_image);
+                                mLegalPersonZUri=data.getStringExtra("uri");
+                                new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgLegalPersonZheng, data.getStringExtra("uri"), R.mipmap.c1_image2);
                                 applyStoreImgAddLegalPersonZheng.setVisibility(View.GONE);
                                 applyStoreDelLegalPersonZheng.setVisibility(View.VISIBLE);
                                 break;
                             case 5:
-                                new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgLegalPersonFan, data.getStringExtra("uri"), R.mipmap.default_image);
+                                mLegalPersonFUri=data.getStringExtra("uri");
+                                new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgLegalPersonFan, data.getStringExtra("uri"), R.mipmap.c1_image2);
                                 applyStoreImgAddLegalPersonFan.setVisibility(View.GONE);
                                 applyStoreDelLegalPersonFan.setVisibility(View.VISIBLE);
                                 break;
@@ -422,6 +544,104 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
                 return false;
             }
         });
+    }
+
+    private int mCurrtindex=0;
+    private void showDialog(String title, final List<String> strings) {
+        //填充对话框的布局
+        View inflate = LayoutInflater.from(this).inflate(R.layout.layout_loopview, null);
+        if (!TextUtils.isEmpty(applyStoreTvType.getText().toString()))
+            for (int i = 0; i < strings.size(); i++) {
+                if (strings.get(i).equals(applyStoreTvType.getText().toString())){
+                    mCurrtindex=i;
+                }
+            }
+        //初始化控件
+        TextView tv_cancel = (TextView) inflate.findViewById(R.id.tv_cancel);
+        TextView tv_confirm = (TextView) inflate.findViewById(R.id.tv_confirm);
+        TextView tv_title = (TextView) inflate.findViewById(R.id.tv_title);
+        tv_title.setText(title);
+        tv_cancel.setOnClickListener(this);
+        tv_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                applyStoreTvType.setText(strings.get(mCurrtindex));
+                mPopupWindow.dismiss();
+            }
+        });
+
+        mLoopView = (LoopView) inflate.findViewById(R.id.loopView);
+        mLoopView.setItems(strings);
+        mLoopView.setInitPosition(mCurrtindex);
+        mLoopView.setNotLoop();
+        mLoopView.setCenterTextColor(getResources().getColor(R.color.txt_color));
+        mLoopView.setListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(int index) {
+                mCurrtindex=index;
+
+            }
+        });
+        if (mPopupWindow != null) {
+            mPopupWindow.dismiss();
+        }
+        mPopupWindow = new PopupWindow(this);
+        // 设置视图
+        mPopupWindow.setContentView(inflate);
+        // 设置弹出窗体的宽和高
+        mPopupWindow.setHeight(RelativeLayout.LayoutParams.WRAP_CONTENT);
+        mPopupWindow.setWidth(RelativeLayout.LayoutParams.MATCH_PARENT);
+        // 设置弹出窗体可点击
+        mPopupWindow.setFocusable(true);
+        // 实例化一个ColorDrawable颜色为半透明
+        ColorDrawable dw = new ColorDrawable(0xb0000000);
+        // 设置弹出窗体的背景
+        mPopupWindow.setBackgroundDrawable(dw);
+        // 设置弹出窗体显示时的动画，从底部向上弹出
+        mPopupWindow.setAnimationStyle(R.style.popwin_comment_anim);
+        mPopupWindow.showAtLocation(mLayoutRoot, Gravity.BOTTOM, ScreenUtils.getScreenWidth(this), 0);
+        inflate.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                mPopupWindow.dismiss();
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        Log.e("onTouch---->",canVerticalScroll(applyStoreEtImportant)+"" );
+        //触摸的是EditText并且当前EditText可以滚动则将事件交给EditText处理；否则将事件交由其父类处理
+        if (view.getId() == R.id.apply_store_et_important && canVerticalScroll(applyStoreEtImportant)){
+            view.getParent().requestDisallowInterceptTouchEvent(true);
+            if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                view.getParent().requestDisallowInterceptTouchEvent(false);
+            }
+        }
+        return false;
+    }
+
+    /**
+     * EditText竖直方向是否可以滚动
+     * @param editText  需要判断的EditText
+     * @return  true：可以滚动   false：不可以滚动
+     */
+    private boolean canVerticalScroll(EditText editText) {
+        //滚动的距离
+        int scrollY = editText.getScrollY();
+        //控件内容的总高度
+        int scrollRange = editText.getLayout().getHeight();
+        //控件实际显示的高度
+        int scrollExtent = editText.getHeight() - editText.getCompoundPaddingTop() -editText.getCompoundPaddingBottom();
+        //控件内容总高度与实际显示高度的差值
+        int scrollDifference = scrollRange - scrollExtent;
+
+        if(scrollDifference == 0) {
+            return false;
+        }
+
+        return (scrollY > 0) || (scrollY < scrollDifference - 1);
     }
 
 }

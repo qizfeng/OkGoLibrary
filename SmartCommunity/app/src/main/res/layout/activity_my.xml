@@ -47,11 +47,16 @@
                 android:id="@+id/my_gonghao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="50dp"
                 android:text="工号 100212151"
                 android:textColor="@color/color_gray_666666"
                 android:textSize="13sp" />
 
+            <View
+                android:layout_marginRight="25dp"
+                android:layout_marginLeft="25dp"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/common_gray_bg"/>
             <TextView
                 android:id="@+id/my_jiedan"
                 android:layout_width="wrap_content"
