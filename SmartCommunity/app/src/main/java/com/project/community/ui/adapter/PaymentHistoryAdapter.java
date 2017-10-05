@@ -58,14 +58,14 @@ public class PaymentHistoryAdapter extends BaseSectionQuickAdapter<PaymentHouseH
             helper.setOnClickListener(R.id.layout_item, new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    onClickListener.onItemClick(item,helper.getLayoutPosition());
+                    onClickListener.onItemClick(view,item,helper.getLayoutPosition());
                 }
             });
 
             helper.setOnClickListener(R.id.tv_delete, new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    onClickListener.onDeleteClick(mData,helper.getLayoutPosition());
+                    onClickListener.onDeleteClick(view,mData,helper.getLayoutPosition());
                 }
             });
         }
@@ -73,8 +73,8 @@ public class PaymentHistoryAdapter extends BaseSectionQuickAdapter<PaymentHouseH
 
 
     public interface OnAdapterItemClickListener {
-        void onDeleteClick(List<PaymentHouseHistroyModel> list, int position);
-        void onItemClick(PaymentHouseHistroyModel item, int position);
+        void onDeleteClick(View view,List<PaymentHouseHistroyModel> list, int position);
+        void onItemClick(View view,PaymentHouseHistroyModel item, int position);
     }
 
 }

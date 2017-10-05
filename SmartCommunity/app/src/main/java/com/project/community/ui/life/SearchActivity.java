@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.jakewharton.rxbinding.view.RxView;
 import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
@@ -37,11 +38,13 @@ import com.project.community.view.SpacesItemDecoration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.Response;
+import rx.functions.Action1;
 
 /**
  * Created by qizfeng on 17/8/11.
@@ -132,10 +135,18 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
 
         mAdapter = new SearchAdapter(mData, index, new RecycleItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
-                Bundle bundle = new Bundle();
-                bundle.putString("artId", mAdapter.getItem(position).id);
-                TopicDetailActivity.startActivity(SearchActivity.this, bundle);
+            public void onItemClick(View view,final int position) {
+                RxView.clicks(view)
+                        .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                        .subscribe(new Action1<Void>() {
+                            @Override
+                            public void call(Void aVoid) {
+                                Bundle bundle = new Bundle();
+                                bundle.putString("artId", mAdapter.getItem(position).id);
+                                TopicDetailActivity.startActivity(SearchActivity.this, bundle);
+                            }
+                        });
+
             }
 
             @Override
@@ -162,7 +173,15 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
             KeyBoardUtils.closeKeybord(etSearchContent, SearchActivity.this);
             etSearchContent.setCursorVisible(false);
             //进行搜索操作的方法，在该方法中可以加入mEditSearchUser的非空判断
-            StartSearch();
+            RxView.clicks( view )
+                    .throttleFirst( 2 , TimeUnit.SECONDS )   //两秒钟之内只取一个点击事件，防抖操作
+                    .subscribe(new Action1<Void>() {
+                        @Override
+                        public void call(Void aVoid) {
+                            StartSearch();
+                        }
+                    }) ;
+
         }
         return false;
     }
@@ -293,7 +312,7 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                    showToast(e.getMessage());
+                showToast(e.getMessage());
             }
         });
 

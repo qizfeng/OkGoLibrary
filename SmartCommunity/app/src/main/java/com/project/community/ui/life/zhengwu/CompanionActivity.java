@@ -20,6 +20,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.jakewharton.rxbinding.view.RxView;
 import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
@@ -38,10 +39,12 @@ import com.project.community.view.SpacesItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import okhttp3.Call;
 import okhttp3.Response;
+import rx.functions.Action1;
 
 /**
  * Created by qizfeng on 17/8/4.
@@ -97,13 +100,22 @@ public class CompanionActivity extends BaseActivity implements View.OnClickListe
         recyclerView.addItemDecoration(decoration);
         mAdapter = new GuideAdapter(mData, new RecycleItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
-                Intent intent = new Intent(CompanionActivity.this, WebViewActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("title", getString(R.string.title_masses_guide));
-                bundle.putString("url", mData.get(position).guideContent);
-                intent.putExtra("bundle", bundle);
-                startActivity(intent);
+            public void onItemClick(View view, final int position) {
+                RxView.clicks(view)
+                        .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                        .subscribe(new Action1<Void>() {
+                            @Override
+                            public void call(Void aVoid) {
+                                Intent intent = new Intent(CompanionActivity.this, WebViewActivity.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putString("title", getString(R.string.title_masses_guide));
+                                bundle.putString("url", mData.get(position).guideContent);
+                                intent.putExtra("bundle", bundle);
+                                startActivity(intent);
+                            }
+                        });
+
+
             }
 
             @Override
@@ -131,7 +143,7 @@ public class CompanionActivity extends BaseActivity implements View.OnClickListe
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                    showToast(e.getMessage());
+                showToast(e.getMessage());
             }
         });
     }

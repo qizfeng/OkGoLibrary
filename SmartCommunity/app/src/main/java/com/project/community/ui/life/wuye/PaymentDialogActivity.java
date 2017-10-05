@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 
 import com.alipay.sdk.app.AuthTask;
 import com.alipay.sdk.app.PayTask;
+import com.jakewharton.rxbinding.view.RxView;
 import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.model.BaseResponse;
 import com.library.okgo.utils.LogUtils;
@@ -29,11 +31,13 @@ import com.project.community.base.BaseActivity;
 import com.project.community.util.ScreenUtils;
 
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.Response;
+import rx.functions.Action1;
 
 /**
  * Created by qizfeng on 17/8/23.
@@ -53,6 +57,8 @@ public class PaymentDialogActivity extends BaseActivity implements View.OnClickL
     RadioButton mBtnAlipay;
     @Bind(R.id.btn_weipay)
     RadioButton mBtnWeipay;
+    @Bind(R.id.btn_confirm)
+    Button mBtnConfirm;
     private String paymentId;
     private String orderStr;
     /**
@@ -158,6 +164,30 @@ public class PaymentDialogActivity extends BaseActivity implements View.OnClickL
         getWindow().setAttributes(p);
         mLayoutAlipay.setOnClickListener(this);
         mLayoutWeipay.setOnClickListener(this);
+        RxView.clicks(mLayoutAlipay)
+                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        onClick(mLayoutAlipay);
+                    }
+                });
+        RxView.clicks(mLayoutWeipay)
+                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        onClick(mLayoutWeipay);
+                    }
+                });
+        RxView.clicks(mBtnConfirm)
+                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        onConfirm(mBtnConfirm);
+                    }
+                });
         mBtnAlipay.setEnabled(false);
         mBtnAlipay.setClickable(false);
         mBtnWeipay.setEnabled(false);
@@ -192,7 +222,6 @@ public class PaymentDialogActivity extends BaseActivity implements View.OnClickL
         this.finish();
     }
 
-    @OnClick(R.id.btn_confirm)
     public void onConfirm(View v) {
         if (mBtnWeipay.isChecked()) {
             showToast(getString(R.string.txt_wei_pay));
@@ -202,7 +231,6 @@ public class PaymentDialogActivity extends BaseActivity implements View.OnClickL
         this.finish();
     }
 
-    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.layout_alipay:

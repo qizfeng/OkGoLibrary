@@ -55,24 +55,24 @@ public class FamilyAdapter extends BaseMultiItemQuickAdapter<FamilyPersonModel, 
                     .placeholder(R.mipmap.d54_tx)
                     .bitmapTransform(new CropCircleTransformation(mContext))
                     .into((ImageView) helper.getView(R.id.iv_avatar));
-            helper.getConvertView().setOnClickListener(new View.OnClickListener() {
+            helper.getView(R.id.layout_item).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    itemClickListener.onItemClick(item, helper.getLayoutPosition());
+                    itemClickListener.onItemClick(view,item, helper.getLayoutPosition());
                 }
             });
 
             helper.setOnClickListener(R.id.tv_delete, new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    itemClickListener.onDeleteClick(item, helper.getLayoutPosition());
+                    itemClickListener.onDeleteClick(view,item, helper.getLayoutPosition());
                 }
             });
 
             helper.setOnClickListener(R.id.tv_edit, new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    itemClickListener.onEdit(item, helper.getLayoutPosition());
+                    itemClickListener.onEdit(view,item, helper.getLayoutPosition());
                 }
             });
 
@@ -80,10 +80,10 @@ public class FamilyAdapter extends BaseMultiItemQuickAdapter<FamilyPersonModel, 
     }
 
     public interface OnAdapterItemClickListener {
-        void onDeleteClick(FamilyPersonModel item, int position);//刪除
+        void onDeleteClick(View view,FamilyPersonModel item, int position);//刪除
 
-        void onEdit(FamilyPersonModel item, int position);//编辑
+        void onEdit(View view,FamilyPersonModel item, int position);//编辑
 
-        void onItemClick(FamilyPersonModel item, int position);//item
+        void onItemClick(View view,FamilyPersonModel item, int position);//item
     }
 }

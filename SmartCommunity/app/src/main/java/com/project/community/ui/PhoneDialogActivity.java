@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jakewharton.rxbinding.view.RxView;
 import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.model.BaseResponse;
 import com.library.okgo.utils.ToastUtils;
@@ -29,10 +30,12 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import okhttp3.Call;
 import okhttp3.Response;
+import rx.functions.Action1;
 
 /**
  * Created by qizfeng on 17/8/2.
@@ -71,8 +74,14 @@ public class PhoneDialogActivity extends BaseActivity implements View.OnClickLis
         p.width = (int) (ScreenUtils.getScreenWidth(this) * 0.8); // 宽度设置为屏幕的0.7
         getWindow().setAttributes(p);
         mIvClose.setOnClickListener(this);
-        mBtnCall.setOnClickListener(this);
-
+        RxView.clicks(mBtnCall)
+                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        onCall();
+                    }
+                });
         hasHeader = getIntent().getBooleanExtra("hasHeader", true);
         type = getIntent().getStringExtra("type");
         if (hasHeader) {
@@ -93,24 +102,24 @@ public class PhoneDialogActivity extends BaseActivity implements View.OnClickLis
             case R.id.iv_close:
                 finish();
                 break;
-            case R.id.btn_call:
-                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + mTvPhoneNumber.getText().toString().trim()));
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                if (Build.VERSION.SDK_INT >= 23) {
-                    if (ActivityCompat.checkSelfPermission(PhoneDialogActivity.this, PERMISSION_CALL_PHONE)
-                            != PackageManager.PERMISSION_GRANTED) {
-                        // 没有权限，申请权限。
-                        ActivityCompat.requestPermissions(PhoneDialogActivity.this, requestPermissions, REQUEST_PERMISSION_CODE);
-                    } else {
-                        // 有权限了，去放肆吧。
-                        startActivity(intent);
-                        finish();
-                    }
-                } else {
-                    startActivity(intent);
-                    finish();
-                }
-                break;
+        }
+    }
+    private void onCall(){
+        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + mTvPhoneNumber.getText().toString().trim()));
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (ActivityCompat.checkSelfPermission(PhoneDialogActivity.this, PERMISSION_CALL_PHONE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                // 没有权限，申请权限。
+                ActivityCompat.requestPermissions(PhoneDialogActivity.this, requestPermissions, REQUEST_PERMISSION_CODE);
+            } else {
+                // 有权限了，去放肆吧。
+                startActivity(intent);
+                finish();
+            }
+        } else {
+            startActivity(intent);
+            finish();
         }
     }
 

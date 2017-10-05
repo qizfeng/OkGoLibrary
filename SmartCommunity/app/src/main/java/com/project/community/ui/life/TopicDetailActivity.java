@@ -32,6 +32,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.jakewharton.rxbinding.view.RxView;
 import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
@@ -59,17 +60,19 @@ import com.umeng.socialize.shareboard.ShareBoardConfig;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import okhttp3.Call;
 import okhttp3.Response;
+import rx.functions.Action1;
 
 /**
  * Created by qizfeng on 17/8/3.
  * 文章正文页
  */
 
-public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
+public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
     @Bind(R.id.refreshLayout)
     VpSwipeRefreshLayout refreshLayout;
     @Bind(R.id.recyclerView)
@@ -130,7 +133,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
         mWebView = (WebView) header.findViewById(R.id.webView);
         mBtnWenjuan = (TextView) header.findViewById(R.id.btn_wenjuan);
         mTvCommentsTips = (TextView) header.findViewById(R.id.tv_comment_tips);
-        mBtnWenjuan.setOnClickListener(this);
+
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
@@ -184,8 +187,22 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
         });
         recyclerView.setAdapter(mAdapter);
         mAdapter.addHeaderView(header);
-        mBtnSend.setOnClickListener(this);
-
+        RxView.clicks(mBtnSend)
+                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        onClick(mBtnSend);
+                    }
+                });
+        RxView.clicks(mBtnWenjuan)
+                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        onClick(mBtnWenjuan);
+                    }
+                });
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -249,7 +266,6 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
     }
 
 
-    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_send:
@@ -312,7 +328,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                    showToast(e.getMessage());
+                showToast(e.getMessage());
             }
         });
     }
@@ -344,7 +360,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                    showToast(e.getMessage());
+                showToast(e.getMessage());
             }
         });
     }
@@ -440,7 +456,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                    showToast(e.getMessage());
+                showToast(e.getMessage());
             }
         });
     }
@@ -478,7 +494,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!isLogin(TopicDetailActivity.this)){
+                if (!isLogin(TopicDetailActivity.this)) {
                     showToast(getString(R.string.toast_no_login));
                     return;
                 }

@@ -7,9 +7,11 @@ import android.text.TextUtils;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jakewharton.rxbinding.view.RxView;
 import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.model.BaseResponse;
 import com.library.okgo.utils.LogUtils;
@@ -18,10 +20,13 @@ import com.project.community.base.BaseActivity;
 import com.project.community.model.HouseModel;
 import com.project.community.util.ScreenUtils;
 
+import java.util.concurrent.TimeUnit;
+
 import butterknife.Bind;
 import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.Response;
+import rx.functions.Action1;
 
 /**
  * Created by qizfeng on 17/8/21.
@@ -36,6 +41,8 @@ public class AddHouseNoDialogActivity extends BaseActivity {
     ImageView mIvClose;
     @Bind(R.id.tv_content)
     TextView mTvContent;
+    @Bind(R.id.btn_confirm)
+    Button mBtnConfirm;
     private String houseNo;
     private String address;
     private String title;
@@ -69,6 +76,15 @@ public class AddHouseNoDialogActivity extends BaseActivity {
                 e.printStackTrace();
             }
         }
+
+        RxView.clicks(mBtnConfirm)
+                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        onConfirm(mBtnConfirm);
+                    }
+                });
     }
 
     @OnClick({R.id.btn_cancel, R.id.iv_close})
@@ -76,7 +92,6 @@ public class AddHouseNoDialogActivity extends BaseActivity {
         this.finish();
     }
 
-    @OnClick(R.id.btn_confirm)
     public void onConfirm(View v) {
         addHouse();
     }

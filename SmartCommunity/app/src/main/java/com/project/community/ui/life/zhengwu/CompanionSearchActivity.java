@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.jakewharton.rxbinding.view.RxView;
 import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.model.BaseResponse;
 import com.library.okgo.utils.KeyBoardUtils;
@@ -35,11 +36,13 @@ import com.project.community.view.SpacesItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.Response;
+import rx.functions.Action1;
 
 /**
  * Created by qizfeng on 17/9/11.
@@ -125,13 +128,21 @@ public class CompanionSearchActivity extends BaseActivity implements View.OnKeyL
 
         mAdapter = new GuideAdapter(mData, new RecycleItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
-                Intent intent = new Intent(CompanionSearchActivity.this, WebViewActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("title", getString(R.string.title_masses_guide));
-                bundle.putString("url", mData.get(position).guideContent);
-                intent.putExtra("bundle", bundle);
-                startActivity(intent);
+            public void onItemClick(View view,final int position) {
+                RxView.clicks(view)
+                        .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                        .subscribe(new Action1<Void>() {
+                            @Override
+                            public void call(Void aVoid) {
+                                Intent intent = new Intent(CompanionSearchActivity.this, WebViewActivity.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putString("title", getString(R.string.title_masses_guide));
+                                bundle.putString("url", mData.get(position).guideContent);
+                                intent.putExtra("bundle", bundle);
+                                startActivity(intent);
+                            }
+                        });
+
             }
 
             @Override

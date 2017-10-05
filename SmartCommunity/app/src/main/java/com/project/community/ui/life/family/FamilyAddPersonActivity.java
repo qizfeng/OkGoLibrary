@@ -41,6 +41,7 @@ import android.widget.TextView;
 
 import com.baidu.platform.comapi.map.B;
 import com.bumptech.glide.Glide;
+import com.jakewharton.rxbinding.view.RxView;
 import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
@@ -66,18 +67,20 @@ import com.project.community.view.crop.CropImageActivity;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import okhttp3.Call;
 import okhttp3.Response;
+import rx.functions.Action1;
 
 /**
  * Created by qizfeng on 17/8/25.
  * 添加人口
  */
 
-public class FamilyAddPersonActivity extends BaseActivity implements View.OnClickListener {
+public class FamilyAddPersonActivity extends BaseActivity {
     public static final int CHOISE_RELATIVE = 1;//选择和户主关系
     public static final int CHOISE_GENDER = 2;//选择性别
     public static final int CHOISE_NATION = 3;//选择民族
@@ -197,12 +200,54 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
 
     private void initView() {
         KeyBoardUtils.closeKeybord(mEtName, this);
-        mTvRelative.setOnClickListener(this);
-        mTvGender.setOnClickListener(this);
-        mTvNation.setOnClickListener(this);
-        mTvReligion.setOnClickListener(this);
-        mTvParty.setOnClickListener(this);
-        mLayoutHeader.setOnClickListener(this);
+        RxView.clicks(mTvRelative)
+                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        onClick(mTvRelative);
+                    }
+                });
+        RxView.clicks(mTvGender)
+                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        onClick(mTvGender);
+                    }
+                });
+        RxView.clicks(mTvNation)
+                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        onClick(mTvNation);
+                    }
+                });
+        RxView.clicks(mTvReligion)
+                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        onClick(mTvReligion);
+                    }
+                });
+        RxView.clicks(mTvParty)
+                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        onClick(mTvParty);
+                    }
+                });
+        RxView.clicks(mLayoutHeader)
+                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        onClick(mLayoutHeader);
+                    }
+                });
         Bundle bundle = getIntent().getBundleExtra("bundle");
         if (bundle != null) {
             initToolBar(mToolBar, mTvTitle, true, bundle.getString("title"), R.mipmap.iv_back);
@@ -210,7 +255,6 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
             personId = bundle.getString("personId");
             roomNo = bundle.getString("roomNo");
             isLook = bundle.getBoolean("isLook");
-            LogUtils.e("isLook:" + isLook);
         }
         if (isLook) {//查看
             mEtAddress.setFocusable(false);
@@ -276,7 +320,6 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
         });
     }
 
-    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.layout_header:
@@ -687,12 +730,33 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
     public void showPhotoDialog() {
         //填充对话框的布局
         View inflate = LayoutInflater.from(this).inflate(R.layout.activity_dialog_photo, null);
-        TextView tv_take_photo = (TextView) inflate.findViewById(R.id.tv_take_photo);
-        TextView tv_pick_photo = (TextView) inflate.findViewById(R.id.tv_pick_photo);
-        TextView tv_cancel = (TextView) inflate.findViewById(R.id.tv_cancel);
-        tv_cancel.setOnClickListener(this);
-        tv_pick_photo.setOnClickListener(this);
-        tv_take_photo.setOnClickListener(this);
+        final TextView tv_take_photo = (TextView) inflate.findViewById(R.id.tv_take_photo);
+        final TextView tv_pick_photo = (TextView) inflate.findViewById(R.id.tv_pick_photo);
+        final TextView tv_cancel = (TextView) inflate.findViewById(R.id.tv_cancel);
+        RxView.clicks(tv_cancel)
+                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        onClick(tv_cancel);
+                    }
+                });
+        RxView.clicks(tv_pick_photo)
+                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        onClick(tv_pick_photo);
+                    }
+                });
+        RxView.clicks(tv_take_photo)
+                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        onClick(tv_take_photo);
+                    }
+                });
         if (mPopupWindow == null)
             mPopupWindow = new PopupWindow(this);
         // 设置视图
@@ -950,9 +1014,22 @@ public class FamilyAddPersonActivity extends BaseActivity implements View.OnClic
         TextView tv_confirm = (TextView) inflate.findViewById(R.id.tv_confirm);
         TextView tv_title = (TextView) inflate.findViewById(R.id.tv_title);
         tv_title.setText(title);
-        tv_cancel.setOnClickListener(this);
-        tv_confirm.setOnClickListener(this);
-
+        RxView.clicks(tv_cancel)
+                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        onClick(mTvRelative);
+                    }
+                });
+        RxView.clicks(tv_confirm)
+                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        onClick(mTvRelative);
+                    }
+                });
         mLoopView = (LoopView) inflate.findViewById(R.id.loopView);
         mLoopView.setItems(strings);
         mLoopView.setNotLoop();

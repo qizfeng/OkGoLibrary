@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Display;
@@ -18,10 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.baidu.platform.comapi.map.B;
-import com.baidu.platform.comapi.map.D;
 import com.library.okgo.callback.DialogCallback;
-import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
 import com.library.okgo.utils.KeyBoardUtils;
 import com.project.community.R;
@@ -30,11 +26,18 @@ import com.project.community.model.AuditStatusModel;
 import com.project.community.model.HouseModel;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.Response;
+
+import com.jakewharton.rxbinding.view.RxView;
+
+import java.util.concurrent.TimeUnit;
+
+import rx.functions.Action1;
 
 /**
  * Created by qizfeng on 17/8/25.
@@ -66,11 +69,17 @@ public class FamilyAddActivity extends BaseActivity {
         setContentView(R.layout.activity_add_family);
         initToolBar(mToolBar, mTvTitle, true, getString(R.string.activity_family_add), R.mipmap.iv_back);
 
+        RxView.clicks(mBtnNext)
+                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        onNext(mBtnNext);
+                    }
+                });
     }
 
-    @OnClick(R.id.btn_next)
     public void onNext(View view) {
-//        checkOwner();
         getHouseInfo();
     }
 
@@ -113,27 +122,32 @@ public class FamilyAddActivity extends BaseActivity {
         Button btn_confirm = (Button) mDialog.getWindow().findViewById(R.id.btn_confirm);
         Button btn_cancel = (Button) mDialog.getWindow().findViewById(R.id.btn_cancel);
         ImageView iv_close = (ImageView) mDialog.getWindow().findViewById(R.id.iv_close);
-        iv_close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDialog.dismiss();
-            }
-        });
-        btn_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDialog.dismiss();
-            }
-        });
-        btn_confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDialog.dismiss();
-                checkOwner();
-//                addFamily();
 
-            }
-        });
+        RxView.clicks(iv_close)
+                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        mDialog.dismiss();
+                    }
+                });
+        RxView.clicks(btn_cancel)
+                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        mDialog.dismiss();
+                    }
+                });
+        RxView.clicks(btn_confirm)
+                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        mDialog.dismiss();
+                        checkOwner();
+                    }
+                });
     }
 
     /**
@@ -156,26 +170,32 @@ public class FamilyAddActivity extends BaseActivity {
         Button btn_confirm = (Button) mDialog.getWindow().findViewById(R.id.btn_confirm);
         Button btn_cancel = (Button) mDialog.getWindow().findViewById(R.id.btn_cancel);
         ImageView iv_close = (ImageView) mDialog.getWindow().findViewById(R.id.iv_close);
-        iv_close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDialog.dismiss();
-            }
-        });
-        btn_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mDialog.dismiss();
-            }
-        });
-        btn_confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                auditFamily();
-                mDialog.dismiss();
+        RxView.clicks(iv_close)
+                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        mDialog.dismiss();
+                    }
+                });
+        RxView.clicks(btn_cancel)
+                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        mDialog.dismiss();
+                    }
+                });
+        RxView.clicks(btn_confirm)
+                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        mDialog.dismiss();
+                        auditFamily();
+                    }
+                });
 
-            }
-        });
     }
 
     /**
@@ -203,7 +223,7 @@ public class FamilyAddActivity extends BaseActivity {
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                    showToast(e.getMessage());
+                showToast(e.getMessage());
             }
         });
     }
@@ -242,7 +262,7 @@ public class FamilyAddActivity extends BaseActivity {
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                    showToast(e.getMessage());
+                showToast(e.getMessage());
             }
         });
     }
@@ -265,7 +285,7 @@ public class FamilyAddActivity extends BaseActivity {
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                    showToast(e.getMessage());
+                showToast(e.getMessage());
             }
         });
     }
@@ -295,7 +315,7 @@ public class FamilyAddActivity extends BaseActivity {
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                    showToast(e.getMessage());
+                showToast(e.getMessage());
             }
 
         });
