@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jakewharton.rxbinding.view.RxView;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.ui.life.wuye.AddHouseNoDialogActivity;
@@ -16,8 +18,11 @@ import com.project.community.ui.life.wuye.PayDetailActivity;
 import com.project.community.ui.life.wuye.PayIndexActivity;
 import com.project.community.util.ScreenUtils;
 
+import java.util.concurrent.TimeUnit;
+
 import butterknife.Bind;
 import butterknife.OnClick;
+import rx.functions.Action1;
 
 /**
  * Created by zipingfang on 17/8/25.
@@ -30,6 +35,10 @@ public class CommonDialogActivity extends BaseActivity {
     ImageView mIvClose;
     @Bind(R.id.tv_content)
     TextView mTvContent;
+    @Bind(R.id.btn_cancel)
+    Button mBtnCancel;
+    @Bind(R.id.btn_confirm)
+    Button mBtnConfirm;
 
     public static void startActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, AddHouseNoDialogActivity.class);
@@ -52,14 +61,34 @@ public class CommonDialogActivity extends BaseActivity {
         if(bundle!=null){
             mTvContent.setText(bundle.getString("info"));
         }
+        RxView.clicks(mBtnCancel)
+                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        onCancelClick(mBtnCancel);
+                    }
+                });
+        RxView.clicks(mIvClose)
+                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        onCancelClick(mIvClose);
+                    }
+                });
+        RxView.clicks(mBtnConfirm)
+                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                    }
+                });
     }
 
-    @OnClick({R.id.btn_cancel, R.id.iv_close})
+   // @OnClick({R.id.btn_cancel, R.id.iv_close})
     public void onCancelClick(View v) {
         this.finish();
     }
 
-    @OnClick(R.id.btn_confirm)
-    public void onConfirm(View v) {
-    }
 }

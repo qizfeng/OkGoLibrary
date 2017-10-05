@@ -27,6 +27,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.jakewharton.rxbinding.view.RxView;
 import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
@@ -60,11 +61,13 @@ import com.ryane.banner_lib.AdPlayBanner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Response;
+import rx.functions.Action1;
 
 /**
  * Created by qizfeng on 17/7/13.
@@ -97,6 +100,7 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     private String recStr = "";//回复评论
     private String targetId;//回復人id
     private int commentPosition = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,16 +123,23 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
         mAdapter = new ArticlePageAdapter(null, new IndexAdapterItemListener() {
             @Override
-            public void onItemClick(View view, int position) {//整个item点击事件
-                position = position - 1;//去掉头部
-                Bundle bundle = new Bundle();
-                if (tabLayout.getSelectedTabPosition() == 1) {
-                    bundle.putString("title", getString(R.string.title_communication_notice));
-                } else if (tabLayout.getSelectedTabPosition() == 0) {
-                    bundle.putString("title", getString(R.string.tab_title_wuye_kuaixun));
-                }
-                bundle.putString("artId", mAdapter.getItem(position).id);
-                TopicDetailActivity.startActivity(WuyeActivity.this, bundle);
+            public void onItemClick(View view, final int position) {//整个item点击事件
+                RxView.clicks(view)
+                        .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                        .subscribe(new Action1<Void>() {
+                            @Override
+                            public void call(Void aVoid) {
+                                Bundle bundle = new Bundle();
+                                if (tabLayout.getSelectedTabPosition() == 1) {
+                                    bundle.putString("title", getString(R.string.title_communication_notice));
+                                } else if (tabLayout.getSelectedTabPosition() == 0) {
+                                    bundle.putString("title", getString(R.string.tab_title_wuye_kuaixun));
+                                }
+                                bundle.putString("artId", mAdapter.getItem(position - 1).id);//去掉头部
+                                TopicDetailActivity.startActivity(WuyeActivity.this, bundle);
+                            }
+                        });
+
             }
 
             @Override
@@ -136,13 +147,21 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
             }
 
             @Override
-            public void onCommentClick(View view, int position) {//点击评论
-                position = position - 1;//去掉头部
-                commentPosition = position;
-                if (isLogin(WuyeActivity.this))
-                    getComments(mAdapter.getItem(position).id, view,commentPosition);
-                else
-                    showToast(getString(R.string.toast_no_login));
+            public void onCommentClick(final View view, final int position) {//点击评论
+                RxView.clicks(view)
+                        .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                        .subscribe(new Action1<Void>() {
+                            @Override
+                            public void call(Void aVoid) {
+                                int index = position - 1;//去掉头部
+                                commentPosition = position;
+                                if (isLogin(WuyeActivity.this))
+                                    getComments(mAdapter.getItem(position).id, view, commentPosition);
+                                else
+                                    showToast(getString(R.string.toast_no_login));
+                            }
+                        });
+
             }
         }, new DiggClickListener() {
             @Override
@@ -404,7 +423,7 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                    showToast(e.getMessage());
+                showToast(e.getMessage());
 
             }
         });
@@ -576,7 +595,7 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                 popupWindow.btn_send.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(!isLogin(WuyeActivity.this)){
+                        if (!isLogin(WuyeActivity.this)) {
                             showToast(getString(R.string.toast_no_login));
                             return;
                         }
@@ -606,7 +625,7 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                    showToast(e.getMessage());
+                showToast(e.getMessage());
             }
         });
     }
@@ -622,14 +641,14 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
             @Override
             public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
                 popupWindow.et_comment.setText("");
-                getComments(artId, view,commentPosition);
+                getComments(artId, view, commentPosition);
                 showToast(baseResponse.message);
             }
 
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                    showToast(e.getMessage());
+                showToast(e.getMessage());
             }
         });
     }
@@ -639,7 +658,7 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
      * 删除评论
      */
     private void deleteComment(final int position, String commentId, int type) {
-        if(!isLogin(this)){
+        if (!isLogin(this)) {
             showToast(getString(R.string.toast_no_login));
             return;
         }
@@ -653,7 +672,7 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                    showToast(e.getMessage());
+                showToast(e.getMessage());
             }
         });
     }
@@ -685,7 +704,7 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                    showToast(e.getMessage());
+                showToast(e.getMessage());
             }
         });
     }

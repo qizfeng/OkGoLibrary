@@ -25,6 +25,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.jakewharton.rxbinding.view.RxView;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
 import com.library.okgo.request.BaseRequest;
@@ -58,11 +59,13 @@ import com.ryane.banner_lib.AdPlayBanner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Response;
+import rx.functions.Action1;
 
 /**
  * Created by qizfeng on 17/7/11.
@@ -228,6 +231,22 @@ public class IndexFragment extends BaseFragment implements GestureDetector.OnGes
         }
     }
 
+    private void onSendComment() {
+        if (TextUtils.isEmpty(popupWindow.et_comment.getText().toString())) {
+            return;
+        }
+        CommentModel comment = new CommentModel();
+        comment.userId = "斯巴达";
+        comment.createDate = DateUtil.getCustomDateStr(DateUtil.millis(), "MM-dd HH:mm");
+        comment.content = popupWindow.et_comment.getText().toString();
+        comment.photo = "https://d-image.i4.cn/i4web/image//upload/20170112/1484183249877077333.jpg";
+        comments.add(comment);
+//                commentsPopwinAdapter.setData(comments);
+        commentsPopwinAdapter.setNewData(comments);
+        popupWindow.et_comment.setText("");
+//                popupWindow.lv_container.setSelection(comments.size() - 1);
+        popupWindow.lv_container.scrollToPosition(comments.size() - 1);
+    }
 
     private void getBannerData() {
         serverDao.getBannerData("1", "1", new JsonCallback<BaseResponse<BannerResponse>>() {
@@ -324,7 +343,15 @@ public class IndexFragment extends BaseFragment implements GestureDetector.OnGes
             textView.setText(getString(R.string.empty_no_comment));
         }
         popupWindow.showAtLocation(parent, Gravity.BOTTOM, ScreenUtils.getScreenWidth(getActivity()), 0);
-        popupWindow.btn_send.setOnClickListener(this);
+//        popupWindow.btn_send.setOnClickListener(this);
+        RxView.clicks(popupWindow.btn_send)
+                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        onSendComment();
+                    }
+                });
     }
 
     private void testAddHeader() {
@@ -414,22 +441,23 @@ public class IndexFragment extends BaseFragment implements GestureDetector.OnGes
 
                 final int row = i;
                 final int column = j;
-                rowView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        String title = tv_title.getText().toString();
-                        if ("全部分类".equals(title)) {
+                RxView.clicks(rowView)
+                        .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                        .subscribe(new Action1<Void>() {
+                            @Override
+                            public void call(Void aVoid) {
+                                String title = tv_title.getText().toString();
+                                if ("全部分类".equals(title)) {
 //                            if (row * 4 + column == moduleModels.size() - 1) {//全部分类
-                            Intent intent = new Intent(getActivity(), CategoryActivity.class);
-                            startActivity(intent);
+                                    Intent intent = new Intent(getActivity(), CategoryActivity.class);
+                                    startActivity(intent);
 //                            }
-                        } else if (getString(R.string.activity_payment).equals(title)) {
-                            Intent intent = new Intent(getActivity(), PayIndexActivity.class);
-                            startActivity(intent);
-                        }
-                    }
-                });
-
+                                } else if (getString(R.string.activity_payment).equals(title)) {
+                                    Intent intent = new Intent(getActivity(), PayIndexActivity.class);
+                                    startActivity(intent);
+                                }
+                            }
+                        });
             }
             TableLayout.LayoutParams params = new TableLayout.LayoutParams(
                     TableLayout.LayoutParams.WRAP_CONTENT,

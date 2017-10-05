@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import com.jakewharton.rxbinding.view.RxView;
 import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.model.BaseResponse;
 import com.project.community.R;
@@ -19,10 +20,12 @@ import com.project.community.view.DividerGridItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import okhttp3.Call;
 import okhttp3.Response;
+import rx.functions.Action1;
 
 /**
  * Created by qizfeng on 17/8/16.
@@ -51,18 +54,26 @@ public class PayIndexActivity extends BaseActivity {
         initData();
         mAdapter = new PayWayAdapter(mData, new RecycleItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
-                if(!isLogin(PayIndexActivity.this)){
-                    showToast(getString(R.string.toast_no_login));
-                    return;
-                }
-                if (position!=4){
-                    showToast("暂未开通");
-                    return;
-                }
-                Bundle bundle = new Bundle();
-                bundle.putString("title", mAdapter.getItem(position).label);
-                PayHistroyActivity.startActivity(PayIndexActivity.this, bundle);
+            public void onItemClick(View view,final int position) {
+                RxView.clicks(view)
+                        .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                        .subscribe(new Action1<Void>() {
+                            @Override
+                            public void call(Void aVoid) {
+                                if(!isLogin(PayIndexActivity.this)){
+                                    showToast(getString(R.string.toast_no_login));
+                                    return;
+                                }
+                                if (position!=4){
+                                    showToast("暂未开通");
+                                    return;
+                                }
+                                Bundle bundle = new Bundle();
+                                bundle.putString("title", mAdapter.getItem(position).label);
+                                PayHistroyActivity.startActivity(PayIndexActivity.this, bundle);
+                            }
+                        });
+
             }
 
             @Override

@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.jakewharton.rxbinding.view.RxView;
 import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.model.BaseResponse;
 import com.library.okgo.utils.LogUtils;
@@ -28,10 +29,12 @@ import com.project.community.view.SpacesItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import okhttp3.Call;
 import okhttp3.Response;
+import rx.functions.Action1;
 
 /**
  * Created by qizfeng on 17/9/5.
@@ -77,14 +80,16 @@ public class PayDetailWuyeActivity extends BaseActivity {
         mEtMoeny = (EditText) header.findViewById(R.id.et_money);
         mEtMoeny.setVisibility(View.GONE);
         mBtnPay = (Button) header.findViewById(R.id.btn_pay);
-        mBtnPay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putString("paymentId", paymentId);
-                PaymentDialogActivity.startActivity(PayDetailWuyeActivity.this, bundle);
-            }
-        });
+        RxView.clicks(mBtnPay)
+                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("paymentId", paymentId);
+                        PaymentDialogActivity.startActivity(PayDetailWuyeActivity.this, bundle);
+                    }
+                });
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -155,7 +160,7 @@ public class PayDetailWuyeActivity extends BaseActivity {
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                    showToast(e.getMessage());
+                showToast(e.getMessage());
             }
 
             @Override

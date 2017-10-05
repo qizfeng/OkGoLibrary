@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import com.jakewharton.rxbinding.view.RxView;
 import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.model.BaseResponse;
 import com.project.community.R;
@@ -20,11 +21,13 @@ import com.project.community.view.SpacesItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.Response;
+import rx.functions.Action1;
 
 /**
  * Created by qizfeng on 17/8/21.
@@ -79,19 +82,34 @@ public class PayHistroyActivity extends BaseActivity {
         mAdapter = new PaymentHistoryAdapter(R.layout.layout_item_payhistory, R.layout.layout_item_payhistory_top, mData,
                 new PaymentHistoryAdapter.OnAdapterItemClickListener() {
                     @Override
-                    public void onDeleteClick(List<PaymentHouseHistroyModel> list, int position) {
-                        onDelete(position);
+                    public void onDeleteClick(View view, List<PaymentHouseHistroyModel> list, final int position) {
+                        RxView.clicks(view)
+                                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                                .subscribe(new Action1<Void>() {
+                                    @Override
+                                    public void call(Void aVoid) {
+                                        onDelete(position);
+                                    }
+                                });
                     }
 
                     @Override
-                    public void onItemClick(PaymentHouseHistroyModel item, int position) {
-                        Bundle bundle = new Bundle();
-                        bundle.putString("houseNo", mAdapter.getItem(position).room.getRoomNo());
-                        bundle.putString("title", title);
-                        if ("物业费".equals(title))
-                            PayDetailWuyeActivity.startActivity(PayHistroyActivity.this, bundle);
-                        else
-                            PayDetailActivity.startActivity(PayHistroyActivity.this, bundle);
+                    public void onItemClick(View view,PaymentHouseHistroyModel item, final int position) {
+                        RxView.clicks(view)
+                                .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                                .subscribe(new Action1<Void>() {
+                                    @Override
+                                    public void call(Void aVoid) {
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("houseNo", mAdapter.getItem(position).room.getRoomNo());
+                                        bundle.putString("title", title);
+                                        if ("物业费".equals(title))
+                                            PayDetailWuyeActivity.startActivity(PayHistroyActivity.this, bundle);
+                                        else
+                                            PayDetailActivity.startActivity(PayHistroyActivity.this, bundle);
+                                    }
+                                });
+
                     }
                 });
 

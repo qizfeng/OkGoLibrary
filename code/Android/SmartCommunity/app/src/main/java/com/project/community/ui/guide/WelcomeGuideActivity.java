@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.jakewharton.rxbinding.view.RxView;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.constants.AppConstants;
@@ -18,6 +19,9 @@ import com.project.community.ui.adapter.GuideViewPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import rx.functions.Action1;
 
 /**
  * Created by zipingfang on 17/7/4.
@@ -54,7 +58,21 @@ public class WelcomeGuideActivity extends BaseActivity implements View.OnClickLi
             if (i == pics.length - 1) {
                 startBtn = (Button) view.findViewById(R.id.btn_login);
                 startBtn.setTag("enter");
-                startBtn.setOnClickListener(this);
+                RxView.clicks(startBtn)
+                        .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
+                        .subscribe(new Action1<Void>() {
+                            @Override
+                            public void call(Void aVoid) {
+                                if (startBtn.getTag().equals("enter")) {
+                                    enterMainActivity();
+                                    return;
+                                }
+
+                                int position = (Integer) startBtn.getTag();
+                                setCurView(position);
+                                setCurDot(position);
+                            }
+                        });
             }
 
             views.add(view);
@@ -94,20 +112,6 @@ public class WelcomeGuideActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void initDots() {
-//        LinearLayout ll = (LinearLayout) findViewById(R.id.ll);
-//        dots = new ImageView[pics.length];
-//
-//        // 循环取得小点图片
-//        for (int i = 0; i < pics.length; i++) {
-//            // 得到一个LinearLayout下面的每一个子元素
-//            dots[i] = (ImageView) ll.getChildAt(i);
-//            dots[i].setEnabled(false);// 都设为灰色
-//            dots[i].setOnClickListener(this);
-//            dots[i].setTag(i);// 设置位置tag，方便取出与当前位置对应
-//        }
-//
-//        currentIndex = 0;
-//        dots[currentIndex].setEnabled(true); // 设置为白色，即选中状态
 
     }
 
@@ -129,12 +133,6 @@ public class WelcomeGuideActivity extends BaseActivity implements View.OnClickLi
      * @param position
      */
     private void setCurDot(int position) {
-//        if (position < 0 || position > pics.length || currentIndex == position) {
-//            return;
-//        }
-//        dots[position].setEnabled(true);
-//        dots[currentIndex].setEnabled(false);
-//        currentIndex = position;
     }
 
     @Override
