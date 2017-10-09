@@ -22,6 +22,8 @@ public class ServiesClauseActivity extends BaseActivity {
     @Bind(R.id.serves_clause)
     TextView servesClause;
 
+    private int code;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +33,10 @@ public class ServiesClauseActivity extends BaseActivity {
     }
 
     private void initData() {
-        initToolBar(mToolBar, tvTitle, true, getResources().getString(R.string.my_fuwu), R.mipmap.iv_back);
+        code=getIntent().getIntExtra("code",1);
+        if (code == 1)
+            initToolBar(mToolBar, tvTitle, true, getResources().getString(R.string.my_fuwu), R.mipmap.iv_back);
+        else
+            initToolBar(mToolBar, tvTitle, true, getResources().getString(R.string.my_zhinan), R.mipmap.iv_back);
     }
 }

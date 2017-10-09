@@ -75,9 +75,13 @@ public class MyActivity extends BaseActivity {
                 break;
             case R.id.rl_my_fuwu:
                 intent=new Intent(this,ServiesClauseActivity.class);
+                intent.putExtra("code", 1);
                 startActivity(intent);
                 break;
             case R.id.rl_my_zhinan:
+                intent=new Intent(this,ServiesClauseActivity.class);
+                intent.putExtra("code", 2);
+                startActivity(intent);
                 break;
         }
     }

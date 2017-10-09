@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.library.okgo.utils.ToastUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.listener.RecycleItemClickListener;
@@ -26,6 +27,7 @@ import com.project.community.view.SpacesItemDecoration;
 import com.project.community.view.VpSwipeRefreshLayout;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.Bind;
@@ -47,6 +49,7 @@ public class TransportationDetailsActivity extends BaseActivity implements Swipe
     CoordinatorLayout coordinatorLayout;
     private View header;
     private TextView mHeadName,mHeadBanci;
+    private ImageView mHeadChangge;
     private TransportationDeailApdater mAdapter;
     private List<CommentModel> comments =new ArrayList<>();
     @Override
@@ -69,6 +72,16 @@ public class TransportationDetailsActivity extends BaseActivity implements Swipe
         });
         mHeadName = (TextView) header.findViewById(R.id.head_name);
         mHeadBanci = (TextView) header.findViewById(R.id.head_banci);
+        mHeadChangge = (ImageView) header.findViewById(R.id.head_changge);
+        mHeadChangge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (comments.size()>0){
+                    Collections.reverse(comments); // 倒序排列
+                    mAdapter.notifyDataSetChanged();
+                }
+            }
+        });
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         SpacesItemDecoration decoration = new SpacesItemDecoration(0, false);
@@ -108,49 +121,6 @@ public class TransportationDetailsActivity extends BaseActivity implements Swipe
         loadData();
     }
     private void loadData() {
-//        String userId;
-//        if (isLogin(this))
-//            userId = getUser(this).id;
-//        else
-//            userId = "";
-//        serverDao.getTopicDetail(userId, artId, new JsonCallback<BaseResponse<ArticleModel>>() {
-//            @Override
-//            public void onSuccess(final BaseResponse<ArticleModel> baseResponse, Call call, Response response) {
-//                mData = baseResponse.retData;
-//                try {
-//                    if (0 == baseResponse.retData.status) {
-//                        menuItem.setIcon(R.mipmap.d4_shoucang1);
-//                    } else if (1 == baseResponse.retData.status) {
-//                        menuItem.setIcon(R.mipmap.d4_shoucang1_p);
-//                    }
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//
-//                if (baseResponse.retData.surveyInfo != null) {
-//                    if (!TextUtils.isEmpty(baseResponse.retData.surveyInfo.id))
-//                        mBtnWenjuan.setVisibility(View.VISIBLE);
-//                    else
-//                        mBtnWenjuan.setVisibility(View.GONE);
-//                } else {
-//                    mBtnWenjuan.setVisibility(View.GONE);
-//                }
-//                new Handler().post(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        try {
-//                            LogUtils.e("url:" + AppConstants.HOST + baseResponse.retData.url);
-//                            mWebView.loadUrl(AppConstants.HOST + baseResponse.retData.url);
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                });
-//
-//                getComments(artId);
-//
-//            }
-//        });
 
     }
     /**
