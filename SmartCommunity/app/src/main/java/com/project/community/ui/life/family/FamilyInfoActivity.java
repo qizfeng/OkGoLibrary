@@ -38,7 +38,6 @@ import java.util.concurrent.TimeUnit;
 import butterknife.Bind;
 import okhttp3.Call;
 import okhttp3.Response;
-import rx.Observer;
 import rx.functions.Action1;
 
 /**
@@ -182,58 +181,37 @@ public class FamilyInfoActivity extends BaseActivity {
         mAdapter = new FamilyAdapter(personList, new FamilyAdapter.OnAdapterItemClickListener() {
             @Override
             public void onItemClick(View view, final FamilyPersonModel item, int position) {
-                RxView.clicks(view)
-                        .throttleFirst(2000, TimeUnit.MILLISECONDS)   //两秒钟之内只取一个点击事件，防抖操作
-                        .subscribe(new Action1<Void>() {
-                            @Override
-                            public void call(Void aVoid) {
-                                Bundle bundle = new Bundle();
-                                bundle.putString("title", getString(R.string.activity_family_look_person));
-                                bundle.putString("familyId", mData.get(mTabLayout.getSelectedTabPosition()).id);
-                                bundle.putString("personId", item.id);
-                                bundle.putString("roomNo", mData.get(mTabLayout.getSelectedTabPosition()).room.roomNo);
-                                bundle.putBoolean("isLook", true);
-                                FamilyAddPersonActivity.startActivity(FamilyInfoActivity.this, bundle);
-                            }
-                        });
+                Bundle bundle = new Bundle();
+                bundle.putString("title", getString(R.string.activity_family_look_person));
+                bundle.putString("familyId", mData.get(mTabLayout.getSelectedTabPosition()).id);
+                bundle.putString("personId", item.id);
+                bundle.putString("roomNo", mData.get(mTabLayout.getSelectedTabPosition()).room.roomNo);
+                bundle.putBoolean("isLook", true);
+                FamilyAddPersonActivity.startActivity(FamilyInfoActivity.this, bundle);
 
             }
 
             @Override
             public void onDeleteClick(View view, FamilyPersonModel item, final int position) {
-                RxView.clicks(view)
-                        .throttleFirst(1, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
-                        .subscribe(new Action1<Void>() {
-                            @Override
-                            public void call(Void aVoid) {
-                                if (!"2".equals(mData.get(mTabLayout.getSelectedTabPosition()).auditStatus)) {
-                                    showToast(getString(R.string.toast_error_permission));
-                                    return;
-                                }
-                                showAlertDialog(position - 1);//-1 去掉头部
-                            }
-                        });
+                if (!"2".equals(mData.get(mTabLayout.getSelectedTabPosition()).auditStatus)) {
+                    showToast(getString(R.string.toast_error_permission));
+                    return;
+                }
+                showAlertDialog(position - 1);//-1 去掉头部
             }
 
             @Override
             public void onEdit(View view, final FamilyPersonModel item, int position) {
-                RxView.clicks(view)
-                        .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
-                        .subscribe(new Action1<Void>() {
-                            @Override
-                            public void call(Void aVoid) {
-                                if (!"2".equals(mData.get(mTabLayout.getSelectedTabPosition()).auditStatus)) {
-                                    showToast(getString(R.string.toast_error_permission));
-                                    return;
-                                }
-                                Bundle bundle = new Bundle();
-                                bundle.putString("title", getString(R.string.activity_family_edit_person));
-                                bundle.putString("familyId", mData.get(mTabLayout.getSelectedTabPosition()).id);
-                                bundle.putString("personId", item.id);
-                                bundle.putString("roomNo", mData.get(mTabLayout.getSelectedTabPosition()).room.roomNo);
-                                FamilyAddPersonActivity.startActivity(FamilyInfoActivity.this, bundle);
-                            }
-                        });
+                if (!"2".equals(mData.get(mTabLayout.getSelectedTabPosition()).auditStatus)) {
+                    showToast(getString(R.string.toast_error_permission));
+                    return;
+                }
+                Bundle bundle = new Bundle();
+                bundle.putString("title", getString(R.string.activity_family_edit_person));
+                bundle.putString("familyId", mData.get(mTabLayout.getSelectedTabPosition()).id);
+                bundle.putString("personId", item.id);
+                bundle.putString("roomNo", mData.get(mTabLayout.getSelectedTabPosition()).room.roomNo);
+                FamilyAddPersonActivity.startActivity(FamilyInfoActivity.this, bundle);
 
             }
         });
@@ -247,15 +225,6 @@ public class FamilyInfoActivity extends BaseActivity {
     }
 
     private void switchData(int position) {
-//        personList = new ArrayList<>();
-//        mTvFamilyNo.setText(mData.get(position).room.getRoomNo());
-//        mTvFamilyAddress.setText(mData.get(position).room.getAddress());
-//        FamilyPersonModel familyPersonModelInfo = new FamilyPersonModel();
-//        familyPersonModelInfo.itemType = 1;
-//        personList.add(0, familyPersonModelInfo);
-//        personList.addAll(mData.get(position).memberList);
-//        mAdapter.setNewData(personList);
-//        mAdapter.notifyDataSetChanged();
         try {
             getFamilyData(mData.get(position).room.roomNo, mData.get(position).id);
 

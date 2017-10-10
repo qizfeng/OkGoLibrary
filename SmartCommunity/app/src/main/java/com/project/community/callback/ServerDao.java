@@ -228,10 +228,11 @@ public interface ServerDao {
 
     /**
      * 办事指南搜索
+     *
      * @param keywords
      * @param callback
      */
-    void searchGuide(String keywords,JsonCallback<BaseResponse<List<GuideModel>>>callback);
+    void searchGuide(String keywords, JsonCallback<BaseResponse<List<GuideModel>>> callback);
 
     /**
      * 热线电话
@@ -386,13 +387,14 @@ public interface ServerDao {
 
     /**
      * 家庭信息
-     * @param userId 用户id
-     * @param phone 手机号
-     * @param roomNo 个人信息房屋编号
+     *
+     * @param userId   用户id
+     * @param phone    手机号
+     * @param roomNo   个人信息房屋编号
      * @param familyId 家庭id
      * @param callback
      */
-    void getFamilyInfo(String userId,String phone,String roomNo,String familyId,JsonCallback<BaseResponse<List<FamilyModel>>>callback);
+    void getFamilyInfo(String userId, String phone, String roomNo, String familyId, JsonCallback<BaseResponse<List<FamilyModel>>> callback);
 
     /**
      * 检查业主状态
@@ -442,7 +444,7 @@ public interface ServerDao {
      *
      * @param userId   用户id
      * @param memberId 删除的成员id
-     * @param roomNo 房屋编号
+     * @param roomNo   房屋编号
      * @param callback
      */
     void deletePerson(String userId, String memberId, String roomNo, JsonCallback<BaseResponse<List>> callback);
@@ -459,8 +461,8 @@ public interface ServerDao {
     /**
      * 删除家庭
      *
-     * @param userId 用户id
-     * @param roomNo 房屋编号
+     * @param userId   用户id
+     * @param roomNo   房屋编号
      * @param familyId 家庭id
      * @param callback
      */
@@ -479,125 +481,149 @@ public interface ServerDao {
 
     /**
      * 获取支付订单信息
-     * @param userId 用户id
+     *
+     * @param userId    用户id
      * @param parmentId 订单id
      * @param callback
      */
-    void getPayOrderInfo(String userId,String parmentId,JsonCallback<BaseResponse<String>>callback);
+    void getPayOrderInfo(String userId, String parmentId, JsonCallback<BaseResponse<String>> callback);
 
     /**
      * 小区列表
-     * @param userId 用户id
-     * @param orgCode 组织机构
+     *
+     * @param userId   用户id
+     * @param orgCode  组织机构
      * @param callback
      */
-    void getCommunityList(String userId, String orgCode, JsonCallback<BaseResponse<List<CommunityModel>>>callback);
+    void getCommunityList(String userId, String orgCode, JsonCallback<BaseResponse<List<CommunityModel>>> callback);
 
     /**
      * 获取小区统计信息
-     * @param userId 用户id
-     * @param orgCode 组织机构
+     *
+     * @param userId   用户id
+     * @param orgCode  组织机构
      * @param callback
      */
-    void getCommunityCensusInfo(String userId, String orgCode, JsonCallback<BaseResponse<List<CommunityCensusModel>>>callback);
+    void getCommunityCensusInfo(String userId, String orgCode, JsonCallback<BaseResponse<List<CommunityCensusModel>>> callback);
 
     /**
      * 小区楼栋成员列表
-     * @param userId 用户id
-     * @param unit 单元
-     * @param floor 楼栋
+     *
+     * @param userId   用户id
+     * @param unit     单元
+     * @param floor    楼栋
      * @param callback
      */
-    void getCommunityFamilyPersonList(String userId, String unit, String floor, JsonCallback<BaseResponse<List<CommunityFamilyModel>>>callback);
+    void getCommunityFamilyPersonList(String userId, String unit, String floor, JsonCallback<BaseResponse<List<CommunityFamilyModel>>> callback);
 
     /**
      * 获取小区楼栋成员信息
+     *
      * @param memberId
      * @param callback
      */
-    void getCommunityFamilyPersonInfo(String memberId,JsonCallback<BaseResponse<FamilyPersonModel>> callback);
+    void getCommunityFamilyPersonInfo(String memberId, JsonCallback<BaseResponse<FamilyPersonModel>> callback);
 
     /**
      * 获取商铺坐标
-     * @param userId 用户id
-     * @param coordinate 定位坐标
-     * @param distance 筛选距离
+     *
+     * @param userId      用户id
+     * @param coordinate  定位坐标
+     * @param distance    筛选距离
      * @param auditStatus 审核状态
      * @param callback
      */
-    void getCommunityShopList(String userId, String coordinate, String distance, String auditStatus, JsonCallback<BaseResponse<List<ShopModel>>>callback);
+    void getCommunityShopList(String userId, String coordinate, String distance, String auditStatus, JsonCallback<BaseResponse<List<ShopModel>>> callback);
 
     /**
      * 获取商铺筛选条件
+     *
      * @param callback
      */
-    void getCommunityShopFilter(JsonCallback<BaseResponse<CommunityShopFilterModel>>callback);
+    void getCommunityShopFilter(JsonCallback<BaseResponse<CommunityShopFilterModel>> callback);
 
     /**
      * 商铺详情
+     *
      * @param userId
      * @param shopId
      * @param callback
      */
-    void getCommunityShopDetail(String userId,String shopId,JsonCallback<BaseResponse<ShopModel>>callback);
+    void getCommunityShopDetail(String userId, String shopId, JsonCallback<BaseResponse<ShopModel>> callback);
 
     /**
      * 获取居民筛选条件
+     *
      * @param callback
      */
-    void getCommunityPersonFilter(JsonCallback<BaseResponse<CommunityPersonFilterModel>>callback);
+    void getCommunityPersonFilter(JsonCallback<BaseResponse<CommunityPersonFilterModel>> callback);
 
     /**
      * 获取居民坐标
-     * @param userId 用户id
+     *
+     * @param userId     用户id
      * @param coordinate 定位坐标
-     * @param distance 筛选距离
-     * @param memberTag 居民标签
+     * @param distance   筛选距离
+     * @param memberTag  居民标签
      * @param callback
      */
-    void getCommunityPersonList(String userId,String coordinate,String distance,String memberTag,JsonCallback<BaseResponse<List<FamilyPersonModel>>>callback);
+    void getCommunityPersonList(String userId, String coordinate, String distance, String memberTag, JsonCallback<BaseResponse<List<FamilyPersonModel>>> callback);
 
     /**
      * 居民详情
+     *
      * @param userId
      * @param id
      * @param callback
      */
-    void getCommunityPersonDetail(String userId,String id,JsonCallback<BaseResponse<FamilyPersonModel>>callback);
+    void getCommunityPersonDetail(String userId, String id, JsonCallback<BaseResponse<FamilyPersonModel>> callback);
 
     /**
      * 获取设施筛选条件
+     *
      * @param callback
      */
-    void getCommunityDeviceFilter(JsonCallback<BaseResponse<CommunityDeviceFilterModel>>callback);
+    void getCommunityDeviceFilter(JsonCallback<BaseResponse<CommunityDeviceFilterModel>> callback);
 
     /**
      * 获取物业设施坐标
-     * @param userId 用户id
-     * @param coordinate 定位坐标
-     * @param orgCode 组织机构
-     * @param distance 筛选距离
+     *
+     * @param userId         用户id
+     * @param coordinate     定位坐标
+     * @param orgCode        组织机构
+     * @param distance       筛选距离
      * @param facilitiesType 设施类型
      * @param callback
      */
     void getCommunityDeviceList(String userId, String coordinate, String orgCode, String distance,
-                                String facilitiesType, JsonCallback<BaseResponse<List<DeviceModel>>>callback);
+                                String facilitiesType, JsonCallback<BaseResponse<List<DeviceModel>>> callback);
 
     /**
      * 物业设施详情
-     * @param userId 用户id
-     * @param faiId 设备id
+     *
+     * @param userId   用户id
+     * @param faiId    设备id
      * @param callback
      */
-    void getCommunityDeviceDetail(String userId,String faiId,JsonCallback<BaseResponse<DeviceModel>>callback);
+    void getCommunityDeviceDetail(String userId, String faiId, JsonCallback<BaseResponse<DeviceModel>> callback);
 
     /**
-     *上传定位表座
-     * @param userId 用户id
+     * 上传定位表座
+     *
+     * @param userId     用户id
      * @param coordinate 经度,纬度
      * @param callback
      */
-    void doUploadLocation(String userId,String coordinate,JsonCallback<BaseResponse<List>>callback );
+    void doUploadLocation(String userId, String coordinate, JsonCallback<BaseResponse<List>> callback);
+
+    /**
+     * 民生首页
+     * @param coordinate 当前定位坐标
+     * @param pageNo 页码
+     * @param pageSize 分页条数
+     * @param callback
+     */
+    void getMinshengIndexData(String coordinate,int pageNo, int pageSize,JsonCallback<BaseResponse<List<ShopModel>>>callback);
 
      /**
      *d27 申请商铺

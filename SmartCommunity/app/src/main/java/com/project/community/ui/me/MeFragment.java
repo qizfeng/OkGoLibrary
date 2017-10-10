@@ -26,6 +26,8 @@ import com.project.community.R;
 import com.project.community.base.BaseFragment;
 import com.project.community.constants.AppConstants;
 import com.project.community.model.UserModel;
+import com.project.community.ui.life.family.FamilyAddActivity;
+import com.project.community.ui.life.family.FamilyInfoActivity;
 import com.project.community.ui.user.LoginActivity;
 import com.project.community.ui.user.RegisterActivity;
 import com.project.community.ui.user.SettingActivity;
@@ -191,24 +193,32 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                 UserInfoActivity.startActivity(getActivity());
                 break;
             case R.id.layout_my_order://我的订单
+                showToast(getString(R.string.toast_online));
                 break;
             case R.id.layout_my_collect://我的收藏
+                showToast(getString(R.string.toast_online));
                 break;
             case R.id.layout_chat://即时聊天
                 break;
             case R.id.layout_my_topic://我的帖子
+                showToast(getString(R.string.toast_online));
                 break;
             case R.id.layout_repair_record://维修记录
+                showToast(getString(R.string.toast_online));
                 break;
             case R.id.layout_family_info://家庭信息
+                FamilyInfoActivity.startActivity(getActivity(),null);
                 break;
             case R.id.layout_shop_manage://店铺管理
+                showToast(getString(R.string.toast_online));
                 break;
             case R.id.btn_apply_shop://申请店铺
                 break;
             case R.id.layout_my_repair_order://我的维修单
+                showToast(getString(R.string.toast_online));
                 break;
             case R.id.layout_system_message://系统消息
+                showToast(getString(R.string.toast_online));
                 break;
             case R.id.btn_login:
                 LoginActivity.startActivity(getActivity());

@@ -237,10 +237,9 @@
         <!-- 自定义service -->
         <service
             android:name=".service.AppLocationService"
-            android:enabled="true"
-            android:process=":remote">
+            android:enabled="true">
             <intent-filter>
-                <action android:name="com.project.community.service.AppLocationService" />
+                <action android:name="android.intent.action.RESPOND_VIA_MESSAGE" />
             </intent-filter>
         </service>
         <!-- receiver -->

@@ -331,6 +331,12 @@ public class AppConstants {
      */
     public static final String URL_APPLY_STORE=URL_BASE+"/m/propleLife/propShops/save";
 
+
+    /**
+     * 附近商家
+     */
+    public static final String URL_MINSHENG_INDEX=URL_BASE+"/m/propleLife/propShops/index";
+
     /*==========================*/
     /**
      * 分页大小
