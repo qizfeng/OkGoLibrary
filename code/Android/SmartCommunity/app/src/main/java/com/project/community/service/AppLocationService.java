@@ -41,8 +41,10 @@ public class AppLocationService extends Service {
 
     /**
      * Service action
+     * android.intent.action.RESPOND_VIA_MESSAGE
+     * com.project.community.service.AppLocationService
      */
-    public static final String ACTION_MY_LOCATION_SERVICE = "com.project.community.service.AppLocationService";
+    public static final String ACTION_MY_LOCATION_SERVICE = "android.intent.action.RESPOND_VIA_MESSAGE";
 
     /**
      * 间隔时间为60秒
@@ -110,19 +112,18 @@ public class AppLocationService extends Service {
     private class InComingHandler extends Handler {
         public void handleMessage(Message msg) {
             int result = msg.what;
-
             switch (result) {
                 // Service与BDListener的交互
                 case AppConstants.CHECK_NETWORK_CONNECT_FLAG: // 检查网络状态
+                    LogUtils.e("CHECK_NETWORK_CONNECT");
                     doCheckNetWork();// 定时检查网络状态
                     break;
                 case AppConstants.SEND_LOCATION_TO_SERVICE: // 传给Service
-                   // LogUtils.e("更新LBS信息成功！");
+                    LogUtils.e("更新LBS信息成功！");
                     Update(msg);
                     break;
                 case AppConstants.UPLOAD_LOACTION_SUCCESS: // 上传地点到服务器成功
-                    LogUtils.i("您当前的位置上传服务器成功！");
-                    //show("您当前的位置上传服务器成功");
+                    LogUtils.e("您当前的位置上传服务器成功");
                     break;
                 case AppConstants.UPLOAD_LOACTION_FAIL: // 上传地点到服务器失败
                     LogUtils.e("您当前的位置上传服务器失败！");
@@ -140,17 +141,18 @@ public class AppLocationService extends Service {
                 // 接下来是Service与Activity的交互
                 case AppConstants.MSG_REGISTER_CLIENT:// 绑定客户端
                     mClients.add(msg.replyTo);
-                    LogUtils.i("客户端注册绑定");
-                    LogUtils.i("有" + mClients.size() + "客户端");
+                    LogUtils.e("客户端注册绑定");
+                    LogUtils.e("有" + mClients.size() + "客户端");
+                    doCheckNetWork();
                     break;
                 case AppConstants.MSG_UNREGISTER_CLIENT:// 解绑客户端
                     mClients.remove(msg.replyTo);
-                    LogUtils.i("客户端解除绑定");
-                    LogUtils.i("有" + mClients.size() + "客户端");
+                    LogUtils.e("客户端解除绑定");
+                    LogUtils.e("有" + mClients.size() + "客户端");
                     break;
                 case AppConstants.MSG_SET_VALUE:// 客户端的通信数据
                     mLastClient = msg.arg1;
-                    LogUtils.i("客户端传递消息");
+                    LogUtils.e("客户端传递消息");
                     for (int i = mClients.size() - 1; i >= 0; i--) {
                         try {
                             // 将消息发送给客户端
@@ -176,27 +178,29 @@ public class AppLocationService extends Service {
      */
     private void Update(Message msg) {
         // 改变消息类型
-        msg.what = AppConstants.MSG_SET_VALUE;
+        Message message = new Message();
+        message.setData(msg.getData());
+        message.arg1=msg.arg1;
+        message.arg2=msg.arg2;
+        message.what=msg.what;
+        message.obj=msg.obj;
+        message.replyTo=msg.replyTo;
+        message.what = AppConstants.MSG_SET_VALUE;
         // 将MSG发送给已经绑定的客户端
         for (int i = mClients.size() - 1; i >= 0; i--) {
             try {
                 LogUtils.e("将定位信息发送给客户端:" + i + "！");
-                 LogUtils.e("msg.what:"+msg.what);
+                 LogUtils.e("msg.what:"+message.what);
                 // 将消息发送给客户端
-                mClients.get(i).send(msg);
+                mClients.get(i).send(message);
             } catch (RemoteException e) {
                 // 远程客户端出错，从list中移除
                 // 遍历列表以保证内部循环安全运行
                 mClients.remove(i);
             }
         }
-//         LogUtils.i("定位信息:"+myLocation);
+         LogUtils.e("定位信息:"+msg.arg1+","+ msg.arg2+","+msg.what);
         // txt_LocationView.setText(myLocation);
-        ServerDao serverDao =new ServerDaoImpl(getApplicationContext());
-        if( SharedPreferenceUtils.getBoolean(getApplicationContext(), SharedPreferenceUtils.SP_LOGIN, false)){
-//            serverDao.doUploadLocation(getUser(getApplicationContext()).id,myl);
-
-        }
 
 
     }
@@ -220,14 +224,14 @@ public class AppLocationService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         // 返回值可用来进行Activity与Service之间的交互
-        LogUtils.i("BindService---onBind");
+        LogUtils.e("BindService---onBind");
         return mMessenger.getBinder();
     }
 
     @Override
     public void onCreate() {
+        super.onCreate();
         LogUtils.e("--------------MyLocatorService onCreate()----------------");
-
         mNotificationUtil = new NotificationUtil(this);
         mContext = AppLocationService.this;
         // 设置为前台进程，尽量避免被系统干掉。
@@ -238,21 +242,21 @@ public class AppLocationService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        super.onStartCommand(intent,flags,startId);
         LogUtils.e("--------------MyLocationService onStartCommand()----------------");
         if (intent != null) {
             startingMode = intent.getIntExtra("startingMode",
                     AppConstants.UNKNOWN_START_SERVICE);
-            LogUtils.i("startingMode = " + startingMode);
+            LogUtils.e("startingMode = " + startingMode);
             if (startingMode == AppConstants.HANDLER_START_SERVICE) {
                 LogUtils.e("-------------手动启动---------------");
 
                 // 判断服务是否已开启
                 boolean isRun = ServiceUtil.isServiceRun(
                         getApplicationContext(), "com.baidu.location.f");
-                LogUtils.i("isRun = " + isRun);
+                LogUtils.e("isRun = " + isRun);
                 if (!isRun) {
                     LogUtils.e("MobileLocatorService start Location Service");
-
                     // 没启动，开启定位服务
                     mLocationClient.start();
                 }
@@ -292,7 +296,7 @@ public class AppLocationService extends Service {
         boolean isRun = ServiceUtil.isServiceRun(getApplicationContext(),
                 "com.baidu.location.f");
         if (isOpenNetwork && isRun) {
-            LogUtils.i("--------------第一次检测网络，直接过了。（已打开）----------------");
+            LogUtils.e("--------------第一次检测网络，直接过了。（已打开）----------------");
             return;
         }
         // 否则打开计时器---每个一段时间提醒一次
@@ -302,7 +306,7 @@ public class AppLocationService extends Service {
             @Override
             public void run() {
                 checkNetworkNumber++;
-                LogUtils.i("Timer checkNetworkNumber = " + checkNetworkNumber);
+                LogUtils.e("Timer checkNetworkNumber = " + checkNetworkNumber);
                 checkNetwork();
 
                 boolean isRun = ServiceUtil.isServiceRun(
@@ -368,6 +372,7 @@ public class AppLocationService extends Service {
      * 设置定位的相关参数
      */
     private void setLocationOption() {
+        LogUtils.e("setLocationOption");
         LocationClientOption locationOption = new LocationClientOption();
         locationOption.setOpenGps(true); // 是否打开GPS
         locationOption.setCoorType("bd09ll");
@@ -382,30 +387,31 @@ public class AppLocationService extends Service {
 
     @Override
     public void onDestroy() {
-        LogUtils.e("---------------MyLocatorService onDestroy()----------------");
-        if (mLocationClient != null && mLocationClient.isStarted()) {
-            mLocationClient.stop();
-            if (mLocationListener != null) {
-                mLocationClient.unRegisterLocationListener(mLocationListener);
-            }
-        }
-        SharedPreferences sp = mContext.getSharedPreferences(
-                "MyMobileLocation", Context.MODE_PRIVATE);
-        String result = sp.getString("instruct", null);
-        LogUtils.i("MobileLocatorService onDestroy() result = " + result);
-        if ("exit".equals(result)) {
-            sp.edit().putString("instruct", "true").commit();
-            LogUtils.e("---------------MobileLocatorService onDestroy()-----------1-----");
-            System.exit(0);
-            return;
-        }
-
-        LogUtils.e("---------------MobileLocatorService onDestroy()---------2-------");
-
-        // 销毁时重新启动Service
-        // Intent intent = new Intent(ACTION_MY_LOCATION_SERVICE);
-        // intent.putExtra("startingMode", startingMode);
-        // this.startService(intent);
+//        LogUtils.e("---------------MyLocatorService onDestroy()----------------");
+//        if (mLocationClient != null && mLocationClient.isStarted()) {
+//            mLocationClient.stop();
+//            if (mLocationListener != null) {
+//                mLocationClient.unRegisterLocationListener(mLocationListener);
+//            }
+//        }
+//        SharedPreferences sp = mContext.getSharedPreferences(
+//                "MyMobileLocation", Context.MODE_PRIVATE);
+//        String result = sp.getString("instruct", null);
+//        LogUtils.e("MobileLocatorService onDestroy() result = " + result);
+//        if ("exit".equals(result)) {
+//            sp.edit().putString("instruct", "true").commit();
+//            LogUtils.e("---------------MobileLocatorService onDestroy()-----------1-----");
+//            System.exit(0);
+//            return;
+//        }
+//
+//        LogUtils.e("---------------MobileLocatorService onDestroy()---------2-------");
+//
+//        // 销毁时重新启动Service
+////         Intent intent = new Intent();
+////        intent.setAction(ACTION_MY_LOCATION_SERVICE);
+////        intent.putExtra("startingMode", startingMode);
+////         this.startService(intent);
     }
 }
 

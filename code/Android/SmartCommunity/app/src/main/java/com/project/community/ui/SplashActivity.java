@@ -61,15 +61,17 @@ public class SplashActivity extends BaseActivity {
         boolean isFirstOpen = SharedPreferenceUtils.getBoolean(this, AppConstants.FIRST_OPEN);
         // 如果是第一次启动，则先进入功能引导页
         if (!isFirstOpen) {
-            Intent intent = new Intent(this, WelcomeGuideActivity.class);
-            startActivity(intent);
-            finish();
+            if (Build.VERSION.SDK_INT >= 23) {
+                ActivityCompat.requestPermissions(this, requestPermissions, REQUEST_PERMISSION_CODE);
+            } else {
+                Intent intent = new Intent(this, WelcomeGuideActivity.class);
+                startActivity(intent);
+                finish();
+            }
             return;
         }
-
         // 如果不是第一次启动app，则正常显示启动屏
         setContentView(R.layout.activity_splash);
-
         new Handler().postDelayed(new Runnable() {
 
             @Override
@@ -80,10 +82,11 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void enterHomeActivity() {
-
         if (Build.VERSION.SDK_INT >= 23) {
             ActivityCompat.requestPermissions(this, requestPermissions, REQUEST_PERMISSION_CODE);
         } else {
+            doBindService();
+            doStartService();
             Intent intent = new Intent(SplashActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
@@ -119,7 +122,6 @@ public class SplashActivity extends BaseActivity {
                         Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
-
                     } else {
                         // 权限被用户拒绝了，洗洗睡吧。
                         ToastUtils.showShortToast(SplashActivity.this, getString(R.string.permission_tips));
@@ -152,9 +154,16 @@ public class SplashActivity extends BaseActivity {
                     // 这里用于更新网络信息---更新Location
                     Bundle b = msg.getData();
                     // 记得设置bundle时，将Location 键的值设为对应的location
-                    String myLocation = b.getString("LocationData");
+                    //  String myLocation = b.getString("LocationData");
                     String latitute = b.getString("latitute");
                     String longitute = b.getString("longitute");
+                    try {
+                        if (longitute.startsWith("-"))
+                            longitute = Math.abs(Double.parseDouble(longitute)) + "";
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
                     LogUtils.e("location:" + longitute + "," + latitute);
 
                     /**
@@ -163,8 +172,8 @@ public class SplashActivity extends BaseActivity {
                      * 上传位置信息
                      */
                     if (!TextUtils.isEmpty(latitute) && !TextUtils.isEmpty(longitute)) {
-                        saveLocation(SplashActivity.this,latitute,longitute);
-                        if(!isLogin(SplashActivity.this))
+                        saveLocation(SplashActivity.this, latitute, longitute);
+                        if (!isLogin(SplashActivity.this))
                             return;
                         serverDao.doUploadLocation(getUser(SplashActivity.this).id, longitute + "," + latitute, new JsonCallback<BaseResponse<List>>() {
                             @Override
@@ -196,6 +205,7 @@ public class SplashActivity extends BaseActivity {
             // service连接建立时将调用该方法
             // 返回IBinder接口以便我们可以跟service关联。
             // 我们可通过IPC接口来交流
+            LogUtils.e("链接service");
             mMessengerService = new Messenger(service); // Service的Messenger
             mIsBind = true;
             try {
@@ -204,16 +214,16 @@ public class SplashActivity extends BaseActivity {
                         .obtain(null, AppConstants.MSG_REGISTER_CLIENT);
                 msg.replyTo = mMessenger;// 用来接收Service数据的Messenger
                 mMessengerService.send(msg);
-
+                LogUtils.e("注册");
                 // 例子
                 msg = Message.obtain(null, AppConstants.MSG_SET_VALUE, 11111, 0);
-
                 mMessengerService.send(msg);
             } catch (RemoteException e) {
                 // In this case the service has crashed before we could even
                 // do anything with it; we can count on soon being
                 // disconnected (and then reconnected if it can be restarted)
                 // so there is no need to do anything here.
+                e.printStackTrace();
             }
         }
 
@@ -221,7 +231,7 @@ public class SplashActivity extends BaseActivity {
         public void onServiceDisconnected(ComponentName name) {
             // 当进程崩溃时将被调用，因为运行在同一程序，如果是崩溃将所以永远不会发生
             // 只有异常销毁时才会被调用
-            LogUtils.e("和Service逝去联系");
+            LogUtils.e("和Service失去联系");
             mMessengerService = null;
             mIsBind = false;
         }
@@ -235,17 +245,15 @@ public class SplashActivity extends BaseActivity {
     private void doStartService() {
         // 如果服务没有开启---现开启Service然后绑定
         boolean isRun = ServiceUtil.isServiceRun(getApplicationContext(),
-                "com.project.community.service.AppLocationService");
+                AppLocationService.ACTION_MY_LOCATION_SERVICE);
         if (!isRun) {
-            LogUtils.e("开启Service---onStart");
-            Intent mIntent = new Intent();
-
-//            mIntent.setAction(AppLocationService.ACTION_MY_LOCATION_SERVICE);//你定义的service的action
+            Intent mIntent = new Intent(SplashActivity.this, AppLocationService.class);
+            mIntent.setAction(AppLocationService.ACTION_MY_LOCATION_SERVICE);//你定义的service的action
             mIntent.setPackage(getPackageName());//这里你需要设置你应用的包名
 //            startService(mIntent);
-            mIntent.setAction(AppLocationService.ACTION_MY_LOCATION_SERVICE);
             mIntent.putExtra("startingMode", AppConstants.HANDLER_START_SERVICE);
-            startService(mIntent);
+            getApplicationContext().startService(mIntent);
+            // LogUtils.e("开启Service---onStart:"+ startService(mIntent));
         }
     }
 
@@ -272,12 +280,17 @@ public class SplashActivity extends BaseActivity {
         if (mIsBind) {
             return;
         }
+        LogUtils.e("bindService---onStart");
         // 绑定Service
         Intent mIntent = new Intent();
         mIntent.setPackage(getPackageName());
         mIntent.setAction(AppLocationService.ACTION_MY_LOCATION_SERVICE);
-        bindService(mIntent, myServiceConnection, Context.BIND_AUTO_CREATE);
-        mIsBind = true;
+        boolean isRun = ServiceUtil.isServiceRun(getApplicationContext(),
+                AppLocationService.ACTION_MY_LOCATION_SERVICE);
+        if (!isRun) {
+            LogUtils.e("bindService---onStart:" + bindService(mIntent, myServiceConnection, Context.BIND_AUTO_CREATE));
+            mIsBind = true;
+        }
     }
 
     /**

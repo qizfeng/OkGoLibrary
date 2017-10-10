@@ -45,6 +45,8 @@ public class ShopModel implements Serializable {
     public String legalPerson;
     public String legalCardPositive;
     public String legalCardReverse;
+    public String distance;
+    public double starLevel;
 
     @Override
     public String toString() {
@@ -66,6 +68,8 @@ public class ShopModel implements Serializable {
                 ", legalPerson='" + legalPerson + '\'' +
                 ", legalCardPositive='" + legalCardPositive + '\'' +
                 ", legalCardReverse='" + legalCardReverse + '\'' +
+                ", distance='" + distance + '\'' +
+                ", starLevel='" + starLevel + '\'' +
                 '}';
     }
 }

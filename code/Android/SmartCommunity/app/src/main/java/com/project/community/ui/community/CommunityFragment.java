@@ -666,7 +666,6 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
     }
 
 
-
     private void clearOverlay() {
         try {
             mBaiduMap.clear();
@@ -1327,7 +1326,6 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
     }
 
 
-
     /**
      * 小区统计信息
      *
@@ -1625,6 +1623,14 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                     } else if ("3".equals(model.facilitiesType)) {//电子门禁
                         bitmapDescriptor = BitmapDescriptorFactory
                                 .fromResource(R.mipmap.d50_icon3);
+                        bitmaps.add(bitmapDescriptor);
+                    } else if ("4".equals(model.facilitiesType)) {//车禁
+                        bitmapDescriptor = BitmapDescriptorFactory
+                                .fromResource(R.mipmap.d50_chesuo);
+                        bitmaps.add(bitmapDescriptor);
+                    } else if ("5".equals(model.facilitiesType)) {//人脸识别
+                        bitmapDescriptor = BitmapDescriptorFactory
+                                .fromResource(R.mipmap.d50_renlian);
                         bitmaps.add(bitmapDescriptor);
                     } else {
                         bitmapDescriptor = BitmapDescriptorFactory

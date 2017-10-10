@@ -696,7 +696,15 @@ public class ServerDaoImpl implements ServerDao {
                 .params("coordinate",coordinate)
                 .execute(callback);
     }
-
+    @Override
+    public void getMinshengIndexData(String coordinate, int pageNo, int pageSize, JsonCallback<BaseResponse<List<ShopModel>>> callback) {
+        OkGo.post(AppConstants.URL_MINSHENG_INDEX)
+                .tag(mContext)
+                .params("coordinate",coordinate)
+                .params("pageNo",pageNo)
+                .params("pageSize",pageSize)
+                .execute(callback);
+    }
     @Override
     public void propShops(String userId,
                           double longitude,

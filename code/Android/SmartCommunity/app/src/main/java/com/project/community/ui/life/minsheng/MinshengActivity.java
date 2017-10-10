@@ -30,9 +30,11 @@ import com.library.okgo.utils.LogUtils;
 import com.library.okgo.utils.ToastUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
+import com.project.community.constants.AppConstants;
 import com.project.community.listener.RecyclerItemTouchHelperCallBack;
 import com.project.community.model.ModuleModel;
 import com.project.community.model.NewsModel;
+import com.project.community.model.ShopModel;
 import com.project.community.ui.WebViewActivity;
 import com.project.community.ui.adapter.MinshengAdapter;
 import com.project.community.ui.adapter.ModuleAdapter;
@@ -59,7 +61,7 @@ import okhttp3.Response;
  * 民生首页
  */
 
-public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener, AdapterView.OnItemClickListener {
+public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener, AdapterView.OnItemClickListener, BaseQuickAdapter.RequestLoadMoreListener {
     @Bind(R.id.recyclerView)
     RecyclerView mRecyclerView;
     @Bind(R.id.refreshLayout)
@@ -69,7 +71,6 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
     private MinshengAdapter mAdapter;
     private View header;
     private HorizaontalGridView gridView;
-    private String type = "health";
     private List<ModuleModel> moduleModels = new ArrayList<>();
 
     @Override
@@ -85,7 +86,7 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
         header.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MinshengActivity.this,ApplyStoreActivity.class);
+                Intent intent = new Intent(MinshengActivity.this, ApplyStoreActivity.class);
                 startActivity(intent);
             }
         });
@@ -98,16 +99,7 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
         mAdapter = new MinshengAdapter(null, new MinshengAdapterItemListener() {
             @Override
             public void onItemClick(View view, int position) {//整个item点击事件
-                String url = mAdapter.getData().get(position).url;
-                Intent intent = new Intent(MinshengActivity.this, TopicDetailActivity.class);
-                if (!TextUtils.isEmpty(url)) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("url", url);
-                    intent.putExtra("bundle", bundle);
-                }
-                startActivity(intent);
             }
-
         });
 
         SpacesItemDecoration decoration = new SpacesItemDecoration(1, true);
@@ -118,10 +110,9 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN);
 
-        mAdapter.setEnableLoadMore(false);
+        mAdapter.setEnableLoadMore(true);
         mAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN);
-        // mAdapter.setOnLoadMoreListener(this, recyclerView);
-
+        mAdapter.setOnLoadMoreListener(this, mRecyclerView);
 
         //中部模块
         setGridData();
@@ -137,22 +128,27 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
     }
 
 
-    private void loadData(String type) {
-        serverDao.getNewsList(type, new JsonCallback<BaseResponse<List<NewsModel>>>() {
+    private void loadData() {
+        String latitute = getLocation(this)[0];
+        String longitute = getLocation(this)[1];
+        serverDao.getMinshengIndexData(longitute + "," + latitute, page, AppConstants.PAGE_SIZE, new JsonCallback<BaseResponse<List<ShopModel>>>() {
             @Override
-            public void onSuccess(BaseResponse<List<NewsModel>> baseResponse, Call call, Response response) {
+            public void onSuccess(BaseResponse<List<ShopModel>> baseResponse, Call call, Response response) {
                 if (page == 1) {
-                    List<NewsModel> data = new ArrayList<>();
-                    data.addAll(baseResponse.newslist);
+                    List<ShopModel> data = new ArrayList<>();
+                    data.addAll(baseResponse.retData);
                     mAdapter.setNewData(data);
                     mAdapter.setEnableLoadMore(true);
                 } else {
                     //显示没有更多数据
-                    if (page == 3) {
+                    if (baseResponse.retData.size() < AppConstants.PAGE_SIZE) {
+                        List<ShopModel> data = new ArrayList<>();
+                        data.addAll(baseResponse.retData);
+                        mAdapter.addData(data);
                         mAdapter.loadMoreEnd();         //加载完成
                     } else {
-                        List<NewsModel> data = new ArrayList<>();
-                        data.addAll(baseResponse.newslist);
+                        List<ShopModel> data = new ArrayList<>();
+                        data.addAll(baseResponse.retData);
                         mAdapter.addData(data);
                         mAdapter.loadMoreComplete();
                     }
@@ -160,7 +156,7 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
             }
 
             @Override
-            public void onAfter(@Nullable BaseResponse<List<NewsModel>> baseResponse, @Nullable Exception e) {
+            public void onAfter(@Nullable BaseResponse<List<ShopModel>> baseResponse, @Nullable Exception e) {
                 super.onAfter(baseResponse, e);
                 //可能需要移除之前添加的布局
                 mAdapter.removeAllFooterView();
@@ -193,7 +189,13 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
     @Override
     public void onRefresh() {
         page = 1;
-        loadData(type);
+        loadData();
+    }
+
+    @Override
+    public void onLoadMoreRequested() {
+        page++;
+        loadData();
     }
 
     @Override
@@ -204,7 +206,7 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         Intent intent;
-        switch (position){
+        switch (position) {
             case 0:
                 intent = new Intent(MinshengActivity.this, CommunityActivity.class);
                 startActivity(intent);
@@ -236,7 +238,7 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
     private void setGridData() {
 
         ModuleModel moduleModel1 = new ModuleModel();
-        moduleModel1.title = "附近商圈";
+        moduleModel1.title = "社区商圈";
         moduleModel1.res = R.mipmap.d27_icon1;
         moduleModel1.hasRedPoint = true;
         moduleModels.add(moduleModel1);
@@ -284,12 +286,12 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
      * 设置GirdView参数，绑定数据
      */
     private void setGridView() {
-        int length = ScreenUtils.getScreenWidth(this)/4;
+        int length = ScreenUtils.getScreenWidth(this) / 4;
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         float density = dm.density;
         int itemWidth = (int) (length * density);
-        itemWidth=length;
+        itemWidth = length;
         gridView.setHorizontalSpacing(5); // 设置列表项水平间距
         ModuleAdapter adapter = new ModuleAdapter(this,
                 moduleModels);
@@ -323,8 +325,8 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
         gridView.setNumColumns(columns);
     }
 
-    private void onDelete(List data){
-        ItemTouchHelper helper = new ItemTouchHelper(new RecyclerItemTouchHelperCallBack(mRecyclerView,data));
+    private void onDelete(List data) {
+        ItemTouchHelper helper = new ItemTouchHelper(new RecyclerItemTouchHelperCallBack(mRecyclerView, data));
         helper.attachToRecyclerView(mRecyclerView);
     }
 

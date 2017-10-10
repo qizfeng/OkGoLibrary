@@ -352,11 +352,11 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 保存定位经纬度
      * @param context
      * @param latitude
-     * @param longitede
+     * @param longitude
      */
-    public void saveLocation(Context context,String latitude,String longitede){
+    public void saveLocation(Context context,String latitude,String longitude){
         SharedPreferenceUtils.putString(context,"lat",latitude);
-        SharedPreferenceUtils.putString(context,"long",longitede);
+        SharedPreferenceUtils.putString(context,"long",longitude);
     }
 
     /**

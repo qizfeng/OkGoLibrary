@@ -266,6 +266,7 @@
     <string name="txt_map_device_belong_company">所属单位</string>
     <string name="txt_map_device_remark">备注</string>
     <!--通用-->
+    <string name="toast_online">此功能将在11月上线,敬请期待!</string>
     <string name="txt_finish">完成</string>
     <string name="toast_exit">再按一次退出程序</string>
     <string name="toast_error_pay">获取订单信息失败</string>
