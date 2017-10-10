@@ -696,4 +696,35 @@ public class ServerDaoImpl implements ServerDao {
                 .params("coordinate",coordinate)
                 .execute(callback);
     }
+
+    @Override
+    public void propShops(String userId,
+                          double longitude,
+                          double latitude,
+                          String shopsName,
+                          String shopPhoto,
+                          String contactName,
+                          String businessAddress, String shopsCategory,
+                          String mainBusiness, String entName, String licenseNo, String licensePositive, String licenseReverse, String legalPerson, String legalCardPositive,
+                          String legalCardReverse, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.URL_APPLY_STORE)
+                .tag(mContext)
+                .params("userId",userId)
+                .params("longitude",longitude)
+                .params("latitude",latitude)
+                .params("shopsName",shopsName)
+                .params("shopPhoto",shopPhoto)
+                .params("contactName",contactName)
+                .params("businessAddress",businessAddress)
+                .params("shopsCategory",shopsCategory)
+                .params("mainBusiness",mainBusiness)
+                .params("entName",entName)
+                .params("licenseNo",licenseNo)
+                .params("licensePositive",licensePositive)
+                .params("licenseReverse",licenseReverse)
+                .params("legalPerson",legalPerson)
+                .params("legalCardPositive",legalCardPositive)
+                .params("legalCardReverse",legalCardReverse)
+                .execute(callback);
+    }
 }
