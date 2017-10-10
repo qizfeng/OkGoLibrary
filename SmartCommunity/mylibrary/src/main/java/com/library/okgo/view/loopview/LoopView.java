@@ -538,11 +538,11 @@ public class LoopView extends View {
                     float extraOffset = (totalScrollY % itemHeight + itemHeight) % itemHeight;
                     mOffset = (int) ((circlePosition - itemsVisibleCount / 2) * itemHeight - extraOffset);
 
-                    if ((System.currentTimeMillis() - startTime) > 120) {
-                        smoothScroll(ACTION.DAGGLE);
-                    } else {
-                        smoothScroll(ACTION.CLICK);
-                    }
+//                    if ((System.currentTimeMillis() - startTime) > 120) {
+//                        smoothScroll(ACTION.DAGGLE);
+//                    } else {
+//                        smoothScroll(ACTION.CLICK);
+//                    }
                 }
                 if (getParent() != null) {
                     getParent().requestDisallowInterceptTouchEvent(false);
