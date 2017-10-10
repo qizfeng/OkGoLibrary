@@ -598,4 +598,29 @@ public interface ServerDao {
      * @param callback
      */
     void doUploadLocation(String userId,String coordinate,JsonCallback<BaseResponse<List>>callback );
+
+     /**
+     *d27 申请商铺
+     * @param userId 用户id
+     * @param longitude 经度
+     * @param latitude 纬度
+     * @param shopsName 商铺名称
+     * @param contactName 商铺名称
+     * @param contactName 联系人
+     * @param businessAddress 营业地址
+     * @param shopsCategory 分类
+     * @param mainBusiness 主营业务
+     * @param entName 企业名称
+     * @param licenseNo 营业执照
+     * @param licensePositive 营业执照正面
+     * @param licenseReverse 营业执照反面
+     * @param legalPerson 法人姓名
+     * @param legalCardPositive 法人身份证正面
+     * @param legalCardReverse 法人身份证反面
+     * @param callback
+     */
+    void propShops(String userId,double longitude,double latitude,String shopsName,String shopPhoto,String contactName,String businessAddress,String shopsCategory,
+                       String mainBusiness,String entName,String licenseNo,String licensePositive,String licenseReverse,String legalPerson,String legalCardPositive,
+                       String legalCardReverse,JsonCallback<BaseResponse<List>>callback );
+
 }

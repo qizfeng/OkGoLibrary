@@ -95,6 +95,9 @@ public class AdrressActivity extends BaseActivity implements BaiduMap.OnMapClick
     private double mCurrentLon = 0.0;
     private float mCurrentAccracy;
     public MyLocationListenner myListener = new MyLocationListenner();
+    private double mLongitude;
+    private double mLatitude;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -165,6 +168,8 @@ public class AdrressActivity extends BaseActivity implements BaiduMap.OnMapClick
                 //target地图操作的中心点。
                 LatLng target = mBaiduMap.getMapStatus().target;
                 Log.e("onMapStatusChangeFinish", target.toString());
+                mLongitude= target.longitude;
+                mLatitude= target.latitude;
                 latlngToAddress(new LatLng(target.latitude,target.longitude));
 //                mBaiduMap.hideInfoWindow();
             }
@@ -251,7 +256,8 @@ public class AdrressActivity extends BaseActivity implements BaiduMap.OnMapClick
                 return;
             }
             LogUtils.e("location____:" + location.getLatitude() + "," + location.getLongitude()+","+location.getAddrStr());
-
+            mLongitude= location.getLatitude();
+            mLatitude= location.getLatitude();
             mCurrentAddress=location.getAddrStr();
             mCurrentLat = location.getLatitude();
             mCurrentLon = location.getLongitude();
@@ -339,6 +345,8 @@ public class AdrressActivity extends BaseActivity implements BaiduMap.OnMapClick
             case R.id.action_confire:
                 Intent intent = new Intent();
                 intent.putExtra("result",mCurrentAddress);
+                intent.putExtra("latitude",mLatitude);
+                intent.putExtra("longitude",mLongitude);
                 setResult(100,intent);
                 finish();
                 return true;

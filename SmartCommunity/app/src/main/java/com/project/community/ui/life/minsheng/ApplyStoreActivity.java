@@ -3,6 +3,7 @@ package com.project.community.ui.life.minsheng;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -27,7 +28,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding.view.RxView;
+import com.library.okgo.callback.JsonCallback;
+import com.library.okgo.model.BaseResponse;
 import com.library.okgo.utils.GlideImageLoader;
+import com.library.okgo.utils.LogUtils;
 import com.library.okgo.utils.ToastUtils;
 import com.library.okgo.utils.ValidateUtil;
 import com.library.okgo.utils.photo.PhotoUtils;
@@ -35,7 +39,15 @@ import com.library.okgo.view.loopview.LoopView;
 import com.library.okgo.view.loopview.OnItemSelectedListener;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
+import com.project.community.model.DictionaryModel;
+import com.project.community.model.DictionaryResponse;
+import com.project.community.model.FileUploadModel;
+import com.project.community.ui.SplashActivity;
+import com.project.community.ui.adapter.CommunityUnitSingleChoiceAdapter;
+import com.project.community.ui.community.CommunityFamilyActivity;
+import com.project.community.ui.life.family.FamilyAddPersonActivity;
 import com.project.community.util.ScreenUtils;
+import com.project.community.util.StringUtils;
 import com.project.community.view.MyButton;
 import com.project.community.view.crop.CropImageActivity;
 
@@ -47,6 +59,8 @@ import java.util.concurrent.TimeUnit;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Response;
 import rx.functions.Action1;
 
 public class ApplyStoreActivity extends BaseActivity implements View.OnClickListener, View.OnTouchListener {
@@ -98,8 +112,10 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
     private String mLegalPersonZUri;
     private String mLegalPersonFUri;
 
+    private double mLongitude; //
+    private double mLatitude;   //
 
-
+    private String shopsCategory;
 
     @Bind(R.id.layout_root)
     LinearLayout mLayoutRoot;
@@ -143,6 +159,10 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
     MyButton applyStoreBtnConfire;
 
     private LoopView mLoopView;
+    private List<DictionaryModel> mDictionaryModelList = new ArrayList<>();
+    private List<String> strings =new ArrayList<>();
+
+    private boolean isData=false;
 
 //    private ApplyStoryPicAdapter mApplyStoryPicAdapterBusinessLicense;
 //    private ApplyStoryPicAdapter mApplyStoryPicAdapterGvLegalPerson;
@@ -235,10 +255,10 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
 //            }
 //        });
 
-
+        getUnitData();
     }
 
-    List<String> data = new ArrayList<>();
+
     @OnClick({R.id.ll_apply_store_tv_address, R.id.ll_apply_store_tv_type, R.id.apply_store_btn_confire, R.id.apply_store_img_add, R.id.apply_store_img_del,
             R.id.apply_store_del_business_license_zheng, R.id.apply_store_img_add_business_license_zheng, R.id.apply_store_del_business_license_fan,
             R.id.apply_store_img_add_business_license_fan, R.id.apply_store_del_legal_person_zheng, R.id.apply_store_img_add_legal_person_zheng,
@@ -250,13 +270,11 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
                 startActivityForResult(intent, 100);
                 break;
             case R.id.ll_apply_store_tv_type:
-                data.clear();
-                data.add("餐饮");
-                data.add("外卖");
-                data.add("家政");
-                data.add("美容美化");
-                data.add("便利店");
-                showDialog(getResources().getString(R.string.send_message_change_type),data);
+//                if (!isData){
+//                    getUnitData();
+//                }else {
+                    showDialog(getResources().getString(R.string.send_message_change_type),mDictionaryModelList);
+//                }
                 break;
             case R.id.apply_store_btn_confire:
                 if (TextUtils.isEmpty(mStoreCoverUri)){
@@ -319,7 +337,9 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
                     ToastUtils.showLongToast(this,getResources().getString(R.string.store_apply_legal_person_photo_fan_toast));
                     return;
                 }
-                finish();
+                progressDialog.show();
+                propShops();
+
                 break;
             case R.id.apply_store_img_add: //点击添加店铺封面
                 iSCode = 1;
@@ -392,6 +412,8 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (data != null && requestCode == 100 && resultCode == 100) {
+            mLatitude = data.getDoubleExtra("latitude",0.0);
+            mLongitude = data.getDoubleExtra("longitude",0.0);
             applyStoreTvAddress.setText(data.getStringExtra("result"));
         }
 
@@ -427,6 +449,7 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
                         switch (iSCode){
                             case 1:
                                 mStoreCoverUri=data.getStringExtra("uri");
+                                Log.e("onActivityResult: ", mStoreCoverUri);
                                 new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgCover, data.getStringExtra("uri"), R.mipmap.c1_image2);
                                 applyStoreImgAdd.setVisibility(View.GONE);
                                 applyStoreImgDel.setVisibility(View.VISIBLE);
@@ -457,6 +480,12 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
                                 break;
                         }
 
+                        Uri uri = Uri.parse(data.getStringExtra("uri"));
+                        Bitmap bitmap = PhotoUtils.getBitmapFromUri(uri, this);
+                        if (bitmap != null) {
+                            uploadFile(new File(StringUtils.getRealFilePath(ApplyStoreActivity.this, uri)));
+                            LogUtils.e("uri:" + StringUtils.getRealFilePath(ApplyStoreActivity.this, uri));
+                        }
 //                        mImags.add(data.getStringExtra("uri"));
 //                        if (mImags.size() >= 9) {
 //                            mApplyStoryPicAdapter.setGoneAdd(0);
@@ -547,15 +576,23 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
     }
 
     private int mCurrtindex=0;
-    private void showDialog(String title, final List<String> strings) {
+    private void showDialog(String title, final List<DictionaryModel> list) {
         //填充对话框的布局
         View inflate = LayoutInflater.from(this).inflate(R.layout.layout_loopview, null);
-        if (!TextUtils.isEmpty(applyStoreTvType.getText().toString()))
-            for (int i = 0; i < strings.size(); i++) {
-                if (strings.get(i).equals(applyStoreTvType.getText().toString())){
+        if (!TextUtils.isEmpty(applyStoreTvType.getText().toString())){
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).label.equals(applyStoreTvType.getText().toString())){
                     mCurrtindex=i;
                 }
             }
+        }else {
+            strings.clear();
+            for (int i = 0; i < list.size(); i++) {
+                strings.add(list.get(i).label);
+            }
+        }
+
+
         //初始化控件
         TextView tv_cancel = (TextView) inflate.findViewById(R.id.tv_cancel);
         TextView tv_confirm = (TextView) inflate.findViewById(R.id.tv_confirm);
@@ -565,7 +602,8 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
         tv_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                applyStoreTvType.setText(strings.get(mCurrtindex));
+                applyStoreTvType.setText(list.get(mCurrtindex).label);
+                shopsCategory= list.get(mCurrtindex).value;
                 mPopupWindow.dismiss();
             }
         });
@@ -644,6 +682,100 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
         return (scrollY > 0) || (scrollY < scrollDifference - 1);
     }
 
+
+    /**
+     * 文件上传
+     *
+     * @param file
+     */
+    private void uploadFile(File file) {
+        serverDao.uploadFile(file, new JsonCallback<BaseResponse<FileUploadModel>>() {
+            @Override
+            public void onSuccess(BaseResponse<FileUploadModel> baseResponse, Call call, Response response) {
+                switch (iSCode){
+                    case 1:
+                        mStoreCoverUri=baseResponse.retData.filePath;
+                        break;
+                    case 2:
+                        mBusinessLicenseZUri=baseResponse.retData.filePath;
+                        break;
+                    case 3:
+                        mBusinessLicenseFUri=baseResponse.retData.filePath;
+                        break;
+                    case 4:
+                        mLegalPersonZUri=baseResponse.retData.filePath;
+                        break;
+                    case 5:
+                        mLegalPersonFUri=baseResponse.retData.filePath;
+                        break;
+
+                }
+
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                showToast(e.getMessage());
+            }
+        });
+    }
+
+    /**
+     * 获取分类
+     */
+    private void getUnitData() {
+        serverDao.getDictionaryData("prop_shops_type", new JsonCallback<BaseResponse<DictionaryResponse>>() {
+            @Override
+            public void onSuccess(BaseResponse<DictionaryResponse> baseResponse, Call call, Response response) {
+                mDictionaryModelList.clear();
+                mDictionaryModelList.addAll(baseResponse.retData.dictList);
+//                if (isData){
+//                    showDialog(getResources().getString(R.string.send_message_change_type),mDictionaryModelList);
+//                }
+//                isData=true;
+            }
+        });
+    }
+    /**
+     * 申请店铺
+     *
+     * @param
+     */
+    private void propShops() {
+        Log.e("propShops: ", "--------"+shopsCategory);
+        serverDao.propShops(getUser(this).id,
+                mLongitude,
+                mLatitude,
+                applyStoreEtTitle.getText().toString(),
+                mStoreCoverUri,
+                applyStoreEtName.getText().toString(),
+                applyStoreTvAddress.getText().toString(),
+                shopsCategory,
+                applyStoreEtImportant.getText().toString(),
+                applyStoreEtCompanyName.getText().toString(),
+                applyStoreEtBusinessLicense.getText().toString(),
+                mBusinessLicenseZUri,
+                mBusinessLicenseFUri,
+                applyStoreEtLegalPerson.getText().toString(),
+                mLegalPersonZUri,
+                mLegalPersonFUri,
+                new JsonCallback<BaseResponse<List>>() {
+            @Override
+            public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
+                ToastUtils.showLongToast(ApplyStoreActivity.this,baseResponse.message);
+                progressDialog.dismiss();
+                finish();
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                showToast(e.getMessage());
+                progressDialog.dismiss();
+            }
+        });
+    }
 }
 
 

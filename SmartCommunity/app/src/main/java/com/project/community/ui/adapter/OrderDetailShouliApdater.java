@@ -49,6 +49,7 @@ public class OrderDetailShouliApdater extends BaseQuickAdapter<CommentModel, Bas
                 baseViewHolder.setImageResource(R.id.item_cirimags,R.mipmap.d41_dian_p)
                         .setVisible(R.id.item_iscurrt,false)
                         .setVisible(R.id.item_view_line_, true)
+                        .setVisible(R.id.item_view_line_left, true)
                         .setVisible(R.id.item_iscurrt_evaluate,false)
                         .setVisible(R.id.item_iscurrt_reylerview,false);
             } else if (baseViewHolder.getLayoutPosition() == 6) {
@@ -58,6 +59,7 @@ public class OrderDetailShouliApdater extends BaseQuickAdapter<CommentModel, Bas
                 baseViewHolder.setVisible(R.id.item_iscurrt,true)
                         .setVisible(R.id.item_iscurrt,true)
                         .setVisible(R.id.item_view_line_, true)
+                        .setVisible(R.id.item_view_line_left, true)
                         .setVisible(R.id.item_iscurrt_evaluate,false)
                         .setVisible(R.id.item_iscurrt_reylerview,true);
                 List<CommentModel> data=new ArrayList<>();
@@ -76,6 +78,7 @@ public class OrderDetailShouliApdater extends BaseQuickAdapter<CommentModel, Bas
                     baseViewHolder.setImageResource(R.id.item_cirimags, R.mipmap.d41_dian_p)
                             .setVisible(R.id.item_iscurrt, true)
                             .setVisible(R.id.item_view_line_, false)
+                            .setVisible(R.id.item_view_line_left, false)
                             .setVisible(R.id.item_iscurrt_evaluate, true)
                             .setVisible(R.id.item_iscurrt_reylerview, false);
                 } else {
@@ -85,6 +88,7 @@ public class OrderDetailShouliApdater extends BaseQuickAdapter<CommentModel, Bas
                     baseViewHolder.setImageResource(R.id.item_cirimags, R.mipmap.d41_dian)
                             .setVisible(R.id.item_iscurrt, false)
                             .setVisible(R.id.item_view_line_, true)
+                            .setVisible(R.id.item_view_line_left, true)
                             .setVisible(R.id.item_iscurrt_evaluate, false)
                             .setVisible(R.id.item_iscurrt_reylerview, false);
                 }

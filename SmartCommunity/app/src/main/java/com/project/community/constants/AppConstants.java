@@ -326,6 +326,11 @@ public class AppConstants {
      */
     public static final String URL_UPLOAD_LATLNG=URL_BASE+"m/community/comyUser/updateCoordinate";
 
+    /**
+     * 申请商铺
+     */
+    public static final String URL_APPLY_STORE=URL_BASE+"/m/propleLife/propShops/save";
+
     /*==========================*/
     /**
      * 分页大小
