@@ -34,6 +34,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     public ServerDao serverDao;
     public GlideImageLoader glide;
     public CustomProgress progressDialog;
+
     @SuppressWarnings("unchecked")
     public <T extends View> T findView(int id) {
         return (T) findViewById(id);
@@ -315,6 +316,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * 获取是否播放动画
+     *
      * @param context
      * @return
      */
@@ -324,24 +326,26 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * 保存是否播放动画
+     *
      * @param context
      * @param willPlay
      */
-    public static void saveWillPlayAnim(Context context,boolean willPlay){
-        SharedPreferenceUtils.putBoolean(context,SharedPreferenceUtils.SP_WILL_PLAY,willPlay);
+    public static void saveWillPlayAnim(Context context, boolean willPlay) {
+        SharedPreferenceUtils.putBoolean(context, SharedPreferenceUtils.SP_WILL_PLAY, willPlay);
     }
-    public  void  showLoading(){
+
+    public void showLoading() {
         //网络请求前显示对话框
         try {
             if (progressDialog != null && !progressDialog.isShowing()) {
                 progressDialog.show();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void dismissDialog(){
+    public void dismissDialog() {
         //网络请求结束后关闭对话框
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
@@ -350,42 +354,68 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * 保存定位经纬度
+     *
      * @param context
      * @param latitude
      * @param longitude
      */
-    public void saveLocation(Context context,String latitude,String longitude){
-        SharedPreferenceUtils.putString(context,"lat",latitude);
-        SharedPreferenceUtils.putString(context,"long",longitude);
+    public void saveLocation(Context context, String latitude, String longitude) {
+        SharedPreferenceUtils.putString(context, "lat", latitude);
+        SharedPreferenceUtils.putString(context, "long", longitude);
     }
 
     /**
      * 取保存的经纬度
+     *
      * @param context
      * @return
      */
-    public String[] getLocation(Context context){
-        String [] locData = new String[2];
-        locData[0]=SharedPreferenceUtils.getString(context,"lat");
-        locData[1]=SharedPreferenceUtils.getString(context,"long");
+    public String[] getLocation(Context context) {
+        String[] locData = new String[2];
+        locData[0] = SharedPreferenceUtils.getString(context, "lat");
+        locData[1] = SharedPreferenceUtils.getString(context, "long");
         return locData;
     }
 
     /**
      * 社区启动页
+     *
      * @param context
      * @param url
      */
-    public void saveCommunityStartPage(Context context,String url){
-        SharedPreferenceUtils.putString(context,"communityStartPage",url);
+    public void saveCommunityStartPage(Context context, String url) {
+        SharedPreferenceUtils.putString(context, "communityStartPage", url);
     }
 
     /**
      * 获取社区启动页
+     *
      * @param context
      * @return
      */
-    public String getCommunityStartPage(Context context){
-        return SharedPreferenceUtils.getString(context,"communityStartPage");
+    public String getCommunityStartPage(Context context) {
+        return SharedPreferenceUtils.getString(context, "communityStartPage");
+    }
+
+    /**
+     * 保存購物車数量
+     *
+     * @param context
+     * @param count
+     */
+    public void saveShopCartCount(Context context, int count) {
+        SharedPreferenceUtils.putInt(context, "shopCartCount", count);
+    }
+
+    /**
+     * 獲取購物車数量
+     *
+     * @param context
+     * @return
+     */
+    public int getShopCartCount(Context context) {
+        int count = 0;
+        count = SharedPreferenceUtils.getInt(context, "shopCartCount", 0);
+        return count;
     }
 }

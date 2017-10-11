@@ -1,18 +1,26 @@
 package com.project.community.ui.adapter;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.ViewTarget;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.library.okgo.utils.DateUtil;
+import com.library.okgo.utils.DeviceUtil;
 import com.library.okgo.utils.GlideImageLoader;
 import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
@@ -39,19 +47,23 @@ public class ArticlePageAdapter extends BaseQuickAdapter<ArticleModel, BaseViewH
     private final static float SIZE_SCALE_01 = 4 / 3f;
     private final static float SIZE_SCALE_02 = 4 / 4f;
     private int screenWidth;
-    private HashMap<Integer, Float> indexMap = new HashMap<Integer, Float>();
+    private HashMap<Integer, Float> indexMap = new HashMap<>();
+    private HashMap<Integer, Integer> imageHeightMap = new HashMap<>();
 
     public ArticlePageAdapter(List<ArticleModel> data, IndexAdapterItemListener itemClick, DiggClickListener diggClickListener) {
         super(R.layout.layout_item_news, data);
         itemClickListener = itemClick;
         this.diggClickListener = diggClickListener;
-//            screenWidth = Utils.getScreenSize(context)[0] - Utils.dp2px(context, 8) * 3;
+    }
 
-
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
     }
 
     @Override
     protected void convert(final BaseViewHolder baseViewHolder, final ArticleModel model) {
+//        baseViewHolder.setIsRecyclable(false);
         /**
          *对指定位置加粗
          */
@@ -119,10 +131,24 @@ public class ArticlePageAdapter extends BaseQuickAdapter<ArticleModel, BaseViewH
             else
                 baseViewHolder.setVisible(R.id.tv_wenjuan, false);
         }
+        int imageWidth = (DeviceUtil.getDeviceWidth(mContext) - 30) / 2;
+//        GlideImageLoader glide = new GlideImageLoader();
+//        glide.onDisplayImage(mContext, (ImageView) baseViewHolder.getView(R.id.iv_imageView), AppConstants.HOST + model.image);
+        if (model.imageWidth != 0 && model.imageHeight != 0) {
+            if (!imageHeightMap.containsKey(baseViewHolder.getLayoutPosition())) {
+                //当首次加载图片时，调用 loadImageFirst()，保存图片高度
+                loadImageFirst(baseViewHolder.getView(R.id.iv_imageView), baseViewHolder.getLayoutPosition());
+            } else {
+                //非首次加载，直接根据保存的长宽，获取图片
+                Glide.with(mContext)
+                        .load(AppConstants.HOST + model.image).override(imageWidth, imageHeightMap.get(baseViewHolder.getLayoutPosition()))
+                        .into((ImageView) baseViewHolder.getView(R.id.iv_imageView));
 
-        GlideImageLoader glide = new GlideImageLoader();
-        glide.onDisplayImage(mContext, (ImageView) baseViewHolder.getView(R.id.iv_imageView), AppConstants.HOST + model.image);
-        resizeItemView((ImageView) baseViewHolder.getView(R.id.iv_imageView), getScaleType(baseViewHolder.getLayoutPosition()));
+            }
+        }
+//        resizeItemView((ImageView) baseViewHolder.getView(R.id.iv_imageView), (float) model.imageWidth / (float) model.imageHeight);
+
+
         View view = baseViewHolder.getConvertView();
         final int position = baseViewHolder.getLayoutPosition();//去掉header的点击事件
         //item点击事件
@@ -155,8 +181,8 @@ public class ArticlePageAdapter extends BaseQuickAdapter<ArticleModel, BaseViewH
     private float getScaleType(int position) {
         if (!indexMap.containsKey(position)) {
             float scaleType;
-            LogUtils.e("header:"+getHeaderLayoutCount());
-            if (getHeaderLayoutCount()>0) {
+            LogUtils.e("header:" + getHeaderLayoutCount());
+            if (getHeaderLayoutCount() > 0) {
                 if (position == 1) {
                     scaleType = SIZE_SCALE_01;
                 } else if (position == 2) {
@@ -181,10 +207,51 @@ public class ArticlePageAdapter extends BaseQuickAdapter<ArticleModel, BaseViewH
 
     private void resizeItemView(ImageView frontCoverImage, float scaleType) {
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) frontCoverImage.getLayoutParams();
-        screenWidth= ScreenUtils.getScreenWidth(mContext)- Utils.dp2px(mContext, 8) * 3;
+        screenWidth = ScreenUtils.getScreenWidth(mContext) - Utils.dp2px(mContext, 8) * 3;
         params.width = screenWidth / 2;
-        params.height = (int) (params.width / scaleType) - Utils.dp2px(context, 8);
+        params.height = (int) (params.width / scaleType) - Utils.dp2px(mContext, 8);
+        LogUtils.e("height1:" + ((int) (params.width / scaleType) - Utils.dp2px(mContext, 8)));
         frontCoverImage.setLayoutParams(params);
+    }
+
+
+    public void loadImageFirst(View view, final int position) {
+        final int imageWidth = (DeviceUtil.getDeviceWidth(mContext) - 30) / 2;
+        //构造方法中参数view,就是回调方法中的this.view
+        ViewTarget<View, Bitmap> target = new ViewTarget<View, Bitmap>(view) {
+            @Override
+            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                //加载图片成功后调用
+                float scaleType = ((float) resource.getHeight()) / resource.getWidth();
+                int imageHeight = (int) (imageWidth * scaleType);
+                //获取图片高度，保存在Map中
+                imageHeightMap.put(position, imageHeight);
+                //设置图片布局的长宽，Glide会根据布局的自动加载适应大小的图片
+                ViewGroup.LayoutParams lp = this.view.getLayoutParams();
+                lp.width = imageWidth;
+                lp.height = imageHeight;
+                this.view.setLayoutParams(lp);
+                //resource就是加载成功后的图片资源
+                ((ImageView) view).setImageBitmap(resource);
+            }
+
+            @Override
+            public void onLoadFailed(Exception e, Drawable errorDrawable) {
+                //加载图片失败后调用
+                super.onLoadFailed(e, errorDrawable);
+                int imageHeight = imageWidth;
+                imageHeightMap.put(position, imageHeight);
+                ViewGroup.LayoutParams lp = this.view.getLayoutParams();
+                lp.width = imageWidth;
+                lp.height = imageHeight;
+                this.view.setLayoutParams(lp);
+                ((ImageView) view).setImageResource(R.mipmap.ic_launcher);
+            }
+        };
+        Glide.with(mContext)
+                .load(AppConstants.HOST + mData.get(position).image)
+                .asBitmap()                 //作为Bitmap加载，对应onResourceReady回调中第一个参数的类型
+                .into(target);
     }
 
 }

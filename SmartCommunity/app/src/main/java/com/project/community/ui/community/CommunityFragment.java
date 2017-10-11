@@ -1525,8 +1525,13 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                 if (coordinateArr.length == 2) {
                     LatLng latLng = new LatLng(Double.parseDouble(coordinateArr[1]), Double.parseDouble(coordinateArr[0]));
                     MarkerOptions markerOptions = new MarkerOptions();
-                    bitmapDescriptor = BitmapDescriptorFactory
-                            .fromResource(R.mipmap.d48_icon1);
+                    if ("1".equals(model.memberTag))
+                        bitmapDescriptor = BitmapDescriptorFactory
+                                .fromResource(R.mipmap.d48_icon1);
+                    else {
+                        bitmapDescriptor = BitmapDescriptorFactory
+                                .fromResource(R.mipmap.d48_icon2);
+                    }
                     bitmaps.add(bitmapDescriptor);
                     markerOptions.icon(bitmapDescriptor)
                             .position(latLng);
