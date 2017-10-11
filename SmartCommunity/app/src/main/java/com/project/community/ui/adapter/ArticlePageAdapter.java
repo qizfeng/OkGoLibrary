@@ -63,7 +63,7 @@ public class ArticlePageAdapter extends BaseQuickAdapter<ArticleModel, BaseViewH
 
     @Override
     protected void convert(final BaseViewHolder baseViewHolder, final ArticleModel model) {
-//        baseViewHolder.setIsRecyclable(false);
+        baseViewHolder.setIsRecyclable(false);
         /**
          *对指定位置加粗
          */
