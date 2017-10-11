@@ -118,7 +118,6 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
 //        recyclerView.setItemAnimator(new DefaultItemAnimator());
         final StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
-
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {

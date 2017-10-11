@@ -36,8 +36,6 @@
                 app:tabGravity="fill"
                 app:tabIndicatorColor="@color/white"
                 app:tabMode="fixed"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
                 app:tabSelectedTextColor="@color/white"
                 app:tabTextColor="@color/color_grag_93b0cc" />
         </FrameLayout>

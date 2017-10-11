@@ -17,7 +17,7 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <!--用于控制toolbar溢出菜单的样式-->
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" >
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
         <item name="actionMenuTextColor">#ffffff</item>
     </style>
 
@@ -58,9 +58,10 @@
     </style>
 
     <!--tablayout-->
-    <style name="TabLayoutTextStyle">
-        <item name="android:textSize">@dimen/common_title_txt_size</item>
+    <style name="TabLayoutTextStyle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
+        <item name="android:textSize">@dimen/common_txt_size</item>
     </style>
+
     <style name="WuyeTabLayoutTextStyle">
         <item name="android:textSize">@dimen/common_sub_title_txt_size</item>
     </style>

@@ -319,16 +319,16 @@ public class AppLocationService extends Service {
                 } else {
                     if (checkNetworkNumber == checkNetWorkMaxNum) {
 
-                        LogUtils.e("--------------第三次检测网络，还未开启，直接退出应用---------");
-
-                        // 检查网络，提醒了用户三次依然未开，退出应用。
-                        mNotificationUtil
-                                .cancelNotification(AppConstants.NOTIFICATIO_NETWORK_NOT_OPEN);
-                        mNotificationUtil
-                                .cancelNotification(AppConstants.NOTIFICATIO_GPS_NOT_OPEN);
-                        mTimer.cancel();
-                        // System.gc();
-                        System.exit(0);
+//                        LogUtils.e("--------------第三次检测网络，还未开启，直接退出应用---------");
+//
+//                        // 检查网络，提醒了用户三次依然未开，退出应用。
+//                        mNotificationUtil
+//                                .cancelNotification(AppConstants.NOTIFICATIO_NETWORK_NOT_OPEN);
+//                        mNotificationUtil
+//                                .cancelNotification(AppConstants.NOTIFICATIO_GPS_NOT_OPEN);
+//                        mTimer.cancel();
+//                        // System.gc();
+//                        System.exit(0);
                     }
                 }
             }

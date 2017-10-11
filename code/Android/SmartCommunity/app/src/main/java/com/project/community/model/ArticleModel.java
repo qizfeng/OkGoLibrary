@@ -74,7 +74,8 @@ public class ArticleModel implements Serializable {
     public int status;//收藏状态 0未收藏 1已收藏
     public String title;
     public String categoryId;
-    public String imageHeight;
+    public int imageHeight;
+    public int imageWidth;
     public String url;
     public int allowComment;
     public int allowCollection;

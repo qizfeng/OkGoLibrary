@@ -88,7 +88,7 @@ public class LifeFragment extends BaseFragment implements View.OnClickListener {
         tabLayout.post(new Runnable() {
             @Override
             public void run() {
-                TablayoutLineReflex.setTabLine(getActivity(), tabLayout, 15, 15);
+                TablayoutLineReflex.setTabLine(getActivity(), tabLayout, 30, 30);
 //                TablayoutLineReflex.setTabLine(getActivity(),tabLayout,15,15);
             }
         });

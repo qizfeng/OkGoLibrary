@@ -76,19 +76,6 @@ public class FamilyAdapter extends BaseMultiItemQuickAdapter<FamilyPersonModel, 
                     itemClickListener.onEdit(view,item, helper.getLayoutPosition());
                 }
             });
-            SwipeItemLayout swipe_layout=helper.getView(R.id.swipe_layout);
-
-            swipe_layout.addSwipeListener(new SwipeItemLayout.SwipeListener() {
-                @Override
-                public void onSwipeOpen(SwipeItemLayout swipeItemLayout) {
-                    swipeItemLayout.close();
-                }
-
-                @Override
-                public void onSwipeClose(SwipeItemLayout swipeItemLayout) {
-
-                }
-            });
         }
     }
 

@@ -66,7 +66,10 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
     RecyclerView mRecyclerView;
     @Bind(R.id.refreshLayout)
     VpSwipeRefreshLayout refreshLayout;
-
+    @Bind(R.id.iv_shop_cart)
+    ImageView mIvShopCart;
+    @Bind(R.id.tv_shop_cart)
+    TextView mTvShopCart;
     private int page = 1;//当前页码
     private MinshengAdapter mAdapter;
     private View header;
@@ -131,9 +134,9 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
     private void loadData() {
         String latitute = getLocation(this)[0];
         String longitute = getLocation(this)[1];
-        String locData="";
-        if(!TextUtils.isEmpty(latitute)&&!TextUtils.isEmpty(longitute)){
-            locData=longitute+","+latitute;
+        String locData = "";
+        if (!TextUtils.isEmpty(latitute) && !TextUtils.isEmpty(longitute)) {
+            locData = longitute + "," + latitute;
         }
         serverDao.getMinshengIndexData(locData, page, AppConstants.PAGE_SIZE, new JsonCallback<BaseResponse<List<ShopModel>>>() {
             @Override
@@ -211,26 +214,34 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         Intent intent;
         switch (position) {
-            case 0:
-                intent = new Intent(MinshengActivity.this, CommunityActivity.class);
+            case 0://社區商圈
+                showToast(getString(R.string.toast_online));
+               /* intent = new Intent(MinshengActivity.this, CommunityActivity.class);
+                startActivity(intent);*/
+                break;
+            case 1://家政
+                showToast(getString(R.string.toast_online));
+               /* intent = new Intent(MinshengActivity.this, OrderDetailActivity.class);
+                startActivity(intent);*/
+                break;
+            case 2://醫院
+                intent = new Intent(MinshengActivity.this, RegistrationAppActivity.class);
                 startActivity(intent);
                 break;
-            case 1:
-                intent = new Intent(MinshengActivity.this, OrderDetailActivity.class);
-                startActivity(intent);
-                break;
-            case 3:
+            case 3://公交
                 intent = new Intent(MinshengActivity.this, PublicTransportationActivity.class);
                 startActivity(intent);
                 break;
-            case 4:
+            case 4://社區论坛
 //                intent = new Intent(MinshengActivity.this, ArticleDetailsActivity.class);
                 intent = new Intent(MinshengActivity.this, BBSActivity.class);
                 startActivity(intent);
                 break;
-            case 2:
-                intent = new Intent(MinshengActivity.this, RegistrationAppActivity.class);
-                startActivity(intent);
+            case 5://就业
+                showToast(getString(R.string.toast_online));
+                break;
+            default://更多
+                showToast(getString(R.string.toast_online));
                 break;
         }
     }
