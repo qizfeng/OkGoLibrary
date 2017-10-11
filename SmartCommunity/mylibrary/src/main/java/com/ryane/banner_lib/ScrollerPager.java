@@ -112,7 +112,7 @@ public class ScrollerPager extends ViewPager {
             mPointViews = new PointView[mInfos.size()];
 
             float pointSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics());
-
+            if(mInfos.size()>1){
             for (int i = 0; i < mInfos.size(); i++) {
                 PointView pointView;
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams((int) pointSize, (int) pointSize);
@@ -133,7 +133,7 @@ public class ScrollerPager extends ViewPager {
                 layoutParams.bottomMargin = (int) pointSize;
                 mPointViews[i] = pointView;
                 mIndicator.addView(mPointViews[i], layoutParams);
-            }
+            }}
         }
     }
 

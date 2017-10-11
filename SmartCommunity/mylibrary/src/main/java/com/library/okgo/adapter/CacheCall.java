@@ -1,6 +1,7 @@
 package com.library.okgo.adapter;
 
 import android.graphics.Bitmap;
+import android.text.TextUtils;
 
 import com.library.okgo.OkGo;
 import com.library.okgo.R;
@@ -213,16 +214,20 @@ public class CacheCall<T> implements Call<T> {
                     }
                 } else {
                     String message = e.getMessage();
-                    if (message.contains("Failed to connect to")) {
-                        message = "网络请求失败";
-                        mCallback.onError(call, response, new IllegalStateException(message));
-                    } else if (message.contains("No address")) {
-                        message = "服务器已关闭";
-                        mCallback.onError(call, response, new IllegalStateException(message));        //请求失败回调 （UI线程）
-                    } else if (e instanceof SocketTimeoutException) {
-                        mCallback.onError(call, response, new IllegalStateException("请求超时"));
-                    } else
-                        mCallback.onError(call, response, e);        //请求失败回调 （UI线程）
+                    if (!TextUtils.isEmpty(message))
+                        if (message.contains("Failed to connect to")) {
+                            message = "网络请求失败";
+                            mCallback.onError(call, response, new IllegalStateException(message));
+                        } else if (message.contains("No address")) {
+                            message = "服务器已关闭";
+                            mCallback.onError(call, response, new IllegalStateException(message));        //请求失败回调 （UI线程）
+                        } else if (e instanceof SocketTimeoutException) {
+                            mCallback.onError(call, response, new IllegalStateException("请求超时"));
+                        } else
+                            mCallback.onError(call, response, e);        //请求失败回调 （UI线程）
+                    else{
+                        mCallback.onError(call, response, e);
+                    }
                     if (cacheMode != CacheMode.REQUEST_FAILED_READ_CACHE) {
                         mCallback.onAfter(null, e);              //请求结束回调 （UI线程）
                     }
