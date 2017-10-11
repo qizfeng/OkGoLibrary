@@ -17,8 +17,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.library.customview.viewpager.NoScrollViewPager;
+import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
 import com.project.community.base.BaseFragment;
+import com.project.community.ui.MainActivity;
 import com.project.community.ui.life.minsheng.MinshengActivity;
 import com.project.community.ui.life.wuye.WuyeActivity;
 import com.project.community.ui.life.zhengwu.ZhengwuActivity;
@@ -38,8 +40,6 @@ import butterknife.ButterKnife;
 public class LifeFragment extends BaseFragment implements View.OnClickListener {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-    //    @Bind(R.id.tv_title)
-//    TextView tv_title;
     @Bind(R.id.tabLayout)
     TabLayout tabLayout;
 
@@ -66,6 +66,15 @@ public class LifeFragment extends BaseFragment implements View.OnClickListener {
         AddActivitiesToViewPager();
     }
 
+    public static int index = 0;
+
+    @Override
+    protected void onVisible() {
+        super.onVisible();
+        LogUtils.e("index:" + index);
+        if (index != 0)
+            viewPager.setCurrentItem(index);
+    }
 
     /**
      * 初始化tabLayout
@@ -143,33 +152,33 @@ public class LifeFragment extends BaseFragment implements View.OnClickListener {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    class MainFragmentPagerAdapter extends FragmentPagerAdapter {
-        private List<Fragment> fragments;
-        private String[] mTitles = new String[]{"政务", "物业", "民生"};
-
-        public MainFragmentPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
-            super(fm);
-            this.fragments = fragments;
-        }
-
-
-        @Override
-        public int getCount() {
-            return fragments.size();
-        }
-
-
-        @Override
-        public Fragment getItem(int position) {
-            return fragments.get(position);
-        }
-
-        //ViewPager与TabLayout绑定后，这里获取到PageTitle就是Tab的Text
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mTitles[position];
-        }
-    }
+//    class MainFragmentPagerAdapter extends FragmentPagerAdapter {
+//        private List<Fragment> fragments;
+//        private String[] mTitles = new String[]{"政务", "物业", "民生"};
+//
+//        public MainFragmentPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
+//            super(fm);
+//            this.fragments = fragments;
+//        }
+//
+//
+//        @Override
+//        public int getCount() {
+//            return fragments.size();
+//        }
+//
+//
+//        @Override
+//        public Fragment getItem(int position) {
+//            return fragments.get(position);
+//        }
+//
+//        //ViewPager与TabLayout绑定后，这里获取到PageTitle就是Tab的Text
+//        @Override
+//        public CharSequence getPageTitle(int position) {
+//            return mTitles[position];
+//        }
+//    }
 
 
     private LocalActivityManager manager;

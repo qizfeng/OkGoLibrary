@@ -131,7 +131,11 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
     private void loadData() {
         String latitute = getLocation(this)[0];
         String longitute = getLocation(this)[1];
-        serverDao.getMinshengIndexData(longitute + "," + latitute, page, AppConstants.PAGE_SIZE, new JsonCallback<BaseResponse<List<ShopModel>>>() {
+        String locData="";
+        if(!TextUtils.isEmpty(latitute)&&!TextUtils.isEmpty(longitute)){
+            locData=longitute+","+latitute;
+        }
+        serverDao.getMinshengIndexData(locData, page, AppConstants.PAGE_SIZE, new JsonCallback<BaseResponse<List<ShopModel>>>() {
             @Override
             public void onSuccess(BaseResponse<List<ShopModel>> baseResponse, Call call, Response response) {
                 if (page == 1) {

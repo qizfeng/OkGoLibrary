@@ -26,7 +26,7 @@
     <string name="txt_repair_record">报修记录</string>
     <string name="txt_family_info">家庭信息</string>
     <string name="txt_shop_manage">商铺管理</string>
-    <string name="txt_apply_shop">+申请开店</string>
+    <string name="txt_apply_shop">申请店铺</string>
     <string name="txt_my_repair_order">我的维修单</string>
     <string name="txt_system_message">系统消息</string>
 
@@ -41,7 +41,7 @@
     <string name="txt_work_time">工作时间:</string>
     <string name="txt_hot_line">政府热线</string>
     <!--民生-->
-    <string name="tab_title_minsheng_nearby">附近商家</string>
+    <string name="tab_title_minsheng_nearby">社区商圈</string>
     <string name="tab_title_minsheng_bbs">社区论坛</string>
     <string name="txt_name">姓名</string>
     <string name="txt_title">标题</string>

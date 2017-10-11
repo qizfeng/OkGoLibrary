@@ -26,6 +26,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.jakewharton.rxbinding.widget.RxAbsListView;
+import com.jakewharton.rxbinding.widget.RxAdapter;
+import com.jakewharton.rxbinding.widget.RxAdapterView;
 import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
@@ -57,11 +60,14 @@ import com.project.community.view.SpacesItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Response;
+import rx.Observer;
+import rx.functions.Action1;
 
 /**
  * Created by qizfeng on 17/7/13.
@@ -186,7 +192,6 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
         onRefresh();
         fab.setOnClickListener(this);
         gridView.setOnItemClickListener(this);
-
         setData();
 
     }
@@ -200,7 +205,8 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
                 break;
         }
     }
-
+    //退出时的时间
+    private long mExitTime;
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         Intent intent = new Intent();
@@ -217,10 +223,16 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
                 showToast(getString(R.string.toast_no_login));
             }
         } else if ("热线".equals(typeStr)) {
-            intent.putExtra("hasHeader", false);
-            intent.putExtra("type", "1");
-            intent.setClass(ZhengwuActivity.this, PhoneDialogActivity.class);
-            startActivity(intent);
+            if ((System.currentTimeMillis() - mExitTime) > 2000) {
+                mExitTime = System.currentTimeMillis();
+                Intent mIntent = new Intent();
+                mIntent.putExtra("hasHeader", false);
+                mIntent.putExtra("type", "1");
+                mIntent.setClass(ZhengwuActivity.this, PhoneDialogActivity.class);
+                startActivity(mIntent);
+            }
+
+
         } else if ("公告".equals(typeStr) || "宣传".equals(typeStr) || "就业".equals(typeStr)) {
             setRefreshing(true);
             if ("公告".equals(typeStr)) {
@@ -442,7 +454,6 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
         gridView.setHorizontalSpacing(5); // 设置列表项水平间距
         ModuleAdapter adapter = new ModuleAdapter(ZhengwuActivity.this,
                 moduleModels);
-//        MenuModuleAdapter adapter = new MenuModuleAdapter(ZhengwuActivity.this,mMenuData);
         int defaultRows = 2;
         int defaultColumns = 4;
         int count = adapter.getCount();
