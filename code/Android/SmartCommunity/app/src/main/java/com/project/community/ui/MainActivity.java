@@ -109,6 +109,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 checkFragment = INDEX_HOME_FRAGMENT;
                 switchFragment(checkFragment);
                 initForMessageCenterIcon(bottom_navigation, false);
+                LifeFragment.index=0;
                 return true;//注意!!! 不要break,否则BottomNavigationView无切换效果
             case R.id.navigation_life:
                 //生活
@@ -129,12 +130,14 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 checkFragment = INDEX_COMMUNITY_FRAGMENT;
                 switchFragment(checkFragment);
                 initForMessageCenterIcon(bottom_navigation, false);
+                LifeFragment.index=0;
                 return true;//注意!!! 不要break,否则BottomNavigationView无切换效果
             case R.id.navigation_me:
                 //我的
                 checkFragment = INDEX_MY_FRAGMENT;
                 switchFragment(checkFragment);
                 initForMessageCenterIcon(bottom_navigation, true);
+                LifeFragment.index=0;
                 return true;//注意!!! 不要break,否则BottomNavigationView无切换效果
             default:
                 break;
@@ -144,7 +147,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     }
 
     //切换fragment
-    private void switchFragment(int index) {
+    public void switchFragment(int index) {
         //切换Fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -157,92 +160,19 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         }
         transaction.commit();
     }
+    //切换fragment
+    public void switchFragment(int index,int childIndex) {
+        checkFragment = INDEX_LIFE_FRAGMENT;
+        switchFragment(checkFragment);
+        bottom_navigation.setSelectedItemId(R.id.navigation_life);
+        initForMessageCenterIcon(bottom_navigation, false);
+        LifeFragment.index=childIndex;
+    }
 
     private LocalActivityManager manager;
-    private MainPagerAdapter viewPageAdapter;
-
-//    private void AddActivitiesToViewPager() {
-//        List<View> mViews = new ArrayList<View>();
-//        Intent intent = new Intent();
-//
-//        intent.setClass(this, IndexActivity.class);
-//        intent.putExtra("id", 1);
-//        mViews.add(getView("IndexActivity", intent));
-//
-//        intent.setClass(this, IndexActivity.class);
-//        intent.putExtra("id", 2);
-//        mViews.add(getView("LifeActivity", intent));
-//
-//        intent.setClass(this, CommunityActivity.class);
-//        intent.putExtra("id", 3);
-//        mViews.add(getView("CommunityActivity", intent));
-//
-//        intent.setClass(this, IndexActivity.class);
-//        intent.putExtra("id", 4);
-//        mViews.add(getView("QualityActivity4", intent));
-//
-//        viewPageAdapter = new MainPagerAdapter(mViews);
-//       // viewPager.setAdapter(viewPageAdapter);
-//
-//    }
-
-    private View getView(String id, Intent intent) {
-        return manager.startActivity(id, intent).getDecorView();
-    }
-
-    class MainPagerAdapter extends PagerAdapter implements Serializable {
-        private List<View> views;
-
-        public MainPagerAdapter(List<View> views) {
-            this.views = views;
-        }
-
-        @Override
-        public int getCount() {
-            return views.size();
-        }
-
-        @Override
-        public boolean isViewFromObject(View arg0, Object arg1) {
-            return arg0 == arg1;
-        }
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView(views.get(position));
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            container.addView(views.get(position), 0);
-            return views.get(position);
-        }
-    }
-
-    class MainFragmentPagerAdapter extends FragmentPagerAdapter {
-        private List<Fragment> fragments;
-
-        public MainFragmentPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
-            super(fm);
-            this.fragments = fragments;
-        }
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            //  super.destroyItem(container, position, object);
-        }
-
-        @Override
-        public int getCount() {
-            return fragments.size();
-        }
 
 
-        @Override
-        public Fragment getItem(int position) {
-            return fragments.get(position);
-        }
-    }
+
 
     private void initForMessageCenterIcon(BottomNavigationView navigationView, boolean isShowRedPoint) {
         Menu menu = navigationView.getMenu();
@@ -272,8 +202,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         super.onDestroy();
         UMShareAPI.get(this).release();
     }
-
-    private long mOldTime;
 
     //退出时的时间
     private long mExitTime;

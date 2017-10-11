@@ -29,6 +29,7 @@ import com.project.community.constants.AppConstants;
 import com.project.community.constants.SharedPreferenceUtils;
 import com.project.community.service.AppLocationService;
 import com.project.community.ui.guide.WelcomeGuideActivity;
+import com.project.community.util.NetworkUtils;
 import com.project.community.util.ServiceUtil;
 
 import java.util.List;
@@ -174,6 +175,8 @@ public class SplashActivity extends BaseActivity {
                     if (!TextUtils.isEmpty(latitute) && !TextUtils.isEmpty(longitute)) {
                         saveLocation(SplashActivity.this, latitute, longitute);
                         if (!isLogin(SplashActivity.this))
+                            return;
+                        if (!NetworkUtils.isNetworkAvailable(SplashActivity.this))
                             return;
                         serverDao.doUploadLocation(getUser(SplashActivity.this).id, longitute + "," + latitute, new JsonCallback<BaseResponse<List>>() {
                             @Override

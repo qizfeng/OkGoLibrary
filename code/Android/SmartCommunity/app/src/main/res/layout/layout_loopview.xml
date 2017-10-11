@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="@dimen/dp_55"
         android:layout_above="@+id/loopView"
         android:background="@color/white">
 
@@ -18,8 +18,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:paddingLeft="@dimen/dp_20"
+            android:paddingRight="@dimen/dp_20"
             android:text="@string/txt_cancel"
             android:textColor="@color/gray_line"
             android:textSize="@dimen/common_txt_size" />
@@ -41,8 +41,8 @@
             android:layout_alignParentRight="true"
             android:background="@drawable/press_selector"
             android:gravity="center"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:paddingLeft="@dimen/dp_20"
+            android:paddingRight="@dimen/dp_20"
             android:text="@string/txt_confirm"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/common_txt_size" />

@@ -120,7 +120,7 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
 
     @Override
     protected void initData() {
-        initToolbar(mToolBar, mTvTitle, getString(R.string.app_name));
+        initToolbar(mToolBar, mTvTitle, "");
         /**
          * 监听 AppBarLayout Offset 变化，动态设置 SwipeRefreshLayout 是否可用
          */
@@ -156,12 +156,20 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
         mIvSetting.setOnClickListener(this);
         mIvToolbarSetting.setOnClickListener(this);
         addRedPoint(mLayoutChat, true);
-        addRedPoint(mLayoutMyRepairOrder, true);
-        addRedPoint(mLayoutSystemMessage, true);
+        addRedPoint(mLayoutMyRepairOrder, false);
+        addRedPoint(mLayoutSystemMessage, false);
         mLayoutMyOrder.getLayoutParams().height = ScreenUtils.getScreenWidth(getActivity()) / 3 - 40;
         mLayoutMyCollect.getLayoutParams().height = ScreenUtils.getScreenWidth(getActivity()) / 3 - 40;
         mLayoutMyTopic.getLayoutParams().height = ScreenUtils.getScreenWidth(getActivity()) / 3 - 40;
-
+        if(!isLogin(getActivity())){
+            mLayoutMyRepairOrder.setVisibility(View.GONE);
+        }else {
+            if("3".equals(getUser(getActivity()).roleType)){
+                mLayoutMyRepairOrder.setVisibility(View.VISIBLE);
+            }else {
+                mLayoutMyRepairOrder.setVisibility(View.GONE);
+            }
+        }
         // glide.onDisplayImageBlur(getActivity(), mIvHeaderBg, R.mipmap.iv_header_bg, 25);
     }
 
@@ -183,10 +191,24 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
     }
 
     @Override
+    protected void onVisible() {
+        super.onVisible();
+        if(!isLogin(getActivity())){
+            mLayoutMyRepairOrder.setVisibility(View.GONE);
+        }else {
+            if("3".equals(getUser(getActivity()).roleType)){
+                mLayoutMyRepairOrder.setVisibility(View.VISIBLE);
+            }else {
+                mLayoutMyRepairOrder.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_header://头像
-                Intent intent = new Intent(getActivity(),MyActivity.class);
+                Intent intent = new Intent(getActivity(), MyActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_info://编辑资料
@@ -207,7 +229,10 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                 showToast(getString(R.string.toast_online));
                 break;
             case R.id.layout_family_info://家庭信息
-                FamilyInfoActivity.startActivity(getActivity(),null);
+                if (isLogin(getActivity()))
+                    FamilyInfoActivity.startActivity(getActivity(), null);
+                else
+                    showToast(getString(R.string.toast_no_login));
                 break;
             case R.id.layout_shop_manage://店铺管理
                 showToast(getString(R.string.toast_online));
@@ -259,6 +284,7 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
 
     @Override
     public void onRefresh() {
+
         if (isLogin(getActivity()))
             loadData();
         else
@@ -296,6 +322,15 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                         .bitmapTransform(new CropCircleTransformation(getActivity()))
                         .into(mIvHeader);
                 mTvName.setText(getUser(getActivity()).loginName);
+                if(!isLogin(getActivity())){
+                    mLayoutMyRepairOrder.setVisibility(View.GONE);
+                }else {
+                    if("3".equals(getUser(getActivity()).roleType)){
+                        mLayoutMyRepairOrder.setVisibility(View.VISIBLE);
+                    }else {
+                        mLayoutMyRepairOrder.setVisibility(View.GONE);
+                    }
+                }
             }
 
             @Override

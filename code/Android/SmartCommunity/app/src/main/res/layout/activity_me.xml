@@ -30,7 +30,7 @@
                 app:expandedTitleGravity="center"
                 app:expandedTitleMarginStart="100dp"
                 app:expandedTitleTextAppearance="@color/transparent"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:statusBarScrim="@color/transparent"
                 app:title=""
                 app:titleEnabled="true">
@@ -56,7 +56,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_margin="30dp"
                             android:scaleType="fitXY"
-                            android:src="@mipmap/ic_launcher_round" />
+                            android:src="@mipmap/d54_tx" />
 
                         <FrameLayout
                             android:layout_width="match_parent"
@@ -184,6 +184,7 @@
                     android:background="@color/transparent"
                     android:titleTextColor="@color/colorPrimary"
                     app:layout_collapseMode="pin"
+                    android:visibility="gone"
                     app:popupTheme="@style/AppTheme.PopupOverlay"
                     app:title="" />
 
@@ -193,6 +194,7 @@
                     android:layout_height="35dp"
                     android:layout_alignParentRight="true"
                     android:layout_gravity="right"
+                    android:visibility="gone"
                     android:layout_margin="@dimen/dp_10"
                     android:src="@mipmap/iv_setting" />
             </android.support.design.widget.CollapsingToolbarLayout>
@@ -201,7 +203,6 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-100dp"
             android:elevation="10dp"
             app:layout_behavior="@string/simple_view_behavior"
             app:svb_dependOn="@id/appbar"
@@ -213,9 +214,7 @@
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-
                 android:gravity="center"
-                android:text="@string/app_name"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -520,7 +519,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="10dp"
+                    android:layout_height="1dp"
                     android:background="@color/common_gray_bg" />
                 <!--系统消息-->
                 <RelativeLayout

@@ -128,13 +128,19 @@ public class WenjuanSearchActivity extends BaseActivity implements View.OnKeyLis
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
                 LogUtils.e("webUrl:" + view.getUrl());
                 AppConstants.LAST_WEB_URL = url;
                 if (url.equals("http://zhihuishequ.zpftech.com/surveyList/history.back")) {
                     finish();
                     return true;
+                }else if (url.contains(AppConstants.URL_WENJUAN_SEARCH)) {
+                    mSearchLayout.setVisibility(View.VISIBLE);
+                    mAppbar.setVisibility(View.GONE);
+                    if (etSearchContent.getText().toString().length() > 0) {
+                        url=url+"&keyword="+etSearchContent.getText();
+                    }
                 }
+                view.loadUrl(url);
                 return super.shouldOverrideUrlLoading(view, url);
             }
 
@@ -147,9 +153,9 @@ public class WenjuanSearchActivity extends BaseActivity implements View.OnKeyLis
                     if (url.contains(AppConstants.URL_WENJUAN_SEARCH)) {
                         mSearchLayout.setVisibility(View.VISIBLE);
                         mAppbar.setVisibility(View.GONE);
-//                        if(etSearchContent.getText().toString().length()>0){
-//                            loadUrl();
-//                        }
+                        if (etSearchContent.getText().toString().length() > 0) {
+                            url=url+"&keyword="+etSearchContent.getText();
+                        }
                     } else if (url.contains(AppConstants.URL_WENJUAN_DETIAL)) {
                         mTvTitle.setText(getString(R.string.activity_write_wenjuan));
                         mSearchLayout.setVisibility(View.GONE);
@@ -163,6 +169,8 @@ public class WenjuanSearchActivity extends BaseActivity implements View.OnKeyLis
                     e.printStackTrace();
                 }
             }
+
+
 
         });
 

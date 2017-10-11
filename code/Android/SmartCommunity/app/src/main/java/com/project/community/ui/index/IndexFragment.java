@@ -40,12 +40,16 @@ import com.project.community.model.BannerResponse;
 import com.project.community.model.CommentModel;
 import com.project.community.model.ModuleModel;
 import com.project.community.model.NewsModel;
+import com.project.community.ui.MainActivity;
 import com.project.community.ui.WebViewActivity;
 import com.project.community.ui.adapter.CommentsApdater;
 import com.project.community.ui.adapter.CommentsPopwinAdapter;
 import com.project.community.ui.adapter.NewsPageAdapter;
 import com.project.community.ui.adapter.listener.IndexAdapterItemListener;
 import com.project.community.ui.life.TopicDetailActivity;
+import com.project.community.ui.life.minsheng.BBSActivity;
+import com.project.community.ui.life.minsheng.PublicTransportationActivity;
+import com.project.community.ui.life.minsheng.RegistrationAppActivity;
 import com.project.community.ui.life.wuye.PayIndexActivity;
 import com.project.community.ui.life.zhengwu.ZhengwuActivity;
 import com.project.community.util.NetworkUtils;
@@ -122,15 +126,17 @@ public class IndexFragment extends BaseFragment implements GestureDetector.OnGes
         mAdapter = new NewsPageAdapter(null, new IndexAdapterItemListener() {
             @Override
             public void onItemClick(View view, int position) {//整个item点击事件
-                position = position - 1;//去掉头部
-                String url = mAdapter.getData().get(position).url;
-                Intent intent = new Intent(getActivity(), TopicDetailActivity.class);
-                if (!TextUtils.isEmpty(url)) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("url", url);
-                    intent.putExtra("bundle", bundle);
-                }
-                startActivity(intent);
+                showToast(getString(R.string.toast_online));
+                return;
+//                position = position - 1;//去掉头部
+//                String url = mAdapter.getData().get(position).url;
+//                Intent intent = new Intent(getActivity(), TopicDetailActivity.class);
+//                if (!TextUtils.isEmpty(url)) {
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("url", url);
+//                    intent.putExtra("bundle", bundle);
+//                }
+//                startActivity(intent);
             }
 
             @Override
@@ -387,7 +393,7 @@ public class IndexFragment extends BaseFragment implements GestureDetector.OnGes
         moduleModels.add(moduleModel5);
 
         ModuleModel moduleModel6 = new ModuleModel();
-        moduleModel6.title = "附近商家";
+        moduleModel6.title = "社区商圈";
         moduleModel6.res = R.mipmap.c1_icon6;
         moduleModel6.hasRedPoint = false;
         moduleModels.add(moduleModel6);
@@ -448,12 +454,29 @@ public class IndexFragment extends BaseFragment implements GestureDetector.OnGes
                             public void call(Void aVoid) {
                                 String title = tv_title.getText().toString();
                                 if ("全部分类".equals(title)) {
-//                            if (row * 4 + column == moduleModels.size() - 1) {//全部分类
+                                    /*
                                     Intent intent = new Intent(getActivity(), CategoryActivity.class);
                                     startActivity(intent);
-//                            }
+                                    */
+                                    showToast(getString(R.string.toast_online));
                                 } else if (getString(R.string.activity_payment).equals(title)) {
                                     Intent intent = new Intent(getActivity(), PayIndexActivity.class);
+                                    startActivity(intent);
+                                }else if("即时聊天".equals(title)){
+                                    showToast(getString(R.string.toast_online));
+                                }else if("报修".equals(title)){
+                                    showToast(getString(R.string.toast_online));
+                                }else if("公交".equals(title)){
+                                    Intent intent = new Intent(getActivity(), PublicTransportationActivity.class);
+                                    startActivity(intent);
+                                }else if("社区论坛".equals(title)){
+                                    Intent intent = new Intent(getActivity(), BBSActivity.class);
+                                    startActivity(intent);
+                                }else if("社区商圈".equals(title)){
+                                    MainActivity mainActivity=(MainActivity) getActivity();
+                                    mainActivity.switchFragment(1,2);
+                                }else if("医院".equals(title)){
+                                    Intent intent = new Intent(getActivity(), RegistrationAppActivity.class);
                                     startActivity(intent);
                                 }
                             }
