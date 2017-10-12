@@ -40,6 +40,7 @@ import com.project.community.view.VpSwipeRefreshLayout;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import okhttp3.Call;
 import okhttp3.Response;
@@ -62,7 +63,7 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
     @Bind(R.id.layout_header_bg)
     LinearLayout mLayoutHeaderBg;//顶部背景
     @Bind(R.id.iv_header)
-    ImageView mIvHeader;//头像
+    CircleImageView mIvHeader;//头像
 
     @Bind(R.id.tv_name)
     TextView mTvName;//用户名

@@ -234,6 +234,10 @@
             android:label="@string/txt_map_person_info"
             android:screenOrientation="portrait" />
         <activity android:name=".view.crop.CropImageActivity"/>
+
+        <activity android:name=".ui.life.minsheng.ShopsListActivity"
+            android:label="@string/activity_shop_list"/>
+
         <!-- 自定义service -->
         <service
             android:name=".service.AppLocationService"

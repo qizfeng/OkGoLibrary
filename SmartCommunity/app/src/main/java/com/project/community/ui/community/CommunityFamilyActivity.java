@@ -162,8 +162,20 @@ public class CommunityFamilyActivity extends BaseActivity {
                     TextView textView = mAdapter.getEmptyView().findViewById(R.id.tv_tips);
                     textView.setText(getString(R.string.empty_no_data_person));
                 } else {
-                    mAdapter.setNewData(mData);
-                    mAdapter.notifyDataSetChanged();
+                    int count = 0;
+                    for (int i = 0; i < mData.size(); i++) {
+                        if (mData.get(i).memberList.size() == 0)
+                            count++;
+                    }
+                    if (count == mData.size()) {
+                        mAdapter.setNewData(null);
+                        mAdapter.setEmptyView(R.layout.empty_view);
+                        TextView textView = mAdapter.getEmptyView().findViewById(R.id.tv_tips);
+                        textView.setText(getString(R.string.empty_no_data_person));
+                    } else {
+                        mAdapter.setNewData(mData);
+                        mAdapter.notifyDataSetChanged();
+                    }
                 }
 
             }

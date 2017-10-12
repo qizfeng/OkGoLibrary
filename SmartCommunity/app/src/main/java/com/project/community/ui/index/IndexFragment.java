@@ -48,8 +48,10 @@ import com.project.community.ui.adapter.NewsPageAdapter;
 import com.project.community.ui.adapter.listener.IndexAdapterItemListener;
 import com.project.community.ui.life.TopicDetailActivity;
 import com.project.community.ui.life.minsheng.BBSActivity;
+import com.project.community.ui.life.minsheng.MinshengActivity;
 import com.project.community.ui.life.minsheng.PublicTransportationActivity;
 import com.project.community.ui.life.minsheng.RegistrationAppActivity;
+import com.project.community.ui.life.minsheng.ShopsListActivity;
 import com.project.community.ui.life.wuye.PayIndexActivity;
 import com.project.community.ui.life.zhengwu.ZhengwuActivity;
 import com.project.community.util.NetworkUtils;
@@ -462,20 +464,22 @@ public class IndexFragment extends BaseFragment implements GestureDetector.OnGes
                                 } else if (getString(R.string.activity_payment).equals(title)) {
                                     Intent intent = new Intent(getActivity(), PayIndexActivity.class);
                                     startActivity(intent);
-                                }else if("即时聊天".equals(title)){
+                                } else if ("即时聊天".equals(title)) {
                                     showToast(getString(R.string.toast_online));
-                                }else if("报修".equals(title)){
+                                } else if ("报修".equals(title)) {
                                     showToast(getString(R.string.toast_online));
-                                }else if("公交".equals(title)){
+                                } else if ("公交".equals(title)) {
                                     Intent intent = new Intent(getActivity(), PublicTransportationActivity.class);
                                     startActivity(intent);
-                                }else if("社区论坛".equals(title)){
+                                } else if ("社区论坛".equals(title)) {
                                     Intent intent = new Intent(getActivity(), BBSActivity.class);
                                     startActivity(intent);
-                                }else if("社区商圈".equals(title)){
-                                    MainActivity mainActivity=(MainActivity) getActivity();
-                                    mainActivity.switchFragment(1,2);
-                                }else if("医院".equals(title)){
+                                } else if ("社区商圈".equals(title)) {
+//                                    MainActivity mainActivity=(MainActivity) getActivity();
+//                                    mainActivity.switchFragment(1,2);
+                                    Intent intent = new Intent(getActivity(), ShopsListActivity.class);
+                                    startActivity(intent);
+                                } else if ("医院".equals(title)) {
                                     Intent intent = new Intent(getActivity(), RegistrationAppActivity.class);
                                     startActivity(intent);
                                 }

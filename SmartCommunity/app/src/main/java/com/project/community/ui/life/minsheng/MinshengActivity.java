@@ -215,9 +215,8 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
         Intent intent;
         switch (position) {
             case 0://社區商圈
-                showToast(getString(R.string.toast_online));
-               /* intent = new Intent(MinshengActivity.this, CommunityActivity.class);
-                startActivity(intent);*/
+                intent = new Intent(MinshengActivity.this, ShopsListActivity.class);
+                startActivity(intent);
                 break;
             case 1://家政
                 showToast(getString(R.string.toast_online));

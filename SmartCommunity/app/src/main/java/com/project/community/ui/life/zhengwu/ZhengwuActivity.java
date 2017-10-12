@@ -7,7 +7,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
@@ -26,14 +25,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.jakewharton.rxbinding.widget.RxAbsListView;
-import com.jakewharton.rxbinding.widget.RxAdapter;
-import com.jakewharton.rxbinding.widget.RxAdapterView;
 import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
 import com.library.okgo.request.BaseRequest;
-import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.constants.AppConstants;
@@ -45,29 +40,23 @@ import com.project.community.model.MenuModel;
 import com.project.community.model.ModuleModel;
 import com.project.community.model.ZhengwuIndexResponse;
 import com.project.community.ui.PhoneDialogActivity;
-import com.project.community.ui.WebViewActivity;
 import com.project.community.ui.adapter.ArticlePageAdapter;
 import com.project.community.ui.adapter.CommentsApdater;
-import com.project.community.ui.adapter.CommentsPopwinAdapter;
 import com.project.community.ui.adapter.ModuleAdapter;
 import com.project.community.ui.adapter.listener.IndexAdapterItemListener;
 import com.project.community.ui.life.TopicDetailActivity;
 import com.project.community.util.ScreenUtils;
-import com.project.community.view.CommentPopWin;
 import com.project.community.view.CommentPopwindow;
 import com.project.community.view.HorizaontalGridView;
 import com.project.community.view.SpacesItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Response;
-import rx.Observer;
-import rx.functions.Action1;
 
 /**
  * Created by qizfeng on 17/7/13.
@@ -436,7 +425,6 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
         moduleModel7.res = R.mipmap.d2_icon7;
         moduleModel7.hasRedPoint = false;
         moduleModels.add(moduleModel7);
-
         setGridView();
     }
 

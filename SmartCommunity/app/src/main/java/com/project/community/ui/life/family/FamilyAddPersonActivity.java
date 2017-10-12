@@ -1010,8 +1010,8 @@ public class FamilyAddPersonActivity extends BaseActivity {
             strings.add(data.get(i).label);
         }
         //初始化控件
-        TextView tv_cancel = (TextView) inflate.findViewById(R.id.tv_cancel);
-        TextView tv_confirm = (TextView) inflate.findViewById(R.id.tv_confirm);
+        final TextView tv_cancel = (TextView) inflate.findViewById(R.id.tv_cancel);
+        final TextView tv_confirm = (TextView) inflate.findViewById(R.id.tv_confirm);
         TextView tv_title = (TextView) inflate.findViewById(R.id.tv_title);
         tv_title.setText(title);
         RxView.clicks(tv_cancel)
@@ -1019,7 +1019,7 @@ public class FamilyAddPersonActivity extends BaseActivity {
                 .subscribe(new Action1<Void>() {
                     @Override
                     public void call(Void aVoid) {
-                        onClick(mTvRelative);
+                        onClick(tv_cancel);
                     }
                 });
         RxView.clicks(tv_confirm)
@@ -1027,7 +1027,7 @@ public class FamilyAddPersonActivity extends BaseActivity {
                 .subscribe(new Action1<Void>() {
                     @Override
                     public void call(Void aVoid) {
-                        onClick(mTvRelative);
+                        onClick(tv_confirm);
                     }
                 });
         mLoopView = (LoopView) inflate.findViewById(R.id.loopView);

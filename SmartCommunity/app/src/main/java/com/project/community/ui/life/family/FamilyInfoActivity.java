@@ -226,8 +226,14 @@ public class FamilyInfoActivity extends BaseActivity {
 
     private void switchData(int position) {
         try {
-            getFamilyData(mData.get(position).room.roomNo, mData.get(position).id);
-
+            if (mData.size() > 0)
+                getFamilyData(mData.get(position).room.roomNo, mData.get(position).id);
+            else {
+                mAdapter.setNewData(null);
+                mAdapter.setEmptyView(R.layout.empty_view);
+                TextView textView = (TextView) mAdapter.getEmptyView().findViewById(R.id.tv_tips);
+                textView.setText(getString(R.string.empty_no_data_family));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -336,6 +342,12 @@ public class FamilyInfoActivity extends BaseActivity {
             public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
                 mTabLayout.removeTabAt(position);
                 showToast(baseResponse.message);
+                if(mTabLayout.getTabCount()<=0){
+                    mAdapter.setNewData(null);
+                    mAdapter.setEmptyView(R.layout.empty_view);
+                    TextView textView = (TextView) mAdapter.getEmptyView().findViewById(R.id.tv_tips);
+                    textView.setText(getString(R.string.empty_no_data_family));
+                }
             }
 
             @Override
@@ -465,16 +477,18 @@ public class FamilyInfoActivity extends BaseActivity {
         serverDao.getFamilyInfo(getUser(this).id, getUsername(this), roomNo, familyId, new DialogCallback<BaseResponse<List<FamilyModel>>>(this) {
             @Override
             public void onSuccess(BaseResponse<List<FamilyModel>> baseResponse, Call call, Response response) {
-                mTvFamilyNo.setText("房屋编号" + baseResponse.retData.get(0).room.roomNo);
-                mTvFamilyAddress.setText(baseResponse.retData.get(0).room.address);
+                if (baseResponse.retData.size() > 0) {
+                    mTvFamilyNo.setText("房屋编号" + baseResponse.retData.get(0).room.roomNo);
+                    mTvFamilyAddress.setText(baseResponse.retData.get(0).room.address);
 
-                personList = new ArrayList<>();
-                FamilyPersonModel familyPersonModelInfo = new FamilyPersonModel();
-                familyPersonModelInfo.itemType = 1;
-                personList.add(0, familyPersonModelInfo);
-                personList.addAll(baseResponse.retData.get(0).memberList);
-                mAdapter.setNewData(personList);
-                mAdapter.notifyDataSetChanged();
+                    personList = new ArrayList<>();
+                    FamilyPersonModel familyPersonModelInfo = new FamilyPersonModel();
+                    familyPersonModelInfo.itemType = 1;
+                    personList.add(0, familyPersonModelInfo);
+                    personList.addAll(baseResponse.retData.get(0).memberList);
+                    mAdapter.setNewData(personList);
+                    mAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -500,6 +514,7 @@ public class FamilyInfoActivity extends BaseActivity {
                     @Override
                     public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
                         mAdapter.remove(position);
+                        mData.remove(position);
                         mAdapter.notifyDataSetChanged();
                         showToast(baseResponse.message);
                         switchData(0);
