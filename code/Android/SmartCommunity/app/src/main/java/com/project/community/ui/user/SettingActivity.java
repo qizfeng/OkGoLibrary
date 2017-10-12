@@ -40,6 +40,10 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         setContentView(R.layout.activity_setting);
         initToolBar(mToolBar, mTvTitle, true, getString(R.string.activity_setting), R.mipmap.iv_back);
         mTvLogout.setOnClickListener(this);
+        if(!isLogin(this))
+            mTvLogout.setVisibility(View.GONE);
+        else
+            mTvLogout.setVisibility(View.VISIBLE);
     }
 
 
@@ -56,7 +60,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
      * 退出登录
      */
     private void logout() {
-        new AlertDialog.Builder(this).setTitle("确认退出吗？")
+        new AlertDialog.Builder(this).setTitle("确定要退出登录吗？")
                 .setIcon(android.R.drawable.ic_menu_info_details)
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
 
@@ -72,7 +76,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                         finish();
                     }
                 })
-                .setNegativeButton("返回", new DialogInterface.OnClickListener() {
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

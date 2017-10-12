@@ -49,14 +49,19 @@
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
-                        <ImageView
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            xmlns:circleimageview="http://schemas.android.com/apk/res-auto"
                             android:id="@+id/iv_header"
                             android:layout_width="65dp"
                             android:layout_height="65dp"
                             android:layout_gravity="center_vertical"
                             android:layout_margin="30dp"
-                            android:scaleType="fitXY"
-                            android:src="@mipmap/d54_tx" />
+                            android:scaleType="centerCrop"
+                            android:src="@mipmap/d54_tx"
+                            circleimageview:civ_border_color="#6f85aa"
+                            circleimageview:civ_border_overlay="false"
+                            circleimageview:civ_border_width="@dimen/dp_4"
+                            circleimageview:civ_fill_color="#6f85aa"/>
 
                         <FrameLayout
                             android:layout_width="match_parent"
@@ -194,7 +199,7 @@
                     android:layout_height="35dp"
                     android:layout_alignParentRight="true"
                     android:layout_gravity="right"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:layout_margin="@dimen/dp_10"
                     android:src="@mipmap/iv_setting" />
             </android.support.design.widget.CollapsingToolbarLayout>
@@ -226,6 +231,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_gravity="right"
                 android:layout_margin="@dimen/dp_10"
+                android:visibility="gone"
                 android:src="@mipmap/iv_setting" />
         </RelativeLayout>
 
