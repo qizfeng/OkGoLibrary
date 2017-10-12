@@ -120,7 +120,7 @@ public class FloatDrawable extends Drawable {
         return 0;
     }
 
-    public int dipTopx(Context context, float dpValue) {
+    public  static int dipTopx(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
