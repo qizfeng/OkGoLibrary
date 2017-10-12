@@ -91,12 +91,12 @@ public class BBSActivity extends BaseActivity implements ViewPager.OnPageChangeL
 
             }
         });
-//        bbsTablayout.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                setIndicator(bbsTablayout,10,10);
-//            }
-//        });
+        bbsTablayout.post(new Runnable() {
+            @Override
+            public void run() {
+                setIndicator(bbsTablayout,15,15);
+            }
+        });
     }
 
     @Override
@@ -140,7 +140,7 @@ public class BBSActivity extends BaseActivity implements ViewPager.OnPageChangeL
             child.setPadding(0, 0, 0, 0);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1);
             params.leftMargin = left;
-            params.rightMargin = right;
+            params.rightMargin = 0;
             child.setLayoutParams(params);
             child.invalidate();
         }

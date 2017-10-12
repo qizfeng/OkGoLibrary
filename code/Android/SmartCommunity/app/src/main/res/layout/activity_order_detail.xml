@@ -224,7 +224,7 @@
                         android:gravity="center_vertical"
                         android:textSize="11sp"
                         android:textColor="@color/color_gray_999999"
-                        android:text="2017-01-01  10:00"
+                        android:text="2017-01-01  10:00:53"
                         android:background="@color/white"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
@@ -307,7 +307,7 @@
             </LinearLayout>
         </com.project.community.view.MyScrollview>
 
-        <com.project.community.view.MyButton
+        <Button
             android:id="@+id/order_detail_complete"
             android:text="已完成"
             android:gravity="center"

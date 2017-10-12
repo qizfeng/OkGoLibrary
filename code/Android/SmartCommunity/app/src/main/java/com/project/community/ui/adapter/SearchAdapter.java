@@ -45,63 +45,97 @@ public class SearchAdapter extends BaseQuickAdapter<SearchModel, BaseViewHolder>
             return super.createBaseViewHolder(parent, R.layout.layout_item_search);
         else if (index == 1)
             return super.createBaseViewHolder(parent, R.layout.layout_item_search2);
-        else if (index == 3)
+        else if (index == 2)
             return super.createBaseViewHolder(parent, R.layout.layout_item_search3);//D32-02搜索页面
+        else if (index == 3)
+            return super.createBaseViewHolder(parent, R.layout.layout_item_bbs);//社区论坛搜索页面
         return super.createBaseViewHolder(parent, R.layout.layout_item_search);
     }
 
     @Override
     protected void convert(final BaseViewHolder baseViewHolder, final SearchModel model) {
-        /**
-         *对指定位置加粗
-         */
-        Spanned result;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            //加粗
-            result = Html.fromHtml(StringUtils.ToDBC("<b>[政务] </b>" + model.title), Html.FROM_HTML_MODE_LEGACY);
-        } else {
-            result = Html.fromHtml(StringUtils.ToDBC(Html.fromHtml("<b>[资讯] </b>") + model.title));
-        }
-        /**
-         *  * 设置黑色
-         * 0代表从第几个字符开始变颜色，注意第一个字符序号是０
-         * 3代表变色到第几个字符．
-         */
-        SpannableStringBuilder style = new SpannableStringBuilder(result);
-        style.setSpan(new ForegroundColorSpan(Color.BLACK), 0, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        baseViewHolder.setText(R.id.tv_content, model.description).setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-        //****************************//
-        baseViewHolder.setText(R.id.tv_comment_num, model.comments + "评论");
-        try {
-            if (index == 1)
-                baseViewHolder.setText(R.id.tv_title, "【" + model.articleName + "】" + model.title);
-            else if (index == 0) {
-                baseViewHolder.setText(R.id.tv_content, "【" + model.articleName + "】" + model.title);
-                if (TextUtils.isEmpty(model.surveyId)) {
-                    baseViewHolder.setVisible(R.id.tv_wenjuan, false);
-                } else {
-                    if (!TextUtils.isEmpty(model.image))
-                        baseViewHolder.setVisible(R.id.tv_wenjuan, true);
-                    else
-                        baseViewHolder.setVisible(R.id.tv_wenjuan, false);
+        if (index==2 || index==3){
+            //民生UI展示,接数据时候删除
+            if (index==3){
+                baseViewHolder.getConvertView().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        itemClickListener.onItemClick(view, baseViewHolder.getLayoutPosition());
+                    }
+                });
+
+                if (model.id.equals("10")){
+                    baseViewHolder.setImageResource(R.id.bbs_item_like,R.mipmap.c1_icon9_p);
+                }else {
+                    baseViewHolder.setImageResource(R.id.bbs_item_like,R.mipmap.c1_icon9);
                 }
+
+                baseViewHolder.setOnClickListener(R.id.bbs_item_like_comment, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        itemClickListener.onCustomClick(view, baseViewHolder.getLayoutPosition());
+                    }
+                }).setOnClickListener(R.id.bbs_item_like, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        itemClickListener.onCustomClick(view, baseViewHolder.getLayoutPosition());
+                    }
+                });
             }
-            baseViewHolder.setText(R.id.tv_time, DateUtil.getCustomDateStr(Long.parseLong(model.createDate), "MM-dd HH:mm"));
-        } catch (Exception e) {
-            e.printStackTrace();
+        }else {
+
+            /**
+             *对指定位置加粗
+             */
+            Spanned result;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                //加粗
+                result = Html.fromHtml(StringUtils.ToDBC("<b>[政务] </b>" + model.title), Html.FROM_HTML_MODE_LEGACY);
+            } else {
+                result = Html.fromHtml(StringUtils.ToDBC(Html.fromHtml("<b>[资讯] </b>") + model.title));
+            }
+            /**
+             *  * 设置黑色
+             * 0代表从第几个字符开始变颜色，注意第一个字符序号是０
+             * 3代表变色到第几个字符．
+             */
+            SpannableStringBuilder style = new SpannableStringBuilder(result);
+            style.setSpan(new ForegroundColorSpan(Color.BLACK), 0, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            baseViewHolder.setText(R.id.tv_content, model.description).setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+            //****************************//
+            baseViewHolder.setText(R.id.tv_comment_num, model.comments + "评论");
+            try {
+                if (index == 1)
+                    baseViewHolder.setText(R.id.tv_title, "【" + model.articleName + "】" + model.title);
+                else if (index == 0) {
+                    baseViewHolder.setText(R.id.tv_content, "【" + model.articleName + "】" + model.title);
+                    if (TextUtils.isEmpty(model.surveyId)) {
+                        baseViewHolder.setVisible(R.id.tv_wenjuan, false);
+                    } else {
+                        if (!TextUtils.isEmpty(model.image))
+                            baseViewHolder.setVisible(R.id.tv_wenjuan, true);
+                        else
+                            baseViewHolder.setVisible(R.id.tv_wenjuan, false);
+                    }
+                }
+                baseViewHolder.setText(R.id.tv_time, DateUtil.getCustomDateStr(Long.parseLong(model.createDate), "MM-dd HH:mm"));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            GlideImageLoader glide = new GlideImageLoader();
+            glide.onDisplayImage(mContext, (ImageView) baseViewHolder.getView(R.id.iv_image), AppConstants.HOST + model.image);
+            View view = baseViewHolder.getConvertView();
+            final int position = baseViewHolder.getLayoutPosition() - 1;//去掉header的点击事件
+            //item点击事件
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    itemClickListener.onItemClick(v, baseViewHolder.getLayoutPosition());
+                }
+            });
         }
 
-        GlideImageLoader glide = new GlideImageLoader();
-        glide.onDisplayImage(mContext, (ImageView) baseViewHolder.getView(R.id.iv_image), AppConstants.HOST + model.image);
-        View view = baseViewHolder.getConvertView();
-        final int position = baseViewHolder.getLayoutPosition() - 1;//去掉header的点击事件
-        //item点击事件
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                itemClickListener.onItemClick(v, baseViewHolder.getLayoutPosition());
-            }
-        });
     }
 
 }

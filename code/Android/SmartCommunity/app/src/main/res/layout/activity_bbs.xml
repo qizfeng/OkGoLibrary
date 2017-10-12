@@ -18,13 +18,12 @@
             android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:paddingRight="15dp"
-            android:paddingLeft="15dp"
             app:tabIndicatorColor="@color/login_bottom_txt"
             app:tabSelectedTextColor="@color/login_bottom_txt"
             app:tabTextColor="@color/color_gray_666666"
             app:tabMode="scrollable"
             app:tabGravity="fill"
+            app:tabMaxWidth="60dp"
             app:tabTextAppearance="@style/MyTabLayoutTextAppearance">
 
         </android.support.design.widget.TabLayout>

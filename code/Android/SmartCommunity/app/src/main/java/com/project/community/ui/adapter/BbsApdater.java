@@ -33,6 +33,12 @@ public class BbsApdater extends BaseQuickAdapter<CommentModel, BaseViewHolder> {
             }
         });
 
+        if (model.id.equals("10")){
+            baseViewHolder.setImageResource(R.id.bbs_item_like,R.mipmap.c1_icon9_p);
+        }else {
+            baseViewHolder.setImageResource(R.id.bbs_item_like,R.mipmap.c1_icon9);
+        }
+
         baseViewHolder.setOnClickListener(R.id.bbs_item_like_comment, new View.OnClickListener() {
             @Override
             public void onClick(View view) {

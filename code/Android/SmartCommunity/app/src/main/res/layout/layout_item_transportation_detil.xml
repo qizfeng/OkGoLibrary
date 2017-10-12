@@ -438,6 +438,7 @@
         android:gravity="center">
 
     <View
+        android:id="@+id/view_line_bottom"
         android:background="#E7E7E7"
         android:layout_height="1dp"
         android:layout_width="3dp"/>

@@ -28,6 +28,8 @@ import com.project.community.constants.AppConstants;
 import com.project.community.model.UserModel;
 import com.project.community.ui.life.family.FamilyAddActivity;
 import com.project.community.ui.life.family.FamilyInfoActivity;
+import com.project.community.ui.life.minsheng.ApplyStoreActivity;
+import com.project.community.ui.life.minsheng.MinshengActivity;
 import com.project.community.ui.user.LoginActivity;
 import com.project.community.ui.user.RegisterActivity;
 import com.project.community.ui.user.SettingActivity;
@@ -238,9 +240,13 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                 showToast(getString(R.string.toast_online));
                 break;
             case R.id.btn_apply_shop://申请店铺
+                intent = new Intent(getActivity(), ApplyStoreActivity.class);
+                startActivity(intent);
                 break;
             case R.id.layout_my_repair_order://我的维修单
-                showToast(getString(R.string.toast_online));
+                intent = new Intent(getActivity(), CommunityActivity.class);
+                startActivity(intent);
+//                showToast(getString(R.string.toast_online));
                 break;
             case R.id.layout_system_message://系统消息
                 showToast(getString(R.string.toast_online));
