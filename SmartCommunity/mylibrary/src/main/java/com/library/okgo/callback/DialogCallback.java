@@ -19,8 +19,9 @@ import com.library.okgo.view.CustomProgress;
 public abstract class DialogCallback<T> extends JsonCallback<T> {
 
     private CustomProgress progressDialog;
+
     private void initDialog(Activity activity) {
-        progressDialog = new CustomProgress(activity,R.style.Custom_Progress);
+        progressDialog = new CustomProgress(activity, R.style.Custom_Progress);
     }
 
     public DialogCallback(Activity activity) {
@@ -36,7 +37,7 @@ public abstract class DialogCallback<T> extends JsonCallback<T> {
             if (progressDialog != null && !progressDialog.isShowing()) {
                 progressDialog.show();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -46,8 +47,12 @@ public abstract class DialogCallback<T> extends JsonCallback<T> {
     public void onAfter(@Nullable T t, @Nullable Exception e) {
         super.onAfter(t, e);
         //网络请求结束后关闭对话框
-        if (progressDialog != null && progressDialog.isShowing()) {
-            progressDialog.dismiss();
+        try {
+            if (progressDialog != null && progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
+        } catch (Exception e1) {
+            e1.printStackTrace();
         }
     }
 }
