@@ -45,14 +45,17 @@ public class TransportationDeailApdater extends BaseQuickAdapter<CommentModel, B
         View view2 = baseViewHolder.getView(R.id.item_view_2);
             if (baseViewHolder.getLayoutPosition()-1==0){
                 view1.setVisibility(View.INVISIBLE);
-                baseViewHolder.setImageResource(R.id.item_cirimags,R.mipmap.d41_dian_p);
+                baseViewHolder.setImageResource(R.id.item_cirimags,R.mipmap.d41_dian_p)
+                        .setVisible(R.id.view_line_bottom,true);
             }else if (baseViewHolder.getLayoutPosition()==getItemCount()-1){
                 view2.setVisibility(View.INVISIBLE);
-                baseViewHolder.setImageResource(R.id.item_cirimags,R.mipmap.d41_dian_p);
+                baseViewHolder.setImageResource(R.id.item_cirimags,R.mipmap.d41_dian_p)
+                        .setVisible(R.id.view_line_bottom,false);
             }else {
                 view1.setVisibility(View.VISIBLE);
                 view2.setVisibility(View.VISIBLE);
-                baseViewHolder.setImageResource(R.id.item_cirimags,R.mipmap.d41_dian);
+                baseViewHolder.setImageResource(R.id.item_cirimags,R.mipmap.d41_dian)
+                        .setVisible(R.id.view_line_bottom,true);
             }
     }
 }

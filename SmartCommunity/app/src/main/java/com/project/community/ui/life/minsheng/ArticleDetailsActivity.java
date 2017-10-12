@@ -59,6 +59,9 @@ import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Response;
 
+/**
+ * 文章详情页面
+ */
 public class ArticleDetailsActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
 
     @Bind(R.id.toolbar)

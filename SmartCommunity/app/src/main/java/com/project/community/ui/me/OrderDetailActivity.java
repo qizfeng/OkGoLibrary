@@ -23,6 +23,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.PopupWindow;
@@ -101,7 +102,7 @@ public class OrderDetailActivity extends BaseActivity implements View.OnClickLis
     @Bind(R.id.layout_root)
     CoordinatorLayout mLayoutRoot;
     @Bind(R.id.order_detail_complete)
-    MyButton mOrderDetailComplete;
+    Button mOrderDetailComplete;
     private List<String> mImages = new ArrayList<>();
     private List<String> mAddImages = new ArrayList<>();
     private List<CommentModel> mShouliList =new ArrayList<>();

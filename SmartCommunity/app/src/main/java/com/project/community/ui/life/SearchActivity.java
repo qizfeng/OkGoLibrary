@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,16 +25,22 @@ import com.jakewharton.rxbinding.view.RxView;
 import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
+import com.library.okgo.utils.DateUtil;
 import com.library.okgo.utils.KeyBoardUtils;
 import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.listener.RecycleItemClickListener;
+import com.project.community.model.CommentModel;
 import com.project.community.model.NewsModel;
 import com.project.community.model.SearchModel;
+import com.project.community.ui.adapter.CommentsApdater;
 import com.project.community.ui.adapter.SearchAdapter;
 import com.project.community.ui.adapter.SearchHistoryAdapter;
+import com.project.community.ui.life.minsheng.ArticleDetailsActivity;
+import com.project.community.util.ScreenUtils;
 import com.project.community.util.SearchHistoryCacheUtils;
+import com.project.community.view.CommentPopwindow;
 import com.project.community.view.SpacesItemDecoration;
 
 import java.util.ArrayList;
@@ -75,6 +83,10 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
     private List<SearchModel> mData = new ArrayList<>();
     private List<String> historyData = new ArrayList<>();
     List<String> historyRecordList = new ArrayList<>();
+    private List<CommentModel> comments = new ArrayList<>();//评论列表
+    private CommentsApdater commentsPopwinAdapter;
+    private CommentPopwindow popupWindow;
+
     private String type = "0";
     private int index = 0;
 
@@ -141,9 +153,15 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
                         .subscribe(new Action1<Void>() {
                             @Override
                             public void call(Void aVoid) {
-                                Bundle bundle = new Bundle();
-                                bundle.putString("artId", mAdapter.getItem(position).id);
-                                TopicDetailActivity.startActivity(SearchActivity.this, bundle);
+                                if (index==3){
+                                    Intent intent = new Intent(SearchActivity.this, ArticleDetailsActivity.class);
+                                    startActivity(intent);
+                                }else {
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("artId", mAdapter.getItem(position).id);
+                                    TopicDetailActivity.startActivity(SearchActivity.this, bundle);
+                                }
+
                             }
                         });
 
@@ -152,6 +170,18 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
             @Override
             public void onCustomClick(View view, int position) {
 
+                if (index==3){
+                    switch (view.getId()){
+                        case R.id.bbs_item_like_comment:
+                            popAwindow(view, position);
+                            break;
+                        case R.id.bbs_item_like:
+                            if (mData.get(position).id.equals("10")) mData.get(position).id="0";
+                            else mData.get(position).id="10";
+                            mAdapter.notifyItemChanged(position,mData.get(position));
+                            break;
+                    }
+                }
             }
         });
 
@@ -178,7 +208,7 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
                     .subscribe(new Action1<Void>() {
                         @Override
                         public void call(Void aVoid) {
-                            StartSearch();
+                                StartSearch();
                         }
                     }) ;
 
@@ -292,6 +322,8 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
         }
         //缓存搜索历史
         save(text);
+        if (index==2 || index == 3)
+            text="副";
         //网络请求
         serverDao.doSearch(type, text, new DialogCallback<BaseResponse<List<SearchModel>>>(this) {
             @Override
@@ -358,5 +390,70 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 弹出评论列表
+     *
+     * @param parent
+     */
+    private void popAwindow(View parent, int position) {
+        comments = new ArrayList<>();
+        CommentModel comment1 = new CommentModel();
+        comment1.userId = "張三";
+        comment1.createDate = DateUtil.getCustomDateStr(DateUtil.millis(), "MM-dd HH:mm");
+        comment1.content = "張三:這個文章不錯喲";
+        comment1.photo = "https://d-image.i4.cn/i4web/image//upload/20170112/1484183249877077333.jpg";
+        CommentModel comment2 = new CommentModel();
+        comment2.userId = "李三";
+        comment2.createDate = DateUtil.getCustomDateStr(DateUtil.millis(), "MM-dd HH:mm");
+        comment2.content = "李四 回复 张三:多谢支持";
+        comment2.photo = "https://d-image.i4.cn/i4web/image//upload/20170111/1484114886498013658.jpg";
+        CommentModel comment3 = new CommentModel();
+        comment3.userId = "王五";
+        comment3.createDate = DateUtil.getCustomDateStr(DateUtil.millis(), "MM-dd HH:mm");
+        comment3.content = "王五:呵呵";
+        comment3.photo = "https://d-image.i4.cn/i4web/image//upload/20170112/1484185403611050214.jpg";
+        comments.add(comment1);
+//        comments.add(comment2);
+//        comments.add(comment3);
+
+        commentsPopwinAdapter = new CommentsApdater(comments, new RecycleItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                popupWindow.et_comment.setText(getString(R.string.txt_receive) + comments.get(position).userName + ":");
+                popupWindow.et_comment.setSelection(popupWindow.et_comment.getText().length());
+            }
+
+            @Override
+            public void onCustomClick(View view, int position) {
+
+            }
+        });
+        popupWindow = new CommentPopwindow(SearchActivity.this, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupWindow.dismiss();
+                popupWindow.et_comment.setText("");
+            }
+        });
+        popupWindow.lv_container.getLayoutParams().height = (int) (ScreenUtils.getScreenHeight(SearchActivity.this) * 0.8);
+        popupWindow.lv_container.setAdapter(commentsPopwinAdapter);
+        commentsPopwinAdapter.bindToRecyclerView(popupWindow.lv_container);
+        if (comments.size() > 0)
+            popupWindow.lv_container.smoothScrollToPosition(comments.size() - 1);
+        if (comments.size() == 0) {
+            commentsPopwinAdapter.setNewData(null);
+            commentsPopwinAdapter.setEmptyView(R.layout.empty_view);
+            TextView textView = (TextView) commentsPopwinAdapter.getEmptyView().findViewById(R.id.tv_tips);
+            textView.setText(getString(R.string.empty_no_comment));
+        }
+        popupWindow.showAtLocation(parent, Gravity.BOTTOM, ScreenUtils.getScreenWidth(SearchActivity.this), 0);
+        popupWindow.btn_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 }

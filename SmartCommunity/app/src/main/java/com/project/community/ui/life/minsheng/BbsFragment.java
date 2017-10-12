@@ -44,6 +44,8 @@ public class BbsFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
     VpSwipeRefreshLayout refreshLayout;
 
     BbsApdater bbsApdater;
+
+    List<CommentModel> data = new ArrayList<>();
     private List<CommentModel> comments = new ArrayList<>();//评论列表
     private CommentsApdater commentsPopwinAdapter;
     private CommentPopwindow popupWindow;
@@ -73,9 +75,10 @@ public class BbsFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN);
         onRefresh();
-        List<CommentModel> data = new ArrayList<>();
+
         for (int i = 0; i < 5; i++) {
             CommentModel commentModel = new CommentModel();
+            commentModel.id="0";
             data.add(commentModel);
         }
         bbsApdater = new BbsApdater(data, new RecycleItemClickListener() {
@@ -92,6 +95,9 @@ public class BbsFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
                         popAwindow(view, position);
                         break;
                     case R.id.bbs_item_like:
+                        if (data.get(position).id.equals("10")) data.get(position).id="0";
+                            else data.get(position).id="10";
+                        bbsApdater.notifyItemChanged(position,data.get(position));
                         break;
                 }
             }
