@@ -81,7 +81,7 @@ public class PublicTransportationActivity extends BaseActivity implements SwipeR
             @Override
             public void onItemClick(View view, int position) {
 //                ToastUtils.showLongToast(PublicTransportationActivity.this,position+"");
-                Intent intent =new Intent(PublicTransportationActivity.this,TransportationDetailsActivity.class);
+                Intent intent =new Intent(PublicTransportationActivity.this,TransportationBaiduMapActivity.class);
                 startActivity(intent);
             }
 
