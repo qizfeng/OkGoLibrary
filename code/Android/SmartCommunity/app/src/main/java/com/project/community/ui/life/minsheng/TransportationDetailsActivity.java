@@ -66,8 +66,8 @@ public class TransportationDetailsActivity extends BaseActivity implements Swipe
         header.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TransportationDetailsActivity.this,TransportationBaiduMapActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(TransportationDetailsActivity.this,TransportationBaiduMapActivity.class);
+//                startActivity(intent);
             }
         });
         mHeadName = (TextView) header.findViewById(R.id.head_name);

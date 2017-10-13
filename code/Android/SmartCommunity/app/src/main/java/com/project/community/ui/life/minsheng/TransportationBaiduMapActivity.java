@@ -1,6 +1,7 @@
 package com.project.community.ui.life.minsheng;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -12,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ZoomControls;
+
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapPoi;
 import com.baidu.mapapi.map.TextureMapView;
@@ -37,8 +39,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-
-import static com.project.community.R.id.linearLayout;
+import butterknife.OnClick;
 
 public class TransportationBaiduMapActivity extends BaseActivity implements OnGetPoiSearchResultListener, OnGetBusLineSearchResultListener,
         BaiduMap.OnMapClickListener {
@@ -55,11 +56,13 @@ public class TransportationBaiduMapActivity extends BaseActivity implements OnGe
     TextView headName;
     @Bind(R.id.head_banci)
     TextView headBanci;
+    @Bind(R.id.ll_banci)
+    LinearLayout ll_banci;
 
     private int nodeIndex = -2;// 节点索引,供浏览节点时使用
     /**
      * 公共交通信息查询结果
-     * */
+     */
     private BusLineResult route = null;// 保存驾车/步行路线数据的变量，供浏览节点时使用
 
     private List<String> busLineIDList = null;
@@ -72,7 +75,7 @@ public class TransportationBaiduMapActivity extends BaseActivity implements OnGe
     private BusLineSearch mBusLineSearch = null;
     /**
      * 用于显示一条公交详情结果的Overlay
-     * */
+     */
     BusLineOverlay overlay;//公交路线绘制对象
 
 
@@ -142,13 +145,12 @@ public class TransportationBaiduMapActivity extends BaseActivity implements OnGe
          * */
         mBaiduMap.setOnMarkerClickListener(overlay);
 
-        startSearch("成都","118");
-
+        startSearch("成都", "118");
 
 
     }
 
-    private void startSearch(String City,String line){
+    private void startSearch(String City, String line) {
         busLineIDList.clear();
         busLineIndex = 0;
         //发起poi检索，从得到所有poi中找到公交线路类型的poi，再使用该poi的uid进行公交详情搜索
@@ -191,43 +193,6 @@ public class TransportationBaiduMapActivity extends BaseActivity implements OnGe
         mBaiduMap.setMyLocationEnabled(false);
         mBaiduMap.getUiSettings().setCompassEnabled(false);
         initData2();
-//        mBaiduMap.setMyLocationEnabled(true);
-//        mBaiduMap.getUiSettings().setCompassEnabled(true);
-//        MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(16.0f);
-//        mBaiduMap.setMapStatus(msu);
-//        //initOverlay();
-//
-//
-//        // 开启定位图层
-//        mBaiduMap.setMyLocationEnabled(true);
-//        // 定位初始化
-//        mLocClient = new LocationClient(this);
-//        mLocClient.registerLocationListener(myListener);
-//        LocationClientOption option = new LocationClientOption();
-//        option.setOpenGps(true); // 打开gps
-//        option.setCoorType("bd09ll"); // 设置坐标类型
-//        option.setScanSpan(1000 * 15);
-//        mLocClient.setLocOption(option);
-//        mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(
-//                MyLocationConfiguration.LocationMode.NORMAL, true, BitmapDescriptorFactory
-//                .fromResource(R.mipmap.d32_icon1),
-//                accuracyCircleFillColor, accuracyCircleStrokeColor));
-//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-//                != PackageManager.PERMISSION_GRANTED) {
-//            // 没有权限，申请权限。
-//            requestPermissions(requestPermissions, REQUEST_PERMISSION_CODE);
-//        } else {
-//            // 有权限了，去放肆吧。
-//            mLocClient.start();
-//        }
-//        mBaiduMap.setOnMapClickListener(this);
-//        mBaiduMap.setOnMarkerClickListener(this);
-//        List<DeviceModel> mDeviceModels =new ArrayList<>();
-//        for (int i = 0; i < 5 ; i++) {
-//            DeviceModel deviceModel =new DeviceModel();
-//            mDeviceModels.add(deviceModel);
-//        }
-//        addDeviceMarker(mDeviceModels);
     }
 
 
@@ -240,6 +205,11 @@ public class TransportationBaiduMapActivity extends BaseActivity implements OnGe
         return false;
     }
 
+    @Override
+    protected void onResume() {
+        mMapView.onResume();
+        super.onResume();
+    }
 
     @Override
     protected void onDestroy() {
@@ -273,7 +243,7 @@ public class TransportationBaiduMapActivity extends BaseActivity implements OnGe
                  * public PoiInfo.POITYPE type
                  * poi类型，0：普通点，1：公交站，2：公交线路，3：地铁站，4：地铁线路,
                  * */
-                Log.e("onGetPoiResult: ", "----"+poi.type);
+                Log.e("onGetPoiResult: ", "----" + poi.type);
                 if (poi.type == PoiInfo.POITYPE.BUS_LINE
                         || poi.type == PoiInfo.POITYPE.SUBWAY_LINE) {
 
@@ -281,7 +251,7 @@ public class TransportationBaiduMapActivity extends BaseActivity implements OnGe
                      * poi id 如果为isPano为true，可用此参数调用街景组件PanoramaService类的
                      * requestPanoramaWithPoiUId方法检索街景数据
                      * */
-                    Log.e("onGetPoiResult: ","----"+ poi.uid);
+                    Log.e("onGetPoiResult: ", "----" + poi.uid);
                     busLineIDList.add(poi.uid);
                 }
             }
@@ -304,7 +274,7 @@ public class TransportationBaiduMapActivity extends BaseActivity implements OnGe
             //如下代码为发起检索代码，定义监听者和设置监听器的方法与POI中的类似
             //参数city和这个keyword路线的UID
             // 公交检索入口
-            Log.e("searchBusline: ", "---"+busLineIDList.get(busLineIndex));
+            Log.e("searchBusline: ", "---" + busLineIDList.get(busLineIndex));
             boolean flag = mBusLineSearch
                     .searchBusLine((new BusLineSearchOption().city("成都")
                             .uid(busLineIDList.get(busLineIndex))));
@@ -324,7 +294,7 @@ public class TransportationBaiduMapActivity extends BaseActivity implements OnGe
 
     /**
      * 下一条按钮点击事件
-     * */
+     */
     public void SearchNextBusline(View v) {
         if (busLineIndex >= busLineIDList.size()) {
             busLineIndex = 0;
@@ -406,5 +376,11 @@ public class TransportationBaiduMapActivity extends BaseActivity implements OnGe
 
         Toast.makeText(TransportationBaiduMapActivity.this, result.getBusLineName(),
                 Toast.LENGTH_SHORT).show();
+    }
+
+    @OnClick(R.id.ll_banci)
+    public void onViewClicked() {
+        Intent intent = new Intent(TransportationBaiduMapActivity.this, TransportationDetailsActivity.class);
+        startActivity(intent);
     }
 }
