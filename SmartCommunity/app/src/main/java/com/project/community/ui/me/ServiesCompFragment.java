@@ -2,6 +2,7 @@ package com.project.community.ui.me;
 
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -76,7 +77,9 @@ public class ServiesCompFragment extends BaseFragment implements SwipeRefreshLay
         mAdapter = new ServiesComApdater(comments, new RecycleItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                ToastUtils.showLongToast(getActivity(),position);
+//                ToastUtils.showLongToast(getActivity(),position);
+                Intent intent = new Intent(getActivity(), OrderDetailActivity.class);
+                startActivity(intent);
             }
 
             @Override

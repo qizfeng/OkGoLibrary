@@ -1,6 +1,7 @@
 package com.project.community.ui.me;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -66,7 +67,9 @@ public class ServiesWaitFragment extends BaseFragment implements SwipeRefreshLay
         mAdapter = new ServiesWaitApdater(comments, new RecycleItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                ToastUtils.showLongToast(getActivity(),position);
+                Intent intent = new Intent(getActivity(), OrderDetailActivity.class);
+                startActivity(intent);
+//                ToastUtils.showLongToast(getActivity(),position);
             }
 
             @Override
