@@ -1,6 +1,7 @@
 package com.project.community.ui.me;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -65,7 +66,9 @@ public class ServiesIngFragment extends BaseFragment implements SwipeRefreshLayo
         mAdapter = new ServiesIngApdater(comments, new RecycleItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                ToastUtils.showLongToast(getActivity(),position);
+//                ToastUtils.showLongToast(getActivity(),position);
+                Intent intent = new Intent(getActivity(), OrderDetailActivity.class);
+                startActivity(intent);
             }
 
             @Override

@@ -26,16 +26,21 @@ public class ServiesComApdater extends BaseQuickAdapter<CommentModel, BaseViewHo
 
     @Override
     protected void convert(final BaseViewHolder baseViewHolder, final CommentModel model) {
-        baseViewHolder.getConvertView().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                itemClickListener.onItemClick(view, baseViewHolder.getLayoutPosition());
-            }
-        });
+//        baseViewHolder.getConvertView().setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                itemClickListener.onItemClick(view, baseViewHolder.getLayoutPosition());
+//            }
+//        });
         baseViewHolder.setOnClickListener(R.id.item_del, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 itemClickListener.onCustomClick(view, baseViewHolder.getLayoutPosition());
+            }
+        }).setOnClickListener(R.id.rl_content, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemClickListener.onItemClick(view, baseViewHolder.getLayoutPosition());
             }
         });
 

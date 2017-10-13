@@ -86,6 +86,7 @@ public class BbsFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(getActivity(), ArticleDetailsActivity.class);
                 startActivity(intent);
+
             }
 
             @Override
