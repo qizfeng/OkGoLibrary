@@ -339,12 +339,14 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                         contentView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                tagIdArr = new String[]{};
+                                tagIdArr = new String[mTagBtnArr.size()];
                                 if (clickPosition == 0) {
                                     if (button.getDrawable() == null) {
                                         for (int i = 0; i < mTagBtnArr.size(); i++) {
                                             mTagBtnArr.get(i).setImageDrawable(nav_up);
+                                            LogUtils.e(">>"+mTagBtnArr.size()+","+personFilterModel.tag.size());
                                             tagIdArr[i] = personFilterModel.tag.get(i).value;
+
                                         }
                                     } else {
                                         for (int i = 0; i < mTagBtnArr.size(); i++) {
@@ -768,6 +770,13 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                             };
                             mInfoWindow = new InfoWindow(BitmapDescriptorFactory.fromView(pop), ll, -110, listener);
                             mBaiduMap.showInfoWindow(mInfoWindow);
+                            dismissDialog();
+                        }
+
+                        @Override
+                        public void onStart() {
+                            super.onStart();
+                            showLoading();
                         }
                     });
         } else {
@@ -1198,7 +1207,6 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
     @Override
     protected void onVisible() {
         super.onVisible();
-
         if (willPlayAnim(getActivity())) {
             final Dialog dialog = new Dialog(getActivity(), R.style.custom_dialog2);
             dialog.show();
@@ -1255,7 +1263,7 @@ public class CommunityFragment extends BaseFragment implements View.OnClickListe
                         @Override
                         public void onLoadFailed(Exception e, Drawable errorDrawable) {
                             super.onLoadFailed(e, errorDrawable);
-                            imageView.setImageResource(R.mipmap.d42_guohui);
+                            imageView.setImageResource(R.mipmap.shequ_start);
                             Animation anim = new AnimationUtils().loadAnimation(getActivity(), R.anim.image_enlarge_anim);
                             anim.setFillAfter(true);//动画执行完毕后停留在最后一帧
                             imageView.startAnimation(anim);

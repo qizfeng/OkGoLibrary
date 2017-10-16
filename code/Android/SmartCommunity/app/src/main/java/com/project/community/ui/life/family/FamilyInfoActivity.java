@@ -151,6 +151,7 @@ public class FamilyInfoActivity extends BaseActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 tabSelection = tab.getPosition();
+                LogUtils.e("posistion:"+mTabLayout.getSelectedTabPosition()+","+tabSelection);
                 switchData(tab.getPosition());
                 if (mTabLayout.getTabCount() > 2) {
                     mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
@@ -169,6 +170,16 @@ public class FamilyInfoActivity extends BaseActivity {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
+                tabSelection = tab.getPosition();
+                LogUtils.e("onTabReselected:"+mTabLayout.getSelectedTabPosition()+","+tabSelection);
+                switchData(tab.getPosition());
+                if (mTabLayout.getTabCount() > 2) {
+                    mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+                    mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+                } else {
+                    mTabLayout.setTabMode(TabLayout.MODE_FIXED);
+                    mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+                }
 
             }
         });
@@ -197,7 +208,7 @@ public class FamilyInfoActivity extends BaseActivity {
                     showToast(getString(R.string.toast_error_permission));
                     return;
                 }
-                showAlertDialog(position - 1);//-1 去掉头部
+                showAlertDeletePersonDialog(position - 2);//-1 去掉头部 -2去掉flag
             }
 
             @Override
@@ -245,8 +256,9 @@ public class FamilyInfoActivity extends BaseActivity {
      *
      * @param position
      */
-    public void showAlertDialog(final int position) {
+    public void showAlertDeletePersonDialog(final int position) {
 //        mDialog = new AlertDialog.Builder(this).create();
+        LogUtils.e("alert:"+position);
         mDialog = new Dialog(this);
         mDialog.setContentView(R.layout.activity_dialog_common);
         Window window = mDialog.getWindow();
@@ -347,6 +359,8 @@ public class FamilyInfoActivity extends BaseActivity {
                     mAdapter.setEmptyView(R.layout.empty_view);
                     TextView textView = (TextView) mAdapter.getEmptyView().findViewById(R.id.tv_tips);
                     textView.setText(getString(R.string.empty_no_data_family));
+                }else {
+                   loadData();
                 }
             }
 
@@ -508,13 +522,14 @@ public class FamilyInfoActivity extends BaseActivity {
         if (!isNetFinish) {
             return;
         }
-        serverDao.deletePerson(getUser(this).id, mAdapter.getItem(position).id,
+        serverDao.deletePerson(getUser(this).id, mData.get(mTabLayout.getSelectedTabPosition()).memberList.get(position).id,
                 mData.get(mTabLayout.getSelectedTabPosition()).room.getRoomNo(),
                 new DialogCallback<BaseResponse<List>>(this) {
                     @Override
                     public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
                         mAdapter.remove(position);
-                        mData.remove(position);
+                        LogUtils.e("posistion:"+tabSelection+","+position);
+                       // mData.get(tabSelection).memberList.remove(position);
                         mAdapter.notifyDataSetChanged();
                         showToast(baseResponse.message);
                         switchData(0);
@@ -529,5 +544,9 @@ public class FamilyInfoActivity extends BaseActivity {
                 });
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        tabSelection=0;
+    }
 }

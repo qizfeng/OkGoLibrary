@@ -252,6 +252,17 @@ public interface ServerDao {
     void getTypeTopic(String uesrId, int pageNo, int pageSize, String type, JsonCallback<BaseResponse<List<ArticleModel>>> callback);
 
     /**
+     * 就业
+     * @param uesrId
+     * @param pageNo
+     * @param pageSize
+     * @param type
+     * @param categoryType
+     * @param callback
+     */
+    void getEmploymentData(String uesrId, int pageNo, int pageSize, String type,String categoryType, JsonCallback<BaseResponse<List<ArticleModel>>> callback);
+
+    /**
      * @param userId
      * @param artId
      * @param callback
@@ -270,9 +281,11 @@ public interface ServerDao {
      * 评论列表
      *
      * @param artId    文章id
+     * @param page
+     * @param pageSize
      * @param callback
      */
-    void getComments(String artId, JsonCallback<BaseResponse<List<CommentModel>>> callback);
+    void getComments(String artId, int page, int pageSize, JsonCallback<BaseResponse<List<CommentModel>>> callback);
 
     /**
      * 发评论
@@ -618,35 +631,37 @@ public interface ServerDao {
 
     /**
      * 民生首页
+     *
      * @param coordinate 当前定位坐标
-     * @param pageNo 页码
-     * @param pageSize 分页条数
+     * @param pageNo     页码
+     * @param pageSize   分页条数
      * @param callback
      */
-    void getMinshengIndexData(String coordinate,int pageNo, int pageSize,JsonCallback<BaseResponse<List<ShopModel>>>callback);
+    void getMinshengIndexData(String coordinate, int pageNo, int pageSize, JsonCallback<BaseResponse<List<ShopModel>>> callback);
 
-     /**
-     *d27 申请商铺
-     * @param userId 用户id
-     * @param longitude 经度
-     * @param latitude 纬度
-     * @param shopsName 商铺名称
-     * @param contactName 商铺名称
-     * @param contactName 联系人
-     * @param businessAddress 营业地址
-     * @param shopsCategory 分类
-     * @param mainBusiness 主营业务
-     * @param entName 企业名称
-     * @param licenseNo 营业执照
-     * @param licensePositive 营业执照正面
-     * @param licenseReverse 营业执照反面
-     * @param legalPerson 法人姓名
+    /**
+     * d27 申请商铺
+     *
+     * @param userId            用户id
+     * @param longitude         经度
+     * @param latitude          纬度
+     * @param shopsName         商铺名称
+     * @param contactName       商铺名称
+     * @param contactName       联系人
+     * @param businessAddress   营业地址
+     * @param shopsCategory     分类
+     * @param mainBusiness      主营业务
+     * @param entName           企业名称
+     * @param licenseNo         营业执照
+     * @param licensePositive   营业执照正面
+     * @param licenseReverse    营业执照反面
+     * @param legalPerson       法人姓名
      * @param legalCardPositive 法人身份证正面
-     * @param legalCardReverse 法人身份证反面
+     * @param legalCardReverse  法人身份证反面
      * @param callback
      */
-    void propShops(String userId,double longitude,double latitude,String shopsName,String shopPhoto,String contactName,String businessAddress,String shopsCategory,
-                       String mainBusiness,String entName,String licenseNo,String licensePositive,String licenseReverse,String legalPerson,String legalCardPositive,
-                       String legalCardReverse,JsonCallback<BaseResponse<List>>callback );
+    void propShops(String userId, double longitude, double latitude, String shopsName, String shopPhoto, String contactName, String businessAddress, String shopsCategory,
+                   String mainBusiness, String entName, String licenseNo, String licensePositive, String licenseReverse, String legalPerson, String legalCardPositive,
+                   String legalCardReverse, JsonCallback<BaseResponse<List>> callback);
 
 }

@@ -6,9 +6,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alanapi.switchbutton.SwitchButton;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.constants.SharedPreferenceUtils;
@@ -27,6 +31,14 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     TextView mTvTitle;
     @Bind(R.id.tv_logout)
     TextView mTvLogout;
+    @Bind(R.id.tv_clear_cache)
+    TextView mTvClearCache;
+    @Bind(R.id.tv_about)
+    TextView mTvAbout;
+    @Bind(R.id.layout_language)
+    RelativeLayout mLayoutLanguage;
+    @Bind(R.id.switchButton)
+    SwitchButton mSwitchButton;
 
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, SettingActivity.class);
@@ -44,6 +56,15 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             mTvLogout.setVisibility(View.GONE);
         else
             mTvLogout.setVisibility(View.VISIBLE);
+        mSwitchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                showToast(getString(R.string.toast_online));
+            }
+        });
+        mTvAbout.setOnClickListener(this);
+        mTvClearCache.setOnClickListener(this);
+        mLayoutLanguage.setOnClickListener(this);
     }
 
 
@@ -52,6 +73,15 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         switch (view.getId()) {
             case R.id.tv_logout:
                 logout();
+                break;
+            case R.id.tv_clear_cache:
+                showToast(getString(R.string.toast_online));
+                break;
+            case R.id.tv_about:
+                showToast(getString(R.string.toast_online));
+                break;
+            case R.id.layout_language:
+                showToast(getString(R.string.toast_online));
                 break;
         }
     }
