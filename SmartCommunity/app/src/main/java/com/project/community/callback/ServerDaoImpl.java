@@ -284,7 +284,7 @@ public class ServerDaoImpl implements ServerDao {
         checkNet();
         OkGo.post(AppConstants.URL_GUIDE_SEARCH)
                 .tag(mContext)
-                .params("keywords",keywords)
+                .params("keywords", keywords)
                 .execute(callback);
     }
 
@@ -341,11 +341,13 @@ public class ServerDaoImpl implements ServerDao {
     }
 
     @Override
-    public void getComments(String artId, JsonCallback<BaseResponse<List<CommentModel>>> callback) {
+    public void getComments(String artId, int page, int pageSize, JsonCallback<BaseResponse<List<CommentModel>>> callback) {
         checkNet();
         OkGo.post(AppConstants.URL_COMMENT_LIST)
                 .tag(mContext)
                 .params("artId", artId)
+                .params("pageNo", page)
+                .params("pageSize", pageSize)
                 .execute(callback);
     }
 
@@ -565,8 +567,8 @@ public class ServerDaoImpl implements ServerDao {
     public void getPayOrderInfo(String userId, String paymentId, JsonCallback<BaseResponse<String>> callback) {
         OkGo.post(AppConstants.URL_GET_PAY_ORDER)
                 .tag(mContext)
-                .params("userId",userId)
-                .params("paymentId",paymentId)
+                .params("userId", userId)
+                .params("paymentId", paymentId)
                 .execute(callback);
     }
 
@@ -574,8 +576,8 @@ public class ServerDaoImpl implements ServerDao {
     public void getCommunityList(String userId, String orgCode, JsonCallback<BaseResponse<List<CommunityModel>>> callback) {
         OkGo.post(AppConstants.URL_COMMUNITY_LIST)
                 .tag(mContext)
-                .params("userId",userId)
-                .params("orgCode",orgCode)
+                .params("userId", userId)
+                .params("orgCode", orgCode)
                 .execute(callback);
     }
 
@@ -583,8 +585,8 @@ public class ServerDaoImpl implements ServerDao {
     public void getCommunityCensusInfo(String userId, String orgCode, JsonCallback<BaseResponse<List<CommunityCensusModel>>> callback) {
         OkGo.post(AppConstants.URL_COMMUNITY_CENSUS)
                 .tag(mContext)
-                .params("userId",userId)
-                .params("orgCode",orgCode)
+                .params("userId", userId)
+                .params("orgCode", orgCode)
                 .execute(callback);
     }
 
@@ -592,9 +594,9 @@ public class ServerDaoImpl implements ServerDao {
     public void getCommunityFamilyPersonList(String userId, String unit, String floor, JsonCallback<BaseResponse<List<CommunityFamilyModel>>> callback) {
         OkGo.post(AppConstants.URL_COMMUNITY_MEMBER_LIST)
                 .tag(mContext)
-                .params("userId",userId)
-                .params("unit",unit)
-                .params("floor",floor)
+                .params("userId", userId)
+                .params("unit", unit)
+                .params("floor", floor)
                 .execute(callback);
     }
 
@@ -602,7 +604,7 @@ public class ServerDaoImpl implements ServerDao {
     public void getCommunityFamilyPersonInfo(String memberId, JsonCallback<BaseResponse<FamilyPersonModel>> callback) {
         OkGo.post(AppConstants.URL_COMMUNITY_MEMBER_INFO)
                 .tag(mContext)
-                .params("memberId",memberId)
+                .params("memberId", memberId)
                 .execute(callback);
     }
 
@@ -610,10 +612,10 @@ public class ServerDaoImpl implements ServerDao {
     public void getCommunityShopList(String userId, String coordinate, String distance, String auditStatus, JsonCallback<BaseResponse<List<ShopModel>>> callback) {
         OkGo.post(AppConstants.URL_COMMUNITY_SHOP_LIST)
                 .tag(mContext)
-                .params("userId",userId)
-                .params("coordinate",coordinate)
-                .params("distance",distance)
-                .params("auditStatus",auditStatus)
+                .params("userId", userId)
+                .params("coordinate", coordinate)
+                .params("distance", distance)
+                .params("auditStatus", auditStatus)
                 .execute(callback);
     }
 
@@ -635,10 +637,10 @@ public class ServerDaoImpl implements ServerDao {
     public void getCommunityPersonList(String userId, String coordinate, String distance, String memberTag, JsonCallback<BaseResponse<List<FamilyPersonModel>>> callback) {
         OkGo.post(AppConstants.URL_COMMUNITY_PERSON_LIST)
                 .tag(mContext)
-                .params("userId",userId)
-                .params("coordinate",coordinate)
-                .params("distance",distance)
-                .params("memberTag",memberTag)
+                .params("userId", userId)
+                .params("coordinate", coordinate)
+                .params("distance", distance)
+                .params("memberTag", memberTag)
                 .execute(callback);
     }
 
@@ -653,11 +655,11 @@ public class ServerDaoImpl implements ServerDao {
     public void getCommunityDeviceList(String userId, String coordinate, String userCode, String distance, String facilitiesType, JsonCallback<BaseResponse<List<DeviceModel>>> callback) {
         OkGo.post(AppConstants.URL_COMMUNITY_DEVICE_LIST)
                 .tag(mContext)
-                .params("userId",userId)
-                .params("coordinate",coordinate)
-                .params("orgCode",userCode)
-                .params("distance",distance)
-                .params("facilitiesType",facilitiesType)
+                .params("userId", userId)
+                .params("coordinate", coordinate)
+                .params("orgCode", userCode)
+                .params("distance", distance)
+                .params("facilitiesType", facilitiesType)
                 .execute(callback);
     }
 
@@ -665,8 +667,8 @@ public class ServerDaoImpl implements ServerDao {
     public void getCommunityShopDetail(String userId, String shopId, JsonCallback<BaseResponse<ShopModel>> callback) {
         OkGo.post(AppConstants.URL_COMMUNITY_SHOP_DETAIL)
                 .tag(mContext)
-                .params("userId",userId)
-                .params("shopId",shopId)
+                .params("userId", userId)
+                .params("shopId", shopId)
                 .execute(callback);
     }
 
@@ -674,8 +676,8 @@ public class ServerDaoImpl implements ServerDao {
     public void getCommunityPersonDetail(String userId, String id, JsonCallback<BaseResponse<FamilyPersonModel>> callback) {
         OkGo.post(AppConstants.URL_COMMUNITY_PERSON_DETAIL)
                 .tag(mContext)
-                .params("userId",userId)
-                .params("id",id)
+                .params("userId", userId)
+                .params("id", id)
                 .execute(callback);
     }
 
@@ -683,8 +685,8 @@ public class ServerDaoImpl implements ServerDao {
     public void getCommunityDeviceDetail(String userId, String faiId, JsonCallback<BaseResponse<DeviceModel>> callback) {
         OkGo.post(AppConstants.URL_COMMUNITY_DEVICE_DETAIL)
                 .tag(mContext)
-                .params("userId",userId)
-                .params("faiId",faiId)
+                .params("userId", userId)
+                .params("faiId", faiId)
                 .execute(callback);
     }
 
@@ -692,19 +694,21 @@ public class ServerDaoImpl implements ServerDao {
     public void doUploadLocation(String userId, String coordinate, JsonCallback<BaseResponse<List>> callback) {
         OkGo.post(AppConstants.URL_UPLOAD_LATLNG)
                 .tag(mContext)
-                .params("userId",userId)
-                .params("coordinate",coordinate)
+                .params("userId", userId)
+                .params("coordinate", coordinate)
                 .execute(callback);
     }
+
     @Override
     public void getMinshengIndexData(String coordinate, int pageNo, int pageSize, JsonCallback<BaseResponse<List<ShopModel>>> callback) {
         OkGo.post(AppConstants.URL_MINSHENG_INDEX)
                 .tag(mContext)
-                .params("coordinate",coordinate)
-                .params("pageNo",pageNo)
-                .params("pageSize",pageSize)
+                .params("coordinate", coordinate)
+                .params("pageNo", pageNo)
+                .params("pageSize", pageSize)
                 .execute(callback);
     }
+
     @Override
     public void propShops(String userId,
                           double longitude,
@@ -717,22 +721,40 @@ public class ServerDaoImpl implements ServerDao {
                           String legalCardReverse, JsonCallback<BaseResponse<List>> callback) {
         OkGo.post(AppConstants.URL_APPLY_STORE)
                 .tag(mContext)
-                .params("userId",userId)
-                .params("longitude",longitude)
-                .params("latitude",latitude)
-                .params("shopsName",shopsName)
-                .params("shopPhoto",shopPhoto)
-                .params("contactName",contactName)
-                .params("businessAddress",businessAddress)
-                .params("shopsCategory",shopsCategory)
-                .params("mainBusiness",mainBusiness)
-                .params("entName",entName)
-                .params("licenseNo",licenseNo)
-                .params("licensePositive",licensePositive)
-                .params("licenseReverse",licenseReverse)
-                .params("legalPerson",legalPerson)
-                .params("legalCardPositive",legalCardPositive)
-                .params("legalCardReverse",legalCardReverse)
+                .params("userId", userId)
+                .params("longitude", longitude)
+                .params("latitude", latitude)
+                .params("shopsName", shopsName)
+                .params("shopPhoto", shopPhoto)
+                .params("contactName", contactName)
+                .params("businessAddress", businessAddress)
+                .params("shopsCategory", shopsCategory)
+                .params("mainBusiness", mainBusiness)
+                .params("entName", entName)
+                .params("licenseNo", licenseNo)
+                .params("licensePositive", licensePositive)
+                .params("licenseReverse", licenseReverse)
+                .params("legalPerson", legalPerson)
+                .params("legalCardPositive", legalCardPositive)
+                .params("legalCardReverse", legalCardReverse)
+                .execute(callback);
+    }
+
+
+    @Override
+    public void getEmploymentData(String userId, int pageNo, int pageSize, String type, String categoryType, JsonCallback<BaseResponse<List<ArticleModel>>> callback) {
+        checkNet();
+        HttpParams params = new HttpParams();
+        params.put("pageNo", pageNo);
+        params.put("pageSize", pageSize);
+        if (!TextUtils.isEmpty(userId)) {
+            params.put("userId", userId);
+        }
+        params.put("type", type);
+        params.put("categoryType","2");
+        OkGo.post(AppConstants.URL_TYPE_TOPIC)
+                .tag(mContext)
+                .params(params)
                 .execute(callback);
     }
 }

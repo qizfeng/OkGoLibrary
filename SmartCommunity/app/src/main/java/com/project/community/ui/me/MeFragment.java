@@ -86,7 +86,7 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
     @Bind(R.id.layout_shop_manage)
     RelativeLayout mLayoutShopManage;//商铺管理
     @Bind(R.id.btn_apply_shop)
-    Button mBtnApplyShop;//申请商铺状态
+    TextView mBtnApplyShop;//申请商铺状态
     @Bind(R.id.layout_my_repair_order)
     RelativeLayout mLayoutMyRepairOrder;//我的维修单
     @Bind(R.id.tv_my_repair_order)

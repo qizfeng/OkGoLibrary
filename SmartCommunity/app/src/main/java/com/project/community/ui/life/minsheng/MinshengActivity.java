@@ -40,6 +40,7 @@ import com.project.community.ui.adapter.MinshengAdapter;
 import com.project.community.ui.adapter.ModuleAdapter;
 import com.project.community.ui.adapter.listener.MinshengAdapterItemListener;
 import com.project.community.ui.life.TopicDetailActivity;
+import com.project.community.ui.life.zhengwu.TypeNewsActivity;
 import com.project.community.ui.me.CommunityActivity;
 import com.project.community.ui.me.OrderDetailActivity;
 import com.project.community.util.ScreenUtils;
@@ -237,7 +238,8 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
                 startActivity(intent);
                 break;
             case 5://就业
-                showToast(getString(R.string.toast_online));
+                intent = new Intent(MinshengActivity.this, TypeNewsActivity.class);
+                startActivity(intent);
                 break;
             default://更多
                 showToast(getString(R.string.toast_online));

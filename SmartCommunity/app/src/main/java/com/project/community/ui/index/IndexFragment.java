@@ -332,11 +332,12 @@ public class IndexFragment extends BaseFragment implements GestureDetector.OnGes
 
             }
         });
-        popupWindow = new CommentPopwindow(getActivity(), new View.OnClickListener() {
+        popupWindow = new CommentPopwindow(getActivity(), new View.OnTouchListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
                 popupWindow.dismiss();
                 popupWindow.et_comment.setText("");
+                return false;
             }
         });
         popupWindow.lv_container.getLayoutParams().height = (int) (ScreenUtils.getScreenHeight(getActivity()) * 0.8);

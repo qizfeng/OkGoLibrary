@@ -467,19 +467,23 @@
                         android:textColor="@color/txt_color"
                         android:textSize="@dimen/common_txt_size" />
 
-                    <Button
+                    <TextView
                         android:id="@+id/btn_apply_shop"
-                        android:background="@drawable/button_me_shop_gray"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="@dimen/dp_25"
-                        android:textColor="@color/color_gray_666666"
-                        android:textSize="@dimen/common_txt_size_small"
-                        android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
-                        android:text="@string/txt_apply_shop" />
+                        android:layout_marginRight="@dimen/dp_25"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/button_me_shop_gray"
+                        android:paddingBottom="8dp"
+                        android:paddingLeft="@dimen/dp_20"
+                        android:paddingRight="@dimen/dp_20"
+                        android:paddingTop="8dp"
+                        android:text="@string/txt_apply_shop"
+                        android:textColor="@color/color_gray_666666"
+                        android:textSize="@dimen/common_txt_size_small" />
 
                     <ImageView
                         android:layout_width="wrap_content"

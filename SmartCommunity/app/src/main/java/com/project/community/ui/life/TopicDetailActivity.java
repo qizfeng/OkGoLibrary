@@ -32,6 +32,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jakewharton.rxbinding.view.RxView;
 import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.callback.JsonCallback;
@@ -72,7 +73,7 @@ import rx.functions.Action1;
  * 文章正文页
  */
 
-public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
     @Bind(R.id.refreshLayout)
     VpSwipeRefreshLayout refreshLayout;
     @Bind(R.id.recyclerView)
@@ -222,6 +223,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
         });
 
         recyclerView.scrollToPosition(0);
+        mAdapter.setOnLoadMoreListener(this, recyclerView);
     }
 
 
@@ -288,11 +290,10 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
                 break;
             case R.id.btn_wenjuan:
                 if (isLogin(this)) {
-                    Intent intent = new Intent();
+                    Intent intent = new Intent(this, WenjuanDetailActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("url", AppConstants.URL_WENJUAN_DETIAL + "?uid=" + getUser(this).id + "&id=" + mData.surveyInfo.id);
                     intent.putExtra("bundle", bundle);
-                    intent.setClass(this, WenjuanDetailActivity.class);
                     startActivity(intent);
                 } else {
                     showToast(getString(R.string.toast_no_login));
@@ -307,6 +308,13 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
         loadData();
     }
 
+    @Override
+    public void onLoadMoreRequested() {
+        pageComment++;
+        getComments(artId);
+    }
+
+    private int pageComment = 1;
 
     /**
      * 获取评论列表
@@ -314,14 +322,23 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
      * @param artId
      */
     private void getComments(final String artId) {
-        serverDao.getComments(artId, new JsonCallback<BaseResponse<List<CommentModel>>>() {
+        serverDao.getComments(artId, pageComment, AppConstants.PAGE_SIZE, new JsonCallback<BaseResponse<List<CommentModel>>>() {
             @Override
             public void onSuccess(BaseResponse<List<CommentModel>> baseResponse, Call call, Response response) {
                 setRefreshing(false);
                 comments = new ArrayList<>();
                 comments = baseResponse.retData;
-                mAdapter.setNewData(comments);
-                mAdapter.loadMoreComplete();
+                if (pageComment == 1) {
+                    mAdapter.setNewData(comments);
+                    mAdapter.setEnableLoadMore(true);
+                } else {
+                    mAdapter.addData(comments);
+                    mAdapter.loadMoreComplete();
+                }
+                if (comments.size() < AppConstants.PAGE_SIZE) {
+                    //显示没有更多数据
+                    mAdapter.loadMoreEnd();         //加载完成
+                }
                 mTvCommentsTips.setText("评论(" + comments.size() + ")");
             }
 

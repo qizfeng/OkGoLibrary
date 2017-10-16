@@ -163,13 +163,7 @@ public class BbsFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
 
             }
         });
-        popupWindow = new CommentPopwindow(getActivity(), new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                popupWindow.dismiss();
-                popupWindow.et_comment.setText("");
-            }
-        });
+        popupWindow = new CommentPopwindow(getActivity(), null);
         popupWindow.lv_container.getLayoutParams().height = (int) (ScreenUtils.getScreenHeight(getActivity()) * 0.8);
         popupWindow.lv_container.setAdapter(commentsPopwinAdapter);
         commentsPopwinAdapter.bindToRecyclerView(popupWindow.lv_container);

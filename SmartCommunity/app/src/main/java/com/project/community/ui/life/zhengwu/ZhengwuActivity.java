@@ -14,6 +14,7 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -29,6 +30,7 @@ import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
 import com.library.okgo.request.BaseRequest;
+import com.library.okgo.utils.KeyBoardUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.constants.AppConstants;
@@ -45,6 +47,7 @@ import com.project.community.ui.adapter.CommentsApdater;
 import com.project.community.ui.adapter.ModuleAdapter;
 import com.project.community.ui.adapter.listener.IndexAdapterItemListener;
 import com.project.community.ui.life.TopicDetailActivity;
+import com.project.community.ui.life.wuye.WuyeActivity;
 import com.project.community.util.ScreenUtils;
 import com.project.community.view.CommentPopwindow;
 import com.project.community.view.HorizaontalGridView;
@@ -138,13 +141,14 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
                 //  popAwindow(view);
                 if (isLogin(ZhengwuActivity.this)) {
                     commentPosition = position;
-                    getComments(mAdapter.getItem(position).id, view, commentPosition);
+                    artId=mAdapter.getItem(position).id;
+                    commentView=view;
+                    getComments(artId,commentView, commentPosition);
                 } else
                     showToast(getString(R.string.toast_no_login));
 
             }
         }, new
-
                 DiggClickListener() {
                     @Override
                     public void onDiggClick(ImageView imageView, TextView textView, int position) {
@@ -170,7 +174,6 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
         mAdapter.setEnableLoadMore(false);
         mAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN);
         mAdapter.setOnLoadMoreListener(this, recyclerView);
-
 
         //头部测试数据
 //        mAdapter.addHeaderView(header);
@@ -519,7 +522,9 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             }
         });
     }
-
+    private int pageComment = 1;
+    private String artId;
+    private View commentView;
     /**
      * 获取评论列表
      *
@@ -527,46 +532,66 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
      * @param parent
      */
     private void getComments(final String artId, final View parent, final int position) {
-        serverDao.getComments(artId, new DialogCallback<BaseResponse<List<CommentModel>>>(this) {
+        serverDao.getComments(artId, pageComment,AppConstants.PAGE_SIZE,new DialogCallback<BaseResponse<List<CommentModel>>>(this) {
             @Override
             public void onSuccess(BaseResponse<List<CommentModel>> baseResponse, Call call, Response response) {
                 comments = new ArrayList<>();
                 comments = baseResponse.retData;
-                commentsPopwinAdapter = new CommentsApdater(comments, new RecycleItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        recStr = getString(R.string.txt_receive) + commentsPopwinAdapter.getItem(position).userName + ":";
-                        targetId = commentsPopwinAdapter.getItem(position).userId;
-                        popupWindow.et_comment.setText(recStr);
-                        popupWindow.et_comment.setSelection(popupWindow.et_comment.getText().length());
-                    }
-
-                    @Override
-                    public void onCustomClick(View view, int position) {//自定义事件,此处做删除逻辑
-                        showAlertDialog(position);
-                    }
-                });
-                if (popupWindow == null)
-                    popupWindow = new CommentPopwindow(ZhengwuActivity.this, new View.OnClickListener() {
+                if (pageComment == 1) {
+                    commentsPopwinAdapter = new CommentsApdater(comments, new RecycleItemClickListener() {
                         @Override
-                        public void onClick(View view) {
-                            popupWindow.et_comment.setText("");
-                            popupWindow.dismiss();
+                        public void onItemClick(View view, int position) {
+                            recStr = getString(R.string.txt_receive) + commentsPopwinAdapter.getItem(position).userName + ":";
+                            targetId = commentsPopwinAdapter.getItem(position).userId;
+                            popupWindow.et_comment.setText(recStr);
+                            popupWindow.et_comment.setSelection(popupWindow.et_comment.getText().length());
+                        }
+
+                        @Override
+                        public void onCustomClick(View view, int position) {//自定义事件,此处做删除逻辑
+                            showAlertDialog(position);
                         }
                     });
-                popupWindow.lv_container.getLayoutParams().height = (int) (ScreenUtils.getScreenHeight(ZhengwuActivity.this) * 0.8);
-                popupWindow.lv_container.setAdapter(commentsPopwinAdapter);
-                commentsPopwinAdapter.bindToRecyclerView(popupWindow.lv_container);
-                if (comments.size() > 0)
-                    popupWindow.lv_container.smoothScrollToPosition(0);
-                popupWindow.showAtLocation(parent, Gravity.BOTTOM, ScreenUtils.getScreenWidth(ZhengwuActivity.this), 0);
-                commentsPopwinAdapter.setNewData(comments);
-                if (comments.size() == 0) {
+                    if (popupWindow == null)
+                        popupWindow = new CommentPopwindow(ZhengwuActivity.this, new View.OnTouchListener() {
+                            @Override
+                            public boolean onTouch(View view, MotionEvent motionEvent) {
+                                KeyBoardUtils.closeKeybord(popupWindow.et_comment,ZhengwuActivity.this);
+                                popupWindow.dismiss();
+                                popupWindow.et_comment.setText("");
+                                pageComment = 1;
+                                commentsPopwinAdapter = null;
+
+                                return false;
+                            }
+                        });
+                    commentsPopwinAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+                        @Override
+                        public void onLoadMoreRequested() {
+                            pageComment++;
+                            getComments(artId, commentView, commentPosition);
+                        }
+                    }, popupWindow.lv_container);
+                    popupWindow.lv_container.getLayoutParams().height = (int) (ScreenUtils.getScreenHeight(ZhengwuActivity.this) * 0.8);
+                    popupWindow.lv_container.setAdapter(commentsPopwinAdapter);
+                    popupWindow.showAtLocation(parent, Gravity.BOTTOM, ScreenUtils.getScreenWidth(ZhengwuActivity.this), 0);
+                }
+                if (pageComment == 1) {
+                    commentsPopwinAdapter.setNewData(comments);
+                    commentsPopwinAdapter.setEnableLoadMore(true);
+                } else {
+                    commentsPopwinAdapter.addData(comments);
+                    commentsPopwinAdapter.loadMoreComplete();
+                }
+                if (comments.size() == 0 && pageComment == 1) {
                     commentsPopwinAdapter.setNewData(null);
                     commentsPopwinAdapter.setEmptyView(R.layout.empty_view);
                     TextView textView = (TextView) commentsPopwinAdapter.getEmptyView().findViewById(R.id.tv_tips);
                     textView.setText(getString(R.string.empty_no_comment));
+                } else if (comments.size() < AppConstants.PAGE_SIZE) {
+                    commentsPopwinAdapter.loadMoreEnd();
                 }
+                popupWindow.showAtLocation(parent, Gravity.BOTTOM, ScreenUtils.getScreenWidth(ZhengwuActivity.this), 0);
                 //发评论事件
                 popupWindow.btn_send.setOnClickListener(new View.OnClickListener() {
                     @Override

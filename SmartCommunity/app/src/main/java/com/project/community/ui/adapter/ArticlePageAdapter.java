@@ -137,7 +137,10 @@ public class ArticlePageAdapter extends BaseQuickAdapter<ArticleModel, BaseViewH
         if (model.imageWidth != 0 && model.imageHeight != 0) {
             if (!imageHeightMap.containsKey(baseViewHolder.getLayoutPosition())) {
                 //当首次加载图片时，调用 loadImageFirst()，保存图片高度
-                loadImageFirst(baseViewHolder.getView(R.id.iv_imageView), baseViewHolder.getLayoutPosition());
+                if (getHeaderLayoutCount() == 0)
+                    loadImageFirst(baseViewHolder.getView(R.id.iv_imageView), baseViewHolder.getLayoutPosition());
+                else
+                    loadImageFirst(baseViewHolder.getView(R.id.iv_imageView), baseViewHolder.getLayoutPosition()-1);
             } else {
                 //非首次加载，直接根据保存的长宽，获取图片
                 Glide.with(mContext)

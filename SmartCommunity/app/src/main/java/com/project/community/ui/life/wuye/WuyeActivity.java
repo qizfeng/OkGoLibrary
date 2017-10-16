@@ -16,6 +16,7 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -31,6 +32,8 @@ import com.jakewharton.rxbinding.view.RxView;
 import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
+import com.library.okgo.utils.KeyBoardUtils;
+import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.constants.AppConstants;
@@ -50,6 +53,7 @@ import com.project.community.ui.adapter.ModuleAdapter;
 import com.project.community.ui.adapter.listener.IndexAdapterItemListener;
 import com.project.community.ui.life.TopicDetailActivity;
 import com.project.community.ui.life.family.FamilyInfoActivity;
+import com.project.community.ui.life.zhengwu.ZhengwuActivity;
 import com.project.community.util.ScreenUtils;
 import com.project.community.util.TablayoutLineReflex;
 import com.project.community.view.CommentPopwindow;
@@ -148,19 +152,14 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
             @Override
             public void onCommentClick(final View view, final int position) {//点击评论
-                RxView.clicks(view)
-                        .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
-                        .subscribe(new Action1<Void>() {
-                            @Override
-                            public void call(Void aVoid) {
-                                int index = position - 1;//去掉头部
-                                commentPosition = position;
-                                if (isLogin(WuyeActivity.this))
-                                    getComments(mAdapter.getItem(position).id, view, commentPosition);
-                                else
-                                    showToast(getString(R.string.toast_no_login));
-                            }
-                        });
+                int index = position - 1;//去掉头部
+                commentPosition = index;
+                artId = mAdapter.getItem(index).id;
+                commentView = view;
+                if (isLogin(WuyeActivity.this)) {
+                    getComments(artId, commentView, commentPosition);
+                } else
+                    showToast(getString(R.string.toast_no_login));
 
             }
         }, new DiggClickListener() {
@@ -311,48 +310,6 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
             }
         });
-//        tabLayout.setOnTabSelectListener(new OnTabSelectListener() {
-//            @Override
-//            public void onTabSelect(int position) {
-//                if (position == 0)//快讯
-//                    type = AppConstants.WUYE_KUAIXUN;
-//                else if (position == 1)//公告
-//                    type = AppConstants.WUYE_GONGGAO;
-//                setRefreshing(true);
-//                pageIndex = 1;
-//                loadData(type);
-//            }
-//
-//            @Override
-//            public void onTabReselect(int position) {
-//
-//            }
-//        });
-//        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-//            @Override
-//            public void onTabSelected(TabLayout.Tab tab) {
-////                if (tab.getPosition() == 0)//全部
-////                    type = "health";
-////                else
-//                if (tab.getPosition() == 0)//快讯
-//                    type = AppConstants.WUYE_KUAIXUN;
-//                else if (tab.getPosition() == 1)//公告
-//                    type = AppConstants.WUYE_GONGGAO;
-//                setRefreshing(true);
-//                pageIndex = 1;
-//                loadData(type);
-//            }
-//
-//            @Override
-//            public void onTabUnselected(TabLayout.Tab tab) {
-//
-//            }
-//
-//            @Override
-//            public void onTabReselected(TabLayout.Tab tab) {
-//
-//            }
-//        });
     }
 
     @Override
@@ -380,15 +337,16 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                 FamilyInfoActivity.startActivity(this, null);
             else
                 showToast(getString(R.string.toast_no_login));
+        } else if ("报修".equals(type)) {
+            showToast(getString(R.string.toast_online));
         }
     }
 
     private void loadData(int type) {
-        String userId;
+        String userId = "";
         if (isLogin(this))
             userId = getUser(this).id;
-        else
-            userId = "";
+
         serverDao.getWuyeIndexData(userId, pageIndex, AppConstants.PAGE_SIZE, type, new JsonCallback<BaseResponse<WuyeIndexResponse>>() {
             @Override
             public void onSuccess(BaseResponse<WuyeIndexResponse> baseResponse, Call call, Response response) {
@@ -542,6 +500,9 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         gridView.setNumColumns(columns);
     }
 
+    private int pageComment = 1;
+    private String artId;
+    private View commentView;
 
     /**
      * 获取评论列表
@@ -550,45 +511,63 @@ public class WuyeActivity extends BaseActivity implements SwipeRefreshLayout.OnR
      * @param parent
      */
     private void getComments(final String artId, final View parent, final int position) {
-        serverDao.getComments(artId, new DialogCallback<BaseResponse<List<CommentModel>>>(this) {
+        serverDao.getComments(artId, pageComment, AppConstants.PAGE_SIZE, new DialogCallback<BaseResponse<List<CommentModel>>>(this) {
             @Override
             public void onSuccess(BaseResponse<List<CommentModel>> baseResponse, Call call, Response response) {
                 comments = new ArrayList<>();
                 comments = baseResponse.retData;
-                commentsPopwinAdapter = new CommentsApdater(comments, new RecycleItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        recStr = getString(R.string.txt_receive) + commentsPopwinAdapter.getItem(position).userName + ":";
-                        targetId = commentsPopwinAdapter.getItem(position).userId;
-                        popupWindow.et_comment.setText(recStr);
-                        popupWindow.et_comment.setSelection(popupWindow.et_comment.getText().length());
-                    }
-
-                    @Override
-                    public void onCustomClick(View view, int position) {//自定义事件,此处做删除逻辑
-                        showAlertDialog(position);
-                    }
-                });
-                if (popupWindow == null)
-                    popupWindow = new CommentPopwindow(WuyeActivity.this, new View.OnClickListener() {
+                if (pageComment == 1) {
+                    commentsPopwinAdapter = new CommentsApdater(comments, new RecycleItemClickListener() {
                         @Override
-                        public void onClick(View view) {
-                            popupWindow.dismiss();
-                            popupWindow.et_comment.setText("");
+                        public void onItemClick(View view, int position) {
+                            recStr = getString(R.string.txt_receive) + commentsPopwinAdapter.getItem(position).userName + ":";
+                            targetId = commentsPopwinAdapter.getItem(position).userId;
+                            popupWindow.et_comment.setText(recStr);
+                            popupWindow.et_comment.setSelection(popupWindow.et_comment.getText().length());
+                        }
+
+                        @Override
+                        public void onCustomClick(View view, int position) {//自定义事件,此处做删除逻辑
+                            showAlertDialog(position);
                         }
                     });
-                popupWindow.lv_container.getLayoutParams().height = (int) (ScreenUtils.getScreenHeight(WuyeActivity.this) * 0.8);
-                popupWindow.lv_container.setAdapter(commentsPopwinAdapter);
-                commentsPopwinAdapter.bindToRecyclerView(popupWindow.lv_container);
-                if (comments.size() > 0)
-                    popupWindow.lv_container.smoothScrollToPosition(0);
-                popupWindow.showAtLocation(parent, Gravity.BOTTOM, ScreenUtils.getScreenWidth(WuyeActivity.this), 0);
-                commentsPopwinAdapter.setNewData(comments);
-                if (comments.size() == 0) {
+                    if (popupWindow == null)
+                        popupWindow = new CommentPopwindow(WuyeActivity.this, new View.OnTouchListener() {
+                            @Override
+                            public boolean onTouch(View view, MotionEvent motionEvent) {
+                                KeyBoardUtils.closeKeybord(popupWindow.et_comment,WuyeActivity.this);
+                                popupWindow.dismiss();
+                                popupWindow.et_comment.setText("");
+                                pageComment = 1;
+                                commentsPopwinAdapter = null;
+                                return false;
+                            }
+                        });
+                    commentsPopwinAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+                        @Override
+                        public void onLoadMoreRequested() {
+                            pageComment++;
+                            getComments(artId, commentView, commentPosition);
+                        }
+                    }, popupWindow.lv_container);
+                    popupWindow.lv_container.getLayoutParams().height = (int) (ScreenUtils.getScreenHeight(WuyeActivity.this) * 0.8);
+                    popupWindow.lv_container.setAdapter(commentsPopwinAdapter);
+                    popupWindow.showAtLocation(parent, Gravity.BOTTOM, ScreenUtils.getScreenWidth(WuyeActivity.this), 0);
+                }
+                if (pageComment == 1) {
+                    commentsPopwinAdapter.setNewData(comments);
+                    commentsPopwinAdapter.setEnableLoadMore(true);
+                } else {
+                    commentsPopwinAdapter.addData(comments);
+                    commentsPopwinAdapter.loadMoreComplete();
+                }
+                if (comments.size() == 0 && pageComment == 1) {
                     commentsPopwinAdapter.setNewData(null);
                     commentsPopwinAdapter.setEmptyView(R.layout.empty_view);
                     TextView textView = (TextView) commentsPopwinAdapter.getEmptyView().findViewById(R.id.tv_tips);
                     textView.setText(getString(R.string.empty_no_comment));
+                } else if (comments.size() < AppConstants.PAGE_SIZE) {
+                    commentsPopwinAdapter.loadMoreEnd();
                 }
                 popupWindow.showAtLocation(parent, Gravity.BOTTOM, ScreenUtils.getScreenWidth(WuyeActivity.this), 0);
                 //发评论事件

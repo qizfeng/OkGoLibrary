@@ -430,11 +430,12 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
 
             }
         });
-        popupWindow = new CommentPopwindow(SearchActivity.this, new View.OnClickListener() {
+        popupWindow = new CommentPopwindow(SearchActivity.this, new View.OnTouchListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
                 popupWindow.dismiss();
                 popupWindow.et_comment.setText("");
+                return false;
             }
         });
         popupWindow.lv_container.getLayoutParams().height = (int) (ScreenUtils.getScreenHeight(SearchActivity.this) * 0.8);
