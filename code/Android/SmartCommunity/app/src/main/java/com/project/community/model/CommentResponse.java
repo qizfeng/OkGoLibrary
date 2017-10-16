@@ -11,6 +11,14 @@ import java.util.List;
 
 public class CommentResponse implements Serializable {
     private static final long serialVersionUID = -4337711009801627866L;
-    List<CommentModel> comments = new ArrayList<>();
+    public List<CommentModel> comments = new ArrayList<>();
+    public int total;
 
+    @Override
+    public String toString() {
+        return "CommentResponse{" +
+                "comments=" + comments +
+                ", total=" + total +
+                '}';
+    }
 }

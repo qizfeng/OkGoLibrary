@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.jakewharton.rxbinding.view.RxView;
 import com.library.okgo.callback.DialogCallback;
+import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
 import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
@@ -447,7 +448,7 @@ public class FamilyInfoActivity extends BaseActivity {
      * 加载数据
      */
     private void loadData() {
-        serverDao.getFamilyListInfo(getUser(this).id, getUsername(this), getUser(this).roomNo, new DialogCallback<BaseResponse<List<FamilyModel>>>(this) {
+        serverDao.getFamilyListInfo(getUser(this).id, getUsername(this), getUser(this).roomNo, new JsonCallback<BaseResponse<List<FamilyModel>>>() {
             @Override
             public void onSuccess(BaseResponse<List<FamilyModel>> baseResponse, Call call, Response response) {
                 mData = new ArrayList<>();

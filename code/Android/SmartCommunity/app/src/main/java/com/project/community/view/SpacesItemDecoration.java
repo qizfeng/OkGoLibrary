@@ -56,17 +56,20 @@ public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
             try {
                 final StaggeredGridLayoutManager.LayoutParams slp = (StaggeredGridLayoutManager.LayoutParams) view.getLayoutParams();
                 // slp.getSpanIndex(): 这个可以拿到它在同一行排序的真实顺序
+                LogUtils.e("spanIndex:"+slp.getSpanIndex());
                 if (slp.getSpanIndex() == 0) {
+                    LogUtils.e("left:"+position);
                     outRect.left = space * 2;
                     outRect.right = space;
                     outRect.bottom = space * 2;
                 } else {
+                    LogUtils.e("right:"+position);
                     outRect.left = space;
                     outRect.right = space * 2;
                     outRect.bottom = space * 2;
                 }
             } catch (Exception e) {
-               // e.printStackTrace();
+                e.printStackTrace();
             }
         }
     }

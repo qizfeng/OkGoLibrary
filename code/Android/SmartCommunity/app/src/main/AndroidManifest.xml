@@ -110,6 +110,7 @@
         <activity
             android:name=".ui.user.RegisterActivity"
             android:label="@string/activity_register"
+            android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.user.LoginActivity"
@@ -206,6 +207,7 @@
         <activity
             android:name=".ui.life.family.FamilyAddPersonActivity"
             android:label="@string/activity_family_add_person"
+            android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.user.UserInfoActivity"

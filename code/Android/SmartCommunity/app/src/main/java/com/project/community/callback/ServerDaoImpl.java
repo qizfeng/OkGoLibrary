@@ -16,6 +16,7 @@ import com.project.community.model.ArticleModel;
 import com.project.community.model.AuditStatusModel;
 import com.project.community.model.BannerResponse;
 import com.project.community.model.CommentModel;
+import com.project.community.model.CommentResponse;
 import com.project.community.model.CommunityCensusModel;
 import com.project.community.model.CommunityDeviceFilterModel;
 import com.project.community.model.CommunityFamilyModel;
@@ -341,7 +342,7 @@ public class ServerDaoImpl implements ServerDao {
     }
 
     @Override
-    public void getComments(String artId, int page, int pageSize, JsonCallback<BaseResponse<List<CommentModel>>> callback) {
+    public void getComments(String artId, int page, int pageSize, JsonCallback<BaseResponse<CommentResponse>> callback) {
         checkNet();
         OkGo.post(AppConstants.URL_COMMENT_LIST)
                 .tag(mContext)
