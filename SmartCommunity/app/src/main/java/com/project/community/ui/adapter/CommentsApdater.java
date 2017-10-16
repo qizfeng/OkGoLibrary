@@ -1,6 +1,7 @@
 package com.project.community.ui.adapter;
 
 import android.media.Image;
+import android.support.annotation.IntRange;
 import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -34,6 +35,7 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 public class CommentsApdater extends BaseQuickAdapter<CommentModel, BaseViewHolder> {
     public RecycleItemClickListener itemClickListener;//点击事件
+    public int total;
 
     public CommentsApdater(List<CommentModel> data, RecycleItemClickListener itemClick) {
         super(R.layout.layout_item_comment, data);
@@ -69,7 +71,7 @@ public class CommentsApdater extends BaseQuickAdapter<CommentModel, BaseViewHold
         baseViewHolder.setVisible(R.id.tv_comment_num, false);
         if (baseViewHolder.getLayoutPosition() == 0) {
             baseViewHolder.setVisible(R.id.tv_comment_num, true)
-                    .setText(R.id.tv_comment_num,"评论("+mData.size()+")");
+                    .setText(R.id.tv_comment_num, "评论(" + getTotalComments() + ")");
         }
         Glide.with(mContext)
                 .load(AppConstants.HOST + model.photo)
@@ -102,4 +104,25 @@ public class CommentsApdater extends BaseQuickAdapter<CommentModel, BaseViewHold
         }
         baseViewHolder.setText(R.id.tv_name, model.userName);
     }
+
+    /**
+     * 设置评论总条数
+     *
+     * @param total
+     */
+    public void setTotalComments(int total) {
+        this.total = total;
+    }
+
+
+    /**
+     * 获取评论总条数
+     *
+     * @return
+     */
+    public int getTotalComments() {
+        return this.total;
+    }
+
+
 }

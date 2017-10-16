@@ -9,6 +9,7 @@ import com.project.community.model.ArticleModel;
 import com.project.community.model.AuditStatusModel;
 import com.project.community.model.BannerResponse;
 import com.project.community.model.CommentModel;
+import com.project.community.model.CommentResponse;
 import com.project.community.model.CommunityCensusModel;
 import com.project.community.model.CommunityDeviceFilterModel;
 import com.project.community.model.CommunityFamilyModel;
@@ -285,7 +286,9 @@ public interface ServerDao {
      * @param pageSize
      * @param callback
      */
-    void getComments(String artId, int page, int pageSize, JsonCallback<BaseResponse<List<CommentModel>>> callback);
+//    void getComments(String artId, int page, int pageSize, JsonCallback<BaseResponse<List<CommentModel>>> callback);
+
+    void getComments(String artId, int page, int pageSize, JsonCallback<BaseResponse<CommentResponse>>callback);
 
     /**
      * 发评论

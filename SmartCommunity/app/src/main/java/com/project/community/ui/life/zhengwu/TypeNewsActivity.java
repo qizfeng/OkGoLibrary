@@ -38,6 +38,7 @@ import com.project.community.listener.DiggClickListener;
 import com.project.community.listener.RecycleItemClickListener;
 import com.project.community.model.ArticleModel;
 import com.project.community.model.CommentModel;
+import com.project.community.model.CommentResponse;
 import com.project.community.model.NewsModel;
 import com.project.community.model.ZhengwuIndexResponse;
 import com.project.community.ui.WebViewActivity;
@@ -75,7 +76,6 @@ public class TypeNewsActivity extends BaseActivity implements View.OnClickListen
     SwipeRefreshLayout refreshLayout;
     @Bind(R.id.fab)
     ImageView fab;
-    private int page = 1;//当前页码
     private ArticlePageAdapter mAdapter;
     private ZhengwuIndexResponse mResponseData = new ZhengwuIndexResponse();
     private String type;
@@ -103,11 +103,20 @@ public class TypeNewsActivity extends BaseActivity implements View.OnClickListen
         initToolBar(mToolBar, mTvTitle, true, "就业", R.mipmap.iv_back);
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        final StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                layoutManager.invalidateSpanAssignments(); //防止第一行到顶部有空白区域
+            }
+        });
+
+        recyclerView.setLayoutManager(layoutManager);
         mAdapter = new ArticlePageAdapter(null, new IndexAdapterItemListener() {
             @Override
             public void onItemClick(View view, int position) {//整个item点击事件
-                //position = position - 1;//去掉头部
                 Intent intent = new Intent(TypeNewsActivity.this, TopicDetailActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("artId", mAdapter.getItem(position).id);
@@ -180,7 +189,7 @@ public class TypeNewsActivity extends BaseActivity implements View.OnClickListen
      */
     @Override
     public void onLoadMoreRequested() {
-        page++;
+        pageIndex++;
         loadData();
     }
 
@@ -189,7 +198,7 @@ public class TypeNewsActivity extends BaseActivity implements View.OnClickListen
      */
     @Override
     public void onRefresh() {
-        page = 1;
+        pageIndex = 1;
         mAdapter.setEnableLoadMore(false);
         loadData();
     }
@@ -299,11 +308,11 @@ public class TypeNewsActivity extends BaseActivity implements View.OnClickListen
      * @param parent
      */
     private void getComments(final String artId, final View parent, final int position) {
-        serverDao.getComments(artId, pageComment,AppConstants.PAGE_SIZE,new DialogCallback<BaseResponse<List<CommentModel>>>(this) {
+        serverDao.getComments(artId, pageComment,AppConstants.PAGE_SIZE,new DialogCallback<BaseResponse<CommentResponse>>(this) {
             @Override
-            public void onSuccess(BaseResponse<List<CommentModel>> baseResponse, Call call, Response response) {
+            public void onSuccess(BaseResponse<CommentResponse> baseResponse, Call call, Response response) {
                 comments = new ArrayList<>();
-                comments = baseResponse.retData;
+                comments = baseResponse.retData.comments;
                 if (pageComment == 1) {
                     commentsPopwinAdapter = new CommentsApdater(comments, new RecycleItemClickListener() {
                         @Override
@@ -331,6 +340,7 @@ public class TypeNewsActivity extends BaseActivity implements View.OnClickListen
                                 return false;
                             }
                         });
+                    commentsPopwinAdapter.setTotalComments(baseResponse.retData.total);
                     commentsPopwinAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
                         @Override
                         public void onLoadMoreRequested() {
@@ -434,7 +444,8 @@ public class TypeNewsActivity extends BaseActivity implements View.OnClickListen
             public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
                 showToast(baseResponse.message);
 //                commentsPopwinAdapter.removeItem(position);
-                commentsPopwinAdapter.remove(position);
+//                commentsPopwinAdapter.remove(position);
+                getComments(artId,commentView,commentPosition);
             }
 
             @Override

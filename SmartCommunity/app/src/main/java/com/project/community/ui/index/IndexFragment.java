@@ -332,6 +332,7 @@ public class IndexFragment extends BaseFragment implements GestureDetector.OnGes
 
             }
         });
+        commentsPopwinAdapter.setTotalComments(comments.size());
         popupWindow = new CommentPopwindow(getActivity(), new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {

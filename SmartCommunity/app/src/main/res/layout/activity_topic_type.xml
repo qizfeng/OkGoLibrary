@@ -11,17 +11,17 @@
     <com.project.community.view.VpSwipeRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="8dp">
-
-        <RelativeLayout
+        android:layout_height="match_parent">
+        <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/dp_20"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
             <ImageView
                 android:id="@+id/fab"
@@ -30,10 +30,9 @@
                 android:layout_margin="16dp"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/c1_btn5"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
                 app:layout_anchor="@id/recyclerView"
                 app:layout_anchorGravity="bottom|right" />
-        </RelativeLayout>
+        </android.support.design.widget.CoordinatorLayout>
+
     </com.project.community.view.VpSwipeRefreshLayout>
 </LinearLayout>

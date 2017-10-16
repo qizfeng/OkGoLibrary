@@ -38,6 +38,7 @@ import com.project.community.listener.DiggClickListener;
 import com.project.community.listener.RecycleItemClickListener;
 import com.project.community.model.ArticleModel;
 import com.project.community.model.CommentModel;
+import com.project.community.model.CommentResponse;
 import com.project.community.model.MenuModel;
 import com.project.community.model.ModuleModel;
 import com.project.community.model.ZhengwuIndexResponse;
@@ -532,11 +533,11 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
      * @param parent
      */
     private void getComments(final String artId, final View parent, final int position) {
-        serverDao.getComments(artId, pageComment,AppConstants.PAGE_SIZE,new DialogCallback<BaseResponse<List<CommentModel>>>(this) {
+        serverDao.getComments(artId, pageComment,AppConstants.PAGE_SIZE,new DialogCallback<BaseResponse<CommentResponse>>(this) {
             @Override
-            public void onSuccess(BaseResponse<List<CommentModel>> baseResponse, Call call, Response response) {
+            public void onSuccess(BaseResponse<CommentResponse> baseResponse, Call call, Response response) {
                 comments = new ArrayList<>();
-                comments = baseResponse.retData;
+                comments = baseResponse.retData.comments;
                 if (pageComment == 1) {
                     commentsPopwinAdapter = new CommentsApdater(comments, new RecycleItemClickListener() {
                         @Override
@@ -565,6 +566,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
                                 return false;
                             }
                         });
+                    commentsPopwinAdapter.setTotalComments(baseResponse.retData.total);
                     commentsPopwinAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
                         @Override
                         public void onLoadMoreRequested() {
@@ -668,7 +670,8 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
                 showToast(baseResponse.message);
 //                commentsPopwinAdapter.removeItem(position);
-                commentsPopwinAdapter.remove(position);
+//                commentsPopwinAdapter.remove(position);
+                getComments(artId,commentView,commentPosition);
             }
 
             @Override

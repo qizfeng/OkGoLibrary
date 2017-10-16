@@ -191,6 +191,7 @@ public class FamilyAddPersonActivity extends BaseActivity {
         context.startActivity(intent);
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -193,7 +193,7 @@ public class AppLocationService extends Service {
                  LogUtils.e("msg.what:"+message.what);
                 // 将消息发送给客户端
                 mClients.get(i).send(message);
-            } catch (RemoteException e) {
+            } catch (Exception e) {
                 // 远程客户端出错，从list中移除
                 // 遍历列表以保证内部循环安全运行
                 mClients.remove(i);

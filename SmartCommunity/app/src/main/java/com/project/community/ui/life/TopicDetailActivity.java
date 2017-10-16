@@ -45,6 +45,7 @@ import com.project.community.constants.AppConstants;
 import com.project.community.listener.RecycleItemClickListener;
 import com.project.community.model.ArticleModel;
 import com.project.community.model.CommentModel;
+import com.project.community.model.CommentResponse;
 import com.project.community.ui.ImageBrowseActivity;
 import com.project.community.ui.adapter.CommentsApdater;
 import com.project.community.ui.life.zhengwu.WenjuanDetailActivity;
@@ -104,7 +105,6 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
     private MenuItem menuItem;
     private Dialog mDialog;
     private ArticleModel mData = new ArticleModel();
-
     public static void startActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, TopicDetailActivity.class);
         intent.putExtra("bundle", bundle);
@@ -172,7 +172,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
         mAdapter = new CommentsApdater(comments, new RecycleItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                position = position - 1;//去掉头部
+                position = position - 1;//-1去掉头部
                 mBottomLayout.setVisibility(View.VISIBLE);
                 recStr = getString(R.string.txt_receive) + comments.get(position).userName + ":";
                 targetId = comments.get(position).userId;
@@ -182,7 +182,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
 
             @Override
             public void onCustomClick(View view, int position) {
-                position = position - 1;//去除头部
+                position = position - 1;//-1去除头部
                 showAlertDialog(position);
             }
         });
@@ -322,13 +322,14 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
      * @param artId
      */
     private void getComments(final String artId) {
-        serverDao.getComments(artId, pageComment, AppConstants.PAGE_SIZE, new JsonCallback<BaseResponse<List<CommentModel>>>() {
+        serverDao.getComments(artId, pageComment, AppConstants.PAGE_SIZE, new JsonCallback<BaseResponse<CommentResponse>>() {
             @Override
-            public void onSuccess(BaseResponse<List<CommentModel>> baseResponse, Call call, Response response) {
+            public void onSuccess(BaseResponse<CommentResponse> baseResponse, Call call, Response response) {
                 setRefreshing(false);
                 comments = new ArrayList<>();
-                comments = baseResponse.retData;
+                comments = baseResponse.retData.comments;
                 if (pageComment == 1) {
+                    mAdapter.setTotalComments(baseResponse.retData.total);
                     mAdapter.setNewData(comments);
                     mAdapter.setEnableLoadMore(true);
                 } else {
@@ -339,7 +340,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
                     //显示没有更多数据
                     mAdapter.loadMoreEnd();         //加载完成
                 }
-                mTvCommentsTips.setText("评论(" + comments.size() + ")");
+                mTvCommentsTips.setText("评论(" + baseResponse.retData.total + ")");
             }
 
             @Override
@@ -479,7 +480,6 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
     }
 
     public void showAlertDialog(final int position) {
-//        mDialog = new AlertDialog.Builder(this).create();
         mDialog = new Dialog(this);
         mDialog.setContentView(R.layout.activity_dialog_common);
         Window window = mDialog.getWindow();
@@ -530,7 +530,8 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
             @Override
             public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
                 showToast(baseResponse.message);
-                mAdapter.remove(position);
+//                mAdapter.remove(position);
+                getComments(artId);
             }
 
             @Override
