@@ -158,9 +158,9 @@ public class TypeNewsActivity extends BaseActivity implements View.OnClickListen
                 });
 
         SpacesItemDecoration decoration = new SpacesItemDecoration(20,false);
+        recyclerView.setPadding(20,0,20,20);
         recyclerView.addItemDecoration(decoration);
         recyclerView.setAdapter(mAdapter);
-
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN);
 

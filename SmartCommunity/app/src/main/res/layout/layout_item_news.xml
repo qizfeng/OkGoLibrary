@@ -13,7 +13,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:src="@mipmap/c1_image2"
             android:scaleType="fitXY" />
         <ImageView
             android:id="@+id/iv_status"

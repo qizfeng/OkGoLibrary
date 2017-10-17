@@ -69,7 +69,6 @@ public class CommunityFamilyActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community_person_list);
-
         initView();
         initData();
         loadData();

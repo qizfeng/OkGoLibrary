@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.library.okgo.utils.DeviceUtil;
+import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
 import com.project.community.constants.AppConstants;
 import com.project.community.listener.RecycleItemClickListener;
@@ -19,6 +22,7 @@ import com.project.community.model.FamilyModel;
 import com.project.community.model.FamilyPersonModel;
 import com.project.community.ui.community.CommunityFamilyActivity;
 import com.project.community.ui.community.CommunityPersonActivity;
+import com.project.community.util.ScreenUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,13 +41,21 @@ public class CommunityFamilyAdapter extends BaseQuickAdapter<CommunityFamilyMode
         itemClickListener = itemClick;
     }
 
-
+    public static void setMargins (View v, int l, int t, int r, int b) {
+        if (v.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
+            p.setMargins(l, t, r, b);
+            v.requestLayout();
+        }
+    }
     @Override
     protected void convert(final BaseViewHolder helper, final CommunityFamilyModel item) {
         List<FamilyPersonModel> personModels = item.memberList;
         final LinearLayout layoutFamily = helper.getView(R.id.layout_content);
         layoutFamily.removeAllViews();
         if (personModels.size() > 0) {
+            layoutFamily.setVisibility(View.VISIBLE);
+            setMargins(layoutFamily, (int)DeviceUtil.dipToPx(mContext,24),0,(int)DeviceUtil.dipToPx(mContext,24),(int)DeviceUtil.dipToPx(mContext,10));
             for (int i = 0; i < personModels.size(); i++) {
                 View personsView = LayoutInflater.from(mContext).inflate(R.layout.layout_item_community_person, null);
                 TextView tvHouseNo = (TextView) personsView.findViewById(R.id.tv_houseno);
@@ -116,6 +128,10 @@ public class CommunityFamilyAdapter extends BaseQuickAdapter<CommunityFamilyMode
                 });
                 layoutFamily.addView(personsView);
             }
+        }else {
+            LogUtils.e("layout:"+helper.getLayoutPosition());
+            setMargins(layoutFamily,0,0,0,0);
+            layoutFamily.setVisibility(View.GONE);
         }
     }
 

@@ -168,6 +168,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
         SpacesItemDecoration decoration = new SpacesItemDecoration(20, false);
         recyclerView.addItemDecoration(decoration);
         recyclerView.setAdapter(mAdapter);
+        recyclerView.setPadding(20,20,20,20);
 
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN);
