@@ -144,7 +144,9 @@ public class ArticlePageAdapter extends BaseQuickAdapter<ArticleModel, BaseViewH
             } else {
                 //非首次加载，直接根据保存的长宽，获取图片
                 Glide.with(mContext)
-                        .load(AppConstants.HOST + model.image).override(imageWidth, imageHeightMap.get(baseViewHolder.getLayoutPosition()))
+                        .load(AppConstants.HOST + model.image)
+                        .override(imageWidth, imageHeightMap.get(baseViewHolder.getLayoutPosition()))
+                        .placeholder(R.mipmap.c1_image1)
                         .into((ImageView) baseViewHolder.getView(R.id.iv_imageView));
 
             }
@@ -248,12 +250,13 @@ public class ArticlePageAdapter extends BaseQuickAdapter<ArticleModel, BaseViewH
                 lp.width = imageWidth;
                 lp.height = imageHeight;
                 this.view.setLayoutParams(lp);
-                ((ImageView) view).setImageResource(R.mipmap.ic_launcher);
+                ((ImageView) view).setImageResource(R.mipmap.c1_image1);
             }
         };
         Glide.with(mContext)
                 .load(AppConstants.HOST + mData.get(position).image)
                 .asBitmap()                 //作为Bitmap加载，对应onResourceReady回调中第一个参数的类型
+                .placeholder(R.mipmap.c1_image1)
                 .into(target);
     }
 

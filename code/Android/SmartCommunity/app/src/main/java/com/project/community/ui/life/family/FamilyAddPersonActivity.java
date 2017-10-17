@@ -328,12 +328,12 @@ public class FamilyAddPersonActivity extends BaseActivity {
                 showPhotoDialog();
                 break;
             case R.id.tv_relative:
-                getDictionary(getString(R.string.txt_chose_nation), "prop_member_relation");
+                getDictionary(getString(R.string.txt_choise_relative), "prop_member_relation");
                 choiseFlag = CHOISE_RELATIVE;
                 KeyBoardUtils.closeKeybord(mEtName, FamilyAddPersonActivity.this);
                 break;
             case R.id.tv_gender:
-                getDictionary(getString(R.string.txt_chose_nation), "sex");
+                getDictionary(getString(R.string.txt_choise_gender), "sex");
                 choiseFlag = CHOISE_GENDER;
                 KeyBoardUtils.closeKeybord(mEtName, FamilyAddPersonActivity.this);
                 break;
