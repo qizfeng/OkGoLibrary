@@ -60,6 +60,12 @@
     <string name="txt_choise_theme">选择主题</string>
     <string name="title_masses_guide">办事指南</string>
     <string name="title_communication_notice">社区公告</string>
+    <string name="txt_shop_status">商家休息，停止接单</string>
+    <string name="txt_shop_more">更多</string>
+    <string name="txt_shop_settlement">去结算</string>
+    <string name="txt_navigation">导航</string>
+    <string name="txt_merchant_buy">购买</string>
+    <string name="txt_merchant_clear_all">清空全部</string>
     <!--登录-->
     <string name="login_phone_hint">请输入手机号</string>
     <string name="forget_phone_hint">请您输入手机号</string>
@@ -365,7 +371,9 @@
     <string name="activity_modify_pwd">修改登录密码</string>
     <string name="activity_agreement">服务条款</string>
     <string name="activity_shop_list">社区商圈</string>
-
+    <string name="activity_shopping_cart">购物车</string>
+    <string name="activity_merchant_detail">商家详情</string>
+    <string name="activity_merchant_navigation">导航</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

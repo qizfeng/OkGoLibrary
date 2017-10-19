@@ -81,7 +81,7 @@ public class MinshengAdapter extends BaseQuickAdapter<ShopModel, BaseViewHolder>
             iv_star5.setImageResource(R.mipmap.d29_icon1);
         }
         View view = baseViewHolder.getConvertView();
-        final int position = baseViewHolder.getLayoutPosition() - 1;
+        final int position = baseViewHolder.getLayoutPosition();
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

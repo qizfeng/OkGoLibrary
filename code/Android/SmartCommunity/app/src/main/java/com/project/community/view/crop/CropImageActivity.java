@@ -66,10 +66,8 @@ public class CropImageActivity extends BaseActivity implements View.OnClickListe
             case R.id.tv_finish:
                 mBitmap = mView.clip();
                 Intent intent = new Intent();
-                Bundle bundle = new Bundle();
                 Uri uri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), mBitmap, null, null));
                 intent.putExtra("uri", uri.toString());
-//                intent.putExtras(bundle);
                 setResult(RESULT_OK, intent);
                 finish();
                 break;

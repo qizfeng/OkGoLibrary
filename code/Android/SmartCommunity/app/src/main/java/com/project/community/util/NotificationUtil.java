@@ -79,8 +79,8 @@ public class NotificationUtil {
 //				mContext.getString(R.string.notification_network_content),
 //				mContentIntent);
 		// 这里发送通知(消息ID,通知对象)
-		mNotificationManager.notify(AppConstants.NOTIFICATIO_NETWORK_NOT_OPEN,
-				mNotification);
+		/*mNotificationManager.notify(AppConstants.NOTIFICATIO_NETWORK_NOT_OPEN,
+				mNotification);*/
 	}
 
 	/**
@@ -109,8 +109,8 @@ public class NotificationUtil {
 //				mContext.getString(R.string.notification_gps_name),
 //				mContext.getString(R.string.notification_gps_content),
 //				mContentIntent);
-		mNotificationManager.notify(AppConstants.NOTIFICATIO_GPS_NOT_OPEN,
-				mNotification);
+		/*mNotificationManager.notify(AppConstants.NOTIFICATIO_GPS_NOT_OPEN,
+				mNotification);*/
 	}
 
 	/**

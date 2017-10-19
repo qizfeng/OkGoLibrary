@@ -2,13 +2,12 @@ package com.project.community.view;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -17,57 +16,38 @@ import com.library.okgo.utils.KeyBoardUtils;
 import com.project.community.R;
 
 /**
- * Created by qizfeng on 17/7/21.
+ * Created by qizfeng on 17/10/18.
+ * 商家详情购物车
  */
 
-public class CommentPopWin extends PopupWindow {
+public class MerchantCartPopwindow extends PopupWindow {
 
     private Context mContext;
     private View view;
-    public EditText et_comment;
-    public ListView lv_container;
-    public Button btn_send;
+    public RecyclerView lv_container;
+    public TextView tv_clear;
+    public MerchantCartPopwindow(final Context mContext, View.OnTouchListener itemsOnClick) {
 
-    public CommentPopWin(final Context mContext, View.OnClickListener itemsOnClick) {
-
-        this.view = LayoutInflater.from(mContext).inflate(R.layout.layout_popup_comment, null);
+        this.view = LayoutInflater.from(mContext).inflate(R.layout.layout_popupwindow_merchant_cart, null);
         setContentView(view);
         view.findViewById(R.id.pop_layout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                KeyBoardUtils.closeKeybord(et_comment, mContext);
                 dismiss();
             }
         });
 
-        btn_send = (Button) view.findViewById(R.id.btn_send);
-        et_comment = (EditText) view.findViewById(R.id.et_input);
-        // KeyBoardUtils.openKeybord(et_comment,mContext);
+        tv_clear = (TextView) view.findViewById(R.id.tv_clear);
 
         //初始化listview，加载数据。
-        lv_container = (ListView) view.findViewById(R.id.lv_container);
-        lv_container.setItemsCanFocus(false);
-        lv_container.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        lv_container = (RecyclerView) view.findViewById(R.id.lv_container);
+        lv_container.setLayoutManager(new LinearLayoutManager(mContext));
+        SpacesItemDecoration decoration = new SpacesItemDecoration(1, true);
+        lv_container.addItemDecoration(decoration);
         // 设置外部可点击
         this.setOutsideTouchable(true);
         // mMenuView添加OnTouchListener监听判断获取触屏位置如果在选择框外面则销毁弹出框
-        this.view.setOnTouchListener(new View.OnTouchListener() {
-
-            public boolean onTouch(View v, MotionEvent event) {
-
-//                int height = view.findViewById(R.id.pop_layout).getTop();
-//                int y = (int) event.getY();
-//                if (event.getAction() == MotionEvent.ACTION_UP) {
-//                    if (y < height) {
-                KeyBoardUtils.closeKeybord(et_comment, mContext);
-                dismiss();
-//                    }
-//                }
-                return true;
-            }
-        });
-
-
+        view.setOnTouchListener(itemsOnClick);
     /* 设置弹出窗口特征 */
         // 设置视图
         this.setContentView(this.view);
@@ -84,6 +64,6 @@ public class CommentPopWin extends PopupWindow {
 
         // 设置弹出窗体显示时的动画，从底部向上弹出
         this.setAnimationStyle(R.style.popwin_comment_anim);
-
     }
 }
+

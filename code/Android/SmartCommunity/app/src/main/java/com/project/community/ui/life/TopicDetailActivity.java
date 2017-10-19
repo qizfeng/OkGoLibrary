@@ -588,6 +588,8 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
                 web.setDescription(mData.description);//描述
                 ShareBoardConfig config = new ShareBoardConfig();
                 config.setMenuItemBackgroundShape(ShareBoardConfig.BG_SHAPE_NONE);
+                config.setTitleText("");
+                config.setShareboardBackgroundColor(0xffffffff);
                 config.setIndicatorVisibility(false);
                 new ShareAction(TopicDetailActivity.this)
                         .withText(mData.description)
