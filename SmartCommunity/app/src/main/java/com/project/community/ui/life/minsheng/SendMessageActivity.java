@@ -220,6 +220,7 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
                     cropImageUri = Uri.fromFile(fileCropUri);
 //                    PhotoUtils.cropImageUri(this, imageUri, cropImageUri, 1, 1, output_X, output_Y, CODE_RESULT_REQUEST);
 //                    uploadFile(fileCropUri);//上传图片
+                    Log.e("onActivityResult: ",imageUri.toString() );
                     CropImageActivity.startCrop(this, imageUri.toString(), output_X, output_Y, CODE_RESULT_REQUEST);
                     break;
                 case CODE_GALLERY_REQUEST://访问相册完成回调
