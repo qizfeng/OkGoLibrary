@@ -1,11 +1,9 @@
 package com.project.community.ui.life.minsheng;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,9 +13,7 @@ import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -26,28 +22,20 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
-import com.library.okgo.utils.LogUtils;
-import com.library.okgo.utils.ToastUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.constants.AppConstants;
 import com.project.community.listener.RecyclerItemTouchHelperCallBack;
 import com.project.community.model.ModuleModel;
-import com.project.community.model.NewsModel;
 import com.project.community.model.ShopModel;
-import com.project.community.ui.WebViewActivity;
 import com.project.community.ui.adapter.MinshengAdapter;
 import com.project.community.ui.adapter.ModuleAdapter;
 import com.project.community.ui.adapter.listener.MinshengAdapterItemListener;
-import com.project.community.ui.life.TopicDetailActivity;
 import com.project.community.ui.life.zhengwu.TypeNewsActivity;
-import com.project.community.ui.me.CommunityActivity;
-import com.project.community.ui.me.OrderDetailActivity;
 import com.project.community.util.ScreenUtils;
 import com.project.community.view.HorizaontalGridView;
 import com.project.community.view.SpacesItemDecoration;
 import com.project.community.view.VpSwipeRefreshLayout;
-import com.ryane.banner_lib.AdPageInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,6 +74,7 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
     }
 
     private void initData() {
+        mIvShopCart.setOnClickListener(this);
         header = LayoutInflater.from(this).inflate(R.layout.layout_header_minsheng, null);
         header.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,6 +92,10 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
         mAdapter = new MinshengAdapter(null, new MinshengAdapterItemListener() {
             @Override
             public void onItemClick(View view, int position) {//整个item点击事件
+                Bundle bundle = new Bundle();
+                position = position - 1;//去掉头部
+                bundle.putString("merchant_id", mAdapter.getItem(position).id);
+                MerchantDetailActivity.startActivity(MinshengActivity.this, bundle);
             }
         });
 
@@ -208,7 +201,11 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
 
     @Override
     public void onClick(View view) {
-
+        switch (view.getId()) {
+            case R.id.iv_shop_cart:
+                ShoppingCartActivity.startActivity(this, null);
+                break;
+        }
     }
 
     @Override
@@ -242,7 +239,8 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
                 startActivity(intent);
                 break;
             default://更多
-                showToast(getString(R.string.toast_online));
+                intent = new Intent(MinshengActivity.this, MerchantModuleMoreActivity.class);
+                startActivity(intent);
                 break;
         }
     }

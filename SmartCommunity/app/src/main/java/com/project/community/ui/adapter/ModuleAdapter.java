@@ -45,11 +45,11 @@ public class ModuleAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         convertView = layoutInflater.inflate(R.layout.layout_item_life_top, null);
-        TextView tvCity = (TextView)convertView.findViewById(R.id.tvCity);
+        TextView tv_title = (TextView)convertView.findViewById(R.id.tv_title);
         ImageView ivIcon = (ImageView) convertView.findViewById(R.id.ivIcon);
-        ModuleModel city = list.get(position);
-        tvCity.setText(city.title);
-        ivIcon.setImageResource(city.res);
+        ModuleModel moduleModel = list.get(position);
+        tv_title.setText(moduleModel.title);
+        ivIcon.setImageResource(moduleModel.res);
         return convertView;
     }
 }

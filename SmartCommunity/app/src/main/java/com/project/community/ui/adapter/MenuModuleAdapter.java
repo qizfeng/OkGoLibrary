@@ -45,10 +45,10 @@ public class MenuModuleAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         convertView = layoutInflater.inflate(R.layout.layout_item_life_top, null);
-        TextView tvCity =(TextView) convertView.findViewById(R.id.tvCity);
+        TextView tv_title =(TextView) convertView.findViewById(R.id.tv_title);
         ImageView ivIcon = (ImageView)convertView.findViewById(R.id.ivIcon);
         MenuModel item = list.get(position);
-        tvCity.setText(item.label);
+        tv_title.setText(item.label);
 //        ivIcon.setImageResource(item.res);
 
         return convertView;

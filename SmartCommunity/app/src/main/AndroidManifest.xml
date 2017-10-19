@@ -239,7 +239,16 @@
 
         <activity android:name=".ui.life.minsheng.ShopsListActivity"
             android:label="@string/activity_shop_list"/>
-
+        <activity android:name=".ui.life.minsheng.MerchantModuleMoreActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/txt_shop_more"/>
+        <activity android:name=".ui.life.minsheng.ShoppingCartActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/activity_shopping_cart"/>
+        <activity android:name=".ui.life.minsheng.MerchantDetailActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/activity_merchant_detail"/>
+        <activity android:name=".ui.life.minsheng.MerchantNavigationActivity"/>
         <!-- 自定义service -->
         <service
             android:name=".service.AppLocationService"

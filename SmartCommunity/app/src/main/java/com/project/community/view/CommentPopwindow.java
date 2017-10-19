@@ -41,28 +41,14 @@ public class CommentPopwindow extends PopupWindow {
 
         btn_send = (Button) view.findViewById(R.id.btn_send);
         et_comment = (EditText) view.findViewById(R.id.et_input);
-        // KeyBoardUtils.openKeybord(et_comment,mContext);
 
         //初始化listview，加载数据。
         lv_container = (RecyclerView) view.findViewById(R.id.lv_container);
         lv_container.setLayoutManager(new LinearLayoutManager(mContext));
-//        lv_container.setItemsCanFocus(false);
-//        lv_container.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         // 设置外部可点击
         this.setOutsideTouchable(true);
         // mMenuView添加OnTouchListener监听判断获取触屏位置如果在选择框外面则销毁弹出框
-//        this.view.setOnTouchListener(new View.OnTouchListener() {
-//
-//            public boolean onTouch(View v, MotionEvent event) {
-//
-//                KeyBoardUtils.closeKeybord(et_comment, mContext);
-//                et_comment.setText("");
-//                dismiss();
-//                return true;
-//            }
-//        });
         view.setOnTouchListener(itemsOnClick);
-//        view.setOnClickListener(itemsOnClick);
     /* 设置弹出窗口特征 */
         // 设置视图
         this.setContentView(this.view);

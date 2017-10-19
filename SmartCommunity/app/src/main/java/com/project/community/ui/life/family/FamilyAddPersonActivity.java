@@ -316,7 +316,7 @@ public class FamilyAddPersonActivity extends BaseActivity {
         mScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-               // KeyBoardUtils.closeKeybord(mEtName, FamilyAddPersonActivity.this);
+                // KeyBoardUtils.closeKeybord(mEtName, FamilyAddPersonActivity.this);
             }
         });
     }
@@ -880,39 +880,10 @@ public class FamilyAddPersonActivity extends BaseActivity {
 
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
-//                case CODE_CAMERA_REQUEST://拍照完成回调
-//                    cropImageUri = Uri.fromFile(fileCropUri);
-//                    PhotoUtils.cropImageUri(this, imageUri, cropImageUri, 1, 1, output_X, output_Y, CODE_RESULT_REQUEST);
-//                    break;
-//                case CODE_GALLERY_REQUEST://访问相册完成回调
-//                    if (hasSdcard()) {
-//                        try {
-//                            cropImageUri = Uri.fromFile(fileCropUri);
-//                            Uri newUri = Uri.parse(PhotoUtils.getPath(this, data.getData()));
-//                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-//                                newUri = FileProvider.getUriForFile(this, "com.project.community", new File(newUri.getPath()));
-//                            }
-//                            PhotoUtils.cropImageUri(this, newUri, cropImageUri, 1, 1, output_X, output_Y, CODE_RESULT_REQUEST);
-//                        }catch (Exception e){
-//                            e.printStackTrace();
-//                            showToast(getString(R.string.toast_error_photo));
-//                        }
-//                    } else {
-//                        showToast("设备没有SD卡！");
-//                    }
-//                    break;
-//                case CODE_RESULT_REQUEST:
-//                    Bitmap bitmap = PhotoUtils.getBitmapFromUri(cropImageUri, this);
-//                    if (bitmap != null) {
-//                        uploadFile(new File(cropImageUri.getPath()));
-//                        showImages(bitmap);
-//                    }
-//                    break;
                 case CODE_CAMERA_REQUEST://拍照完成回调
                     cropImageUri = Uri.fromFile(fileCropUri);
-//                    PhotoUtils.cropImageUri(this, imageUri, cropImageUri, 1, 1, output_X, output_Y, CODE_RESULT_REQUEST);
-//                    uploadFile(fileCropUri);//上传图片
-                    CropImageActivity.startCrop(this, imageUri.toString(), output_X, output_Y, CODE_RESULT_REQUEST);
+                    PhotoUtils.cropImageUri(this, imageUri, cropImageUri, 1, 1, output_X, output_Y, CODE_RESULT_REQUEST);
+//                    CropImageActivity.startCrop(this, imageUri.toString(), output_X, output_Y, CODE_RESULT_REQUEST);
                     break;
                 case CODE_GALLERY_REQUEST://访问相册完成回调
                     if (hasSdcard()) {
@@ -922,8 +893,8 @@ public class FamilyAddPersonActivity extends BaseActivity {
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                                 newUri = FileProvider.getUriForFile(this, "com.project.community", new File(newUri.getPath()));
                             }
-//                            PhotoUtils.cropImageUri(this, newUri, cropImageUri, 1, 1, output_X, output_Y, CODE_RESULT_REQUEST);
-                            CropImageActivity.startCrop(this, newUri.toString(), output_X, output_Y, CODE_RESULT_REQUEST);
+                            PhotoUtils.cropImageUri(this, newUri, cropImageUri, 1, 1, output_X, output_Y, CODE_RESULT_REQUEST);
+//                            CropImageActivity.startCrop(this, newUri.toString(), output_X, output_Y, CODE_RESULT_REQUEST);
                         } catch (Exception e) {
                             e.printStackTrace();
                             showToast(getString(R.string.toast_error_photo));
@@ -935,11 +906,10 @@ public class FamilyAddPersonActivity extends BaseActivity {
                     break;
                 case CODE_RESULT_REQUEST:
                     if (data != null) {
-                        Uri uri = Uri.parse(data.getStringExtra("uri"));
-                        Bitmap bitmap = PhotoUtils.getBitmapFromUri(uri, this);
+//                        Uri uri = Uri.parse(data.getStringExtra("uri"));
+                        Bitmap bitmap = PhotoUtils.getBitmapFromUri(cropImageUri, this);
                         if (bitmap != null) {
-                            uploadFile(new File(StringUtils.getRealFilePath(FamilyAddPersonActivity.this, uri)));
-                            LogUtils.e("uri:" + StringUtils.getRealFilePath(FamilyAddPersonActivity.this, uri));
+                            uploadFile(new File(StringUtils.getRealFilePath(FamilyAddPersonActivity.this, cropImageUri)));
                             showImages(bitmap);
                         }
                     }

@@ -133,7 +133,7 @@ public class CommunityFamilyActivity extends BaseActivity {
                     public void onItemClick(View view, int position, long id) {
                         singleChoiceAdapter.check(position);
                         unitId = unitModelList.get(position).value;
-//                        loadData();
+                        loadData();
                     }
                 });
                 // 默认选中第一个item
@@ -208,7 +208,7 @@ public class CommunityFamilyActivity extends BaseActivity {
                     drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
                     TextView tvChoice = item.getActionView().findViewById(R.id.tv_choice);
                     tvChoice.setCompoundDrawables(null, null, drawable, null);
-                    loadData();
+//                    loadData();
                 } else if (mRecyclerViewSelect.getVisibility() == View.GONE) {
                     mRecyclerViewSelect.setVisibility(View.VISIBLE);
                     Drawable drawable = getResources().getDrawable(R.mipmap.d44_shangla);
