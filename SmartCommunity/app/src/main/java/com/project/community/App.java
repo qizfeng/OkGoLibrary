@@ -24,6 +24,8 @@ import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.X509TrustManager;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * Created by qizfeng on 17/7/11.
  */
@@ -118,6 +120,10 @@ public class App extends Application {
         //初始化友盟
         Config.DEBUG=true;
         UMShareAPI.get(this);
+
+        //初始化极光
+        JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
+        JPushInterface.init(this);
     }
 
     /**

@@ -2,6 +2,7 @@ package com.project.community.ui.life.minsheng;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -21,11 +22,13 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.library.okgo.utils.KeyBoardUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.model.GoodsModel;
 import com.project.community.ui.adapter.MerchantCartPopwinAdapter;
 import com.project.community.ui.adapter.MerchantDetailAdapter;
+import com.project.community.ui.life.TopicDetailActivity;
 import com.project.community.util.ScreenUtils;
 import com.project.community.view.SpacesItemDecoration;
 import com.umeng.socialize.ShareAction;
@@ -222,7 +225,7 @@ public class MerchantDetailActivity extends BaseActivity {
         lv_container.setLayoutManager(new LinearLayoutManager(this));
         lv_container.addItemDecoration(decoration);
         TextView tv_clear = inflate.findViewById(R.id.tv_clear);
-
+        LinearLayout pop_layout = inflate.findViewById(R.id.pop_layout);
 
         mMerchantCartPopwinAdapter = new MerchantCartPopwinAdapter(mCartData, new MerchantCartPopwinAdapter.OnMerchantCartItemClickListener() {
             @Override
@@ -258,7 +261,7 @@ public class MerchantDetailActivity extends BaseActivity {
                             return;
                         }
                         mPopupWindow = new PopupWindow(inflate, ViewGroup.LayoutParams.MATCH_PARENT
-                                , ViewGroup.LayoutParams.MATCH_PARENT);
+                                , ViewGroup.LayoutParams.WRAP_CONTENT);
                         // 设置弹出窗体的背景
                         mPopupWindow.setBackgroundDrawable(dw);
                         // 设置弹出窗体显示时的动画，从底部向上弹出
@@ -319,16 +322,18 @@ public class MerchantDetailActivity extends BaseActivity {
         // 实例化一个ColorDrawable颜色为半透明
         ColorDrawable dw = new ColorDrawable(0xb0000000);
         mPopupWindow = new PopupWindow(inflate, ViewGroup.LayoutParams.MATCH_PARENT
-                , ScreenUtils.getScreenHeight(this));
-
+                , ViewGroup.LayoutParams.WRAP_CONTENT);
         // 设置弹出窗体的背景
         mPopupWindow.setBackgroundDrawable(dw);
         // 设置弹出窗体显示时的动画，从底部向上弹出
         inflate.measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        if (mCartData.size()>5)
+            lv_container.getLayoutParams().height = (int) (ScreenUtils.getScreenHeight(this) * 0.5);
         mPopupWindow.setFocusable(true);
         int height = inflate.getMeasuredHeight();
         int[] location = new int[2];
         parent.getLocationInWindow(location);
+//        pop_layout.setMinimumHeight(ScreenUtils.getScreenHeight(this)-height);
         mPopupWindow.showAtLocation(parent, Gravity.TOP, ScreenUtils.getScreenWidth(this), location[1] - height);
         inflate.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -420,6 +425,7 @@ public class MerchantDetailActivity extends BaseActivity {
 
         }
     };
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

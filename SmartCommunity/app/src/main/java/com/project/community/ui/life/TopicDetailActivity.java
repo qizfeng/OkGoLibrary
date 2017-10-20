@@ -19,6 +19,7 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -105,6 +106,8 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
     private MenuItem menuItem;
     private Dialog mDialog;
     private ArticleModel mData = new ArticleModel();
+    private int index = 0;
+
     public static void startActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, TopicDetailActivity.class);
         intent.putExtra("bundle", bundle);
@@ -122,6 +125,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
         initToolBar(mToolBar, mTvTitle, true, getString(R.string.title_topic_detail), R.mipmap.iv_back);
         Bundle bundle = getIntent().getBundleExtra("bundle");
         if (bundle != null) {
+            index = bundle.getInt("index");
             String title = bundle.getString("title");
             if (getString(R.string.title_communication_notice).equals(title))
                 initToolBar(mToolBar, mTvTitle, true, getString(R.string.title_communication_notice), R.mipmap.iv_back);
@@ -224,6 +228,22 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
 
         recyclerView.scrollToPosition(0);
         mAdapter.setOnLoadMoreListener(this, recyclerView);
+
+
+        mEtInput.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (comments.size() > 0) {
+//                    recyclerView.smoothScrollToPosition(1);
+                    try {
+                        recyclerView.scrollToPosition(2);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+                return false;
+            }
+        });
     }
 
 
@@ -271,7 +291,6 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_send:
-
                 if (TextUtils.isEmpty(recStr)) {
                     if (TextUtils.isEmpty(mEtInput.getText().toString())) {
                         return;
@@ -373,6 +392,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
                 mEtInput.setText("");
                 getComments(artId);
                 showToast(baseResponse.message);
+                KeyBoardUtils.closeKeybord(mEtInput,TopicDetailActivity.this);
             }
 
             @Override
@@ -545,6 +565,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
 
     @Override
     protected void onDestroy() {
+        LogUtils.e("ondextroy:" + index);
         if (mWebView != null) {
             mWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
             mWebView.clearHistory();

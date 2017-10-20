@@ -1,8 +1,10 @@
 package com.project.community.ui;
 
 import android.app.LocalActivityManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -20,8 +22,11 @@ import android.view.ViewGroup;
 
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
+import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
+import com.project.community.jpush.JpushUtil;
+import com.project.community.jpush.LocalBroadcastManager;
 import com.project.community.model.BannerResponse;
 import com.project.community.ui.community.CommunityFragment;
 import com.project.community.ui.index.IndexFragment;
@@ -37,6 +42,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import cn.jpush.android.api.JPushInterface;
 import okhttp3.Call;
 import okhttp3.Response;
 
@@ -53,6 +59,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     private static final int INDEX_COMMUNITY_FRAGMENT = 2;
     private static final int INDEX_MY_FRAGMENT = 3;
     private int checkFragment = INDEX_HOME_FRAGMENT;//当前选中
+    public static boolean isForeground = false;
 
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -72,6 +79,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         initFragments();
         initForMessageCenterIcon(bottom_navigation, false);
         getCommunityStartPage();
+        init();
+        registerMessageReceiver();
+        JpushUtil.setAlias(this);
+
     }
 
     private List<Fragment> fragments = new ArrayList<>();
@@ -109,7 +120,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 checkFragment = INDEX_HOME_FRAGMENT;
                 switchFragment(checkFragment);
                 initForMessageCenterIcon(bottom_navigation, false);
-                LifeFragment.index=0;
+                LifeFragment.index = 0;
                 return true;//注意!!! 不要break,否则BottomNavigationView无切换效果
             case R.id.navigation_life:
                 //生活
@@ -123,21 +134,21 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                     showToast(getString(R.string.toast_no_login));
                     return false;
                 }
-                if(!"2".equals(getUser(this).roleType)){
+                if (!"2".equals(getUser(this).roleType)) {
                     showToast(getString(R.string.toast_no_permission));
                     return false;
                 }
                 checkFragment = INDEX_COMMUNITY_FRAGMENT;
                 switchFragment(checkFragment);
                 initForMessageCenterIcon(bottom_navigation, false);
-                LifeFragment.index=0;
+                LifeFragment.index = 0;
                 return true;//注意!!! 不要break,否则BottomNavigationView无切换效果
             case R.id.navigation_me:
                 //我的
                 checkFragment = INDEX_MY_FRAGMENT;
                 switchFragment(checkFragment);
                 initForMessageCenterIcon(bottom_navigation, true);
-                LifeFragment.index=0;
+                LifeFragment.index = 0;
                 return true;//注意!!! 不要break,否则BottomNavigationView无切换效果
             default:
                 break;
@@ -160,18 +171,17 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         }
         transaction.commit();
     }
+
     //切换fragment
-    public void switchFragment(int index,int childIndex) {
+    public void switchFragment(int index, int childIndex) {
         checkFragment = INDEX_LIFE_FRAGMENT;
         switchFragment(checkFragment);
         bottom_navigation.setSelectedItemId(R.id.navigation_life);
         initForMessageCenterIcon(bottom_navigation, false);
-        LifeFragment.index=childIndex;
+        LifeFragment.index = childIndex;
     }
 
     private LocalActivityManager manager;
-
-
 
 
     private void initForMessageCenterIcon(BottomNavigationView navigationView, boolean isShowRedPoint) {
@@ -199,6 +209,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     @Override
     protected void onDestroy() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
         super.onDestroy();
         UMShareAPI.get(this).release();
     }
@@ -238,5 +249,60 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                     saveCommunityStartPage(MainActivity.this, baseResponse.retData.imageList.get(0).imageUrl);
             }
         });
+    }
+
+    // 初始化 JPush。如果已经初始化，但没有登录成功，则执行重新登录。
+    private void init() {
+        JPushInterface.init(getApplicationContext());
+    }
+
+
+    @Override
+    protected void onResume() {
+        isForeground = true;
+        super.onResume();
+    }
+
+
+    @Override
+    protected void onPause() {
+        isForeground = false;
+        super.onPause();
+    }
+
+
+    //for receive customer msg from jpush server
+    private MessageReceiver mMessageReceiver;
+    public static final String MESSAGE_RECEIVED_ACTION = "com.example.jpushdemo.MESSAGE_RECEIVED_ACTION";
+    public static final String KEY_TITLE = "title";
+    public static final String KEY_MESSAGE = "message";
+    public static final String KEY_EXTRAS = "extras";
+
+    public void registerMessageReceiver() {
+        mMessageReceiver = new MessageReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.setPriority(IntentFilter.SYSTEM_HIGH_PRIORITY);
+        filter.addAction(MESSAGE_RECEIVED_ACTION);
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, filter);
+    }
+
+    public class MessageReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            try {
+                if (MESSAGE_RECEIVED_ACTION.equals(intent.getAction())) {
+                    String messge = intent.getStringExtra(KEY_MESSAGE);
+                    String extras = intent.getStringExtra(KEY_EXTRAS);
+                    StringBuilder showMsg = new StringBuilder();
+                    showMsg.append(KEY_MESSAGE + " : " + messge + "\n");
+                    if (!JpushUtil.isEmpty(extras)) {
+                        showMsg.append(KEY_EXTRAS + " : " + extras + "\n");
+                    }
+                    LogUtils.e("jpush:" + showMsg.toString());
+                }
+            } catch (Exception e) {
+            }
+        }
     }
 }
