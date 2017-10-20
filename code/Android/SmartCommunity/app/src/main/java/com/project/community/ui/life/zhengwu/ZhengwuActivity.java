@@ -128,6 +128,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
                 Intent intent = new Intent(ZhengwuActivity.this, TopicDetailActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("artId", mAdapter.getItem(position).id);
+                bundle.putInt("index",position);
                 intent.putExtra("bundle", bundle);
                 startActivity(intent);
             }
@@ -142,9 +143,9 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
                 //  popAwindow(view);
                 if (isLogin(ZhengwuActivity.this)) {
                     commentPosition = position;
-                    artId=mAdapter.getItem(position).id;
-                    commentView=view;
-                    getComments(artId,commentView, commentPosition);
+                    artId = mAdapter.getItem(position).id;
+                    commentView = view;
+                    getComments(artId, commentView, commentPosition);
                 } else
                     showToast(getString(R.string.toast_no_login));
 
@@ -168,7 +169,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
         SpacesItemDecoration decoration = new SpacesItemDecoration(20, false);
         recyclerView.addItemDecoration(decoration);
         recyclerView.setAdapter(mAdapter);
-        recyclerView.setPadding(20,20,20,20);
+        recyclerView.setPadding(20, 20, 20, 20);
 
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN);
@@ -198,8 +199,10 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
                 break;
         }
     }
+
     //退出时的时间
     private long mExitTime;
+
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         Intent intent = new Intent();
@@ -524,9 +527,11 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             }
         });
     }
+
     private int pageComment = 1;
     private String artId;
     private View commentView;
+
     /**
      * 获取评论列表
      *
@@ -534,7 +539,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
      * @param parent
      */
     private void getComments(final String artId, final View parent, final int position) {
-        serverDao.getComments(artId, pageComment,AppConstants.PAGE_SIZE,new DialogCallback<BaseResponse<CommentResponse>>(this) {
+        serverDao.getComments(artId, pageComment, AppConstants.PAGE_SIZE, new DialogCallback<BaseResponse<CommentResponse>>(this) {
             @Override
             public void onSuccess(BaseResponse<CommentResponse> baseResponse, Call call, Response response) {
                 comments = new ArrayList<>();
@@ -558,7 +563,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
                         popupWindow = new CommentPopwindow(ZhengwuActivity.this, new View.OnTouchListener() {
                             @Override
                             public boolean onTouch(View view, MotionEvent motionEvent) {
-                                KeyBoardUtils.closeKeybord(popupWindow.et_comment,ZhengwuActivity.this);
+                                KeyBoardUtils.closeKeybord(popupWindow.et_comment, ZhengwuActivity.this);
                                 popupWindow.dismiss();
                                 popupWindow.et_comment.setText("");
                                 pageComment = 1;
@@ -672,7 +677,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
                 showToast(baseResponse.message);
 //                commentsPopwinAdapter.removeItem(position);
 //                commentsPopwinAdapter.remove(position);
-                getComments(artId,commentView,commentPosition);
+                getComments(artId, commentView, commentPosition);
             }
 
             @Override
@@ -721,5 +726,15 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             }
         });
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 99) {
+
+            }
+        }
     }
 }

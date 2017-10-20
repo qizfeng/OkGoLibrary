@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
 import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.callback.JsonCallback;
@@ -199,11 +200,7 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
         if(!isLogin(getActivity())){
             mLayoutMyRepairOrder.setVisibility(View.GONE);
         }else {
-            if("3".equals(getUser(getActivity()).roleType)){
-                mLayoutMyRepairOrder.setVisibility(View.VISIBLE);
-            }else {
-                mLayoutMyRepairOrder.setVisibility(View.GONE);
-            }
+            loadData();
         }
     }
 
@@ -326,6 +323,7 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                 Glide.with(getActivity())
                         .load(AppConstants.HOST + userResponseBaseResponse.retData.photo)
                         .placeholder(R.mipmap.d54_tx)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .bitmapTransform(new CropCircleTransformation(getActivity()))
                         .into(mIvHeader);
                 mTvName.setText(getUser(getActivity()).loginName);
