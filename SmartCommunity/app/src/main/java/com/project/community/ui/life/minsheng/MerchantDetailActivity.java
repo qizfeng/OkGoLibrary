@@ -23,6 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.library.okgo.utils.KeyBoardUtils;
+import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.model.GoodsModel;
@@ -327,8 +328,11 @@ public class MerchantDetailActivity extends BaseActivity {
         mPopupWindow.setBackgroundDrawable(dw);
         // 设置弹出窗体显示时的动画，从底部向上弹出
         inflate.measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        if (mCartData.size()>5)
+        if (mCartData.size() > 5) {
             lv_container.getLayoutParams().height = (int) (ScreenUtils.getScreenHeight(this) * 0.5);
+            inflate.measure(ViewGroup.LayoutParams.MATCH_PARENT,(int) (ScreenUtils.getScreenHeight(this) * 0.5));
+            LogUtils.e(">"+lv_container.getLayoutParams().height);
+        }
         mPopupWindow.setFocusable(true);
         int height = inflate.getMeasuredHeight();
         int[] location = new int[2];
