@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/common_gray_bg"
-    tools:context="com.project.community.ui.life.minsheng.BBSActivity">
+    tools:context="com.project.community.ui.me.all_order.AllOrderActivity">
 
     <LinearLayout
         android:orientation="vertical"
@@ -29,20 +29,9 @@
 
         <android.support.v4.view.ViewPager
             android:id="@+id/bbs_viewpager"
-            android:layout_marginTop="10dp"
             android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/bbs_btn_send_message"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="15dp"
-        android:layout_gravity="bottom|right"
-        android:background="@drawable/press_bbs_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-
-</FrameLayout>
+</LinearLayout>

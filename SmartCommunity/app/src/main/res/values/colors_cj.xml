@@ -2,5 +2,9 @@
 <resources>
     <color name="transparent_100">#00ffffff</color>
     <color name="yellow">#D4E294</color>
+    <color name="yellow_ff961b">#ff961b</color>
+    <color name="view_line">#dcdcdc</color>
+    <color name="black_333333">#333333</color>
+    <color name="view_line_E5E5E5">#E5E5E5</color>
 
 </resources>
