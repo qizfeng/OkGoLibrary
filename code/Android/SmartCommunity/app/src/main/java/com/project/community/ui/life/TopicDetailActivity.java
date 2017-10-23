@@ -566,6 +566,10 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
     @Override
     protected void onDestroy() {
         LogUtils.e("ondextroy:" + index);
+        Intent intent =new Intent();
+        intent.putExtra("index",index);
+        setResult(RESULT_OK,intent);
+
         if (mWebView != null) {
             mWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
             mWebView.clearHistory();

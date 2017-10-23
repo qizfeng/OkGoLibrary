@@ -131,7 +131,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
                 bundle.putInt("index",position);
                 intent.putExtra("bundle", bundle);
                 startActivity(intent);
-            }
+        }
 
             @Override
             public void onTextClick(View view, int position) {//文字部分点击事件
