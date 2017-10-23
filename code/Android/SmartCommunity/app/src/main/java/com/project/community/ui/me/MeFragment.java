@@ -20,17 +20,16 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
-import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
 import com.project.community.R;
 import com.project.community.base.BaseFragment;
 import com.project.community.constants.AppConstants;
 import com.project.community.model.UserModel;
-import com.project.community.ui.life.family.FamilyAddActivity;
 import com.project.community.ui.life.family.FamilyInfoActivity;
 import com.project.community.ui.life.minsheng.ApplyStoreActivity;
-import com.project.community.ui.life.minsheng.MinshengActivity;
+import com.project.community.ui.me.all_order.AllOrderActivity;
+import com.project.community.ui.me.shop_management.AllProductsActivity;
 import com.project.community.ui.user.LoginActivity;
 import com.project.community.ui.user.RegisterActivity;
 import com.project.community.ui.user.SettingActivity;
@@ -215,7 +214,8 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                 UserInfoActivity.startActivity(getActivity());
                 break;
             case R.id.layout_my_order://我的订单
-                showToast(getString(R.string.toast_online));
+                AllOrderActivity.startActivity(getActivity());
+//                showToast(getString(R.string.toast_online));
                 break;
             case R.id.layout_my_collect://我的收藏
                 showToast(getString(R.string.toast_online));
@@ -235,7 +235,8 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                     showToast(getString(R.string.toast_no_login));
                 break;
             case R.id.layout_shop_manage://店铺管理
-                showToast(getString(R.string.toast_online));
+                AllProductsActivity.startActivity(getActivity());
+//                showToast(getString(R.string.toast_online));
                 break;
             case R.id.btn_apply_shop://申请店铺
                 intent = new Intent(getActivity(), ApplyStoreActivity.class);

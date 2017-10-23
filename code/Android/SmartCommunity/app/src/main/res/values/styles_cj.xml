@@ -9,6 +9,13 @@
         <item name="android:paddingLeft">12dp</item>
         <item name="android:textColorHint">@color/color_gray_999999</item>
     </style>
+    <!--商铺资料-->
+    <style name="shop_data_tv_title">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/color_gray_666666</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColorHint">@color/color_gray_999999</item>
+    </style>
     <style name="apply_store_et_title">
         <item name="android:singleLine">true</item>
         <item name="android:textSize">14sp</item>

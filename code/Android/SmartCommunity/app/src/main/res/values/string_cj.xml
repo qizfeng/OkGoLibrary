@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>'
+<resources>
     <!--挂号申请-->
     <string name="registration_hospital">医院</string>
     <string name="registration_administrative">科室</string>
@@ -82,5 +82,43 @@
     <string name="send_message_commit">立即发布</string>
     <string name="send_message_photo_hit">（支持jpg、png）</string>
     <string name="send_message_change_type">选择分类</string>
+
+    <!--商品管理-->
+    <string name="products_manager_add">+添加商品</string>
+    <string name="products_manager_all">全部商品</string>
+    <string name="products_manager_sell_ing">出售中</string>
+    <string name="products_manager_sell_end">售罄</string>
+    <string name="products_manager_sell_xia">已下架</string>
+    <string name="products_manager_sell_item_edit">编辑</string>
+    <string name="products_manager_sell_item_xia">下架</string>
+    <string name="products_manager_sell_item_del">删除</string>
+
+    <!--店铺资料-->
+    <string name="shop_data_title">店铺资料</string>
+    <string name="shop_data_zuobiao">坐标</string>
+    <string name="shop_data_type">分类\t\t：</string>
+    <string name="shop_data_zhuying_yewu">主营业务：</string>
+    <string name="shop_data_qiye_name">企业名称：</string>
+    <string name="shop_data_yingye_num">营业执照号：</string>
+    <string name="shop_data_faren_name">法人姓名：</string>
+    <string name="shop_data_yingye_photo">营业执照</string>
+    <string name="shop_data_faren_shengfenzheng">法人身份证（正反）</string>
+    <string name="shop_data_edit_info">编辑信息</string>
+    <string name="shop_data_edit_info_re">重新编辑提交</string>
+
+    <!--店铺资料-->
+    <string name="all_order_title">所有订单</string>
+    <string name="all_order_fahuo">发货</string>
+    <string name="all_order_yichuli">已处理</string>
+
+    <!--店铺商品详情-->
+    <string name="goods_order_title">商品订单详情</string>
+    <string name="goods_order_reason">申请原因</string>
+    <string name="goods_order_pingzheng">凭证</string>
+    <string name="goods_order_heji">合计</string>
+    <string name="goods_order_type">订单状态</string>
+    <string name="goods_order_jiaoyi_danhao">交易单号</string>
+    <string name="goods_order_xiadan_time">下单时间</string>
+    <string name="goods_order_yichuli">已处理</string>
 
 </resources>
