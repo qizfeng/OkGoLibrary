@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/pop_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"
     android:gravity="bottom"
     android:orientation="vertical">
-
     <RelativeLayout
+        android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_55"
         android:layout_gravity="bottom"
@@ -41,10 +41,11 @@
         android:id="@+id/lv_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:background="#dcdcdc"
         android:divider="@null" />
    <!--  <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_55"
         android:background="@color/transparent"/>-->
-</LinearLayout>
+</RelativeLayout>

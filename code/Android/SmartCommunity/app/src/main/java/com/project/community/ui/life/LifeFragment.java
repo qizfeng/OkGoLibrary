@@ -1,13 +1,10 @@
 package com.project.community.ui.life;
 
-import android.app.LocalActivityManager;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,13 +17,11 @@ import com.library.customview.viewpager.NoScrollViewPager;
 import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
 import com.project.community.base.BaseFragment;
-import com.project.community.ui.MainActivity;
-import com.project.community.ui.life.minsheng.MinshengActivity;
-import com.project.community.ui.life.wuye.WuyeActivity;
-import com.project.community.ui.life.zhengwu.ZhengwuActivity;
+import com.project.community.ui.life.minsheng.MinshengFragment;
+import com.project.community.ui.life.wuye.WuyeFragment;
+import com.project.community.ui.life.zhengwu.ZhengwuFragment;
 import com.project.community.util.TablayoutLineReflex;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,8 +44,6 @@ public class LifeFragment extends BaseFragment implements View.OnClickListener {
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_life, container, false);
-        manager = new LocalActivityManager(getActivity(), true);
-        manager.dispatchCreate(savedInstanceState);
         ButterKnife.bind(this, view);
 //        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         //换成下面这句就OK了
@@ -63,7 +56,8 @@ public class LifeFragment extends BaseFragment implements View.OnClickListener {
         initToolbar(toolbar, "");
         setHasOptionsMenu(true);
         initTabLayout();
-        AddActivitiesToViewPager();
+        initFragments();
+//        AddActivitiesToViewPager();
     }
 
     public static int index = 0;
@@ -151,102 +145,39 @@ public class LifeFragment extends BaseFragment implements View.OnClickListener {
         inflater.inflate(R.menu.menu_actionbar, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
-
-//    class MainFragmentPagerAdapter extends FragmentPagerAdapter {
-//        private List<Fragment> fragments;
-//        private String[] mTitles = new String[]{"政务", "物业", "民生"};
-//
-//        public MainFragmentPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
-//            super(fm);
-//            this.fragments = fragments;
-//        }
-//
-//
-//        @Override
-//        public int getCount() {
-//            return fragments.size();
-//        }
-//
-//
-//        @Override
-//        public Fragment getItem(int position) {
-//            return fragments.get(position);
-//        }
-//
-//        //ViewPager与TabLayout绑定后，这里获取到PageTitle就是Tab的Text
-//        @Override
-//        public CharSequence getPageTitle(int position) {
-//            return mTitles[position];
-//        }
-//    }
-
-
-    private LocalActivityManager manager;
-    private MainPagerAdapter viewPageAdapter;
-
-    private void AddActivitiesToViewPager() {
-        List<View> mViews = new ArrayList<View>();
-        Intent intent = new Intent();
-
-        intent.setClass(getActivity(), ZhengwuActivity.class);
-        intent.putExtra("id", 1);
-        mViews.add(getView("ZhengwuActivity", intent));
-
-        intent.setClass(getActivity(), WuyeActivity.class);
-        intent.putExtra("id", 2);
-        mViews.add(getView("WuyeActivity", intent));
-
-        intent.setClass(getActivity(), MinshengActivity.class);
-        intent.putExtra("id", 3);
-        mViews.add(getView("MinshengActivity", intent));
-
-
-        viewPageAdapter = new MainPagerAdapter(mViews);
-        viewPager.setAdapter(viewPageAdapter);
-        viewPager.setCurrentItem(0);
-        viewPager.setOffscreenPageLimit(0);
-
+    private List<Fragment> fragments = new ArrayList<>();
+    private void initFragments(){
+        fragments.add(new ZhengwuFragment());
+        fragments.add(new WuyeFragment());
+        fragments.add(new MinshengFragment());
+        MainFragmentPagerAdapter fragmentPagerAdapter = new MainFragmentPagerAdapter(getChildFragmentManager(),fragments);
+        viewPager.setAdapter(fragmentPagerAdapter);
     }
-
-
-    private View getView(String id, Intent intent) {
-        return manager.startActivity(id, intent).getDecorView();
-    }
-
-    class MainPagerAdapter extends PagerAdapter implements Serializable {
-        private List<View> views;
+    class MainFragmentPagerAdapter extends FragmentPagerAdapter {
+        private List<Fragment> fragments;
         private String[] mTitles = new String[]{"政务", "物业", "民生"};
 
-        public MainPagerAdapter(List<View> views) {
-            this.views = views;
+        public MainFragmentPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
+            super(fm);
+            this.fragments = fragments;
         }
+
 
         @Override
         public int getCount() {
-            return views.size();
+            return fragments.size();
         }
+
 
         @Override
-        public boolean isViewFromObject(View arg0, Object arg1) {
-            return arg0 == arg1;
+        public Fragment getItem(int position) {
+            return fragments.get(position);
         }
 
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView(views.get(position));
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            container.addView(views.get(position), 0);
-            return views.get(position);
-        }
-
+        //ViewPager与TabLayout绑定后，这里获取到PageTitle就是Tab的Text
         @Override
         public CharSequence getPageTitle(int position) {
             return mTitles[position];
         }
     }
-
-
 }

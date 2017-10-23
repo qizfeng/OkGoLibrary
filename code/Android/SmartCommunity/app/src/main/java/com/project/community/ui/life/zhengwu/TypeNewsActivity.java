@@ -28,6 +28,7 @@ import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
 import com.library.okgo.request.BaseRequest;
 import com.library.okgo.utils.KeyBoardUtils;
+import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.constants.AppConstants;
@@ -41,6 +42,7 @@ import com.project.community.ui.adapter.ArticlePageAdapter;
 import com.project.community.ui.adapter.CommentsApdater;
 import com.project.community.ui.adapter.listener.IndexAdapterItemListener;
 import com.project.community.ui.life.TopicDetailActivity;
+import com.project.community.util.NavStaggeredGridLayoutManager;
 import com.project.community.util.ScreenUtils;
 import com.project.community.view.CommentPopwindow;
 import com.project.community.view.SpacesItemDecoration;
@@ -58,6 +60,7 @@ import okhttp3.Response;
  */
 
 public class TypeNewsActivity extends BaseActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
+    public static final int REQUEST_CODE_COMMENT = 1000;
     @Bind(R.id.toolbar)
     Toolbar mToolBar;
     @Bind(R.id.tv_title)
@@ -95,7 +98,7 @@ public class TypeNewsActivity extends BaseActivity implements View.OnClickListen
         initToolBar(mToolBar, mTvTitle, true, "就业", R.mipmap.iv_back);
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        final StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        final NavStaggeredGridLayoutManager layoutManager = new NavStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -113,7 +116,7 @@ public class TypeNewsActivity extends BaseActivity implements View.OnClickListen
                 Bundle bundle = new Bundle();
                 bundle.putString("artId", mAdapter.getItem(position).id);
                 intent.putExtra("bundle", bundle);
-                startActivity(intent);
+                startActivityForResult(intent,REQUEST_CODE_COMMENT);
             }
 
             @Override
@@ -486,5 +489,17 @@ public class TypeNewsActivity extends BaseActivity implements View.OnClickListen
             }
         });
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CODE_COMMENT) {
+                LogUtils.e(">"+data.getIntExtra("index", 0)+","+data.getIntExtra("comment", 0));
+                mAdapter.getData().get(data.getIntExtra("index", 0)).comments = data.getIntExtra("comment", 0);
+                mAdapter.notifyDataSetChanged();
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.project.community.ui.life;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +17,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Display;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -107,6 +109,12 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
     private Dialog mDialog;
     private ArticleModel mData = new ArticleModel();
     private int index = 0;
+
+    public static void startActivityForResult(Activity context, Bundle bundle, int requestCode){
+        Intent intent = new Intent(context, TopicDetailActivity.class);
+        intent.putExtra("bundle", bundle);
+        context.startActivityForResult(intent,requestCode);
+    }
 
     public static void startActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, TopicDetailActivity.class);
@@ -237,7 +245,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
 //                    recyclerView.smoothScrollToPosition(1);
                     try {
                         recyclerView.scrollToPosition(2);
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
@@ -392,7 +400,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
                 mEtInput.setText("");
                 getComments(artId);
                 showToast(baseResponse.message);
-                KeyBoardUtils.closeKeybord(mEtInput,TopicDetailActivity.this);
+                KeyBoardUtils.closeKeybord(mEtInput, TopicDetailActivity.this);
             }
 
             @Override
@@ -562,13 +570,22 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
         });
     }
 
+    //对返回键进行监听
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Intent intent = new Intent();
+            intent.putExtra("index", index);
+            intent.putExtra("comment", mAdapter.getTotalComments());
+            setResult(RESULT_OK, intent);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
     @Override
     protected void onDestroy() {
-        LogUtils.e("ondextroy:" + index);
-        Intent intent =new Intent();
-        intent.putExtra("index",index);
-        setResult(RESULT_OK,intent);
 
         if (mWebView != null) {
             mWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
@@ -624,6 +641,13 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
 //                        .setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN)
                         .setCallback(shareListener)
                         .open(config);
+                return true;
+            case android.R.id.home:
+                Intent intent = new Intent();
+                intent.putExtra("index", index);
+                intent.putExtra("comment", mAdapter.getTotalComments());
+                setResult(RESULT_OK, intent);
+                finish();
                 return true;
             default:
                 // If we got here, the user's action was not recognized.

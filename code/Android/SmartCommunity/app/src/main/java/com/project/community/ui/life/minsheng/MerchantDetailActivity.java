@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -195,38 +196,10 @@ public class MerchantDetailActivity extends BaseActivity {
         mRecyclerView.addItemDecoration(decoration);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.addHeaderView(header);
-    }
-
-    @OnClick(R.id.layout_shoppingcart)
-    public void onCartClick(View view) {
-        if (mCartData.size() > 0)
-            showCartPopwin(view);
-    }
-
-    public void onNavigationClick(View view) {
-        Intent intent = new Intent(this, MerchantNavigationActivity.class);
-        startActivity(intent);
-    }
 
 
-    /**
-     * 弹出评论列表
-     *
-     * @param parent
-     */
-    private void showCartPopwin(final View parent) {
-        if (mCartData == null)
-            mCartData = new ArrayList<>();
-
-
-        //填充对话框的布局
-        final View inflate = LayoutInflater.from(this).inflate(R.layout.layout_popupwindow_merchant_cart, null);
-        RecyclerView lv_container = inflate.findViewById(R.id.lv_container);
-        SpacesItemDecoration decoration = new SpacesItemDecoration(1, true);
         lv_container.setLayoutManager(new LinearLayoutManager(this));
-        lv_container.addItemDecoration(decoration);
-        TextView tv_clear = inflate.findViewById(R.id.tv_clear);
-        LinearLayout pop_layout = inflate.findViewById(R.id.pop_layout);
+        lv_container.addItemDecoration(new SpacesItemDecoration(1, true));
 
         mMerchantCartPopwinAdapter = new MerchantCartPopwinAdapter(mCartData, new MerchantCartPopwinAdapter.OnMerchantCartItemClickListener() {
             @Override
@@ -256,23 +229,10 @@ public class MerchantDetailActivity extends BaseActivity {
                         mMerchantCartPopwinAdapter.remove(position);
                         // 实例化一个ColorDrawable颜色为半透明
                         ColorDrawable dw = new ColorDrawable(0xb0000000);
-                        if (mPopupWindow != null)
-                            mPopupWindow.dismiss();
                         if (mMerchantCartPopwinAdapter.getData().size() == 0) {
                             return;
                         }
-                        mPopupWindow = new PopupWindow(inflate, ViewGroup.LayoutParams.MATCH_PARENT
-                                , ViewGroup.LayoutParams.WRAP_CONTENT);
-                        // 设置弹出窗体的背景
-                        mPopupWindow.setBackgroundDrawable(dw);
-                        // 设置弹出窗体显示时的动画，从底部向上弹出
-                        inflate.measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                        mPopupWindow.setFocusable(true);
-                        int height = inflate.getMeasuredHeight();
-                        int[] location = new int[2];
-                        parent.getLocationInWindow(location);
-                        mPopupWindow.showAtLocation(parent, Gravity.TOP, ScreenUtils.getScreenWidth(MerchantDetailActivity.this), location[1] - height);
-
+                        mPopLayout.setVisibility(View.VISIBLE);
                     }
                 }
             }
@@ -299,13 +259,46 @@ public class MerchantDetailActivity extends BaseActivity {
         });
         mMerchantCartPopwinAdapter.bindToRecyclerView(lv_container);
         lv_container.setAdapter(mMerchantCartPopwinAdapter);
-        if (mCartData.size() == 0) {
-            mMerchantCartPopwinAdapter.setNewData(null);
-            mMerchantCartPopwinAdapter.setEmptyView(R.layout.empty_view);
-            TextView textView = (TextView) mMerchantCartPopwinAdapter.getEmptyView().findViewById(R.id.tv_tips);
-            textView.setText(getString(R.string.empty_no_comment));
+    }
+
+    @OnClick(R.id.layout_shoppingcart)
+    public void onCartClick(View view) {
+        if (mCartData.size() > 0)
+            showCartPopwin(view);
+    }
+
+    public void onNavigationClick(View view) {
+        Intent intent = new Intent(this, MerchantNavigationActivity.class);
+        startActivity(intent);
+    }
+
+
+    @Bind(R.id.pop_layout)
+    RelativeLayout mPopLayout;
+    @Bind(R.id.tv_clear)
+    TextView mTvClear;
+    @Bind(R.id.lv_container)
+    RecyclerView lv_container;
+
+    /**
+     * 弹窗购物车
+     *
+     * @param parent
+     */
+    private void showCartPopwin(final View parent) {
+        if (mPopLayout.getVisibility() == View.VISIBLE) {
+            mPopLayout.setVisibility(View.GONE);
+            return;
+        } else {
+            mPopLayout.setVisibility(View.VISIBLE);
         }
-        tv_clear.setOnClickListener(new View.OnClickListener() {
+        if (mCartData == null)
+            mCartData = new ArrayList<>();
+        if(mCartData.size()>5){
+            lv_container.getLayoutParams().height=(int)(ScreenUtils.getScreenHeight(this)*0.5);
+        }
+        mMerchantCartPopwinAdapter.setNewData(mCartData);
+        mTvClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 for (int i = 0; i < mData.size(); i++) {
@@ -316,38 +309,36 @@ public class MerchantDetailActivity extends BaseActivity {
                 mMerchantCartPopwinAdapter.removeAllData();
                 totalCount = 0;
                 mTvCount.setVisibility(View.GONE);
-                mPopupWindow.dismiss();
+                mPopLayout.setVisibility(View.GONE);
             }
         });
 
         // 实例化一个ColorDrawable颜色为半透明
         ColorDrawable dw = new ColorDrawable(0xb0000000);
-        mPopupWindow = new PopupWindow(inflate, ViewGroup.LayoutParams.MATCH_PARENT
-                , ViewGroup.LayoutParams.WRAP_CONTENT);
-        // 设置弹出窗体的背景
-        mPopupWindow.setBackgroundDrawable(dw);
-        // 设置弹出窗体显示时的动画，从底部向上弹出
-        inflate.measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        if (mCartData.size() > 5) {
-            lv_container.getLayoutParams().height = (int) (ScreenUtils.getScreenHeight(this) * 0.5);
-            inflate.measure(ViewGroup.LayoutParams.MATCH_PARENT,(int) (ScreenUtils.getScreenHeight(this) * 0.5));
-            LogUtils.e(">"+lv_container.getLayoutParams().height);
-        }
-        mPopupWindow.setFocusable(true);
-        int height = inflate.getMeasuredHeight();
-        int[] location = new int[2];
-        parent.getLocationInWindow(location);
-//        pop_layout.setMinimumHeight(ScreenUtils.getScreenHeight(this)-height);
-        mPopupWindow.showAtLocation(parent, Gravity.TOP, ScreenUtils.getScreenWidth(this), location[1] - height);
-        inflate.setOnTouchListener(new View.OnTouchListener() {
+        mPopLayout.setBackground(dw);
+        mPopLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                mPopupWindow.dismiss();
+                mPopLayout.setVisibility(View.GONE);
                 return false;
             }
         });
     }
 
+
+    //对返回键进行监听
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if(mPopLayout.getVisibility()==View.VISIBLE){
+                mPopLayout.setVisibility(View.GONE);
+            }else {
+                finish();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         return super.onPrepareOptionsMenu(menu);

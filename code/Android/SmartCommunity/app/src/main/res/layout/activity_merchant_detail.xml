@@ -16,7 +16,54 @@
             android:layout_height="match_parent"
             android:layout_above="@+id/layout_bottom"
             android:background="@color/color_gray_e5e5e5" />
+        <RelativeLayout
+            android:id="@+id/pop_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_above="@+id/layout_bottom"
+            android:visibility="gone"
+            android:gravity="bottom"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:id="@+id/layout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_55"
+                android:layout_gravity="bottom"
+                android:gravity="bottom"
+                android:layout_above="@+id/lv_container"
+                android:background="@color/color_gray_eeeeee">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:gravity="center"
+                    android:text="@string/activity_shopping_cart"
+                    android:textColor="@color/color_gray_666666"
+                    android:textSize="@dimen/common_txt_size" />
+
+                <TextView
+                    android:id="@+id/tv_clear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:drawableLeft="@mipmap/d29_shanchu"
+                    android:drawablePadding="@dimen/dp_4"
+                    android:gravity="center"
+                    android:paddingRight="@dimen/dp_15"
+                    android:text="@string/txt_merchant_clear_all"
+                    android:textSize="@dimen/sp_14" />
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/lv_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="#dcdcdc"
+                android:divider="@null" />
+        </RelativeLayout>
         <LinearLayout
             android:id="@+id/layout_bottom"
             android:layout_width="match_parent"

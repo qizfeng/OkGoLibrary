@@ -2,6 +2,7 @@ package com.project.community.base;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -418,4 +419,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         count = SharedPreferenceUtils.getInt(context, "shopCartCount", 0);
         return count;
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
 }

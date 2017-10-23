@@ -13,6 +13,7 @@ import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -23,7 +24,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
 import com.project.community.R;
-import com.project.community.base.BaseActivity;
+import com.project.community.base.BaseFragment;
 import com.project.community.constants.AppConstants;
 import com.project.community.listener.RecyclerItemTouchHelperCallBack;
 import com.project.community.model.ModuleModel;
@@ -32,6 +33,7 @@ import com.project.community.ui.adapter.MinshengAdapter;
 import com.project.community.ui.adapter.ModuleAdapter;
 import com.project.community.ui.adapter.listener.MinshengAdapterItemListener;
 import com.project.community.ui.life.zhengwu.TypeNewsActivity;
+import com.project.community.util.NavLinearLayoutManager;
 import com.project.community.util.ScreenUtils;
 import com.project.community.view.HorizaontalGridView;
 import com.project.community.view.SpacesItemDecoration;
@@ -46,11 +48,10 @@ import okhttp3.Call;
 import okhttp3.Response;
 
 /**
- * Created by qizfeng on 17/7/17.
- * 民生首页
+ * Created by zipingfang on 17/10/23.
  */
 
-public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener, AdapterView.OnItemClickListener, BaseQuickAdapter.RequestLoadMoreListener {
+public class MinshengFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener, AdapterView.OnItemClickListener, BaseQuickAdapter.RequestLoadMoreListener {
     @Bind(R.id.recyclerView)
     RecyclerView mRecyclerView;
     @Bind(R.id.refreshLayout)
@@ -65,28 +66,38 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
     private HorizaontalGridView gridView;
     private List<ModuleModel> moduleModels = new ArrayList<>();
 
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_minsheng);
+//        ButterKnife.bind(this);
+//        initData();
+//    }
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_minsheng);
-        ButterKnife.bind(this);
+    protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_minsheng, container, false);
+        ButterKnife.bind(this, view);
         initData();
+        return view;
     }
 
-    private void initData() {
+    @Override
+    public void initData() {
         mIvShopCart.setOnClickListener(this);
-        header = LayoutInflater.from(this).inflate(R.layout.layout_header_minsheng, null);
+        header = LayoutInflater.from(getActivity()).inflate(R.layout.layout_header_minsheng, null);
         header.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MinshengActivity.this, ApplyStoreActivity.class);
+                Intent intent = new Intent(getActivity(), ApplyStoreActivity.class);
                 startActivity(intent);
             }
         });
         gridView = (HorizaontalGridView) header.findViewById(R.id.gridview);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setLayoutManager(new NavLinearLayoutManager(getActivity()));
 
 
         mAdapter = new MinshengAdapter(null, new MinshengAdapterItemListener() {
@@ -95,7 +106,7 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
                 Bundle bundle = new Bundle();
                 position = position - 1;//去掉头部
                 bundle.putString("merchant_id", mAdapter.getItem(position).id);
-                MerchantDetailActivity.startActivity(MinshengActivity.this, bundle);
+                MerchantDetailActivity.startActivity(getActivity(), bundle);
             }
         });
 
@@ -126,8 +137,8 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
 
 
     private void loadData() {
-        String latitute = getLocation(this)[0];
-        String longitute = getLocation(this)[1];
+        String latitute = getLocation(getActivity())[0];
+        String longitute = getLocation(getActivity())[1];
         String locData = "";
         if (!TextUtils.isEmpty(latitute) && !TextUtils.isEmpty(longitute)) {
             locData = longitute + "," + latitute;
@@ -203,7 +214,7 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_shop_cart:
-                ShoppingCartActivity.startActivity(this, null);
+                ShoppingCartActivity.startActivity(getActivity(), null);
                 break;
         }
     }
@@ -213,33 +224,33 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
         Intent intent;
         switch (position) {
             case 0://社區商圈
-                intent = new Intent(MinshengActivity.this, ShopsListActivity.class);
+                intent = new Intent(getActivity(), ShopsListActivity.class);
                 startActivity(intent);
                 break;
             case 1://家政
                 showToast(getString(R.string.toast_online));
-               /* intent = new Intent(MinshengActivity.this, OrderDetailActivity.class);
+               /* intent = new Intent(getActivity(), OrderDetailActivity.class);
                 startActivity(intent);*/
                 break;
             case 2://醫院
-                intent = new Intent(MinshengActivity.this, RegistrationAppActivity.class);
+                intent = new Intent(getActivity(), RegistrationAppActivity.class);
                 startActivity(intent);
                 break;
             case 3://公交
-                intent = new Intent(MinshengActivity.this, PublicTransportationActivity.class);
+                intent = new Intent(getActivity(), PublicTransportationActivity.class);
                 startActivity(intent);
                 break;
             case 4://社區论坛
-//                intent = new Intent(MinshengActivity.this, ArticleDetailsActivity.class);
-                intent = new Intent(MinshengActivity.this, BBSActivity.class);
+//                intent = new Intent(getActivity(), ArticleDetailsActivity.class);
+                intent = new Intent(getActivity(), BBSActivity.class);
                 startActivity(intent);
                 break;
             case 5://就业
-                intent = new Intent(MinshengActivity.this, TypeNewsActivity.class);
+                intent = new Intent(getActivity(), TypeNewsActivity.class);
                 startActivity(intent);
                 break;
             default://更多
-                intent = new Intent(MinshengActivity.this, MerchantModuleMoreActivity.class);
+                intent = new Intent(getActivity(), MerchantModuleMoreActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -250,7 +261,7 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
      * 设置数据
      */
     private void setGridData() {
-
+        moduleModels = new ArrayList<>();
         ModuleModel moduleModel1 = new ModuleModel();
         moduleModel1.title = "社区商圈";
         moduleModel1.res = R.mipmap.d27_icon1;
@@ -300,14 +311,14 @@ public class MinshengActivity extends BaseActivity implements SwipeRefreshLayout
      * 设置GirdView参数，绑定数据
      */
     private void setGridView() {
-        int length = ScreenUtils.getScreenWidth(this) / 4;
+        int length = ScreenUtils.getScreenWidth(getActivity()) / 4;
         DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
         float density = dm.density;
         int itemWidth = (int) (length * density);
         itemWidth = length;
         gridView.setHorizontalSpacing(5); // 设置列表项水平间距
-        ModuleAdapter adapter = new ModuleAdapter(this,
+        ModuleAdapter adapter = new ModuleAdapter(getActivity(),
                 moduleModels);
         int defaultRows = 2;
         int defaultColumns = 4;
