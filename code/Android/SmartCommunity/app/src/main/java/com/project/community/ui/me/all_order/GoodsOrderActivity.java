@@ -102,11 +102,7 @@ public class GoodsOrderActivity extends BaseActivity {
     }
 
     private void initData() {
-//        goodsOrderRvOrder.setHasFixedSize(true);
-//        goodsOrderRvOrder.setItemAnimator(new DefaultItemAnimator());
         goodsOrderRvOrder.setLayoutManager(new LinearLayoutManager(this));
-//        SpacesItemDecoration decoration = new SpacesItemDecoration(2, false);
-//        goodsOrderRvOrder.addItemDecoration(decoration);
         for (int i = 0; i < 2; i++) {
             CommentModel commentModel =new CommentModel();
             commentModel.id="0";
