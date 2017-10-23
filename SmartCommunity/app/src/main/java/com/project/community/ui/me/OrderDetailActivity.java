@@ -35,7 +35,6 @@ import com.library.okgo.utils.ToastUtils;
 import com.library.okgo.utils.photo.PhotoUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
-import com.project.community.constants.AppConstants;
 import com.project.community.listener.RecycleItemClickListener;
 import com.project.community.model.CommentModel;
 import com.project.community.ui.ImageBrowseActivity;
@@ -43,9 +42,7 @@ import com.project.community.ui.PhoneDialogActivity;
 import com.project.community.ui.adapter.ArticleDetailsImagsAdapter;
 import com.project.community.ui.adapter.OrderDetailShouliApdater;
 import com.project.community.ui.adapter.SendMessageAdapter;
-import com.project.community.ui.life.zhengwu.ZhengwuActivity;
 import com.project.community.util.ScreenUtils;
-import com.project.community.view.MyButton;
 import com.project.community.view.MyGridView;
 import com.project.community.view.crop.CropImageActivity;
 
@@ -56,7 +53,6 @@ import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import rx.functions.Action1;
 
 public class OrderDetailActivity extends BaseActivity implements View.OnClickListener {

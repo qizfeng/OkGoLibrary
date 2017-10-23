@@ -71,8 +71,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        manager = new LocalActivityManager(this, true);
-        manager.dispatchCreate(savedInstanceState);
         //取消位移动画
         BottomNavigationViewHelper.disableShiftMode(bottom_navigation);
         bottom_navigation.setOnNavigationItemSelectedListener(this);
@@ -120,7 +118,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 checkFragment = INDEX_HOME_FRAGMENT;
                 switchFragment(checkFragment);
                 initForMessageCenterIcon(bottom_navigation, false);
-                LifeFragment.index = 0;
                 return true;//注意!!! 不要break,否则BottomNavigationView无切换效果
             case R.id.navigation_life:
                 //生活
@@ -141,14 +138,12 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 checkFragment = INDEX_COMMUNITY_FRAGMENT;
                 switchFragment(checkFragment);
                 initForMessageCenterIcon(bottom_navigation, false);
-                LifeFragment.index = 0;
                 return true;//注意!!! 不要break,否则BottomNavigationView无切换效果
             case R.id.navigation_me:
                 //我的
                 checkFragment = INDEX_MY_FRAGMENT;
                 switchFragment(checkFragment);
                 initForMessageCenterIcon(bottom_navigation, true);
-                LifeFragment.index = 0;
                 return true;//注意!!! 不要break,否则BottomNavigationView无切换效果
             default:
                 break;
@@ -172,16 +167,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         transaction.commit();
     }
 
-    //切换fragment
-    public void switchFragment(int index, int childIndex) {
-        checkFragment = INDEX_LIFE_FRAGMENT;
-        switchFragment(checkFragment);
-        bottom_navigation.setSelectedItemId(R.id.navigation_life);
-        initForMessageCenterIcon(bottom_navigation, false);
-        LifeFragment.index = childIndex;
-    }
 
-    private LocalActivityManager manager;
 
 
     private void initForMessageCenterIcon(BottomNavigationView navigationView, boolean isShowRedPoint) {
@@ -304,5 +290,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
             } catch (Exception e) {
             }
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

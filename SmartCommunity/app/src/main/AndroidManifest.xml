@@ -111,20 +111,8 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name=".ui.life.zhengwu.ZhengwuActivity"
-            android:label="@string/activity_zhengwu"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.life.wuye.WuyeActivity"
-            android:label="@string/activity_wuye"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ui.WebViewActivity"
             android:label="@string/activity_webview"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.life.minsheng.MinshengActivity"
-            android:label="@string/activity_minsheng"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.user.RegisterActivity"

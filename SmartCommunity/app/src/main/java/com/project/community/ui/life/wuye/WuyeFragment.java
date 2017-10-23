@@ -1,4 +1,4 @@
-package com.project.community.ui.life.zhengwu;
+package com.project.community.ui.life.wuye;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -6,7 +6,9 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
@@ -16,6 +18,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -26,150 +29,164 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.jakewharton.rxbinding.view.RxView;
 import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
-import com.library.okgo.request.BaseRequest;
 import com.library.okgo.utils.KeyBoardUtils;
 import com.project.community.R;
-import com.project.community.base.BaseActivity;
+import com.project.community.base.BaseFragment;
 import com.project.community.constants.AppConstants;
 import com.project.community.listener.DiggClickListener;
 import com.project.community.listener.RecycleItemClickListener;
 import com.project.community.model.ArticleModel;
+import com.project.community.model.BannerResponse;
 import com.project.community.model.CommentModel;
 import com.project.community.model.CommentResponse;
 import com.project.community.model.MenuModel;
 import com.project.community.model.ModuleModel;
-import com.project.community.model.ZhengwuIndexResponse;
+import com.project.community.model.WuyeIndexResponse;
 import com.project.community.ui.PhoneDialogActivity;
+import com.project.community.ui.WebViewActivity;
 import com.project.community.ui.adapter.ArticlePageAdapter;
 import com.project.community.ui.adapter.CommentsApdater;
 import com.project.community.ui.adapter.ModuleAdapter;
 import com.project.community.ui.adapter.listener.IndexAdapterItemListener;
 import com.project.community.ui.life.TopicDetailActivity;
-import com.project.community.ui.life.wuye.WuyeActivity;
+import com.project.community.ui.life.family.FamilyInfoActivity;
+import com.project.community.util.NavStaggeredGridLayoutManager;
 import com.project.community.util.ScreenUtils;
+import com.project.community.util.TablayoutLineReflex;
 import com.project.community.view.CommentPopwindow;
 import com.project.community.view.HorizaontalGridView;
 import com.project.community.view.SpacesItemDecoration;
+import com.project.community.view.VpSwipeRefreshLayout;
+import com.ryane.banner_lib.AdPageInfo;
+import com.ryane.banner_lib.AdPlayBanner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Response;
+import rx.functions.Action1;
 
 /**
- * Created by qizfeng on 17/7/13.
+ * Created by zipingfang on 17/10/23.
  */
 
-public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemClickListener, View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
-
+public class WuyeFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener, View.OnClickListener, AdapterView.OnItemClickListener {
+    public static final int REQUEST_CODE_COMMENT = 1000;
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
     @Bind(R.id.refreshLayout)
-    SwipeRefreshLayout refreshLayout;
+    VpSwipeRefreshLayout refreshLayout;
     @Bind(R.id.fab)
     ImageView fab;
-    @Bind(R.id.gridview)
-    HorizaontalGridView gridView;
-
-    private int pageIndex = 1;//当前页码
+    AdPlayBanner adPlayBanner;
+    private CommentPopwindow popupWindow;
+    private List<AdPageInfo> mDatas = new ArrayList<>();//模拟轮播图数据
+    private ArticlePageAdapter mAdapter;
     private View header;
+    private TabLayout tabLayout;
+    private HorizaontalGridView gridView;
+    private int type = 7;
+    private int pageIndex = 1;
     private List<ModuleModel> moduleModels = new ArrayList<>();
     private List<CommentModel> comments = new ArrayList<>();//评论列表
     private CommentsApdater commentsPopwinAdapter;
-    private CommentPopwindow popupWindow;
-    private List<MenuModel> mMenuData = new ArrayList<>();
     private List<ArticleModel> mArticleDate = new ArrayList<>();
-    private ZhengwuIndexResponse mResponseData = new ZhengwuIndexResponse();
-    private ArticlePageAdapter mAdapter;
+    private WuyeIndexResponse mResponseData = new WuyeIndexResponse();
+    private List<MenuModel> mMenuData = new ArrayList<>();
     private Dialog mDialog;
     private String recStr = "";//回复评论
     private String targetId;//回復人id
-    private int type = 0;
     private int commentPosition = 0;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_zhengwu);
-        initView();
+    protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_wuye, container, false);
+        ButterKnife.bind(this, view);
         initData();
+        return view;
     }
 
-    protected void initView() {
-        ButterKnife.bind(this);
-        header = LayoutInflater.from(ZhengwuActivity.this).inflate(R.layout.layout_header_zhengwu, null);
-    }
-
-    protected void initData() {
+    @Override
+    public void initData() {
+        header = LayoutInflater.from(getActivity()).inflate(R.layout.layout_header_wuye, null);
+        tabLayout = (TabLayout) header.findViewById(R.id.tabLayout);
+        gridView = (HorizaontalGridView) header.findViewById(R.id.gridview);
+        adPlayBanner = (AdPlayBanner) header.findViewById(R.id.adPlayBanner);
+        adPlayBanner.getLayoutParams().height = ScreenUtils.getScreenWidth(getActivity()) * 1 / 2;
+        adPlayBanner.getLayoutParams().width = ScreenUtils.getScreenWidth(getActivity());
         recyclerView.setHasFixedSize(true);
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        final StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                layoutManager.invalidateSpanAssignments(); //防止第一行到顶部有空白区域
-            }
-        });
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setLayoutManager(new NavStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
 
-        recyclerView.setLayoutManager(layoutManager);
 
         mAdapter = new ArticlePageAdapter(null, new IndexAdapterItemListener() {
             @Override
             public void onItemClick(View view, int position) {//整个item点击事件
-                //position = position - 1;//去掉头部
-                Intent intent = new Intent(ZhengwuActivity.this, TopicDetailActivity.class);
+                Intent intent = new Intent(getActivity(), TopicDetailActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("artId", mAdapter.getItem(position).id);
-                bundle.putInt("index",position);
+                position = position - 1;//去掉头部
+                if (tabLayout.getSelectedTabPosition() == 1) {
+                    bundle.putString("title", getString(R.string.title_communication_notice));
+                } else if (tabLayout.getSelectedTabPosition() == 0) {
+                    bundle.putString("title", getString(R.string.tab_title_wuye_kuaixun));
+                }
+                bundle.putString("artId", mAdapter.getItem(position).id);//去掉头部
+                bundle.putInt("index", position);
                 intent.putExtra("bundle", bundle);
-                startActivity(intent);
-        }
+                startActivityForResult(intent, REQUEST_CODE_COMMENT);
+
+            }
 
             @Override
             public void onTextClick(View view, int position) {//文字部分点击事件
             }
 
-
             @Override
-            public void onCommentClick(View view, int position) {//点击评论
-                //  popAwindow(view);
-                if (isLogin(ZhengwuActivity.this)) {
-                    commentPosition = position;
-                    artId = mAdapter.getItem(position).id;
-                    commentView = view;
+            public void onCommentClick(final View view, final int position) {//点击评论
+                int index = position - 1;//去掉头部
+                commentPosition = index;
+                artId = mAdapter.getItem(index).id;
+                commentView = view;
+                if (isLogin(getActivity())) {
                     getComments(artId, commentView, commentPosition);
                 } else
                     showToast(getString(R.string.toast_no_login));
 
             }
-        }, new
-                DiggClickListener() {
-                    @Override
-                    public void onDiggClick(ImageView imageView, TextView textView, int position) {
-                        if (isLogin(ZhengwuActivity.this)) {
-                            if (mAdapter.getItem(position).categoryAllowCollection == 0 ||
-                                    mAdapter.getItem(position).allowCollection == 0) {
-                                showToast(getString(R.string.toast_no_collect));
-                                return;
-                            }
-                            onCollect(textView, imageView, position);
-                        } else
-                            showToast(getString(R.string.toast_no_login));
+        }, new DiggClickListener() {
+            @Override
+            public void onDiggClick(ImageView imageView, TextView textView, int position) {
+                position = position - 1;//去掉头部
+                if (isLogin(getActivity())) {
+                    if (mAdapter.getItem(position).categoryAllowCollection == 0 ||
+                            mAdapter.getItem(position).allowCollection == 0) {
+                        showToast(getString(R.string.toast_no_collect));
+                        return;
                     }
-                });
+                    onCollect(textView, imageView, position);
+                } else
+                    showToast(getString(R.string.toast_no_login));
+            }
+        });
 
-        SpacesItemDecoration decoration = new SpacesItemDecoration(20, false);
+
+        /**
+         * 监听 AppBarLayout Offset 变化，动态设置 SwipeRefreshLayout 是否可用
+         */
+
+        SpacesItemDecoration decoration = new SpacesItemDecoration(20, true);
         recyclerView.addItemDecoration(decoration);
         recyclerView.setAdapter(mAdapter);
-        recyclerView.setPadding(20, 20, 20, 20);
+
 
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN);
@@ -178,18 +195,113 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
         mAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN);
         mAdapter.setOnLoadMoreListener(this, recyclerView);
 
+        //选项卡
+        initTabLayout();
+
+        //轮播图
+        initBanner();
+
+        //中部模块
+        setGridData();
+
         //头部测试数据
-//        mAdapter.addHeaderView(header);
+        mAdapter.addHeaderView(header);
         //开启loading,获取数据
         setRefreshing(true);
-
         onRefresh();
         fab.setOnClickListener(this);
         gridView.setOnItemClickListener(this);
-        setData();
-
     }
 
+    private void initBanner() {
+        mDatas = new ArrayList<>();
+        getBannerData();
+    }
+
+    private void getBannerData() {
+        serverDao.getBannerData("1", "2", new JsonCallback<BaseResponse<BannerResponse>>() {
+            @Override
+            public void onSuccess(BaseResponse<BannerResponse> baseResponse, Call call, Response response) {
+                mDatas = new ArrayList<>();
+                mDatas = baseResponse.retData.imageList;
+                try {
+                    //开始轮播
+                    adPlayBanner
+                            .setImageLoadType(AdPlayBanner.ImageLoaderType.GLIDE)
+                            .setAutoPlay(true)
+                            .setIndicatorType(AdPlayBanner.IndicatorType.POINT_INDICATOR)
+                            .setInterval(5000)
+                            .setOnPageClickListener(new AdPlayBanner.OnPageClickListener() {
+                                @Override
+                                public void onPageClick(AdPageInfo info, int postion) {
+                                    info = mDatas.get(postion);
+                                    if ("2".equals(info.linkType)) {//文章
+                                        Bundle bundle = new Bundle();
+                                        if ((AppConstants.WUYE_GONGGAO + "").equals(info.categoryId)) {
+                                            bundle.putString("title", getString(R.string.title_communication_notice));
+                                        } else if ((AppConstants.WUYE_KUAIXUN + "").equals(info.categoryId)) {
+                                            bundle.putString("title", getString(R.string.tab_title_wuye_kuaixun));
+                                        }
+                                        bundle.putString("artId", info.articleId);
+                                        TopicDetailActivity.startActivity(getActivity(), bundle);
+                                    } else if ("1".equals(info.linkType)) {//链接
+                                        Intent intent = new Intent(getActivity(), WebViewActivity.class);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("url", info.link);
+                                        intent.putExtra("bundle", bundle);
+                                        startActivity(intent);
+                                    }
+
+                                }
+                            })
+//                .setPageTransfromer(new FadeInFadeOutTransformer())//淡入淡出
+//                    .setPageTransfromer(new RotateDownTransformer())//旋转效果
+//                .setPageTransfromer(new ZoomOutPageTransformer())//空间切换
+                            .setInfoList((ArrayList<AdPageInfo>) mDatas)
+                            .setUp();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * 初始化tabLayout
+     */
+    private void initTabLayout() {
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.tab_title_wuye_kuaixun)));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.tab_title_wuye_gonggao)));
+        tabLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                TablayoutLineReflex
+                        .setTabLine(getActivity(), tabLayout, 65, 65);
+            }
+        });
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if (tab.getPosition() == 0)//快讯
+                    type = AppConstants.WUYE_KUAIXUN;
+                else if (tab.getPosition() == 1)//公告
+                    type = AppConstants.WUYE_GONGGAO;
+                setRefreshing(true);
+                pageIndex = 1;
+                loadData(type);
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+    }
 
     @Override
     public void onClick(View view) {
@@ -200,130 +312,35 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
         }
     }
 
-    //退出时的时间
-    private long mExitTime;
-
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         Intent intent = new Intent();
-        String typeStr = moduleModels.get(position).title;
-        if ("问卷".equals(typeStr)) {
-            if (isLogin(this)) {
-                Bundle bundle = new Bundle();
-                bundle.putString("url", AppConstants.URL_WENJUAN_LIST + "?uid=" + getUser(this).id);
-                intent.putExtra("bundle", bundle);
-                intent.putExtra("hideNavigation", true);
-                intent.setClass(ZhengwuActivity.this, WenjuanActivity.class);
-                startActivity(intent);
-            } else {
-                showToast(getString(R.string.toast_no_login));
-            }
-        } else if ("热线".equals(typeStr)) {
-            if ((System.currentTimeMillis() - mExitTime) > 2000) {
-                mExitTime = System.currentTimeMillis();
-                Intent mIntent = new Intent();
-                mIntent.putExtra("hasHeader", false);
-                mIntent.putExtra("type", "1");
-                mIntent.setClass(ZhengwuActivity.this, PhoneDialogActivity.class);
-                startActivity(mIntent);
-            }
-
-
-        } else if ("公告".equals(typeStr) || "宣传".equals(typeStr) || "就业".equals(typeStr)) {
-            setRefreshing(true);
-            if ("公告".equals(typeStr)) {
-                pageIndex = 1;
-                type = AppConstants.ZHENGWU_GONGGAO_TYPE;
-                getTypeTopic(type + "");
-            } else if ("宣传".equals(typeStr)) {
-                pageIndex = 1;
-                type = AppConstants.ZHENGWU_XUANCHUAN_TYPE;
-                getTypeTopic(type + "");
-            }
-        } else if ("意见".equals(typeStr)) {
-            if (isLogin(this)) {
-                intent.setClass(ZhengwuActivity.this, SuggestionActivity.class);
-                startActivity(intent);
-            } else {
-                showToast(getString(R.string.toast_no_login));
-            }
-
-        } else if ("指南".equals(typeStr)) {
-            intent.setClass(ZhengwuActivity.this, CompanionActivity.class);
+        String type = moduleModels.get(position).title;
+        if ("客服".equals(type)) {
+            intent.putExtra("type", "2");
+            intent.setClass(getActivity(), PhoneDialogActivity.class);
             startActivity(intent);
+        } else if (getString(R.string.activity_payment).equals(type)) {
+            intent.setClass(getActivity(), PayIndexActivity.class);
+            startActivity(intent);
+        } else if (getString(R.string.activity_family_info).equals(type)) {
+            if (isLogin(getActivity()))
+                FamilyInfoActivity.startActivity(getActivity(), null);
+            else
+                showToast(getString(R.string.toast_no_login));
+        } else if ("报修".equals(type)) {
+            showToast(getString(R.string.toast_online));
         }
-
     }
 
-    /**
-     * 上拉加载更多
-     */
-    @Override
-    public void onLoadMoreRequested() {
-        pageIndex++;
-        loadData();
+    private void loadData(int type) {
+        String userId = "";
+        if (isLogin(getActivity()))
+            userId = getUser(getActivity()).id;
 
-    }
-
-    /**
-     * 下拉刷新重新加载
-     */
-    @Override
-    public void onRefresh() {
-        pageIndex = 1;
-        mAdapter.setEnableLoadMore(false);
-        if (type == 0)
-            loadData();
-        else
-            getTypeTopic(type + "");
-    }
-
-
-    /**
-     * 点击收藏
-     *
-     * @param textView
-     * @param imageView
-     * @param position
-     */
-
-    private void onCollect(final TextView textView, final ImageView imageView, final int position) {
-        serverDao.doCollectTopic(getUser(this).id, mAdapter.getItem(position).id, new DialogCallback<BaseResponse<List>>(this) {
+        serverDao.getWuyeIndexData(userId, pageIndex, AppConstants.PAGE_SIZE, type, new JsonCallback<BaseResponse<WuyeIndexResponse>>() {
             @Override
-            public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
-                if ("收藏成功".equals(baseResponse.message)) {
-                    mAdapter.getData().get(position).collections = mAdapter.getData().get(position).collections + 1;
-                    textView.setText(mAdapter.getData().get(position).collections + "");
-                    imageView.setImageResource(R.mipmap.c1_icon9_p);
-                } else if ("取消收藏成功".equals(baseResponse.message)) {
-                    mAdapter.getData().get(position).collections = mAdapter.getData().get(position).collections - 1;
-                    textView.setText(mAdapter.getData().get(position).collections + "");
-                    imageView.setImageResource(R.mipmap.c1_icon9);
-                }
-                showToast(baseResponse.message);
-
-            }
-
-            @Override
-            public void onError(Call call, Response response, Exception e) {
-                super.onError(call, response, e);
-                showToast(e.getMessage());
-            }
-        });
-    }
-
-    /**
-     * 加载数据
-     */
-    private void loadData() {
-        String userId;
-        if (isLogin(this))
-            userId = getUser(this).id;
-        else
-            userId = "";
-        serverDao.getZhengwuIndexData(userId, pageIndex, AppConstants.PAGE_SIZE, new JsonCallback<BaseResponse<ZhengwuIndexResponse>>() {
-            @Override
-            public void onSuccess(BaseResponse<ZhengwuIndexResponse> baseResponse, Call call, Response response) {
+            public void onSuccess(BaseResponse<WuyeIndexResponse> baseResponse, Call call, Response response) {
                 mResponseData = baseResponse.retData;
                 mMenuData = mResponseData.menu;
                 if (pageIndex == 1) {
@@ -344,19 +361,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             }
 
             @Override
-            public void onError(Call call, Response response, Exception e) {
-                super.onError(call, response, e);
-                showToast(e.getMessage());
-            }
-
-            @Override
-            public void onCacheSuccess(BaseResponse<ZhengwuIndexResponse> baseResponse, Call call) {
-                //super.onCacheSuccess(baseResponse, call);
-                //一般来说,只需要第一次初始化界面的时候需要使用缓存刷新界面,以后不需要,所以用一个变量标识
-            }
-
-            @Override
-            public void onAfter(@Nullable BaseResponse<ZhengwuIndexResponse> baseResponse, @Nullable Exception e) {
+            public void onAfter(@Nullable BaseResponse<WuyeIndexResponse> baseResponse, @Nullable Exception e) {
                 super.onAfter(baseResponse, e);
                 //可能需要移除之前添加的布局
                 mAdapter.removeAllFooterView();
@@ -365,12 +370,11 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
             }
 
             @Override
-            public void onBefore(BaseRequest request) {
-                super.onBefore(request);
-                if (mAdapter != null)
-                    mAdapter.setEnableLoadMore(true);
-            }
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                showToast(e.getMessage());
 
+            }
         });
     }
 
@@ -388,66 +392,75 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
         });
     }
 
+    //如果你需要考虑更好的体验，可以这么操作
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onRefresh() {
+        pageIndex = 1;
+        loadData(type);
+        getBannerData();
+    }
+
+    @Override
+    public void onLoadMoreRequested() {
+        pageIndex++;
+        loadData(type);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getBannerData();
+    }
+
     /**
      * 设置数据
      */
-    private void setData() {
-        ModuleModel moduleModel1 = new ModuleModel();
-        moduleModel1.title = "公告";
-        moduleModel1.res = R.mipmap.d2_icon1;
-        moduleModel1.hasRedPoint = true;
-        moduleModels.add(moduleModel1);
-
+    private void setGridData() {
+        moduleModels = new ArrayList<>();
         ModuleModel moduleModel2 = new ModuleModel();
-        moduleModel2.title = "宣传";
-        moduleModel2.res = R.mipmap.d2_icon2;
+        moduleModel2.title = "缴费";
+        moduleModel2.res = R.mipmap.d17_icon2;
         moduleModel2.hasRedPoint = false;
         moduleModels.add(moduleModel2);
 
         ModuleModel moduleModel3 = new ModuleModel();
-        moduleModel3.title = "问卷";
-        moduleModel3.res = R.mipmap.d2_icon3;
+        moduleModel3.title = "报修";
+        moduleModel3.res = R.mipmap.d17_icon3;
         moduleModel3.hasRedPoint = false;
         moduleModels.add(moduleModel3);
 
-//        ModuleModel moduleModel4 = new ModuleModel();
-//        moduleModel4.title = "就业";
-//        moduleModel4.res = R.mipmap.d2_icon4;
-//        moduleModel4.hasRedPoint = false;
-//        moduleModels.add(moduleModel4);
+        ModuleModel moduleModel4 = new ModuleModel();
+        moduleModel4.title = "家庭信息";
+        moduleModel4.res = R.mipmap.d17_icon4;
+        moduleModel4.hasRedPoint = false;
+        moduleModels.add(moduleModel4);
 
-        ModuleModel moduleModel5 = new ModuleModel();
-        moduleModel5.title = "意见";
-        moduleModel5.res = R.mipmap.d2_icon5;
-        moduleModel5.hasRedPoint = false;
-        moduleModels.add(moduleModel5);
-
-        ModuleModel moduleModel6 = new ModuleModel();
-        moduleModel6.title = "指南";
-        moduleModel6.res = R.mipmap.d2_icon6;
-        moduleModel6.hasRedPoint = false;
-        moduleModels.add(moduleModel6);
-
-        ModuleModel moduleModel7 = new ModuleModel();
-        moduleModel7.title = "热线";
-        moduleModel7.res = R.mipmap.d2_icon7;
-        moduleModel7.hasRedPoint = false;
-        moduleModels.add(moduleModel7);
+        ModuleModel moduleModel1 = new ModuleModel();
+        moduleModel1.title = "客服";
+        moduleModel1.res = R.mipmap.d17_icon1;
+        moduleModel1.hasRedPoint = true;
+        moduleModels.add(moduleModel1);
         setGridView();
+
     }
 
     /**
      * 设置GirdView参数，绑定数据
      */
     private void setGridView() {
-        int length = ScreenUtils.getScreenWidth(this) / 4;
+        int length = ScreenUtils.getScreenWidth(getActivity()) / 4;
         DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
         float density = dm.density;
         int itemWidth = (int) (length * density);
         itemWidth = length;
         gridView.setHorizontalSpacing(5); // 设置列表项水平间距
-        ModuleAdapter adapter = new ModuleAdapter(ZhengwuActivity.this,
+        ModuleAdapter adapter = new ModuleAdapter(getActivity(),
                 moduleModels);
         int defaultRows = 2;
         int defaultColumns = 4;
@@ -479,55 +492,6 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
         gridView.setNumColumns(columns);
     }
 
-    /**
-     * 获取分类文章
-     *
-     * @param type
-     */
-    private void getTypeTopic(String type) {
-        String userId;
-        if (isLogin(this))
-            userId = getUser(this).id;
-        else
-            userId = "";
-        serverDao.getTypeTopic(userId, pageIndex, AppConstants.PAGE_SIZE, type, new JsonCallback<BaseResponse<List<ArticleModel>>>() {
-            @Override
-            public void onSuccess(BaseResponse<List<ArticleModel>> baseResponse, Call call, Response response) {
-                if (pageIndex == 1) {
-                    mAdapter.setNewData(baseResponse.retData);
-                    mAdapter.setEnableLoadMore(true);
-                } else {
-                    mAdapter.addData(mResponseData.artList);
-                    mAdapter.loadMoreComplete();
-                }
-                if (baseResponse.retData.size() < AppConstants.PAGE_SIZE) {
-                    //显示没有更多数据
-                    mAdapter.loadMoreEnd();         //加载完成
-                }
-            }
-
-            @Override
-            public void onError(Call call, Response response, Exception e) {
-                super.onError(call, response, e);
-                showToast(e.getMessage());
-            }
-
-            @Override
-            public void onAfter(@Nullable BaseResponse<List<ArticleModel>> baseResponse, @Nullable Exception e) {
-                super.onAfter(baseResponse, e);
-                //可能需要移除之前添加的布局
-                mAdapter.removeAllFooterView();
-                //结束刷新动画
-                setRefreshing(false);
-            }
-
-            @Override
-            public void onBefore(BaseRequest request) {
-                super.onBefore(request);
-            }
-        });
-    }
-
     private int pageComment = 1;
     private String artId;
     private View commentView;
@@ -539,7 +503,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
      * @param parent
      */
     private void getComments(final String artId, final View parent, final int position) {
-        serverDao.getComments(artId, pageComment, AppConstants.PAGE_SIZE, new DialogCallback<BaseResponse<CommentResponse>>(this) {
+        serverDao.getComments(artId, pageComment, AppConstants.PAGE_SIZE, new DialogCallback<BaseResponse<CommentResponse>>(getActivity()) {
             @Override
             public void onSuccess(BaseResponse<CommentResponse> baseResponse, Call call, Response response) {
                 comments = new ArrayList<>();
@@ -560,15 +524,14 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
                         }
                     });
                     if (popupWindow == null)
-                        popupWindow = new CommentPopwindow(ZhengwuActivity.this, new View.OnTouchListener() {
+                        popupWindow = new CommentPopwindow(getActivity(), new View.OnTouchListener() {
                             @Override
                             public boolean onTouch(View view, MotionEvent motionEvent) {
-                                KeyBoardUtils.closeKeybord(popupWindow.et_comment, ZhengwuActivity.this);
+                                KeyBoardUtils.closeKeybord(popupWindow.et_comment, getActivity());
                                 popupWindow.dismiss();
                                 popupWindow.et_comment.setText("");
                                 pageComment = 1;
                                 commentsPopwinAdapter = null;
-
                                 return false;
                             }
                         });
@@ -580,9 +543,9 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
                             getComments(artId, commentView, commentPosition);
                         }
                     }, popupWindow.lv_container);
-                    popupWindow.lv_container.getLayoutParams().height = (int) (ScreenUtils.getScreenHeight(ZhengwuActivity.this) * 0.8);
+                    popupWindow.lv_container.getLayoutParams().height = (int) (ScreenUtils.getScreenHeight(getActivity()) * 0.8);
                     popupWindow.lv_container.setAdapter(commentsPopwinAdapter);
-                    popupWindow.showAtLocation(parent, Gravity.BOTTOM, ScreenUtils.getScreenWidth(ZhengwuActivity.this), 0);
+                    popupWindow.showAtLocation(parent, Gravity.BOTTOM, ScreenUtils.getScreenWidth(getActivity()), 0);
                 }
                 if (pageComment == 1) {
                     commentsPopwinAdapter.setNewData(comments);
@@ -599,12 +562,12 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
                 } else if (comments.size() < AppConstants.PAGE_SIZE) {
                     commentsPopwinAdapter.loadMoreEnd();
                 }
-                popupWindow.showAtLocation(parent, Gravity.BOTTOM, ScreenUtils.getScreenWidth(ZhengwuActivity.this), 0);
+                popupWindow.showAtLocation(parent, Gravity.BOTTOM, ScreenUtils.getScreenWidth(getActivity()), 0);
                 //发评论事件
                 popupWindow.btn_send.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (!isLogin(ZhengwuActivity.this)) {
+                        if (!isLogin(getActivity())) {
                             showToast(getString(R.string.toast_no_login));
                             return;
                         }
@@ -646,7 +609,7 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
      * @param content
      */
     private void doComment(final View view, final String artId, String content, final String targetId) {
-        serverDao.doComment(getUser(this).id, artId, content, targetId, new DialogCallback<BaseResponse<List>>(this) {
+        serverDao.doComment(getUser(getActivity()).id, artId, content, targetId, new DialogCallback<BaseResponse<List>>(getActivity()) {
             @Override
             public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
                 popupWindow.et_comment.setText("");
@@ -667,15 +630,14 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
      * 删除评论
      */
     private void deleteComment(final int position, String commentId, int type) {
-        if (!isLogin(this)) {
+        if (!isLogin(getActivity())) {
             showToast(getString(R.string.toast_no_login));
             return;
         }
-        serverDao.doDeleteComment(getUser(this).id, commentId, type, new DialogCallback<BaseResponse<List>>(this) {
+        serverDao.doDeleteComment(getUser(getActivity()).id, commentId, type, new DialogCallback<BaseResponse<List>>(getActivity()) {
             @Override
             public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
                 showToast(baseResponse.message);
-//                commentsPopwinAdapter.removeItem(position);
 //                commentsPopwinAdapter.remove(position);
                 getComments(artId, commentView, commentPosition);
             }
@@ -688,13 +650,45 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
         });
     }
 
+    /**
+     * 点击收藏
+     *
+     * @param textView
+     * @param imageView
+     * @param position
+     */
+    private void onCollect(final TextView textView, final ImageView imageView, final int position) {
+        serverDao.doCollectTopic(getUser(getActivity()).id, mAdapter.getItem(position).id, new JsonCallback<BaseResponse<List>>() {
+            @Override
+            public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
+                if ("收藏成功".equals(baseResponse.message)) {
+                    mAdapter.getData().get(position).collections = mAdapter.getData().get(position).collections + 1;
+                    textView.setText(mAdapter.getData().get(position).collections + "");
+                    imageView.setImageResource(R.mipmap.c1_icon9_p);
+                } else if ("取消收藏成功".equals(baseResponse.message)) {
+                    mAdapter.getData().get(position).collections = mAdapter.getData().get(position).collections - 1;
+                    textView.setText(mAdapter.getData().get(position).collections + "");
+                    imageView.setImageResource(R.mipmap.c1_icon9);
+                }
+                showToast(baseResponse.message);
+
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                showToast(e.getMessage());
+            }
+        });
+    }
+
     public void showAlertDialog(final int position) {
 //        mDialog = new AlertDialog.Builder(this).create();
-        mDialog = new Dialog(this);
+        mDialog = new Dialog(getActivity());
         mDialog.setContentView(R.layout.activity_dialog_common);
         Window window = mDialog.getWindow();
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        WindowManager m = getWindowManager();
+        WindowManager m = getActivity().getWindowManager();
         Display d = m.getDefaultDisplay(); // 获取屏幕宽、高用
         WindowManager.LayoutParams p = window.getAttributes(); // 获取对话框当前的参数值
         p.height = (int) (d.getHeight() * 0.6); // 高度设置为屏幕的0.6
@@ -729,11 +723,12 @@ public class ZhengwuActivity extends BaseActivity implements AdapterView.OnItemC
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            if (requestCode == 99) {
-
+        if (resultCode == getActivity().RESULT_OK) {
+            if (requestCode == REQUEST_CODE_COMMENT) {
+                mAdapter.getData().get(data.getIntExtra("index", 0)).comments = data.getIntExtra("comment", 0);
+                mAdapter.notifyDataSetChanged();
             }
         }
     }
