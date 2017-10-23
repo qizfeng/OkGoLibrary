@@ -258,6 +258,40 @@
             android:name=".ui.life.minsheng.MerchantDetailActivity"
             android:label="@string/activity_merchant_detail"
             android:screenOrientation="portrait" />
+
+
+
+        <activity
+            android:name=".ui.me.MyAddressActivity"
+            android:label="@string/activity_my_address"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.me.AddAddressActivity"
+            android:label="@string/add_address_activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.me.CollectActivity"
+            android:label="@string/activity_collect"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.me.MessageActivity"
+            android:label="@string/activity_message"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.me.MessageListActivity"
+            android:label="@string/activity_message_list"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".ui.me.MessageCenterActivity"
+            android:label="@string/activity_message_center"
+            android:screenOrientation="portrait"/>
+
+
+
+
         <activity android:name=".ui.life.minsheng.MerchantNavigationActivity" />
         <!-- 自定义service -->
         <service

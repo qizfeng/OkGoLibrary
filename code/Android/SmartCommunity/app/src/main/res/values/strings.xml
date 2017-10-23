@@ -374,6 +374,12 @@
     <string name="activity_shopping_cart">购物车</string>
     <string name="activity_merchant_detail">商家详情</string>
     <string name="activity_merchant_navigation">导航</string>
+    <string name="activity_my_address">地址管理</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_address_activity">地址</string>
+    <string name="activity_collect">收藏</string>
+    <string name="activity_message">消息中心</string>
+    <string name="activity_message_list">消息列表</string>
+    <string name="activity_message_center">消息中心</string>
 </resources>

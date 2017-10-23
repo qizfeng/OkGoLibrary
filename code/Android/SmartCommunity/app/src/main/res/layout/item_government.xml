@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@android:color/white"
+    android:layout_height="78dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingBottom="12dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="15dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="政务阿萨德三大政务阿萨德三大政务阿萨德三大政务阿萨德三大政务阿萨德三大政务阿萨德三大政务阿萨德三大政务阿萨德三大政务阿萨德三大政务阿萨德三大"
+                android:textColor="@color/color_gray_333333"
+                android:textSize="14sp" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="07-12    14:00"
+                    android:textColor="@color/color_gray_999999"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:text="8评论"
+                    android:textColor="@color/color_gray_999999"
+                    android:textSize="12sp" />
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="80dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="15dp"
+            android:layout_height="65dp">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="65dp"
+
+                android:src="@color/color_map_community_5c894fb6" />
+            <TextView
+                android:id="@+id/tv_wenjuan"
+                android:background="@drawable/button_shape_alpha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="民调"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:textSize="10dp"
+                android:textColor="@color/white"
+                android:layout_margin="@dimen/dp_10"
+                android:layout_gravity="right|bottom"
+                android:src="@mipmap/c1_bq1"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="23dp"
+        android:src="@mipmap/d64_bg" />
+
+
+    <View
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#e5e5e5" />
+
+</RelativeLayout>
