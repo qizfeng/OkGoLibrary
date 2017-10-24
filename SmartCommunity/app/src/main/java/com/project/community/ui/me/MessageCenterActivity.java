@@ -3,6 +3,7 @@ package com.project.community.ui.me;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.widget.TextView;
 
 import com.project.community.R;
@@ -36,4 +37,7 @@ public class MessageCenterActivity extends BaseActivity {
     private void setTitles() {
         initToolBar(toolbar, tvTitle, true, "消息中心", R.mipmap.iv_back);
     }
+
+
+
 }

@@ -12,7 +12,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.project.community.R;
 import com.project.community.ui.me.MessageCenterActivity;
+import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuAdapter;
+import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
+import com.yanzhenjie.recyclerview.swipe.SwipeMenuView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +60,8 @@ public class MessageListAdapter extends SwipeMenuAdapter<MessageListAdapter.Defa
 
     @Override
     public void onBindViewHolder(final DefaultViewHolder holder, final int position) {
+
+
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

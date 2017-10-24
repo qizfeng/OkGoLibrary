@@ -1,8 +1,10 @@
 package com.project.community.ui.me;
 
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Px;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -151,11 +153,12 @@ public class MessageListActivity extends BaseActivity {
 //                CustomSwipeMenuLayout csml = new CustomSwipeMenuLayout(getActivity());
 //                swipeRightMenu = new SwipeMenu(csml,viewType);
                 SwipeMenuItem deleteItem = new SwipeMenuItem(MessageListActivity.this)
-                        .setBackgroundDrawable(R.color.color_red_d54824)
+                        .setBackgroundDrawable(R.drawable.del_bg)
                         .setText("删除") // 文字，还可以设置文字颜色，大小等。。
                         .setTextColor(Color.WHITE)
                         .setWidth(width)
                         .setHeight(height);
+
                 swipeRightMenu.addMenuItem(deleteItem);// 添加一个按钮到右侧侧菜单。
             }
         }
