@@ -21,7 +21,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * cj  -->商铺资料
+ * Created by cj on 17/10/24.
+ * 商铺资料
  */
 
 public class ShopDataActivity extends BaseActivity {

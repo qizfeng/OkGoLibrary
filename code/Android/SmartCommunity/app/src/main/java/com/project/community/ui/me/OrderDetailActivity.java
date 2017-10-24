@@ -54,7 +54,10 @@ import java.util.concurrent.TimeUnit;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import rx.functions.Action1;
-
+/**
+ * Created by cj on 17/10/24
+ * 订单详情
+ */
 public class OrderDetailActivity extends BaseActivity implements View.OnClickListener {
 
     private static final int CODE_GALLERY_REQUEST = 0xa0;

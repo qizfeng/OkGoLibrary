@@ -28,6 +28,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * Created by cj on 17/9/26.
+ * 社区论坛
+ */
+
 public class CommunityActivity extends BaseActivity {
 
     @Bind(R.id.tv_serview_wait)
@@ -50,8 +55,13 @@ public class CommunityActivity extends BaseActivity {
     View viewRedComplet;
     @Bind(R.id.ll_servers_commplet)
     LinearLayout llServersCommplet;
-    @Bind(R.id.line)
-    View line;
+    @Bind(R.id.line_1)
+    View line_1;
+    @Bind(R.id.line_2)
+    View line_2;
+    @Bind(R.id.line_3)
+    View line_3;
+
     @Bind(R.id.community_off)
     TextView community_off;
     @Bind(R.id.viewpager)
@@ -88,27 +98,27 @@ public class CommunityActivity extends BaseActivity {
         mViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                WindowManager wm = getWindowManager();
-
-                int screeWidth = wm.getDefaultDisplay().getWidth();
-                int screeHeight = wm.getDefaultDisplay().getHeight();
-                LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) line
-                        .getLayoutParams();
-                lp.leftMargin = (int) (positionOffset * (screeWidth * 1.0 / 4) + position * (screeWidth / 4));
-                line.setLayoutParams(lp);
+//                WindowManager wm = getWindowManager();
+//
+//                int screeWidth = wm.getDefaultDisplay().getWidth();
+//                int screeHeight = wm.getDefaultDisplay().getHeight();
+//                LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) line
+//                        .getLayoutParams();
+//                lp.leftMargin = (int) (positionOffset * (screeWidth * 1.0 / 3) + position * (screeWidth / 3));
+//                line.setLayoutParams(lp);
             }
 
             @Override
             public void onPageSelected(int position) {
                 switch (position) {
                     case 0:
-                        resetTextView(mTvServiewWait);
+                        resetTextView(mTvServiewWait,line_1);
                         break;
                     case 1:
-                        resetTextView(mTvServiewIng);
+                        resetTextView(mTvServiewIng,line_2);
                         break;
                     case 2:
-                        resetTextView(mTvServiewComp);
+                        resetTextView(mTvServiewComp,line_3);
                         break;
 
                 }
@@ -121,8 +131,12 @@ public class CommunityActivity extends BaseActivity {
         });
     }
 
-    private void resetTextView(TextView v) {
+    private void resetTextView(TextView v,View line) {
 
+        line_1.setVisibility(View.INVISIBLE);
+        line_2.setVisibility(View.INVISIBLE);
+        line_3.setVisibility(View.INVISIBLE);
+        line.setVisibility(View.VISIBLE);
         mTvServiewWait.setTextColor(getResources().getColor(R.color.color_gray_666666));
         mTvServiewIng.setTextColor(getResources().getColor(R.color.color_gray_666666));
         mTvServiewComp.setTextColor(getResources().getColor(R.color.color_gray_666666));

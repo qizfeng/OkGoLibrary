@@ -68,6 +68,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * Created by cj on 17/9/28.
+ * 地址页面
+ */
+
 public class AdrressActivity extends BaseActivity implements BaiduMap.OnMapClickListener, BaiduMap.OnMarkerClickListener {
 
     private static final int accuracyCircleFillColor = 0xAAFFFF88;

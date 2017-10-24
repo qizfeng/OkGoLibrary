@@ -258,13 +258,10 @@
             android:name=".ui.life.minsheng.MerchantDetailActivity"
             android:label="@string/activity_merchant_detail"
             android:screenOrientation="portrait" />
-
-
         <activity
             android:name=".ui.me.MyAddressActivity"
             android:label="@string/activity_my_address"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.me.AddAddressActivity"
             android:label="@string/add_address_activity"
@@ -273,12 +270,10 @@
             android:name=".ui.me.CollectActivity"
             android:label="@string/activity_collect"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.me.MessageActivity"
             android:label="@string/activity_message"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.me.MessageListActivity"
             android:label="@string/activity_message_list"
@@ -288,6 +283,7 @@
             android:name=".ui.me.MessageCenterActivity"
             android:label="@string/activity_message_center"
             android:screenOrientation="portrait" />
+
 
         <activity
             android:name=".ui.me.MyForumActivity"
@@ -573,7 +569,14 @@
         <activity android:name=".ui.me.shop_management.AllProductsActivity" />
         <activity android:name=".ui.me.shop_management.ShopDataActivity" />
         <activity android:name=".ui.me.all_order.AllOrderActivity" />
-        <activity android:name=".ui.me.all_order.GoodsOrderActivity"></activity>
+        <activity android:name=".ui.me.all_order.GoodsOrderActivity" />
+        <activity android:name=".ui.me.shop_management.ShopManagerActivity" />
+        <activity
+            android:name=".ui.me.shop_management.BuildNewGoodsActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".ui.me.shop_management.SubdomainsAccountActivity" />
+        <activity android:name=".ui.me.shop_management.AddSubdomainsAccountActivity" />
+        <activity android:name=".ui.me.all_order.MyOrderActivity"></activity>
     </application>
 
 </manifest>

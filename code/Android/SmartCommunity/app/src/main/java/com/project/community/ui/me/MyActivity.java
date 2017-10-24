@@ -16,6 +16,10 @@ import com.project.community.ui.PhoneDialogActivity;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+/**
+ * Created by cj on 17/9/27.
+ * 我的
+ */
 
 public class MyActivity extends BaseActivity {
 

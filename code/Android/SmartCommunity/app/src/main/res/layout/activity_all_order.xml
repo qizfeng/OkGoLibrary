@@ -23,7 +23,7 @@
             app:tabMode="scrollable"
             app:tabGravity="fill"
             app:tabMaxWidth="60dp"
-            app:tabTextAppearance="@style/MyTabLayoutTextAppearance">
+            app:tabTextAppearance="@style/TabLayoutTextStyle">
 
         </android.support.design.widget.TabLayout>
 

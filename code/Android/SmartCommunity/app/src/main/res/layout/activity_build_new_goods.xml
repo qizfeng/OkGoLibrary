@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_gray_bg"
+    android:orientation="vertical"
+    android:id="@+id/layout_root"
+    tools:context="com.project.community.ui.me.shop_management.BuildNewGoodsActivity">
+
+    <include layout="@layout/pub_layout_toolbar"/>
+    <ScrollView
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+                <TextView
+                    style="@style/apply_store_tv_title"
+                    android:text="@string/build_new_goods_name"
+                    android:layout_width="105dp"
+                    android:layout_height="match_parent" />
+                <EditText
+                    android:id="@+id/build_new_et_name"
+                    style="@style/apply_store_et_title"
+                    android:hint="@string/build_new_goods_name_hit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/common_gray_bg"/>
+            <LinearLayout
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+                <TextView
+                    style="@style/apply_store_tv_title"
+                    android:text="@string/build_new_goods_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:textSize="14sp"
+                    android:gravity="center_vertical"
+                    android:hint="@string/store_apply_photo_hit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <LinearLayout
+                android:paddingBottom="15dp"
+                android:paddingLeft="12dp"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <FrameLayout
+                    android:orientation="vertical"
+                    android:layout_width="111dp"
+                    android:layout_height="111dp">
+                    <ImageView
+                        android:id="@+id/build_new_img_cover"
+                        android:src="@color/color_gray_eeeeee"
+                        android:layout_width="111dp"
+                        android:layout_height="111dp"
+                        android:layout_centerInParent="true"
+                        android:scaleType="fitXY"/>
+                    <ImageView
+                        android:id="@+id/build_new_img_del"
+                        android:visibility="gone"
+                        android:layout_marginRight="6dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_gravity="right"
+                        android:src="@mipmap/d31_shanchu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <FrameLayout
+                        android:id="@+id/build_new_img_add"
+                        android:background="@color/color_gray_eeeeee"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:src="@mipmap/d31_jia"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </FrameLayout>
+
+                </FrameLayout>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/common_gray_bg"/>
+            <LinearLayout
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="21dp"
+                android:background="@drawable/edit_describe_color"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="90dp">
+                <EditText
+                    android:id="@+id/build_new_et_describe"
+                    style="@style/apply_store_et_title"
+                    android:singleLine="false"
+                    android:gravity="top"
+                    android:maxLength="60"
+                    android:paddingTop="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="10dp"
+                    android:layout_weight="1"
+                    android:hint="@string/build_new_goods_character_describe"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:id="@+id/build_new_tv_describe_num"
+                    style="@style/apply_store_tv_title"
+                    android:hint="0/60"
+                    android:gravity="right"
+                    android:paddingBottom="8dp"
+                    android:paddingRight="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/common_gray_bg"/>
+            <LinearLayout
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+                <TextView
+                    style="@style/apply_store_tv_title"
+                    android:text="@string/build_new_goods_sell_price"
+                    android:layout_width="105dp"
+                    android:layout_height="match_parent" />
+                <EditText
+                    android:id="@+id/build_new_et_sell_price"
+                    style="@style/apply_store_et_title"
+                    android:hint="@string/build_new_goods_sell_price_hit"
+                    android:inputType="numberDecimal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/common_gray_bg"/>
+            <LinearLayout
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+                <TextView
+                    style="@style/apply_store_tv_title"
+                    android:text="@string/build_new_goods_price"
+                    android:layout_width="105dp"
+                    android:layout_height="match_parent" />
+                <EditText
+                    android:id="@+id/build_new_et_price"
+                    style="@style/apply_store_et_title"
+                    android:hint="@string/build_new_goods_price_hit"
+                    android:inputType="numberDecimal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/common_gray_bg"/>
+            <LinearLayout
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+                <TextView
+                    style="@style/apply_store_tv_title"
+                    android:text="@string/build_new_goods_unit"
+                    android:layout_width="105dp"
+                    android:layout_height="match_parent" />
+                <EditText
+                    android:id="@+id/build_new_et_unit"
+                    style="@style/apply_store_et_title"
+                    android:hint="@string/build_new_goods_unit_hit"
+                    android:inputType="numberDecimal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/common_gray_bg"/>
+            <LinearLayout
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+                <TextView
+                    style="@style/apply_store_tv_title"
+                    android:text="@string/build_new_goods_inventory"
+                    android:layout_width="105dp"
+                    android:layout_height="match_parent" />
+                <EditText
+                    android:id="@+id/build_new_et_inventory"
+                    style="@style/apply_store_et_title"
+                    android:hint="@string/build_new_goods_inventory_hit"
+                    android:inputType="number"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/common_gray_bg"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

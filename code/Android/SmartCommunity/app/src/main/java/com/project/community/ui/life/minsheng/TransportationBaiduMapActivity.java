@@ -41,6 +41,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * Created by cj on 17/9/24.
+ * 公交
+ */
+
 public class TransportationBaiduMapActivity extends BaseActivity implements OnGetPoiSearchResultListener, OnGetBusLineSearchResultListener,
         BaiduMap.OnMapClickListener {
 

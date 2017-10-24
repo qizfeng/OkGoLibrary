@@ -24,8 +24,10 @@ import butterknife.Bind;
 import butterknife.OnClick;
 
 /**
- * cj  -->全部商品
+ * Created by cj on 17/10/24.
+ * 全部商品
  */
+
 public class AllProductsActivity extends BaseActivity {
 
     @Bind(R.id.toolbar)
@@ -89,6 +91,7 @@ public class AllProductsActivity extends BaseActivity {
 
     @OnClick(R.id.product_add)
     public void onViewClicked() {
+        BuildNewGoodsActivity.startActivity(this);
     }
     class MyFrageStatePagerAdapter extends FragmentStatePagerAdapter {
 

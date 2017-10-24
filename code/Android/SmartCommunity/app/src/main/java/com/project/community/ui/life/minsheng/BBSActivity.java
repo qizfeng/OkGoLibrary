@@ -18,6 +18,8 @@ import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.ui.adapter.PageFragmentAdapter;
 import com.project.community.ui.life.SearchActivity;
+import com.project.community.ui.me.all_order.AllOrderActivity;
+import com.project.community.util.TablayoutLineReflex;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -26,6 +28,11 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+/**
+ * Created by cj on 17/9/24.
+ * 社区论坛
+ */
 
 public class BBSActivity extends BaseActivity implements ViewPager.OnPageChangeListener {
 
@@ -95,6 +102,7 @@ public class BBSActivity extends BaseActivity implements ViewPager.OnPageChangeL
             @Override
             public void run() {
                 setIndicator(bbsTablayout,15,15);
+//                TablayoutLineReflex.setTabLine(BBSActivity.this, bbsTablayout, 10, 10);
             }
         });
     }
