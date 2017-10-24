@@ -222,10 +222,12 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
             case R.id.layout_chat://即时聊天
                 break;
             case R.id.layout_my_topic://我的帖子
-                showToast(getString(R.string.toast_online));
+//                showToast(getString(R.string.toast_online));
+                startActivity(new Intent(getActivity(),MyForumActivity.class));
                 break;
             case R.id.layout_repair_record://维修记录
-                showToast(getString(R.string.toast_online));
+//                showToast(getString(R.string.toast_online));
+                startActivity(new Intent(getActivity(),RepairsRecordActivity.class));
                 break;
             case R.id.layout_family_info://家庭信息
                 if (isLogin(getActivity()))

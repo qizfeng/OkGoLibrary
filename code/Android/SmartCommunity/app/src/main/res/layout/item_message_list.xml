@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@android:color/white">
+    android:background="@drawable/item_bg_white">
 
     <!--<View-->
         <!--android:layout_width="match_parent"-->
@@ -11,6 +11,7 @@
         <!--android:background="@color/color_gray_eeeeee"/>-->
 
     <LinearLayout
+        android:background="@drawable/item_bg_white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -29,7 +30,7 @@
                 android:text="申请成功"
                 android:textColor="@color/color_gray_333333"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+              />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -43,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:ellipsize="end"
             android:maxLines="2"
             android:text="申请成功申请成功申请成功申请成功申请成功申请成功申请成功申请成功申请成功申请成功申请成功申请成功申请成功申请成功申请成功申请成功"

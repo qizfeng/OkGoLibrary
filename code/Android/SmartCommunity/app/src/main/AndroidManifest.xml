@@ -260,7 +260,6 @@
             android:screenOrientation="portrait" />
 
 
-
         <activity
             android:name=".ui.me.MyAddressActivity"
             android:label="@string/activity_my_address"
@@ -285,11 +284,31 @@
             android:label="@string/activity_message_list"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".ui.me.MessageCenterActivity"
+        <activity
+            android:name=".ui.me.MessageCenterActivity"
             android:label="@string/activity_message_center"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".ui.me.MyForumActivity"
+            android:label="@string/activity_my_forum"
+            android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".ui.me.MyForumDetailsActivity"
+            android:label="@string/activity_my_forum_details"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.me.RepairsRecordActivity"
+            android:label="@string/activity_repairs_record"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.me.RepairsEvaluateActivity"
+            android:label="@string/activity_repairs_evaluate"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize|stateHidden" />
 
 
         <activity android:name=".ui.life.minsheng.MerchantNavigationActivity" />
