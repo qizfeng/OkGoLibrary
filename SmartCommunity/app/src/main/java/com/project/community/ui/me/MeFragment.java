@@ -28,6 +28,10 @@ import com.project.community.constants.AppConstants;
 import com.project.community.model.UserModel;
 import com.project.community.ui.life.family.FamilyInfoActivity;
 import com.project.community.ui.life.minsheng.ApplyStoreActivity;
+import com.project.community.ui.me.all_order.AllOrderActivity;
+import com.project.community.ui.me.all_order.MyOrderActivity;
+import com.project.community.ui.me.shop_management.AllProductsActivity;
+import com.project.community.ui.me.shop_management.ShopManagerActivity;
 import com.project.community.ui.user.LoginActivity;
 import com.project.community.ui.user.RegisterActivity;
 import com.project.community.ui.user.SettingActivity;
@@ -213,11 +217,13 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                 break;
             case R.id.layout_my_order://我的订单
 //                showToast(getString(R.string.toast_online));
-                startActivity(new Intent(getActivity(),MyAddressActivity.class));
+//                startActivity(new Intent(getActivity(),MyAddressActivity.class));
+                MyOrderActivity.startActivity(getActivity());
                 break;
             case R.id.layout_my_collect://我的收藏
 //                showToast(getString(R.string.toast_online));
                 startActivity(new Intent(getActivity(),CollectActivity.class));
+
                 break;
             case R.id.layout_chat://即时聊天
                 break;
@@ -236,7 +242,8 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                     showToast(getString(R.string.toast_no_login));
                 break;
             case R.id.layout_shop_manage://店铺管理
-                showToast(getString(R.string.toast_online));
+                ShopManagerActivity.startActivity(getActivity());
+//                showToast(getString(R.string.toast_online));
                 break;
             case R.id.btn_apply_shop://申请店铺
                 intent = new Intent(getActivity(), ApplyStoreActivity.class);

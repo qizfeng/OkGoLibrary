@@ -32,6 +32,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * Created by cj on 17/10/24.
+ * 商品订单详情
+ */
+
 public class GoodsOrderActivity extends BaseActivity {
 
     @Bind(R.id.toolbar)

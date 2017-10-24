@@ -38,6 +38,11 @@ import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Response;
 
+/**
+ * Created by cj on 17/9/25.
+ * 公交页面
+ */
+
 public class PublicTransportationActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     @Bind(R.id.toolbar)

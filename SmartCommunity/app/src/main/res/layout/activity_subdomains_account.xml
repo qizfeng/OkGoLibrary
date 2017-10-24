@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_gray_bg"
+    android:orientation="vertical"
+    tools:context="com.project.community.ui.me.shop_management.SubdomainsAccountActivity">
+
+    <include layout="@layout/pub_layout_toolbar"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+    <com.project.community.view.MyButton
+        android:id="@+id/add"
+        android:textSize="@dimen/sp_16"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/white"
+        android:text="@string/subdomains_account_add"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_item_height" />
+
+</LinearLayout>

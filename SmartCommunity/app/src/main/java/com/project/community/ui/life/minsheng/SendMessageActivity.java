@@ -50,6 +50,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.functions.Action1;
 
+/**
+ * Created by cj on 17/9/27.
+ * 发信息页面
+ */
+
 public class SendMessageActivity extends BaseActivity implements View.OnClickListener, View.OnTouchListener {
 
     private static final int CODE_GALLERY_REQUEST = 0xa0;

@@ -30,8 +30,10 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- *  cj-->所有订单
+ * Created by cj on 17/10/24.
+ * 所有订单
  */
+
 public class AllOrderActivity extends BaseActivity {
 
     @Bind(R.id.toolbar)

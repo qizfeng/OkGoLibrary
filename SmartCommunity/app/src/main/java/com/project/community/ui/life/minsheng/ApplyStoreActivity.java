@@ -62,7 +62,10 @@ import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.Response;
 import rx.functions.Action1;
-
+/**
+ * Created by cj on 17/9/24.
+ * 申请店铺
+ */
 public class ApplyStoreActivity extends BaseActivity implements View.OnClickListener, View.OnTouchListener {
 
 

@@ -121,4 +121,62 @@
     <string name="goods_order_xiadan_time">下单时间</string>
     <string name="goods_order_yichuli">已处理</string>
 
+    <!--商品管理-->
+    <string name="shop_manager_title">商铺管理</string>
+    <string name="shop_manager_goods">商品管理</string>
+    <string name="shop_manager_goods_son"><span style="font-size:36px; color:#ffffff;">商铺管理</span><span style="font-size:12px; color:#ffffff;">(子账号)</span></string>
+    <string name="shop_manager_liushui">今日流水/总流水（元）</string>
+    <string name="shop_manager_order">今日订单数/总订单数</string>
+    <string name="shop_manager_data">商铺资料</string>
+    <string name="shop_manager_order_manager">订单管理</string>
+    <string name="shop_manager_zhanghao_manager">账号管理</string>
+    <string name="shop_manager_shop_yingye">店铺营业</string>
+
+    <!--商品管理-->
+    <string name="add_subdomains_account_title">添加子账号</string>
+    <string name="add_subdomains_account_name">名称</string>
+    <string name="add_subdomains_account_name_hit">请输入名称</string>
+    <string name="add_subdomains_account_phone">手机号</string>
+    <string name="add_subdomains_account_phone_hit">请输入手机号</string>
+    <string name="add_subdomains_account_yuding">今日与定额/总金额（元）</string>
+    <string name="add_subdomains_account_permisson">权限</string>
+    <string name="add_subdomains_account_set">设置是否需要子账号可见</string>
+    <string name="add_subdomains_account_save">保存</string>
+    <string name="add_subdomains_account_add_goods">添加商品</string>
+
+    <!--商品管理-->
+    <string name="build_new_goods_title">新建商品</string>
+    <string name="build_new_goods_issue">发布</string>
+    <string name="build_new_goods_photo">商品图片</string>
+    <string name="build_new_goods_photo_hit">请上传商品图片</string>
+    <string name="build_new_goods_format">（支持jpg、png）</string>
+    <string name="build_new_goods_character_describe">文字描述</string>
+    <string name="build_new_goods_character_describe_hit">请输入文字描述</string>
+    <string name="build_new_goods_name">商品名称</string>
+    <string name="build_new_goods_name_hit">请输入商品名称</string>
+    <string name="build_new_goods_sell_price">售价</string>
+    <string name="build_new_goods_sell_price_hit">请输入售价</string>
+    <string name="build_new_goods_price">原价</string>
+    <string name="build_new_goods_price_hit">请输入原价</string>
+    <string name="build_new_goods_unit">单位</string>
+    <string name="build_new_goods_unit_hit">请输入单位</string>
+    <string name="build_new_goods_inventory">库存</string>
+    <string name="build_new_goods_inventory_hit">请输入库存</string>
+
+    <!--子账号-->
+    <string name="subdomains_account_title">子账号</string>
+    <string name="subdomains_account_add">添加子账号</string>
+    <string name="subdomains_account_edit">编辑</string>
+    <string name="subdomains_account_del">删除</string>
+
+    <!--我的订单页面-->
+    <string name="my_order_title">我的订单</string>
+    <string name="my_order_address">地址管理</string>
+    <string name="my_order_all">全部</string>
+    <string name="my_order_wait_fahuo">待发货</string>
+    <string name="my_order_end">已发货</string>
+    <string name="my_order_wait_pingjia">待评价</string>
+    <string name="my_order_address_shouhou">售后</string>
+
+
 </resources>

@@ -34,6 +34,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * Created by cj on 17/9/25.
+ * 挂号申请
+ */
+
 public class RegistrationAppActivity extends BaseActivity {
 
     @Bind(R.id.layout_root)

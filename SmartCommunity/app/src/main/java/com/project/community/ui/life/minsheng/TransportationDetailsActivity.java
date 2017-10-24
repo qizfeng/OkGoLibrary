@@ -32,6 +32,10 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+/**
+ * Created by cj on 17/9/24.
+ * 公交
+ */
 
 public class TransportationDetailsActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 

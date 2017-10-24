@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context="com.project.community.ui.me.shop_management.AddSubdomainsAccountActivity">
+
+    <include layout="@layout/pub_layout_toolbar"/>
+    <ScrollView
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_marginTop="30dp"
+                android:paddingRight="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_55"
+                android:background="@color/white">
+
+                <TextView
+                    style="@style/textview_style"
+                    android:textSize="14sp"
+                    android:layout_width="75dp"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/dp_15"
+                    android:paddingRight="@dimen/dp_15"
+                    android:text="@string/add_subdomains_account_name"/>
+
+                <EditText
+                    android:id="@+id/add_subdomains_account_et_name"
+                    style="@style/apply_store_et_title"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:textSize="@dimen/common_txt_size"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_describe_color"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:paddingRight="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_55"
+                android:background="@color/white">
+
+                <TextView
+                    style="@style/textview_style"
+                    android:textSize="14sp"
+                    android:layout_width="75dp"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/dp_15"
+                    android:paddingRight="@dimen/dp_15"
+                    android:text="@string/add_subdomains_account_phone"/>
+
+                <EditText
+                    android:id="@+id/add_subdomains_account_et_phone"
+                    style="@style/apply_store_et_title"
+                    android:textSize="@dimen/common_txt_size"
+                    android:inputType="number"
+                    android:maxLength="11"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_describe_color"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    style="@style/textview_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_10"
+                android:background="@color/color_gray_eeeeee" />
+            <TextView
+                android:paddingLeft="@dimen/dp_15"
+                style="@style/textview_style"
+                android:text="@string/add_subdomains_account_set"
+                android:textColor="@color/colorPrimary"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_55" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/color_gray_eeeeee" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_55"
+                android:background="@color/white">
+
+                <TextView
+                    style="@style/textview_style"
+                    android:textSize="14sp"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/dp_15"
+                    android:text="@string/add_subdomains_account_yuding"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <com.alanapi.switchbutton.SwitchButton
+                    android:id="@+id/add_subdomains_account_sw_price"
+                    style="@style/sw_SwitchButtonIOS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dp"
+                    android:checked="true"
+                    android:gravity="center_vertical" />
+
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/color_gray_eeeeee" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_55"
+                android:background="@color/white">
+
+                <TextView
+                    style="@style/textview_style"
+                    android:textSize="14sp"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/dp_15"
+                    android:text="@string/shop_manager_order"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <com.alanapi.switchbutton.SwitchButton
+                    android:id="@+id/add_subdomains_account_sw_order"
+                    style="@style/sw_SwitchButtonIOS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dp"
+                    android:checked="true"
+                    android:gravity="center_vertical" />
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/color_gray_eeeeee" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_10"
+                android:background="@color/color_gray_eeeeee" />
+            <TextView
+                android:paddingLeft="@dimen/dp_15"
+                style="@style/textview_style"
+                android:text="@string/add_subdomains_account_permisson"
+                android:textColor="@color/colorPrimary"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_55" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/color_gray_eeeeee" />
+            <RelativeLayout
+                android:id="@+id/add_subdomains_account_rl_add_goods"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_55"
+                android:background="@color/white">
+                <TextView
+                    style="@style/textview_style"
+                    android:textSize="14sp"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/dp_15"
+                    android:text="@string/add_subdomains_account_add_goods"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <CheckBox
+                    android:id="@+id/add_subdomains_account_cb_add_goods"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dp"
+                    android:checked="true"
+                    android:gravity="center_vertical" />
+
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/color_gray_eeeeee" />
+            <RelativeLayout
+                android:id="@+id/add_subdomains_account_rl_goods_manager"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_55"
+                android:background="@color/white">
+                <TextView
+                    style="@style/textview_style"
+                    android:textSize="14sp"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/dp_15"
+                    android:text="@string/shop_manager_goods"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <CheckBox
+                    android:id="@+id/add_subdomains_account_cb_goods_manager"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dp"
+                    android:checked="true"
+                    android:gravity="center_vertical" />
+
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/color_gray_eeeeee" />
+            <RelativeLayout
+                android:id="@+id/add_subdomains_account_rl_order_manager"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_55"
+                android:background="@color/white">
+                <TextView
+                    style="@style/textview_style"
+                    android:textSize="14sp"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/dp_15"
+                    android:text="@string/shop_manager_order_manager"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <CheckBox
+                    android:id="@+id/add_subdomains_account_cb_order_manager"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dp"
+                    android:checked="false"
+                    android:gravity="center_vertical" />
+
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="@color/color_gray_eeeeee" />
+            <RelativeLayout
+                android:id="@+id/add_subdomains_account_rl_shop_data"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_55"
+                android:background="@color/white">
+                <TextView
+                    style="@style/textview_style"
+                    android:textSize="14sp"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/dp_15"
+                    android:text="@string/shop_manager_data"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <CheckBox
+                    android:id="@+id/add_subdomains_account_cb_shop_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dp"
+                    android:checked="false"
+                    android:gravity="center_vertical" />
+
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_15"
+                android:background="@color/color_gray_eeeeee" />
+        </LinearLayout>
+    </ScrollView>
+    <com.project.community.view.MyButton
+        android:id="@+id/btn_sava"
+        android:textSize="@dimen/sp_16"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/white"
+        android:text="@string/add_subdomains_account_save"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_item_height" />
+</LinearLayout>

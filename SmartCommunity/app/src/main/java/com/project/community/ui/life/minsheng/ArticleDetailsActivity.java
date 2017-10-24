@@ -60,6 +60,7 @@ import okhttp3.Call;
 import okhttp3.Response;
 
 /**
+ * Created by cj on 17/9/27.
  * 文章详情页面
  */
 public class ArticleDetailsActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
