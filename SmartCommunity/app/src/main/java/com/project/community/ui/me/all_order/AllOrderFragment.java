@@ -74,7 +74,7 @@ public class AllOrderFragment extends BaseFragment implements SwipeRefreshLayout
         bbsApdater = new AllOrderApdater(data, new RecycleItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                GoodsOrderActivity.startActivity(getActivity());
+                GoodsOrderActivity.startActivity(getActivity(),1);
 
             }
 

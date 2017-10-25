@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.donkingliang.groupedadapter.adapter.GroupedRecyclerViewAdapter;
+import com.donkingliang.groupedadapter.holder.BaseViewHolder;
 import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
 import com.project.community.base.BaseFragment;
@@ -41,6 +43,8 @@ public class MyOrderFragment extends BaseFragment implements SwipeRefreshLayout.
     private MyOrderApdater mAdapter;
     private List<ShoppingCartModel> mData = new ArrayList<>();
 
+    private int code;//0:全部,1:待发货2:已发货3:待评价4:售后
+
     public static MyOrderFragment newInstance(int id) {
         final MyOrderFragment f = new MyOrderFragment();
         final Bundle args = new Bundle();
@@ -58,12 +62,14 @@ public class MyOrderFragment extends BaseFragment implements SwipeRefreshLayout.
 
     @Override
     protected void initData() {
+        code = getArguments().getInt("ncid");
         mData = getListData();
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN);
         onRefresh();
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
         mAdapter = new MyOrderApdater(getActivity(), mData, new MyOrderApdater.OnGoodsClickListener() {
             @Override
             public void onGoodsItemClick(View view,int parentPosition, int childPosition) {
@@ -73,6 +79,16 @@ public class MyOrderFragment extends BaseFragment implements SwipeRefreshLayout.
             @Override
             public void onFooterDeleteClick(View view, int position) {
                 LogUtils.e("delete:"+position);
+                switch (view.getId()){
+                    case R.id.item_foot_1:
+                        TakeDeliveryOfGoodsActivity.startActivity(getActivity());
+                        break;
+                    case R.id.item_foot_2:
+                        break;
+                    case R.id.item_foot_3:
+                        ApplySaleActivity.startActivity(getActivity());
+                        break;
+                }
             }
 
             @Override
@@ -80,7 +96,12 @@ public class MyOrderFragment extends BaseFragment implements SwipeRefreshLayout.
                 LogUtils.e("settlement:"+position);
             }
         });
-
+        mAdapter.setOnChildClickListener(new GroupedRecyclerViewAdapter.OnChildClickListener() {
+            @Override
+            public void onChildClick(GroupedRecyclerViewAdapter adapter, BaseViewHolder holder, int groupPosition, int childPosition) {
+                GoodsOrderActivity.startActivity(getActivity(),code);
+            }
+        });
         mRecyclerView.setAdapter(mAdapter);
     }
 

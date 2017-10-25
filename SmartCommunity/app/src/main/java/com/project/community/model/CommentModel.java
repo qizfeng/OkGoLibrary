@@ -31,6 +31,7 @@ public class CommentModel implements Serializable{
     public String createDate;
     public String targetName;
     public String targetId;
+    public float  rating;
 
     @Override
     public String toString() {

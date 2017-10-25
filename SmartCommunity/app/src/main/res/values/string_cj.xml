@@ -174,9 +174,22 @@
     <string name="my_order_address">地址管理</string>
     <string name="my_order_all">全部</string>
     <string name="my_order_wait_fahuo">待发货</string>
+    <string name="my_order_wait_yishouhuo">已收货</string>
     <string name="my_order_end">已发货</string>
     <string name="my_order_wait_pingjia">待评价</string>
     <string name="my_order_address_shouhou">售后</string>
 
+    <!--收货评价-->
+    <string name="take_delivery_of_goods_title">收货评价</string>
+    <string name="take_delivery_of_goods_commit">提交</string>
+    <string name="take_delivery_of_goods_describe">商品描述</string>
+    <string name="take_delivery_of_goods_edit_hit">请输入您的评价</string>
+    <string name="take_delivery_of_goods_ratingbar_hit">请选择评分</string>
+
+    <!--申请售后-->
+    <string name="apply_sale_title">申请售后</string>
+    <string name="apply_sale_pingzheng">上传凭证</string>
+    <string name="apply_sale_pingzheng_hit">请上传凭证</string>
+    <string name="apply_sale_tuihuo_hit">请输入退货原因</string>
 
 </resources>
