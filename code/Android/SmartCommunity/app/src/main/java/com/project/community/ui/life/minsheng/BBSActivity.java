@@ -101,8 +101,8 @@ public class BBSActivity extends BaseActivity implements ViewPager.OnPageChangeL
         bbsTablayout.post(new Runnable() {
             @Override
             public void run() {
-                setIndicator(bbsTablayout,15,15);
-//                TablayoutLineReflex.setTabLine(BBSActivity.this, bbsTablayout, 10, 10);
+//                setIndicator(bbsTablayout,15,15);
+                TablayoutLineReflex.setTabLine(BBSActivity.this, bbsTablayout, 15, 0);
             }
         });
     }

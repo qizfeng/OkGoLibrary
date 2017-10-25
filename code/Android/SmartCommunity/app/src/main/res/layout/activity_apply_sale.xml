@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_gray_eeeeee"
+    android:orientation="vertical"
+    android:id="@+id/layout_root"
+    tools:context="com.project.community.ui.me.all_order.ApplySaleActivity">
+
+    <include layout="@layout/pub_layout_toolbar"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recylerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="@color/common_gray_bg"/>
+            <LinearLayout
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/edit_describe_color"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="155dp">
+                <EditText
+                    android:id="@+id/et_comment"
+                    style="@style/apply_store_et_title"
+                    android:singleLine="false"
+                    android:gravity="top"
+                    android:maxLength="350"
+                    android:paddingTop="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="10dp"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:hint="@string/apply_sale_tuihuo_hit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:id="@+id/build_new_tv_describe_num"
+                    style="@style/apply_store_tv_title"
+                    android:hint="0/350"
+                    android:gravity="right"
+                    android:paddingBottom="8dp"
+                    android:paddingRight="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:background="@color/common_gray_bg"/>
+            <LinearLayout
+                android:background="@color/white"
+                android:paddingRight="15dp"
+                android:paddingBottom="12dp"
+                android:paddingTop="12dp"
+                android:paddingLeft="15dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/txt_color"
+                    android:textSize="@dimen/common_txt_size_small"
+                    android:text="@string/apply_sale_pingzheng"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:background="@color/white"
+                    android:text="@string/send_message_photo_hit"
+                    android:textSize="12sp"
+                    android:gravity="right"
+                    android:textColor="@color/color_gray_999999"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <com.project.community.view.MyGridView
+                android:id="@+id/gridview"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="15dp"
+                android:horizontalSpacing="4dp"
+                android:verticalSpacing="4dp"
+                android:numColumns="3">
+
+            </com.project.community.view.MyGridView>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

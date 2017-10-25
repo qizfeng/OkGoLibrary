@@ -11,6 +11,7 @@
     <include layout="@layout/pub_layout_toolbar"/>
 
     <com.project.community.view.MyScrollview
+        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -93,7 +94,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:text="代发货"
+                    android:text="@string/my_order_wait_fahuo"
                     android:textColor="@color/yellow_ff961b"
                     android:textSize="@dimen/sp_14" />
 
@@ -104,7 +105,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="已发货"
+                    android:text="@string/my_order_end"
                     android:textColor="@color/yellow_ff961b"
                     android:textSize="@dimen/sp_14" />
 
@@ -115,7 +116,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
                     android:gravity="right"
-                    android:text="已收货"
+                    android:text="@string/my_order_wait_yishouhuo"
                     android:textColor="@color/yellow_ff961b"
                     android:textSize="@dimen/sp_14" />
             </LinearLayout>
@@ -161,7 +162,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="9dp"
                         android:text="一区5号楼1单元1001"
-                        android:textColor="@color/color_gray_333333"
+                        android:textColor="@color/color_gray_666666"
                         android:textSize="13sp" />
                 </LinearLayout>
 
@@ -177,7 +178,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="13884242797"
-                        android:textColor="@color/color_gray_333333"
+                        android:textColor="@color/color_gray_666666"
                         android:textSize="13sp" />
 
                     <TextView
@@ -195,11 +196,21 @@
                 android:layout_height="1dp"
                 android:background="@color/common_gray_bg" />
 
+            <TextView
+                android:id="@+id/goods_order_tv_shop_name"
+                android:textColor="@color/color_gray_333333"
+                android:singleLine="true"
+                android:paddingRight="15dp"
+                android:paddingLeft="15dp"
+                android:gravity="center_vertical"
+                android:textSize="14sp"
+                android:text="香格里拉"
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/goods_order_rv_order"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
                 android:background="@color/color_gray_f4f4f4">
 
             </android.support.v7.widget.RecyclerView>
@@ -216,6 +227,7 @@
                 android:textSize="12sp" />
 
             <TextView
+                android:id="@+id/goods_order_tv_pingzheng"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/color_gray_f4f4f4"
@@ -238,9 +250,24 @@
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp" />
 
+            <TextView
+                android:id="@+id/goods_order_tv_order_type"
+                android:textColor="@color/color_gray_666666"
+                android:singleLine="true"
+                android:paddingRight="15dp"
+                android:paddingLeft="15dp"
+                android:gravity="center_vertical|right"
+                android:textSize="14sp"
+                android:text="已取消"
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/common_gray_bg" />
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/layout_item_height"
+                android:layout_height="40dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingLeft="15dp"
@@ -270,7 +297,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/layout_item_height"
+                android:layout_height="40dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingLeft="15dp"
@@ -321,30 +348,92 @@
                 android:textColor="@color/color_gray_999999"
                 android:textSize="12sp" />
 
+
+            <LinearLayout
+                android:id="@+id/goods_order_ll_pinglun"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@color/common_gray_bg" />
+                <TextView
+                    android:textColor="@color/colorPrimary"
+                    android:singleLine="true"
+                    android:paddingRight="15dp"
+                    android:paddingLeft="15dp"
+                    android:gravity="center_vertical"
+                    android:textSize="14sp"
+                    android:text="评论"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/common_gray_bg" />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/goods_order_rv_pinglun"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </android.support.v7.widget.RecyclerView>
+            </LinearLayout>
+
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:background="@color/common_gray_bg" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/layout_item_height"
-                android:background="@color/white"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp">
 
-                <com.project.community.view.MyButton
-                    android:id="@+id/goods_order_btn_type"
-                    android:layout_width="70dp"
-                    android:layout_height="24dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/press_type_gray_666666"
-                    android:gravity="center"
-                    android:text="@string/all_order_fahuo"
-                    android:textColor="@color/color_gray_666666"
-                    android:textSize="@dimen/sp_16" />
-            </RelativeLayout>
         </LinearLayout>
     </com.project.community.view.MyScrollview>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_item_height"
+        android:background="@color/white"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+        <TextView
+            android:id="@+id/goods_order_btn_type1"
+            android:layout_toLeftOf="@+id/goods_order_btn_type2"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/press_type_gray_666666"
+            android:gravity="center"
+            android:text="@string/all_order_fahuo"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:textColor="@color/color_gray_666666"
+            android:textSize="@dimen/sp_16" />
+        <TextView
+            android:id="@+id/goods_order_btn_type2"
+            android:layout_toLeftOf="@+id/goods_order_btn_type3"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/press_type_gray_666666"
+            android:gravity="center"
+            android:text="@string/all_order_fahuo"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:textColor="@color/color_gray_666666"
+            android:textSize="@dimen/sp_16" />
+        <TextView
+            android:id="@+id/goods_order_btn_type3"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/press_type_gray_666666"
+            android:gravity="center"
+            android:text="@string/all_order_fahuo"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:textColor="@color/color_gray_666666"
+            android:textSize="@dimen/sp_16" />
+    </RelativeLayout>
 </LinearLayout>

@@ -278,35 +278,27 @@
             android:name=".ui.me.MessageListActivity"
             android:label="@string/activity_message_list"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.me.MessageCenterActivity"
             android:label="@string/activity_message_center"
             android:screenOrientation="portrait" />
-
-
         <activity
             android:name=".ui.me.MyForumActivity"
             android:label="@string/activity_my_forum"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.me.MyForumDetailsActivity"
             android:label="@string/activity_my_forum_details"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.me.RepairsRecordActivity"
             android:label="@string/activity_repairs_record"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.me.RepairsEvaluateActivity"
             android:label="@string/activity_repairs_evaluate"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible|adjustResize|stateHidden" />
-
-
         <activity android:name=".ui.life.minsheng.MerchantNavigationActivity" />
         <!-- 自定义service -->
         <service
@@ -576,7 +568,10 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".ui.me.shop_management.SubdomainsAccountActivity" />
         <activity android:name=".ui.me.shop_management.AddSubdomainsAccountActivity" />
-        <activity android:name=".ui.me.all_order.MyOrderActivity"></activity>
+        <activity android:name=".ui.me.all_order.MyOrderActivity" />
+        <activity android:name=".ui.me.all_order.TakeDeliveryOfGoodsActivity" />
+        <activity android:name=".ui.me.all_order.ApplySaleActivity" />
+        <activity android:name=".ui.me.all_order.AfterSaleActivity"></activity>
     </application>
 
 </manifest>
