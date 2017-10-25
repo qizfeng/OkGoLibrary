@@ -299,6 +299,18 @@
             android:label="@string/activity_repairs_evaluate"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible|adjustResize|stateHidden" />
+        <activity
+            android:name=".ui.me.ImRepairsActivity"
+            android:label="@string/activity_im_repairs"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize|stateHidden" />
+
+        <activity
+            android:name=".ui.me.RepairsDetailsActivity"
+            android:label="@string/activity_repairs_details"
+            android:screenOrientation="portrait" />
+
+
         <activity android:name=".ui.life.minsheng.MerchantNavigationActivity" />
         <!-- 自定义service -->
         <service

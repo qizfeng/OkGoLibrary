@@ -1,5 +1,6 @@
 package com.project.community.ui.me;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
@@ -87,7 +88,7 @@ public class RepairsRecordActivity extends BaseActivity {
         repairsRecordAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                startActivity(new Intent(getActivity(), MyForumDetailsActivity.class));
+                startActivity(new Intent(RepairsRecordActivity.this, RepairsDetailsActivity.class));
             }
         });
 
@@ -107,6 +108,8 @@ public class RepairsRecordActivity extends BaseActivity {
 
     @OnClick(R.id.tv_repairs)
     public void onViewClicked() {
+
+        startActivity(new Intent(this,ImRepairsActivity.class));
     }
 
 

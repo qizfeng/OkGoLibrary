@@ -230,4 +230,7 @@
         <item name="android:textColor">@color/color_gray_666666</item>
         <item name="android:background">@drawable/button_me_shop_gray</item>
     </style>
+    <style name="HomeNumberCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/checkbox</item>
+    </style>
 </resources>
