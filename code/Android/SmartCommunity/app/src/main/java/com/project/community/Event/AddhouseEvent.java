@@ -4,11 +4,11 @@ package com.project.community.Event;
  * author：fangkai on 2017/10/25 14:40
  * em：617716355@qq.com
  */
-public class AddhouseEvent {
+public class AddHouseEvent {
 
     private String item;
 
-    public AddhouseEvent(String item) {
+    public AddHouseEvent(String item) {
         this.item = item;
     }
 

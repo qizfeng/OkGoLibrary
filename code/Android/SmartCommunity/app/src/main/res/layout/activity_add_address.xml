@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="84dp"
             android:layout_height="wrap_content"
-            android:text="收货人"
+            android:text="@string/address_name"
             android:textColor="@color/color_gray_333333"
             android:textSize="15dp" />
 
@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/white"
-            android:hint="请输入收货人姓名"
+            android:hint="@string/address_name_hint"
             android:inputType="text"
             android:maxLength="10"
             android:textColor="@color/color_gray_333333"
@@ -56,7 +56,7 @@
         <TextView
             android:layout_width="84dp"
             android:layout_height="wrap_content"
-            android:text="联系方式"
+            android:text="@string/address_phone"
             android:textColor="@color/color_gray_333333"
             android:textSize="15dp" />
 
@@ -65,7 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/white"
-            android:hint="请输入联系方式"
+            android:hint="@string/address_phone_hint"
             android:inputType="number"
             android:maxLength="11"
             android:textColor="@color/color_gray_333333"
@@ -93,7 +93,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="收货地址"
+            android:text="@string/address_address"
             android:textColor="@color/color_gray_333333"
             android:textSize="15dp" />
 
@@ -102,7 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
-            android:hint="请选择"
+            android:hint="@string/address_address_select"
             android:textColor="@color/color_gray_333333"
             android:textColorHint="@color/color_gray_999999"
             android:textSize="14sp" />
@@ -126,7 +126,7 @@
         android:layout_height="90dp"
         android:background="@android:color/white"
         android:gravity="top"
-        android:hint="请输入详细地址"
+        android:hint="@string/address_import_detailed_address"
         android:inputType="text"
         android:maxLength="60"
         android:padding="12dp"
@@ -142,6 +142,6 @@
         android:layout_marginBottom="@dimen/dp_20"
         android:layout_marginLeft="@dimen/dp_20"
         android:layout_marginRight="@dimen/dp_20"
-        android:text="保存"
+        android:text="@string/save"
         android:textColor="@color/white" />
 </LinearLayout>

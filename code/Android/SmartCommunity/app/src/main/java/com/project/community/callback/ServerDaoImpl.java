@@ -10,6 +10,11 @@ import com.library.okgo.model.BaseResponse;
 import com.library.okgo.model.HttpParams;
 import com.library.okgo.utils.ToastUtils;
 import com.project.community.R;
+import com.project.community.bean.AddressListBean;
+import com.project.community.bean.CommunityBean;
+import com.project.community.bean.ForumListBean;
+import com.project.community.bean.GovernmentBean;
+import com.project.community.bean.MerchantBean;
 import com.project.community.constants.AppConstants;
 import com.project.community.model.AgreementResponse;
 import com.project.community.model.ArticleModel;
@@ -746,12 +751,102 @@ public class ServerDaoImpl implements ServerDao {
     }
 
     @Override
+    public void addAddress(String userId, String consignee,
+                           String contactPhone, String userArea,
+                           String userStreet, String address,
+                           String addressId, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.URL_ADD_ADDRESS)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("consignee", consignee)
+                .params("contactPhone", contactPhone)
+                .params("userArea", userArea)
+                .params("userStreet", userStreet)
+                .params("address", address)
+                .params("addressId", addressId)
+                .execute(callback);
+    }
+    @Override
     public void updateIsOpen(String userId, JsonCallback<BaseResponse<List<List>>> callback) {
         OkGo.post(AppConstants.URL_UPDATEISOPEN)
                 .tag(mContext)
                 .params("userId", userId)
                 .execute(callback);
     }
+
+
+
+    @Override
+    public void deleteAddress(String userId, String addressId, JsonCallback<BaseResponse<List<String>>> callback) {
+        OkGo.post(AppConstants.URL_DEL_ADDRESS)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("addressId", addressId)
+                .execute(callback);
+    }
+
+    @Override
+    public void setDefaultAddress(String userId, String addressId, JsonCallback<BaseResponse<List<String>>> callback) {
+        OkGo.post(AppConstants.URL_SET_DEFAULT)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("addressId", addressId)
+                .execute(callback);
+    }
+
+    @Override
+    public void getGovernmentList(String userId, String type, String pageNo, String pageSize,
+                                  JsonCallback<BaseResponse<List<GovernmentBean>>> callback) {
+        OkGo.get(AppConstants.URL_GET_COLLECTION)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("type", type)
+                .params("pageNo", pageNo)
+                .params("pageSize", pageSize)
+                .execute(callback);
+    }
+
+    @Override
+    public void getCommunityList(String userId, String type, String pageNo, String pageSize, JsonCallback<BaseResponse<List<CommunityBean>>> callback) {
+        OkGo.get(AppConstants.URL_GET_COLLECTION)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("type", type)
+                .params("pageNo", pageNo)
+                .params("pageSize", pageSize)
+                .execute(callback);
+    }
+
+    @Override
+    public void getForumList(String userId, String type, String pageNo, String pageSize, JsonCallback<BaseResponse<List<ForumListBean>>> callback) {
+        OkGo.get(AppConstants.URL_GET_COLLECTION)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("type", type)
+                .params("pageNo", pageNo)
+                .params("pageSize", pageSize)
+                .execute(callback);
+    }
+
+    @Override
+    public void getMerchantList(String userId, String type, String pageNo, String pageSize, JsonCallback<BaseResponse<List<MerchantBean>>> callback) {
+        OkGo.get(AppConstants.URL_GET_COLLECTION)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("type", type)
+                .params("pageNo", pageNo)
+                .params("pageSize", pageSize)
+                .execute(callback);
+    }
+
+    @Override
+    public void getAddressList(String userId, JsonCallback<BaseResponse<List<AddressListBean>>> callback) {
+        OkGo.get(AppConstants.URL_GET_ADDRESS_LIST)
+                .tag(mContext)
+                .params("userId", userId)
+                .execute(callback);
+    }
+
 
     @Override
     public void getPropShops(String userId, JsonCallback<BaseResponse<ShopModel>> callback) {
@@ -835,4 +930,23 @@ public class ServerDaoImpl implements ServerDao {
                 .params(params)
                 .execute(callback);
     }
+
+//    @Override
+//    public void addAddress(String userId, String consignee,
+//                           String contactPhone, String userArea,
+//                           String userStreet, String address,
+//                           String addressId,
+//                           JsonCallback<BaseResponse> callback) {
+//        OkGo.post(AppConstants.URL_ADD_ADDRESS)
+//                .tag(mContext)
+//                .params("userId", userId)
+//                .params("consignee", consignee)
+//                .params("contactPhone", contactPhone)
+//                .params("userArea", userArea)
+//                .params("userStreet", userStreet)
+//                .params("address", address)
+//                .params("addressId", addressId)
+//                .execute(callback);
+//    }
+
 }

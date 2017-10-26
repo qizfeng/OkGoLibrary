@@ -1,5 +1,7 @@
 package com.project.community.ui.me;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -13,20 +15,30 @@ import android.widget.TextView;
 
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.google.gson.Gson;
+import com.library.okgo.callback.JsonCallback;
+import com.library.okgo.model.BaseResponse;
+import com.project.community.Event.AddAddressEvent;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
+import com.project.community.bean.AddressListBean;
 import com.project.community.util.FormValidationUtil;
 import com.project.community.util.KeyBoardUtil;
+import com.project.community.util.NetworkUtils;
+import com.project.community.util.ToastUtil;
 import com.project.community.view.pickerView.GetJsonDataUtil;
 import com.project.community.view.pickerView.JsonBean;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Response;
 import rx.Single;
 import rx.SingleSubscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -63,6 +75,21 @@ public class AddAddressActivity extends BaseActivity {
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
     private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
 
+
+    private AddressListBean addressListBean;
+
+
+    public static void startActivity(Context context, AddressListBean addressListBean) {
+
+        Intent intent = new Intent(context, AddAddressActivity.class);
+
+        intent.putExtra("addressListBean", addressListBean);
+
+        context.startActivity(intent);
+
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,8 +99,19 @@ public class AddAddressActivity extends BaseActivity {
     }
 
     private void setTitles() {
+        addressListBean = (AddressListBean) getIntent().getSerializableExtra("addressListBean");
 
-        initToolBar(toolbar, tvTitle, true, "地址", R.mipmap.iv_back);
+//        AddHouseEvent addhouseEvent1 = getIntent().getParcelableExtra("s");
+
+        initToolBar(toolbar, tvTitle, true, getString(R.string.add_address_activity), R.mipmap.iv_back);
+
+
+        if (addressListBean != null) {
+            etName.setText(addressListBean.getConsignee());
+            etPhone.setText(addressListBean.getContactPhone());
+            tvAddress.setText(addressListBean.getUserArea());
+            etAddress.setText(addressListBean.getAddress());
+        }
     }
 
     @OnClick({R.id.ll_address, R.id.btn_register})
@@ -114,30 +152,98 @@ public class AddAddressActivity extends BaseActivity {
 
     private void register() {
         if (TextUtils.isEmpty(etName.getText().toString().trim())) {
-            showToast("请输入收货人姓名");
+            showToast(getString(R.string.address_no_name));
             return;
         }
         if (TextUtils.isEmpty(etPhone.getText().toString().trim())) {
-            showToast("请输入联系方式");
+            showToast(getString(R.string.address_no_phone));
             return;
         }
-        if (!FormValidationUtil.isMobile(etPhone.getText().toString().trim())){
+        if (!FormValidationUtil.isMobile(etPhone.getText().toString().trim())) {
 
-            showToast("请输入正确的手机号");
+            showToast(getString(R.string.address_is_mobile));
             return;
         }
 
 
         if (TextUtils.isEmpty(tvAddress.getText().toString().trim())) {
-            showToast("请选择收货地址");
+            showToast(getString(R.string.address_change_address));
             return;
         }
         if (TextUtils.isEmpty(etAddress.getText().toString().trim())) {
-            showToast("请输入详细地址");
+            showToast(getString(R.string.address_import_address));
             return;
         }
 
-        finish();
+        if (!NetworkUtils.isNetworkAvailable(this)) {
+            showToast(getString(R.string.network_error));
+            return;
+        }
+//        JsonCallback
+
+
+        progressDialog.show();
+        if (addressListBean == null) {
+
+            serverDao.addAddress(getUser(this).id, etName.getText().toString().trim(),
+                    etPhone.getText().toString().trim(), tvAddress.getText().toString().trim(),
+                    "街道", etAddress.getText().toString().trim(), "", new JsonCallback<BaseResponse<List>>() {
+                        @Override
+                        public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
+
+                            progressDialog.dismiss();
+                            ToastUtil.showToast(AddAddressActivity.this, baseResponse.message + "");
+                            if (baseResponse.errNum.equals("0")) {
+                                finish();
+                                EventBus.getDefault().post(new AddAddressEvent(true));
+                            } else {
+
+                            }
+
+
+                        }
+
+                        @Override
+                        public void onError(Call call, Response response, Exception e) {
+                            super.onError(call, response, e);
+                            progressDialog.dismiss();
+                            ToastUtil.showToast(AddAddressActivity.this, e.getMessage() + "");
+                        }
+                    });
+
+        } else {
+
+            serverDao.addAddress(getUser(this).id, etName.getText().toString().trim(),
+                    etPhone.getText().toString().trim(), tvAddress.getText().toString().trim(),
+                    "街道", etAddress.getText().toString().trim(), addressListBean.getId(), new JsonCallback<BaseResponse<List>>() {
+                        @Override
+                        public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
+
+                            progressDialog.dismiss();
+                            ToastUtil.showToast(AddAddressActivity.this, baseResponse.message + "");
+                            if (baseResponse.errNum.equals("0")) {
+                                finish();
+                                EventBus.getDefault().post(new AddAddressEvent(true));
+                            } else {
+
+                            }
+
+
+                        }
+
+                        @Override
+                        public void onError(Call call, Response response, Exception e) {
+                            super.onError(call, response, e);
+                            progressDialog.dismiss();
+                            ToastUtil.showToast(AddAddressActivity.this, e.getMessage() + "");
+                        }
+                    });
+
+
+        }
+
+
+//        finish();
 
 
     }
@@ -237,11 +343,12 @@ public class AddAddressActivity extends BaseActivity {
 
             }
         })
-                .setTitleText("城市")
+                .setTitleText(getString(R.string.city))
                 .setTitleColor(Color.parseColor("#19a595"))
-                .setSubmitText("确认")
+                .setSubmitText(getString(R.string.confirm))
                 .setSubmitColor(Color.parseColor("#19a595"))
                 .setCancelColor(Color.parseColor("#19a595"))
+                .setCancelText(getString(R.string.cancel))
                 .setTitleBgColor(Color.WHITE)
                 .setBgColor(Color.WHITE)
                 .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
