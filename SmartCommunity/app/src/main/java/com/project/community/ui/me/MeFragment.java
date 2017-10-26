@@ -249,8 +249,7 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                 startActivity(intent);
                 break;
             case R.id.layout_my_repair_order://我的维修单
-                intent = new Intent(getActivity(), CommunityActivity.class);
-                startActivity(intent);
+                CommunityActivity.startActivity(getActivity());
 //                showToast(getString(R.string.toast_online));
                 break;
             case R.id.layout_system_message://系统消息

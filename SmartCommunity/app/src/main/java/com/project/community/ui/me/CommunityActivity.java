@@ -1,5 +1,6 @@
 package com.project.community.ui.me;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -20,6 +21,7 @@ import com.library.customview.viewpager.NoScrollViewPager;
 import com.library.okgo.utils.ToastUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
+import com.project.community.ui.me.all_order.MyOrderActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +75,14 @@ public class CommunityActivity extends BaseActivity {
     Fragment mServiesCompFragment;
 
     private boolean isType;
+
+
+    public static void startActivity(Context context) {
+        Intent intent = new Intent(context, CommunityActivity.class);
+        context.startActivity(intent);
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

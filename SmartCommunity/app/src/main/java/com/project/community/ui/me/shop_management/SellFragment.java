@@ -13,13 +13,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.library.okgo.callback.JsonCallback;
+import com.library.okgo.model.BaseResponse;
+import com.library.okgo.utils.ToastUtils;
 import com.project.community.R;
 import com.project.community.base.BaseFragment;
 import com.project.community.listener.RecycleItemClickListener;
 import com.project.community.model.CommentModel;
+import com.project.community.model.GoodsManagerModel;
 import com.project.community.ui.adapter.ProductSellApdater;
 import com.project.community.ui.adapter.ServiesComApdater;
 import com.project.community.ui.me.OrderDetailActivity;
+import com.project.community.ui.me.all_order.AllOrderFragment;
+import com.project.community.util.NetworkUtils;
 import com.project.community.view.SpacesItemDecoration;
 import com.project.community.view.VpSwipeRefreshLayout;
 
@@ -28,6 +34,8 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,7 +49,17 @@ public class SellFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     VpSwipeRefreshLayout refreshLayout;
 
     ProductSellApdater mAdapter;
-    List<CommentModel> comments =new ArrayList<>();
+    List<GoodsManagerModel> list =new ArrayList<>();
+    private String id="0";
+
+
+    public static SellFragment newInstance(int id) {
+        final SellFragment f = new SellFragment();
+        final Bundle args = new Bundle();
+        args.putInt("cj", id);
+        f.setArguments(args);
+        return f;
+    }
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,13 +77,7 @@ public class SellFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         recyclerView.addItemDecoration(decoration);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN);
-        onRefresh();
-        for (int i = 0; i < 10; i++) {
-            CommentModel commentModel =new CommentModel();
-            commentModel.id="0";
-            comments.add(commentModel);
-        }
-        mAdapter = new ProductSellApdater(comments, new RecycleItemClickListener() {
+        mAdapter = new ProductSellApdater(list, new RecycleItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 ShopDataActivity.startActivity(getActivity());
@@ -75,12 +87,8 @@ public class SellFragment extends BaseFragment implements SwipeRefreshLayout.OnR
             public void onCustomClick(View view, int position) {
                 switch (view.getId()){
                     case R.id.item_product_change:
-                        if (comments.get(position).id.equals("0")){
-                            comments.get(position).id="1";
-                        }else {
-                            comments.get(position).id="0";
-                        }
-                        mAdapter.notifyItemChanged(position,comments.get(position));
+                        list.get(position).open=!list.get(position).open;
+                        mAdapter.notifyItemChanged(position,list.get(position));
                         break;
                     case R.id.item_product_del:
                         mAdapter.notifyItemRemoved(position);
@@ -96,12 +104,14 @@ public class SellFragment extends BaseFragment implements SwipeRefreshLayout.OnR
             }
         });
         recyclerView.setAdapter(mAdapter);
+        onRefresh();
     }
 
     @Override
     public void onRefresh() {
-        setRefreshing(true);
-        setRefreshing(false);
+        id=getArguments().getString("cj");
+        getData(id);
+        
     }
     /**
      * 设置是否刷新动画
@@ -116,4 +126,40 @@ public class SellFragment extends BaseFragment implements SwipeRefreshLayout.OnR
             }
         });
     }
+
+
+    /**
+     * 获取列表
+     */
+    private void getData(String id){
+
+        setRefreshing(true);
+        if (!NetworkUtils.isNetworkAvailable(getActivity())) {
+            ToastUtils.showShortToast(getActivity(), R.string.network_error);
+            dismissDialog();
+            return;
+        }
+        serverDao.getGoodsManagerList(
+                getUser(getActivity()).id,
+                id,
+                new JsonCallback<BaseResponse<List<GoodsManagerModel>>>() {
+
+                    @Override
+                    public void onSuccess(BaseResponse<List<GoodsManagerModel>> listBaseResponse, Call call, Response response) {
+                        setRefreshing(false);
+                        showToast(listBaseResponse.message);
+                        list.clear();
+                        list.addAll(listBaseResponse.retData);
+                        mAdapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        setRefreshing(false);
+                        showToast(e.getMessage());
+                    }
+                });
+    }
+
 }

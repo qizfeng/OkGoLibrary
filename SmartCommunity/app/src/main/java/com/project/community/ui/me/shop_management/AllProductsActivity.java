@@ -45,9 +45,7 @@ public class AllProductsActivity extends BaseActivity {
 
     private List<Fragment> mFragmentsList;
     private MyFrageStatePagerAdapter mAdapter;
-    Fragment mSellIngFragment;
-    Fragment mSellEndFragment;
-    Fragment mSellXiaFragment;
+
 
 
     public static void startActivity(Context context){
@@ -65,13 +63,10 @@ public class AllProductsActivity extends BaseActivity {
     }
 
     private void initData() {
-        mSellIngFragment = new SellFragment();
-        mSellEndFragment = new SellFragment();
-        mSellXiaFragment = new SellFragment();
         mFragmentsList =new ArrayList<>();
-        mFragmentsList.add(mSellIngFragment);
-        mFragmentsList.add(mSellEndFragment);
-        mFragmentsList.add(mSellXiaFragment);
+        mFragmentsList.add(SellFragment.newInstance(0));
+        mFragmentsList.add(SellFragment.newInstance(1));
+        mFragmentsList.add(SellFragment.newInstance(2));
         mAdapter = new MyFrageStatePagerAdapter(getSupportFragmentManager());
         mViewpager.setAdapter(mAdapter);
         mViewpager.setOffscreenPageLimit(3);

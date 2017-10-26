@@ -29,6 +29,7 @@ import com.project.community.model.DistModel;
 import com.project.community.model.FamilyModel;
 import com.project.community.model.FamilyPersonModel;
 import com.project.community.model.FileUploadModel;
+import com.project.community.model.GoodsManagerModel;
 import com.project.community.model.GuideModel;
 import com.project.community.model.HotlineModel;
 import com.project.community.model.HouseModel;
@@ -39,6 +40,7 @@ import com.project.community.model.PaymentInfoModel;
 import com.project.community.model.PaymentWayModel;
 import com.project.community.model.SearchModel;
 import com.project.community.model.ShopModel;
+import com.project.community.model.SubdomainAccountModel;
 import com.project.community.model.UserModel;
 import com.project.community.model.WuyeIndexResponse;
 import com.project.community.model.ZhengwuIndexResponse;
@@ -711,15 +713,17 @@ public class ServerDaoImpl implements ServerDao {
     }
 
     @Override
-    public void propShops(String userId,
-                          double longitude,
-                          double latitude,
-                          String shopsName,
-                          String shopPhoto,
-                          String contactName,
-                          String businessAddress, String shopsCategory,
-                          String mainBusiness, String entName, String licenseNo, String licensePositive, String licenseReverse, String legalPerson, String legalCardPositive,
-                          String legalCardReverse, JsonCallback<BaseResponse<List>> callback) {
+    public void propShops(
+            String id,
+            String userId,
+            double longitude,
+            double latitude,
+            String shopsName,
+            String shopPhoto,
+            String contactName,
+            String businessAddress, String shopsCategory,
+            String mainBusiness, String entName, String licenseNo, String licensePositive, String licenseReverse, String legalPerson, String legalCardPositive,
+            String legalCardReverse, JsonCallback<BaseResponse<List>> callback) {
         OkGo.post(AppConstants.URL_APPLY_STORE)
                 .tag(mContext)
                 .params("userId", userId)
@@ -741,6 +745,79 @@ public class ServerDaoImpl implements ServerDao {
                 .execute(callback);
     }
 
+    @Override
+    public void updateIsOpen(String userId, JsonCallback<BaseResponse<List<List>>> callback) {
+        OkGo.post(AppConstants.URL_UPDATEISOPEN)
+                .tag(mContext)
+                .params("userId", userId)
+                .execute(callback);
+    }
+
+    @Override
+    public void getPropShops(String userId, JsonCallback<BaseResponse<ShopModel>> callback) {
+        OkGo.get(AppConstants.URL_PROPSHOPS)
+                .tag(mContext)
+                .params("userId", userId)
+                .execute(callback);
+    }
+
+    @Override
+    public void getSubdomainsAccount(String userId, JsonCallback<BaseResponse<List<SubdomainAccountModel>>> callback) {
+        OkGo.get(AppConstants.URL_SUBDOMAINACCOUNTLIST)
+                .tag(mContext)
+                .params("userId", userId)
+                .execute(callback);
+    }
+
+    @Override
+    public void addGoods(String userId, String shopId, String name, String images, String description, String price, String originalPrice, String unit, String stock, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.URL_ADDGOODS)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("shopId", shopId)
+                .params("name", name)
+                .params("images", images)
+                .params("description", description)
+                .params("price", price)
+                .params("originalPrice", originalPrice)
+                .params("unit", unit)
+                .params("stock", stock)
+                .execute(callback);
+    }
+
+    @Override
+    public void addSubdomainsAccount(String userId, String shopId, String name, String phone,int sumMoney, int addGoods, int goodsMge, int orderMge, int shopInfo, int sumOrder, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.URL_ADDSUBDOMAINACCOUNT)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("shopId", shopId)
+                .params("name", name)
+                .params("phone", phone)
+                .params("sumMoney", sumMoney)
+                .params("addGoods", addGoods)
+                .params("goodsMge", goodsMge)
+                .params("orderMge", orderMge)
+                .params("shopInfo", shopInfo)
+                .params("sumOrder", sumOrder)
+                .execute(callback);
+    }
+
+    @Override
+    public void getSubdomainsAccountDetail(String childId, JsonCallback<BaseResponse<SubdomainAccountModel>> callback) {
+        OkGo.get(AppConstants.URL_GETSUBDOMAINACCOUNTDETAIL)
+                .tag(mContext)
+                .params("childId", childId)
+                .execute(callback);
+    }
+
+    @Override
+    public void getGoodsManagerList(String userId, String status, JsonCallback<BaseResponse<List<GoodsManagerModel>>> callback) {
+        OkGo.get(AppConstants.URL_GETGOODSMANAGER)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("status", status)
+                .execute(callback);
+    }
 
     @Override
     public void getEmploymentData(String userId, int pageNo, int pageSize, String type, String categoryType, JsonCallback<BaseResponse<List<ArticleModel>>> callback) {

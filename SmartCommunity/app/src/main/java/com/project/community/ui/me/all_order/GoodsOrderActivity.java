@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.project.community.R;
@@ -109,6 +110,15 @@ public class GoodsOrderActivity extends BaseActivity {
     LinearLayout goods_order_ll_pinglun;//评论列表
     @Bind(R.id.goods_order_rv_pinglun)
     RecyclerView goods_order_rv_pinglun;
+    @Bind(R.id.goods_order_shouhou_type1)
+    TextView goods_order_shouhou_type1;
+    @Bind(R.id.goods_order_shouhou_type2)
+    LinearLayout goods_order_shouhou_type2;
+    @Bind(R.id.goods_order_shouhou_type3)
+    RelativeLayout goods_order_shouhou_type3;
+
+
+
 
     private int code;//0:全部,1:待发货2:已发货3:待评价4:售后
 
@@ -133,20 +143,41 @@ public class GoodsOrderActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goods_order);
         ButterKnife.bind(this);
-        initToolBar(mToolBar, mTvTitle, true, getString(R.string.goods_order_title), R.mipmap.iv_back);
+
         initData();
     }
 
     private void initData() {
         code=getIntent().getIntExtra("code",0);
+        if (code==4) initToolBar(mToolBar, mTvTitle, true, getString(R.string.apply_sale_detail), R.mipmap.iv_back);
+        else initToolBar(mToolBar, mTvTitle, true, getString(R.string.goods_order_title), R.mipmap.iv_back);
         switch (code){
             case 0:
-//                goods_order_ll_pinglun.setVisibility(View.GONE);
+//
                 break;
-            case 1:
+            case 1://待发货
+                goods_order_shouhou_type1.setVisibility(View.GONE);
                 goods_order_ll_pinglun.setVisibility(View.GONE);
+
+                goodsOrderViewTypeRight.setBackgroundColor(getResources().getColor(R.color.color_gray_eeeeee));
+                goodsOrderViewTypeLeft.setBackgroundColor(getResources().getColor(R.color.color_gray_eeeeee));
+                goodsOrderViewType3.setBackgroundResource(R.drawable.dot_goods_type_hui);
+                goodsOrderViewType2.setBackgroundResource(R.drawable.dot_goods_type_hui);
+                goodsOrderTvType2.setTextColor(getResources().getColor(R.color.color_gray_cccccc));
+                goodsOrderTvType3.setTextColor(getResources().getColor(R.color.color_gray_cccccc));
+
+                goodsOrderRvPingzheng.setVisibility(View.GONE);
+                goodsOrderTvReason.setVisibility(View.GONE);
+                goods_order_tv_pingzheng.setVisibility(View.GONE);
+                goods_order_ll_pinglun.setVisibility(View.GONE);
+
+                goods_order_btn_type1.setVisibility(View.GONE);
+                goods_order_btn_type2.setText(getResources().getString(R.string.my_order_address_lianxishangjia));
+                goods_order_btn_type3.setText(getResources().getString(R.string.my_order_address_cacel_order));
+                goodsOrderTvType.setText("等待卖家发货");
                 break;
-            case 2:
+            case 2://已发货
+                goods_order_shouhou_type1.setVisibility(View.GONE);
                 goods_order_tv_shop_name.setVisibility(View.VISIBLE);
                 goodsOrderRvPingzheng.setVisibility(View.GONE);
                 goodsOrderTvReason.setVisibility(View.GONE);
@@ -157,23 +188,31 @@ public class GoodsOrderActivity extends BaseActivity {
 
                 goods_order_btn_type1.setVisibility(View.GONE);
                 goods_order_btn_type2.setVisibility(View.GONE);
-                goods_order_btn_type3.setText("确认收货");
+                goods_order_btn_type3.setText(getResources().getString(R.string.my_order_address_querenshouhuo));
                 goodsOrderViewTypeRight.setBackgroundColor(getResources().getColor(R.color.color_gray_eeeeee));
                 goodsOrderViewType3.setBackgroundResource(R.drawable.dot_goods_type_hui);
                 goodsOrderTvType3.setTextColor(getResources().getColor(R.color.color_gray_cccccc));
                 break;
-            case 3:
-            case 4:
+            case 3://待评价
+                goods_order_shouhou_type1.setVisibility(View.GONE);
                 goods_order_tv_shop_name.setVisibility(View.VISIBLE);
                 goodsOrderRvPingzheng.setVisibility(View.GONE);
                 goodsOrderTvReason.setVisibility(View.GONE);
                 goods_order_tv_pingzheng.setVisibility(View.GONE);
 
                 goods_order_tv_order_type.setText("");
-                goods_order_btn_type1.setText("评论");
-                goods_order_btn_type2.setText("删除订单");
-                goods_order_btn_type3.setText("申请售后");
-
+                goodsOrderTvType.setTextColor(getResources().getColor(R.color.color_gray_666666));
+                goods_order_btn_type1.setText(getResources().getString(R.string.my_order_address_pinglun));
+                goods_order_btn_type2.setText(getResources().getString(R.string.my_order_address_del_order));
+                goods_order_btn_type3.setText(getResources().getString(R.string.my_order_address_apply_safe));
+                break;
+            case 4://售后
+                goods_order_shouhou_type1.setVisibility(View.VISIBLE);
+                goods_order_shouhou_type2.setVisibility(View.GONE);
+                goods_order_shouhou_type3.setVisibility(View.GONE);
+                goods_order_tv_shop_name.setVisibility(View.GONE);
+                goods_order_tv_order_type.setVisibility(View.GONE);
+                goods_order_ll_pinglun.setVisibility(View.GONE);
                 break;
 
         }

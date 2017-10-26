@@ -44,14 +44,15 @@
                             android:id="@+id/shop_data_title"
                             android:textSize="@dimen/sp_14"
                             android:textColor="@color/colorPrimary"
-                            android:text="林林巴海"
+                            android:text=""
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                         <TextView
                             android:id="@+id/shop_data_type"
                             android:textSize="@dimen/sp_12"
                             android:textColor="@color/colorPrimary"
-                            android:text="物业认证"
+                            android:text=""
+                            android:visibility="gone"
                             android:background="@drawable/press_type_green103375"
                             android:paddingRight="5dp"
                             android:paddingLeft="5dp"
@@ -66,18 +67,18 @@
                         android:id="@+id/shop_data_people"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="7dp"
-                        android:text="联系人：张三     18984242797"
+                        android:layout_marginTop="9dp"
+                        android:text=""
                         android:textColor="@color/color_gray_666666"
                         android:textSize="@dimen/sp_14" />
                     <TextView
                         android:id="@+id/shop_data_address"
                         android:maxLines="2"
                         android:ellipsize="end"
-                        android:textSize="@dimen/sp_16"
+                        android:textSize="@dimen/sp_14"
                         android:layout_weight="1"
                         android:gravity="bottom"
-                        android:text="营业地址：就是不告诉你窝在哪里就是不告诉你窝在哪里就是不告诉你窝在哪里就是不告诉你窝在哪里"
+                        android:text="营业地址："
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
@@ -100,7 +101,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:drawableLeft="@mipmap/d24_icon1"
-                    android:drawablePadding="5dp"
+                    android:drawablePadding="7dp"
                     android:text="@string/shop_data_zuobiao"
                     android:textColor="@color/color_gray_666666"
                     android:textSize="@dimen/common_txt_size"
@@ -141,7 +142,7 @@
                 <TextView
                     android:id="@+id/shop_data_tv_type"
                     style="@style/shop_data_tv_title"
-                    android:text="餐饮"
+                    android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -161,7 +162,7 @@
                 <TextView
                     android:id="@+id/shop_data_tv_zhuyingyewu"
                     style="@style/shop_data_tv_title"
-                    android:text="餐饮,蛋炒饭,红烧肉"
+                    android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -187,7 +188,7 @@
                 <TextView
                     android:id="@+id/shop_data_tv_qiye_name"
                     style="@style/shop_data_tv_title"
-                    android:text="餐饮哈哈"
+                    android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -207,7 +208,7 @@
                 <TextView
                     android:id="@+id/shop_data_tv_yingye_phone"
                     style="@style/shop_data_tv_title"
-                    android:text="1231645484"
+                    android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -227,7 +228,7 @@
                 <TextView
                     android:id="@+id/shop_data_tv_faren_name"
                     style="@style/shop_data_tv_title"
-                    android:text="餐饮"
+                    android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 

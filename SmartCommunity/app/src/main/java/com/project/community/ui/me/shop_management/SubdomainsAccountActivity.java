@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,15 +19,22 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.library.okgo.callback.JsonCallback;
+import com.library.okgo.model.BaseResponse;
+import com.library.okgo.utils.ToastUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.listener.RecycleItemClickListener;
 import com.project.community.model.CommentModel;
+import com.project.community.model.SubdomainAccountModel;
+import com.project.community.model.UserModel;
 import com.project.community.ui.adapter.ServiesComApdater;
 import com.project.community.ui.adapter.SubdomainsAccountApdater;
 import com.project.community.ui.me.OrderDetailActivity;
+import com.project.community.util.NetworkUtils;
 import com.project.community.view.MyButton;
 import com.project.community.view.SpacesItemDecoration;
+import com.project.community.view.VpSwipeRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,13 +42,15 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * Created by cj on 17/10/24.
  * 子账号
  */
 
-public class SubdomainsAccountActivity extends BaseActivity {
+public class SubdomainsAccountActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     @Bind(R.id.toolbar)
     Toolbar mToolBar;
@@ -50,7 +60,10 @@ public class SubdomainsAccountActivity extends BaseActivity {
     MyButton add;
     @Bind(R.id.recyclerView)
     RecyclerView mRecyclerView;
-    List<CommentModel> list =new ArrayList<>();
+    @Bind(R.id.refreshLayout)
+    VpSwipeRefreshLayout refreshLayout;
+
+    List<SubdomainAccountModel> list =new ArrayList<>();
     SubdomainsAccountApdater mAdapter;
     private Dialog mDialog;
 
@@ -69,27 +82,27 @@ public class SubdomainsAccountActivity extends BaseActivity {
     }
 
     private void initData() {
+
+        refreshLayout.setOnRefreshListener(this);
+        refreshLayout.setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN);
+        onRefresh();
+
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         SpacesItemDecoration decoration = new SpacesItemDecoration(2, false);
         mRecyclerView.addItemDecoration(decoration);
-        for (int i = 0; i < 2; i++) {
-            CommentModel commentModel =new CommentModel();
-            commentModel.content="贝贝";
-            list.add(commentModel);
-        }
         mAdapter = new SubdomainsAccountApdater(list, new RecycleItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-//                ToastUtils.showLongToast(this,position);
-              
+
             }
 
             @Override
             public void onCustomClick(View view, int position) {
                 switch (view.getId()){
                     case R.id.item_edit:
+                        AddSubdomainsAccountActivity.startActivity(SubdomainsAccountActivity.this,list.get(position).id);
                         break;     
                     case R.id.item_del:
                         showAlertDialog(position);
@@ -110,9 +123,10 @@ public class SubdomainsAccountActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (data!=null && requestCode==100 && resultCode==100){
-            CommentModel commentModel = (CommentModel) data.getSerializableExtra("save");
-            list.add(commentModel);
-            mAdapter.notifyItemInserted(list.size()-1);
+//            CommentModel commentModel = (CommentModel) data.getSerializableExtra("save");
+////            list.add(commentModel);
+//            mAdapter.notifyItemInserted(list.size()-1);
+            onRefresh();
         }
     }
 
@@ -160,4 +174,46 @@ public class SubdomainsAccountActivity extends BaseActivity {
             }
         });
     }
+
+    /**
+     * 获取子账号列表
+     */
+    private void getData(){
+        setRefreshing(true);
+        if (!NetworkUtils.isNetworkAvailable(this)) {
+            ToastUtils.showShortToast(this, R.string.network_error);
+            setRefreshing(false);
+            return;
+        }
+
+        serverDao.getSubdomainsAccount(getUser(this).id, new JsonCallback<BaseResponse<List<SubdomainAccountModel>>>() {
+            @Override
+            public void onSuccess(BaseResponse<List<SubdomainAccountModel>> listBaseResponse, Call call, Response response) {
+                setRefreshing(false);
+                showToast(listBaseResponse.message);
+                list.clear();
+                list.addAll(listBaseResponse.retData);
+                mAdapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    @Override
+    public void onRefresh() {
+        getData();
+    }
+    /**
+     * 设置是否刷新动画
+     *
+     * @param refreshing true开始刷新动画 false结束刷新动画
+     */
+    public void setRefreshing(final boolean refreshing) {
+        refreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                refreshLayout.setRefreshing(refreshing);
+            }
+        });
+    }
+
 }

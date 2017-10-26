@@ -45,8 +45,11 @@ public class ShopModel implements Serializable {
     public String legalPerson;
     public String legalCardPositive;
     public String legalCardReverse;
+    public String latitude;
     public String distance;
-    public double starLevel;
+    public String longitude;
+    public String auditContent;
+    public double starLevel;//星星
 
     @Override
     public String toString() {

@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.donkingliang.groupedadapter.adapter.GroupedRecyclerViewAdapter;
+import com.donkingliang.groupedadapter.holder.BaseViewHolder;
 import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
@@ -66,7 +68,13 @@ public class AfterSaleActivity extends BaseActivity implements SwipeRefreshLayou
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new AfterSaleApdater(this, mData);
         mRecyclerView.setAdapter(mAdapter);
-        
+        mAdapter.setOnChildClickListener(new GroupedRecyclerViewAdapter.OnChildClickListener() {
+            @Override
+            public void onChildClick(GroupedRecyclerViewAdapter adapter, BaseViewHolder holder, int groupPosition, int childPosition) {
+                GoodsOrderActivity.startActivity(AfterSaleActivity.this,4);
+            }
+        });
+
     }
 
     @Override
