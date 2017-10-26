@@ -33,12 +33,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding.view.RxView;
+import com.library.okgo.callback.JsonCallback;
+import com.library.okgo.model.BaseResponse;
 import com.library.okgo.utils.GlideImageLoader;
 import com.library.okgo.utils.LogUtils;
 import com.library.okgo.utils.ToastUtils;
 import com.library.okgo.utils.photo.PhotoUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
+import com.project.community.model.FileUploadModel;
+import com.project.community.model.GoodsManagerModel;
 import com.project.community.ui.life.SearchActivity;
 import com.project.community.ui.life.minsheng.ApplyStoreActivity;
 import com.project.community.ui.life.minsheng.BBSActivity;
@@ -47,11 +51,14 @@ import com.project.community.util.StringUtils;
 import com.project.community.view.crop.CropImageActivity;
 
 import java.io.File;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Response;
 import rx.functions.Action1;
 
 /**
@@ -92,9 +99,16 @@ public class BuildNewGoodsActivity extends BaseActivity implements View.OnTouchL
     private File fileCropUri = new File(Environment.getExternalStorageDirectory().getPath() + "/crop_photo.jpg");
     private Uri imageUri;
     private String mStoreCoverUri;
+    private String id="";
 
     public static void startActivity(Context context){
         Intent intent = new Intent(context,BuildNewGoodsActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void startActivity(Context context, GoodsManagerModel goodsManagerModel){
+        Intent intent = new Intent(context,BuildNewGoodsActivity.class);
+        intent.putExtra("cj",goodsManagerModel);
         context.startActivity(intent);
     }
 
@@ -108,6 +122,22 @@ public class BuildNewGoodsActivity extends BaseActivity implements View.OnTouchL
     }
 
     private void initData() {
+        if (getIntent().getExtras()!=null){
+            GoodsManagerModel model = (GoodsManagerModel) getIntent().getSerializableExtra("cj");
+            buildNewEtName.setText(model.name);
+            mStoreCoverUri=model.images;
+            if (TextUtils.isEmpty(mStoreCoverUri)){
+                new GlideImageLoader().onDisplayImageWithDefault(this, buildNewImgCover, mStoreCoverUri, R.mipmap.c1_image2);
+                buildNewImgAdd.setVisibility(View.GONE);
+                buildNewImgDel.setVisibility(View.VISIBLE);
+            }
+            buildNewEtDescribe.setText(model.description);
+            buildNewTvDescribeNum.setText(buildNewEtDescribe.getText().length()+"/60");
+            buildNewEtSellPrice.setText(model.price);
+            buildNewEtPrice.setText(model.originalPrice);
+            buildNewEtUnit.setText(model.unit);
+            buildNewEtInventory.setText(model.stock);
+        }
         buildNewEtDescribe.setOnTouchListener(this);
         buildNewEtDescribe.addTextChangedListener(new TextWatcher() {
             @Override
@@ -187,7 +217,7 @@ public class BuildNewGoodsActivity extends BaseActivity implements View.OnTouchL
                     break;
                 case CODE_RESULT_REQUEST:
                     if (data != null) {
-                        mStoreCoverUri=data.getStringExtra("uri");
+//                        mStoreCoverUri=data.getStringExtra("uri");
                         Log.e("onActivityResult: ", mStoreCoverUri);
                         new GlideImageLoader().onDisplayImageWithDefault(this, buildNewImgCover, data.getStringExtra("uri"), R.mipmap.c1_image2);
                         buildNewImgAdd.setVisibility(View.GONE);
@@ -195,8 +225,8 @@ public class BuildNewGoodsActivity extends BaseActivity implements View.OnTouchL
                         Uri uri = Uri.parse(data.getStringExtra("uri"));
                         Bitmap bitmap = PhotoUtils.getBitmapFromUri(uri, this);
                         if (bitmap != null) {
-//                            uploadFile(new File(StringUtils.getRealFilePath(BuildNewGoodsActivity.this, uri)));
-//                            LogUtils.e("uri:" + StringUtils.getRealFilePath(BuildNewGoodsActivity.this, uri));
+                            uploadFile(new File(StringUtils.getRealFilePath(BuildNewGoodsActivity.this, uri)));
+                            LogUtils.e("uri:" + StringUtils.getRealFilePath(BuildNewGoodsActivity.this, uri));
                         }
 
                     }
@@ -383,7 +413,7 @@ public class BuildNewGoodsActivity extends BaseActivity implements View.OnTouchL
                     ToastUtils.showLongToast(this,getResources().getString(R.string.build_new_goods_inventory_hit));
                     return false;
                 }
-                finish();
+                propShops(id);
                 return true;
             default:
                 // If we got here, the user's action was not recognized.
@@ -392,5 +422,62 @@ public class BuildNewGoodsActivity extends BaseActivity implements View.OnTouchL
         }
     }
 
+    /**
+     * 文件上传
+     *
+     * @param file
+     */
+    private void uploadFile(File file) {
+        serverDao.uploadFile(file, new JsonCallback<BaseResponse<FileUploadModel>>() {
+            @Override
+            public void onSuccess(BaseResponse<FileUploadModel> baseResponse, Call call, Response response) {
+                mStoreCoverUri=baseResponse.retData.filePath;
+
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                showToast(e.getMessage());
+                mStoreCoverUri="";
+                buildNewImgAdd.setVisibility(View.VISIBLE);
+                buildNewImgDel.setVisibility(View.GONE);
+            }
+        });
+    }
+
+
+    /**
+     * 申请店铺
+     *
+     * @param
+     */
+    private void propShops(String id) {
+        progressDialog.show();
+        serverDao.addGoods(getUser(this).id,
+                id,
+                buildNewEtName.getText().toString(),
+                mStoreCoverUri,
+                buildNewEtDescribe.getText().toString(),
+                buildNewEtSellPrice.getText().toString(),
+                buildNewEtPrice.getText().toString(),
+                buildNewEtUnit.getText().toString(),
+                buildNewEtInventory.getText().toString(),
+                new JsonCallback<BaseResponse<List>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
+                        ToastUtils.showLongToast(BuildNewGoodsActivity.this,baseResponse.message);
+                        progressDialog.dismiss();
+                        finish();
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        showToast(e.getMessage());
+                        progressDialog.dismiss();
+                    }
+                });
+    }
 
 }

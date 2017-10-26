@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string name="sell_price">售价：</string>
+
+
     <!--挂号申请-->
     <string name="registration_hospital">医院</string>
     <string name="registration_administrative">科室</string>
@@ -120,6 +124,12 @@
     <string name="goods_order_jiaoyi_danhao">交易单号</string>
     <string name="goods_order_xiadan_time">下单时间</string>
     <string name="goods_order_yichuli">已处理</string>
+    <string name="goods_order_lianxiren">联系人：</string>
+    <string name="goods_order_yingyedizhi">营业地址：</string>
+    <string name="goods_order_shenghei">未审核</string>
+    <string name="goods_order_shengheitongguo">审核通过</string>
+    <string name="goods_order_shengheiweitongguo">审核未通过</string>
+    <string name="goods_order_shengheiweitongguoyuanyin">审核未通过原因：</string>
 
     <!--商品管理-->
     <string name="shop_manager_title">商铺管理</string>
@@ -161,6 +171,8 @@
     <string name="build_new_goods_unit">单位</string>
     <string name="build_new_goods_unit_hit">请输入单位</string>
     <string name="build_new_goods_inventory">库存</string>
+    <string name="build_new_goods_inventory_maohao">库存：</string>
+    <string name="build_new_goods_xiaoliang_maohao">销量：</string>
     <string name="build_new_goods_inventory_hit">请输入库存</string>
 
     <!--子账号-->
@@ -178,6 +190,12 @@
     <string name="my_order_end">已发货</string>
     <string name="my_order_wait_pingjia">待评价</string>
     <string name="my_order_address_shouhou">售后</string>
+    <string name="my_order_address_lianxishangjia">联系商家</string>
+    <string name="my_order_address_cacel_order">取消订单</string>
+    <string name="my_order_address_querenshouhuo">确认收货</string>
+    <string name="my_order_address_pinglun">评论</string>
+    <string name="my_order_address_del_order">删除订单</string>
+    <string name="my_order_address_apply_safe">申请售后</string>
 
     <!--收货评价-->
     <string name="take_delivery_of_goods_title">收货评价</string>
@@ -188,6 +206,7 @@
 
     <!--申请售后-->
     <string name="apply_sale_title">申请售后</string>
+    <string name="apply_sale_detail">售后详情</string>
     <string name="apply_sale_pingzheng">上传凭证</string>
     <string name="apply_sale_pingzheng_hit">请上传凭证</string>
     <string name="apply_sale_tuihuo_hit">请输入退货原因</string>

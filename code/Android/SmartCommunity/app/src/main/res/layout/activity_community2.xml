@@ -95,6 +95,7 @@
                     <TextView
                         android:id="@+id/tv_serview_wait"
                         android:textSize="14sp"
+                        style="?android:attr/windowTitleStyle"
                         android:textColor="@color/colorPrimary"
                         android:text="待服务"
                         android:layout_width="wrap_content"
@@ -109,7 +110,7 @@
                 <View
                     android:id="@+id/line_1"
                     android:layout_width="54dp"
-                    android:layout_height="2dp"
+                    android:layout_height="3dp"
                     android:background="@color/login_bottom_txt"/>
             </LinearLayout>
             <LinearLayout
@@ -127,6 +128,7 @@
                     <TextView
                         android:id="@+id/tv_serview_ing"
                         android:textSize="14sp"
+                        style="?android:attr/windowTitleStyle"
                         android:textColor="@color/color_gray_666666"
                         android:text="服务中"
                         android:layout_width="wrap_content"
@@ -142,7 +144,7 @@
                     android:id="@+id/line_2"
                     android:visibility="invisible"
                     android:layout_width="54dp"
-                    android:layout_height="2dp"
+                    android:layout_height="3dp"
                     android:background="@color/login_bottom_txt"/>
             </LinearLayout>
             <LinearLayout
@@ -160,6 +162,7 @@
                     <TextView
                         android:id="@+id/tv_serview_com"
                         android:textSize="14sp"
+                        style="?android:attr/windowTitleStyle"
                         android:textColor="@color/color_gray_666666"
                         android:text="已完成"
                         android:layout_width="wrap_content"
@@ -175,7 +178,7 @@
                     android:id="@+id/line_3"
                     android:visibility="invisible"
                     android:layout_width="54dp"
-                    android:layout_height="2dp"
+                    android:layout_height="3dp"
                     android:background="@color/login_bottom_txt"/>
             </LinearLayout>
             </LinearLayout>

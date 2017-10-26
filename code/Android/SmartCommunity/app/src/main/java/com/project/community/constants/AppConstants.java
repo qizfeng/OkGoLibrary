@@ -337,6 +337,41 @@ public class AppConstants {
      */
     public static final String URL_MINSHENG_INDEX=URL_BASE+"/m/propleLife/propShops/index";
 
+    /**
+     * 申请商铺
+     */
+    public static final String URL_UPDATEISOPEN=URL_BASE+"/m/propleLife/propShops/updateIsOpen";
+
+    /**
+     * D83商铺详情
+     */
+    public static final String URL_PROPSHOPS=URL_BASE+"/m/propleLife/propShops/get";
+
+    /**
+     * D77字账号列表
+     */
+    public static final String URL_SUBDOMAINACCOUNTLIST=URL_BASE+"/m/propleLife/shop/account/list";
+
+    /**
+     * D78子账号详情
+     */
+    public static final String URL_GETSUBDOMAINACCOUNTDETAIL=URL_BASE+"/m/propleLife/shop/account/get";
+
+    /**
+     * D76添加商品
+     */
+    public static final String URL_ADDGOODS=URL_BASE+"/m/propleLife/shop/goods/save";
+
+    /**
+     * D78子账号添加
+     */
+    public static final String URL_ADDSUBDOMAINACCOUNT=URL_BASE+"/m/propleLife/shop/account/save";
+
+    /**
+     * D80商品管理
+     */
+    public static final String URL_GETGOODSMANAGER=URL_BASE+"/m/propleLife/shop/goods/list";
+
     /*==========================*/
     /**
      * 分页大小

@@ -22,6 +22,8 @@ import com.project.community.model.DistModel;
 import com.project.community.model.FamilyModel;
 import com.project.community.model.FamilyPersonModel;
 import com.project.community.model.FileUploadModel;
+import com.project.community.model.GoodsManagerModel;
+import com.project.community.model.GoodsModel;
 import com.project.community.model.GuideModel;
 import com.project.community.model.HotlineModel;
 import com.project.community.model.HouseModel;
@@ -32,6 +34,7 @@ import com.project.community.model.PaymentInfoModel;
 import com.project.community.model.PaymentWayModel;
 import com.project.community.model.SearchModel;
 import com.project.community.model.ShopModel;
+import com.project.community.model.SubdomainAccountModel;
 import com.project.community.model.UserModel;
 import com.project.community.model.WuyeIndexResponse;
 import com.project.community.model.ZhengwuIndexResponse;
@@ -663,8 +666,98 @@ public interface ServerDao {
      * @param legalCardReverse  法人身份证反面
      * @param callback
      */
-    void propShops(String userId, double longitude, double latitude, String shopsName, String shopPhoto, String contactName, String businessAddress, String shopsCategory,
+    void propShops(String id,String userId, double longitude, double latitude, String shopsName, String shopPhoto, String contactName, String businessAddress, String shopsCategory,
                    String mainBusiness, String entName, String licenseNo, String licensePositive, String licenseReverse, String legalPerson, String legalCardPositive,
                    String legalCardReverse, JsonCallback<BaseResponse<List>> callback);
+
+
+    /**
+     * D75店铺营业
+     *
+     * @param callback
+     */
+    void updateIsOpen(String userId, JsonCallback<BaseResponse<List<List>>> callback);
+
+
+    /**
+     * D83商铺详情
+     *
+     * @param callback
+     */
+    void getPropShops(String userId, JsonCallback<BaseResponse<ShopModel>> callback);
+
+    /**
+     * D77字账号列表
+     *
+     * @param callback
+     */
+    void getSubdomainsAccount(String userId, JsonCallback<BaseResponse<List<SubdomainAccountModel>>> callback);
+
+
+    /**
+     * D76添加商品
+     *
+     * @param userId 用户id
+     * @param shopId 店铺id
+     * @param name 商铺名称
+     * @param images 图片
+     * @param description 描述
+     * @param price 价格
+     * @param originalPrice 原始价格
+     * @param unit 单位
+     * @param stock 库存
+     * @param callback
+     */
+    void addGoods(
+            String userId,
+            String shopId,
+            String name,
+            String images,
+            String description,
+            String price,
+            String originalPrice,
+            String unit,
+            String stock,
+            JsonCallback<BaseResponse<List>> callback);
+
+    /**
+     * D78子账号添加
+     *
+     * @param callback
+     */
+    void addSubdomainsAccount(
+            String userId,
+            String shopId,
+            String name,
+            String phone,
+            int sumMoney,
+            int addGoods,
+            int goodsMge,
+            int orderMge,
+            int shopInfo,
+            int sumOrder,
+            JsonCallback<BaseResponse<List>> callback);
+
+
+    /**
+     * D78子账号详情
+     *
+     * @param callback
+     */
+    void getSubdomainsAccountDetail(
+            String childId,
+            JsonCallback<BaseResponse<SubdomainAccountModel>> callback);
+
+    /**
+     * D80商品管理
+     *
+     * @param status 商品状态0:出售中；1:售罄；2：下架
+     * @param callback
+     */
+    void getGoodsManagerList(
+            String userId,
+            String status,
+            JsonCallback<BaseResponse<List<GoodsManagerModel>>> callback);
+
 
 }

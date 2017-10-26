@@ -1,6 +1,7 @@
 package com.project.community.ui.life.minsheng;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -42,6 +43,7 @@ import com.project.community.base.BaseActivity;
 import com.project.community.model.DictionaryModel;
 import com.project.community.model.DictionaryResponse;
 import com.project.community.model.FileUploadModel;
+import com.project.community.model.ShopModel;
 import com.project.community.ui.SplashActivity;
 import com.project.community.ui.adapter.CommunityUnitSingleChoiceAdapter;
 import com.project.community.ui.community.CommunityFamilyActivity;
@@ -166,11 +168,18 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
     private List<String> strings =new ArrayList<>();
 
     private boolean isData=false;
+    private String id="";
 
 //    private ApplyStoryPicAdapter mApplyStoryPicAdapterBusinessLicense;
 //    private ApplyStoryPicAdapter mApplyStoryPicAdapterGvLegalPerson;
 //    private List<String> mImagsBusinessLicense = new ArrayList<>(); // 营业执照照片集合
 //    private List<String> mImagsGvLegalPersone = new ArrayList<>();//法人照片集合
+
+    public static void startActivity(Context context, ShopModel shopModel) {
+        Intent intent = new Intent(context, ApplyStoreActivity.class);
+        intent.putExtra("value",shopModel);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -182,6 +191,51 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
 
     private void initData() {
         initToolBar(mToolBar, mTvTitle, true, getString(R.string.store_Apply), R.mipmap.iv_back);
+
+        if (getIntent().getExtras()!=null){
+            ShopModel shopModel = (ShopModel) getIntent().getSerializableExtra("value");
+            applyStoreEtTitle.setText(shopModel.shopsName);
+            applyStoreEtName.setText(shopModel.contactName);
+            applyStoreEtTel.setText(shopModel.contactPhone);
+            applyStoreTvAddress.setText(shopModel.businessAddress);
+            applyStoreTvType.setText(shopModel.shopsCategory);
+            applyStoreEtImportant.setText(shopModel.mainBusiness);
+            applyStoreEtCompanyName.setText(shopModel.entName);
+            applyStoreEtBusinessLicense.setText(shopModel.licenseNo);
+
+            id=shopModel.id;
+            mStoreCoverUri=shopModel.shopPhoto;//店铺封面
+            if (!TextUtils.isEmpty(mStoreCoverUri)){
+                new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgCover, mStoreCoverUri, R.mipmap.c1_image2);
+                applyStoreImgAdd.setVisibility(View.GONE);
+                applyStoreImgDel.setVisibility(View.VISIBLE);
+            }
+            mBusinessLicenseZUri=shopModel.licensePositive;//
+            if (!TextUtils.isEmpty(mBusinessLicenseZUri)){
+                new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgBusinessLicenseZheng, mBusinessLicenseZUri, R.mipmap.c1_image2);
+                applyStoreImgAddBusinessLicenseZheng.setVisibility(View.GONE);
+                applyStoreDelBusinessLicenseZheng.setVisibility(View.VISIBLE);
+            }
+            mBusinessLicenseFUri=shopModel.licenseReverse;//
+            if (!TextUtils.isEmpty(mBusinessLicenseFUri)){
+                new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgBusinessLicenseFan, mBusinessLicenseFUri, R.mipmap.c1_image2);
+                applyStoreImgAddBusinessLicenseFan.setVisibility(View.GONE);
+                applyStoreDelBusinessLicenseFan.setVisibility(View.VISIBLE);
+            }
+            mLegalPersonZUri=shopModel.legalCardPositive;//
+            if (!TextUtils.isEmpty(mLegalPersonZUri)){
+                new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgLegalPersonZheng, mLegalPersonZUri, R.mipmap.c1_image2);
+                applyStoreImgAddLegalPersonZheng.setVisibility(View.GONE);
+                applyStoreDelLegalPersonZheng.setVisibility(View.VISIBLE);
+            }
+            mLegalPersonFUri=shopModel.legalCardReverse;//
+            if (!TextUtils.isEmpty(mLegalPersonFUri)){
+                new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgLegalPersonFan, mLegalPersonFUri, R.mipmap.c1_image2);
+                applyStoreImgAddLegalPersonFan.setVisibility(View.GONE);
+                applyStoreDelLegalPersonFan.setVisibility(View.VISIBLE);
+            }
+
+        }
 
         applyStoreEtImportant.setOnTouchListener(this);
 
@@ -340,9 +394,7 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
                     ToastUtils.showLongToast(this,getResources().getString(R.string.store_apply_legal_person_photo_fan_toast));
                     return;
                 }
-                progressDialog.show();
-                propShops();
-
+                propShops(id);
                 break;
             case R.id.apply_store_img_add: //点击添加店铺封面
                 iSCode = 1;
@@ -451,32 +503,32 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
                     if (data != null) {
                         switch (iSCode){
                             case 1:
-                                mStoreCoverUri=data.getStringExtra("uri");
+//                                mStoreCoverUri=data.getStringExtra("uri");
                                 Log.e("onActivityResult: ", mStoreCoverUri);
                                 new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgCover, data.getStringExtra("uri"), R.mipmap.c1_image2);
                                 applyStoreImgAdd.setVisibility(View.GONE);
                                 applyStoreImgDel.setVisibility(View.VISIBLE);
                                 break;
                             case 2:
-                                mBusinessLicenseZUri=data.getStringExtra("uri");
+//                                mBusinessLicenseZUri=data.getStringExtra("uri");
                                 new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgBusinessLicenseZheng, data.getStringExtra("uri"), R.mipmap.c1_image2);
                                 applyStoreImgAddBusinessLicenseZheng.setVisibility(View.GONE);
                                 applyStoreDelBusinessLicenseZheng.setVisibility(View.VISIBLE);
                                 break;
                             case 3:
-                                mBusinessLicenseFUri=data.getStringExtra("uri");
+//                                mBusinessLicenseFUri=data.getStringExtra("uri");
                                 new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgBusinessLicenseFan, data.getStringExtra("uri"), R.mipmap.c1_image2);
                                 applyStoreImgAddBusinessLicenseFan.setVisibility(View.GONE);
                                 applyStoreDelBusinessLicenseFan.setVisibility(View.VISIBLE);
                                 break;
                             case 4:
-                                mLegalPersonZUri=data.getStringExtra("uri");
+//                                mLegalPersonZUri=data.getStringExtra("uri");
                                 new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgLegalPersonZheng, data.getStringExtra("uri"), R.mipmap.c1_image2);
                                 applyStoreImgAddLegalPersonZheng.setVisibility(View.GONE);
                                 applyStoreDelLegalPersonZheng.setVisibility(View.VISIBLE);
                                 break;
                             case 5:
-                                mLegalPersonFUri=data.getStringExtra("uri");
+//                                mLegalPersonFUri=data.getStringExtra("uri");
                                 new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgLegalPersonFan, data.getStringExtra("uri"), R.mipmap.c1_image2);
                                 applyStoreImgAddLegalPersonFan.setVisibility(View.GONE);
                                 applyStoreDelLegalPersonFan.setVisibility(View.VISIBLE);
@@ -720,6 +772,34 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
                 showToast(e.getMessage());
+                switch (iSCode){
+                    case 1:
+                        mStoreCoverUri="";
+                        applyStoreImgAdd.setVisibility(View.VISIBLE);
+                        applyStoreImgDel.setVisibility(View.GONE);
+                        break;
+                    case 2:
+                        mBusinessLicenseZUri="";
+                        applyStoreImgAddBusinessLicenseZheng.setVisibility(View.VISIBLE);
+                        applyStoreDelBusinessLicenseZheng.setVisibility(View.GONE);
+                        break;
+                    case 3:
+                        mBusinessLicenseFUri="";
+                        applyStoreImgAddBusinessLicenseFan.setVisibility(View.VISIBLE);
+                        applyStoreDelBusinessLicenseFan.setVisibility(View.GONE);
+                        break;
+                    case 4:
+                        mLegalPersonZUri="";
+                        applyStoreImgAddLegalPersonZheng.setVisibility(View.VISIBLE);
+                        applyStoreDelLegalPersonZheng.setVisibility(View.GONE);
+                        break;
+                    case 5:
+                        mLegalPersonFUri="";
+                        applyStoreImgAddLegalPersonFan.setVisibility(View.VISIBLE);
+                        applyStoreDelLegalPersonFan.setVisibility(View.GONE);
+                        break;
+
+                }
             }
         });
     }
@@ -745,9 +825,10 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
      *
      * @param
      */
-    private void propShops() {
+    private void propShops(String id) {
+        progressDialog.show();
         Log.e("propShops: ", "--------"+shopsCategory);
-        serverDao.propShops(getUser(this).id,
+        serverDao.propShops(id,getUser(this).id,
                 mLongitude,
                 mLatitude,
                 applyStoreEtTitle.getText().toString(),

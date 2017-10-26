@@ -2,6 +2,7 @@ package com.project.community.ui.life.minsheng;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +28,7 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapPoi;
 import com.baidu.mapapi.map.MapStatus;
@@ -50,9 +53,11 @@ import com.library.okgo.utils.LogUtils;
 import com.library.okgo.utils.ToastUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
+import com.project.community.model.DeviceModel;
 import com.project.community.ui.community.CommunityFragment;
 import com.project.community.ui.life.TopicDetailActivity;
 import com.project.community.ui.life.wuye.AddHouseNoActivity;
+import com.project.community.ui.me.shop_management.ShopDataActivity;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
@@ -86,6 +91,8 @@ public class AdrressActivity extends BaseActivity implements BaiduMap.OnMapClick
     TextureMapView mMapView;
     @Bind(R.id.iv_current_poi)
     ImageView ivCurrentPoi;
+    @Bind(R.id.imgs_datouzheng)
+    ImageView imgs_datouzheng;
 
     private String mCurrentAddress="";
     /**
@@ -100,8 +107,20 @@ public class AdrressActivity extends BaseActivity implements BaiduMap.OnMapClick
     private double mCurrentLon = 0.0;
     private float mCurrentAccracy;
     public MyLocationListenner myListener = new MyLocationListenner();
-    private double mLongitude;
-    private double mLatitude;
+    private double mLongitude; // 经度
+    private double mLatitude; //纬度
+
+    public static void startActivity(Context context) {
+        Intent intent = new Intent(context, AdrressActivity.class);
+        context.startActivity(intent);
+    }
+    public static void startActivity(Context context,String longitude,String latitude) {
+        Intent intent = new Intent(context, AdrressActivity.class);
+        intent.putExtra("longitude",longitude);
+        intent.putExtra("latitude",latitude);
+        context.startActivity(intent);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,10 +162,18 @@ public class AdrressActivity extends BaseActivity implements BaiduMap.OnMapClick
         option.setScanSpan(1000 * 30);
         option.setAddrType("all");
         mLocClient.setLocOption(option);
-        mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(
-                MyLocationConfiguration.LocationMode.NORMAL, true, BitmapDescriptorFactory
-                .fromResource(R.mipmap.k),
-                accuracyCircleFillColor, accuracyCircleStrokeColor));
+        if (getIntent().getExtras()!=null){
+            mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(
+                    MyLocationConfiguration.LocationMode.NORMAL, true, BitmapDescriptorFactory
+                    .fromResource(R.mipmap.d32_icon1),
+                    accuracyCircleFillColor, accuracyCircleStrokeColor));
+        }else {
+            mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(
+                    MyLocationConfiguration.LocationMode.NORMAL, true, BitmapDescriptorFactory
+                    .fromResource(R.mipmap.k),
+                    accuracyCircleFillColor, accuracyCircleStrokeColor));
+        }
+
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             // 没有权限，申请权限。
@@ -157,28 +184,45 @@ public class AdrressActivity extends BaseActivity implements BaiduMap.OnMapClick
         }
         mBaiduMap.setOnMapClickListener(this);
         mBaiduMap.setOnMarkerClickListener(this);
-        mBaiduMap.setOnMapStatusChangeListener(new BaiduMap.OnMapStatusChangeListener() {
-            @Override
-            public void onMapStatusChangeStart(MapStatus mapStatus) {
 
-            }
+        if (getIntent().getExtras()!=null){
+            mLongitude= Double.parseDouble(getIntent().getStringExtra("longitude"));
+            mLatitude= Double.parseDouble(getIntent().getStringExtra("latitude"));
+            imgs_datouzheng.setVisibility(View.GONE);
+            MapStatus mMapStatus = new MapStatus.Builder()
+                    .target(new LatLng(mLatitude, mLongitude))
+                    .zoom(18)
+                    .build();
+            MapStatusUpdate u = MapStatusUpdateFactory
+                    .newMapStatus(mMapStatus);
+            mBaiduMap.setMapStatus(u);
 
-            @Override
-            public void onMapStatusChange(MapStatus mapStatus) {
+            addDeviceMarker(mLatitude,mLongitude);
 
-            }
+        }else {
+            mBaiduMap.setOnMapStatusChangeListener(new BaiduMap.OnMapStatusChangeListener() {
+                @Override
+                public void onMapStatusChangeStart(MapStatus mapStatus) {
 
-            @Override
-            public void onMapStatusChangeFinish(MapStatus mapStatus) {
-                //target地图操作的中心点。
-                LatLng target = mBaiduMap.getMapStatus().target;
-                Log.e("onMapStatusChangeFinish", target.toString());
-                mLongitude= target.longitude;
-                mLatitude= target.latitude;
-                latlngToAddress(new LatLng(target.latitude,target.longitude));
+                }
+
+                @Override
+                public void onMapStatusChange(MapStatus mapStatus) {
+
+                }
+
+                @Override
+                public void onMapStatusChangeFinish(MapStatus mapStatus) {
+                    //target地图操作的中心点。
+                    LatLng target = mBaiduMap.getMapStatus().target;
+                    Log.e("onMapStatusChangeFinish", target.toString());
+                    mLongitude= target.longitude;
+                    mLatitude= target.latitude;
+                    latlngToAddress(new LatLng(target.latitude,target.longitude));
 //                mBaiduMap.hideInfoWindow();
-            }
-        });
+                }
+            });
+        }
 
     }
 
@@ -239,13 +283,6 @@ public class AdrressActivity extends BaseActivity implements BaiduMap.OnMapClick
     @Override
     public boolean onMarkerClick(Marker marker) {
         Log.e( "onMapClick__marker", marker.getTitle());
-        MapStatus mMapStatus = new MapStatus.Builder()
-                .target(new LatLng(mCurrentLat, mCurrentLon))
-                .zoom(18)
-                .build();
-        MapStatusUpdate u = MapStatusUpdateFactory
-                .newMapStatus(mMapStatus);
-        mBaiduMap.setMapStatus(u);
         return false;
     }
 
@@ -348,12 +385,17 @@ public class AdrressActivity extends BaseActivity implements BaiduMap.OnMapClick
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_confire:
-                Intent intent = new Intent();
-                intent.putExtra("result",mCurrentAddress);
-                intent.putExtra("latitude",mLatitude);
-                intent.putExtra("longitude",mLongitude);
-                setResult(100,intent);
-                finish();
+                if (getIntent().getExtras()==null){
+                    Intent intent = new Intent();
+                    intent.putExtra("result",mCurrentAddress);
+                    intent.putExtra("latitude",mLatitude);
+                    intent.putExtra("longitude",mLongitude);
+                    setResult(100,intent);
+                    finish();
+                }else {
+                    finish();
+                }
+
                 return true;
             default:
                 // If we got here, the user's action was not recognized.
@@ -361,6 +403,19 @@ public class AdrressActivity extends BaseActivity implements BaiduMap.OnMapClick
                 return super.onOptionsItemSelected(item);
 
         }
+    }
+
+    /**
+     * 描绘设备marker
+     */
+    private void addDeviceMarker(double lat,double lon) {
+        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.mipmap.d32_icon1);
+        mBaiduMap.hideInfoWindow();
+        LatLng latLng = new LatLng(lat,lon);
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.icon(bitmapDescriptor)
+                .position(latLng);
+        mBaiduMap.addOverlay(markerOptions);
     }
 
 }

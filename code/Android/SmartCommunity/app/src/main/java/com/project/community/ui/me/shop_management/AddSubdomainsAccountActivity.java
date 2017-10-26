@@ -13,15 +13,24 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.alanapi.switchbutton.SwitchButton;
+import com.library.okgo.callback.JsonCallback;
+import com.library.okgo.model.BaseResponse;
 import com.library.okgo.utils.ToastUtils;
 import com.library.okgo.utils.ValidateUtil;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.model.CommentModel;
+import com.project.community.model.SubdomainAccountModel;
+import com.project.community.model.UserModel;
+import com.project.community.util.NetworkUtils;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * Created by cj on 17/10/24.
@@ -55,6 +64,11 @@ public class AddSubdomainsAccountActivity extends BaseActivity {
         Intent intent = new Intent(context, AddSubdomainsAccountActivity.class);
         ((Activity)context).startActivityForResult(intent,100);
     }
+    public static void startActivity(Context context, String id) {
+        Intent intent = new Intent(context, AddSubdomainsAccountActivity.class);
+        intent.putExtra("cj",id);
+        ((Activity)context).startActivityForResult(intent,100);
+    }
 
 
     @Override
@@ -67,6 +81,9 @@ public class AddSubdomainsAccountActivity extends BaseActivity {
     }
 
     private void initData() {
+        if (getIntent().getExtras()!=null){
+            getData(getIntent().getStringExtra("cj"));
+        }
         addSubdomainsAccountSwPrice.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
@@ -111,13 +128,108 @@ public class AddSubdomainsAccountActivity extends BaseActivity {
                     showToast(getString(R.string.toast_error_phone));
                     return;
                 }
-                CommentModel commentModel =new CommentModel();
-                commentModel.content=addSubdomainsAccountEtName.getText().toString();
-                Intent intent = new Intent();
-                intent.putExtra("save",commentModel);
-                setResult(100,intent);
-                finish();
+                AddData("1");
+
                 break;
         }
     }
+
+    /**
+     * 增加子账号
+     */
+    private void AddData(String id){
+        showLoading();
+        if (!NetworkUtils.isNetworkAvailable(this)) {
+            ToastUtils.showShortToast(this, R.string.network_error);
+            dismissDialog();
+            return;
+        }
+
+        int addSubdomainsAccountSwPriceNum=0;
+        int addSubdomainsAccountSwOrderNum=0;
+        int addSubdomainsAccountCbAddGoodsNum=0;
+        int addSubdomainsAccountCbGoodsManagerNum=0;
+        int addSubdomainsAccountCbOrderManagerNum=0;
+        int addSubdomainsAccountCbShopDataNum=0;
+        if (addSubdomainsAccountSwPrice.isChecked()) addSubdomainsAccountSwPriceNum=0;
+        else addSubdomainsAccountSwPriceNum=1;
+        if (addSubdomainsAccountSwOrder.isChecked()) addSubdomainsAccountSwOrderNum=0;
+        else addSubdomainsAccountSwOrderNum=1;
+        if (addSubdomainsAccountCbAddGoods.isChecked()) addSubdomainsAccountCbAddGoodsNum=0;
+        else addSubdomainsAccountCbAddGoodsNum=1;
+        if (addSubdomainsAccountCbGoodsManager.isChecked()) addSubdomainsAccountCbGoodsManagerNum=0;
+        else addSubdomainsAccountCbGoodsManagerNum=1;
+        if (addSubdomainsAccountCbOrderManager.isChecked()) addSubdomainsAccountCbOrderManagerNum=0;
+        else addSubdomainsAccountCbOrderManagerNum=1;
+        if (addSubdomainsAccountCbShopData.isChecked()) addSubdomainsAccountCbShopDataNum=0;
+        else addSubdomainsAccountCbShopDataNum=1;
+
+
+        serverDao.addSubdomainsAccount(
+                getUser(this).id,
+                id,
+                addSubdomainsAccountEtName.getText().toString(),
+                addSubdomainsAccountEtPhone.getText().toString(),
+                addSubdomainsAccountSwPriceNum,
+                addSubdomainsAccountCbAddGoodsNum,
+                addSubdomainsAccountCbGoodsManagerNum,
+                addSubdomainsAccountCbOrderManagerNum,
+                addSubdomainsAccountCbShopDataNum,
+                addSubdomainsAccountSwOrderNum,
+                new JsonCallback<BaseResponse<List>>() {
+
+                    @Override
+                    public void onSuccess(BaseResponse<List> listBaseResponse, Call call, Response response) {
+                        dismissDialog();
+                        showToast(listBaseResponse.message);
+                        Intent intent = new Intent();
+                        setResult(100,intent);
+                        finish();
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        dismissDialog();
+                        showToast(e.getMessage());
+                    }
+                });
+    }
+
+    private void getData(String id){
+        showLoading();
+        if (!NetworkUtils.isNetworkAvailable(this)) {
+            ToastUtils.showShortToast(this, R.string.network_error);
+            dismissDialog();
+            return;
+        }
+        serverDao.getSubdomainsAccountDetail(id, new JsonCallback<BaseResponse<SubdomainAccountModel>>() {
+            @Override
+            public void onSuccess(BaseResponse<SubdomainAccountModel> subdomainAccountModelBaseResponse, Call call, Response response) {
+                dismissDialog();
+                addSubdomainsAccountEtName.setText(subdomainAccountModelBaseResponse.retData.name);
+                addSubdomainsAccountEtPhone.setText(subdomainAccountModelBaseResponse.retData.phone);
+                if (subdomainAccountModelBaseResponse.retData.sumMoney.equals("0")) addSubdomainsAccountSwPrice.setChecked(true);
+                else addSubdomainsAccountSwPrice.setChecked(false);
+                if (subdomainAccountModelBaseResponse.retData.sumOrder.equals("0")) addSubdomainsAccountSwOrder.setChecked(true);
+                else addSubdomainsAccountSwOrder.setChecked(false);
+                if (subdomainAccountModelBaseResponse.retData.addGoods.equals("0")) addSubdomainsAccountCbAddGoods.setChecked(true);
+                else addSubdomainsAccountCbAddGoods.setChecked(false);
+                if (subdomainAccountModelBaseResponse.retData.goodsMge.equals("0")) addSubdomainsAccountCbGoodsManager.setChecked(true);
+                else addSubdomainsAccountCbGoodsManager.setChecked(false);
+                if (subdomainAccountModelBaseResponse.retData.orderMge.equals("0")) addSubdomainsAccountCbOrderManager.setChecked(true);
+                else addSubdomainsAccountCbOrderManager.setChecked(false);
+                if (subdomainAccountModelBaseResponse.retData.shopInfo.equals("0")) addSubdomainsAccountCbShopData.setChecked(true);
+                else addSubdomainsAccountCbShopData.setChecked(false);
+
+            }
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                dismissDialog();
+                showToast(e.getMessage());
+            }
+        });
+    }
+
 }

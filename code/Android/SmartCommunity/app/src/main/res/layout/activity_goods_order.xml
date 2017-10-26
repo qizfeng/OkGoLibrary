@@ -11,6 +11,7 @@
     <include layout="@layout/pub_layout_toolbar"/>
 
     <com.project.community.view.MyScrollview
+        android:descendantFocusability="blocksDescendants"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -21,111 +22,130 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/goods_order_tv_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/goods_order_shouhou_type1"
+                style="?android:attr/windowTitleStyle"
+                android:textSize="18sp"
+                android:textColor="@color/white"
                 android:paddingLeft="15dp"
-                android:paddingTop="20dp"
-                android:text="已发货"
-                android:textColor="@color/yellow_ff961b"
-                android:textSize="@dimen/sp_16" />
+                android:gravity="center_vertical"
+                android:text="等待商家处理.."
+                android:background="@color/color_orange_ff961b"
+                android:layout_width="match_parent"
+                android:layout_height="62dp" />
 
             <LinearLayout
+                android:id="@+id/goods_order_shouhou_type2"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginTop="30dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/goods_order_tv_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="20dp"
+                    android:text="@string/my_order_end"
+                    android:textColor="@color/yellow_ff961b"
+                    android:textSize="@dimen/sp_16" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginTop="30dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <View
-                        android:id="@+id/goods_order_view_type_1"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:background="@drawable/dot_goods_type" />
-
-                    <View
-                        android:id="@+id/goods_order_view_type_left"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_weight="1"
-                        android:background="@color/yellow_ff961b" />
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
-                    <View
-                        android:id="@+id/goods_order_view_type_2"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:background="@drawable/dot_goods_type" />
+                        <View
+                            android:id="@+id/goods_order_view_type_1"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:background="@drawable/dot_goods_type" />
 
-                    <View
-                        android:id="@+id/goods_order_view_type_right"
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_weight="1"
-                        android:background="@color/yellow_ff961b" />
+                        <View
+                            android:id="@+id/goods_order_view_type_left"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_weight="1"
+                            android:background="@color/yellow_ff961b" />
 
-                    <View
-                        android:id="@+id/goods_order_view_type_3"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:background="@drawable/dot_goods_type" />
+                        <View
+                            android:id="@+id/goods_order_view_type_2"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:background="@drawable/dot_goods_type" />
+
+                        <View
+                            android:id="@+id/goods_order_view_type_right"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_weight="1"
+                            android:background="@color/yellow_ff961b" />
+
+                        <View
+                            android:id="@+id/goods_order_view_type_3"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:background="@drawable/dot_goods_type" />
+                    </LinearLayout>
+
+
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="26dp"
+                    android:paddingRight="26dp">
 
+                    <TextView
+                        android:id="@+id/goods_order_tv_type_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:text="@string/my_order_wait_fahuo"
+                        android:textColor="@color/yellow_ff961b"
+                        android:textSize="@dimen/sp_14" />
+
+                    <TextView
+                        android:id="@+id/goods_order_tv_type_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/my_order_end"
+                        android:textColor="@color/yellow_ff961b"
+                        android:textSize="@dimen/sp_14" />
+
+                    <TextView
+                        android:id="@+id/goods_order_tv_type_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="@string/my_order_wait_yishouhuo"
+                        android:textColor="@color/yellow_ff961b"
+                        android:textSize="@dimen/sp_14" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/color_gray_f4f4f4" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="26dp"
-                android:paddingRight="26dp">
-
-                <TextView
-                    android:id="@+id/goods_order_tv_type_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:text="@string/my_order_wait_fahuo"
-                    android:textColor="@color/yellow_ff961b"
-                    android:textSize="@dimen/sp_14" />
-
-                <TextView
-                    android:id="@+id/goods_order_tv_type_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/my_order_end"
-                    android:textColor="@color/yellow_ff961b"
-                    android:textSize="@dimen/sp_14" />
-
-                <TextView
-                    android:id="@+id/goods_order_tv_type_3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="@string/my_order_wait_yishouhuo"
-                    android:textColor="@color/yellow_ff961b"
-                    android:textSize="@dimen/sp_14" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:layout_marginTop="15dp"
-                android:background="@color/color_gray_f4f4f4" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -252,7 +272,7 @@
 
             <TextView
                 android:id="@+id/goods_order_tv_order_type"
-                android:textColor="@color/color_gray_666666"
+                android:textColor="@color/color_gray_999999"
                 android:singleLine="true"
                 android:paddingRight="15dp"
                 android:paddingLeft="15dp"
@@ -389,6 +409,7 @@
         </LinearLayout>
     </com.project.community.view.MyScrollview>
     <RelativeLayout
+        android:id="@+id/goods_order_shouhou_type3"
         android:layout_width="match_parent"
         android:layout_height="@dimen/layout_item_height"
         android:background="@color/white"
