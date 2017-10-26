@@ -6,15 +6,22 @@ import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.library.okgo.callback.JsonCallback;
+import com.library.okgo.model.BaseResponse;
 import com.project.community.R;
 import com.project.community.base.BaseFragment;
+import com.project.community.bean.CommunityBean;
+import com.project.community.bean.ForumListBean;
+import com.project.community.constants.AppConstants;
 import com.project.community.ui.adapter.ForumAdapter;
 import com.project.community.ui.life.minsheng.ArticleDetailsActivity;
+import com.project.community.util.ToastUtil;
 import com.project.community.view.SpacesItemDecoration;
 
 import java.util.ArrayList;
@@ -22,6 +29,8 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * author：fangkai on 2017/10/23 17:00
@@ -36,6 +45,12 @@ public class ForumFragment extends BaseFragment {
 
     private ForumAdapter forumAdapter;
 
+
+    private int page = 1;
+
+    private List<ForumListBean> mData = new ArrayList<>();
+
+
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragmnet_recycler_view, container, false);
@@ -49,10 +64,6 @@ public class ForumFragment extends BaseFragment {
     }
 
     private void steAdapter() {
-        List<String> mData = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            mData.add("s");
-        }
 
         forumAdapter = new ForumAdapter(R.layout.item_forum, mData);
         rvGovernment.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -66,7 +77,8 @@ public class ForumFragment extends BaseFragment {
                     @Override
                     public void run() {
 
-                        forumAdapter.loadMoreEnd();
+                        page++;
+                        getForumList();
 
                     }
 
@@ -90,11 +102,56 @@ public class ForumFragment extends BaseFragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        swipeRl.setRefreshing(false);
+                        mData.clear();
+                        forumAdapter.notifyDataSetChanged();
+                        getForumList();
                     }
                 }, 1000);
             }
         });
+
+        swipeRl.setRefreshing(true);
+        getForumList();
+    }
+
+    private void getForumList() {
+        serverDao.getForumList(getUser(getActivity()).id, "2", String.valueOf(page), String.valueOf(AppConstants.PAGE_SIZE), new JsonCallback<BaseResponse<List<ForumListBean>>>() {
+            @Override
+            public void onSuccess(BaseResponse<List<ForumListBean>> listBaseResponse, Call call, Response response) {
+
+                swipeRl.setRefreshing(false);
+
+                if (listBaseResponse.errNum.equals("0")) {
+
+                    if (page == 1) {
+                        mData.addAll(listBaseResponse.retData);
+                        forumAdapter.setNewData(mData);
+                        forumAdapter.setEnableLoadMore(true);
+                    } else {
+                        mData.addAll(listBaseResponse.retData);
+                        forumAdapter.addData(listBaseResponse.retData);
+                        forumAdapter.loadMoreComplete();
+                    }
+
+                    if (listBaseResponse.retData.size()< AppConstants.PAGE_SIZE)
+                        forumAdapter.loadMoreEnd();
+
+                } else {
+                    forumAdapter.loadMoreEnd();
+                    ToastUtil.showToast(getActivity(), listBaseResponse.message + "");
+
+                }
+
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                Log.e("tag_f", e.getMessage() + "");
+                swipeRl.setRefreshing(false);
+            }
+        });
+
     }
 
     @Override

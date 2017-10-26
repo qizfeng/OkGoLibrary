@@ -94,6 +94,7 @@
                 </LinearLayout>
                 <TextView
                     android:id="@+id/tv_state"
+
                     style="@style/rectangle_category_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -142,6 +143,7 @@
                     android:textColor="@color/white"
                     android:paddingLeft="@dimen/dp_5"
                     android:paddingRight="@dimen/dp_5"
+                    android:visibility="gone"
                     android:layout_marginLeft="@dimen/dp_5"
                     android:background="@color/color_gray_cccccc"/>
             </LinearLayout>

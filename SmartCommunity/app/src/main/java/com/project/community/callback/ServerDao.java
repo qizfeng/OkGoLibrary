@@ -1,14 +1,17 @@
 package com.project.community.callback;
 
-import com.baidu.platform.comapi.map.B;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
 import com.library.okgo.model.HttpParams;
+import com.project.community.bean.AddressListBean;
+import com.project.community.bean.CommunityBean;
+import com.project.community.bean.ForumListBean;
+import com.project.community.bean.GovernmentBean;
+import com.project.community.bean.MerchantBean;
 import com.project.community.model.AgreementResponse;
 import com.project.community.model.ArticleModel;
 import com.project.community.model.AuditStatusModel;
 import com.project.community.model.BannerResponse;
-import com.project.community.model.CommentModel;
 import com.project.community.model.CommentResponse;
 import com.project.community.model.CommunityCensusModel;
 import com.project.community.model.CommunityDeviceFilterModel;
@@ -28,7 +31,6 @@ import com.project.community.model.GuideModel;
 import com.project.community.model.HotlineModel;
 import com.project.community.model.HouseModel;
 import com.project.community.model.NewsModel;
-import com.project.community.model.PaymentDetailModel;
 import com.project.community.model.PaymentHouseHistroyModel;
 import com.project.community.model.PaymentInfoModel;
 import com.project.community.model.PaymentWayModel;
@@ -257,6 +259,7 @@ public interface ServerDao {
 
     /**
      * 就业
+     *
      * @param uesrId
      * @param pageNo
      * @param pageSize
@@ -264,7 +267,7 @@ public interface ServerDao {
      * @param categoryType
      * @param callback
      */
-    void getEmploymentData(String uesrId, int pageNo, int pageSize, String type,String categoryType, JsonCallback<BaseResponse<List<ArticleModel>>> callback);
+    void getEmploymentData(String uesrId, int pageNo, int pageSize, String type, String categoryType, JsonCallback<BaseResponse<List<ArticleModel>>> callback);
 
     /**
      * @param userId
@@ -291,7 +294,7 @@ public interface ServerDao {
      */
 //    void getComments(String artId, int page, int pageSize, JsonCallback<BaseResponse<List<CommentModel>>> callback);
 
-    void getComments(String artId, int page, int pageSize, JsonCallback<BaseResponse<CommentResponse>>callback);
+    void getComments(String artId, int page, int pageSize, JsonCallback<BaseResponse<CommentResponse>> callback);
 
     /**
      * 发评论
@@ -669,6 +672,95 @@ public interface ServerDao {
     void propShops(String id,String userId, double longitude, double latitude, String shopsName, String shopPhoto, String contactName, String businessAddress, String shopsCategory,
                    String mainBusiness, String entName, String licenseNo, String licensePositive, String licenseReverse, String legalPerson, String legalCardPositive,
                    String legalCardReverse, JsonCallback<BaseResponse<List>> callback);
+
+
+    /**
+     * 地址（添加或者修改地址）
+     *
+     * @param userId       用户id
+     * @param consignee    收货人
+     * @param contactPhone 联系电话
+     * @param userArea     所在地区
+     * @param userStreet   所在街道
+     * @param address      详细地址
+     * @param addressId    地址id，为空则为添加
+     * @param callback     返回参数
+     */
+    void addAddress(String userId, String consignee,
+                    String contactPhone, String userArea,
+                    String userStreet, String address,
+                    String addressId,
+                    JsonCallback<BaseResponse<List>> callback);
+
+
+    /**
+     * 获取地址列表
+     *
+     * @param userId
+     * @param callback
+     */
+    void getAddressList(String userId,
+                        JsonCallback<BaseResponse<List<AddressListBean>>> callback);
+
+    /**
+     * 删除地址
+     *
+     * @param userId
+     * @param addressId 地址id
+     * @param callback
+     */
+    void deleteAddress(String userId, String addressId,
+                       JsonCallback<BaseResponse<List<String>>> callback);
+
+    /**
+     * 设为默认地址
+     *
+     * @param userId
+     * @param addressId
+     * @param callback
+     */
+    void setDefaultAddress(String userId, String addressId,
+                           JsonCallback<BaseResponse<List<String>>> callback);
+
+
+    /**
+     * 获取政务收藏
+     *
+     * @param userId
+     * @param type
+     * @param pageNo
+     * @param pageSize
+     * @param callback
+     */
+    void getGovernmentList(String userId, String type, String pageNo, String pageSize,
+                           JsonCallback<BaseResponse<List<GovernmentBean>>> callback);
+
+    /**
+     * 获取社区收藏
+     *
+     * @param userId
+     * @param type
+     * @param pageNo
+     * @param pageSize
+     * @param callback
+     */
+    void getCommunityList(String userId, String type, String pageNo, String pageSize,
+                          JsonCallback<BaseResponse<List<CommunityBean>>> callback);
+
+    /**
+     * 获取论坛收藏
+     *
+     * @param userId
+     * @param type
+     * @param pageNo
+     * @param pageSize
+     * @param callback
+     */
+    void getForumList(String userId, String type, String pageNo, String pageSize,
+                      JsonCallback<BaseResponse<List<ForumListBean>>> callback);
+
+    void getMerchantList(String userId, String type, String pageNo, String pageSize,
+                         JsonCallback<BaseResponse<List<MerchantBean>>> callback);
 
 
     /**

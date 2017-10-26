@@ -388,4 +388,21 @@
     <string name="activity_repairs_evaluate">报修评价</string>
     <string name="activity_im_repairs">我要报修</string>
     <string name="activity_repairs_details">报修详情</string>
+    <string name="address_no_name">请输入收货人姓名</string>
+    <string name="address_no_phone">请输入联系方式</string>
+    <string name="address_is_mobile">请输入正确的手机号</string>
+    <string name="address_change_address">请选择收货地址</string>
+    <string name="address_import_address">请输入详细地址</string>
+    <string name="city">城市</string>
+    <string name="confirm">确认</string>
+    <string name="cancel">取消</string>
+    <string name="address_name">收货人</string>
+    <string name="address_phone">联系方式</string>
+    <string name="address_name_hint">请输入收货人姓名</string>
+    <string name="address_phone_hint">请输入联系方式</string>
+    <string name="address_address_select">请选择</string>
+    <string name="address_address">收货地址</string>
+    <string name="address_import_detailed_address">请输入详细地址</string>
+    <string name="save">保存</string>
+    <string name="set_as_default_address">设为默认地址</string>
 </resources>

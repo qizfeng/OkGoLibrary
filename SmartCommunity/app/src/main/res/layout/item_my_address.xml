@@ -15,17 +15,17 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/tv_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="毛杜拉"
             android:textColor="@color/color_gray_333333"
             android:textSize="@dimen/sp_14" />
 
         <TextView
+            android:id="@+id/tv_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="15000000000"
             android:textColor="@color/color_gray_333333"
             android:textSize="@dimen/sp_14" />
 
@@ -33,13 +33,13 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tv_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp_15"
         android:layout_marginRight="@dimen/dp_15"
         android:layout_marginTop="@dimen/dp_4"
         android:orientation="horizontal"
-        android:text="朝阳区建国路朝阳区建国路朝阳区建国路朝阳区建国路朝阳区建国路朝阳区建国路"
         android:textColor="@color/color_gray_666666"
         android:textSize="@dimen/sp_12" />
 
@@ -62,16 +62,18 @@
 
 
         <ImageView
+            android:id="@+id/iv_set_address"
             android:layout_width="14dp"
             android:layout_height="14dp"
             android:src="@mipmap/d10_btn1_p" />
 
         <TextView
+            android:id="@+id/tv_set_address"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="6dp"
             android:layout_weight="1"
-            android:text="设为默认地址"
+            android:text="@string/set_as_default_address"
             android:textColor="#103375"
             android:textSize="12sp" />
 

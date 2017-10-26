@@ -1,7 +1,5 @@
 package com.project.community.constants;
 
-import com.baidu.platform.comapi.map.B;
-
 /**
  * Created by qizfeng on 17/7/4.
  * 常量字段存储
@@ -262,80 +260,104 @@ public class AppConstants {
     public static final String URL_COMMUNITY_LIST = URL_BASE + "m/sys/communityList";
 
     /**
-     *社区-小区统计信息
+     * 社区-小区统计信息
      */
-    public static final String URL_COMMUNITY_CENSUS=URL_BASE+"m/community/floor/getFloors";
+    public static final String URL_COMMUNITY_CENSUS = URL_BASE + "m/community/floor/getFloors";
 
     /**
      * 小区楼栋人员列表
      */
-    public static final String URL_COMMUNITY_MEMBER_LIST = URL_BASE+"m/community/floor/getFloorMember";
+    public static final String URL_COMMUNITY_MEMBER_LIST = URL_BASE + "m/community/floor/getFloorMember";
 
     /**
      * 小区人员信息
      */
-    public static final String URL_COMMUNITY_MEMBER_INFO=URL_BASE+"m/propMember/getMemberByMap";
+    public static final String URL_COMMUNITY_MEMBER_INFO = URL_BASE + "m/propMember/getMemberByMap";
 
     /**
      * 商铺坐标
      */
-    public static final String URL_COMMUNITY_SHOP_LIST=URL_BASE+"m/community/shops/shopsList";
+    public static final String URL_COMMUNITY_SHOP_LIST = URL_BASE + "m/community/shops/shopsList";
 
     /**
      * 商铺筛选
      */
-    public static final String URL_COMMUNITY_SHOP_FILTER=URL_BASE+"m/community/shops/searchData";
+    public static final String URL_COMMUNITY_SHOP_FILTER = URL_BASE + "m/community/shops/searchData";
 
     /**
      * 商铺详细信息
      */
-    public static final String URL_COMMUNITY_SHOP_DETAIL=URL_BASE+"m/community/shops/get";
+    public static final String URL_COMMUNITY_SHOP_DETAIL = URL_BASE + "m/community/shops/get";
 
     /**
      * 居民筛选
      */
-    public static final String URL_COMMUNITY_PERSON_FILTER=URL_BASE+"m/community/comyUser/searchData";
+    public static final String URL_COMMUNITY_PERSON_FILTER = URL_BASE + "m/community/comyUser/searchData";
 
     /**
      * 居民坐标
      */
-    public static final String URL_COMMUNITY_PERSON_LIST=URL_BASE+"m/community/comyUser/userList";
+    public static final String URL_COMMUNITY_PERSON_LIST = URL_BASE + "m/community/comyUser/userList";
 
     /**
      * 居民详情
      */
-    public static final String URL_COMMUNITY_PERSON_DETAIL=URL_BASE+"m/community/comyUser/get";
+    public static final String URL_COMMUNITY_PERSON_DETAIL = URL_BASE + "m/community/comyUser/get";
 
     /**
      * 设施坐标
      */
-    public static final String URL_COMMUNITY_DEVICE_LIST=URL_BASE+"m/community/facilities/facilitiesList";
+    public static final String URL_COMMUNITY_DEVICE_LIST = URL_BASE + "m/community/facilities/facilitiesList";
 
     /**
      * 设施筛选
      */
-    public static final String URL_COMMUNITY_DEVICE_FILTER=URL_BASE+"m/community/facilities/searchData";
+    public static final String URL_COMMUNITY_DEVICE_FILTER = URL_BASE + "m/community/facilities/searchData";
 
     /**
      * 设施详情
      */
-    public static final String URL_COMMUNITY_DEVICE_DETAIL=URL_BASE+"m/community/facilities/get";
+    public static final String URL_COMMUNITY_DEVICE_DETAIL = URL_BASE + "m/community/facilities/get";
 
     /**
      * 上传用户坐标
      */
-    public static final String URL_UPLOAD_LATLNG=URL_BASE+"m/community/comyUser/updateCoordinate";
+    public static final String URL_UPLOAD_LATLNG = URL_BASE + "m/community/comyUser/updateCoordinate";
 
     /**
      * 申请商铺
      */
-    public static final String URL_APPLY_STORE=URL_BASE+"/m/propleLife/propShops/save";
+    public static final String URL_APPLY_STORE = URL_BASE + "/m/propleLife/propShops/save";
 
 
     /**
      * 附近商家
      */
-    public static final String URL_MINSHENG_INDEX=URL_BASE+"/m/propleLife/propShops/index";
+    public static final String URL_MINSHENG_INDEX = URL_BASE + "/m/propleLife/propShops/index";
+
+
+    /**
+     * 添加修改地址
+     */
+    public static final String URL_ADD_ADDRESS = URL_BASE + "/m/user/address/save";
+
+    /**
+     * 地址列表
+     */
+    public static final String URL_GET_ADDRESS_LIST = URL_BASE + "/m/user/address/index";
+    /**
+     * 删除地址
+     */
+    public static final String URL_DEL_ADDRESS = URL_BASE + "/m/user/address/delete";
+
+    /**
+     * 设为默认地址
+     */
+    public static final String URL_SET_DEFAULT = URL_BASE + "/m/user/address/setDefault";
+
+
+    public static final  String URL_GET_COLLECTION=URL_BASE+"/m/user/collection/index";
+
 
     /**
      * 申请商铺

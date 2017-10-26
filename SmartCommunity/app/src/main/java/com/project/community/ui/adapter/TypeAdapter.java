@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.project.community.Event.AddhouseEvent;
 import com.project.community.Event.TypeEvent;
 import com.project.community.R;
 import com.project.community.base.BaseRecyclerAdapter;
@@ -95,11 +94,11 @@ public class TypeAdapter extends BaseRecyclerAdapter<Object, HomeNumberAdapter.H
 //            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 //
 ////                if (holder.cbCheck.isChecked()){
-//                    EventBus.getDefault().post(new AddhouseEvent((String) mDatas.get(position)));
+//                    EventBus.getDefault().post(new AddHouseEvent((String) mDatas.get(position)));
 ////                }else {
-////                    EventBus.getDefault().post(new AddhouseEvent((String) mDatas.get(position)));
+////                    EventBus.getDefault().post(new AddHouseEvent((String) mDatas.get(position)));
 //
-////                    EventBus.getDefault().post(new AddhouseEvent(position));
+////                    EventBus.getDefault().post(new AddHouseEvent(position));
 ////                }
 //            }
 //        });

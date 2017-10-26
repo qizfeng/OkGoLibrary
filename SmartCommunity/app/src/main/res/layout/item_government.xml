@@ -16,15 +16,15 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:paddingBottom="10dp"
-            android:paddingLeft="12dp"
+            android:paddingLeft="15dp"
             android:paddingTop="12dp">
 
             <TextView
+                android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="政务阿萨德三大政务阿萨德三大政务阿萨德三大政务阿萨德三大政务阿萨德三大政务阿萨德三大政务阿萨德三大政务阿萨德三大政务阿萨德三大政务阿萨德三大"
                 android:textColor="@color/color_gray_333333"
                 android:textSize="14sp" />
 
@@ -36,17 +36,17 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tv_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="07-12    14:00"
                     android:textColor="@color/color_gray_999999"
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/tv_comments"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="25dp"
-                    android:text="8评论"
                     android:textColor="@color/color_gray_999999"
                     android:textSize="12sp" />
 
@@ -58,15 +58,17 @@
         <RelativeLayout
             android:layout_width="80dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="12dp"
+            android:layout_marginRight="15dp"
             android:layout_height="65dp">
 
             <ImageView
+                android:id="@+id/iv_img"
                 android:layout_width="80dp"
                 android:layout_height="65dp"
-
+                android:scaleType="centerCrop"
                 android:src="@color/color_map_community_5c894fb6" />
             <TextView
+                android:visibility="gone"
                 android:id="@+id/tv_wenjuan"
                 android:background="@drawable/button_shape_alpha"
                 android:layout_width="wrap_content"
@@ -85,6 +87,7 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/iv_image"
         android:layout_width="40dp"
         android:layout_height="23dp"
         android:src="@mipmap/d64_bg" />

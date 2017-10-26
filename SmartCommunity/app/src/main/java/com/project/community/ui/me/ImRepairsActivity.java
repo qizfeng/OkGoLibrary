@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -31,16 +30,14 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.baidu.platform.comapi.map.F;
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.library.okgo.utils.photo.PhotoUtils;
 import com.library.okgo.view.loopview.LoopView;
-import com.project.community.Event.AddhouseEvent;
+import com.project.community.Event.AddHouseEvent;
 import com.project.community.Event.TypeEvent;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.base.BasePopupWindow;
-import com.project.community.ui.MainActivity;
 import com.project.community.ui.adapter.HomeNumberAdapter;
 import com.project.community.ui.adapter.SendMessageAdapter;
 import com.project.community.ui.adapter.TypeAdapter;
@@ -55,11 +52,8 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -371,7 +365,7 @@ public class ImRepairsActivity extends BaseActivity {
 
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void AddhouseEvent(AddhouseEvent addhouseEvent) {
+    public void AddhouseEvent(AddHouseEvent addhouseEvent) {
 
 //        if (this.item.equals(addhouseEvent.getItem())) {
 //            this.item = "";
