@@ -28,14 +28,22 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jakewharton.rxbinding.view.RxView;
+import com.library.okgo.callback.JsonCallback;
+import com.library.okgo.model.BaseResponse;
 import com.library.okgo.utils.ToastUtils;
 import com.library.okgo.utils.photo.PhotoUtils;
 import com.library.okgo.view.loopview.LoopView;
 import com.library.okgo.view.loopview.OnItemSelectedListener;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
+import com.project.community.bean.ClassifyBaseBean;
+import com.project.community.model.FileUploadModel;
 import com.project.community.ui.adapter.SendMessageAdapter;
+import com.project.community.util.KeyBoardUtil;
+import com.project.community.util.ListAdapterUtils;
 import com.project.community.util.ScreenUtils;
+import com.project.community.util.StringUtils;
+import com.project.community.util.ToastUtil;
 import com.project.community.view.MyButton;
 import com.project.community.view.MyGridView;
 import com.project.community.view.crop.CropImageActivity;
@@ -48,6 +56,8 @@ import java.util.concurrent.TimeUnit;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Response;
 import rx.functions.Action1;
 
 /**
@@ -95,6 +105,9 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
     private SendMessageAdapter mApplyStoryPicAdapter;
     private List<String> mImags = new ArrayList<>(); //
 
+
+    //分类
+    private ClassifyBaseBean classifylist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,7 +168,7 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
 
             @Override
             public void afterTextChanged(Editable editable) {
-                sendMessageTvTitleNum.setText(editable.length()+"/35");
+                sendMessageTvTitleNum.setText(editable.length() + "/35");
             }
         });
         sendMessageEtContent.addTextChangedListener(new TextWatcher() {
@@ -171,9 +184,52 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
 
             @Override
             public void afterTextChanged(Editable editable) {
-                sendMessageTvContentNum.setText(editable.length()+"/350");
+                sendMessageTvContentNum.setText(editable.length() + "/350");
             }
         });
+    }
+
+    /**
+     * 获取分类列表
+     */
+    private void getClassify() {
+        progressDialog.show();
+        serverDao.getClassifyList("livelihood_article_category", new JsonCallback<BaseResponse<ClassifyBaseBean>>() {
+            @Override
+            public void onSuccess(BaseResponse<ClassifyBaseBean> listBaseResponse, Call call, Response response) {
+
+                progressDialog.dismiss();
+                if (listBaseResponse.errNum.equals("0")) {
+
+                    classifylist = listBaseResponse.retData;
+                    setSelectClassify();
+
+                } else {
+                    ToastUtil.showToast(SendMessageActivity.this, response.message());
+                }
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                progressDialog.dismiss();
+
+            }
+        });
+
+
+    }
+
+    private void setSelectClassify() {
+
+        data.clear();
+
+
+        for (int i = 0; i < classifylist.getDictList().size(); i++) {
+            data.add(classifylist.getDictList().get(i).getLabel());
+        }
+        showDialog(getResources().getString(R.string.send_message_change_type), data);
+
     }
 
     /**
@@ -199,6 +255,7 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
             }
         }
     }
+
     /**
      * 自动获取sdk权限
      */
@@ -225,7 +282,7 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
                     cropImageUri = Uri.fromFile(fileCropUri);
 //                    PhotoUtils.cropImageUri(this, imageUri, cropImageUri, 1, 1, output_X, output_Y, CODE_RESULT_REQUEST);
 //                    uploadFile(fileCropUri);//上传图片
-                    Log.e("onActivityResult: ",imageUri.toString() );
+                    Log.e("onActivityResult: ", imageUri.toString());
                     CropImageActivity.startCrop(this, imageUri.toString(), output_X, output_Y, CODE_RESULT_REQUEST);
                     break;
                 case CODE_GALLERY_REQUEST://访问相册完成回调
@@ -264,38 +321,148 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
     }
 
     List<String> data = new ArrayList<>();
-    @OnClick({R.id.send_message_ll_type,R.id.send_message_summit})
+
+    @OnClick({R.id.send_message_ll_type, R.id.send_message_summit})
     public void onViewClicked(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.send_message_ll_type:
-                data.clear();
-                data.add("邻居互动");
-                data.add("供求信息");
-                data.add("二手市场");
-                data.add("房屋出租");
-                showDialog(getResources().getString(R.string.send_message_change_type),data);
+                KeyBoardUtil.closeKeybord(this);
+
+                if (classifylist == null)
+                    getClassify();
+                else
+                    showDialog(getResources().getString(R.string.send_message_change_type), data);
+//                data.clear();
+//                data.add("邻居互动");
+//                data.add("供求信息");
+//                data.add("二手市场");
+//                data.add("房屋出租");
+//                showDialog(getResources().getString(R.string.send_message_change_type),data);
                 break;
             case R.id.send_message_summit:
+                KeyBoardUtil.closeKeybord(this);
+                if (TextUtils.isEmpty(sendMessageTvType.getText().toString())) {
+                    ToastUtils.showLongToast(this, getResources().getString(R.string.send_message_type_toast));
+                    return;
+                }
+                if (TextUtils.isEmpty(sendMessageEtTitle.getText().toString())) {
+                    ToastUtils.showLongToast(this, getResources().getString(R.string.send_message_title_toast));
+                    return;
+                }
+                if (TextUtils.isEmpty(sendMessageEtContent.getText().toString())) {
+                    ToastUtils.showLongToast(this, getResources().getString(R.string.send_message_content_toast));
+                    return;
+                }
+                if (mImags.size() < 1) {
+                    ToastUtils.showLongToast(this, getResources().getString(R.string.send_message_uoload_img_toast));
+                    return;
+                }
 
-               if (TextUtils.isEmpty(sendMessageTvType.getText().toString())){
-                    ToastUtils.showLongToast(this,getResources().getString(R.string.send_message_type_toast));
-                   return;
-               }
-               if (TextUtils.isEmpty(sendMessageEtTitle.getText().toString())){
-                    ToastUtils.showLongToast(this,getResources().getString(R.string.send_message_title_toast));
-                   return;
-               }
-               if (TextUtils.isEmpty(sendMessageEtContent.getText().toString())){
-                    ToastUtils.showLongToast(this,getResources().getString(R.string.send_message_content_toast));
-                   return;
-               }
-               if (mImags.size()<1){
-                    ToastUtils.showLongToast(this,getResources().getString(R.string.send_message_uoload_img_toast));
-                   return;
-               }
-                finish();
+                save();
+
+//                finish();
                 break;
         }
+    }
+
+
+    /**
+     * 8
+     * 发布帖子
+     */
+    private void save() {
+
+        //当前没有上传图片
+//        if (imgS?ize==0){
+        if (mImags.size() == 1)
+//            uploadFile(new File(mImags.get(0)));
+            uploadFile(new File(StringUtils.getRealFilePath(SendMessageActivity.this, Uri.parse(mImags.get(0)))));
+
+        if (mImags.size() == 2)
+            uploadFile(new File(StringUtils.getRealFilePath(SendMessageActivity.this, Uri.parse(mImags.get(1)))));
+        if (mImags.size() == 3)
+            uploadFile(new File(StringUtils.getRealFilePath(SendMessageActivity.this, Uri.parse(mImags.get(2)))));
+//        }
+
+
+    }
+
+    private List<String> upImage = new ArrayList<String>();
+
+    /**
+     * 文件上传
+     *
+     * @param file
+     */
+    private void uploadFile(File file) {
+        serverDao.uploadFile(file, new JsonCallback<BaseResponse<FileUploadModel>>() {
+            @Override
+            public void onSuccess(BaseResponse<FileUploadModel> baseResponse, Call call, Response response) {
+
+                upImage.add(baseResponse.retData.filePath);
+
+                if (upImage.size() < mImags.size()) {
+                    save();
+                } else {
+
+                    releaseSendMessage();
+
+                }
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                showToast(e.getMessage());
+
+            }
+        });
+    }
+
+
+    /**
+     * 8
+     * 发布帖子
+     */
+    private void releaseSendMessage() {
+
+        progressDialog.show();
+
+        //分类
+        String categoryId = "";
+        for (int i = 0; i < classifylist.getDictList().size(); i++) {
+            if (classifylist.getDictList().get(i).getLabel().equals(sendMessageTvType.getText().toString())) {
+                categoryId = classifylist.getDictList().get(i).getValue();
+            }
+        }
+
+        serverDao.releaseSendMessage(getUser(this).id, categoryId,
+                sendMessageEtTitle.getText().toString().trim(),
+                sendMessageEtContent.getText().toString(),
+                ListAdapterUtils.toStr(",", upImage),
+                new JsonCallback<BaseResponse<Object>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<Object> listBaseResponse, Call call, Response response) {
+
+                        progressDialog.dismiss();
+                        ToastUtil.showToast(SendMessageActivity.this, response.message());
+
+                        if (listBaseResponse.errNum.equals("0")) {
+                            finish();
+
+                        } else {
+                        }
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        progressDialog.dismiss();
+                        Log.e("tag_f", e.getMessage().toString() + "");
+                    }
+                });
+
+
     }
 
     private PopupWindow mPopupWindow;
@@ -336,7 +503,7 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.tv_take_photo:
                 if (mPopupWindow != null) {
                     mPopupWindow.dismiss();
@@ -357,14 +524,15 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
         }
     }
 
-    private int mCurrtindex=0;
+    private int mCurrtindex = 0;
+
     private void showDialog(String title, final List<String> strings) {
         //填充对话框的布局
         View inflate = LayoutInflater.from(this).inflate(R.layout.layout_loopview, null);
         if (!TextUtils.isEmpty(sendMessageTvType.getText().toString()))
             for (int i = 0; i < strings.size(); i++) {
-                if (strings.get(i).equals(sendMessageTvType.getText().toString())){
-                    mCurrtindex=i;
+                if (strings.get(i).equals(sendMessageTvType.getText().toString())) {
+                    mCurrtindex = i;
                 }
             }
         //初始化控件
@@ -389,7 +557,7 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
         mLoopView.setListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(int index) {
-                mCurrtindex=index;
+                mCurrtindex = index;
 
             }
         });
@@ -423,9 +591,9 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
-        Log.e("onTouch---->",canVerticalScroll(sendMessageEtContent)+"" );
+        Log.e("onTouch---->", canVerticalScroll(sendMessageEtContent) + "");
         //触摸的是EditText并且当前EditText可以滚动则将事件交给EditText处理；否则将事件交由其父类处理
-        if ( ((view.getId() == R.id.send_message_et_content && canVerticalScroll(sendMessageEtContent))) ||
+        if (((view.getId() == R.id.send_message_et_content && canVerticalScroll(sendMessageEtContent))) ||
                 ((view.getId() == R.id.send_message_et_title && canVerticalScroll(sendMessageEtTitle)))) {
             view.getParent().requestDisallowInterceptTouchEvent(true);
             if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
@@ -437,8 +605,9 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
 
     /**
      * EditText竖直方向是否可以滚动
-     * @param editText  需要判断的EditText
-     * @return  true：可以滚动   false：不可以滚动
+     *
+     * @param editText 需要判断的EditText
+     * @return true：可以滚动   false：不可以滚动
      */
     private boolean canVerticalScroll(EditText editText) {
         //滚动的距离
@@ -446,11 +615,11 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
         //控件内容的总高度
         int scrollRange = editText.getLayout().getHeight();
         //控件实际显示的高度
-        int scrollExtent = editText.getHeight() - editText.getCompoundPaddingTop() -editText.getCompoundPaddingBottom();
+        int scrollExtent = editText.getHeight() - editText.getCompoundPaddingTop() - editText.getCompoundPaddingBottom();
         //控件内容总高度与实际显示高度的差值
         int scrollDifference = scrollRange - scrollExtent;
 
-        if(scrollDifference == 0) {
+        if (scrollDifference == 0) {
             return false;
         }
 

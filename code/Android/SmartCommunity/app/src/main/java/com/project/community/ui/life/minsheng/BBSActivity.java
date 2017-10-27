@@ -14,12 +14,17 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.library.okgo.callback.JsonCallback;
+import com.library.okgo.model.BaseResponse;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
+import com.project.community.bean.ClassifyBaseBean;
+import com.project.community.bean.ClassifyListBean;
 import com.project.community.ui.adapter.PageFragmentAdapter;
 import com.project.community.ui.life.SearchActivity;
 import com.project.community.ui.me.all_order.AllOrderActivity;
 import com.project.community.util.TablayoutLineReflex;
+import com.project.community.util.ToastUtil;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -28,6 +33,8 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * Created by cj on 17/9/24.
@@ -47,6 +54,7 @@ public class BBSActivity extends BaseActivity implements ViewPager.OnPageChangeL
 
     PageFragmentAdapter adapter;
     List<Fragment> fragmentList = new ArrayList<>();
+    private ClassifyBaseBean classifylist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,29 +65,67 @@ public class BBSActivity extends BaseActivity implements ViewPager.OnPageChangeL
     }
 
     private void ininData() {
-        initToolBar(mToolBar, mTvTitle, true, getString(R.string.bbs), R.mipmap.iv_back);
-        fragmentList.add(BbsFragment.newInstance(1));
-        fragmentList.add(BbsFragment.newInstance(2));
-        fragmentList.add(BbsFragment.newInstance(3));
-        fragmentList.add(BbsFragment.newInstance(4));
-        fragmentList.add(BbsFragment.newInstance(5));
-        fragmentList.add(BbsFragment.newInstance(6));
-        fragmentList.add(BbsFragment.newInstance(7));
-        fragmentList.add(BbsFragment.newInstance(8));
 
+
+
+        initToolBar(mToolBar, mTvTitle, true, getString(R.string.bbs), R.mipmap.iv_back);
+
+        getClassify();
+
+
+
+    }
+
+    private void getClassify() {
+
+        progressDialog.show();
+        serverDao.getClassifyList("livelihood_article_category", new JsonCallback<BaseResponse<ClassifyBaseBean>>() {
+            @Override
+            public void onSuccess(BaseResponse<ClassifyBaseBean> listBaseResponse, Call call, Response response) {
+
+                progressDialog.dismiss();
+                if (listBaseResponse.errNum.equals("0")) {
+
+                    classifylist = listBaseResponse.retData;
+                    setViewPage();
+
+                } else {
+                    ToastUtil.showToast(BBSActivity.this, response.message());
+                }
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                progressDialog.dismiss();
+
+            }
+        });
+
+    }
+
+
+    /**
+     * 设置fragment
+     */
+    private void setViewPage() {
+
+        List<String> titleID=new ArrayList<>();
+
+        titleID.add("全部");
+        fragmentList.add(BbsFragment.newInstance("全部"));
         bbsTablayout.addTab(bbsTablayout.newTab().setText("全部"));
-        bbsTablayout.addTab(bbsTablayout.newTab().setText("资讯"));
-        bbsTablayout.addTab(bbsTablayout.newTab().setText("环境资讯"));
-        bbsTablayout.addTab(bbsTablayout.newTab().setText("环境"));
-        bbsTablayout.addTab(bbsTablayout.newTab().setText("环境"));
-        bbsTablayout.addTab(bbsTablayout.newTab().setText("环境资讯"));
-        bbsTablayout.addTab(bbsTablayout.newTab().setText("环境"));
-        bbsTablayout.addTab(bbsTablayout.newTab().setText("环境"));
+        for (int i = 0; i < classifylist.getDictList().size(); i++) {
+            titleID.add(classifylist.getDictList().get(i).getValue());
+            fragmentList.add(BbsFragment.newInstance(classifylist.getDictList().get(i).getValue()));
+            bbsTablayout.addTab(bbsTablayout.newTab().setText(classifylist.getDictList().get(i).getLabel()));
+        }
         // 设置TabLayout模式
         bbsTablayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
         // 设置从PagerAdapter中获取Tab
         adapter = new PageFragmentAdapter(getSupportFragmentManager(), fragmentList);
+        bbsViewpager.setOffscreenPageLimit(fragmentList.size());
         bbsViewpager.setAdapter(adapter);
         bbsViewpager.setOnPageChangeListener(this);
         bbsTablayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -105,6 +151,8 @@ public class BBSActivity extends BaseActivity implements ViewPager.OnPageChangeL
                 TablayoutLineReflex.setTabLine(BBSActivity.this, bbsTablayout, 15, 0);
             }
         });
+
+
     }
 
     @Override

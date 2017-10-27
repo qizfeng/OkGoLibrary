@@ -83,6 +83,10 @@ public class ForumAdapter extends BaseQuickAdapter<ForumListBean, BaseViewHolder
             Glide.with(mContext)
                     .load(AppConstants.HOST + result.get(2))
                     .into((ImageView) helper.getView(R.id.bbs_item_ll_three_img_3));
+        }else if (result.size()==0){
+            helper.getView(R.id.bbs_item_big_img).setVisibility(View.GONE);
+            helper.getView(R.id.bbs_item_ll_two_img).setVisibility(View.GONE);
+            helper.getView(R.id.bbs_item_ll_three_img).setVisibility(View.GONE);
         }
 
 
