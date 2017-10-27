@@ -14,9 +14,12 @@ import android.widget.TextView;
 import com.alanapi.switchbutton.SwitchButton;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
+import com.library.okgo.utils.ToastUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
+import com.project.community.model.ShopIndexModel;
 import com.project.community.ui.me.all_order.AllOrderActivity;
+import com.project.community.util.NetworkUtils;
 import com.project.community.util.ToastUtil;
 
 import java.util.List;
@@ -60,6 +63,13 @@ public class ShopManagerActivity extends BaseActivity {
 
     private boolean iS_Swich=false;
 
+
+    private String shopId="";
+
+    /**
+     *
+     * @param context
+     */
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, ShopManagerActivity.class);
         context.startActivity(intent);
@@ -72,7 +82,8 @@ public class ShopManagerActivity extends BaseActivity {
         setContentView(R.layout.activity_shop_manager);
         ButterKnife.bind(this);
         initToolBar(mToolBar, mTvTitle, true, getString(R.string.shop_manager_title), R.mipmap.iv_back);
-//        mTvTitle.setText(Html.fromHtml(getString(R.string.shop_manager_goods_son)));
+
+        getShopData();
         iS_Swich=mSwitchButton.isChecked();
         mSwitchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -97,9 +108,13 @@ public class ShopManagerActivity extends BaseActivity {
 
     @OnClick({R.id.shop_manager_goods_manager, R.id.shop_manager_data_manager, R.id.shop_manager_order_manager, R.id.shop_manager_zhanghao_manager})
     public void onViewClicked(View view) {
+        if (!NetworkUtils.isNetworkAvailable(this)) {
+            ToastUtils.showShortToast(this, R.string.network_error);
+            return;
+        }
         switch (view.getId()) {
             case R.id.shop_manager_goods_manager://商品管理
-                AllProductsActivity.startActivity(this);
+                AllProductsActivity.startActivity(this,shopId);
                 break;
             case R.id.shop_manager_data_manager://商铺资料
                 ShopDataActivity.startActivity(this);
@@ -108,8 +123,49 @@ public class ShopManagerActivity extends BaseActivity {
                 AllOrderActivity.startActivity(this);
                 break;
             case R.id.shop_manager_zhanghao_manager://账号管理
-                SubdomainsAccountActivity.startActivity(this);
+                SubdomainsAccountActivity.startActivity(this,shopId);
                 break;
         }
     }
+    /**
+     * 获取店铺信息
+     */
+    private void getShopData(){
+        showLoading();
+        if (!NetworkUtils.isNetworkAvailable(this)) {
+            ToastUtils.showShortToast(this, R.string.network_error);
+            dismissDialog();
+            return;
+        }
+
+        serverDao.shopIndex(getUser(this).id,new JsonCallback<BaseResponse<ShopIndexModel>>() {
+            @Override
+            public void onSuccess(BaseResponse<ShopIndexModel> listBaseResponse, Call call, Response response) {
+                dismissDialog();
+                if (listBaseResponse.retData.isChild==1) {
+                    mTvTitle.setText(Html.fromHtml("<font>"+getString(R.string.shop_manager_title)+"</font><font><small>"+getString(R.string.shop_manager_title_son)+"</small></font>"));
+                    shopManagerZhanghaoManager.setVisibility(View.INVISIBLE);
+                }
+                shopManagerLiushui.setText(listBaseResponse.retData.todayMoney+"/"+listBaseResponse.retData.moneyTotal);
+                shopManagerOrder.setText(listBaseResponse.retData.todayOrder+"/"+listBaseResponse.retData.orderTotal);
+                if (listBaseResponse.retData.handleOrder>0) {
+                    shopManagerOrderNum.setVisibility(View.VISIBLE);
+                    shopManagerOrderNum.setText(listBaseResponse.retData.handleOrder+"");
+                }
+                else shopManagerOrderNum.setVisibility(View.GONE);
+                if (listBaseResponse.retData.isOpen==0) mSwitchButton.setChecked(true);
+                else mSwitchButton.setChecked(false);
+                shopId=listBaseResponse.retData.shopId;
+
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                dismissDialog();
+                showToast(e.getMessage());
+            }
+        });
+    }
+
 }

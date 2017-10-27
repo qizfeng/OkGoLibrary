@@ -23,6 +23,19 @@ public class GoodsModel implements Serializable {
     public int partentId;
     public int childId;
 
+
+    public String id;
+    public String name;
+    public String images;
+    public String price;
+    public int number;
+
+// "id": "477c5c404d5f45829d0d00232be7e895",
+//         "name": "酸菜鱼",
+//         "images": "jpg",
+//         "price": 10,
+//         "number": 2
+
     @Override
     public String toString() {
         return "GoodsModel{" +

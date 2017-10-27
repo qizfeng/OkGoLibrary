@@ -67,8 +67,11 @@ public class SubdomainsAccountActivity extends BaseActivity implements SwipeRefr
     SubdomainsAccountApdater mAdapter;
     private Dialog mDialog;
 
-    public static void startActivity(Context context){
+    private String shopId;
+
+    public static void startActivity(Context context,String shopId){
         Intent intent = new Intent(context,SubdomainsAccountActivity.class);
+        intent.putExtra("cj",shopId);
         context.startActivity(intent);
     }
 
@@ -82,7 +85,7 @@ public class SubdomainsAccountActivity extends BaseActivity implements SwipeRefr
     }
 
     private void initData() {
-
+        shopId=getIntent().getStringExtra("cj");
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN);
         onRefresh();
@@ -95,14 +98,14 @@ public class SubdomainsAccountActivity extends BaseActivity implements SwipeRefr
         mAdapter = new SubdomainsAccountApdater(list, new RecycleItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
+//                ShopManagerActivity.startActivity(SubdomainsAccountActivity.this,0);
             }
 
             @Override
             public void onCustomClick(View view, int position) {
                 switch (view.getId()){
                     case R.id.item_edit:
-                        AddSubdomainsAccountActivity.startActivity(SubdomainsAccountActivity.this,list.get(position).id);
+                        AddSubdomainsAccountActivity.startActivity(SubdomainsAccountActivity.this,list.get(position).id,shopId);
                         break;     
                     case R.id.item_del:
                         showAlertDialog(position);
@@ -116,7 +119,7 @@ public class SubdomainsAccountActivity extends BaseActivity implements SwipeRefr
 
     @OnClick(R.id.add)
     public void onViewClicked() {
-        AddSubdomainsAccountActivity.startActivity(this);
+        AddSubdomainsAccountActivity.startActivity(this,"",shopId);
     }
 
     @Override
@@ -168,9 +171,7 @@ public class SubdomainsAccountActivity extends BaseActivity implements SwipeRefr
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDialog.dismiss();
-                list.remove(position);
-                mAdapter.notifyItemRemoved(position);
+                delData(list.get(position).id,position);
             }
         });
     }
@@ -190,10 +191,47 @@ public class SubdomainsAccountActivity extends BaseActivity implements SwipeRefr
             @Override
             public void onSuccess(BaseResponse<List<SubdomainAccountModel>> listBaseResponse, Call call, Response response) {
                 setRefreshing(false);
-                showToast(listBaseResponse.message);
                 list.clear();
                 list.addAll(listBaseResponse.retData);
                 mAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                showToast(e.getMessage());
+                setRefreshing(false);
+            }
+        });
+    }
+
+
+   /**
+     * 删除子账号
+     */
+    private void delData(String childId, final int position){
+        showLoading();
+        if (!NetworkUtils.isNetworkAvailable(this)) {
+            ToastUtils.showShortToast(this, R.string.network_error);
+            dismissDialog();
+            return;
+        }
+
+        serverDao.delSubdomainsAccount(getUser(this).id, childId,new JsonCallback<BaseResponse<List>>() {
+            @Override
+            public void onSuccess(BaseResponse<List> listBaseResponse, Call call, Response response) {
+                dismissDialog();
+                showToast(listBaseResponse.message);
+                mDialog.dismiss();
+                list.remove(position);
+                mAdapter.notifyItemRemoved(position);
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                dismissDialog();
+                showToast(e.getMessage());
             }
         });
     }
@@ -202,6 +240,7 @@ public class SubdomainsAccountActivity extends BaseActivity implements SwipeRefr
     public void onRefresh() {
         getData();
     }
+
     /**
      * 设置是否刷新动画
      *

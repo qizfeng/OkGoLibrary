@@ -1,6 +1,7 @@
 package com.project.community.ui.me.shop_management;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -39,8 +40,11 @@ import com.library.okgo.utils.GlideImageLoader;
 import com.library.okgo.utils.LogUtils;
 import com.library.okgo.utils.ToastUtils;
 import com.library.okgo.utils.photo.PhotoUtils;
+import com.project.community.Event.AddGoodsEvent;
+import com.project.community.Event.AddHouseEvent;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
+import com.project.community.constants.AppConstants;
 import com.project.community.model.FileUploadModel;
 import com.project.community.model.GoodsManagerModel;
 import com.project.community.ui.life.SearchActivity;
@@ -49,6 +53,8 @@ import com.project.community.ui.life.minsheng.BBSActivity;
 import com.project.community.util.ScreenUtils;
 import com.project.community.util.StringUtils;
 import com.project.community.view.crop.CropImageActivity;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 import java.util.List;
@@ -99,16 +105,18 @@ public class BuildNewGoodsActivity extends BaseActivity implements View.OnTouchL
     private File fileCropUri = new File(Environment.getExternalStorageDirectory().getPath() + "/crop_photo.jpg");
     private Uri imageUri;
     private String mStoreCoverUri;
-    private String id="";
+    private String shopId;
+    private String goodId="";
 
     public static void startActivity(Context context){
         Intent intent = new Intent(context,BuildNewGoodsActivity.class);
         context.startActivity(intent);
     }
 
-    public static void startActivity(Context context, GoodsManagerModel goodsManagerModel){
+    public static void startActivity(Context context, GoodsManagerModel goodsManagerModel,String shopId ){
         Intent intent = new Intent(context,BuildNewGoodsActivity.class);
         intent.putExtra("cj",goodsManagerModel);
+        intent.putExtra("shopId",shopId);
         context.startActivity(intent);
     }
 
@@ -122,12 +130,17 @@ public class BuildNewGoodsActivity extends BaseActivity implements View.OnTouchL
     }
 
     private void initData() {
-        if (getIntent().getExtras()!=null){
+        if (getIntent().getExtras()!=null && getIntent().getSerializableExtra("cj")!=null){
+            mTvTitle.setText(getResources().getString(R.string.build_new_goods_title_edit));
             GoodsManagerModel model = (GoodsManagerModel) getIntent().getSerializableExtra("cj");
+            goodId=model.goodId;
             buildNewEtName.setText(model.name);
+            if (!TextUtils.isEmpty(buildNewEtName.getText().toString())){
+                buildNewEtName.setSelection(buildNewEtName.getText().length());
+            }
             mStoreCoverUri=model.images;
-            if (TextUtils.isEmpty(mStoreCoverUri)){
-                new GlideImageLoader().onDisplayImageWithDefault(this, buildNewImgCover, mStoreCoverUri, R.mipmap.c1_image2);
+            if (!TextUtils.isEmpty(mStoreCoverUri)){
+                new GlideImageLoader().onDisplayImageWithDefault(this, buildNewImgCover, AppConstants.URL_BASE+mStoreCoverUri, R.mipmap.c1_image2);
                 buildNewImgAdd.setVisibility(View.GONE);
                 buildNewImgDel.setVisibility(View.VISIBLE);
             }
@@ -138,6 +151,7 @@ public class BuildNewGoodsActivity extends BaseActivity implements View.OnTouchL
             buildNewEtUnit.setText(model.unit);
             buildNewEtInventory.setText(model.stock);
         }
+        shopId=getIntent().getStringExtra("shopId");
         buildNewEtDescribe.setOnTouchListener(this);
         buildNewEtDescribe.addTextChangedListener(new TextWatcher() {
             @Override
@@ -218,7 +232,6 @@ public class BuildNewGoodsActivity extends BaseActivity implements View.OnTouchL
                 case CODE_RESULT_REQUEST:
                     if (data != null) {
 //                        mStoreCoverUri=data.getStringExtra("uri");
-                        Log.e("onActivityResult: ", mStoreCoverUri);
                         new GlideImageLoader().onDisplayImageWithDefault(this, buildNewImgCover, data.getStringExtra("uri"), R.mipmap.c1_image2);
                         buildNewImgAdd.setVisibility(View.GONE);
                         buildNewImgDel.setVisibility(View.VISIBLE);
@@ -413,7 +426,7 @@ public class BuildNewGoodsActivity extends BaseActivity implements View.OnTouchL
                     ToastUtils.showLongToast(this,getResources().getString(R.string.build_new_goods_inventory_hit));
                     return false;
                 }
-                propShops(id);
+                propShops(goodId,shopId);
                 return true;
             default:
                 // If we got here, the user's action was not recognized.
@@ -448,14 +461,15 @@ public class BuildNewGoodsActivity extends BaseActivity implements View.OnTouchL
 
 
     /**
-     * 申请店铺
+     * 添加或者保存商品
      *
      * @param
      */
-    private void propShops(String id) {
+    private void propShops(String goodId,String shopId) {
         progressDialog.show();
         serverDao.addGoods(getUser(this).id,
-                id,
+                goodId,
+                shopId,
                 buildNewEtName.getText().toString(),
                 mStoreCoverUri,
                 buildNewEtDescribe.getText().toString(),
@@ -468,6 +482,7 @@ public class BuildNewGoodsActivity extends BaseActivity implements View.OnTouchL
                     public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
                         ToastUtils.showLongToast(BuildNewGoodsActivity.this,baseResponse.message);
                         progressDialog.dismiss();
+                        EventBus.getDefault().post(new AddGoodsEvent("cj"));
                         finish();
                     }
 

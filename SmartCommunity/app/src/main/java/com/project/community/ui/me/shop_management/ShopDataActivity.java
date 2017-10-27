@@ -17,6 +17,7 @@ import com.library.okgo.utils.GlideImageLoader;
 import com.library.okgo.utils.ToastUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
+import com.project.community.constants.AppConstants;
 import com.project.community.model.ShopModel;
 import com.project.community.ui.life.minsheng.AdrressActivity;
 import com.project.community.ui.life.minsheng.ApplyStoreActivity;
@@ -114,7 +115,7 @@ public class ShopDataActivity extends BaseActivity {
 //                        showToast(baseResponse.message);
                         progressDialog.dismiss();
                         mShopModel=baseResponse.retData;
-                        new GlideImageLoader().onDisplayImageWithDefault(ShopDataActivity.this, shopDataCover, baseResponse.retData.shopPhoto, R.mipmap.c1_image2);
+                        new GlideImageLoader().onDisplayImageWithDefault(ShopDataActivity.this, shopDataCover, AppConstants.URL_BASE+baseResponse.retData.shopPhoto, R.mipmap.c1_image2);
                         shopDataTitle.setText(baseResponse.retData.shopsName);
                         shopDataPeople.setText(getResources().getString(R.string.goods_order_lianxiren)+baseResponse.retData.contactName+"    "+baseResponse.retData.contactPhone);
                         shopDataAddress.setText(getResources().getString(R.string.goods_order_yingyedizhi)+baseResponse.retData.businessAddress);
@@ -125,11 +126,11 @@ public class ShopDataActivity extends BaseActivity {
                         shopDataTvZhuyingyewu.setText(baseResponse.retData.mainBusiness);
                         shopDataTvQiyeName.setText(baseResponse.retData.entName);
                         shopDataTvYingyePhone.setText(baseResponse.retData.licenseNo);
-                        new GlideImageLoader().onDisplayImageWithDefault(ShopDataActivity.this, shopDataYingyePhoto1, baseResponse.retData.licensePositive, R.mipmap.c1_image2);
-                        new GlideImageLoader().onDisplayImageWithDefault(ShopDataActivity.this, shopDataYingyePhoto2, baseResponse.retData.licenseReverse, R.mipmap.c1_image2);
+                        new GlideImageLoader().onDisplayImageWithDefault(ShopDataActivity.this, shopDataYingyePhoto1, AppConstants.URL_BASE+baseResponse.retData.licensePositive, R.mipmap.c1_image2);
+                        new GlideImageLoader().onDisplayImageWithDefault(ShopDataActivity.this, shopDataYingyePhoto2, AppConstants.URL_BASE+baseResponse.retData.licenseReverse, R.mipmap.c1_image2);
                         shopDataTvFarenName.setText(baseResponse.retData.legalPerson);
-                        new GlideImageLoader().onDisplayImageWithDefault(ShopDataActivity.this, shopDataFarenPhoto1, baseResponse.retData.legalCardPositive, R.mipmap.c1_image2);
-                        new GlideImageLoader().onDisplayImageWithDefault(ShopDataActivity.this, shopDataFarenPhoto2, baseResponse.retData.legalCardReverse, R.mipmap.c1_image2);
+                        new GlideImageLoader().onDisplayImageWithDefault(ShopDataActivity.this, shopDataFarenPhoto1, AppConstants.URL_BASE+baseResponse.retData.legalCardPositive, R.mipmap.c1_image2);
+                        new GlideImageLoader().onDisplayImageWithDefault(ShopDataActivity.this, shopDataFarenPhoto2, AppConstants.URL_BASE+baseResponse.retData.legalCardReverse, R.mipmap.c1_image2);
 
                         shopDataType.setVisibility(View.VISIBLE);
                         if (baseResponse.retData.auditStatus.equals("1")){//未审核

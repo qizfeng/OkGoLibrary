@@ -90,43 +90,47 @@
                 android:src="@mipmap/d80_sanjiao" />
 
             <LinearLayout
-                android:layout_width="173dp"
+                android:layout_width="177dp"
                 android:layout_height="35dp"
                 android:background="@drawable/press_button_black_333333_10dp"
                 android:gravity="center">
 
                 <TextView
                     android:id="@+id/item_product_deit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:text="@string/products_manager_sell_item_edit"
                     android:textColor="@color/white" />
 
                 <View
+                    android:id="@+id/view_1"
                     android:layout_width="1dp"
                     android:layout_height="11dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
                     android:background="@color/gray_line" />
 
                 <TextView
                     android:id="@+id/item_product_xia"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:text="@string/products_manager_sell_item_xia"
                     android:textColor="@color/white" />
 
                 <View
+                    android:id="@+id/view_2"
                     android:layout_width="1dp"
                     android:layout_height="11dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
                     android:background="@color/gray_line" />
 
                 <TextView
                     android:id="@+id/item_product_del"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:text="@string/products_manager_sell_item_del"
                     android:textColor="@color/white" />
             </LinearLayout>

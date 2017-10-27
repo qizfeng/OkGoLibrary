@@ -1,6 +1,7 @@
 package com.project.community.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by qizfeng on 17/9/21.
@@ -50,6 +51,8 @@ public class ShopModel implements Serializable {
     public String longitude;
     public String auditContent;
     public double starLevel;//星星
+
+    public List<GoodsModel> goods;
 
     @Override
     public String toString() {

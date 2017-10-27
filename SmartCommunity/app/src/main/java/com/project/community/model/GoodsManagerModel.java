@@ -21,6 +21,7 @@ public class GoodsManagerModel implements Serializable {
 //    }
 
     public String id;
+    public String goodId;
     public String name;
     public String images;
     public String price;
@@ -35,6 +36,7 @@ public class GoodsManagerModel implements Serializable {
     public String toString() {
         return "GoodsManagerModel{" +
                 "id='" + id + '\'' +
+                "goodId='" + goodId + '\'' +
                 ", name='" + name + '\'' +
                 ", images='" + images + '\'' +
                 ", price='" + price + '\'' +

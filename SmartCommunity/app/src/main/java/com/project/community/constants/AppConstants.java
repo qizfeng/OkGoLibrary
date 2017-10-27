@@ -365,6 +365,11 @@ public class AppConstants {
     public static final String URL_UPDATEISOPEN=URL_BASE+"/m/propleLife/propShops/updateIsOpen";
 
     /**
+     * D75商铺信息首页
+     */
+    public static final String URL_SHOPINDEX=URL_BASE+"/m/propleLife/propShops/shopIndex";
+
+    /**
      * D83商铺详情
      */
     public static final String URL_PROPSHOPS=URL_BASE+"/m/propleLife/propShops/get";
@@ -373,6 +378,11 @@ public class AppConstants {
      * D77字账号列表
      */
     public static final String URL_SUBDOMAINACCOUNTLIST=URL_BASE+"/m/propleLife/shop/account/list";
+
+    /**
+     * D77子账号删除
+     */
+    public static final String DELETE_SUBDOMAINACCOUNT=URL_BASE+"/m/propleLife/shop/account/delete";
 
     /**
      * D78子账号详情
@@ -394,13 +404,32 @@ public class AppConstants {
      */
     public static final String URL_GETGOODSMANAGER=URL_BASE+"/m/propleLife/shop/goods/list";
 
+    /**
+     * D80商品删除
+     */
+    public static final String URL_DELGOODS=URL_BASE+"/m/propleLife/shop/goods/delete";
+
+    /**
+     * D78上下架
+     */
+    public static final String URL_UPDOWNGOODS=URL_BASE+"/m/propleLife/shop/goods/upDownGoods";
+
+
+    /**
+     * D27购物车
+     */
+    public static final String URL_GETCARTLIST=URL_BASE+"/m/propleLife/shop/cart/list";
+
+    /**
+     * D27购物车删除
+     */
+    public static final String URL_DELCART=URL_BASE+"/m/propleLife/shop/cart/delete";
 
     /**
      * 上传设备唯一标识符
      */
     public static final String URL_UPLOAD_UDID=URL_BASE+"m/sys/machineCode";
 
-    /*==========================*/
     /**
      * 分页大小
      */

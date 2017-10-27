@@ -191,7 +191,6 @@
                     android:id="@+id/build_new_et_unit"
                     style="@style/apply_store_et_title"
                     android:hint="@string/build_new_goods_unit_hit"
-                    android:inputType="numberDecimal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>

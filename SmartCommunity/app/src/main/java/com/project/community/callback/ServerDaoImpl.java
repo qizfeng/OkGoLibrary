@@ -42,7 +42,9 @@ import com.project.community.model.PaymentHouseHistroyModel;
 import com.project.community.model.PaymentInfoModel;
 import com.project.community.model.PaymentWayModel;
 import com.project.community.model.SearchModel;
+import com.project.community.model.ShopIndexModel;
 import com.project.community.model.ShopModel;
+import com.project.community.model.ShoppingCartModel;
 import com.project.community.model.ShopResponse;
 import com.project.community.model.SubdomainAccountModel;
 import com.project.community.model.UserModel;
@@ -773,6 +775,13 @@ public class ServerDaoImpl implements ServerDao {
                 .execute(callback);
     }
 
+    @Override
+    public void shopIndex(String userId, JsonCallback<BaseResponse<ShopIndexModel>> callback) {
+        OkGo.get(AppConstants.URL_SHOPINDEX)
+                .tag(mContext)
+                .params("userId", userId)
+                .execute(callback);
+    }
 
 
     @Override
@@ -864,10 +873,20 @@ public class ServerDaoImpl implements ServerDao {
     }
 
     @Override
-    public void addGoods(String userId, String shopId, String name, String images, String description, String price, String originalPrice, String unit, String stock, JsonCallback<BaseResponse<List>> callback) {
+    public void delSubdomainsAccount(String userId, String childId, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.DELETE_SUBDOMAINACCOUNT)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("childId", childId)
+                .execute(callback);
+    }
+
+    @Override
+    public void addGoods(String userId,String goodId, String shopId, String name, String images, String description, String price, String originalPrice, String unit, String stock, JsonCallback<BaseResponse<List>> callback) {
         OkGo.post(AppConstants.URL_ADDGOODS)
                 .tag(mContext)
                 .params("userId", userId)
+                .params("goodId", goodId)
                 .params("shopId", shopId)
                 .params("name", name)
                 .params("images", images)
@@ -880,10 +899,11 @@ public class ServerDaoImpl implements ServerDao {
     }
 
     @Override
-    public void addSubdomainsAccount(String userId, String shopId, String name, String phone,int sumMoney, int addGoods, int goodsMge, int orderMge, int shopInfo, int sumOrder, JsonCallback<BaseResponse<List>> callback) {
+    public void addSubdomainsAccount(String userId,String id, String shopId, String name, String phone,int sumMoney, int addGoods, int goodsMge, int orderMge, int shopInfo, int sumOrder, JsonCallback<BaseResponse<List>> callback) {
         OkGo.post(AppConstants.URL_ADDSUBDOMAINACCOUNT)
                 .tag(mContext)
                 .params("userId", userId)
+                .params("id", id)
                 .params("shopId", shopId)
                 .params("name", name)
                 .params("phone", phone)
@@ -910,6 +930,41 @@ public class ServerDaoImpl implements ServerDao {
                 .tag(mContext)
                 .params("userId", userId)
                 .params("status", status)
+                .execute(callback);
+    }
+
+
+    @Override
+    public void upDownGoods(String userId, String goodId, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.URL_UPDOWNGOODS)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("goodId", goodId)
+                .execute(callback);
+    }
+
+    @Override
+    public void getCartList(String userId, JsonCallback<BaseResponse<List<ShoppingCartModel>>> callback) {
+        OkGo.get(AppConstants.URL_GETCARTLIST)
+                .tag(mContext)
+                .params("userId", userId)
+                .execute(callback);
+    }
+
+    @Override
+    public void delCart(String cartId, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.URL_DELCART)
+                .tag(mContext)
+                .params("cartId", cartId)
+                .execute(callback);
+    }
+
+    @Override
+    public void delGoods(String userId, String goodId, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.URL_DELGOODS)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("goodId", goodId)
                 .execute(callback);
     }
 

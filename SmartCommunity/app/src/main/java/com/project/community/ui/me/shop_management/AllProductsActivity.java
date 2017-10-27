@@ -46,10 +46,12 @@ public class AllProductsActivity extends BaseActivity {
     private List<Fragment> mFragmentsList;
     private MyFrageStatePagerAdapter mAdapter;
 
+    private String shopId;
 
 
-    public static void startActivity(Context context){
+    public static void startActivity(Context context,String shopId){
         Intent intent = new Intent(context,AllProductsActivity.class);
+        intent.putExtra("shopId",shopId);
         context.startActivity(intent);
     }
 
@@ -63,13 +65,14 @@ public class AllProductsActivity extends BaseActivity {
     }
 
     private void initData() {
+        shopId=getIntent().getStringExtra("shopId");
         mFragmentsList =new ArrayList<>();
-        mFragmentsList.add(SellFragment.newInstance(0));
-        mFragmentsList.add(SellFragment.newInstance(1));
-        mFragmentsList.add(SellFragment.newInstance(2));
+        mFragmentsList.add(SellFragment.newInstance(0,shopId));
+        mFragmentsList.add(SellFragment.newInstance(1,shopId));
+        mFragmentsList.add(SellFragment.newInstance(2,shopId));
         mAdapter = new MyFrageStatePagerAdapter(getSupportFragmentManager());
         mViewpager.setAdapter(mAdapter);
-        mViewpager.setOffscreenPageLimit(3);
+        mViewpager.setOffscreenPageLimit(mFragmentsList.size());
 
     }
 
@@ -86,7 +89,7 @@ public class AllProductsActivity extends BaseActivity {
 
     @OnClick(R.id.product_add)
     public void onViewClicked() {
-        BuildNewGoodsActivity.startActivity(this);
+        BuildNewGoodsActivity.startActivity(this,null,shopId);
     }
     class MyFrageStatePagerAdapter extends FragmentStatePagerAdapter {
 
@@ -118,4 +121,5 @@ public class AllProductsActivity extends BaseActivity {
         }
 
     }
+
 }

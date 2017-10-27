@@ -60,13 +60,16 @@ public class AddSubdomainsAccountActivity extends BaseActivity {
     @Bind(R.id.add_subdomains_account_cb_shop_data)
     CheckBox addSubdomainsAccountCbShopData;
 
+    private String shopId;//店铺Id
+    private String childId="";//子账号Id
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, AddSubdomainsAccountActivity.class);
         ((Activity)context).startActivityForResult(intent,100);
     }
-    public static void startActivity(Context context, String id) {
+    public static void startActivity(Context context, String childId ,String shopId) {
         Intent intent = new Intent(context, AddSubdomainsAccountActivity.class);
-        intent.putExtra("cj",id);
+        intent.putExtra("cj",childId);
+        intent.putExtra("shopId",shopId);
         ((Activity)context).startActivityForResult(intent,100);
     }
 
@@ -81,9 +84,12 @@ public class AddSubdomainsAccountActivity extends BaseActivity {
     }
 
     private void initData() {
-        if (getIntent().getExtras()!=null){
-            getData(getIntent().getStringExtra("cj"));
+        if (getIntent().getExtras()!=null && !TextUtils.isEmpty(getIntent().getStringExtra("cj"))){
+            childId=getIntent().getStringExtra("cj");
+            mTvTitle.setText(getResources().getString(R.string.add_subdomains_account_title_edit));
+            getData(childId);
         }
+        shopId=getIntent().getStringExtra("shopId");
         addSubdomainsAccountSwPrice.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
@@ -128,7 +134,7 @@ public class AddSubdomainsAccountActivity extends BaseActivity {
                     showToast(getString(R.string.toast_error_phone));
                     return;
                 }
-                AddData("1");
+                AddData(childId,shopId);
 
                 break;
         }
@@ -137,7 +143,7 @@ public class AddSubdomainsAccountActivity extends BaseActivity {
     /**
      * 增加子账号
      */
-    private void AddData(String id){
+    private void AddData(String id,String shopId){
         showLoading();
         if (!NetworkUtils.isNetworkAvailable(this)) {
             ToastUtils.showShortToast(this, R.string.network_error);
@@ -168,6 +174,7 @@ public class AddSubdomainsAccountActivity extends BaseActivity {
         serverDao.addSubdomainsAccount(
                 getUser(this).id,
                 id,
+                shopId,
                 addSubdomainsAccountEtName.getText().toString(),
                 addSubdomainsAccountEtPhone.getText().toString(),
                 addSubdomainsAccountSwPriceNum,
@@ -196,18 +203,21 @@ public class AddSubdomainsAccountActivity extends BaseActivity {
                 });
     }
 
-    private void getData(String id){
+    private void getData(String childId){
         showLoading();
         if (!NetworkUtils.isNetworkAvailable(this)) {
             ToastUtils.showShortToast(this, R.string.network_error);
             dismissDialog();
             return;
         }
-        serverDao.getSubdomainsAccountDetail(id, new JsonCallback<BaseResponse<SubdomainAccountModel>>() {
+        serverDao.getSubdomainsAccountDetail(childId, new JsonCallback<BaseResponse<SubdomainAccountModel>>() {
             @Override
             public void onSuccess(BaseResponse<SubdomainAccountModel> subdomainAccountModelBaseResponse, Call call, Response response) {
                 dismissDialog();
                 addSubdomainsAccountEtName.setText(subdomainAccountModelBaseResponse.retData.name);
+                if (!TextUtils.isEmpty(addSubdomainsAccountEtName.getText().toString())){
+                    addSubdomainsAccountEtName.setSelection(addSubdomainsAccountEtName.getText().length());
+                }
                 addSubdomainsAccountEtPhone.setText(subdomainAccountModelBaseResponse.retData.phone);
                 if (subdomainAccountModelBaseResponse.retData.sumMoney.equals("0")) addSubdomainsAccountSwPrice.setChecked(true);
                 else addSubdomainsAccountSwPrice.setChecked(false);
