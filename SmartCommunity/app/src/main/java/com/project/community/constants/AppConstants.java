@@ -394,6 +394,12 @@ public class AppConstants {
      */
     public static final String URL_GETGOODSMANAGER=URL_BASE+"/m/propleLife/shop/goods/list";
 
+
+    /**
+     * 上传设备唯一标识符
+     */
+    public static final String URL_UPLOAD_UDID=URL_BASE+"m/sys/machineCode";
+
     /*==========================*/
     /**
      * 分页大小

@@ -20,6 +20,7 @@ import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.constants.AppConstants;
 import com.project.community.model.ShopModel;
+import com.project.community.model.ShopResponse;
 import com.project.community.ui.adapter.MinshengAdapter;
 import com.project.community.ui.adapter.listener.MinshengAdapterItemListener;
 import com.project.community.view.SpacesItemDecoration;
@@ -95,25 +96,28 @@ public class ShopsListActivity extends BaseActivity implements SwipeRefreshLayou
         if (!TextUtils.isEmpty(latitute) && !TextUtils.isEmpty(longitute)) {
             locData = longitute + "," + latitute;
         }
-        serverDao.getMinshengIndexData(locData, page, AppConstants.PAGE_SIZE, new JsonCallback<BaseResponse<List<ShopModel>>>() {
+        String userId ="";
+        if(isLogin(this))
+            userId= getUser(this).id;
+        serverDao.getMinshengIndexData(userId,locData, page, AppConstants.PAGE_SIZE, new JsonCallback<BaseResponse<ShopResponse>>() {
             @Override
-            public void onSuccess(BaseResponse<List<ShopModel>> baseResponse, Call call, Response response) {
+            public void onSuccess(BaseResponse<ShopResponse> baseResponse, Call call, Response response) {
                 if (page == 1) {
                     List<ShopModel> data = new ArrayList<>();
-                    data.addAll(baseResponse.retData);
+                    data.addAll(baseResponse.retData.shopList);
                     mAdapter.setNewData(data);
                     mAdapter.setEnableLoadMore(true);
                 } else {
                     //显示没有更多数据
                     LogUtils.e("page:" + page);
-                    if (baseResponse.retData.size() < AppConstants.PAGE_SIZE && page != 1) {
+                    if (baseResponse.retData.shopList.size() < AppConstants.PAGE_SIZE && page != 1) {
                         List<ShopModel> data = new ArrayList<>();
-                        data.addAll(baseResponse.retData);
+                        data.addAll(baseResponse.retData.shopList);
                         mAdapter.addData(data);
                         mAdapter.loadMoreEnd();         //加载完成
                     } else {
                         List<ShopModel> data = new ArrayList<>();
-                        data.addAll(baseResponse.retData);
+                        data.addAll(baseResponse.retData.shopList);
                         mAdapter.addData(data);
                         mAdapter.loadMoreComplete();
                     }
@@ -121,7 +125,7 @@ public class ShopsListActivity extends BaseActivity implements SwipeRefreshLayou
             }
 
             @Override
-            public void onAfter(@Nullable BaseResponse<List<ShopModel>> baseResponse, @Nullable Exception e) {
+            public void onAfter(@Nullable BaseResponse<ShopResponse> baseResponse, @Nullable Exception e) {
                 super.onAfter(baseResponse, e);
                 //可能需要移除之前添加的布局
                 mAdapter.removeAllFooterView();

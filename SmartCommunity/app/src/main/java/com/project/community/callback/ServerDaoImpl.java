@@ -20,7 +20,6 @@ import com.project.community.model.AgreementResponse;
 import com.project.community.model.ArticleModel;
 import com.project.community.model.AuditStatusModel;
 import com.project.community.model.BannerResponse;
-import com.project.community.model.CommentModel;
 import com.project.community.model.CommentResponse;
 import com.project.community.model.CommunityCensusModel;
 import com.project.community.model.CommunityDeviceFilterModel;
@@ -39,12 +38,12 @@ import com.project.community.model.GuideModel;
 import com.project.community.model.HotlineModel;
 import com.project.community.model.HouseModel;
 import com.project.community.model.NewsModel;
-import com.project.community.model.PaymentDetailModel;
 import com.project.community.model.PaymentHouseHistroyModel;
 import com.project.community.model.PaymentInfoModel;
 import com.project.community.model.PaymentWayModel;
 import com.project.community.model.SearchModel;
 import com.project.community.model.ShopModel;
+import com.project.community.model.ShopResponse;
 import com.project.community.model.SubdomainAccountModel;
 import com.project.community.model.UserModel;
 import com.project.community.model.WuyeIndexResponse;
@@ -708,15 +707,15 @@ public class ServerDaoImpl implements ServerDao {
     }
 
     @Override
-    public void getMinshengIndexData(String coordinate, int pageNo, int pageSize, JsonCallback<BaseResponse<List<ShopModel>>> callback) {
+    public void getMinshengIndexData(String userId,String coordinate, int pageNo, int pageSize, JsonCallback<BaseResponse<ShopResponse>> callback) {
         OkGo.post(AppConstants.URL_MINSHENG_INDEX)
                 .tag(mContext)
+                .params("userId",userId)
                 .params("coordinate", coordinate)
                 .params("pageNo", pageNo)
                 .params("pageSize", pageSize)
                 .execute(callback);
     }
-
     @Override
     public void propShops(
             String id,
@@ -930,7 +929,15 @@ public class ServerDaoImpl implements ServerDao {
                 .params(params)
                 .execute(callback);
     }
-
+    @Override
+    public void uploadUDID(String userId, String machineCode, JsonCallback<BaseResponse<List>> callback) {
+        checkNet();
+        OkGo.post(AppConstants.URL_UPLOAD_UDID)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("machineCode", machineCode)
+                .execute(callback);
+    }
 //    @Override
 //    public void addAddress(String userId, String consignee,
 //                           String contactPhone, String userArea,
