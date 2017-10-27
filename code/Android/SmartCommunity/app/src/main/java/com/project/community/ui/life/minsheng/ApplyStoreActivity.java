@@ -40,6 +40,7 @@ import com.library.okgo.view.loopview.LoopView;
 import com.library.okgo.view.loopview.OnItemSelectedListener;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
+import com.project.community.constants.AppConstants;
 import com.project.community.model.DictionaryModel;
 import com.project.community.model.DictionaryResponse;
 import com.project.community.model.FileUploadModel;
@@ -193,8 +194,12 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
         initToolBar(mToolBar, mTvTitle, true, getString(R.string.store_Apply), R.mipmap.iv_back);
 
         if (getIntent().getExtras()!=null){
+            mTvTitle.setText(getResources().getString(R.string.store_Apply_edit));
             ShopModel shopModel = (ShopModel) getIntent().getSerializableExtra("value");
             applyStoreEtTitle.setText(shopModel.shopsName);
+            if (!TextUtils.isEmpty(applyStoreEtTitle.getText().toString())){
+                applyStoreEtTitle.setSelection(applyStoreEtTitle.getText().length());
+            }
             applyStoreEtName.setText(shopModel.contactName);
             applyStoreEtTel.setText(shopModel.contactPhone);
             applyStoreTvAddress.setText(shopModel.businessAddress);
@@ -206,31 +211,31 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
             id=shopModel.id;
             mStoreCoverUri=shopModel.shopPhoto;//店铺封面
             if (!TextUtils.isEmpty(mStoreCoverUri)){
-                new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgCover, mStoreCoverUri, R.mipmap.c1_image2);
+                new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgCover, AppConstants.URL_BASE+mStoreCoverUri, R.mipmap.c1_image2);
                 applyStoreImgAdd.setVisibility(View.GONE);
                 applyStoreImgDel.setVisibility(View.VISIBLE);
             }
             mBusinessLicenseZUri=shopModel.licensePositive;//
             if (!TextUtils.isEmpty(mBusinessLicenseZUri)){
-                new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgBusinessLicenseZheng, mBusinessLicenseZUri, R.mipmap.c1_image2);
+                new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgBusinessLicenseZheng, AppConstants.URL_BASE+mBusinessLicenseZUri, R.mipmap.c1_image2);
                 applyStoreImgAddBusinessLicenseZheng.setVisibility(View.GONE);
                 applyStoreDelBusinessLicenseZheng.setVisibility(View.VISIBLE);
             }
             mBusinessLicenseFUri=shopModel.licenseReverse;//
             if (!TextUtils.isEmpty(mBusinessLicenseFUri)){
-                new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgBusinessLicenseFan, mBusinessLicenseFUri, R.mipmap.c1_image2);
+                new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgBusinessLicenseFan, AppConstants.URL_BASE+mBusinessLicenseFUri, R.mipmap.c1_image2);
                 applyStoreImgAddBusinessLicenseFan.setVisibility(View.GONE);
                 applyStoreDelBusinessLicenseFan.setVisibility(View.VISIBLE);
             }
             mLegalPersonZUri=shopModel.legalCardPositive;//
             if (!TextUtils.isEmpty(mLegalPersonZUri)){
-                new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgLegalPersonZheng, mLegalPersonZUri, R.mipmap.c1_image2);
+                new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgLegalPersonZheng, AppConstants.URL_BASE+mLegalPersonZUri, R.mipmap.c1_image2);
                 applyStoreImgAddLegalPersonZheng.setVisibility(View.GONE);
                 applyStoreDelLegalPersonZheng.setVisibility(View.VISIBLE);
             }
             mLegalPersonFUri=shopModel.legalCardReverse;//
             if (!TextUtils.isEmpty(mLegalPersonFUri)){
-                new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgLegalPersonFan, mLegalPersonFUri, R.mipmap.c1_image2);
+                new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgLegalPersonFan, AppConstants.URL_BASE+mLegalPersonFUri, R.mipmap.c1_image2);
                 applyStoreImgAddLegalPersonFan.setVisibility(View.GONE);
                 applyStoreDelLegalPersonFan.setVisibility(View.VISIBLE);
             }

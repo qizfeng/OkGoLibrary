@@ -34,7 +34,9 @@ import com.project.community.model.PaymentHouseHistroyModel;
 import com.project.community.model.PaymentInfoModel;
 import com.project.community.model.PaymentWayModel;
 import com.project.community.model.SearchModel;
+import com.project.community.model.ShopIndexModel;
 import com.project.community.model.ShopModel;
+import com.project.community.model.ShoppingCartModel;
 import com.project.community.model.ShopResponse;
 import com.project.community.model.SubdomainAccountModel;
 import com.project.community.model.UserModel;
@@ -772,6 +774,14 @@ public interface ServerDao {
 
 
     /**
+     * D75商铺信息首页
+     *
+     * @param callback
+     */
+    void shopIndex(String userId, JsonCallback<BaseResponse<ShopIndexModel>> callback);
+
+
+    /**
      * D83商铺详情
      *
      * @param callback
@@ -785,11 +795,21 @@ public interface ServerDao {
      */
     void getSubdomainsAccount(String userId, JsonCallback<BaseResponse<List<SubdomainAccountModel>>> callback);
 
+    /**
+     * D77子账号删除
+     *
+     * @param userId
+     * @param childId
+     * @param callback
+     */
+    void delSubdomainsAccount(String userId, String childId,JsonCallback<BaseResponse<List>> callback);
+
 
     /**
      * D76添加商品
      *
      * @param userId 用户id
+     * @param goodId 保存不需要,修改必填
      * @param shopId 店铺id
      * @param name 商铺名称
      * @param images 图片
@@ -802,6 +822,7 @@ public interface ServerDao {
      */
     void addGoods(
             String userId,
+            String goodId,
             String shopId,
             String name,
             String images,
@@ -819,6 +840,7 @@ public interface ServerDao {
      */
     void addSubdomainsAccount(
             String userId,
+            String id,
             String shopId,
             String name,
             String phone,
@@ -852,10 +874,52 @@ public interface ServerDao {
             JsonCallback<BaseResponse<List<GoodsManagerModel>>> callback);
 
     /**
+     * D80商品删除
+     *
+     * @param goodId
+     * @param callback
+     */
+    void delGoods(
+            String userId,
+            String goodId,
+            JsonCallback<BaseResponse<List>> callback);
+
+    /**
      * 上传设备唯一标识符
      * @param userId
      * @param machineCode
      * @param callback
      */
     void uploadUDID(String userId,String machineCode,JsonCallback<BaseResponse<List>>callback);
+
+    /**
+     * D78上下架
+     *
+     * @param goodId
+     * @param callback
+     */
+    void upDownGoods(
+            String userId,
+            String goodId,
+            JsonCallback<BaseResponse<List>> callback);
+
+    /**
+     * D27购物车
+     *
+     * @param callback
+     */
+    void getCartList(
+            String userId,
+            JsonCallback<BaseResponse<List<ShoppingCartModel>>> callback);
+
+    /**
+     * D27购物车删除
+     *
+     * @param callback
+     */
+    void delCart(
+            String cartId,
+            JsonCallback<BaseResponse<List>> callback);
+
+
 }

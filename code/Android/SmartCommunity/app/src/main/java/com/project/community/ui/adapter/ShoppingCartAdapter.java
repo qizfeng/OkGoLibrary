@@ -2,11 +2,15 @@ package com.project.community.ui.adapter;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.donkingliang.groupedadapter.adapter.GroupedRecyclerViewAdapter;
 import com.donkingliang.groupedadapter.holder.BaseViewHolder;
+import com.library.okgo.utils.GlideImageLoader;
 import com.project.community.R;
+import com.project.community.constants.AppConstants;
 import com.project.community.model.GoodsModel;
+import com.project.community.model.ShopModel;
 import com.project.community.model.ShoppingCartModel;
 
 import java.util.List;
@@ -36,7 +40,7 @@ public class ShoppingCartAdapter extends GroupedRecyclerViewAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        List<GoodsModel> children = mGroups.get(groupPosition).goods;
+        List<GoodsModel> children = mGroups.get(groupPosition).shop.goods;
         return children == null ? 0 : children.size();
     }
 
@@ -67,30 +71,36 @@ public class ShoppingCartAdapter extends GroupedRecyclerViewAdapter {
 
     @Override
     public void onBindHeaderViewHolder(BaseViewHolder holder, int groupPosition) {
-        ShoppingCartModel entity = mGroups.get(groupPosition);
+        ShopModel entity = mGroups.get(groupPosition).shop;
+        holder.setText(R.id.item_header_title,entity.shopsName);
+
     }
 
     @Override
     public void onBindFooterViewHolder(final BaseViewHolder holder, final int groupPosition) {
-        ShoppingCartModel entity = mGroups.get(groupPosition);
         holder.get(R.id.tv_delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onFooterClickListener.onFooterDeleteClick(holder.get(R.id.tv_comment_num), groupPosition);
+                onFooterClickListener.onFooterDeleteClick(view, groupPosition);
             }
         });
 
         holder.get(R.id.tv_settlement).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onFooterClickListener.onSettlementClick(holder.get(R.id.tv_settlement), groupPosition);
+                onFooterClickListener.onSettlementClick(view, groupPosition);
             }
         });
     }
 
     @Override
     public void onBindChildViewHolder(BaseViewHolder holder, int groupPosition, int childPosition) {
-        GoodsModel entity = mGroups.get(groupPosition).goods.get(childPosition);
+        GoodsModel entity = mGroups.get(groupPosition).shop.goods.get(childPosition);
+
+        holder.setText(R.id.item_goods_name,entity.name)
+                .setText(R.id.tv_unit_price,"¥"+entity.price)
+                .setText(R.id.tv_goods_count,"x"+entity.number);
+        new GlideImageLoader().onDisplayImageWithDefault(mContext, (ImageView) holder.get(R.id.item_goods_cover), AppConstants.URL_BASE+entity.images, R.mipmap.c1_image2);
 
     }
 

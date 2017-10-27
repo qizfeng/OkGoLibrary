@@ -9,6 +9,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import android.view.ViewGroup;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
 import com.library.okgo.utils.ToastUtils;
+import com.project.community.Event.AddGoodsEvent;
+import com.project.community.Event.AddHouseEvent;
 import com.project.community.R;
 import com.project.community.base.BaseFragment;
 import com.project.community.listener.RecycleItemClickListener;
@@ -28,6 +31,10 @@ import com.project.community.ui.me.all_order.AllOrderFragment;
 import com.project.community.util.NetworkUtils;
 import com.project.community.view.SpacesItemDecoration;
 import com.project.community.view.VpSwipeRefreshLayout;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,15 +55,17 @@ public class SellFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     @Bind(R.id.refreshLayout)
     VpSwipeRefreshLayout refreshLayout;
 
-    ProductSellApdater mAdapter;
-    List<GoodsManagerModel> list =new ArrayList<>();
-    private String id="0";
+    private ProductSellApdater mAdapter;
+    private List<GoodsManagerModel> list =new ArrayList<>();;
+    private int code=0;
+    private String shopId;
 
 
-    public static SellFragment newInstance(int id) {
+    public static SellFragment newInstance(int code,String shopId) {
         final SellFragment f = new SellFragment();
         final Bundle args = new Bundle();
-        args.putInt("cj", id);
+        args.putInt("cj", code);
+        args.putString("shopId", shopId);
         f.setArguments(args);
         return f;
     }
@@ -70,6 +79,8 @@ public class SellFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
     @Override
     protected void initData() {
+        EventBus.getDefault().register(this);
+        code=getArguments().getInt("cj");
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -77,10 +88,11 @@ public class SellFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         recyclerView.addItemDecoration(decoration);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN);
+
         mAdapter = new ProductSellApdater(list, new RecycleItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                ShopDataActivity.startActivity(getActivity());
+//                ShopDataActivity.startActivity(getActivity());
             }
 
             @Override
@@ -91,26 +103,26 @@ public class SellFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                         mAdapter.notifyItemChanged(position,list.get(position));
                         break;
                     case R.id.item_product_del:
-                        mAdapter.notifyItemRemoved(position);
+                        delData(list.get(position).goodId,position);
                         break;
                     case R.id.item_product_deit:
-//                        mAdapter.notifyItemRemoved(position);
+                        BuildNewGoodsActivity.startActivity(getActivity(),list.get(position),shopId);
                         break;
                     case R.id.item_product_xia:
-                        mAdapter.notifyItemRemoved(position);
+                        upDownGoods(list.get(position).goodId,position);
                         break;
                 }
 
             }
-        });
+        },code);
         recyclerView.setAdapter(mAdapter);
         onRefresh();
     }
 
     @Override
     public void onRefresh() {
-        id=getArguments().getString("cj");
-        getData(id);
+        shopId=getArguments().getString("shopId");
+        getData(code);
         
     }
     /**
@@ -131,23 +143,21 @@ public class SellFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     /**
      * 获取列表
      */
-    private void getData(String id){
+    private void getData(int id){
 
         setRefreshing(true);
         if (!NetworkUtils.isNetworkAvailable(getActivity())) {
             ToastUtils.showShortToast(getActivity(), R.string.network_error);
-            dismissDialog();
+            setRefreshing(false);
             return;
         }
         serverDao.getGoodsManagerList(
                 getUser(getActivity()).id,
-                id,
+                id+"",
                 new JsonCallback<BaseResponse<List<GoodsManagerModel>>>() {
-
                     @Override
                     public void onSuccess(BaseResponse<List<GoodsManagerModel>> listBaseResponse, Call call, Response response) {
                         setRefreshing(false);
-                        showToast(listBaseResponse.message);
                         list.clear();
                         list.addAll(listBaseResponse.retData);
                         mAdapter.notifyDataSetChanged();
@@ -162,4 +172,80 @@ public class SellFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                 });
     }
 
+    /**
+     * 删除商品
+     */
+    private void delData(String goodId, final int position){
+        showLoading();
+        if (!NetworkUtils.isNetworkAvailable(getActivity())) {
+            ToastUtils.showShortToast(getActivity(), R.string.network_error);
+            dismissDialog();
+            return;
+        }
+
+        serverDao.delGoods(getUser(getActivity()).id, goodId,new JsonCallback<BaseResponse<List>>() {
+            @Override
+            public void onSuccess(BaseResponse<List> listBaseResponse, Call call, Response response) {
+                dismissDialog();
+                showToast(listBaseResponse.message);
+                list.remove(position);
+                mAdapter.notifyItemRemoved(position);
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                dismissDialog();
+                list.remove(position);
+                mAdapter.notifyItemRemoved(position);
+                showToast(e.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * D78上下架
+     */
+    private void upDownGoods(String goodId, final int position){
+        showLoading();
+        if (!NetworkUtils.isNetworkAvailable(getActivity())) {
+            ToastUtils.showShortToast(getActivity(), R.string.network_error);
+            dismissDialog();
+            return;
+        }
+
+        serverDao.upDownGoods(getUser(getActivity()).id, goodId,new JsonCallback<BaseResponse<List>>() {
+            @Override
+            public void onSuccess(BaseResponse<List> listBaseResponse, Call call, Response response) {
+                dismissDialog();
+                showToast(listBaseResponse.message);
+                list.remove(position);
+                mAdapter.notifyItemRemoved(position);
+                EventBus.getDefault().post(new AddGoodsEvent(code+""));
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                dismissDialog();
+                list.remove(position);
+                mAdapter.notifyItemRemoved(position);
+                EventBus.getDefault().post(new AddGoodsEvent(code+""));
+                showToast(e.getMessage());
+            }
+        });
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void setAddGoodsEvent(AddGoodsEvent addGoodsEvent) {
+        if (!addGoodsEvent.getItem().equals(code+""))
+            onRefresh();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 }

@@ -26,6 +26,7 @@
     <!--店铺申请-->
     <string name="btn_confire">确认并提交</string>
     <string name="store_Apply">申请店铺</string>
+    <string name="store_Apply_edit">编辑店铺</string>
     <string name="store_apply_upcover">上传店铺封面</string>
     <string name="store_apply_title">店铺名称</string>
     <string name="store_apply_title_hit">请输入店铺名称</string>
@@ -94,7 +95,9 @@
     <string name="products_manager_sell_end">售罄</string>
     <string name="products_manager_sell_xia">已下架</string>
     <string name="products_manager_sell_item_edit">编辑</string>
+    <string name="products_manager_sell_item_editkucun">编辑库存</string>
     <string name="products_manager_sell_item_xia">下架</string>
+    <string name="products_manager_sell_item_shang">上架</string>
     <string name="products_manager_sell_item_del">删除</string>
 
     <!--店铺资料-->
@@ -133,8 +136,11 @@
 
     <!--商品管理-->
     <string name="shop_manager_title">商铺管理</string>
+    <string name="shop_manager_title_son">(子账号)</string>
     <string name="shop_manager_goods">商品管理</string>
-    <string name="shop_manager_goods_son"><span style="font-size:36px; color:#ffffff;">商铺管理</span><span style="font-size:12px; color:#ffffff;">(子账号)</span></string>
+    <!--<string name="shop_manager_goods_son"><span style="font-size:36px; color:#ffffff;">商铺管理</span><span style="font-size:12px; color:#ffffff;">(子账号)</span></string>-->
+    <string name="shop_manager_goods_son">"<big><font>商铺管理</font></big><font><small>(子账号)</small></font>"</string>
+    <!--<string name="shop_manager_goods_son1"><font color='red' size='36'>商铺管理</font><font color='blue' size='14'>(子账号)</font></string>-->
     <string name="shop_manager_liushui">今日流水/总流水（元）</string>
     <string name="shop_manager_order">今日订单数/总订单数</string>
     <string name="shop_manager_data">商铺资料</string>
@@ -144,6 +150,7 @@
 
     <!--商品管理-->
     <string name="add_subdomains_account_title">添加子账号</string>
+    <string name="add_subdomains_account_title_edit">编辑子账号</string>
     <string name="add_subdomains_account_name">名称</string>
     <string name="add_subdomains_account_name_hit">请输入名称</string>
     <string name="add_subdomains_account_phone">手机号</string>
@@ -156,6 +163,7 @@
 
     <!--商品管理-->
     <string name="build_new_goods_title">新建商品</string>
+    <string name="build_new_goods_title_edit">编辑商品</string>
     <string name="build_new_goods_issue">发布</string>
     <string name="build_new_goods_photo">商品图片</string>
     <string name="build_new_goods_photo_hit">请上传商品图片</string>

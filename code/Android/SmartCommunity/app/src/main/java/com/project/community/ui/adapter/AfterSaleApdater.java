@@ -50,7 +50,7 @@ public class AfterSaleApdater extends GroupedRecyclerViewAdapter {
 
     @Override
     public boolean hasFooter(int groupPosition) {
-        return false;
+        return true;
     }
 
     @Override
@@ -60,7 +60,7 @@ public class AfterSaleApdater extends GroupedRecyclerViewAdapter {
 
     @Override
     public int getFooterLayout(int viewType) {
-        return 0;
+        return R.layout.layout_item_after_sale_footer;
     }
 
     @Override
