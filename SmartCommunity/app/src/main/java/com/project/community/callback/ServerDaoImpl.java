@@ -11,6 +11,9 @@ import com.library.okgo.model.HttpParams;
 import com.library.okgo.utils.ToastUtils;
 import com.project.community.R;
 import com.project.community.bean.AddressListBean;
+import com.project.community.bean.ClassifyBaseBean;
+import com.project.community.bean.ClassifyListBean;
+import com.project.community.bean.CommentsListBean;
 import com.project.community.bean.CommunityBean;
 import com.project.community.bean.ForumListBean;
 import com.project.community.bean.GovernmentBean;
@@ -933,6 +936,62 @@ public class ServerDaoImpl implements ServerDao {
                 .execute(callback);
     }
 
+
+    @Override
+    public void getClassifyList(String dictType, JsonCallback<BaseResponse<ClassifyBaseBean>> callback) {
+        OkGo.get(AppConstants.URL_CLASSIFY_LIST)
+                .tag(mContext)
+                .params("dictType", dictType)
+                .execute(callback);
+    }
+
+    @Override
+    public void releaseSendMessage(String userId, String categoryId,
+                                   String title, String content,
+                                   String imagesUrl, JsonCallback<BaseResponse<Object>> callback) {
+        OkGo.post(AppConstants.URL_SENDMESSAGE)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("categoryId", categoryId)
+                .params("title", title)
+                .params("content", content)
+                .params("imagesUrl", imagesUrl)
+                .execute(callback);
+    }
+
+    @Override
+    public void getBbs(String userId, String pageNo,
+                       String pageSize, String categoryId,
+                       String keywords, JsonCallback<BaseResponse<Object>> callback) {
+        OkGo.get(AppConstants.URL_GET_BBS_LIST)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("pageNo", pageNo)
+                .params("pageSize", pageSize)
+                .params("categoryId", categoryId)
+                .params("keywords", keywords)
+                .execute(callback);
+
+    }
+
+    @Override
+    public void collectBbs(String userId, String articleId, JsonCallback<BaseResponse<Object>> callback) {
+        OkGo.post(AppConstants.URL_CLLECT_BBS)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("articleId", articleId)
+                .execute(callback);
+    }
+
+    @Override
+    public void getCommentList(String articleId, String pageNo, String pageSize, JsonCallback<BaseResponse<CommentsListBean>> callback) {
+        OkGo.get(AppConstants.URL_GET_COMMENT_LIST)
+                .tag(mContext)
+                .params("articleId", articleId)
+                .params("pageNo", pageNo)
+                .params("pageSize", pageSize)
+                .execute(callback);
+    }
 
     @Override
     public void upDownGoods(String userId, String goodId, JsonCallback<BaseResponse<List>> callback) {

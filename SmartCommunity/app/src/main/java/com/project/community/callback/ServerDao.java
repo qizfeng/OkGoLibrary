@@ -4,6 +4,8 @@ import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
 import com.library.okgo.model.HttpParams;
 import com.project.community.bean.AddressListBean;
+import com.project.community.bean.ClassifyBaseBean;
+import com.project.community.bean.CommentsListBean;
 import com.project.community.bean.CommunityBean;
 import com.project.community.bean.ForumListBean;
 import com.project.community.bean.GovernmentBean;
@@ -671,7 +673,7 @@ public interface ServerDao {
      * @param legalCardReverse  法人身份证反面
      * @param callback
      */
-    void propShops(String id,String userId, double longitude, double latitude, String shopsName, String shopPhoto, String contactName, String businessAddress, String shopsCategory,
+    void propShops(String id, String userId, double longitude, double latitude, String shopsName, String shopPhoto, String contactName, String businessAddress, String shopsCategory,
                    String mainBusiness, String entName, String licenseNo, String licensePositive, String licenseReverse, String legalPerson, String legalCardPositive,
                    String legalCardReverse, JsonCallback<BaseResponse<List>> callback);
 
@@ -808,6 +810,21 @@ public interface ServerDao {
     /**
      * D76添加商品
      *
+<<<<<<< .mine
+     * @param userId        用户id
+     * @param shopId        店铺id
+     * @param name          商铺名称
+     * @param images        图片
+     * @param description   描述
+     * @param price         价格
+||||||| .r465
+     * @param userId 用户id
+     * @param shopId 店铺id
+     * @param name 商铺名称
+     * @param images 图片
+     * @param description 描述
+     * @param price 价格
+=======
      * @param userId 用户id
      * @param goodId 保存不需要,修改必填
      * @param shopId 店铺id
@@ -815,9 +832,10 @@ public interface ServerDao {
      * @param images 图片
      * @param description 描述
      * @param price 价格
+>>>>>>> .r489
      * @param originalPrice 原始价格
-     * @param unit 单位
-     * @param stock 库存
+     * @param unit          单位
+     * @param stock         库存
      * @param callback
      */
     void addGoods(
@@ -865,7 +883,7 @@ public interface ServerDao {
     /**
      * D80商品管理
      *
-     * @param status 商品状态0:出售中；1:售罄；2：下架
+     * @param status   商品状态0:出售中；1:售罄；2：下架
      * @param callback
      */
     void getGoodsManagerList(
@@ -883,6 +901,66 @@ public interface ServerDao {
             String userId,
             String goodId,
             JsonCallback<BaseResponse<List>> callback);
+
+    /**
+     * 获取分类
+     *
+     * @param dictType
+     * @param callback
+     */
+    void getClassifyList(String dictType,
+                         JsonCallback<BaseResponse<ClassifyBaseBean>> callback);
+
+    /**
+     * 发布消息
+     *
+     * @param userId
+     * @param categoryId 类型id
+     * @param title      标题
+     * @param content    内容
+     * @param imagesUrl  图片
+     * @param callback
+     */
+
+    void releaseSendMessage(String userId, String categoryId, String title,
+                            String content, String imagesUrl,
+                            JsonCallback<BaseResponse<Object>> callback);
+
+
+    /**
+     * 获取帖子列表
+     * @param userId
+     * @param pageNo
+     * @param pageSize
+     * @param categoryId
+     * @param keywords
+     * @param callback
+     */
+    void getBbs(String userId, String pageNo, String pageSize, String categoryId, String keywords,
+                JsonCallback<BaseResponse<Object>> callback);
+
+
+    /**
+     * 收藏或者取消收藏
+     * @param userId
+     * @param articleId
+     * @param callback
+     */
+    void collectBbs(String userId, String articleId,
+                JsonCallback<BaseResponse<Object>> callback);
+
+
+    /**
+     * 获取论坛评论
+     * @param userId
+     * @param pageNo
+     * @param pageSize
+     * @param callback
+     */
+    void getCommentList(String userId, String pageNo, String pageSize,
+                JsonCallback<BaseResponse<CommentsListBean>> callback);
+
+
 
     /**
      * 上传设备唯一标识符

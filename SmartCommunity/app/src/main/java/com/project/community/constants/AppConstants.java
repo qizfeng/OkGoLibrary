@@ -356,13 +356,13 @@ public class AppConstants {
     public static final String URL_SET_DEFAULT = URL_BASE + "/m/user/address/setDefault";
 
 
-    public static final  String URL_GET_COLLECTION=URL_BASE+"/m/user/collection/index";
+    public static final String URL_GET_COLLECTION = URL_BASE + "/m/user/collection/index";
 
 
     /**
      * 申请商铺
      */
-    public static final String URL_UPDATEISOPEN=URL_BASE+"/m/propleLife/propShops/updateIsOpen";
+    public static final String URL_UPDATEISOPEN = URL_BASE + "/m/propleLife/propShops/updateIsOpen";
 
     /**
      * D75商铺信息首页
@@ -372,12 +372,12 @@ public class AppConstants {
     /**
      * D83商铺详情
      */
-    public static final String URL_PROPSHOPS=URL_BASE+"/m/propleLife/propShops/get";
+    public static final String URL_PROPSHOPS = URL_BASE + "/m/propleLife/propShops/get";
 
     /**
      * D77字账号列表
      */
-    public static final String URL_SUBDOMAINACCOUNTLIST=URL_BASE+"/m/propleLife/shop/account/list";
+    public static final String URL_SUBDOMAINACCOUNTLIST = URL_BASE + "/m/propleLife/shop/account/list";
 
     /**
      * D77子账号删除
@@ -387,23 +387,53 @@ public class AppConstants {
     /**
      * D78子账号详情
      */
-    public static final String URL_GETSUBDOMAINACCOUNTDETAIL=URL_BASE+"/m/propleLife/shop/account/get";
+    public static final String URL_GETSUBDOMAINACCOUNTDETAIL = URL_BASE + "/m/propleLife/shop/account/get";
 
     /**
      * D76添加商品
      */
-    public static final String URL_ADDGOODS=URL_BASE+"/m/propleLife/shop/goods/save";
+    public static final String URL_ADDGOODS = URL_BASE + "/m/propleLife/shop/goods/save";
 
     /**
      * D78子账号添加
      */
-    public static final String URL_ADDSUBDOMAINACCOUNT=URL_BASE+"/m/propleLife/shop/account/save";
+    public static final String URL_ADDSUBDOMAINACCOUNT = URL_BASE + "/m/propleLife/shop/account/save";
 
     /**
      * D80商品管理
      */
-    public static final String URL_GETGOODSMANAGER=URL_BASE+"/m/propleLife/shop/goods/list";
+    public static final String URL_GETGOODSMANAGER = URL_BASE + "/m/propleLife/shop/goods/list";
 
+
+    /**
+     * 获取论坛分类
+     */
+    public final static String URL_CLASSIFY_LIST = URL_BASE + "/m/sys/dict/list";
+
+    /**
+     * 获取论坛分类
+     */
+    public final static String URL_SENDMESSAGE = URL_BASE + "/m/propleLife/article/save";
+
+
+    /**
+     * 获取论坛分类
+     */
+    public final static String URL_GET_BBS_LIST = URL_BASE + "/m/propleLife/article/list";
+
+    /**
+     * 收藏或者取消收藏
+     */
+    public final static String URL_CLLECT_BBS = URL_BASE + "/m/propleLife/collection/collect";
+
+
+    /**
+     * 获取论坛评论列表
+     */
+    public  final  static  String  URL_GET_COMMENT_LIST=URL_BASE + "/m/propleLife/comment/list";
+
+
+    /*==========================*/
     /**
      * D80商品删除
      */
