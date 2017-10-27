@@ -80,6 +80,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         init();
         registerMessageReceiver();
         JpushUtil.setAlias(this);
+        uploadUDID();
 
     }
 
@@ -237,6 +238,21 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         });
     }
 
+    /**
+     * 上传设备唯一标识符
+     */
+    private void uploadUDID(){
+        if(!isLogin(this))
+            return;
+        serverDao.uploadUDID(getUser(this).id, JpushUtil.getDeviceId(this), new JsonCallback<BaseResponse<List>>() {
+            @Override
+            public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
+                LogUtils.e(baseResponse.retData.toString());
+            }
+        });
+    }
+
+
     // 初始化 JPush。如果已经初始化，但没有登录成功，则执行重新登录。
     private void init() {
         JPushInterface.init(getApplicationContext());
@@ -292,8 +308,5 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-    }
+
 }

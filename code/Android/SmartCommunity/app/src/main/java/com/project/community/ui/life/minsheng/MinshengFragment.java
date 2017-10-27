@@ -29,6 +29,7 @@ import com.project.community.constants.AppConstants;
 import com.project.community.listener.RecyclerItemTouchHelperCallBack;
 import com.project.community.model.ModuleModel;
 import com.project.community.model.ShopModel;
+import com.project.community.model.ShopResponse;
 import com.project.community.ui.adapter.MinshengAdapter;
 import com.project.community.ui.adapter.ModuleAdapter;
 import com.project.community.ui.adapter.listener.MinshengAdapterItemListener;
@@ -66,15 +67,6 @@ public class MinshengFragment extends BaseFragment implements SwipeRefreshLayout
     private HorizaontalGridView gridView;
     private List<ModuleModel> moduleModels = new ArrayList<>();
 
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_minsheng);
-//        ButterKnife.bind(this);
-//        initData();
-//    }
-
-
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_minsheng, container, false);
@@ -94,7 +86,7 @@ public class MinshengFragment extends BaseFragment implements SwipeRefreshLayout
                 startActivity(intent);
             }
         });
-        gridView = (HorizaontalGridView) header.findViewById(R.id.gridview);
+        gridView = header.findViewById(R.id.gridview);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setLayoutManager(new NavLinearLayoutManager(getActivity()));
@@ -143,24 +135,28 @@ public class MinshengFragment extends BaseFragment implements SwipeRefreshLayout
         if (!TextUtils.isEmpty(latitute) && !TextUtils.isEmpty(longitute)) {
             locData = longitute + "," + latitute;
         }
-        serverDao.getMinshengIndexData(locData, page, AppConstants.PAGE_SIZE, new JsonCallback<BaseResponse<List<ShopModel>>>() {
+        String userId ="";
+        if(isLogin(getActivity()))
+            userId= getUser(getActivity()).id;
+        serverDao.getMinshengIndexData(userId,locData, page, AppConstants.PAGE_SIZE, new JsonCallback<BaseResponse<ShopResponse>>() {
             @Override
-            public void onSuccess(BaseResponse<List<ShopModel>> baseResponse, Call call, Response response) {
+            public void onSuccess(BaseResponse<ShopResponse> baseResponse, Call call, Response response) {
+                mTvShopCart.setText(baseResponse.retData.cartTotal+"");
                 if (page == 1) {
                     List<ShopModel> data = new ArrayList<>();
-                    data.addAll(baseResponse.retData);
+                    data.addAll(baseResponse.retData.shopList);
                     mAdapter.setNewData(data);
                     mAdapter.setEnableLoadMore(true);
                 } else {
                     //显示没有更多数据
-                    if (baseResponse.retData.size() < AppConstants.PAGE_SIZE) {
+                    if (baseResponse.retData.shopList.size() < AppConstants.PAGE_SIZE) {
                         List<ShopModel> data = new ArrayList<>();
-                        data.addAll(baseResponse.retData);
+                        data.addAll(baseResponse.retData.shopList);
                         mAdapter.addData(data);
                         mAdapter.loadMoreEnd();         //加载完成
                     } else {
                         List<ShopModel> data = new ArrayList<>();
-                        data.addAll(baseResponse.retData);
+                        data.addAll(baseResponse.retData.shopList);
                         mAdapter.addData(data);
                         mAdapter.loadMoreComplete();
                     }
@@ -168,7 +164,7 @@ public class MinshengFragment extends BaseFragment implements SwipeRefreshLayout
             }
 
             @Override
-            public void onAfter(@Nullable BaseResponse<List<ShopModel>> baseResponse, @Nullable Exception e) {
+            public void onAfter(@Nullable BaseResponse<ShopResponse> baseResponse, @Nullable Exception e) {
                 super.onAfter(baseResponse, e);
                 //可能需要移除之前添加的布局
                 mAdapter.removeAllFooterView();

@@ -26,7 +26,6 @@ import com.project.community.model.FamilyModel;
 import com.project.community.model.FamilyPersonModel;
 import com.project.community.model.FileUploadModel;
 import com.project.community.model.GoodsManagerModel;
-import com.project.community.model.GoodsModel;
 import com.project.community.model.GuideModel;
 import com.project.community.model.HotlineModel;
 import com.project.community.model.HouseModel;
@@ -36,6 +35,7 @@ import com.project.community.model.PaymentInfoModel;
 import com.project.community.model.PaymentWayModel;
 import com.project.community.model.SearchModel;
 import com.project.community.model.ShopModel;
+import com.project.community.model.ShopResponse;
 import com.project.community.model.SubdomainAccountModel;
 import com.project.community.model.UserModel;
 import com.project.community.model.WuyeIndexResponse;
@@ -640,13 +640,13 @@ public interface ServerDao {
 
     /**
      * 民生首页
-     *
+//     *
      * @param coordinate 当前定位坐标
      * @param pageNo     页码
      * @param pageSize   分页条数
      * @param callback
      */
-    void getMinshengIndexData(String coordinate, int pageNo, int pageSize, JsonCallback<BaseResponse<List<ShopModel>>> callback);
+    void getMinshengIndexData(String userId,String coordinate, int pageNo, int pageSize, JsonCallback<BaseResponse<ShopResponse>> callback);
 
     /**
      * d27 申请商铺
@@ -851,5 +851,11 @@ public interface ServerDao {
             String status,
             JsonCallback<BaseResponse<List<GoodsManagerModel>>> callback);
 
-
+    /**
+     * 上传设备唯一标识符
+     * @param userId
+     * @param machineCode
+     * @param callback
+     */
+    void uploadUDID(String userId,String machineCode,JsonCallback<BaseResponse<List>>callback);
 }
