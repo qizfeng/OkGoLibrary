@@ -1,15 +1,15 @@
 package com.project.community.Event;
 
 /**
- * author：fangkai on 2017/10/25 14:40
+ * author：fangkai on 2017/10/27 09:35
  * em：617716355@qq.com
  */
 public class AddHouseEvent {
 
-    private String item;
+    private  String item;
 
-    public AddHouseEvent(String item) {
-        this.item = item;
+    public  AddHouseEvent(String item){
+        this.item=item;
     }
 
     public String getItem() {
