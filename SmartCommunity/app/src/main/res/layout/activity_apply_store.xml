@@ -199,20 +199,27 @@
                 <TextView
                     style="@style/apply_store_tv_title"
                     android:text="@string/store_apply_important"
+                    android:gravity="top"
+                    android:paddingTop="12dp"
                     android:layout_width="105dp"
-                    android:layout_height="match_parent" />
+                    android:layout_height="45dp" />
                 <EditText
                     android:id="@+id/apply_store_et_important"
                     style="@style/apply_store_et_title"
                     android:singleLine="false"
                     android:hint="@string/store_apply_important_hit"
+                    android:minHeight="45dp"
+                    android:text=""
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:gravity="top"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp" />
+                    android:layout_height="95dp" />
             </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/white"/>
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:background="@color/white"/>-->
 
             <TextView
                 android:layout_marginTop="10dp"
