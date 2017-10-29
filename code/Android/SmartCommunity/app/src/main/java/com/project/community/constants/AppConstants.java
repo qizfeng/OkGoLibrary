@@ -439,9 +439,14 @@ public class AppConstants {
     public  final  static  String  URL_SAVE_COMMENT=URL_BASE + "/m/propleLife/comment/save";
 
     /**
+     * 删除所有评论
+     */
+    public  final  static  String URL_DEL_ALL_COMMENT =URL_BASE + "/m/user/article/deleteAllComments";
+
+    /**
      * 删除评论
      */
-    public  final  static  String  URL_DEL_COMMENT=URL_BASE + "/m/user/article/deleteAllComments";
+    public  final  static  String URL_DEL_COMMENT =URL_BASE + "/m/propleLife/comment/delete";
 
     /**
      * 获取帖子详情
