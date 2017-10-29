@@ -1,5 +1,7 @@
 package com.project.community.ui.me;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.Toolbar;
@@ -8,12 +10,26 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.library.okgo.callback.JsonCallback;
+import com.library.okgo.model.BaseResponse;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
+import com.project.community.bean.ArticleIndexBean;
+import com.project.community.constants.AppConstants;
+import com.project.community.util.ToastUtil;
+
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.Arrays;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * author：fangkai on 2017/10/24 14:22
@@ -58,6 +74,25 @@ public class MyForumDetailsActivity extends BaseActivity {
     TextView tvDelete;
     @Bind(R.id.tv_anew)
     TextView tvAnew;
+    @Bind(R.id.tv_audit_content)
+    TextView tvAuditContent;
+
+
+    private ArticleIndexBean model;
+
+    /**
+     * @param context
+     * @param articleIndexBean 帖子详情
+     */
+    public static void startActivity(Context context, ArticleIndexBean articleIndexBean) {
+
+        Intent intent = new Intent(context, MyForumDetailsActivity.class);
+
+        intent.putExtra("articleIndexBean", articleIndexBean);
+
+        context.startActivity(intent);
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,18 +105,120 @@ public class MyForumDetailsActivity extends BaseActivity {
     private void setTitles() {
         initToolBar(toolbar, tvTitle, true, "信息详情", R.mipmap.iv_back);
 
+        model = (ArticleIndexBean) getIntent().getSerializableExtra("articleIndexBean");
 
+        if (model == null) {
+            ToastUtil.showToast(this, "参数错误");
+        } else {
+            setView();
+        }
+    }
+
+    private void setView() {
+
+
+        bbsItemName.setText(model.getUserName() + "");
+        bbsItemTime.setText(model.getCreateDate() + "");
+        bbsItemContent.setText(model.getContent() + "");
+        bbsItemComment.setText(model.getComments() + "评论");
+
+        Glide.with(this)
+                .load(AppConstants.HOST + model.getUserPhoto())
+                .placeholder(R.mipmap.d54_tx)
+                .bitmapTransform(new CropCircleTransformation(this))
+                .into(bbsItemHead);
+
+
+        if (model.getIsShow() == 0) {
+            tvAuditContent.setVisibility(View.INVISIBLE);
+            tvAnew.setVisibility(View.GONE);
+        } else {
+            tvAuditContent.setVisibility(View.VISIBLE);
+            tvAuditContent.setText("审核未通过原因：" + model.getAudit_content());
+            tvAnew.setVisibility(View.VISIBLE);
+        }
+
+
+        List<String> result = Arrays.asList(model.getImagesUrl().split(","));
+
+        if (result.size() == 1) {
+
+            bbsItemBigImg.setVisibility(View.VISIBLE);
+            bbsItemLlTwoImg.setVisibility(View.GONE);
+            bbsItemLlThreeImg.setVisibility(View.GONE);
+
+            Glide.with(this)
+                    .load(AppConstants.HOST + result.get(0))
+                    .into(bbsItemBigImg);
+
+        } else if (result.size() == 2) {
+            bbsItemBigImg.setVisibility(View.GONE);
+            bbsItemLlTwoImg.setVisibility(View.VISIBLE);
+            bbsItemLlThreeImg.setVisibility(View.GONE);
+            Glide.with(this)
+                    .load(AppConstants.HOST + result.get(0))
+                    .into(bbsItemLlTwoImg1);
+            Glide.with(this)
+                    .load(AppConstants.HOST + result.get(1))
+                    .into(bbsItemLlTwoImg2);
+
+        } else if (result.size() == 3) {
+            bbsItemBigImg.setVisibility(View.GONE);
+            bbsItemLlTwoImg.setVisibility(View.GONE);
+            bbsItemLlThreeImg.setVisibility(View.VISIBLE);
+
+            Glide.with(this)
+                    .load(AppConstants.HOST + result.get(0))
+                    .into(bbsItemLlThreeImg1);
+            Glide.with(this)
+                    .load(AppConstants.HOST + result.get(1))
+                    .into(bbsItemLlThreeImg2);
+            Glide.with(this)
+                    .load(AppConstants.HOST + result.get(2))
+                    .into(bbsItemLlThreeImg3);
+        } else if (result.size() == 0) {
+            bbsItemBigImg.setVisibility(View.GONE);
+            bbsItemLlTwoImg.setVisibility(View.GONE);
+            bbsItemLlThreeImg.setVisibility(View.GONE);
+        }
     }
 
     @OnClick({R.id.tv_delete, R.id.tv_anew})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_delete:
-                finish();
+                delete();
                 break;
             case R.id.tv_anew:
                 finish();
                 break;
         }
+    }
+
+
+    /**
+     * 删除帖子
+     */
+    private void delete() {
+
+        progressDialog.show();
+        serverDao.delArticle(getUser(this).id, model.getId(), new JsonCallback<BaseResponse<List>>() {
+            @Override
+            public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
+                progressDialog.dismiss();
+                ToastUtil.showToast(MyForumDetailsActivity.this, baseResponse.message + "");
+                if (baseResponse.errNum.equals("0")) {
+                    EventBus.getDefault().post(model);
+                    finish();
+                }
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                progressDialog.dismiss();
+            }
+        });
+
     }
 }

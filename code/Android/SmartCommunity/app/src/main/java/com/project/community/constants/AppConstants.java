@@ -433,6 +433,44 @@ public class AppConstants {
     public  final  static  String  URL_GET_COMMENT_LIST=URL_BASE + "/m/propleLife/comment/list";
 
 
+    /**
+     * 发表评论或者评帖子
+     */
+    public  final  static  String  URL_SAVE_COMMENT=URL_BASE + "/m/propleLife/comment/save";
+
+    /**
+     * 删除评论
+     */
+    public  final  static  String  URL_DEL_COMMENT=URL_BASE + "/m/user/article/deleteAllComments";
+
+    /**
+     * 获取帖子详情
+     */
+    public  final  static  String  URL_GET_ARTICLE=URL_BASE + "/m/propleLife/article/get";
+
+    /**
+     * 搜索
+     */
+    public  final  static  String  URL_GET_BBS_SEARCH=URL_BASE + "/m/propleLife/article/get";
+
+    /**
+     * 发布的帖子
+     */
+
+    public  final  static  String  URL_GET_ARTICLE_INDEX=URL_BASE + "/m/user/article/index";
+
+    /**
+     * 删除帖子
+     */
+    public  final  static  String  URL_DEL_ARTICLE=URL_BASE + "/m/propleLife/article/delete";
+    /**
+     * 我的回帖
+     */
+    public  final  static  String  URL_ARTICLE_REPLIES=URL_BASE + "/m/user/article/replies";
+
+
+
+
     /*==========================*/
     /**
      * D80商品删除

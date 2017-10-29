@@ -1,7 +1,6 @@
 package com.project.community.ui.life.minsheng;
 
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -22,6 +22,7 @@ import com.google.gson.reflect.TypeToken;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
 import com.project.community.Event.BbsCollectEvent;
+import com.project.community.Event.DelCommnetEvent;
 import com.project.community.R;
 import com.project.community.base.BaseFragment;
 import com.project.community.bean.BbsBean;
@@ -30,7 +31,7 @@ import com.project.community.constants.AppConstants;
 import com.project.community.listener.RecycleItemClickListener;
 import com.project.community.ui.adapter.BbsApdater;
 import com.project.community.ui.adapter.BbsCommentsApdater;
-import com.project.community.ui.adapter.CommentsApdater;
+import com.project.community.util.KeyBoardUtil;
 import com.project.community.util.ScreenUtils;
 import com.project.community.util.ToastUtil;
 import com.project.community.view.CommentPopwindow;
@@ -121,8 +122,9 @@ public class BbsFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
         bbsApdater = new BbsApdater(mData, new RecycleItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent = new Intent(getActivity(), ArticleDetailsActivity.class);
-                startActivity(intent);
+                //跳转
+
+                ArticleDetailsActivity.startActivity(getActivity(), bbsApdater.getData().get(position).getId(), id);
 
             }
 
@@ -167,6 +169,47 @@ public class BbsFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
     public void onEventMainThread(BbsCollectEvent event) {
 
         collect(event.getId());
+    }
+
+    /**
+     * 删除评论
+     *
+     * @param event
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(DelCommnetEvent event) {
+        if (popupWindow.isShowing())
+            delComment(event.getCommentsBean());
+    }
+
+    private void delComment(final CommentsListBean.CommentsBean commentsBean) {
+
+        KeyBoardUtil.closeKeybord(getActivity());
+        progressDialog.show();
+        serverDao.delComment(getUser(getActivity()).id, commentsBean.getId(), new JsonCallback<BaseResponse<List>>() {
+            @Override
+            public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
+                progressDialog.dismiss();
+                ToastUtil.showToast(getActivity(), baseResponse.message + "");
+                if (baseResponse.errNum.equals("0")) {
+                    for (int i = 0; i < commentsPopwinAdapter.getData().size(); i++) {
+                        if (commentsPopwinAdapter.getData().get(i).getId().equals(commentsBean.getId())) {
+                            commentsPopwinAdapter.remove(i);
+                        }
+                    }
+                } else {
+
+                }
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                progressDialog.dismiss();
+            }
+        });
+
+
     }
 
 
@@ -306,6 +349,12 @@ public class BbsFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
         });
     }
 
+
+    /**
+     * 表示当前是回复那个人
+     */
+    private CommentsListBean.CommentsBean commentsBean;
+
     /**
      * 弹出评论列表
      *
@@ -319,8 +368,9 @@ public class BbsFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
         commentsPopwinAdapter = new BbsCommentsApdater(comments, new RecycleItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-//                popupWindow.et_comment.setText(getString(R.string.txt_receive) + comments.get(position).userName + ":");
-//                popupWindow.et_comment.setSelection(popupWindow.et_comment.getText().length());
+                commentsBean = comments.get(position);
+                popupWindow.et_comment.setText(getString(R.string.txt_receive) + comments.get(position).getUserName() + ":");
+                popupWindow.et_comment.setSelection(popupWindow.et_comment.getText().length());
             }
 
             @Override
@@ -328,7 +378,12 @@ public class BbsFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
 
             }
         });
-        popupWindow = new CommentPopwindow(getActivity(), null);
+        popupWindow = new CommentPopwindow(getActivity(), new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return false;
+            }
+        });
         popupWindow.lv_container.getLayoutParams().height = (int) (ScreenUtils.getScreenHeight(getActivity()) * 0.8);
         popupWindow.lv_container.setAdapter(commentsPopwinAdapter);
         commentsPopwinAdapter.bindToRecyclerView(popupWindow.lv_container);
@@ -346,9 +401,23 @@ public class BbsFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
         popupWindow.btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (commentsBean != null) {
+                    //表示是回复
+                    if (popupWindow.et_comment.getText().toString().contains(String.valueOf(getString(R.string.txt_receive) + comments.get(position).getUserName() + ":"))) {
+                        replyComment(popupWindow.et_comment.getText().toString(), position);
+
+                    } else {
+                        //发表评论
+                        releaseComment(popupWindow.et_comment.getText().toString(), position);
+                    }
 
 
+                } else {
+                    //发表评论
+                    releaseComment(popupWindow.et_comment.getText().toString(), position);
 
+
+                }
 
             }
         });
@@ -356,7 +425,6 @@ public class BbsFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
 
         //设置评论总数
         commentsPopwinAdapter.setTotalComments(bbsApdater.getData().get(position).getComments());
-
 
         //加载更多
         commentsPopwinAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
@@ -368,31 +436,87 @@ public class BbsFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
         });
 
 
-
         getComment(position);
 
 
-//        comments = new ArrayList<>();
-//        CommentModel comment1 = new CommentModel();
-//        comment1.userId = "張三";
-//        comment1.createDate = DateUtil.getCustomDateStr(DateUtil.millis(), "MM-dd HH:mm");
-//        comment1.content = "張三:這個文章不錯喲";
-//        comment1.photo = "https://d-image.i4.cn/i4web/image//upload/20170112/1484183249877077333.jpg";
-//        CommentModel comment2 = new CommentModel();
-//        comment2.userId = "李三";
-//        comment2.createDate = DateUtil.getCustomDateStr(DateUtil.millis(), "MM-dd HH:mm");
-//        comment2.content = "李四 回复 张三:多谢支持";
-//        comment2.photo = "https://d-image.i4.cn/i4web/image//upload/20170111/1484114886498013658.jpg";
-//        CommentModel comment3 = new CommentModel();
-//        comment3.userId = "王五";
-//        comment3.createDate = DateUtil.getCustomDateStr(DateUtil.millis(), "MM-dd HH:mm");
-//        comment3.content = "王五:呵呵";
-//        comment3.photo = "https://d-image.i4.cn/i4web/image//upload/20170112/1484185403611050214.jpg";
-//        comments.add(comment1);
-//        comments.add(comment2);
-//        comments.add(comment3);
+    }
 
 
+    /**
+     * 发表评论
+     *
+     * @param string
+     * @param position
+     */
+    private void releaseComment(String string, final int position) {
+        KeyBoardUtil.closeKeybord(getActivity());
+        progressDialog.show();
+        serverDao.saveComment(getUser(getActivity()).id, mData.get(position).getId(),
+                id, string, "", new JsonCallback<BaseResponse<List>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
+                        progressDialog.dismiss();
+                        ToastUtil.showToast(getActivity(), baseResponse.message + "");
+                        if (baseResponse.errNum.equals("0")) {
+                            popupWindow.et_comment.setText("");
+                            comments.clear();
+                            commentPage = 1;
+
+                            mData.get(position).setComments(mData.get(position).getComments() + 1);
+                            bbsApdater.notifyDataSetChanged();
+
+
+                            getComment(position);
+                        } else {
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        progressDialog.dismiss();
+                    }
+                });
+    }
+
+    /**
+     * 回复
+     *
+     * @param string
+     * @param position
+     */
+    private void replyComment(String string, final int position) {
+        KeyBoardUtil.closeKeybord(getActivity());
+        progressDialog.show();
+        serverDao.saveComment(getUser(getActivity()).id, mData.get(position).getId(),
+                id, string.replace(String.valueOf(getString(R.string.txt_receive) + comments.get(position).getUserName() + ":"), ""),
+                commentsBean.getUserId(), new JsonCallback<BaseResponse<List>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
+
+                        progressDialog.dismiss();
+                        ToastUtil.showToast(getActivity(), baseResponse.message + "");
+                        if (baseResponse.errNum.equals("0")) {
+                            popupWindow.et_comment.setText("");
+                            comments.clear();
+                            commentPage = 1;
+                            mData.get(position).setComments(mData.get(position).getComments() + 1);
+                            bbsApdater.notifyDataSetChanged();
+                            getComment(position);
+                        } else {
+
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        progressDialog.dismiss();
+                    }
+                });
     }
 
 
@@ -401,7 +525,7 @@ public class BbsFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
      */
     private void getComment(int position) {
         progressDialog.show();
-        serverDao.getCommentList(bbsApdater.getData().get(position).getId(), String.valueOf(page),
+        serverDao.getCommentList(bbsApdater.getData().get(position).getId(), String.valueOf(commentPage),
                 String.valueOf(AppConstants.PAGE_SIZE),
                 new JsonCallback<BaseResponse<CommentsListBean>>() {
                     @Override
@@ -409,10 +533,10 @@ public class BbsFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
                         progressDialog.dismiss();
 
 
-                        Log.e("tag_f" ,commentsListBeanBaseResponse.toString()+"");
+                        Log.e("tag_f", commentsListBeanBaseResponse.toString() + "");
 
                         comments.addAll(commentsListBeanBaseResponse.retData.getComments());
-                        if (page == 1) {
+                        if (commentPage == 1) {
                             commentsPopwinAdapter.setNewData(comments);
                             commentsPopwinAdapter.setEnableLoadMore(true);
                         } else {
@@ -435,7 +559,7 @@ public class BbsFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
         );
 
         if (comments.size() == 0) {
-            commentsPopwinAdapter.setNewData(null);
+            commentsPopwinAdapter.setNewData(comments);
             commentsPopwinAdapter.setEmptyView(R.layout.empty_view);
             TextView textView = (TextView) commentsPopwinAdapter.getEmptyView().findViewById(R.id.tv_tips);
             textView.setText(getString(R.string.empty_no_comment));

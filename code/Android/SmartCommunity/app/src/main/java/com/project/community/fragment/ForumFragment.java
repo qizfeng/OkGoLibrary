@@ -88,11 +88,13 @@ public class ForumFragment extends BaseFragment {
 
 
         forumAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(getActivity(), ArticleDetailsActivity.class);
-                startActivity(intent);
-            }
+                    @Override
+                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+//                        Intent intent = new Intent(getActivity(), ArticleDetailsActivity.class);
+//                        startActivity(intent);
+                        ArticleDetailsActivity.startActivity(getActivity(), forumAdapter.getData().get(position).getArticleId(), "");
+
+                    }
         });
 
 
@@ -102,6 +104,7 @@ public class ForumFragment extends BaseFragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        page=1;
                         mData.clear();
                         forumAdapter.notifyDataSetChanged();
                         getForumList();

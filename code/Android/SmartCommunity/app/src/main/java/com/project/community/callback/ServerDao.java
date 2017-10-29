@@ -4,6 +4,9 @@ import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
 import com.library.okgo.model.HttpParams;
 import com.project.community.bean.AddressListBean;
+import com.project.community.bean.ArticleBean;
+import com.project.community.bean.ArticleIndexBean;
+import com.project.community.bean.ArticleRepliesBean;
 import com.project.community.bean.ClassifyBaseBean;
 import com.project.community.bean.CommentsListBean;
 import com.project.community.bean.CommunityBean;
@@ -38,8 +41,8 @@ import com.project.community.model.PaymentWayModel;
 import com.project.community.model.SearchModel;
 import com.project.community.model.ShopIndexModel;
 import com.project.community.model.ShopModel;
-import com.project.community.model.ShoppingCartModel;
 import com.project.community.model.ShopResponse;
+import com.project.community.model.ShoppingCartModel;
 import com.project.community.model.SubdomainAccountModel;
 import com.project.community.model.UserModel;
 import com.project.community.model.WuyeIndexResponse;
@@ -644,13 +647,14 @@ public interface ServerDao {
 
     /**
      * 民生首页
-//     *
+     * //     *
+     *
      * @param coordinate 当前定位坐标
      * @param pageNo     页码
      * @param pageSize   分页条数
      * @param callback
      */
-    void getMinshengIndexData(String userId,String coordinate, int pageNo, int pageSize, JsonCallback<BaseResponse<ShopResponse>> callback);
+    void getMinshengIndexData(String userId, String coordinate, int pageNo, int pageSize, JsonCallback<BaseResponse<ShopResponse>> callback);
 
     /**
      * d27 申请商铺
@@ -804,35 +808,36 @@ public interface ServerDao {
      * @param childId
      * @param callback
      */
-    void delSubdomainsAccount(String userId, String childId,JsonCallback<BaseResponse<List>> callback);
+    void delSubdomainsAccount(String userId, String childId, JsonCallback<BaseResponse<List>> callback);
 
 
     /**
      * D76添加商品
+     * <p>
+     * <<<<<<< .mine
      *
-<<<<<<< .mine
      * @param userId        用户id
      * @param shopId        店铺id
      * @param name          商铺名称
      * @param images        图片
      * @param description   描述
      * @param price         价格
-||||||| .r465
-     * @param userId 用户id
-     * @param shopId 店铺id
-     * @param name 商铺名称
-     * @param images 图片
-     * @param description 描述
-     * @param price 价格
-=======
-     * @param userId 用户id
-     * @param goodId 保存不需要,修改必填
-     * @param shopId 店铺id
-     * @param name 商铺名称
-     * @param images 图片
-     * @param description 描述
-     * @param price 价格
->>>>>>> .r489
+     *                      ||||||| .r465
+     * @param userId        用户id
+     * @param shopId        店铺id
+     * @param name          商铺名称
+     * @param images        图片
+     * @param description   描述
+     * @param price         价格
+     *                      =======
+     * @param userId        用户id
+     * @param goodId        保存不需要,修改必填
+     * @param shopId        店铺id
+     * @param name          商铺名称
+     * @param images        图片
+     * @param description   描述
+     * @param price         价格
+     *                      >>>>>>> .r489
      * @param originalPrice 原始价格
      * @param unit          单位
      * @param stock         库存
@@ -929,6 +934,7 @@ public interface ServerDao {
 
     /**
      * 获取帖子列表
+     *
      * @param userId
      * @param pageNo
      * @param pageSize
@@ -942,33 +948,35 @@ public interface ServerDao {
 
     /**
      * 收藏或者取消收藏
+     *
      * @param userId
      * @param articleId
      * @param callback
      */
     void collectBbs(String userId, String articleId,
-                JsonCallback<BaseResponse<Object>> callback);
+                    JsonCallback<BaseResponse<Object>> callback);
 
 
     /**
      * 获取论坛评论
+     *
      * @param userId
      * @param pageNo
      * @param pageSize
      * @param callback
      */
     void getCommentList(String userId, String pageNo, String pageSize,
-                JsonCallback<BaseResponse<CommentsListBean>> callback);
-
+                        JsonCallback<BaseResponse<CommentsListBean>> callback);
 
 
     /**
      * 上传设备唯一标识符
+     *
      * @param userId
      * @param machineCode
      * @param callback
      */
-    void uploadUDID(String userId,String machineCode,JsonCallback<BaseResponse<List>>callback);
+    void uploadUDID(String userId, String machineCode, JsonCallback<BaseResponse<List>> callback);
 
     /**
      * D78上下架
@@ -998,6 +1006,115 @@ public interface ServerDao {
     void delCart(
             String cartId,
             JsonCallback<BaseResponse<List>> callback);
+
+
+    /**
+     * 评论或者会回复
+     *
+     * @param userId
+     * @param articleId
+     * @param categoryId
+     * @param content
+     * @param targetId
+     * @param callback
+     */
+    void saveComment(
+            String userId,
+            String articleId,
+            String categoryId,
+            String content,
+            String targetId,
+            JsonCallback<BaseResponse<List>> callback);
+
+
+    /**
+     * 删除评论
+     *
+     * @param userId
+     * @param articleId 论坛ID
+     * @param callback
+     */
+    void delAllComment(
+            String userId,
+            String articleId,
+            JsonCallback<BaseResponse<List>> callback);
+
+    /**
+     * 删除评论
+     *
+     * @param userId
+     * @param commentId
+     * @param callback
+     */
+    void delComment(
+            String userId,
+            String commentId,
+            JsonCallback<BaseResponse<List>> callback);
+
+    /**
+     * 获取帖子详情
+     *
+     * @param userId
+     * @param articleId
+     * @param callback
+     */
+    void getArticle(
+            String userId,
+            String articleId,
+            JsonCallback<BaseResponse<ArticleBean>> callback);
+
+    /**
+     * 搜索帖子
+     *
+     * @param userId
+     * @param pageNo
+     * @param pageSize
+     * @param categoryId
+     * @param keywords
+     * @param callback
+     */
+    void getBbsSearche(
+            String userId,
+            String pageNo,
+            String pageSize,
+            String categoryId,
+            String keywords,
+            JsonCallback<BaseResponse<ArticleBean>> callback);
+
+
+    /**
+     * 我的发帖
+     *
+     * @param userId
+     * @param pageNo
+     * @param pageSize
+     * @param callback
+     */
+    void getArticleIndex(
+            String userId,
+            String pageNo,
+            String pageSize,
+            JsonCallback<BaseResponse<List<ArticleIndexBean>>> callback);
+
+
+    /**
+     * 删除帖子
+     *
+     * @param userId
+     * @param articleId
+     * @param callback
+     */
+    void delArticle(
+            String userId,
+            String articleId,
+            JsonCallback<BaseResponse<List>> callback);
+
+
+    void getArticleReplies(
+            String userId,
+            String pageNo,
+            String pageSize,
+            JsonCallback<BaseResponse<List<ArticleRepliesBean>>> callback);
 
 
 }

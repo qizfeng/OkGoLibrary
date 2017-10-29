@@ -11,8 +11,10 @@ import com.library.okgo.model.HttpParams;
 import com.library.okgo.utils.ToastUtils;
 import com.project.community.R;
 import com.project.community.bean.AddressListBean;
+import com.project.community.bean.ArticleBean;
+import com.project.community.bean.ArticleIndexBean;
+import com.project.community.bean.ArticleRepliesBean;
 import com.project.community.bean.ClassifyBaseBean;
-import com.project.community.bean.ClassifyListBean;
 import com.project.community.bean.CommentsListBean;
 import com.project.community.bean.CommunityBean;
 import com.project.community.bean.ForumListBean;
@@ -47,8 +49,8 @@ import com.project.community.model.PaymentWayModel;
 import com.project.community.model.SearchModel;
 import com.project.community.model.ShopIndexModel;
 import com.project.community.model.ShopModel;
-import com.project.community.model.ShoppingCartModel;
 import com.project.community.model.ShopResponse;
+import com.project.community.model.ShoppingCartModel;
 import com.project.community.model.SubdomainAccountModel;
 import com.project.community.model.UserModel;
 import com.project.community.model.WuyeIndexResponse;
@@ -712,15 +714,16 @@ public class ServerDaoImpl implements ServerDao {
     }
 
     @Override
-    public void getMinshengIndexData(String userId,String coordinate, int pageNo, int pageSize, JsonCallback<BaseResponse<ShopResponse>> callback) {
+    public void getMinshengIndexData(String userId, String coordinate, int pageNo, int pageSize, JsonCallback<BaseResponse<ShopResponse>> callback) {
         OkGo.post(AppConstants.URL_MINSHENG_INDEX)
                 .tag(mContext)
-                .params("userId",userId)
+                .params("userId", userId)
                 .params("coordinate", coordinate)
                 .params("pageNo", pageNo)
                 .params("pageSize", pageSize)
                 .execute(callback);
     }
+
     @Override
     public void propShops(
             String id,
@@ -770,6 +773,7 @@ public class ServerDaoImpl implements ServerDao {
                 .params("addressId", addressId)
                 .execute(callback);
     }
+
     @Override
     public void updateIsOpen(String userId, JsonCallback<BaseResponse<List<List>>> callback) {
         OkGo.post(AppConstants.URL_UPDATEISOPEN)
@@ -885,7 +889,7 @@ public class ServerDaoImpl implements ServerDao {
     }
 
     @Override
-    public void addGoods(String userId,String goodId, String shopId, String name, String images, String description, String price, String originalPrice, String unit, String stock, JsonCallback<BaseResponse<List>> callback) {
+    public void addGoods(String userId, String goodId, String shopId, String name, String images, String description, String price, String originalPrice, String unit, String stock, JsonCallback<BaseResponse<List>> callback) {
         OkGo.post(AppConstants.URL_ADDGOODS)
                 .tag(mContext)
                 .params("userId", userId)
@@ -902,7 +906,7 @@ public class ServerDaoImpl implements ServerDao {
     }
 
     @Override
-    public void addSubdomainsAccount(String userId,String id, String shopId, String name, String phone,int sumMoney, int addGoods, int goodsMge, int orderMge, int shopInfo, int sumOrder, JsonCallback<BaseResponse<List>> callback) {
+    public void addSubdomainsAccount(String userId, String id, String shopId, String name, String phone, int sumMoney, int addGoods, int goodsMge, int orderMge, int shopInfo, int sumOrder, JsonCallback<BaseResponse<List>> callback) {
         OkGo.post(AppConstants.URL_ADDSUBDOMAINACCOUNT)
                 .tag(mContext)
                 .params("userId", userId)
@@ -1019,6 +1023,93 @@ public class ServerDaoImpl implements ServerDao {
     }
 
     @Override
+    public void saveComment(String userId, String articleId, String categoryId,
+                            String content, String targetId, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.URL_SAVE_COMMENT)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("articleId", articleId)
+                .params("categoryId", categoryId)
+                .params("content", content)
+                .params("targetId", targetId)
+                .execute(callback);
+    }
+
+    @Override
+    public void delAllComment(String userId, String articleId, JsonCallback<BaseResponse<List>> callback) {
+
+        OkGo.get(AppConstants.URL_DEL_COMMENT)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("articleId", articleId)
+                .execute(callback);
+
+    }
+
+    @Override
+    public void delComment(String userId, String commentId, JsonCallback<BaseResponse<List>> callback) {
+
+        OkGo.get(AppConstants.URL_DEL_COMMENT)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("articleId", commentId)
+                .execute(callback);
+    }
+
+    @Override
+    public void getArticle(String userId, String articleId, JsonCallback<BaseResponse<ArticleBean>> callback) {
+        OkGo.get(AppConstants.URL_GET_ARTICLE)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("articleId", articleId)
+                .execute(callback);
+    }
+
+    @Override
+    public void getBbsSearche(String userId, String pageNo, String pageSize,
+                              String categoryId, String keywords,
+                              JsonCallback<BaseResponse<ArticleBean>> callback) {
+        OkGo.get(AppConstants.URL_GET_ARTICLE)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("pageNo", pageNo)
+                .params("pageSize", pageSize)
+                .params("categoryId", categoryId)
+                .params("keywords", keywords)
+                .execute(callback);
+    }
+
+    @Override
+    public void getArticleIndex(String userId, String pageNo, String pageSize, JsonCallback<BaseResponse<List<ArticleIndexBean>>> callback) {
+        OkGo.get(AppConstants.URL_GET_ARTICLE_INDEX)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("pageNo", pageNo)
+                .params("pageSize", pageSize)
+                .execute(callback);
+    }
+
+    @Override
+    public void delArticle(String userId, String articleId, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.URL_DEL_ARTICLE)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("articleId", articleId)
+                .execute(callback);
+    }
+
+    @Override
+    public void getArticleReplies(String userId, String pageNo,
+                                  String pageSize, JsonCallback<BaseResponse<List<ArticleRepliesBean>>> callback) {
+        OkGo.get(AppConstants.URL_ARTICLE_REPLIES)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("pageNo", pageNo)
+                .params("pageSize", pageSize)
+                .execute(callback);
+    }
+
+    @Override
     public void delGoods(String userId, String goodId, JsonCallback<BaseResponse<List>> callback) {
         OkGo.post(AppConstants.URL_DELGOODS)
                 .tag(mContext)
@@ -1037,12 +1128,13 @@ public class ServerDaoImpl implements ServerDao {
             params.put("userId", userId);
         }
         params.put("type", type);
-        params.put("categoryType","2");
+        params.put("categoryType", "2");
         OkGo.post(AppConstants.URL_TYPE_TOPIC)
                 .tag(mContext)
                 .params(params)
                 .execute(callback);
     }
+
     @Override
     public void uploadUDID(String userId, String machineCode, JsonCallback<BaseResponse<List>> callback) {
         checkNet();

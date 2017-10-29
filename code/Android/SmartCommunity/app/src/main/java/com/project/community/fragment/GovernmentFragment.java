@@ -95,6 +95,7 @@ public class GovernmentFragment extends BaseFragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        page=1;
                         mData.clear();
                         governmentAdapter.notifyDataSetChanged();
                         getGovernment();

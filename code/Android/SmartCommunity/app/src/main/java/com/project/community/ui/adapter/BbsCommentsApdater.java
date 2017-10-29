@@ -12,12 +12,15 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.project.community.Event.DelCommnetEvent;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.bean.CommentsListBean;
 import com.project.community.constants.AppConstants;
 import com.project.community.listener.RecycleItemClickListener;
 import com.project.community.util.StringUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -52,6 +55,14 @@ public class BbsCommentsApdater extends BaseQuickAdapter<CommentsListBean.Commen
                 itemClickListener.onCustomClick(v, baseViewHolder.getLayoutPosition());
             }
         });
+
+        baseViewHolder.getView(R.id.iv_delete).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EventBus.getDefault().post(new DelCommnetEvent(model));
+            }
+        });
+
 
 
         Glide.with(mContext)
