@@ -405,4 +405,6 @@
     <string name="address_import_detailed_address">请输入详细地址</string>
     <string name="save">保存</string>
     <string name="set_as_default_address">设为默认地址</string>
+    <string name="activity_bbs_search">论坛搜索</string>
+    <string name="text_all_reply">删除全部评论</string>
 </resources>

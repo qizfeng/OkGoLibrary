@@ -1,19 +1,18 @@
 package com.project.community.ui.life.minsheng;
 
-import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,24 +22,25 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
 import com.library.okgo.utils.KeyBoardUtils;
-import com.library.okgo.utils.LogUtils;
+import com.project.community.Event.DelCommnetEvent;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
+import com.project.community.bean.ArticleBean;
+import com.project.community.bean.CommentsListBean;
 import com.project.community.constants.AppConstants;
 import com.project.community.listener.RecycleItemClickListener;
-import com.project.community.model.ArticleModel;
-import com.project.community.model.CommentModel;
-import com.project.community.ui.adapter.ArticleDetailsImagsAdapter;
-import com.project.community.ui.adapter.CommentsApdater;
-import com.project.community.ui.life.TopicDetailActivity;
+import com.project.community.ui.adapter.ArticleDetailsAdapter;
+import com.project.community.util.KeyBoardUtil;
+import com.project.community.util.ToastUtil;
 import com.project.community.view.SpacesItemDecoration;
 import com.project.community.view.VpSwipeRefreshLayout;
 import com.umeng.socialize.ShareAction;
@@ -51,11 +51,17 @@ import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
 import com.umeng.socialize.shareboard.ShareBoardConfig;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import okhttp3.Call;
 import okhttp3.Response;
 
@@ -85,51 +91,236 @@ public class ArticleDetailsActivity extends BaseActivity implements SwipeRefresh
     private MenuItem menuItem;
     private Dialog mDialog;
     private View header;
-    private CommentsApdater mAdapter;
-    private List<CommentModel> comments = new ArrayList<>();//评论列表
+    private ArticleDetailsAdapter mAdapter;
+    private List<CommentsListBean.CommentsBean> comments = new ArrayList<>();//评论列表
     private String recStr = "";//回复评论
     private String targetId;//回復人id
 
-    private ImageView mIvHeadHeader; //头像
-    private TextView mTvHeadName,mTvHeadDate,mTvHeadComment,mTvCommentsTips;//头部名字,日期,内容
-    private GridView mGvImgs;
-    private List<String> mImages = new ArrayList<>();
-    ArticleDetailsImagsAdapter grid_photoAdapter;
+//    private ImageView mIvHeadHeader; //头像
+//    private TextView mTvHeadName, mTvHeadDate, mTvHeadComment, mTvCommentsTips;//头部名字,日期,内容
+//    private GridView mGvImgs;
+//    private List<String> mImages = new ArrayList<>();
+//    ArticleDetailsImagsAdapter grid_photoAdapter;
+
+
+    private  String categoryId;
+
+    private String id = null;
+
+
+    private int page = 1;
+    /**
+     * 帖子详情
+     */
+    private ArticleBean articleBean = new ArticleBean();
+
+    /**
+     * @param context
+     * @param id      帖子id
+     */
+    public static void startActivity(Context context, String id,String categoryId) {
+
+        Intent intent = new Intent(context, ArticleDetailsActivity.class);
+
+        intent.putExtra("id", id);
+        intent.putExtra("categoryId", categoryId);
+
+        context.startActivity(intent);
+
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article_details);
         ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
         initData();
+    }
+
+
+    /**
+     * 删除评论
+     *
+     * @param event
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(DelCommnetEvent event) {
+            delComment(event.getCommentsBean());
+    }
+
+    private void delComment(final CommentsListBean.CommentsBean commentsBean) {
+
+        KeyBoardUtil.closeKeybord(this);
+        progressDialog.show();
+        serverDao.delComment(getUser(this).id, commentsBean.getId(), new JsonCallback<BaseResponse<List>>() {
+            @Override
+            public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
+                progressDialog.dismiss();
+                ToastUtil.showToast(ArticleDetailsActivity.this, baseResponse.message + "");
+                if (baseResponse.errNum.equals("0")) {
+                    for (int i = 0; i < mAdapter.getData().size(); i++) {
+                        if (mAdapter.getData().get(i).getId().equals(commentsBean.getId())) {
+                            mAdapter.remove(i);
+                        }
+                    }
+                } else {
+                }
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                progressDialog.dismiss();
+            }
+        });
+
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
     }
 
     private void initData() {
         initToolBar(mToolBar, mTvTitle, true, getString(R.string.articledetails_title), R.mipmap.iv_back);
-        header = LayoutInflater.from(this).inflate(R.layout.layout_header_article_detail, null);
-        mIvHeadHeader = (ImageView) header.findViewById(R.id.iv_head_header);
-        mTvHeadName = (TextView) header.findViewById(R.id.tv_head_name);
-        mTvHeadDate = (TextView) header.findViewById(R.id.tv_head_date);
-        mTvHeadComment = (TextView) header.findViewById(R.id.tv_head_comment);
-        mTvCommentsTips = (TextView) header.findViewById(R.id.tv_comment_tips);
-        mGvImgs = (GridView) header.findViewById(R.id.gv_imgs);
 
-        for (int i = 0; i < 6; i++) {
-            mImages.add("");
+
+        id = getIntent().getStringExtra("id");
+        categoryId = getIntent().getStringExtra("categoryId");
+
+        if (id != null)
+            getArticleDetails();
+        else
+            ToastUtil.showToast(this, "参数错误");
+
+    }
+
+
+    /**
+     * 获取帖子详情
+     */
+    private void getArticleDetails() {
+
+
+        progressDialog.show();
+        serverDao.getArticle(getUser(this).id, id, new JsonCallback<BaseResponse<ArticleBean>>() {
+            @Override
+            public void onSuccess(BaseResponse<ArticleBean> baseResponse, Call call, Response response) {
+                progressDialog.dismiss();
+                if (baseResponse.errNum.equals("0")) {
+                    articleBean = baseResponse.retData;
+                    setView();
+                } else {
+
+                    ToastUtil.showToast(ArticleDetailsActivity.this, baseResponse.message);
+                }
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                progressDialog.dismiss();
+            }
+        });
+
+
+    }
+
+    private void setView() {
+        header = LayoutInflater.from(this).inflate(R.layout.header_article_detail, null);
+//        mIvHeadHeader = (ImageView) header.findViewById(R.id.iv_head_header);
+//        mTvHeadName = (TextView) header.findViewById(R.id.tv_head_name);
+//        mTvHeadDate = (TextView) header.findViewById(R.id.tv_head_date);
+//        mTvHeadComment = (TextView) header.findViewById(R.id.tv_head_comment);
+//        mTvCommentsTips = (TextView) header.findViewById(R.id.tv_comment_tips);
+//        mGvImgs = (GridView) header.findViewById(R.id.gv_imgs);
+
+
+        TextView textView = (TextView) header.findViewById(R.id.bbs_item_name);
+        textView.setText(articleBean.getUserName() + "");
+        TextView textView1 = (TextView) header.findViewById(R.id.bbs_item_time);
+        textView1.setText(articleBean.getCreateDate() + "");
+        TextView textView2 = (TextView) header.findViewById(R.id.bbs_item_content);
+        textView2.setText(articleBean.getContent() + "");
+        TextView textView3 = (TextView) header.findViewById(R.id.bbs_item_comment);
+        textView3.setText(articleBean.getComments() + "评论");
+
+
+        Glide.with(this)
+                .load(AppConstants.HOST + articleBean.getUserPhoto())
+                .placeholder(R.mipmap.d54_tx)
+                .bitmapTransform(new CropCircleTransformation(this))
+                .into((ImageView) header.findViewById(R.id.bbs_item_head));
+
+
+        if (menuItem != null)
+            if (articleBean.getStatus() != 0) {
+
+                menuItem.setIcon(R.mipmap.d4_shoucang1_p);
+            } else {
+                menuItem.setIcon(R.mipmap.d4_shoucang1);
+            }
+
+
+        List<String> result = Arrays.asList(articleBean.getImageUrl().split(","));
+
+        if (result.size() == 1) {
+
+            header.findViewById(R.id.bbs_item_big_img).setVisibility(View.VISIBLE);
+            header.findViewById(R.id.bbs_item_ll_two_img).setVisibility(View.GONE);
+            header.findViewById(R.id.bbs_item_ll_three_img).setVisibility(View.GONE);
+
+            Glide.with(this)
+                    .load(AppConstants.HOST + result.get(0))
+                    .into((ImageView) header.findViewById(R.id.bbs_item_big_img));
+
+        } else if (result.size() == 2) {
+            header.findViewById(R.id.bbs_item_big_img).setVisibility(View.GONE);
+            header.findViewById(R.id.bbs_item_ll_two_img).setVisibility(View.VISIBLE);
+            header.findViewById(R.id.bbs_item_ll_three_img).setVisibility(View.GONE);
+            Glide.with(this)
+                    .load(AppConstants.HOST + result.get(0))
+                    .into((ImageView) header.findViewById(R.id.bbs_item_ll_two_img_1));
+            Glide.with(this)
+                    .load(AppConstants.HOST + result.get(1))
+                    .into((ImageView) header.findViewById(R.id.bbs_item_ll_two_img_2));
+
+        } else if (result.size() == 3) {
+            header.findViewById(R.id.bbs_item_big_img).setVisibility(View.GONE);
+            header.findViewById(R.id.bbs_item_ll_two_img).setVisibility(View.GONE);
+            header.findViewById(R.id.bbs_item_ll_three_img).setVisibility(View.VISIBLE);
+
+            Glide.with(this)
+                    .load(AppConstants.HOST + result.get(0))
+                    .into((ImageView) header.findViewById(R.id.bbs_item_ll_three_img_1));
+            Glide.with(this)
+                    .load(AppConstants.HOST + result.get(1))
+                    .into((ImageView) header.findViewById(R.id.bbs_item_ll_three_img_2));
+            Glide.with(this)
+                    .load(AppConstants.HOST + result.get(2))
+                    .into((ImageView) header.findViewById(R.id.bbs_item_ll_three_img_3));
+        } else if (result.size() == 0) {
+            header.findViewById(R.id.bbs_item_big_img).setVisibility(View.GONE);
+            header.findViewById(R.id.bbs_item_ll_two_img).setVisibility(View.GONE);
+            header.findViewById(R.id.bbs_item_ll_three_img).setVisibility(View.GONE);
         }
 
 
+        setAdapter();
 
-        for (int i = 0; i < 10; i++) {
-            CommentModel commentModel = new CommentModel();
-            commentModel.articleId="1";
-            commentModel.id="2";
-            commentModel.userId="2";
-            commentModel.userName="西贝";
-            commentModel.createDate="151515151";
-            commentModel.content="吐鲁番水库正在启动中吐鲁番水库正在启动中吐鲁番水库正在启动中吐鲁番水库正在启动中";
-            comments.add(commentModel);
-        }
+
+    }
+
+    private void setAdapter() {
+
+        //        for (int i = 0; i < 6; i++) {
+//            mImages.add("");
+//        }
+
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         SpacesItemDecoration decoration = new SpacesItemDecoration(0, false);
@@ -137,15 +328,17 @@ public class ArticleDetailsActivity extends BaseActivity implements SwipeRefresh
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN);
         onRefresh();
-        mAdapter = new CommentsApdater(comments, new RecycleItemClickListener() {
+        mAdapter = new ArticleDetailsAdapter(comments, new RecycleItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 position = position - 1;//去掉头部
+                commentsBean = comments.get(position);
                 mBottomLayout.setVisibility(View.VISIBLE);
-                recStr = getString(R.string.txt_receive) + comments.get(position).userName + ":";
-                targetId = comments.get(position).userId;
+                recStr = getString(R.string.txt_receive) + comments.get(position).getUserName() + ":";
+                targetId = comments.get(position).getId();
                 mEtInput.setText(recStr);
                 mEtInput.setSelection(mEtInput.getText().length());
+
             }
 
             @Override
@@ -157,8 +350,8 @@ public class ArticleDetailsActivity extends BaseActivity implements SwipeRefresh
         recyclerView.setAdapter(mAdapter);
         mAdapter.addHeaderView(header);
         mBtnSend.setOnClickListener(this);
-        grid_photoAdapter=new ArticleDetailsImagsAdapter(this,mImages);
-        mGvImgs.setAdapter(grid_photoAdapter);
+//        grid_photoAdapter = new ArticleDetailsImagsAdapter(this, mImages);
+//        mGvImgs.setAdapter(grid_photoAdapter);
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -179,6 +372,50 @@ public class ArticleDetailsActivity extends BaseActivity implements SwipeRefresh
         });
 
         recyclerView.scrollToPosition(0);
+
+        //加载更多
+        mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+                page++;
+                getComment();
+            }
+        });
+        getComment();
+    }
+
+    private void getComment() {
+        serverDao.getCommentList(id, String.valueOf(page),
+                String.valueOf(AppConstants.PAGE_SIZE),
+                new JsonCallback<BaseResponse<CommentsListBean>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<CommentsListBean> commentsListBeanBaseResponse, Call call, Response response) {
+                        setRefreshing(false);
+
+                        Log.e("tag_f", commentsListBeanBaseResponse.toString() + "");
+
+                        comments.addAll(commentsListBeanBaseResponse.retData.getComments());
+                        if (page == 1) {
+                            mAdapter.setNewData(comments);
+                            mAdapter.setEnableLoadMore(true);
+                        } else {
+                            mAdapter.addData(commentsListBeanBaseResponse.retData.getComments());
+                            mAdapter.loadMoreComplete();
+                        }
+
+                        if (commentsListBeanBaseResponse.retData.getComments().size() < AppConstants.PAGE_SIZE)
+                            mAdapter.loadMoreEnd();
+
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        Log.e("tag_f", e.getMessage().toString() + "");
+                        setRefreshing(false);
+                    }
+                }
+        );
     }
 
     private void loadData() {
@@ -231,9 +468,14 @@ public class ArticleDetailsActivity extends BaseActivity implements SwipeRefresh
     @Override
     public void onRefresh() {
         setRefreshing(true);
-        loadData();
-        setRefreshing(false);
+        if (mAdapter != null) {
+            comments.clear();
+            mAdapter.notifyDataSetChanged();
+            getComment();
+        }
+
     }
+
     public void showAlertDialog(final int position) {
 //        mDialog = new AlertDialog.Builder(this).create();
         mDialog = new Dialog(this);
@@ -267,7 +509,7 @@ public class ArticleDetailsActivity extends BaseActivity implements SwipeRefresh
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!isLogin(ArticleDetailsActivity.this)){
+                if (!isLogin(ArticleDetailsActivity.this)) {
                     showToast(getString(R.string.toast_no_login));
                     return;
                 }
@@ -278,28 +520,113 @@ public class ArticleDetailsActivity extends BaseActivity implements SwipeRefresh
 
     }
 
+    /**
+     * 表示当前是回复那个人
+     */
+    private CommentsListBean.CommentsBean commentsBean;
+
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_send:
 
-                if (TextUtils.isEmpty(recStr)) {
-                    if (TextUtils.isEmpty(mEtInput.getText().toString())) {
-                        return;
+//                if (TextUtils.isEmpty(recStr)) {
+//                    if (TextUtils.isEmpty(mEtInput.getText().toString())) {
+//                        return;
+//                    }
+////                    doComment(artId, mEtInput.getText().toString(), "");
+//                } else {
+//                    if (!mEtInput.getText().toString().startsWith(recStr))
+//                        targetId = "";
+//                    String content = mEtInput.getText().toString().replace(recStr, "");
+//                    if (TextUtils.isEmpty(content)) {
+//                        return;
+//                    }
+////                    doComment(artId, content, targetId);
+//                }
+////                recyclerView.smoothScrollToPosition(mAdapter.getItemCount() - 1);
+                if (commentsBean != null) {
+                    //表示是回复
+                    if (mEtInput.getText().toString().contains(String.valueOf(getString(R.string.txt_receive) + commentsBean.getUserName() + ":"))) {
+                        replyComment(mEtInput.getText().toString());
+
+                    } else {
+                        //发表评论
+                        releaseComment(mEtInput.getText().toString());
                     }
-//                    doComment(artId, mEtInput.getText().toString(), "");
+
+
                 } else {
-                    if (!mEtInput.getText().toString().startsWith(recStr))
-                        targetId = "";
-                    String content = mEtInput.getText().toString().replace(recStr, "");
-                    if (TextUtils.isEmpty(content)) {
-                        return;
-                    }
-//                    doComment(artId, content, targetId);
+                    //发表评论
+                    releaseComment(mEtInput.getText().toString());
+
+
                 }
-//                recyclerView.smoothScrollToPosition(mAdapter.getItemCount() - 1);
+
                 break;
         }
+    }
+
+    private void releaseComment(String string) {
+        KeyBoardUtil.closeKeybord(this);
+        progressDialog.show();
+        serverDao.saveComment(getUser(this).id, id,
+                categoryId, string, "", new JsonCallback<BaseResponse<List>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
+                        progressDialog.dismiss();
+                        ToastUtil.showToast(ArticleDetailsActivity.this, baseResponse.message + "");
+                        if (baseResponse.errNum.equals("0")) {
+                            mEtInput.setText("");
+                            comments.clear();
+                            mAdapter.notifyDataSetChanged();
+                            page = 1;
+                            getComment();
+                        } else {
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        progressDialog.dismiss();
+                    }
+                });
+
+    }
+
+    private void replyComment(String string) {
+        KeyBoardUtil.closeKeybord(this);
+        progressDialog.show();
+        serverDao.saveComment(getUser(this).id,id,
+              categoryId , string.replace(String.valueOf(getString(R.string.txt_receive) + commentsBean.getUserName() + ":"), ""),
+                commentsBean.getUserId(), new JsonCallback<BaseResponse<List>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
+
+                        progressDialog.dismiss();
+                        ToastUtil.showToast(ArticleDetailsActivity.this, baseResponse.message + "");
+                        if (baseResponse.errNum.equals("0")) {
+                            mEtInput.setText("");
+                            comments.clear();
+                            mAdapter.notifyDataSetChanged();
+                            page = 1;
+                            getComment();
+                        } else {
+
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        progressDialog.dismiss();
+                    }
+                });
     }
 
     public void setRefreshing(final boolean refreshing) {
@@ -413,6 +740,7 @@ public class ArticleDetailsActivity extends BaseActivity implements SwipeRefresh
 
 
     private boolean isCollect;
+
     /**
      * 点击收藏
      *
@@ -426,16 +754,16 @@ public class ArticleDetailsActivity extends BaseActivity implements SwipeRefresh
 
         if (!isCollect) {
             item.setIcon(R.mipmap.d4_shoucang1_p);
-        }else {
+        } else {
             item.setIcon(R.mipmap.d4_shoucang1);
         }
-        isCollect=!isCollect;
+        isCollect = !isCollect;
 
 //        if (mData.category.allowCollection == 0 || mData.allowCollection == 0) {
 //            showToast(getString(R.string.toast_no_collect));
 //            return;
 //        }
-//        serverDao.doCollectTopic(getUser(this).id, artId, new JsonCallback<BaseResponse<List>>() {
+//        serverDao.doCollectTopic(getUser(this).id, FartId, new JsonCallback<BaseResponse<List>>() {
 //            @Override
 //            public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
 //                if ("收藏成功".equals(baseResponse.message)) {

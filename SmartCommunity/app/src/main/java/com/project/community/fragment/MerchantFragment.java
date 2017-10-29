@@ -100,6 +100,7 @@ public class MerchantFragment extends BaseFragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        page=1;
                         mData.clear();
                         merchantAdapter.notifyDataSetChanged();
                         getMerchant();

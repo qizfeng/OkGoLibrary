@@ -128,6 +128,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="122dp"
                     android:layout_marginRight="5dp"
+                    android:scaleType="centerCrop"
                     android:layout_weight="1"
                     android:src="@color/black" />
 
@@ -135,6 +136,7 @@
                     android:id="@+id/bbs_item_ll_two_img_2"
                     android:layout_width="match_parent"
                     android:layout_height="122dp"
+                    android:scaleType="centerCrop"
                     android:layout_weight="1"
                     android:src="@color/black" />
             </LinearLayout>
@@ -152,6 +154,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="111dp"
                     android:layout_marginRight="6dp"
+                    android:scaleType="centerCrop"
                     android:layout_weight="1"
                     android:src="@color/black" />
 
@@ -160,6 +163,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="111dp"
                     android:layout_marginRight="6dp"
+                    android:scaleType="centerCrop"
                     android:layout_weight="1"
                     android:src="@color/black" />
 
@@ -168,17 +172,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="111dp"
                     android:layout_weight="1"
+                    android:scaleType="centerCrop"
                     android:src="@color/black" />
             </LinearLayout>
 
 
             <TextView
+                android:id="@+id/tv_audit_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@android:color/white"
                 android:padding="15dp"
-                android:text="审核未通过原因：图片不符合要求"
                 android:textColor="@color/color_red_d54824"
                 android:textSize="15sp" />
 

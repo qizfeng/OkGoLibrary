@@ -43,6 +43,23 @@ public class BbsApdater extends BaseQuickAdapter<BbsBean.ArtListBean, BaseViewHo
         });
 
 
+
+
+        baseViewHolder.setOnClickListener(R.id.bbs_item_like_comment, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemClickListener.onCustomClick(view, baseViewHolder.getLayoutPosition());
+            }
+        });
+
+        baseViewHolder.getView(R.id.bbs_item_like).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EventBus.getDefault().post(new BbsCollectEvent(model.getId()));
+            }
+        });
+
+
         baseViewHolder.setText(R.id.bbs_item_name, model.getUserName() + "");
         baseViewHolder.setText(R.id.bbs_item_time, model.getCreateDate() + "");
         baseViewHolder.setText(R.id.bbs_item_content, model.getContent() + "");
@@ -63,21 +80,6 @@ public class BbsApdater extends BaseQuickAdapter<BbsBean.ArtListBean, BaseViewHo
 
         baseViewHolder.setText(R.id.bbs_item_like_num, model.getCollections() + "");
         baseViewHolder.setText(R.id.bbs_item_like_comment_num, model.getComments() + "");
-
-
-        baseViewHolder.setOnClickListener(R.id.bbs_item_like_comment, new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                itemClickListener.onCustomClick(view, baseViewHolder.getLayoutPosition());
-            }
-        });
-
-        baseViewHolder.getView(R.id.bbs_item_like).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                EventBus.getDefault().post(new BbsCollectEvent(model.getId()));
-            }
-        });
 
 
         List<String> result = Arrays.asList(model.getImagesUrl().split(","));

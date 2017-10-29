@@ -6,86 +6,70 @@
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-
-
-    <RelativeLayout
+    <LinearLayout
+        android:paddingTop="15dp"
+        android:paddingLeft="15dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/iv_is_show"
-            android:layout_alignParentRight="true"
-            android:layout_width="60dp"
-            android:layout_height="20dp"
-            android:src="@mipmap/d68_bg"/>
+            android:id="@+id/bbs_item_head"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/d54_tx" />
+
         <LinearLayout
-            android:paddingTop="15dp"
-            android:paddingLeft="15dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/bbs_item_head"
-                android:layout_width="33dp"
-                android:layout_height="33dp"
-                android:layout_gravity="center_vertical"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/d54_tx" />
-
             <LinearLayout
-                android:layout_marginLeft="10dp"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/bbs_item_name"
-                        android:layout_marginRight="10dp"
-                        android:textColor="@color/login_bottom_txt"
-                        android:textSize="14sp"
-                        android:text="吕乐乐"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/bbs_item_time"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:layout_weight="1"
-                        android:text="01-01  12:00"
-                        android:textColor="@color/color_gray_999999"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/bbs_item_comment"
-                        android:textColor="@color/color_gray_999999"
-                        android:textSize="14sp"
-                        android:layout_marginTop="2dp"
-                        android:text="123评论"
-                        android:layout_marginRight="15dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-
+                <TextView
+                    android:id="@+id/bbs_item_name"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/login_bottom_txt"
+                    android:textSize="14sp"
+                    android:text="吕乐乐"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/bbs_item_time"
+                    android:textColor="@color/color_gray_999999"
+                    android:textSize="14sp"
+                    android:layout_marginTop="2dp"
+                    android:layout_weight="1"
+                    android:text="01-01  12:00"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/bbs_item_comment"
+                    android:textColor="@color/color_gray_999999"
+                    android:textSize="14sp"
+                    android:layout_marginTop="2dp"
+                    android:text="123评论"
+                    android:layout_marginRight="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
 
         </LinearLayout>
 
-
-    </RelativeLayout>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/bbs_item_content"
@@ -120,12 +104,14 @@
             android:src="@color/black"
             android:layout_weight="1"
             android:layout_marginRight="5dp"
+            android:scaleType="centerCrop"
             android:layout_width="match_parent"
             android:layout_height="122dp" />
         <ImageView
             android:id="@+id/bbs_item_ll_two_img_2"
             android:src="@color/black"
             android:layout_weight="1"
+            android:scaleType="centerCrop"
             android:layout_width="match_parent"
             android:layout_height="122dp" />
     </LinearLayout>
@@ -140,17 +126,20 @@
             android:src="@color/black"
             android:layout_weight="1"
             android:layout_marginRight="6dp"
+            android:scaleType="centerCrop"
             android:layout_width="match_parent"
             android:layout_height="111dp" />
         <ImageView
             android:id="@+id/bbs_item_ll_three_img_2"            android:src="@color/black"
             android:layout_weight="1"
             android:layout_marginRight="6dp"
+            android:scaleType="centerCrop"
             android:layout_width="match_parent"
             android:layout_height="111dp" />
         <ImageView
             android:id="@+id/bbs_item_ll_three_img_3"            android:src="@color/black"
             android:layout_weight="1"
+            android:scaleType="centerCrop"
             android:layout_width="match_parent"
             android:layout_height="111dp" />
     </LinearLayout>
