@@ -1038,7 +1038,7 @@ public class ServerDaoImpl implements ServerDao {
     @Override
     public void delAllComment(String userId, String articleId, JsonCallback<BaseResponse<List>> callback) {
 
-        OkGo.get(AppConstants.URL_DEL_COMMENT)
+        OkGo.get(AppConstants.URL_DEL_ALL_COMMENT)
                 .tag(mContext)
                 .params("userId", userId)
                 .params("articleId", articleId)
@@ -1049,10 +1049,10 @@ public class ServerDaoImpl implements ServerDao {
     @Override
     public void delComment(String userId, String commentId, JsonCallback<BaseResponse<List>> callback) {
 
-        OkGo.get(AppConstants.URL_DEL_COMMENT)
+        OkGo.post(AppConstants.URL_DEL_COMMENT)
                 .tag(mContext)
                 .params("userId", userId)
-                .params("articleId", commentId)
+                .params("commentId", commentId)
                 .execute(callback);
     }
 
