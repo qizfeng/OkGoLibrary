@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jakewharton.rxbinding.view.RxView;
 import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.callback.JsonCallback;
@@ -30,14 +31,17 @@ import com.library.okgo.utils.KeyBoardUtils;
 import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
+import com.project.community.constants.AppConstants;
 import com.project.community.listener.RecycleItemClickListener;
 import com.project.community.model.CommentModel;
 import com.project.community.model.NewsModel;
 import com.project.community.model.SearchModel;
+import com.project.community.model.ShopModel;
 import com.project.community.ui.adapter.CommentsApdater;
 import com.project.community.ui.adapter.SearchAdapter;
 import com.project.community.ui.adapter.SearchHistoryAdapter;
 import com.project.community.ui.life.minsheng.ArticleDetailsActivity;
+import com.project.community.ui.life.minsheng.MerchantDetailActivity;
 import com.project.community.util.ScreenUtils;
 import com.project.community.util.SearchHistoryCacheUtils;
 import com.project.community.view.CommentPopwindow;
@@ -88,7 +92,8 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
     private CommentPopwindow popupWindow;
 
     private String type = "0";
-    private int index = 0;
+    private int index = 0;//2:民生点击进来搜索店铺
+    private int page=1;
 
     public static void startActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, SearchActivity.class);
@@ -156,6 +161,11 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
                                 if (index==3){
                                     Intent intent = new Intent(SearchActivity.this, ArticleDetailsActivity.class);
                                     startActivity(intent);
+                                }if (index==2){
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("merchant_id", mAdapter.getItem(position).id);
+                                    bundle.putString("merchant_distance", mAdapter.getItem(position).distance);
+                                    MerchantDetailActivity.startActivity(SearchActivity.this, bundle);
                                 }else {
                                     Bundle bundle = new Bundle();
                                     bundle.putString("artId", mAdapter.getItem(position).id);
@@ -185,6 +195,16 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
             }
         });
 
+        if (index==2){
+            mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+                @Override
+                public void onLoadMoreRequested() {
+                    page++;
+                    StartSearch();
+                }
+            });
+        }
+
         mAdapter.bindToRecyclerView(mResultRecyclerView);
         mResultRecyclerView.setAdapter(mAdapter);
         etSearchContent.setOnTouchListener(new View.OnTouchListener() {
@@ -208,7 +228,9 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
                     .subscribe(new Action1<Void>() {
                         @Override
                         public void call(Void aVoid) {
-                                StartSearch();
+//                            if (index==2)
+//                                showLoading();
+                            StartSearch();
                         }
                     }) ;
 
@@ -322,31 +344,78 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
         }
         //缓存搜索历史
         save(text);
-        if (index==2 || index == 3)
-            text="副";
-        //网络请求
-        serverDao.doSearch(type, text, new DialogCallback<BaseResponse<List<SearchModel>>>(this) {
-            @Override
-            public void onSuccess(BaseResponse<List<SearchModel>> baseResponse, Call call, Response response) {
-                mData = new ArrayList<>();
-                mData.addAll(baseResponse.retData);
-                if (llResult.getVisibility() == View.GONE) {
-                    llResult.setVisibility(View.VISIBLE);
-                }
-                mAdapter.setNewData(mData);
-                if (mData.size() == 0) {
-                    mAdapter.setNewData(null);
-                    mAdapter.setEmptyView(R.layout.layout_empty_search);
-                }
-                KeyBoardUtils.closeKeybord(etSearchContent, SearchActivity.this);
+        if (index==2 || index == 3){
+            switch (index){
+                case 2:
+                    String locData = getIntent().getExtras().getString("locData");
+                    serverDao.doShopsSearch(locData, page, 15, text, new JsonCallback<BaseResponse<List<SearchModel>>>() {
+                        @Override
+                        public void onSuccess(BaseResponse<List<SearchModel>> listBaseResponse, Call call, Response response) {
+                            KeyBoardUtils.closeKeybord(etSearchContent, SearchActivity.this);
+                            if (page==1){
+//                                dismissDialog();
+                                mData= new ArrayList<>();
+                                mData.addAll(listBaseResponse.retData);
+                                mAdapter.setNewData(mData);
+                                mAdapter.setEnableLoadMore(true);
+                                if (llResult.getVisibility() == View.GONE) {
+                                    llResult.setVisibility(View.VISIBLE);
+                                }
+                                if (mData.size() == 0) {
+                                    mAdapter.setNewData(null);
+                                    mAdapter.setEmptyView(R.layout.layout_empty_search);
+                                }
+                            }else {
+                                mData.addAll(listBaseResponse.retData);
+                                if (listBaseResponse.retData.size() < AppConstants.PAGE_SIZE) {
+                                    List<SearchModel> data = new ArrayList<>();
+                                    data.addAll(listBaseResponse.retData);
+                                    mAdapter.addData(data);
+                                    mAdapter.loadMoreEnd();         //加载完成,没有更多内容了
+                                }else {
+                                    List<SearchModel> data = new ArrayList<>();
+                                    data.addAll(listBaseResponse.retData);
+                                    mAdapter.addData(data);
+                                    mAdapter.loadMoreComplete();
+                                }
+                            }
+                        }
+                        @Override
+                        public void onError(Call call, Response response, Exception e) {
+                            super.onError(call, response, e);
+//                            dismissDialog();
+                            showToast(e.getMessage());
+                        }
+                    });
+                    break;
             }
 
-            @Override
-            public void onError(Call call, Response response, Exception e) {
-                super.onError(call, response, e);
-                showToast(e.getMessage());
-            }
-        });
+        }else {
+            //网络请求
+            serverDao.doSearch(type, text, new DialogCallback<BaseResponse<List<SearchModel>>>(this) {
+                @Override
+                public void onSuccess(BaseResponse<List<SearchModel>> baseResponse, Call call, Response response) {
+                    mData = new ArrayList<>();
+                    mData.addAll(baseResponse.retData);
+                    if (llResult.getVisibility() == View.GONE) {
+                        llResult.setVisibility(View.VISIBLE);
+                    }
+                    mAdapter.setNewData(mData);
+                    if (mData.size() == 0) {
+                        mAdapter.setNewData(null);
+                        mAdapter.setEmptyView(R.layout.layout_empty_search);
+                    }
+                    KeyBoardUtils.closeKeybord(etSearchContent, SearchActivity.this);
+                }
+
+                @Override
+                public void onError(Call call, Response response, Exception e) {
+                    super.onError(call, response, e);
+                    showToast(e.getMessage());
+                }
+            });
+        }
+
 
     }
 

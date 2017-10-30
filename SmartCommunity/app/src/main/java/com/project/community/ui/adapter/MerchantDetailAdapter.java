@@ -9,8 +9,11 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.hedgehog.ratingbar.RatingBar;
+import com.library.okgo.utils.GlideImageLoader;
 import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
+import com.project.community.constants.AppConstants;
 import com.project.community.model.GoodsModel;
 
 import java.util.List;
@@ -36,8 +39,12 @@ public class MerchantDetailAdapter extends BaseQuickAdapter<GoodsModel, BaseView
         final int position = helper.getLayoutPosition();
         TextView tv_original_price = helper.getView(R.id.tv_original_price);
         final TextView tv_price = helper.getView(R.id.tv_price);
+        RatingBar ratingBar = helper.getView(R.id.ratingBar);
+        ratingBar.setStar(item.starLevel);
+        new GlideImageLoader().onDisplayImageWithDefault(mContext, (ImageView) helper.getView(R.id.iv_image), AppConstants.HOST + item.images, R.mipmap.c1_image2);
         tv_original_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-        tv_price.setText("¥"+item.goodsPrice);
+        tv_original_price.setText("¥"+item.originalPrice);
+        tv_price.setText("¥"+item.price);
         int count = item.goodsCount;
         if(count>0){
             iv_minus.setVisibility(View.VISIBLE);

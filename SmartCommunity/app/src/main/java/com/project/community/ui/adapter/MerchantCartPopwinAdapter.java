@@ -11,6 +11,7 @@ import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
 import com.project.community.model.GoodsModel;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -33,10 +34,14 @@ public class MerchantCartPopwinAdapter extends BaseQuickAdapter<GoodsModel, Base
         final TextView tv_count = baseViewHolder.getView(R.id.tv_count);
         final int position = baseViewHolder.getLayoutPosition();
         final TextView tv_price = baseViewHolder.getView(R.id.tv_price);
+        //        new GlideImageLoader().onDisplayImageWithDefault(mContext,headeCover,listBaseResponse.retData.shop.shopPhoto,R.mipmap.c1_image2);
         tv_count.setVisibility(View.VISIBLE);
         iv_minus.setVisibility(View.VISIBLE);
         tv_count.setText(""+model.goodsCount);
-        tv_price.setText("¥" + (model.goodsPrice * model.goodsCount));
+        BigDecimal bigDecimal = new BigDecimal(model.goodsPrice);
+//        bigDecimal.multiply(new BigDecimal(model.goodsCount));
+//        tv_price.setText("¥" + (model.goodsPrice * model.goodsCount));
+        tv_price.setText("¥" + bigDecimal.multiply(new BigDecimal(model.goodsCount)).toString());
         iv_minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

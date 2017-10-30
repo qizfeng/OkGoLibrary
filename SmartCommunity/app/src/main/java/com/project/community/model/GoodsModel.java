@@ -14,7 +14,7 @@ public class GoodsModel implements Serializable {
     public String goodsImage;
     public int res;
     public String goodsName;
-    public int goodsPrice;
+    public String goodsPrice;
     public int goodsCount;
     public int originalPrice;
     public int star;
@@ -28,14 +28,19 @@ public class GoodsModel implements Serializable {
     public String name;
     public String images;
     public String price;
+    public String goodId;
+    public float starLevel;
+    public int stock;
+    public int cartNum=0;
     public int number;
 
-// "id": "477c5c404d5f45829d0d00232be7e895",
-//         "name": "酸菜鱼",
-//         "images": "jpg",
-//         "price": 10,
-//         "number": 2
-
+//"id": "6",
+//        "name": "酸菜鱼",
+//        "images": "jpg",#图片
+//                "price": 10,#价格
+//                "originalPrice": 20,#原价
+//                "starLevel": 0,
+//                        "stock": 1234#库存
     @Override
     public String toString() {
         return "GoodsModel{" +

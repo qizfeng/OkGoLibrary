@@ -14,6 +14,7 @@ import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.hedgehog.ratingbar.RatingBar;
 import com.library.okgo.utils.DateUtil;
 import com.library.okgo.utils.GlideImageLoader;
 import com.project.community.R;
@@ -79,6 +80,19 @@ public class SearchAdapter extends BaseQuickAdapter<SearchModel, BaseViewHolder>
                     @Override
                     public void onClick(View view) {
                         itemClickListener.onCustomClick(view, baseViewHolder.getLayoutPosition());
+                    }
+                });
+            }else {
+                GlideImageLoader glide = new GlideImageLoader();
+                glide.onDisplayImage(mContext, (ImageView) baseViewHolder.getView(R.id.iv_image), AppConstants.HOST + model.shopPhoto);
+                baseViewHolder.setText(R.id.tv_title,model.shopsName)
+                        .setText(R.id.tv_content,model.businessAddress);
+                RatingBar ratingBar = baseViewHolder.getView(R.id.ratingBar);
+                ratingBar.setStar(model.starLevel);
+                baseViewHolder.getConvertView().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        itemClickListener.onItemClick(view, baseViewHolder.getLayoutPosition());
                     }
                 });
             }
