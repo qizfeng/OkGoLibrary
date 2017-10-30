@@ -31,6 +31,7 @@ public class ShopModel implements Serializable {
         */
     public String id;
     public String shopsName;
+    public String totalCost;
     public String coordinate;
     public String auditStatus;
     public String shopPhoto;
@@ -50,7 +51,8 @@ public class ShopModel implements Serializable {
     public String distance;
     public String longitude;
     public String auditContent;
-    public double starLevel;//星星
+    public int isOpen;
+    public float starLevel;//星星
 
     public List<GoodsModel> goods;
 

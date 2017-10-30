@@ -25,6 +25,28 @@ public class SearchModel implements Serializable{
      "weightDate": ""#过期时间
      surveyId
      */
+
+
+//      "id": "1",
+//              "shopsName": "霹雳之家1", #商铺名称
+//            "businessAddress": "", # 营业地址
+//            "shopPhoto": "/upload/shequ_8YRP0569My2v8hE7dR.rrer", #商铺图片
+//            "distance": 0.17, #距离
+//            "starLevel": 0 #星级
+
+
+
+    public String shopsName;
+    public String businessAddress;
+    public String shopPhoto;
+    public String distance;
+    public float starLevel;
+
+
+
+
+
+
     public String imageWidth;
     public String image;
     public String articleName;

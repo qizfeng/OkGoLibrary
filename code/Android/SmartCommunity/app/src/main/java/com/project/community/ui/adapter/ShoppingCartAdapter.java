@@ -91,6 +91,8 @@ public class ShoppingCartAdapter extends GroupedRecyclerViewAdapter {
                 onFooterClickListener.onSettlementClick(view, groupPosition);
             }
         });
+        ShopModel entity = mGroups.get(groupPosition).shop;
+        holder.setText(R.id.tv_total_price,"¥"+entity.totalCost);
     }
 
     @Override

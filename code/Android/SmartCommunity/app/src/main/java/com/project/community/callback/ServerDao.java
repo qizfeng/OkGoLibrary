@@ -34,6 +34,7 @@ import com.project.community.model.GoodsManagerModel;
 import com.project.community.model.GuideModel;
 import com.project.community.model.HotlineModel;
 import com.project.community.model.HouseModel;
+import com.project.community.model.MerchantDeailModel;
 import com.project.community.model.NewsModel;
 import com.project.community.model.PaymentHouseHistroyModel;
 import com.project.community.model.PaymentInfoModel;
@@ -340,6 +341,19 @@ public interface ServerDao {
      * @param callback
      */
     void doSearch(String type, String keywords, JsonCallback<BaseResponse<List<SearchModel>>> callback);
+
+
+    /**
+     * D27商铺分页
+     *
+     * @param coordinate
+     * @param pageNo
+     * @param coordinate 关键字
+     * @param callback
+     */
+    void doShopsSearch(String coordinate,int pageNo,int pageSize, String keywords, JsonCallback<BaseResponse<List<SearchModel>>> callback);
+
+
 
     /**
      * 物业首页数据
@@ -997,6 +1011,30 @@ public interface ServerDao {
     void getCartList(
             String userId,
             JsonCallback<BaseResponse<List<ShoppingCartModel>>> callback);
+
+    /**
+     * D29商家详情
+     *
+     * @param callback
+     */
+    void getShopByUser(
+            String userId,
+            String shopId,
+            JsonCallback<BaseResponse<MerchantDeailModel>> callback);
+
+
+    /**
+     * D27添加购物车
+     *
+     * @param callback
+     */
+    void addCart(
+            String userId,
+            int number,
+            String shopId,
+            String goodId,
+            String id,
+            JsonCallback<BaseResponse<List>> callback);
 
     /**
      * D27购物车删除

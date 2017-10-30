@@ -66,6 +66,15 @@ public class MinshengFragment extends BaseFragment implements SwipeRefreshLayout
     private View header;
     private HorizaontalGridView gridView;
     private List<ModuleModel> moduleModels = new ArrayList<>();
+    private String locData="";
+
+    public String getLocData() {
+        return locData;
+    }
+
+    public void setLocData(String locData) {
+        this.locData = locData;
+    }
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -98,6 +107,7 @@ public class MinshengFragment extends BaseFragment implements SwipeRefreshLayout
                 Bundle bundle = new Bundle();
                 position = position - 1;//去掉头部
                 bundle.putString("merchant_id", mAdapter.getItem(position).id);
+                bundle.putString("merchant_distance", mAdapter.getItem(position).distance);
                 MerchantDetailActivity.startActivity(getActivity(), bundle);
             }
         });
@@ -131,7 +141,7 @@ public class MinshengFragment extends BaseFragment implements SwipeRefreshLayout
     private void loadData() {
         String latitute = getLocation(getActivity())[0];
         String longitute = getLocation(getActivity())[1];
-        String locData = "";
+//        String locData = "";
         if (!TextUtils.isEmpty(latitute) && !TextUtils.isEmpty(longitute)) {
             locData = longitute + "," + latitute;
         }

@@ -6,12 +6,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.library.customview.viewpager.NoScrollViewPager;
 import com.library.okgo.utils.LogUtils;
@@ -21,6 +24,7 @@ import com.project.community.ui.life.minsheng.MinshengFragment;
 import com.project.community.ui.life.wuye.WuyeFragment;
 import com.project.community.ui.life.zhengwu.ZhengwuFragment;
 import com.project.community.util.TablayoutLineReflex;
+import com.project.community.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -114,7 +118,18 @@ public class LifeFragment extends BaseFragment implements View.OnClickListener {
                     bundle.putString("type", "1");
                     bundle.putInt("index", 1);
                 } else if (viewPager.getCurrentItem() == 2) {
+                    String locData="";
+                    if (fragments.get(2)!=null){
+                        MinshengFragment minshengFragment = (MinshengFragment) fragments.get(2);
+                        locData = minshengFragment.getLocData();
+                        if (TextUtils.isEmpty(locData)){
+                            showToast("经纬度获取失败");
+                            return false;
+                        }
+                    }
+                    Log.e("onOptionsItemSelected: ", locData);
                     bundle.putString("type", "mobile");
+                    bundle.putString("locData", locData);
                     bundle.putInt("index", 2);
                 }
                 SearchActivity.startActivity(getActivity(), bundle);

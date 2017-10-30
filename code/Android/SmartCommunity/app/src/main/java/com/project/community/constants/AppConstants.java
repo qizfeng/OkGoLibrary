@@ -158,6 +158,11 @@ public class AppConstants {
     public static final String URL_SEARCH_WUYE = URL_BASE + "m/prop/search";
 
     /**
+     * 搜索民生
+     */
+    public static final String URL_SEARCH_PROPSHOPS = URL_BASE + "/m/propleLife/propShops/list";
+
+    /**
      * 获取缴费类别
      */
     public static final String URL_JIAOFEI_TYPE = URL_BASE + "m/propPayment/menu";
@@ -492,6 +497,16 @@ public class AppConstants {
      * D27购物车
      */
     public static final String URL_GETCARTLIST=URL_BASE+"/m/propleLife/shop/cart/list";
+
+    /**
+     * D29商家详情
+     */
+    public static final String URL_GETSHOPBYUSER=URL_BASE+"/m/propleLife/propShops/getShopByUser";
+
+    /**
+     * D27添加购物车
+     */
+    public static final String URL_ADDSHOPCART=URL_BASE+"/m/propleLife/shop/cart/save";
 
     /**
      * D27购物车删除

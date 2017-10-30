@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:cj="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical">
     <LinearLayout
@@ -53,37 +54,49 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginTop="8dp"
                     android:orientation="horizontal">
-
-                    <ImageView
+                    <com.hedgehog.ratingbar.RatingBar
+                        android:id="@+id/ratingBar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginRight="6dp"
-                        android:src="@mipmap/d29_icon1" />
+                        cj:clickable="false"
+                        cj:halfstart="true"
+                        cj:starCount="5"
+                        cj:starImagePadding="5dp"
+                        cj:starImageHeight="15dp"
+                        cj:starImageWidth="18dp"
+                        cj:starEmpty="@mipmap/d29_icon1_p"
+                        cj:starHalf="@mipmap/d27_banxing"
+                        cj:starFill="@mipmap/d29_icon1"/>
+                    <!--<ImageView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginLeft="2dp"-->
+                        <!--android:layout_marginRight="6dp"-->
+                        <!--android:src="@mipmap/d29_icon1" />-->
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="6dp"
-                        android:src="@mipmap/d29_icon1" />
+                    <!--<ImageView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginRight="6dp"-->
+                        <!--android:src="@mipmap/d29_icon1" />-->
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="6dp"
-                        android:src="@mipmap/d29_icon1" />
+                    <!--<ImageView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginRight="6dp"-->
+                        <!--android:src="@mipmap/d29_icon1" />-->
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="6dp"
-                        android:src="@mipmap/d29_icon1_p" />
+                    <!--<ImageView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginRight="6dp"-->
+                        <!--android:src="@mipmap/d29_icon1_p" />-->
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="6dp"
-                        android:src="@mipmap/d29_icon1_p" />
+                    <!--<ImageView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginRight="6dp"-->
+                        <!--android:src="@mipmap/d29_icon1_p" />-->
                 </LinearLayout>
                 <TextView
                     android:id="@+id/tv_wenjuan"

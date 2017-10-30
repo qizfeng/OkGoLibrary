@@ -144,7 +144,6 @@ public class AdrressActivity extends BaseActivity implements BaiduMap.OnMapClick
             e.printStackTrace();
         }
         mMapView.showZoomControls(false);
-        mBaiduMap.setMyLocationEnabled(true);
         mBaiduMap.getUiSettings().setCompassEnabled(true);
         MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(16.0f);
         mBaiduMap.setMapStatus(msu);

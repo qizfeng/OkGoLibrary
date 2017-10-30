@@ -42,6 +42,7 @@ import com.project.community.model.GoodsManagerModel;
 import com.project.community.model.GuideModel;
 import com.project.community.model.HotlineModel;
 import com.project.community.model.HouseModel;
+import com.project.community.model.MerchantDeailModel;
 import com.project.community.model.NewsModel;
 import com.project.community.model.PaymentHouseHistroyModel;
 import com.project.community.model.PaymentInfoModel;
@@ -413,6 +414,17 @@ public class ServerDaoImpl implements ServerDao {
         OkGo.post(url)
                 .tag(mContext)
                 .params(params)
+                .execute(callback);
+    }
+
+    @Override
+    public void doShopsSearch(String coordinate, int pageNo, int pageSize, String keywords, JsonCallback<BaseResponse<List<SearchModel>>> callback) {
+        OkGo.get(AppConstants.URL_SEARCH_PROPSHOPS)
+                .tag(mContext)
+                .params("coordinate",coordinate)
+                .params("pageNo",pageNo)
+                .params("pageSize",pageSize)
+                .params("keywords",keywords)
                 .execute(callback);
     }
 
@@ -1011,6 +1023,27 @@ public class ServerDaoImpl implements ServerDao {
         OkGo.get(AppConstants.URL_GETCARTLIST)
                 .tag(mContext)
                 .params("userId", userId)
+                .execute(callback);
+    }
+
+    @Override
+    public void getShopByUser(String userId, String shopId, JsonCallback<BaseResponse<MerchantDeailModel>> callback) {
+        OkGo.get(AppConstants.URL_GETSHOPBYUSER)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("shopId", shopId)
+                .execute(callback);
+    }
+
+    @Override
+    public void addCart(String userId, int number, String shopId, String goodId, String id, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.URL_ADDSHOPCART)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("number", number)
+                .params("shopId", shopId)
+                .params("goodId", goodId)
+                .params("id", id)
                 .execute(callback);
     }
 
