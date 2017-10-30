@@ -103,7 +103,7 @@ public class ArticleDetailsActivity extends BaseActivity implements SwipeRefresh
 //    ArticleDetailsImagsAdapter grid_photoAdapter;
 
 
-    private  String categoryId;
+    private String categoryId;
 
     private String id = null;
 
@@ -118,7 +118,7 @@ public class ArticleDetailsActivity extends BaseActivity implements SwipeRefresh
      * @param context
      * @param id      帖子id
      */
-    public static void startActivity(Context context, String id,String categoryId) {
+    public static void startActivity(Context context, String id, String categoryId) {
 
         Intent intent = new Intent(context, ArticleDetailsActivity.class);
 
@@ -147,7 +147,7 @@ public class ArticleDetailsActivity extends BaseActivity implements SwipeRefresh
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(DelCommnetEvent event) {
-            delComment(event.getCommentsBean());
+        delComment(event.getCommentsBean());
     }
 
     private void delComment(final CommentsListBean.CommentsBean commentsBean) {
@@ -572,7 +572,7 @@ public class ArticleDetailsActivity extends BaseActivity implements SwipeRefresh
         KeyBoardUtil.closeKeybord(this);
         progressDialog.show();
         serverDao.saveComment(getUser(this).id, id,
-                categoryId, string, "", new JsonCallback<BaseResponse<List>>() {
+                String.valueOf(articleBean.getCategoryId()), string, "", new JsonCallback<BaseResponse<List>>() {
                     @Override
                     public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
                         progressDialog.dismiss();
@@ -600,8 +600,8 @@ public class ArticleDetailsActivity extends BaseActivity implements SwipeRefresh
     private void replyComment(String string) {
         KeyBoardUtil.closeKeybord(this);
         progressDialog.show();
-        serverDao.saveComment(getUser(this).id,id,
-              categoryId , string.replace(String.valueOf(getString(R.string.txt_receive) + commentsBean.getUserName() + ":"), ""),
+        serverDao.saveComment(getUser(this).id, id,
+                String.valueOf(articleBean.getCategoryId()), string.replace(String.valueOf(getString(R.string.txt_receive) + commentsBean.getUserName() + ":"), ""),
                 commentsBean.getUserId(), new JsonCallback<BaseResponse<List>>() {
                     @Override
                     public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {

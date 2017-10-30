@@ -174,10 +174,6 @@
             android:label="@string/activity_setting"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.life.SearchActivity"
-            android:label="@string/activity_search"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ui.life.wuye.PayIndexActivity"
             android:label="@string/activity_payment"
             android:screenOrientation="portrait" />
@@ -309,6 +305,10 @@
             android:name=".ui.me.RepairsDetailsActivity"
             android:label="@string/activity_repairs_details"
             android:screenOrientation="portrait" />
+
+        <activity android:name=".ui.me.AddHouseNumberActivity"
+            android:label="@string/activity_add_house_number"
+            android:screenOrientation="portrait"/>
 
 
         <activity android:name=".ui.life.minsheng.MerchantNavigationActivity" />

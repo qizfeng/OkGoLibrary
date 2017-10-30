@@ -452,7 +452,7 @@ public class BbsFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
         KeyBoardUtil.closeKeybord(getActivity());
         progressDialog.show();
         serverDao.saveComment(getUser(getActivity()).id, mData.get(position).getId(),
-                id, string, "", new JsonCallback<BaseResponse<List>>() {
+                String.valueOf(mData.get(position).getCategoryId()), string, "", new JsonCallback<BaseResponse<List>>() {
                     @Override
                     public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
                         progressDialog.dismiss();
@@ -490,7 +490,7 @@ public class BbsFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
         KeyBoardUtil.closeKeybord(getActivity());
         progressDialog.show();
         serverDao.saveComment(getUser(getActivity()).id, mData.get(position).getId(),
-                id, string.replace(String.valueOf(getString(R.string.txt_receive) + comments.get(position).getUserName() + ":"), ""),
+                String.valueOf(mData.get(position).getCategoryId()), string.replace(String.valueOf(getString(R.string.txt_receive) + comments.get(position).getUserName() + ":"), ""),
                 commentsBean.getUserId(), new JsonCallback<BaseResponse<List>>() {
                     @Override
                     public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {

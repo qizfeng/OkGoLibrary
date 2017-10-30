@@ -17,13 +17,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/white"
             android:orientation="vertical">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
-                android:background="@color/white"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingLeft="15dp"
@@ -35,16 +35,17 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2017"
+                        android:maxLength="4"
                         android:textColor="@color/color_gray_999999"
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/tv_times"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="07-12"
                         android:textColor="@color/color_gray_999999"
                         android:textSize="14sp" />
 
@@ -71,16 +72,18 @@
                         android:paddingLeft="-6dp">
 
                         <TextView
+                            android:id="@+id/tv_orderType"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="【电】"
                             android:textColor="#103375"
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/tv_orderNo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="订单号：343345435"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:textColor="@color/color_gray_333333"
                             android:textSize="14sp" />
 
@@ -88,18 +91,18 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/tv_roomNo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:text="房屋编号：123121312"
                         android:textColor="@color/color_gray_999999"
                         android:textSize="12sp" />
 
                     <TextView
+                        android:id="@+id/tv_roomAddress"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:text="一区  2号楼  一单元1000室"
                         android:textColor="@color/color_gray_999999"
                         android:textSize="12sp" />
 
@@ -109,6 +112,10 @@
 
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/color_gray_eeeeee" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -157,11 +164,11 @@
                         android:gravity="top"
                         android:hint="请输入你的评价~"
                         android:maxLength="350"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp"
-
-                        android:paddingTop="10dp"
                         android:paddingBottom="22dp"
+                        android:paddingLeft="8dp"
+
+                        android:paddingRight="8dp"
+                        android:paddingTop="10dp"
                         android:textColor="@color/color_gray_333333"
                         android:textColorHint="@color/color_gray_999999"
                         android:textSize="14sp" />
@@ -171,13 +178,13 @@
                         android:id="@+id/tv_size"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0/350"
-                        android:textSize="12sp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
                         android:layout_marginBottom="8dp"
                         android:layout_marginRight="10dp"
+                        android:text="0/350"
                         android:textColor="@color/color_gray_999999"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentRight="true"/>
+                        android:textSize="12sp" />
 
                 </RelativeLayout>
 

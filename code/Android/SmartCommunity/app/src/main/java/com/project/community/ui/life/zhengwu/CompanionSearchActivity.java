@@ -30,7 +30,6 @@ import com.project.community.model.GuideModel;
 import com.project.community.ui.WebViewActivity;
 import com.project.community.ui.adapter.GuideAdapter;
 import com.project.community.ui.adapter.SearchHistoryAdapter;
-import com.project.community.ui.life.SearchActivity;
 import com.project.community.util.SearchHistoryCacheUtils;
 import com.project.community.view.SpacesItemDecoration;
 

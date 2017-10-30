@@ -12,6 +12,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.project.community.Event.AddHouseEvent;
 import com.project.community.R;
 import com.project.community.base.BaseRecyclerAdapter;
+import com.project.community.bean.RoomList;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -24,8 +25,7 @@ import butterknife.ButterKnife;
  * author：fangkai on 2017/10/25 13:57
  * em：617716355@qq.com
  */
-public class HomeNumberAdapter extends BaseRecyclerAdapter<Object, HomeNumberAdapter.HouseViewHolder> {
-
+public class HomeNumberAdapter extends BaseRecyclerAdapter<RoomList, HomeNumberAdapter.HouseViewHolder> {
 
 
     private String item;
@@ -44,10 +44,6 @@ public class HomeNumberAdapter extends BaseRecyclerAdapter<Object, HomeNumberAda
         notifyDataSetChanged();
     }
 
-    public HomeNumberAdapter(Context context, Object[] datas) {
-        super(context, datas);
-    }
-
 
     @Override
     public HouseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -59,8 +55,11 @@ public class HomeNumberAdapter extends BaseRecyclerAdapter<Object, HomeNumberAda
     public void onBindViewHolder(final HouseViewHolder holder, final int position) {
 
 
+        holder.setText(R.id.tv_house_nuber, "房屋编号" + mDatas.get(position).getRoomNo());
+
+
         if (!item.equals("")) {
-            if (item.equals(mDatas.get(position))) {
+            if (item.equals(mDatas.get(position).getRoomNo())) {
 //                holder.i.setChecked(true);
                 holder.ivCheck.setImageResource(R.mipmap.d10_btn1_p);
                 holder.llHouseNumber.setBackground(mContext.getDrawable(R.drawable.shape_blue_5dp));
@@ -74,16 +73,21 @@ public class HomeNumberAdapter extends BaseRecyclerAdapter<Object, HomeNumberAda
 
 //                holder.cbCheck.setChecked(false);
             }
+        } else {
+            holder.ivCheck.setImageResource(R.mipmap.d10_btn1);
+            holder.llHouseNumber.setBackground(mContext.getDrawable(R.drawable.shape_gray_5dp));
+            holder.tvHouseNuber.setTextColor(mContext.getColor(R.color.color_gray_333333));
+
         }
 
 
-        holder.tvHouseNuber.setText("房屋编号" + String.valueOf(mDatas.get(position)));
+//        holder.tvHouseNuber.setText("房屋编号" + String.valueOf(mDatas.get(position)));
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EventBus.getDefault().post(new AddHouseEvent((String) mDatas.get(position)));
+                EventBus.getDefault().post(new AddHouseEvent(mDatas.get(position).getRoomNo()));
 
             }
         });
