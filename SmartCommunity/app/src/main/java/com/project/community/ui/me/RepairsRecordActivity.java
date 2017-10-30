@@ -8,14 +8,19 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.library.okgo.callback.JsonCallback;
+import com.library.okgo.model.BaseResponse;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
+import com.project.community.bean.RepairsRecordBean;
+import com.project.community.constants.AppConstants;
 import com.project.community.ui.adapter.RepairsRecordAdapter;
 
 import java.util.ArrayList;
@@ -24,6 +29,8 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * author：fangkai on 2017/10/24 16:52
@@ -46,6 +53,9 @@ public class RepairsRecordActivity extends BaseActivity {
     TextView tvRepairs;
 
     private RepairsRecordAdapter repairsRecordAdapter;
+    private List<RepairsRecordBean> mData;
+
+    private int page = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,16 +65,14 @@ public class RepairsRecordActivity extends BaseActivity {
         setTitles();
         steAdapter();
     }
+
     private void setTitles() {
         initToolBar(toolbar, tvTitle, true, "报修记录", R.mipmap.iv_back);
     }
 
 
     private void steAdapter() {
-        List<String> mData = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            mData.add("s");
-        }
+        mData = new ArrayList<>();
 
         repairsRecordAdapter = new RepairsRecordAdapter(R.layout.item_repairs_record, mData);
         rvGovernment.setLayoutManager(new LinearLayoutManager(this));
@@ -75,9 +83,9 @@ public class RepairsRecordActivity extends BaseActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-
-                        repairsRecordAdapter.loadMoreEnd();
-
+                        page++;
+//                        repairsRecordAdapter.loadMoreEnd();
+                        getData();
                     }
 
                 }, 1000);
@@ -99,17 +107,63 @@ public class RepairsRecordActivity extends BaseActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        swipeRl.setRefreshing(false);
+                        mData.clear();
+                        repairsRecordAdapter.removeAllData();
+                        swipeRl.setRefreshing(true);
+                        getData();
                     }
                 }, 1000);
             }
         });
+
+        swipeRl.setRefreshing(true);
+        getData();
+    }
+
+
+    /**
+     * 获取我的报修列表
+     */
+    private void getData() {
+        serverDao.getRepairsRecord(getUser(this).id, String.valueOf(page),
+                String.valueOf(AppConstants.PAGE_SIZE),
+                new JsonCallback<BaseResponse<List<RepairsRecordBean>>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<List<RepairsRecordBean>> objectBaseResponse, Call call, Response response) {
+
+                        if (swipeRl != null)
+                            swipeRl.setRefreshing(false);
+
+                        mData.addAll(objectBaseResponse.retData);
+                        if (page == 1) {
+                            repairsRecordAdapter.setNewData(mData);
+                            repairsRecordAdapter.setEnableLoadMore(true);
+                        } else {
+                            repairsRecordAdapter.addData(objectBaseResponse.retData);
+                            repairsRecordAdapter.loadMoreComplete();
+                        }
+                        if (objectBaseResponse.retData.size() < AppConstants.PAGE_SIZE)
+                            repairsRecordAdapter.loadMoreEnd();
+
+
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        Log.e("tag_f", e.getMessage().toString() + "");
+                        if (swipeRl != null)
+                            swipeRl.setRefreshing(false);
+                    }
+                });
+
+
     }
 
     @OnClick(R.id.tv_repairs)
     public void onViewClicked() {
 
-        startActivity(new Intent(this,ImRepairsActivity.class));
+        startActivity(new Intent(this, ImRepairsActivity.class));
     }
 
 
@@ -145,5 +199,80 @@ public class RepairsRecordActivity extends BaseActivity {
                 return super.onOptionsItemSelected(item);
 
         }
+    }
+
+
+    /**
+     * 取消报修
+     */
+    private void propRepairCancel(final String id) {
+        serverDao.propRepairCancel(getUser(this).id, id,
+                new JsonCallback<BaseResponse<List>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<List> objectBaseResponse, Call call, Response response) {
+
+                        if (objectBaseResponse.errNum.equals("0")) {
+
+                            for (int i = 0; i < repairsRecordAdapter.getData().size(); i++) {
+                                if (repairsRecordAdapter.getData().get(i).getOrderNo().equals(id)) {
+                                    repairsRecordAdapter.getData().get(i).setRepairStatus("1");
+                                    repairsRecordAdapter.notifyDataSetChanged();
+
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        Log.e("tag_f", e.getMessage().toString() + "");
+                        if (swipeRl != null)
+                            swipeRl.setRefreshing(false);
+                    }
+                });
+
+
+    }
+
+
+    /**
+     * 完成订单
+     * @param id
+     */
+    private void propRepairComplete(final String id) {
+        serverDao.propRepairComplete(getUser(this).id, id,
+                new JsonCallback<BaseResponse<List>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<List> objectBaseResponse, Call call, Response response) {
+
+                        if (objectBaseResponse.errNum.equals("0")) {
+
+                            for (int i = 0; i < repairsRecordAdapter.getData().size(); i++) {
+                                if (repairsRecordAdapter.getData().get(i).getOrderNo().equals(id)) {
+                                    repairsRecordAdapter.getData().get(i).setHandleStatus("2");
+                                    repairsRecordAdapter.notifyDataSetChanged();
+
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        Log.e("tag_f", e.getMessage().toString() + "");
+                        if (swipeRl != null)
+                            swipeRl.setRefreshing(false);
+                    }
+                });
+
+
     }
 }

@@ -3,7 +3,6 @@ package com.project.community.ui.me;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -17,6 +16,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
@@ -30,7 +30,9 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bigkoo.pickerview.OptionsPickerView;
+import com.bigkoo.pickerview.TimePickerView;
+import com.library.okgo.callback.JsonCallback;
+import com.library.okgo.model.BaseResponse;
 import com.library.okgo.utils.photo.PhotoUtils;
 import com.library.okgo.view.loopview.LoopView;
 import com.project.community.Event.AddHouseEvent;
@@ -38,12 +40,18 @@ import com.project.community.Event.TypeEvent;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.base.BasePopupWindow;
+import com.project.community.bean.ClassifyBean;
+import com.project.community.bean.RoomList;
+import com.project.community.model.FileUploadModel;
 import com.project.community.ui.adapter.HomeNumberAdapter;
 import com.project.community.ui.adapter.SendMessageAdapter;
 import com.project.community.ui.adapter.TypeAdapter;
+import com.project.community.util.DataUtilsa;
 import com.project.community.util.KeyBoardUtil;
+import com.project.community.util.ListAdapterUtils;
 import com.project.community.util.ScreenUtils;
-import com.project.community.view.CustomTimePickerView;
+import com.project.community.util.StringUtils;
+import com.project.community.util.ToastUtil;
 import com.project.community.view.MyGridView;
 import com.project.community.view.crop.CropImageActivity;
 
@@ -52,20 +60,18 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import rx.Observable;
+import okhttp3.Call;
+import okhttp3.Response;
 import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 
 /**
  * author：fangkai on 2017/10/25 10:27
@@ -128,13 +134,15 @@ public class ImRepairsActivity extends BaseActivity {
 
     //选择了哪一个
     private List<String> typelist = new ArrayList<>();
+    //最终的
+    private List<String> typelists = new ArrayList<>();
 
     private String item = "";
 
     //房屋信息
-    private List<String> mData = new ArrayList<>();
+    private List<RoomList> mData = new ArrayList<>();
 
-    private List<String> mData2 = new ArrayList<>();
+    private List<ClassifyBean.DictListBean> mData2 = new ArrayList<>();
 
 
     private BasePopupWindow popupWindow;
@@ -151,215 +159,380 @@ public class ImRepairsActivity extends BaseActivity {
         ininData();
     }
 
-    @OnClick({R.id.tv_have_add, R.id.tv_no_add, R.id.ll_type, R.id.ll_time})
+    @OnClick({R.id.tv_have_add, R.id.tv_no_add, R.id.ll_type, R.id.ll_time, R.id.tv_repairs})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            //提交
+            case R.id.tv_repairs:
+                submit();
+                break;
             case R.id.ll_time:
                 showTime();
                 break;
             case R.id.ll_type:
-                showPopuWindow();
+
+                getClassify();
                 break;
             case R.id.tv_have_add:
-//                mData.add("s");
-//                homeNumberAdapter.setThisItem(item);
-//                homeNumberAdapter.notifyDataSetChanged();
+                startActivity(new Intent(this, AddHouseNumberActivity.class));
+
                 break;
             case R.id.tv_no_add:
-                mData.add("12345");
-                mData.add("54321");
-                homeNumberAdapter.setThisItem(item);
-                if (mData.size() > 0) {
-                    llHave.setVisibility(View.VISIBLE);
-                    llAddRepairs.setVisibility(View.GONE);
-                }
+
+                startActivity(new Intent(this, AddHouseNumberActivity.class));
                 break;
         }
     }
 
-    private ArrayList<String> optionsItems = new ArrayList<>();
-    private ArrayList<String> optionsItems2 = new ArrayList<>();
-    private ArrayList<String> optionsItems3 = new ArrayList<>();
-
-    private CustomTimePickerView pvOptions_time;
-
-    private void showTime() {
-
-        if (optionsItems.size() <= 0) {
-            optionsItems.add("今天");
-            optionsItems.add("明天");
-
-            for (int i = 0; i < 24; i++) {
-                optionsItems2.add(String.valueOf(i) + "时");
-            }
-            for (int j = 0; j < 12; j++) {
-                optionsItems3.add(String.valueOf(j * 5) + "分");
-            }
-
+    private void submit() {
+        if (item.equals("")) {
+            ToastUtil.showToast(this, "请选择房屋编号");
+            return;
         }
-//        final List<TimeBean> monthListData = timePickerModel.getMonthData();
 
-//        pvOptions_time.setSelectOptions(select[0], select[1], select[2]);
-        pvOptions_time = new CustomTimePickerView.Builder(this, new OptionsPickerView.OnOptionsSelectListener() {
-            @Override
-            public void onOptionsSelect(int options1, int options2, int options3, View v) {
-                tvTime.setText(optionsItems.get(options1) + "  "
-                        + optionsItems2.get(options2) + "  "
-                        + optionsItems3.get(options3));
-
-//                String year = optionsItems.get(options1).year;
-//                String month = optionsItems2.get(options1).month;
-//                String dayOfMonth = optionsItems3.get(options1).dayOfMonth;
-//                String hour = hours.get(options2).replace("点", "");
-//                String minutes = minute.get(options3).replace("分", "");
-//                SimpleDateFormat sdf = new SimpleDateFormat("MM月dd日 HH:mm");
-//                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
-//
-//                try {
-//                    Date parse = dateFormat.parse(year + "年" +
-//                            month + "月" +
-//                            dayOfMonth + "日 " +
-//                            hour + ":" +
-//                            minutes);
-//                    yukeTime = parse.getTime();
-//                    tvTime.setText((month.length() == 1 ? "0" + month : month) + "月" +
-//                            (dayOfMonth.length() == 1 ? "0" + dayOfMonth : dayOfMonth) + "日 " +
-//                            (hour.length() == 1 ? "0" + hour : hour) + ":" +
-//                            (minutes.length() == 1 ? "0" + minutes : minutes));
-////                    L.e("yukeTime = " + yukeTime);
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
-
-
+        String str = "";
+        if (typelist.size() > 0)
+            for (int i = 0; i < mData2.size(); i++) {
+                for (int j = 0; j < typelist.size(); j++) {
+                    if (mData2.get(i).getValue().equals(typelist.get(j).toString()))
+                        if (str.equals("")) {
+                            str = mData2.get(i).getLabel();
+                        } else {
+                            str = str + "," + mData2.get(i).getLabel();
+                        }
+                }
             }
+        if (str.equals("")) {
+            ToastUtil.showToast(this, "请选报修类型");
+            return;
+        }
 
-        })
-                .setTitleText("预约时间")
-                .setTitleColor(Color.parseColor("#000000"))
-                .setSubmitText("确认")
-                .setSubCalSize(15)
-                .setSubmitColor(Color.parseColor("#103375"))
-                .setCancelColor(Color.parseColor("#103375"))
-                .setTitleBgColor(Color.WHITE)
-                .setLinkage(false)
-                .setLayoutRes(R.layout.pickerview_options_time, null)
-                .build();
-        pvOptions_time.setNPicker(optionsItems, optionsItems2, optionsItems3);
-//        pvOptions_time.show();
+        if (TextUtils.isEmpty(etDescribe.getText().toString().trim())) {
+            ToastUtil.showToast(this, "请输入文字描述");
+        }
 
+        if (mImags.size() <= 0) {
+            ToastUtil.showToast(this, "请选择图片");
+            return;
+        }
+        if (TextUtils.isEmpty(tvTime.getText().toString().trim())){
+            ToastUtil.showToast(this, "请选预约时间");
+            return;
+        }
 
-        setTimes();
+        if (mImags.size() == 1)
+//            uploadFile(new File(mImags.get(0)));
+            uploadFile(new File(StringUtils.getRealFilePath(ImRepairsActivity.this, Uri.parse(mImags.get(0)))));
+
+        if (mImags.size() == 2)
+            uploadFile(new File(StringUtils.getRealFilePath(ImRepairsActivity.this, Uri.parse(mImags.get(1)))));
+        if (mImags.size() == 3)
+            uploadFile(new File(StringUtils.getRealFilePath(ImRepairsActivity.this, Uri.parse(mImags.get(2)))));
+//        }
+
 
     }
 
-    private static int[] select;
-//    private Disposable pvOptions_timeObser;
-    private void setTimes() {
+    private List<String> upImage = new ArrayList<String>();
 
-        pvOptions_time.show();
+    /**
+     * 文件上传
+     *
+     * @param file
+     */
+    private void uploadFile(File file) {
+        serverDao.uploadFile(file, new JsonCallback<BaseResponse<FileUploadModel>>() {
+            @Override
+            public void onSuccess(BaseResponse<FileUploadModel> baseResponse, Call call, Response response) {
 
-        if (subscription == null)
-        //今天
-//                            L.e("判断计时器 " + throwable.getMessage());
-        subscription = Observable.interval(500, TimeUnit.MILLISECONDS)
-                    .map(new Func1<Long, Boolean>() {
-                        @Override
-                        public Boolean call(Long aLong) {
-                            if (!pvOptions_time.isShowing()) return false;
-                            select = pvOptions_time.getCurrentItems();
-                            if (pvOptions_time.isShowing()) {
-                                Calendar calendar = Calendar.getInstance();
-                                int hour_of_day = calendar.get(Calendar.HOUR_OF_DAY);
-                                int checkHour = Integer.parseInt(optionsItems2.get(select[1]).replace("时", ""));
-                                int checkMinute = Integer.parseInt(optionsItems3.get(select[2]).replace("分", ""));
-                                int minutes = calendar.get(Calendar.MINUTE);
-                                //今天
-                                if (select[0] == 0) {
-                                    if (checkHour < hour_of_day + 1) {
-                                        select[1] = hour_of_day + 1;
-                                    }
-                                    if (checkHour == hour_of_day + 1 && checkMinute < minutes) {
-                                        select[2] = minutes < 5 ? 1 : (minutes / 5) + 1;
-                                    }
-                                    return true;
-                                }
-                            }
-                            return false;
+                upImage.add(baseResponse.retData.filePath);
+
+                if (upImage.size() < mImags.size()) {
+                    submit();
+                } else {
+                    propRepairSave();
+
+                }
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                showToast(e.getMessage());
+
+            }
+        });
+    }
+
+    /**
+     * 提交报修
+     */
+    private void propRepairSave() {
+        progressDialog.show();
+        serverDao.propRepairSave(getUser(this).id, ListAdapterUtils.toStr(",", typelists),
+                item, etDescribe.getText().toString().trim(),
+                ListAdapterUtils.toStr(",", upImage), tvTime.getText().toString().trim(),
+                new JsonCallback<BaseResponse<List>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<List> listBaseResponse, Call call, Response response) {
+                        progressDialog.dismiss();
+                        ToastUtil.showToast(ImRepairsActivity.this,listBaseResponse.message);
+                        if (listBaseResponse.errNum.equals("0")) {
+                            finish();
                         }
-                    }).subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Action1<Boolean>() {
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        progressDialog.dismiss();
+                    }
+                });
+
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getProRepairRoom();
+    }
+
+    /**
+     * 获取分类列表
+     */
+    private void getClassify() {
+        KeyBoardUtil.closeKeybord(this);
+        if (mData2.size() <= 0) {
+            progressDialog.show();
+            serverDao.getRoomClassify("prop_repair_type",
+                    new JsonCallback<BaseResponse<ClassifyBean>>() {
                         @Override
-                        public void call(Boolean aBoolean) {
-                            if (aBoolean && pvOptions_time.isShowing()) {
-                                pvOptions_time.setSelectOptions(select[0], select[1], select[2]);
+                        public void onSuccess(BaseResponse<ClassifyBean> listBaseResponse, Call call, Response response) {
+
+                            progressDialog.dismiss();
+
+                            mData2.addAll(listBaseResponse.retData.getDictList());
+                            if (mData2.size() > 0) {
+                                showPopuWindow();
+                            } else {
+                                ToastUtil.showToast(ImRepairsActivity.this, listBaseResponse.retMsg);
                             }
                         }
-                    }, new Action1<Throwable>() {
 
                         @Override
-                        public void call(Throwable throwable) {
-//                            L.e("判断计时器 " + throwable.getMessage());
+                        public void onError(Call call, Response response, Exception e) {
+                            super.onError(call, response, e);
+                            Log.e("tag_f", e.getMessage().toString() + "");
+                            progressDialog.dismiss();
                         }
                     });
 
+        } else
+            showPopuWindow();
 
     }
+
+    private TimePickerView pvTime;
+
+    private void showTime() {
+
+        //控制时间范围(如果不设置范围，则使用默认时间1900-2100年，此段代码可注释)
+        //因为系统Calendar的月份是从0-11的,所以如果是调用Calendar的set方法来设置时间,月份的范围也要是从0-11
+        Calendar selectedDate = Calendar.getInstance();
+        Calendar startDate = Calendar.getInstance();
+        startDate.set(DataUtilsa.getYear(), DataUtilsa.getMonth(), DataUtilsa.getCurrentDayOfMonth());
+//        startDate.set(1900, 12, 28);
+        Calendar endDate = Calendar.getInstance();
+        endDate.set(3000, 12, 31);
+        //时间选择器
+        pvTime = new TimePickerView.Builder(this, new TimePickerView.OnTimeSelectListener() {
+            @Override
+            public void onTimeSelect(Date date, View v) {//选中事件回调
+                // 这里回调过来的v,就是show()方法里面所添加的 View 参数，如果show的时候没有添加参数，v则为null
+
+                /*btn_Time.setText(getTime(date));*/
+                tvTime.setText(getTime(date));
+
+            }
+        })
+                //年月日时分秒 的显示与否，不设置则默认全部显示
+                .setType(new boolean[]{true, true, true, false, false, false})
+                .setLabel("年", "月", "日", "点", "分", "")
+                .isCenterLabel(false)
+//                .setDividerColor(Color.DKGRAY)
+                .setDividerColor(getResources().getColor(R.color.gray_line))
+                .setCancelColor(getResources().getColor(R.color.gray_line))
+                .setSubmitColor(getResources().getColor(R.color.colorPrimary))
+                .setContentSize(21)
+                .setSubCalSize(16)
+                .setTitleSize(20)
+                .setTitleText("选择预约时间")
+                .setDate(selectedDate)
+                .setRangDate(startDate, endDate)
+                .setBackgroundId(0x00FFFFFF) //设置外部遮罩颜色
+                .setDecorView(null)
+                .build();
+
+        pvTime.show();
+    }
+
+    private String getTime(Date date) {//可根据需要自行截取数据显示
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        return format.format(date);
+    }
+
+    /**
+     * 获取房屋编号
+     */
+    private void getProRepairRoom() {
+        progressDialog.show();
+        serverDao.getRoomList(getUser(this).id,
+                new JsonCallback<BaseResponse<List<RoomList>>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<List<RoomList>> listBaseResponse, Call call, Response response) {
+
+                        progressDialog.dismiss();
+                        Log.e("tag_f", listBaseResponse.retData.toString());
+
+                        mData.clear();
+                        mData.addAll(listBaseResponse.retData);
+//                        homeNumberAdapter.updateItems(mData);
+                        homeNumberAdapter.notifyDataSetChanged();
+                        if (mData.size() > 0) {
+                            llHave.setVisibility(View.VISIBLE);
+                            llAddRepairs.setVisibility(View.GONE);
+                        } else {
+//                            ToastUtil.showToast(ImRepairsActivity.this, listBaseResponse.retMsg);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        Log.e("tag_f", e.getMessage().toString() + "");
+                        progressDialog.dismiss();
+                    }
+                });
+
+
+    }
+
+//    private static int[] select;
+//
+//    //    private Disposable pvOptions_timeObser;
+//    private void setTimes() {
+//
+//        pvOptions_time.show();
+//
+//        if (subscription == null)
+//            //今天
+////                            L.e("判断计时器 " + throwable.getMessage());
+//            subscription = Observable.interval(500, TimeUnit.MILLISECONDS)
+//                    .map(new Func1<Long, Boolean>() {
+//                        @Override
+//                        public Boolean call(Long aLong) {
+//                            if (!pvOptions_time.isShowing()) return false;
+//                            select = pvOptions_time.getCurrentItems();
+//                            if (pvOptions_time.isShowing()) {
+//                                Calendar calendar = Calendar.getInstance();
+//                                int hour_of_day = calendar.get(Calendar.HOUR_OF_DAY);
+//                                int checkHour = Integer.parseInt(optionsItems2.get(select[1]).replace("时", ""));
+//                                int checkMinute = Integer.parseInt(optionsItems3.get(select[2]).replace("分", ""));
+//                                int minutes = calendar.get(Calendar.MINUTE);
+//                                //今天
+//                                if (select[0] == 0) {
+//                                    if (checkHour < hour_of_day + 1) {
+//                                        select[1] = hour_of_day + 1;
+//                                    }
+//                                    if (checkHour == hour_of_day + 1 && checkMinute < minutes) {
+//                                        select[2] = minutes < 5 ? 1 : (minutes / 5) + 1;
+//                                    }
+//                                    return true;
+//                                }
+//                            }
+//                            return false;
+//                        }
+//                    }).subscribeOn(Schedulers.newThread())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe(new Action1<Boolean>() {
+//                        @Override
+//                        public void call(Boolean aBoolean) {
+//                            if (aBoolean && pvOptions_time.isShowing()) {
+//                                pvOptions_time.setSelectOptions(select[0], select[1], select[2]);
+//                            }
+//                        }
+//                    }, new Action1<Throwable>() {
+//
+//                        @Override
+//                        public void call(Throwable throwable) {
+////                            L.e("判断计时器 " + throwable.getMessage());
+//                        }
+//                    });
+//
+//
+//    }
 
 
     private void showPopuWindow() {
 
-        KeyBoardUtil.closeKeybord(this);
-        if (mData2.size() <= 0) {
-            mData2.add("水");
-            mData2.add("电");
-            mData2.add("其他");
-        }
-        popupWindow = new BasePopupWindow(this);
 
-        View view = View.inflate(this, R.layout.popuwindow_type, null);
+        if (popupWindow == null) {
+            popupWindow = new BasePopupWindow(this);
 
-        RecyclerView recyclerView = view.findViewById(R.id.rc_data);
+            View view = View.inflate(this, R.layout.popuwindow_type, null);
 
-        typeAdapter = new TypeAdapter(this, mData2);
-        typeAdapter.setThisItem(typelist);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(typeAdapter);
+            RecyclerView recyclerView = view.findViewById(R.id.rc_data);
+
+            typeAdapter = new TypeAdapter(this, mData2);
+            typeAdapter.setThisItem(typelist);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.setAdapter(typeAdapter);
 
 
-        view.findViewById(R.id.iv_close).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                popupWindow.dismiss();
-            }
-        });
-        view.findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                popupWindow.dismiss();
-            }
-        });
-        view.findViewById(R.id.btn_confirm).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String str = "";
-                if (typelist.size() > 0)
-                    for (int i = 0; i < typelist.size(); i++) {
-                        if (i == 0) {
-                            str = typelist.get(i);
-                        } else {
-                            str = str + "," + typelist.get(i);
+            view.findViewById(R.id.iv_close).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    popupWindow.dismiss();
+                }
+            });
+            view.findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    popupWindow.dismiss();
+                }
+            });
+            view.findViewById(R.id.btn_confirm).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    typelists.clear();
+                    typelists.addAll(typelist);
+                    String str = "";
+                    if (typelist.size() > 0)
+                        for (int i = 0; i < mData2.size(); i++) {
+                            for (int j = 0; j < typelist.size(); j++) {
+                                if (mData2.get(i).getValue().equals(typelist.get(j).toString()))
+                                    if (str.equals("")) {
+                                        str = mData2.get(i).getLabel();
+                                    } else {
+                                        str = str + "," + mData2.get(i).getLabel();
+                                    }
+                            }
                         }
-                    }
-                if (!str.equals(""))
-                    tvType.setText(str);
-                popupWindow.dismiss();
-            }
-        });
+                    if (!str.equals(""))
+                        tvType.setText(str);
+                    popupWindow.dismiss();
+                }
+            });
 
-        popupWindow.setContentView(view);
-        popupWindow.showAtLocation(getWindow().getDecorView(), Gravity.CENTER, 0, 0);
+            popupWindow.setContentView(view);
+            popupWindow.showAtLocation(getWindow().getDecorView(), Gravity.CENTER, 0, 0);
+        } else {
+            typelist.clear();
+            typelist.addAll(typelists);
+            popupWindow.showAtLocation(getWindow().getDecorView(), Gravity.CENTER, 0, 0);
+            typeAdapter.setThisItem(typelists);
+        }
 
     }
 
@@ -379,11 +552,12 @@ public class ImRepairsActivity extends BaseActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void TypeEvent(TypeEvent typeEvent) {
 
-            if (typelist.contains(typeEvent.getName())) {
-                typelist.remove(typeEvent.getName());
-            } else {
-                typelist.add(typeEvent.getName());
-            }
+
+        if (typelist.contains(typeEvent.getName())) {
+            typelist.remove(typeEvent.getName());
+        } else {
+            typelist.add(typeEvent.getName());
+        }
 
         if (typeAdapter != null) {
             typeAdapter.setThisItem(typelist);
@@ -411,7 +585,7 @@ public class ImRepairsActivity extends BaseActivity {
         sendMessageGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if (mImags.size() >= 6) {
+                if (mImags.size() >= 3) {
                     return;
                 }
                 if (i == mApplyStoryPicAdapter.getCount() - 1) {
@@ -439,13 +613,15 @@ public class ImRepairsActivity extends BaseActivity {
                 tvSize.setText(editable.length() + "/350");
             }
         });
+
+
     }
 
 
     @Override
     protected void onDestroy() {
         EventBus.getDefault().unregister(this);
-        if(subscription!=null)subscription.unsubscribe();
+        if (subscription != null) subscription.unsubscribe();
         super.onDestroy();
     }
 
@@ -524,7 +700,7 @@ public class ImRepairsActivity extends BaseActivity {
                 case CODE_RESULT_REQUEST:
                     if (data != null) {
                         mImags.add(data.getStringExtra("uri"));
-                        if (mImags.size() >= 6) {
+                        if (mImags.size() >= 3) {
                             mApplyStoryPicAdapter.setGoneAdd(0);
                         } else {
                             mApplyStoryPicAdapter.setGoneAdd(1);

@@ -15,11 +15,14 @@ import com.project.community.bean.ArticleBean;
 import com.project.community.bean.ArticleIndexBean;
 import com.project.community.bean.ArticleRepliesBean;
 import com.project.community.bean.ClassifyBaseBean;
+import com.project.community.bean.ClassifyBean;
 import com.project.community.bean.CommentsListBean;
 import com.project.community.bean.CommunityBean;
 import com.project.community.bean.ForumListBean;
 import com.project.community.bean.GovernmentBean;
 import com.project.community.bean.MerchantBean;
+import com.project.community.bean.RepairsRecordBean;
+import com.project.community.bean.RoomList;
 import com.project.community.constants.AppConstants;
 import com.project.community.model.AgreementResponse;
 import com.project.community.model.ArticleModel;
@@ -1139,6 +1142,89 @@ public class ServerDaoImpl implements ServerDao {
                 .params("userId", userId)
                 .params("pageNo", pageNo)
                 .params("pageSize", pageSize)
+                .execute(callback);
+    }
+
+    @Override
+    public void getRepairsRecord(String userId, String pageNo, String pageSize, JsonCallback<BaseResponse<List<RepairsRecordBean>>> callback) {
+        OkGo.get(AppConstants.URL_REPAIRS_RECORD)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("pageNo", pageNo)
+                .params("pageSize", pageSize)
+                .execute(callback);
+    }
+
+    @Override
+    public void getRoomList(String userId, JsonCallback<BaseResponse<List<RoomList>>> callback) {
+        OkGo.get(AppConstants.URL_GET_ROOM_LIST)
+                .tag(mContext)
+                .params("userId", userId)
+                .execute(callback);
+    }
+
+    @Override
+    public void getRoomClassify(String dictType, JsonCallback<BaseResponse<ClassifyBean>> callback) {
+        OkGo.get(AppConstants.URL_CLASSIFY_LIST)
+                .tag(mContext)
+                .params("dictType", dictType)
+                .execute(callback);
+    }
+
+    @Override
+    public void saveHouseNumber(String roomNo, String userId, JsonCallback<BaseResponse<RoomList>> callback) {
+        OkGo.post(AppConstants.URL_SEVA_HOUSE_NUMBER)
+                .tag(mContext)
+                .params("roomNo", roomNo)
+                .params("userId", userId)
+                .execute(callback);
+    }
+
+    @Override
+    public void propRepairSave(String userId, String orderType,
+                               String roomNo, String content,
+                               String imagesUrl, String bespeakDate, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.URL_SAVE_PROP_REPAIR)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("orderType", orderType)
+                .params("roomNo", roomNo)
+                .params("content", content)
+                .params("imagesUrl", imagesUrl)
+                .params("bespeakDate", bespeakDate)
+                .execute(callback);
+    }
+
+    @Override
+    public void proRepairCommentSave(String userId, String orderNo,
+                                     String repairId, String starLevel,
+                                     String content, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.URL_PROREPAIR_COMMENT_SAVE)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("orderNo", orderNo)
+                .params("repairId", repairId)
+                .params("content", content)
+                .params("starLevel", starLevel)
+                .params("content", content)
+                .execute(callback);
+    }
+
+    @Override
+    public void propRepairCancel(String userId, String orderNo, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.URL_PROREPAIR_CANCEL)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("orderNo", orderNo)
+                .execute(callback);
+    }
+
+    @Override
+    public void propRepairComplete(String userId, String orderNo, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.URL_PROREPAIR_COMPLETE)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("orderNo", orderNo)
                 .execute(callback);
     }
 

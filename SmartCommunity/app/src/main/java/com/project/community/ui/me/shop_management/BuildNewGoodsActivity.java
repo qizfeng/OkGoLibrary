@@ -1,7 +1,6 @@
 package com.project.community.ui.me.shop_management;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -41,15 +40,11 @@ import com.library.okgo.utils.LogUtils;
 import com.library.okgo.utils.ToastUtils;
 import com.library.okgo.utils.photo.PhotoUtils;
 import com.project.community.Event.AddGoodsEvent;
-import com.project.community.Event.AddHouseEvent;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.constants.AppConstants;
 import com.project.community.model.FileUploadModel;
 import com.project.community.model.GoodsManagerModel;
-import com.project.community.ui.life.SearchActivity;
-import com.project.community.ui.life.minsheng.ApplyStoreActivity;
-import com.project.community.ui.life.minsheng.BBSActivity;
 import com.project.community.util.ScreenUtils;
 import com.project.community.util.StringUtils;
 import com.project.community.view.crop.CropImageActivity;

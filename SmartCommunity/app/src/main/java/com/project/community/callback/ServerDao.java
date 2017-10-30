@@ -1,5 +1,7 @@
 package com.project.community.callback;
 
+import android.view.View;
+
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
 import com.library.okgo.model.HttpParams;
@@ -8,11 +10,14 @@ import com.project.community.bean.ArticleBean;
 import com.project.community.bean.ArticleIndexBean;
 import com.project.community.bean.ArticleRepliesBean;
 import com.project.community.bean.ClassifyBaseBean;
+import com.project.community.bean.ClassifyBean;
 import com.project.community.bean.CommentsListBean;
 import com.project.community.bean.CommunityBean;
 import com.project.community.bean.ForumListBean;
 import com.project.community.bean.GovernmentBean;
 import com.project.community.bean.MerchantBean;
+import com.project.community.bean.RepairsRecordBean;
+import com.project.community.bean.RoomList;
 import com.project.community.model.AgreementResponse;
 import com.project.community.model.ArticleModel;
 import com.project.community.model.AuditStatusModel;
@@ -1148,6 +1153,14 @@ public interface ServerDao {
             JsonCallback<BaseResponse<List>> callback);
 
 
+    /**
+     * 我的回帖
+     *
+     * @param userId
+     * @param pageNo
+     * @param pageSize
+     * @param callback
+     */
     void getArticleReplies(
             String userId,
             String pageNo,
@@ -1155,4 +1168,116 @@ public interface ServerDao {
             JsonCallback<BaseResponse<List<ArticleRepliesBean>>> callback);
 
 
+    /**
+     * 我的报修记录
+     *
+     * @param userId
+     * @param pageNo
+     * @param pageSize
+     * @param callback
+     */
+    void getRepairsRecord(
+            String userId,
+            String pageNo,
+            String pageSize,
+            JsonCallback<BaseResponse<List<RepairsRecordBean>>> callback);
+
+    /**
+     * 房屋列表
+     *
+     * @param userId
+     * @param callback
+     */
+    void getRoomList(
+            String userId,
+            JsonCallback<BaseResponse<List<RoomList>>> callback);
+
+
+    /**
+     * 获取报修分类
+     *
+     * @param dictType
+     * @param callback
+     */
+    void getRoomClassify(
+            String dictType,
+            JsonCallback<BaseResponse<ClassifyBean>> callback);
+
+
+    /**
+     * 保存房屋编号
+     * @param roomNo
+     * @param userId
+     * @param callback
+     */
+    void saveHouseNumber(
+            String roomNo,
+            String userId,
+            JsonCallback<BaseResponse<RoomList>> callback);
+
+    /**
+     * 发布报修
+     * @param userId
+     * @param orderType
+     * @param roomNo
+     * @param content
+     * @param imagesUrl
+     * @param bespeakDate
+     * @param callback
+     */
+    void propRepairSave(
+            String userId,
+            String orderType,
+            String roomNo,
+            String content,
+            String imagesUrl,
+            String bespeakDate,
+            JsonCallback<BaseResponse<List>> callback);
+
+
+    /**
+     * 评价
+     * @param userId
+     * @param orderNo
+     * @param repairId
+     * @param starLevel
+     * @param content
+     * @param callback
+     */
+    void  proRepairCommentSave(
+
+            String userId,
+            String orderNo,
+            String repairId,
+            String starLevel,
+            String content,
+            JsonCallback<BaseResponse<List>> callback
+    );
+
+
+    /**
+     * 取消订单
+     * @param userId
+     * @param orderNo
+     * @param callback
+     */
+    void  propRepairCancel(
+            String userId,
+            String orderNo,
+
+            JsonCallback<BaseResponse<List>> callback
+    );
+
+
+    /**
+     * 完成订单
+     * @param userId
+     * @param orderNo
+     * @param callback
+     */
+    void  propRepairComplete(
+            String userId,
+            String orderNo,
+            JsonCallback<BaseResponse<List>> callback
+    );
 }

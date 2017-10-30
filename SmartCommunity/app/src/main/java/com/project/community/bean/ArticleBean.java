@@ -24,6 +24,15 @@ public class ArticleBean {
     private String createDate;
     private int comments;
     private int status;
+    private int categoryId;
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
 
     public int getStatus() {
         return status;

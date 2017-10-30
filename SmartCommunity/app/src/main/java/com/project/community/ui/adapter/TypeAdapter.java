@@ -12,6 +12,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.project.community.Event.TypeEvent;
 import com.project.community.R;
 import com.project.community.base.BaseRecyclerAdapter;
+import com.project.community.bean.ClassifyBean;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -25,11 +26,10 @@ import butterknife.ButterKnife;
  * author：fangkai on 2017/10/25 15:53
  * em：617716355@qq.com
  */
-public class TypeAdapter extends BaseRecyclerAdapter<Object, HomeNumberAdapter.HouseViewHolder> {
+public class TypeAdapter extends BaseRecyclerAdapter<ClassifyBean.DictListBean, HomeNumberAdapter.HouseViewHolder> {
 
 
-
-    private List<String> item=new ArrayList<>();
+    private List<String> item = new ArrayList<>();
 
 
     public TypeAdapter(Context context) {
@@ -45,10 +45,6 @@ public class TypeAdapter extends BaseRecyclerAdapter<Object, HomeNumberAdapter.H
         notifyDataSetChanged();
     }
 
-    public TypeAdapter(Context context, Object[] datas) {
-        super(context, datas);
-    }
-
 
     @Override
     public HomeNumberAdapter.HouseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -60,8 +56,8 @@ public class TypeAdapter extends BaseRecyclerAdapter<Object, HomeNumberAdapter.H
     public void onBindViewHolder(final HomeNumberAdapter.HouseViewHolder holder, final int position) {
 
 
-        if (item.size()>0) {
-            if (item.contains(mDatas.get(position))) {
+        if (item.size() > 0) {
+            if (item.contains(mDatas.get(position).getValue())) {
 //                holder.i.setChecked(true);
                 holder.ivCheck.setImageResource(R.mipmap.d10_btn2_p);
                 holder.llHouseNumber.setBackground(mContext.getDrawable(R.drawable.shape_blue_5dp));
@@ -75,16 +71,21 @@ public class TypeAdapter extends BaseRecyclerAdapter<Object, HomeNumberAdapter.H
 
 //                holder.cbCheck.setChecked(false);
             }
+        } else {
+            holder.ivCheck.setImageResource(R.mipmap.d10_btn2);
+            holder.llHouseNumber.setBackground(mContext.getDrawable(R.drawable.shape_gray_5dp));
+            holder.tvHouseNuber.setTextColor(mContext.getColor(R.color.color_gray_333333));
+
         }
 
 
-        holder.tvHouseNuber.setText(String.valueOf(mDatas.get(position)));
+        holder.tvHouseNuber.setText(String.valueOf(mDatas.get(position).getLabel()));
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EventBus.getDefault().post(new TypeEvent((String) mDatas.get(position)));
+                EventBus.getDefault().post(new TypeEvent(mDatas.get(position).getValue()));
 
             }
         });

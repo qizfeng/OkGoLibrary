@@ -65,6 +65,7 @@ public class SearchAdapter extends BaseQuickAdapter<SearchModel, BaseViewHolder>
                     }
                 });
 
+
                 if (model.id.equals("10")){
                     baseViewHolder.setImageResource(R.id.bbs_item_like,R.mipmap.c1_icon9_p);
                 }else {

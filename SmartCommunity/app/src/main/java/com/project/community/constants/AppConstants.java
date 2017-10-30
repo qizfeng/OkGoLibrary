@@ -479,7 +479,41 @@ public class AppConstants {
     public  final  static  String  URL_ARTICLE_REPLIES=URL_BASE + "/m/user/article/replies";
 
 
+    /**
+     * 我的报修记录
+     */
+    public final  static  String  URL_REPAIRS_RECORD=URL_BASE + "/m/propRepair/index";
 
+
+    /**
+     * 获取报修分类
+     */
+    public  final  static  String URL_GET_ROOM_LIST =URL_BASE + "/m/proRepairRoom/index";
+
+    /**
+     * 添加房屋编码
+     */
+    public  final  static  String URL_SEVA_HOUSE_NUMBER =URL_BASE + "/m/proRepairRoom/save";
+
+    /**
+     * 提价报修
+     */
+    public final  static  String URL_SAVE_PROP_REPAIR=URL_BASE + "/m/propRepair/save";
+
+    /**
+     * 评价报修
+     */
+    public final  static  String URL_PROREPAIR_COMMENT_SAVE=URL_BASE + "/m/proRepair/comment/save";
+
+    /**
+     * 取消订单
+     */
+    public final  static  String URL_PROREPAIR_CANCEL=URL_BASE + "/m/propRepair/cancel";
+
+    /**
+     * 完成订单
+     */
+    public  final  static  String URL_PROREPAIR_COMPLETE=URL_BASE + "/m/propRepair/complete";
 
     /*==========================*/
     /**
