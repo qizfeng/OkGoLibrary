@@ -1,6 +1,9 @@
 package com.project.community.ui.adapter;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +32,7 @@ import butterknife.ButterKnife;
 public class TypeAdapter extends BaseRecyclerAdapter<ClassifyBean.DictListBean, HomeNumberAdapter.HouseViewHolder> {
 
 
-    private List<String> item = new ArrayList<>();
+    private String item = "";
 
 
     public TypeAdapter(Context context) {
@@ -40,7 +43,7 @@ public class TypeAdapter extends BaseRecyclerAdapter<ClassifyBean.DictListBean, 
         super(context, datas);
     }
 
-    public void setThisItem(List<String> item) {
+    public void setThisItem(String item) {
         this.item = item;
         notifyDataSetChanged();
     }
@@ -52,12 +55,14 @@ public class TypeAdapter extends BaseRecyclerAdapter<ClassifyBean.DictListBean, 
         return new HomeNumberAdapter.HouseViewHolder(view);
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onBindViewHolder(final HomeNumberAdapter.HouseViewHolder holder, final int position) {
 
 
-        if (item.size() > 0) {
-            if (item.contains(mDatas.get(position).getValue())) {
+        if (!item.equals("")) {
+            if (item.equals(mDatas.get(position).getValue())) {
 //                holder.i.setChecked(true);
                 holder.ivCheck.setImageResource(R.mipmap.d10_btn2_p);
                 holder.llHouseNumber.setBackground(mContext.getDrawable(R.drawable.shape_blue_5dp));

@@ -309,6 +309,9 @@
         <activity android:name=".ui.me.AddHouseNumberActivity"
             android:label="@string/activity_add_house_number"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.life.SearchActivity"
+            android:label="搜索"
+            android:screenOrientation="portrait"/>
 
 
         <activity android:name=".ui.life.minsheng.MerchantNavigationActivity" />
