@@ -133,9 +133,9 @@ public class ImRepairsActivity extends BaseActivity {
 
 
     //选择了哪一个
-    private List<String> typelist = new ArrayList<>();
     //最终的
-    private List<String> typelists = new ArrayList<>();
+    private String typelist = "";
+    private String typelists = "";
 
     private String item = "";
 
@@ -190,19 +190,19 @@ public class ImRepairsActivity extends BaseActivity {
             return;
         }
 
-        String str = "";
-        if (typelist.size() > 0)
-            for (int i = 0; i < mData2.size(); i++) {
-                for (int j = 0; j < typelist.size(); j++) {
-                    if (mData2.get(i).getValue().equals(typelist.get(j).toString()))
-                        if (str.equals("")) {
-                            str = mData2.get(i).getLabel();
-                        } else {
-                            str = str + "," + mData2.get(i).getLabel();
-                        }
-                }
-            }
-        if (str.equals("")) {
+//        String str = "";
+//        if (typelist.size() > 0)
+//            for (int i = 0; i < mData2.size(); i++) {
+//                for (int j = 0; j < typelist.size(); j++) {
+//                    if (mData2.get(i).getValue().equals(typelist.get(j).toString()))
+//                        if (str.equals("")) {
+//                            str = mData2.get(i).getLabel();
+//                        } else {
+//                            str = str + "," + mData2.get(i).getLabel();
+//                        }
+//                }
+//            }
+        if (typelist.equals("")) {
             ToastUtil.showToast(this, "请选报修类型");
             return;
         }
@@ -269,7 +269,7 @@ public class ImRepairsActivity extends BaseActivity {
      */
     private void propRepairSave() {
         progressDialog.show();
-        serverDao.propRepairSave(getUser(this).id, ListAdapterUtils.toStr(",", typelists),
+        serverDao.propRepairSave(getUser(this).id, typelists,
                 item, etDescribe.getText().toString().trim(),
                 ListAdapterUtils.toStr(",", upImage), tvTime.getText().toString().trim(),
                 new JsonCallback<BaseResponse<List>>() {
@@ -505,18 +505,13 @@ public class ImRepairsActivity extends BaseActivity {
             view.findViewById(R.id.btn_confirm).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    typelists.clear();
-                    typelists.addAll(typelist);
-                    String str = "";
-                    if (typelist.size() > 0)
+                    typelists=typelist.intern();
+                        String str="";
+                    if (!typelists.equals(""))
                         for (int i = 0; i < mData2.size(); i++) {
-                            for (int j = 0; j < typelist.size(); j++) {
-                                if (mData2.get(i).getValue().equals(typelist.get(j).toString()))
+                                if (mData2.get(i).getValue().equals(typelists))
                                     if (str.equals("")) {
                                         str = mData2.get(i).getLabel();
-                                    } else {
-                                        str = str + "," + mData2.get(i).getLabel();
-                                    }
                             }
                         }
                     if (!str.equals(""))
@@ -528,10 +523,9 @@ public class ImRepairsActivity extends BaseActivity {
             popupWindow.setContentView(view);
             popupWindow.showAtLocation(getWindow().getDecorView(), Gravity.CENTER, 0, 0);
         } else {
-            typelist.clear();
-            typelist.addAll(typelists);
+            typelist=typelists.intern();
             popupWindow.showAtLocation(getWindow().getDecorView(), Gravity.CENTER, 0, 0);
-            typeAdapter.setThisItem(typelists);
+            typeAdapter.setThisItem(typelist);
         }
 
     }
@@ -552,12 +546,12 @@ public class ImRepairsActivity extends BaseActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void TypeEvent(TypeEvent typeEvent) {
 
-
-        if (typelist.contains(typeEvent.getName())) {
-            typelist.remove(typeEvent.getName());
-        } else {
-            typelist.add(typeEvent.getName());
-        }
+        typelist=typeEvent.getName();
+//        if (typelist.contains(typeEvent.getName())) {
+//            typelist.remove(typeEvent.getName());
+//        } else {
+//            typelist.add(typeEvent.getName());
+//        }
 
         if (typeAdapter != null) {
             typeAdapter.setThisItem(typelist);

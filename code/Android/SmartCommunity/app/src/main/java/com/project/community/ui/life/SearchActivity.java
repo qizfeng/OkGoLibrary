@@ -22,33 +22,33 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.google.gson.Gson;
 import com.jakewharton.rxbinding.view.RxView;
 import com.library.okgo.callback.DialogCallback;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
-import com.library.okgo.utils.DateUtil;
 import com.library.okgo.utils.KeyBoardUtils;
-import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
+import com.project.community.bean.BbsBean;
+import com.project.community.bean.CommentsListBean;
 import com.project.community.constants.AppConstants;
 import com.project.community.listener.RecycleItemClickListener;
-import com.project.community.model.CommentModel;
-import com.project.community.model.NewsModel;
 import com.project.community.model.SearchModel;
-import com.project.community.model.ShopModel;
-import com.project.community.ui.adapter.CommentsApdater;
+import com.project.community.ui.adapter.BbsCommentsApdater;
 import com.project.community.ui.adapter.SearchAdapter;
+import com.project.community.ui.adapter.SearchBbsAdapter;
 import com.project.community.ui.adapter.SearchHistoryAdapter;
 import com.project.community.ui.life.minsheng.ArticleDetailsActivity;
 import com.project.community.ui.life.minsheng.MerchantDetailActivity;
+import com.project.community.util.KeyBoardUtil;
 import com.project.community.util.ScreenUtils;
 import com.project.community.util.SearchHistoryCacheUtils;
+import com.project.community.util.ToastUtil;
 import com.project.community.view.CommentPopwindow;
 import com.project.community.view.SpacesItemDecoration;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -87,13 +87,17 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
     private List<SearchModel> mData = new ArrayList<>();
     private List<String> historyData = new ArrayList<>();
     List<String> historyRecordList = new ArrayList<>();
-    private List<CommentModel> comments = new ArrayList<>();//评论列表
-    private CommentsApdater commentsPopwinAdapter;
-    private CommentPopwindow popupWindow;
+//    private List<CommentModel> comments = new ArrayList<>();//评论列表
+//    private CommentsApdater commentsPopwinAdapter;
+//    private CommentPopwindow popupWindow;
 
     private String type = "0";
     private int index = 0;//2:民生点击进来搜索店铺
-    private int page=1;
+    private int page = 1;
+
+    private List<BbsBean.ArtListBean> artListBeanList = new ArrayList<>();
+    SearchBbsAdapter bbsApdater;
+
 
     public static void startActivity(Context context, Bundle bundle) {
         Intent intent = new Intent(context, SearchActivity.class);
@@ -152,21 +156,22 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
 
         mAdapter = new SearchAdapter(mData, index, new RecycleItemClickListener() {
             @Override
-            public void onItemClick(View view,final int position) {
+            public void onItemClick(View view, final int position) {
                 RxView.clicks(view)
                         .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
                         .subscribe(new Action1<Void>() {
                             @Override
                             public void call(Void aVoid) {
-                                if (index==3){
+                                if (index == 3) {
                                     Intent intent = new Intent(SearchActivity.this, ArticleDetailsActivity.class);
                                     startActivity(intent);
-                                }if (index==2){
+                                }
+                                if (index == 2) {
                                     Bundle bundle = new Bundle();
                                     bundle.putString("merchant_id", mAdapter.getItem(position).id);
                                     bundle.putString("merchant_distance", mAdapter.getItem(position).distance);
                                     MerchantDetailActivity.startActivity(SearchActivity.this, bundle);
-                                }else {
+                                } else {
                                     Bundle bundle = new Bundle();
                                     bundle.putString("artId", mAdapter.getItem(position).id);
                                     TopicDetailActivity.startActivity(SearchActivity.this, bundle);
@@ -180,22 +185,22 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
             @Override
             public void onCustomClick(View view, int position) {
 
-                if (index==3){
-                    switch (view.getId()){
+                if (index == 3) {
+                    switch (view.getId()) {
                         case R.id.bbs_item_like_comment:
                             popAwindow(view, position);
                             break;
                         case R.id.bbs_item_like:
-                            if (mData.get(position).id.equals("10")) mData.get(position).id="0";
-                            else mData.get(position).id="10";
-                            mAdapter.notifyItemChanged(position,mData.get(position));
+                            if (mData.get(position).id.equals("10")) mData.get(position).id = "0";
+                            else mData.get(position).id = "10";
+                            mAdapter.notifyItemChanged(position, mData.get(position));
                             break;
                     }
                 }
             }
         });
 
-        if (index==2){
+        if (index == 2) {
             mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
                 @Override
                 public void onLoadMoreRequested() {
@@ -223,8 +228,8 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
             KeyBoardUtils.closeKeybord(etSearchContent, SearchActivity.this);
             etSearchContent.setCursorVisible(false);
             //进行搜索操作的方法，在该方法中可以加入mEditSearchUser的非空判断
-            RxView.clicks( view )
-                    .throttleFirst( 2 , TimeUnit.SECONDS )   //两秒钟之内只取一个点击事件，防抖操作
+            RxView.clicks(view)
+                    .throttleFirst(2, TimeUnit.SECONDS)   //两秒钟之内只取一个点击事件，防抖操作
                     .subscribe(new Action1<Void>() {
                         @Override
                         public void call(Void aVoid) {
@@ -232,7 +237,7 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
 //                                showLoading();
                             StartSearch();
                         }
-                    }) ;
+                    });
 
         }
         return false;
@@ -344,17 +349,17 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
         }
         //缓存搜索历史
         save(text);
-        if (index==2 || index == 3){
-            switch (index){
+        if (index == 2 || index == 3) {
+            switch (index) {
                 case 2:
                     String locData = getIntent().getExtras().getString("locData");
                     serverDao.doShopsSearch(locData, page, 15, text, new JsonCallback<BaseResponse<List<SearchModel>>>() {
                         @Override
                         public void onSuccess(BaseResponse<List<SearchModel>> listBaseResponse, Call call, Response response) {
                             KeyBoardUtils.closeKeybord(etSearchContent, SearchActivity.this);
-                            if (page==1){
+                            if (page == 1) {
 //                                dismissDialog();
-                                mData= new ArrayList<>();
+                                mData = new ArrayList<>();
                                 mData.addAll(listBaseResponse.retData);
                                 mAdapter.setNewData(mData);
                                 mAdapter.setEnableLoadMore(true);
@@ -365,14 +370,14 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
                                     mAdapter.setNewData(null);
                                     mAdapter.setEmptyView(R.layout.layout_empty_search);
                                 }
-                            }else {
+                            } else {
                                 mData.addAll(listBaseResponse.retData);
                                 if (listBaseResponse.retData.size() < AppConstants.PAGE_SIZE) {
                                     List<SearchModel> data = new ArrayList<>();
                                     data.addAll(listBaseResponse.retData);
                                     mAdapter.addData(data);
                                     mAdapter.loadMoreEnd();         //加载完成,没有更多内容了
-                                }else {
+                                } else {
                                     List<SearchModel> data = new ArrayList<>();
                                     data.addAll(listBaseResponse.retData);
                                     mAdapter.addData(data);
@@ -380,6 +385,7 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
                                 }
                             }
                         }
+
                         @Override
                         public void onError(Call call, Response response, Exception e) {
                             super.onError(call, response, e);
@@ -388,9 +394,51 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
                         }
                     });
                     break;
+                case 3:
+                    serverDao.getBbs(getUser(this).id, String.valueOf(page),
+                            String.valueOf(AppConstants.PAGE_SIZE), "", text,
+                            new JsonCallback<BaseResponse<Object>>() {
+                                @Override
+                                public void onSuccess(BaseResponse<Object> objectBaseResponse, Call call, Response response) {
+                                    String jsonObject = new Gson().toJson(objectBaseResponse.retData);
+                                    if (llResult.getVisibility() == View.GONE) {
+                                        llResult.setVisibility(View.VISIBLE);
+                                    }
+                                    KeyBoardUtils.closeKeybord(etSearchContent, SearchActivity.this);
+//                        Log.e("tag_f",objectBaseResponse.retData.toString()+"");
+
+                                    BbsBean bbsBean = new Gson().fromJson(jsonObject, BbsBean.class);
+
+                                    artListBeanList.addAll(bbsBean.getArtList());
+                                    if (bbsApdater != null) {
+                                        if (page == 1) {
+                                            bbsApdater.setNewData(artListBeanList);
+                                            bbsApdater.setEnableLoadMore(true);
+                                        } else {
+                                            bbsApdater.addData(bbsBean.getArtList());
+                                            bbsApdater.loadMoreComplete();
+                                        }
+
+                                        if (bbsBean.getArtList().size() < AppConstants.PAGE_SIZE)
+                                            bbsApdater.loadMoreEnd();
+                                    } else {
+                                        setAdapter(bbsBean);
+                                    }
+
+
+                                }
+
+                                @Override
+                                public void onError(Call call, Response response, Exception e) {
+                                    super.onError(call, response, e);
+                                    Log.e("tag_f", e.getMessage().toString() + "");
+                                }
+                            });
+
             }
 
-        }else {
+
+        } else {
             //网络请求
             serverDao.doSearch(type, text, new DialogCallback<BaseResponse<List<SearchModel>>>(this) {
                 @Override
@@ -417,6 +465,58 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
         }
 
 
+    }
+
+    private void setAdapter(BbsBean bbsBean) {
+
+        KeyBoardUtils.closeKeybord(etSearchContent, SearchActivity.this);
+        bbsApdater = new SearchBbsAdapter(artListBeanList, new RecycleItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                ArticleDetailsActivity.startActivity(SearchActivity.this, bbsApdater.getData().get(position).getId(), "");
+
+            }
+
+            @Override
+            public void onCustomClick(View view, int position) {
+                switch (view.getId()) {
+                    case R.id.bbs_item_like_comment:
+                        popAwindow(view, position);
+                        break;
+                    case R.id.bbs_item_like:
+                        collect(bbsApdater.getData().get(position).getId());
+//                        if (data.get(position).id.equals("10")) data.get(position).id = "0";
+//                        else data.get(position).id = "10";
+//                        bbsApdater.notifyItemChanged(position, data.get(position));
+                        break;
+                }
+            }
+        });
+
+        bbsApdater.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+
+                page++;
+                StartSearch();
+
+            }
+        });
+
+
+        mResultRecyclerView.setAdapter(bbsApdater);
+
+
+        if (page == 1) {
+            bbsApdater.setNewData(artListBeanList);
+            bbsApdater.setEnableLoadMore(true);
+        } else {
+            bbsApdater.addData(bbsBean.getArtList());
+            bbsApdater.loadMoreComplete();
+        }
+
+        if (bbsBean.getArtList().size() < AppConstants.PAGE_SIZE)
+            bbsApdater.loadMoreEnd();
     }
 
 
@@ -461,36 +561,31 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
         }
     }
 
+
+    private List<CommentsListBean.CommentsBean> comments = new ArrayList<>();//评论列表
+    private BbsCommentsApdater commentsPopwinAdapter;
+    private int commentPage = 1;
+    private CommentPopwindow popupWindow;
+    /**
+     * 表示当前是回复那个人
+     */
+    private CommentsListBean.CommentsBean commentsBean;
+
     /**
      * 弹出评论列表
      *
      * @param parent
      */
-    private void popAwindow(View parent, int position) {
-        comments = new ArrayList<>();
-        CommentModel comment1 = new CommentModel();
-        comment1.userId = "張三";
-        comment1.createDate = DateUtil.getCustomDateStr(DateUtil.millis(), "MM-dd HH:mm");
-        comment1.content = "張三:這個文章不錯喲";
-        comment1.photo = "https://d-image.i4.cn/i4web/image//upload/20170112/1484183249877077333.jpg";
-        CommentModel comment2 = new CommentModel();
-        comment2.userId = "李三";
-        comment2.createDate = DateUtil.getCustomDateStr(DateUtil.millis(), "MM-dd HH:mm");
-        comment2.content = "李四 回复 张三:多谢支持";
-        comment2.photo = "https://d-image.i4.cn/i4web/image//upload/20170111/1484114886498013658.jpg";
-        CommentModel comment3 = new CommentModel();
-        comment3.userId = "王五";
-        comment3.createDate = DateUtil.getCustomDateStr(DateUtil.millis(), "MM-dd HH:mm");
-        comment3.content = "王五:呵呵";
-        comment3.photo = "https://d-image.i4.cn/i4web/image//upload/20170112/1484185403611050214.jpg";
-        comments.add(comment1);
-//        comments.add(comment2);
-//        comments.add(comment3);
+    private void popAwindow(View parent, final int position) {
+        commentPage = 1;
 
-        commentsPopwinAdapter = new CommentsApdater(comments, new RecycleItemClickListener() {
+        comments.clear();
+
+        commentsPopwinAdapter = new BbsCommentsApdater(comments, new RecycleItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                popupWindow.et_comment.setText(getString(R.string.txt_receive) + comments.get(position).userName + ":");
+                commentsBean = comments.get(position);
+                popupWindow.et_comment.setText(getString(R.string.txt_receive) + comments.get(position).getUserName() + ":");
                 popupWindow.et_comment.setSelection(popupWindow.et_comment.getText().length());
             }
 
@@ -499,31 +594,243 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
 
             }
         });
-        popupWindow = new CommentPopwindow(SearchActivity.this, new View.OnTouchListener() {
+        popupWindow = new CommentPopwindow(this, new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                popupWindow.dismiss();
-                popupWindow.et_comment.setText("");
                 return false;
             }
         });
-        popupWindow.lv_container.getLayoutParams().height = (int) (ScreenUtils.getScreenHeight(SearchActivity.this) * 0.8);
+        popupWindow.lv_container.getLayoutParams().height = (int) (ScreenUtils.getScreenHeight(this) * 0.8);
         popupWindow.lv_container.setAdapter(commentsPopwinAdapter);
         commentsPopwinAdapter.bindToRecyclerView(popupWindow.lv_container);
-        if (comments.size() > 0)
-            popupWindow.lv_container.smoothScrollToPosition(comments.size() - 1);
+//        if (comments.size() > 0)
+//            popupWindow.lv_container.smoothScrollToPosition(comments.size() - 1);
+//        if (comments.size() == 0) {
+//            commentsPopwinAdapter.setNewData(null);
+//            commentsPopwinAdapter.setEmptyView(R.layout.empty_view);
+//            TextView textView = (TextView) commentsPopwinAdapter.getEmptyView().findViewById(R.id.tv_tips);
+//            textView.setText(getString(R.string.empty_no_comment));
+//        }
+
+
+        popupWindow.showAtLocation(parent, Gravity.BOTTOM, ScreenUtils.getScreenWidth(this), 0);
+        popupWindow.btn_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (commentsBean != null) {
+                    //表示是回复
+                    if (popupWindow.et_comment.getText().toString().contains(String.valueOf(getString(R.string.txt_receive) + comments.get(position).getUserName() + ":"))) {
+                        replyComment(popupWindow.et_comment.getText().toString(), position);
+
+                    } else {
+                        //发表评论
+                        releaseComment(popupWindow.et_comment.getText().toString(), position);
+                    }
+
+
+                } else {
+                    //发表评论
+                    releaseComment(popupWindow.et_comment.getText().toString(), position);
+
+
+                }
+
+            }
+        });
+
+
+        //设置评论总数
+        commentsPopwinAdapter.setTotalComments(bbsApdater.getData().get(position).getComments());
+
+        //加载更多
+        commentsPopwinAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+                commentPage++;
+                getComment(position);
+            }
+        });
+
+
+        getComment(position);
+    }
+
+
+    /**
+     * 发表评论
+     *
+     * @param string
+     * @param position
+     */
+    private void releaseComment(String string, final int position) {
+        KeyBoardUtil.closeKeybord(this);
+        progressDialog.show();
+        serverDao.saveComment(getUser(this).id, artListBeanList.get(position).getId(),
+                String.valueOf(artListBeanList.get(position).getCategoryId()), string, "", new JsonCallback<BaseResponse<List>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
+                        progressDialog.dismiss();
+                        ToastUtil.showToast(SearchActivity.this, baseResponse.message + "");
+                        if (baseResponse.errNum.equals("0")) {
+                            popupWindow.et_comment.setText("");
+                            comments.clear();
+                            commentPage = 1;
+
+                            artListBeanList.get(position).setComments(artListBeanList.get(position).getComments() + 1);
+                            bbsApdater.notifyDataSetChanged();
+
+
+                            getComment(position);
+                        } else {
+
+                        }
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        progressDialog.dismiss();
+                    }
+                });
+    }
+
+
+    /**
+     * 回复
+     *
+     * @param string
+     * @param position
+     */
+    private void replyComment(String string, final int position) {
+        KeyBoardUtil.closeKeybord(this);
+        progressDialog.show();
+        serverDao.saveComment(getUser(this).id, artListBeanList.get(position).getId(),
+                String.valueOf(artListBeanList.get(position).getCategoryId()), string.replace(String.valueOf(getString(R.string.txt_receive) + comments.get(position).getUserName() + ":"), ""),
+                commentsBean.getUserId(), new JsonCallback<BaseResponse<List>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<List> baseResponse, Call call, Response response) {
+
+                        progressDialog.dismiss();
+                        ToastUtil.showToast(SearchActivity.this, baseResponse.message + "");
+                        if (baseResponse.errNum.equals("0")) {
+                            popupWindow.et_comment.setText("");
+                            comments.clear();
+                            commentPage = 1;
+                            artListBeanList.get(position).setComments(artListBeanList.get(position).getComments() + 1);
+                            bbsApdater.notifyDataSetChanged();
+                            getComment(position);
+                        } else {
+
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        progressDialog.dismiss();
+                    }
+                });
+    }
+
+
+    /**
+     * 获取评论
+     */
+    private void getComment(int position) {
+        progressDialog.show();
+        serverDao.getCommentList(bbsApdater.getData().get(position).getId(), String.valueOf(commentPage),
+                String.valueOf(AppConstants.PAGE_SIZE),
+                new JsonCallback<BaseResponse<CommentsListBean>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<CommentsListBean> commentsListBeanBaseResponse, Call call, Response response) {
+                        progressDialog.dismiss();
+
+
+                        Log.e("tag_f", commentsListBeanBaseResponse.toString() + "");
+
+                        comments.addAll(commentsListBeanBaseResponse.retData.getComments());
+                        if (commentPage == 1) {
+                            commentsPopwinAdapter.setNewData(comments);
+                            commentsPopwinAdapter.setEnableLoadMore(true);
+                        } else {
+                            commentsPopwinAdapter.addData(commentsListBeanBaseResponse.retData.getComments());
+                            commentsPopwinAdapter.loadMoreComplete();
+                        }
+
+                        if (commentsListBeanBaseResponse.retData.getComments().size() < AppConstants.PAGE_SIZE)
+                            commentsPopwinAdapter.loadMoreEnd();
+
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        Log.e("tag_f", e.getMessage().toString() + "");
+                        progressDialog.dismiss();
+                    }
+                }
+        );
+
         if (comments.size() == 0) {
-            commentsPopwinAdapter.setNewData(null);
+            commentsPopwinAdapter.setNewData(comments);
             commentsPopwinAdapter.setEmptyView(R.layout.empty_view);
             TextView textView = (TextView) commentsPopwinAdapter.getEmptyView().findViewById(R.id.tv_tips);
             textView.setText(getString(R.string.empty_no_comment));
         }
-        popupWindow.showAtLocation(parent, Gravity.BOTTOM, ScreenUtils.getScreenWidth(SearchActivity.this), 0);
-        popupWindow.btn_send.setOnClickListener(new View.OnClickListener() {
+    }
+
+
+    /**
+     * 添加收藏或者取消收藏
+     *
+     * @param id
+     */
+    private void collect(final String id) {
+        progressDialog.show();
+        serverDao.collectBbs(getUser(this).id, id, new JsonCallback<BaseResponse<Object>>() {
             @Override
-            public void onClick(View view) {
+            public void onSuccess(BaseResponse<Object> objectBaseResponse, Call call, Response response) {
+                progressDialog.dismiss();
+                ToastUtil.showToast(SearchActivity.this, objectBaseResponse.message);
+                if (objectBaseResponse.errNum.equals("0")) {
+
+                    for (int i = 0; i < bbsApdater.getData().size(); i++) {
+
+                        if (bbsApdater.getData().get(i).getId().equals(id)) {
+                            if (bbsApdater.getData().get(i).getStatus() == 0) {
+                                bbsApdater.getData().get(i).setStatus(999);
+                                bbsApdater.getData().get(i).setCollections(bbsApdater.getData().get(i).getCollections() + 1);
+                                bbsApdater.notifyDataSetChanged();
+                            } else {
+
+                                bbsApdater.getData().get(i).setStatus(0);
+                                bbsApdater.getData().get(i).setCollections(bbsApdater.getData().get(i).getCollections() - 1);
+
+                                bbsApdater.notifyDataSetChanged();
+                            }
+                        }
+
+
+                    }
+
+
+                } else {
+
+                }
+
 
             }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                progressDialog.dismiss();
+                Log.e("tag_f", e.getMessage().toString() + "");
+            }
         });
+
+
     }
 }

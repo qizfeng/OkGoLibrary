@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
+import com.project.community.ui.life.SearchActivity;
 import com.project.community.util.TablayoutLineReflex;
 
 import java.util.ArrayList;
