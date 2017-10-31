@@ -109,7 +109,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
     private Dialog mDialog;
     private ArticleModel mData = new ArticleModel();
     private int index = 0;
-
+    private LinearLayoutManager mLinearLayoutManager;
     public static void startActivityForResult(Activity context, Bundle bundle, int requestCode){
         Intent intent = new Intent(context, TopicDetailActivity.class);
         intent.putExtra("bundle", bundle);
@@ -175,7 +175,8 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
         mWebView.addJavascriptInterface(new JavascriptInterface(this), "imageListener");
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mLinearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(mLinearLayoutManager);
         SpacesItemDecoration decoration = new SpacesItemDecoration(0, false);
         recyclerView.addItemDecoration(decoration);
         refreshLayout.setOnRefreshListener(this);
@@ -234,7 +235,6 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
             }
         });
 
-        recyclerView.scrollToPosition(0);
         mAdapter.setOnLoadMoreListener(this, recyclerView);
 
 
@@ -244,15 +244,51 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
                 if (comments.size() > 0) {
 //                    recyclerView.smoothScrollToPosition(1);
                     try {
-                        recyclerView.scrollToPosition(2);
+//                        recyclerView.scrollToPosition(2);
+                        moveToPosition(1);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    if (move ){
+                        move = false;
+                        //获取要置顶的项在当前屏幕的位置，mIndex是记录的要置顶项在RecyclerView中的位置
+                        int n = 1 - mLinearLayoutManager.findFirstVisibleItemPosition();
+                        if ( 0 <= n && n < recyclerView.getChildCount()){
+                            //获取要置顶的项顶部离RecyclerView顶部的距离
+                            int top = recyclerView.getChildAt(n).getTop();
+                            //最后的移动
+                            recyclerView.scrollBy(0, top);
+                        }
+                    }
                 }
+                mBottomLayout.setVisibility(View.VISIBLE);
                 return false;
             }
         });
     }
+
+    private boolean move =false;
+    private void moveToPosition(int n) {
+        //先从RecyclerView的LayoutManager中获取第一项和最后一项的Position
+        int firstItem = mLinearLayoutManager.findFirstVisibleItemPosition();
+        int lastItem = mLinearLayoutManager.findLastVisibleItemPosition();
+        //然后区分情况
+        if (n <= firstItem ){
+            //当要置顶的项在当前显示的第一个项的前面时
+            recyclerView.scrollToPosition(n);
+        }else if ( n <= lastItem ){
+            //当要置顶的项已经在屏幕上显示时
+            int top = recyclerView.getChildAt(n - firstItem).getTop();
+            recyclerView.scrollBy(0, top);
+        }else{
+            //当要置顶的项在当前显示的最后一项的后面时
+            recyclerView.scrollToPosition(n);
+            //这里这个变量是用在RecyclerView滚动监听里面的
+            move = true;
+        }
+
+    }
+
 
 
     // 注入js函数监听
@@ -458,7 +494,6 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
                     @Override
                     public void run() {
                         try {
-                            LogUtils.e("url:" + AppConstants.HOST + baseResponse.retData.url);
                             mWebView.loadUrl(AppConstants.HOST + baseResponse.retData.url);
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -624,7 +659,7 @@ public class TopicDetailActivity extends BaseActivity implements SwipeRefreshLay
                     return true;
                 }
                 KeyBoardUtils.closeKeybord(mEtInput, TopicDetailActivity.this);
-                UMWeb web = new UMWeb(mWebView.getUrl());
+                UMWeb web = new UMWeb(AppConstants.HOST+mData.shareHtml+"?artId="+artId);
                 web.setTitle(mData.title);//标题
                 web.setThumb(new UMImage(TopicDetailActivity.this, R.mipmap.ic_launcher_round));  //缩略图
                 web.setDescription(mData.description);//描述

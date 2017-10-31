@@ -463,13 +463,13 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
                     }
                     break;
                 case CODE_RESULT_REQUEST:
-                    if (data != null) {
 //                        Uri uri = Uri.parse(data.getStringExtra("uri"));
-                        Bitmap bitmap = PhotoUtils.getBitmapFromUri(cropImageUri, this);
-                        if (bitmap != null) {
-                            uploadFile(new File(StringUtils.getRealFilePath(UserInfoActivity.this,cropImageUri)));
-                            showImages(bitmap);
-                        }
+                    Bitmap bitmap = PhotoUtils.getBitmapFromUri(cropImageUri, this);
+                    LogUtils.e("=="+cropImageUri);
+                    if (bitmap != null) {
+                        LogUtils.e("==>"+cropImageUri);
+                        uploadFile(new File(StringUtils.getRealFilePath(UserInfoActivity.this, cropImageUri)));
+                        showImages(bitmap);
                     }
                     break;
                 case REQUEST_CODE_NICKNAME://修改昵称
