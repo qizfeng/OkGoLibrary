@@ -93,5 +93,5 @@ public class ArticleModel implements Serializable {
     public SurveyInfoModel surveyInfo = null;
     public int categoryAllowComment;
     public int categoryAllowCollection;
-
+    public String shareHtml;
 }

@@ -108,7 +108,6 @@ public class GovernmentFragment extends BaseFragment {
     }
 
     private void getGovernment() {
-
         serverDao.getGovernmentList(getUser(getActivity()).id, "0", String.valueOf(page), String.valueOf(AppConstants.PAGE_SIZE), new JsonCallback<BaseResponse<List<GovernmentBean>>>() {
             @Override
             public void onSuccess(BaseResponse<List<GovernmentBean>> listBaseResponse, Call call, Response response) {
@@ -116,7 +115,6 @@ public class GovernmentFragment extends BaseFragment {
                 swipeRl.setRefreshing(false);
 
                 if (listBaseResponse.errNum.equals("0")) {
-
                     if (page == 1) {
                         mData.addAll(listBaseResponse.retData);
                         governmentAdapter.setNewData(mData);

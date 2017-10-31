@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -134,6 +135,7 @@ public class CommunityFamilyActivity extends BaseActivity {
                         singleChoiceAdapter.check(position);
                         unitId = unitModelList.get(position).value;
                         loadData();
+
                     }
                 });
                 // 默认选中第一个item
@@ -141,6 +143,18 @@ public class CommunityFamilyActivity extends BaseActivity {
                 mRecyclerViewSelect.setAdapter(singleChoiceAdapter);
             }
         });
+        mRecyclerViewSelect.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                mRecyclerViewSelect.setVisibility(View.GONE);
+                Drawable drawable = getResources().getDrawable(R.mipmap.d44_xiala);
+                drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                TextView tvChoice = item.getActionView().findViewById(R.id.tv_choice);
+                tvChoice.setCompoundDrawables(null, null, drawable, null);
+                return false;
+            }
+        });
+
     }
 
     /**
@@ -176,6 +190,11 @@ public class CommunityFamilyActivity extends BaseActivity {
                         mAdapter.notifyDataSetChanged();
                     }
                 }
+                mRecyclerViewSelect.setVisibility(View.GONE);
+                Drawable drawable = getResources().getDrawable(R.mipmap.d44_xiala);
+                drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                TextView tvChoice = item.getActionView().findViewById(R.id.tv_choice);
+                tvChoice.setCompoundDrawables(null, null, drawable, null);
 
             }
 
@@ -232,10 +251,12 @@ public class CommunityFamilyActivity extends BaseActivity {
         return super.onPrepareOptionsMenu(menu);
     }
 
+    private MenuItem item;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_community_toolbar_choise, menu);
-        final MenuItem item = menu.findItem(R.id.action_all);
+        item = menu.findItem(R.id.action_all);
         item.getActionView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
