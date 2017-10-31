@@ -44,7 +44,7 @@ public class GovernmentAdapter extends BaseQuickAdapter<GovernmentBean, BaseView
             if (item.getWeight().equals("0")) {
                 helper.getView(R.id.iv_image).setVisibility(View.GONE);
             } else {
-                helper.getView(R.id.iv_image).setVisibility(View.GONE);
+                helper.getView(R.id.iv_image).setVisibility(View.VISIBLE);
                 helper.setImageResource(R.id.iv_image,R.mipmap.c1_bq1);
 
             }

@@ -445,11 +445,11 @@ public class SendMessageActivity extends BaseActivity implements View.OnClickLis
                     public void onSuccess(BaseResponse<Object> listBaseResponse, Call call, Response response) {
 
                         progressDialog.dismiss();
-                        ToastUtil.showToast(SendMessageActivity.this, response.message());
+
 
                         if (listBaseResponse.errNum.equals("0")) {
                             finish();
-
+                            ToastUtil.showToast(SendMessageActivity.this, "信息发布成功");
                         } else {
                         }
                     }

@@ -54,7 +54,7 @@ public class ImageBrowseActivity extends BaseActivity {
         search_viewpager.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                finish();
+//                finish();
                 return false;
             }
         });

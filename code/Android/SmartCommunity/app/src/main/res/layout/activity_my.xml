@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    xmlns:xlhRatingBar="http://schemas.android.com/apk/res-auto"
     android:background="@color/common_gray_bg"
     tools:context="com.project.community.ui.me.MyActivity">
 
@@ -31,7 +32,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="吕乐乐"
             android:textColor="@color/color_gray_333333"
             android:textSize="15sp" />
 
@@ -47,7 +47,6 @@
                 android:id="@+id/my_gonghao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="工号 100212151"
                 android:textColor="@color/color_gray_666666"
                 android:textSize="13sp" />
 
@@ -61,10 +60,10 @@
                 android:id="@+id/my_jiedan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="已接75454545单"
                 android:textColor="@color/color_gray_666666"
                 android:textSize="13sp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_marginBottom="21dp"
             android:gravity="center_horizontal"
@@ -73,36 +72,48 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:orientation="horizontal">
-            <ImageView
-                android:id="@+id/my_star_1"
-                android:layout_width="16dp"
-                android:layout_height="15dp"
-                android:layout_marginRight="5dp"
-                android:src="@mipmap/d29_icon1"/>
-            <ImageView
-                android:id="@+id/my_star_2"
-                android:layout_width="16dp"
-                android:layout_height="15dp"
-                android:layout_marginRight="5dp"
-                android:src="@mipmap/d29_icon1_p"/>
-            <ImageView
-                android:id="@+id/my_star_3"
-                android:layout_width="16dp"
-                android:layout_height="15dp"
-                android:layout_marginRight="5dp"
-                android:src="@mipmap/d29_icon1_p"/>
-            <ImageView
-                android:id="@+id/my_star_4"
-                android:layout_width="16dp"
-                android:layout_height="15dp"
-                android:layout_marginRight="5dp"
-                android:src="@mipmap/d29_icon1_p"/>
-            <ImageView
-                android:id="@+id/my_star_5"
-                android:layout_width="16dp"
-                android:layout_height="15dp"
-                android:layout_marginRight="5dp"
-                android:src="@mipmap/d29_icon1_p"/>
+            <com.example.xlhratingbar_lib.XLHRatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                xlhRatingBar:canEdit="false"
+                xlhRatingBar:countSelected="2"
+                xlhRatingBar:differentSize="false"
+                xlhRatingBar:dividerWidth="3dp"
+                xlhRatingBar:starCount="5"
+                xlhRatingBar:stateResId="@drawable/comment_ratingbar_selector_fk"
+                xlhRatingBar:widthAndHeight="20dp" />
+
+            <!--<ImageView-->
+                <!--android:id="@+id/my_star_1"-->
+                <!--android:layout_width="16dp"-->
+                <!--android:layout_height="15dp"-->
+                <!--android:layout_marginRight="5dp"-->
+                <!--android:src="@mipmap/d29_icon1"/>-->
+            <!--<ImageView-->
+                <!--android:id="@+id/my_star_2"-->
+                <!--android:layout_width="16dp"-->
+                <!--android:layout_height="15dp"-->
+                <!--android:layout_marginRight="5dp"-->
+                <!--android:src="@mipmap/d29_icon1_p"/>-->
+            <!--<ImageView-->
+                <!--android:id="@+id/my_star_3"-->
+                <!--android:layout_width="16dp"-->
+                <!--android:layout_height="15dp"-->
+                <!--android:layout_marginRight="5dp"-->
+                <!--android:src="@mipmap/d29_icon1_p"/>-->
+            <!--<ImageView-->
+                <!--android:id="@+id/my_star_4"-->
+                <!--android:layout_width="16dp"-->
+                <!--android:layout_height="15dp"-->
+                <!--android:layout_marginRight="5dp"-->
+                <!--android:src="@mipmap/d29_icon1_p"/>-->
+            <!--<ImageView-->
+                <!--android:id="@+id/my_star_5"-->
+                <!--android:layout_width="16dp"-->
+                <!--android:layout_height="15dp"-->
+                <!--android:layout_marginRight="5dp"-->
+                <!--android:src="@mipmap/d29_icon1_p"/>-->
         </LinearLayout>
     </LinearLayout>
 
@@ -129,7 +140,6 @@
         <TextView
             android:id="@+id/my_pingtai"
             android:gravity="center_vertical"
-            android:text="400-868-468"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"

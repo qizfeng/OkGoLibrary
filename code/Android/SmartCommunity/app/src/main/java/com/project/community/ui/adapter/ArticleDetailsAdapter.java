@@ -134,14 +134,15 @@ public class ArticleDetailsAdapter extends BaseQuickAdapter<CommentsListBean.Com
                 .into((ImageView) baseViewHolder.getView(R.id.iv_header));
         baseViewHolder.setText(R.id.tv_comment, model.getContent());
         baseViewHolder.setText(R.id.tv_name, model.getUserName());
+        baseViewHolder.setText(R.id.tv_date, model.getCreateDate());
 
 
         if (mData.size() > 0)
             if (mData.get(0).getId().equals(model.getId())) {
                 baseViewHolder.setVisible(R.id.tv_comment_num, true);
-//                baseViewHolder.setText(R.id.tv_comment_num, "评论(" + getTotalComments() + ")");
+                baseViewHolder.setText(R.id.tv_comment_num, "评论(" + getTotalComments() + ")");
             } else {
-                baseViewHolder.setVisible(R.id.tv_comment_num, false);
+                baseViewHolder.setVisible(R.id.tv_comment_num, true);
 
             }
 

@@ -306,12 +306,24 @@
             android:label="@string/activity_repairs_details"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".ui.me.AddHouseNumberActivity"
+        <activity
+            android:name=".ui.me.AddHouseNumberActivity"
             android:label="@string/activity_add_house_number"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.life.SearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.life.SearchActivity"
             android:label="搜索"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.me.MyUserActivity"
+            android:label="我的用户"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.me.SearchMyUserActivity"
+            android:label="搜索用户"
+            android:screenOrientation="portrait" />
 
 
         <activity android:name=".ui.life.minsheng.MerchantNavigationActivity" />
@@ -446,9 +458,13 @@
         <activity android:name=".ui.life.minsheng.PublicTransportationActivity" />
         <activity android:name=".ui.life.minsheng.TransportationDetailsActivity" />
         <activity android:name=".ui.life.minsheng.TransportationBaiduMapActivity" />
+
         <activity android:name=".ui.me.CommunityActivity" />
+
         <activity android:name=".ui.me.OrderDetailActivity" />
+
         <activity android:name=".ui.me.MyActivity" />
+
         <activity android:name=".ui.me.ServiesClauseActivity" />
         <activity
             android:name=".ui.life.minsheng.ApplyStoreActivity"
@@ -582,8 +598,9 @@
             android:name=".ui.me.shop_management.BuildNewGoodsActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".ui.me.shop_management.SubdomainsAccountActivity" />
-        <activity android:name=".ui.me.shop_management.AddSubdomainsAccountActivity"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity
+            android:name=".ui.me.shop_management.AddSubdomainsAccountActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".ui.me.all_order.MyOrderActivity" />
         <activity android:name=".ui.me.all_order.TakeDeliveryOfGoodsActivity" />
         <activity android:name=".ui.me.all_order.ApplySaleActivity" />

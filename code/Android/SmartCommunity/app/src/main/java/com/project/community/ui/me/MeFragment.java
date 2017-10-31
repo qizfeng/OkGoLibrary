@@ -18,7 +18,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
@@ -28,9 +27,7 @@ import com.project.community.constants.AppConstants;
 import com.project.community.model.UserModel;
 import com.project.community.ui.life.family.FamilyInfoActivity;
 import com.project.community.ui.life.minsheng.ApplyStoreActivity;
-import com.project.community.ui.me.all_order.AllOrderActivity;
 import com.project.community.ui.me.all_order.MyOrderActivity;
-import com.project.community.ui.me.shop_management.AllProductsActivity;
 import com.project.community.ui.me.shop_management.ShopManagerActivity;
 import com.project.community.ui.user.LoginActivity;
 import com.project.community.ui.user.RegisterActivity;
@@ -114,6 +111,8 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
     ImageView mIvSetting;
     @Bind(R.id.iv_toolbar_setting)
     ImageView mIvToolbarSetting;
+    @Bind(R.id.rl_my_user)
+    RelativeLayout rlMyUser;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -144,6 +143,7 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN);
 
+        rlMyUser.setOnClickListener(this);
         mIvHeader.setOnClickListener(this);
         btn_info.setOnClickListener(this);
         mLayoutMyOrder.setOnClickListener(this);
@@ -166,12 +166,12 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
         mLayoutMyOrder.getLayoutParams().height = ScreenUtils.getScreenWidth(getActivity()) / 3 - 40;
         mLayoutMyCollect.getLayoutParams().height = ScreenUtils.getScreenWidth(getActivity()) / 3 - 40;
         mLayoutMyTopic.getLayoutParams().height = ScreenUtils.getScreenWidth(getActivity()) / 3 - 40;
-        if(!isLogin(getActivity())){
+        if (!isLogin(getActivity())) {
             mLayoutMyRepairOrder.setVisibility(View.GONE);
-        }else {
-            if("3".equals(getUser(getActivity()).roleType)){
+        } else {
+            if ("3".equals(getUser(getActivity()).roleType)) {
                 mLayoutMyRepairOrder.setVisibility(View.VISIBLE);
-            }else {
+            } else {
                 mLayoutMyRepairOrder.setVisibility(View.GONE);
             }
         }
@@ -198,9 +198,9 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
     @Override
     protected void onVisible() {
         super.onVisible();
-        if(!isLogin(getActivity())){
+        if (!isLogin(getActivity())) {
             mLayoutMyRepairOrder.setVisibility(View.GONE);
-        }else {
+        } else {
             loadData();
         }
     }
@@ -221,18 +221,24 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                 break;
             case R.id.layout_my_collect://我的收藏
 //                showToast(getString(R.string.toast_online));
-                startActivity(new Intent(getActivity(),CollectActivity.class));
+                startActivity(new Intent(getActivity(), CollectActivity.class));
 
                 break;
             case R.id.layout_chat://即时聊天
                 break;
             case R.id.layout_my_topic://我的帖子
 //                showToast(getString(R.string.toast_online));
-                startActivity(new Intent(getActivity(),MyForumActivity.class));
+                if (isLogin(getActivity()))
+                    startActivity(new Intent(getActivity(), MyForumActivity.class));
+                else
+                    showToast(getString(R.string.toast_no_login));
                 break;
             case R.id.layout_repair_record://维修记录
 //                showToast(getString(R.string.toast_online));
-                startActivity(new Intent(getActivity(),RepairsRecordActivity.class));
+                if (isLogin(getActivity()))
+                    startActivity(new Intent(getActivity(), RepairsRecordActivity.class));
+                else
+                    showToast(getString(R.string.toast_no_login));
                 break;
             case R.id.layout_family_info://家庭信息
                 if (isLogin(getActivity()))
@@ -254,7 +260,7 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                 break;
             case R.id.layout_system_message://系统消息
 //                showToast(getString(R.string.toast_online));
-                startActivity(new Intent(getActivity(),MessageActivity.class));
+                startActivity(new Intent(getActivity(), MessageActivity.class));
                 break;
             case R.id.btn_login:
                 LoginActivity.startActivity(getActivity());
@@ -267,6 +273,11 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                 break;
             case R.id.iv_toolbar_setting:
                 SettingActivity.startActivity(getActivity());
+                break;
+            //我的用户
+            case R.id.rl_my_user:
+                Intent intent1=new Intent(getActivity(),MyUserActivity.class);
+                startActivity(intent1);
                 break;
         }
     }
@@ -329,17 +340,17 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                 saveUser(getActivity(), userStr);
                 Glide.with(getActivity())
                         .load(AppConstants.HOST + userResponseBaseResponse.retData.photo)
-                       // .placeholder(R.mipmap.d54_tx)
-                       // .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        // .placeholder(R.mipmap.d54_tx)
+                        // .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .bitmapTransform(new CropCircleTransformation(getActivity()))
                         .into(mIvHeader);
                 mTvName.setText(getUser(getActivity()).loginName);
-                if(!isLogin(getActivity())){
+                if (!isLogin(getActivity())) {
                     mLayoutMyRepairOrder.setVisibility(View.GONE);
-                }else {
-                    if("3".equals(getUser(getActivity()).roleType)){
+                } else {
+                    if ("3".equals(getUser(getActivity()).roleType)) {
                         mLayoutMyRepairOrder.setVisibility(View.VISIBLE);
-                    }else {
+                    } else {
                         mLayoutMyRepairOrder.setVisibility(View.GONE);
                     }
                 }
@@ -374,5 +385,19 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                 refreshLayout.setRefreshing(refreshing);
             }
         });
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 }

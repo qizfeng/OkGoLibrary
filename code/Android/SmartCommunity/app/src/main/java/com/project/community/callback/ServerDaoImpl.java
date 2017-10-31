@@ -19,8 +19,10 @@ import com.project.community.bean.ClassifyBean;
 import com.project.community.bean.CommentsListBean;
 import com.project.community.bean.CommunityBean;
 import com.project.community.bean.ForumListBean;
+import com.project.community.bean.GetRepairBean;
 import com.project.community.bean.GovernmentBean;
 import com.project.community.bean.MerchantBean;
+import com.project.community.bean.RepairListBean;
 import com.project.community.bean.RepairsRecordBean;
 import com.project.community.bean.RoomList;
 import com.project.community.constants.AppConstants;
@@ -1225,6 +1227,27 @@ public class ServerDaoImpl implements ServerDao {
                 .tag(mContext)
                 .params("userId", userId)
                 .params("orderNo", orderNo)
+                .execute(callback);
+    }
+
+    @Override
+    public void repairList(String userId, String orderStatus,
+                           String pageNo, String pageSize,
+                           JsonCallback<BaseResponse<List<RepairListBean>>> callback) {
+        OkGo.get(AppConstants.URL_REPAIR_LIST)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("orderStatus", orderStatus)
+                .params("pageNo", pageNo)
+                .params("pageSize", pageSize)
+                .execute(callback);
+    }
+
+    @Override
+    public void getRepair(String userId, JsonCallback<BaseResponse<GetRepairBean>> callback) {
+        OkGo.get(AppConstants.URL_GET_REPAIR)
+                .tag(mContext)
+                .params("userId", userId)
                 .execute(callback);
     }
 

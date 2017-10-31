@@ -438,6 +438,39 @@
                         android:layout_centerVertical="true"
                         android:src="@mipmap/iv_arrow_right" />
                 </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@color/common_gray_bg" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_my_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/layout_item_height"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/press_selector"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:drawableLeft="@mipmap/d54_icon6"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:gravity="center_vertical"
+                        android:text="@string/text_my_user"
+                        android:textColor="@color/txt_color"
+                        android:textSize="@dimen/common_txt_size" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/iv_arrow_right" />
+                </RelativeLayout>
 
                 <View
                     android:layout_width="match_parent"

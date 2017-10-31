@@ -64,6 +64,14 @@ public class BbsCommentsApdater extends BaseQuickAdapter<CommentsListBean.Commen
         });
 
 
+        if (mData.size() > 0)
+            if (mData.get(0).getId().equals(model.getId())) {
+                baseViewHolder.setVisible(R.id.tv_comment_num, true);
+                baseViewHolder.setText(R.id.tv_comment_num, "评论(" + getTotalComments() + ")");
+            } else {
+                baseViewHolder.setVisible(R.id.tv_comment_num, true);
+
+            }
 
         Glide.with(mContext)
                 .load(AppConstants.HOST + model.getPhoto())

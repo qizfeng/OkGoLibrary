@@ -1,5 +1,6 @@
 package com.project.community.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -18,6 +19,7 @@ import com.project.community.base.BaseFragment;
 import com.project.community.bean.GovernmentBean;
 import com.project.community.constants.AppConstants;
 import com.project.community.ui.adapter.GovernmentAdapter;
+import com.project.community.ui.life.TopicDetailActivity;
 import com.project.community.util.ToastUtil;
 
 import java.util.ArrayList;
@@ -56,7 +58,7 @@ public class GovernmentFragment extends BaseFragment {
     protected void initData() {
         steAdapter();
     }
-
+    public static final int REQUEST_CODE_COMMENT=1000;
     private void steAdapter() {
 
         governmentAdapter = new GovernmentAdapter(R.layout.item_government, mData);
@@ -84,7 +86,12 @@ public class GovernmentFragment extends BaseFragment {
         governmentAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+                Intent intent = new Intent(getActivity(), TopicDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("artId", governmentAdapter.getItem(position).getArticleId());
+                bundle.putInt("index", position);
+                intent.putExtra("bundle", bundle);
+                startActivityForResult(intent,REQUEST_CODE_COMMENT);
             }
         });
 
