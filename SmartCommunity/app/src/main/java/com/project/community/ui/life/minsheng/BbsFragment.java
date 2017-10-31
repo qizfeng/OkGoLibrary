@@ -178,12 +178,16 @@ public class BbsFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(DelCommnetEvent event) {
+
         if (popupWindow.isShowing())
             delComment(event.getCommentsBean());
     }
 
     private void delComment(final CommentsListBean.CommentsBean commentsBean) {
-
+        if (!isLogin(getActivity())) {
+            showToast(getString(R.string.toast_no_login));
+            return;
+        }
         KeyBoardUtil.closeKeybord(getActivity());
         progressDialog.show();
         serverDao.delComment(getUser(getActivity()).id, commentsBean.getId(), new JsonCallback<BaseResponse<List>>() {
@@ -219,6 +223,10 @@ public class BbsFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
      * @param id
      */
     private void collect(final String id) {
+        if (!isLogin(getActivity())) {
+            showToast(getString(R.string.toast_no_login));
+            return;
+        }
         progressDialog.show();
         serverDao.collectBbs(getUser(getActivity()).id, id, new JsonCallback<BaseResponse<Object>>() {
             @Override
@@ -423,8 +431,6 @@ public class BbsFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
         });
 
 
-        //设置评论总数
-        commentsPopwinAdapter.setTotalComments(bbsApdater.getData().get(position).getComments());
 
         //加载更多
         commentsPopwinAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
@@ -487,6 +493,10 @@ public class BbsFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
      * @param position
      */
     private void replyComment(String string, final int position) {
+        if (!isLogin(getActivity())) {
+            showToast(getString(R.string.toast_no_login));
+            return;
+        }
         KeyBoardUtil.closeKeybord(getActivity());
         progressDialog.show();
         serverDao.saveComment(getUser(getActivity()).id, mData.get(position).getId(),
@@ -524,6 +534,10 @@ public class BbsFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
      * 获取评论
      */
     private void getComment(int position) {
+        if (!isLogin(getActivity())) {
+            showToast(getString(R.string.toast_no_login));
+            return;
+        }
         progressDialog.show();
         serverDao.getCommentList(bbsApdater.getData().get(position).getId(), String.valueOf(commentPage),
                 String.valueOf(AppConstants.PAGE_SIZE),
@@ -536,12 +550,22 @@ public class BbsFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
                         Log.e("tag_f", commentsListBeanBaseResponse.toString() + "");
 
                         comments.addAll(commentsListBeanBaseResponse.retData.getComments());
+
+
+
                         if (commentPage == 1) {
                             commentsPopwinAdapter.setNewData(comments);
                             commentsPopwinAdapter.setEnableLoadMore(true);
+                            //设置评论总数
+                            commentsPopwinAdapter.setTotalComments(commentsListBeanBaseResponse.retData.getTotal());
+                            commentsPopwinAdapter.notifyDataSetChanged();
+
                         } else {
                             commentsPopwinAdapter.addData(commentsListBeanBaseResponse.retData.getComments());
                             commentsPopwinAdapter.loadMoreComplete();
+                            //设置评论总数
+                            commentsPopwinAdapter.setTotalComments(commentsListBeanBaseResponse.retData.getTotal());
+                            commentsPopwinAdapter.notifyDataSetChanged();
                         }
 
                         if (commentsListBeanBaseResponse.retData.getComments().size() < AppConstants.PAGE_SIZE)

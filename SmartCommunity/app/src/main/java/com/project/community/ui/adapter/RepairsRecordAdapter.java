@@ -40,8 +40,9 @@ public class RepairsRecordAdapter extends BaseQuickAdapter<RepairsRecordBean, Ba
             public void onClick(View view) {
                 TextView textView = helper.getView(R.id.tv_evaluate);
                 if (textView.getText().toString().trim().equals("去评价")) {
-                    EventBus.getDefault().postSticky(item);
                     mContext.startActivity(new Intent(mContext, RepairsEvaluateActivity.class));
+                    RepairsEvaluateActivity.startActivity(mContext,item.getOrderNo());
+
                 }
             }
         });

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/pub_layout_toolbar" />
+
+    <RelativeLayout
+        android:id="@+id/rl_search"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/et_search_content"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginRight="@dimen/dp_15"
+            android:layout_toLeftOf="@+id/tv_cancel"
+            android:background="@drawable/round_et_bg_white"
+            android:drawablePadding="@dimen/dp_10"
+            android:drawableRight="@mipmap/sousuo"
+            android:gravity="start|center_vertical"
+            android:hint="@string/search_name"
+            android:imeOptions="actionSearch"
+            android:maxLines="1"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:singleLine="true"
+            android:textColor="#333333"
+            android:textColorHint="#666666"
+            android:textCursorDrawable="@drawable/edit_cursor_white"
+            android:textSize="@dimen/common_txt_size" />
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#e6e6e6" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyler_cityList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <com.project.community.util.MyLetterListView
+            android:layout_marginTop="60dp"
+            android:id="@+id/letterListView"
+            android:layout_width="20dp"
+            android:layout_height="350dp"
+            android:layout_alignParentRight="true" />
+
+
+        <TextView
+            android:id="@+id/tv_noData"
+            android:visibility="gone"
+            android:gravity="center_horizontal|top"
+            android:paddingTop="50dp"
+            android:layout_width="match_parent"
+            android:background="#eeeeee"
+            android:layout_height="match_parent"
+            android:textColor="@android:color/black"
+            android:text="对不起，未找到匹配数据"/>
+    </RelativeLayout>
+</LinearLayout>

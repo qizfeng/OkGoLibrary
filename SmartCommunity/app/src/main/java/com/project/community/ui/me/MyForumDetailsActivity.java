@@ -17,10 +17,15 @@ import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.bean.ArticleIndexBean;
 import com.project.community.constants.AppConstants;
+import com.project.community.ui.ImageBrowseActivity;
+import com.project.community.ui.life.minsheng.ArticleDetailsActivity;
+import com.project.community.ui.life.minsheng.BBSActivity;
+import com.project.community.ui.life.minsheng.SendMessageActivity;
 import com.project.community.util.ToastUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -131,7 +136,7 @@ public class MyForumDetailsActivity extends BaseActivity {
 
         if (model.getIsShow() == 0) {
             tvAuditContent.setVisibility(View.INVISIBLE);
-            tvAnew.setVisibility(View.GONE);
+            tvAnew.setVisibility(View.VISIBLE);
         } else {
             tvAuditContent.setVisibility(View.VISIBLE);
             tvAuditContent.setText("审核未通过原因：" + model.getAudit_content());
@@ -140,6 +145,10 @@ public class MyForumDetailsActivity extends BaseActivity {
 
 
         List<String> result = Arrays.asList(model.getImagesUrl().split(","));
+        final List<String>  img=new ArrayList<>();
+        for (int i = 0; i < result.size(); i++) {
+            img.add(AppConstants.HOST +result.get(i).toString());
+        }
 
         if (result.size() == 1) {
 
@@ -150,6 +159,12 @@ public class MyForumDetailsActivity extends BaseActivity {
             Glide.with(this)
                     .load(AppConstants.HOST + result.get(0))
                     .into(bbsItemBigImg);
+            bbsItemBigImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ImageBrowseActivity.startActivity(MyForumDetailsActivity.this,new ArrayList<String>(img));
+                }
+            });
 
         } else if (result.size() == 2) {
             bbsItemBigImg.setVisibility(View.GONE);
@@ -161,6 +176,18 @@ public class MyForumDetailsActivity extends BaseActivity {
             Glide.with(this)
                     .load(AppConstants.HOST + result.get(1))
                     .into(bbsItemLlTwoImg2);
+            bbsItemLlTwoImg1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ImageBrowseActivity.startActivity(MyForumDetailsActivity.this,new ArrayList<String>(img));
+                }
+            });
+            bbsItemLlTwoImg2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ImageBrowseActivity.startActivity(MyForumDetailsActivity.this,new ArrayList<String>(img));
+                }
+            });
 
         } else if (result.size() == 3) {
             bbsItemBigImg.setVisibility(View.GONE);
@@ -176,6 +203,24 @@ public class MyForumDetailsActivity extends BaseActivity {
             Glide.with(this)
                     .load(AppConstants.HOST + result.get(2))
                     .into(bbsItemLlThreeImg3);
+            bbsItemLlThreeImg1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ImageBrowseActivity.startActivity(MyForumDetailsActivity.this,new ArrayList<String>(img));
+                }
+            });
+            bbsItemLlThreeImg2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ImageBrowseActivity.startActivity(MyForumDetailsActivity.this,new ArrayList<String>(img));
+                }
+            });
+            bbsItemLlThreeImg3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ImageBrowseActivity.startActivity(MyForumDetailsActivity.this,new ArrayList<String>(img));
+                }
+            });
         } else if (result.size() == 0) {
             bbsItemBigImg.setVisibility(View.GONE);
             bbsItemLlTwoImg.setVisibility(View.GONE);
@@ -190,7 +235,8 @@ public class MyForumDetailsActivity extends BaseActivity {
                 delete();
                 break;
             case R.id.tv_anew:
-                finish();
+                Intent intent =new Intent(MyForumDetailsActivity.this,SendMessageActivity.class);
+                startActivity(intent);
                 break;
         }
     }

@@ -127,7 +127,6 @@
         android:background="@android:color/white"
         android:gravity="top"
         android:hint="@string/address_import_detailed_address"
-        android:inputType="text"
         android:maxLength="60"
         android:padding="12dp"
         android:textColor="@color/color_gray_333333"

@@ -38,6 +38,7 @@ import com.project.community.bean.ArticleBean;
 import com.project.community.bean.CommentsListBean;
 import com.project.community.constants.AppConstants;
 import com.project.community.listener.RecycleItemClickListener;
+import com.project.community.ui.ImageBrowseActivity;
 import com.project.community.ui.adapter.ArticleDetailsAdapter;
 import com.project.community.util.KeyBoardUtil;
 import com.project.community.util.ToastUtil;
@@ -258,8 +259,7 @@ public class ArticleDetailsActivity extends BaseActivity implements SwipeRefresh
 
 
         if (menuItem != null)
-            if (articleBean.getStatus() != 0) {
-
+            if (articleBean.getStatus() == 1) {
                 menuItem.setIcon(R.mipmap.d4_shoucang1_p);
             } else {
                 menuItem.setIcon(R.mipmap.d4_shoucang1);
@@ -267,6 +267,10 @@ public class ArticleDetailsActivity extends BaseActivity implements SwipeRefresh
 
 
         List<String> result = Arrays.asList(articleBean.getImageUrl().split(","));
+        final List<String>  img=new ArrayList<>();
+        for (int i = 0; i < result.size(); i++) {
+            img.add(AppConstants.HOST +result.get(i).toString());
+        }
 
         if (result.size() == 1) {
 
@@ -277,6 +281,13 @@ public class ArticleDetailsActivity extends BaseActivity implements SwipeRefresh
             Glide.with(this)
                     .load(AppConstants.HOST + result.get(0))
                     .into((ImageView) header.findViewById(R.id.bbs_item_big_img));
+
+            header.findViewById(R.id.bbs_item_big_img).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ImageBrowseActivity.startActivity(ArticleDetailsActivity.this,new ArrayList<String> (img));
+                }
+            });
 
         } else if (result.size() == 2) {
             header.findViewById(R.id.bbs_item_big_img).setVisibility(View.GONE);
@@ -289,6 +300,18 @@ public class ArticleDetailsActivity extends BaseActivity implements SwipeRefresh
                     .load(AppConstants.HOST + result.get(1))
                     .into((ImageView) header.findViewById(R.id.bbs_item_ll_two_img_2));
 
+            header.findViewById(R.id.bbs_item_ll_two_img_1).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ImageBrowseActivity.startActivity(ArticleDetailsActivity.this,new ArrayList<String> (img));
+                }
+            });
+            header.findViewById(R.id.bbs_item_ll_two_img_2).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ImageBrowseActivity.startActivity(ArticleDetailsActivity.this,new ArrayList<String> (img));
+                }
+            });
         } else if (result.size() == 3) {
             header.findViewById(R.id.bbs_item_big_img).setVisibility(View.GONE);
             header.findViewById(R.id.bbs_item_ll_two_img).setVisibility(View.GONE);
@@ -303,6 +326,24 @@ public class ArticleDetailsActivity extends BaseActivity implements SwipeRefresh
             Glide.with(this)
                     .load(AppConstants.HOST + result.get(2))
                     .into((ImageView) header.findViewById(R.id.bbs_item_ll_three_img_3));
+            header.findViewById(R.id.bbs_item_ll_three_img_1).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ImageBrowseActivity.startActivity(ArticleDetailsActivity.this,new ArrayList<String> (img));
+                }
+            });
+            header.findViewById(R.id.bbs_item_ll_three_img_2).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ImageBrowseActivity.startActivity(ArticleDetailsActivity.this,new ArrayList<String> (img));
+                }
+            });
+            header.findViewById(R.id.bbs_item_ll_three_img_3).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ImageBrowseActivity.startActivity(ArticleDetailsActivity.this,new ArrayList<String> (img));
+                }
+            });
         } else if (result.size() == 0) {
             header.findViewById(R.id.bbs_item_big_img).setVisibility(View.GONE);
             header.findViewById(R.id.bbs_item_ll_two_img).setVisibility(View.GONE);
@@ -398,9 +439,13 @@ public class ArticleDetailsActivity extends BaseActivity implements SwipeRefresh
                         if (page == 1) {
                             mAdapter.setNewData(comments);
                             mAdapter.setEnableLoadMore(true);
+                            mAdapter.setTotalComments(commentsListBeanBaseResponse.retData.getTotal());
+                            mAdapter.notifyDataSetChanged();
                         } else {
                             mAdapter.addData(commentsListBeanBaseResponse.retData.getComments());
                             mAdapter.loadMoreComplete();
+                            mAdapter.setTotalComments(commentsListBeanBaseResponse.retData.getTotal());
+                            mAdapter.notifyDataSetChanged();
                         }
 
                         if (commentsListBeanBaseResponse.retData.getComments().size() < AppConstants.PAGE_SIZE)
@@ -530,7 +575,10 @@ public class ArticleDetailsActivity extends BaseActivity implements SwipeRefresh
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_send:
-
+                if (!isLogin(this)) {
+                    showToast(getString(R.string.toast_no_login));
+                    return;
+                }
 //                if (TextUtils.isEmpty(recStr)) {
 //                    if (TextUtils.isEmpty(mEtInput.getText().toString())) {
 //                        return;
@@ -655,8 +703,8 @@ public class ArticleDetailsActivity extends BaseActivity implements SwipeRefresh
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.navigation_collect:
-                onCollect(item);
                 KeyBoardUtils.closeKeybord(mEtInput, ArticleDetailsActivity.this);
+                onCollect(item);
                 return true;
             case R.id.navigation_share:
 //                if (mData.category.allowShare == 0 || mData.allowShare == 0) {

@@ -11,9 +11,11 @@ import com.project.community.R;
 import com.project.community.bean.BbsBean;
 import com.project.community.constants.AppConstants;
 import com.project.community.listener.RecycleItemClickListener;
+import com.project.community.ui.ImageBrowseActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -82,7 +84,12 @@ public class BbsApdater extends BaseQuickAdapter<BbsBean.ArtListBean, BaseViewHo
         baseViewHolder.setText(R.id.bbs_item_like_comment_num, model.getComments() + "");
 
 
-        List<String> result = Arrays.asList(model.getImagesUrl().split(","));
+        final List<String> result = Arrays.asList(model.getImagesUrl().split(","));
+
+        final List<String>  img=new ArrayList<>();
+        for (int i = 0; i < result.size(); i++) {
+            img.add(AppConstants.HOST +result.get(i).toString());
+        }
 
         if (result.size() == 1) {
 
@@ -94,6 +101,14 @@ public class BbsApdater extends BaseQuickAdapter<BbsBean.ArtListBean, BaseViewHo
                     .load(AppConstants.HOST + result.get(0))
                     .into((ImageView) baseViewHolder.getView(R.id.bbs_item_big_img));
 
+
+            baseViewHolder.getView(R.id.bbs_item_big_img).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ImageBrowseActivity.startActivity(mContext,new ArrayList<String> (img));
+                }
+            });
+
         } else if (result.size() == 2) {
             baseViewHolder.getView(R.id.bbs_item_big_img).setVisibility(View.GONE);
             baseViewHolder.getView(R.id.bbs_item_ll_two_img).setVisibility(View.VISIBLE);
@@ -104,6 +119,20 @@ public class BbsApdater extends BaseQuickAdapter<BbsBean.ArtListBean, BaseViewHo
             Glide.with(mContext)
                     .load(AppConstants.HOST + result.get(1))
                     .into((ImageView) baseViewHolder.getView(R.id.bbs_item_ll_two_img_2));
+
+
+            baseViewHolder.getView(R.id.bbs_item_ll_two_img_1).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ImageBrowseActivity.startActivity(mContext,new ArrayList<String> (img));
+                }
+            });
+            baseViewHolder.getView(R.id.bbs_item_ll_two_img_2).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ImageBrowseActivity.startActivity(mContext,new ArrayList<String> (img));
+                }
+            });
 
         } else if (result.size() == 3) {
             baseViewHolder.getView(R.id.bbs_item_big_img).setVisibility(View.GONE);
@@ -119,6 +148,26 @@ public class BbsApdater extends BaseQuickAdapter<BbsBean.ArtListBean, BaseViewHo
             Glide.with(mContext)
                     .load(AppConstants.HOST + result.get(2))
                     .into((ImageView) baseViewHolder.getView(R.id.bbs_item_ll_three_img_3));
+            baseViewHolder.getView(R.id.bbs_item_ll_three_img_1).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ImageBrowseActivity.startActivity(mContext, new ArrayList<String> (img));
+                }
+            });
+            baseViewHolder.getView(R.id.bbs_item_ll_three_img_2).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ImageBrowseActivity.startActivity(mContext, new ArrayList<String> (img));
+                }
+            });
+            baseViewHolder.getView(R.id.bbs_item_ll_three_img_3).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ImageBrowseActivity.startActivity(mContext, new ArrayList<String> (img));
+                }
+            });
+
+
         } else if (result.size() == 0) {
             baseViewHolder.getView(R.id.bbs_item_big_img).setVisibility(View.GONE);
             baseViewHolder.getView(R.id.bbs_item_ll_two_img).setVisibility(View.GONE);

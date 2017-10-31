@@ -16,6 +16,7 @@ import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.ui.adapter.BaseFragmentPageAdapter;
 import com.project.community.ui.me.MyAddressActivity;
+import com.project.community.ui.me.MyForumActivity;
 import com.project.community.util.TableLayoutHelper;
 
 import java.util.ArrayList;
@@ -101,8 +102,10 @@ public class MyOrderActivity extends BaseActivity {
                 // User chose the "Settings" item, show the app settings UI...
                 return true;*/
             case R.id.action_favorite:
-                startActivity(new Intent(MyOrderActivity.this, MyAddressActivity.class));
-
+                if (isLogin(this))
+                    startActivity(new Intent(MyOrderActivity.this, MyAddressActivity.class));
+                else
+                    showToast(getString(R.string.toast_no_login));
                 return true;
             default:
                 // If we got here, the user's action was not recognized.

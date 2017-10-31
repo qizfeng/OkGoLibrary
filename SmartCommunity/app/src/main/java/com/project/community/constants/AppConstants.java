@@ -548,6 +548,16 @@ public class AppConstants {
     public static final String URL_DELCART=URL_BASE+"/m/propleLife/shop/cart/delete";
 
     /**
+     * 维修人员维修单
+     */
+    public static final String URL_REPAIR_LIST=URL_BASE+"/m/propRepair/repairList";
+
+    /**
+     * 获取维修人员详情
+     */
+    public static final  String URL_GET_REPAIR=URL_BASE+"/m/propRepair/getRepair";
+
+    /**
      * 上传设备唯一标识符
      */
     public static final String URL_UPLOAD_UDID=URL_BASE+"m/sys/machineCode";

@@ -14,8 +14,10 @@ import com.project.community.bean.ClassifyBean;
 import com.project.community.bean.CommentsListBean;
 import com.project.community.bean.CommunityBean;
 import com.project.community.bean.ForumListBean;
+import com.project.community.bean.GetRepairBean;
 import com.project.community.bean.GovernmentBean;
 import com.project.community.bean.MerchantBean;
+import com.project.community.bean.RepairListBean;
 import com.project.community.bean.RepairsRecordBean;
 import com.project.community.bean.RoomList;
 import com.project.community.model.AgreementResponse;
@@ -1279,5 +1281,32 @@ public interface ServerDao {
             String userId,
             String orderNo,
             JsonCallback<BaseResponse<List>> callback
+    );
+
+    /**
+     * 维修人员获取维修列表
+     * @param userId
+     * @param orderStatus
+     * @param pageNo
+     * @param pageSize
+     * @param callback
+     */
+    void  repairList(
+            String userId,
+            String orderStatus,
+            String pageNo,
+            String pageSize,
+            JsonCallback<BaseResponse<List<RepairListBean>>> callback
+    );
+
+
+    /**
+     * 获取报修列表
+     * @param userId
+     * @param callback
+     */
+    void getRepair(
+            String userId,
+            JsonCallback<BaseResponse<GetRepairBean>> callback
     );
 }

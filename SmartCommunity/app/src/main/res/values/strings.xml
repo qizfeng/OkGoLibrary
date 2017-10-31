@@ -409,4 +409,7 @@
     <string name="text_all_reply">删除全部评论</string>
     <string name="add_house_number">添加房屋编号</string>
     <string name="activity_add_house_number">添加房屋编号</string>
+    <string name="text_my_user">我的用户</string>
+    <string name="search_name">搜索名称</string>
+    <string name="my_user">我的用户</string>
 </resources>

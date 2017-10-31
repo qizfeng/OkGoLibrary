@@ -1,12 +1,13 @@
 package com.project.community.ui.me;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -18,10 +19,7 @@ import com.library.okgo.model.BaseResponse;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.bean.RepairsRecordBean;
-import com.project.community.constants.AppConstants;
 import com.project.community.util.ToastUtil;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -66,6 +64,20 @@ public class RepairsEvaluateActivity extends BaseActivity {
 
     private RepairsRecordBean item;
 
+
+    private String orderNo;
+
+
+    public static void startActivity(Context context, String orderNo) {
+
+        Intent intent = new Intent(context, RepairsEvaluateActivity.class);
+
+        intent.putExtra("orderNo", orderNo);
+
+        context.startActivity(intent);
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,10 +89,11 @@ public class RepairsEvaluateActivity extends BaseActivity {
 
     private void addlistening() {
 
-        item = EventBus.getDefault().getStickyEvent(RepairsRecordBean.class);
+        orderNo = getIntent().getStringExtra("orderNo");
 
-        if (item != null)
-            setView();
+        if (orderNo != null )
+            getData();
+
 
 
         ratingBar.setOnRatingChangeListener(new XLHRatingBar.OnRatingChangeListener() {
@@ -117,6 +130,14 @@ public class RepairsEvaluateActivity extends BaseActivity {
         });
 
 
+    }
+
+    /**
+     * 获取订单详情
+     */
+    private void getData() {
+
+        setView();
     }
 
 
@@ -188,25 +209,17 @@ public class RepairsEvaluateActivity extends BaseActivity {
         }
 
 
-//        serverDao.proRepairCommentSave(getUser(this).id, String.valueOf(page),
-//                String.valueOf(AppConstants.PAGE_SIZE),
-//                new JsonCallback<BaseResponse<List<RepairsRecordBean>>>() {
+//        serverDao.proRepairCommentSave(getUser(this).id, orderNo,
+//                repairId, "", etEvaluate.getText().toString(),
+//                new JsonCallback<BaseResponse<List>>() {
 //                    @Override
-//                    public void onSuccess(BaseResponse<List<RepairsRecordBean>> objectBaseResponse, Call call, Response response) {
+//                    public void onSuccess(BaseResponse<List> listBaseResponse, Call call, Response response) {
 //
-//                        if (swipeRl != null)
-//                            swipeRl.setRefreshing(false);
-//
-//                        mData.addAll(objectBaseResponse.retData);
-//                        if (page == 1) {
-//                            repairsRecordAdapter.setNewData(mData);
-//                            repairsRecordAdapter.setEnableLoadMore(true);
-//                        } else {
-//                            repairsRecordAdapter.addData(objectBaseResponse.retData);
-//                            repairsRecordAdapter.loadMoreComplete();
+//                        if (listBaseResponse.errNum.equals("0")){
+//                            finish();
+//                        }else {
+//                            ToastUtil.showToast(RepairsEvaluateActivity.this,listBaseResponse.message);
 //                        }
-//                        if (objectBaseResponse.retData.size() < AppConstants.PAGE_SIZE)
-//                            repairsRecordAdapter.loadMoreEnd();
 //
 //
 //                    }
@@ -214,12 +227,7 @@ public class RepairsEvaluateActivity extends BaseActivity {
 //                    @Override
 //                    public void onError(Call call, Response response, Exception e) {
 //                        super.onError(call, response, e);
-//                        Log.e("tag_f", e.getMessage().toString() + "");
-//                        if (swipeRl != null)
-//                            swipeRl.setRefreshing(false);
 //                    }
 //                });
-
-
     }
 }

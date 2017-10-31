@@ -21,6 +21,7 @@ import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.bean.RepairsRecordBean;
 import com.project.community.constants.AppConstants;
+import com.project.community.ui.PhoneDialogActivity;
 import com.project.community.ui.adapter.RepairsRecordAdapter;
 
 import java.util.ArrayList;
@@ -190,7 +191,10 @@ public class RepairsRecordActivity extends BaseActivity {
                 return true;*/
 
             case R.id.action_favorite:
-
+                Intent intent = new Intent();
+                intent.putExtra("type", "2");
+                intent.setClass(this, PhoneDialogActivity.class);
+                startActivity(intent);
                 return true;
 
             default:
