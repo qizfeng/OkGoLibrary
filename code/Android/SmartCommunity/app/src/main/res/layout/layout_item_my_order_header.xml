@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
     <TextView
+        android:id="@+id/header_title"
         android:paddingTop="14dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:id="@+id/header_time"
             android:text="2016-12-01    12:00"
             android:textColor="@color/color_gray_999999"
             android:textSize="12sp"
@@ -30,6 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
+            android:id="@+id/header_status"
             android:textColor="@color/color_orange_ff961b"
             android:text="待发货"
             android:textSize="13sp"

@@ -65,6 +65,8 @@
     <string name="txt_shop_settlement">去结算</string>
     <string name="txt_navigation">导航</string>
     <string name="txt_merchant_buy">购买</string>
+    <string name="txt_merchant_pay">支付</string>
+    <string name="txt_merchant_heji">合计: </string>
     <string name="txt_merchant_clear_all">清空全部</string>
     <!--登录-->
     <string name="login_phone_hint">请输入手机号</string>

@@ -40,6 +40,7 @@ import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.listener.RecycleItemClickListener;
 import com.project.community.model.CommentModel;
+import com.project.community.model.OrderModel;
 import com.project.community.ui.adapter.GoodsOrderDetailApdater;
 import com.project.community.ui.adapter.SendMessageAdapter;
 import com.project.community.util.ScreenUtils;
@@ -88,7 +89,7 @@ public class ApplySaleActivity extends BaseActivity implements View.OnClickListe
     MyGridView gridview;
 
     private GoodsOrderDetailApdater mAdapter;//商品详情订单适配器
-    List<CommentModel> list =new ArrayList<>();
+    List<OrderModel> list =new ArrayList<>();
 
     private List<String> mImags = new ArrayList<>(); //上传照片
     private SendMessageAdapter mApplyStoryPicAdapter;
@@ -126,13 +127,13 @@ public class ApplySaleActivity extends BaseActivity implements View.OnClickListe
                 buildNewTvDescribeNum.setText(editable.length()+"/350");
             }
         });
-        for (int i = 0; i < 2; i++) {
-            CommentModel commentModel =new CommentModel();
-            commentModel.id="0";
-            list.add(commentModel);
-        }
+//        for (int i = 0; i < 2; i++) {
+//            CommentModel commentModel =new CommentModel();
+//            commentModel.id="0";
+//            list.add(commentModel);
+//        }
         recylerview.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new GoodsOrderDetailApdater(list, new RecycleItemClickListener() {
+        mAdapter = new GoodsOrderDetailApdater(list.get(0).detailList, new RecycleItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
             }

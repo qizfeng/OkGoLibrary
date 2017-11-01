@@ -29,6 +29,10 @@ public class GoodsModel implements Serializable {
     public String images;
     public String price;
     public String goodId;
+    public String goodName;
+    public String goodImage;
+    public String goodPrice;
+
     public float starLevel;
     public int stock;
     public int cartNum=0;
@@ -41,6 +45,8 @@ public class GoodsModel implements Serializable {
 //                "originalPrice": 20,#原价
 //                "starLevel": 0,
 //                        "stock": 1234#库存
+
+
     @Override
     public String toString() {
         return "GoodsModel{" +
@@ -49,16 +55,25 @@ public class GoodsModel implements Serializable {
                 ", res=" + res +
                 ", goodsName='" + goodsName + '\'' +
                 ", goodsPrice='" + goodsPrice + '\'' +
-                ", originalPrice='" + originalPrice + '\'' +
-                ", star='" + star + '\'' +
-                ", goodsCount='" + goodsCount + '\'' +
-                ", parentPosition='" + parentPosition + '\'' +
-                ", childPosition='" + childPosition + '\'' +
-                ", partentId='" + partentId + '\'' +
-                ", childId='" + childId + '\'' +
+                ", goodsCount=" + goodsCount +
+                ", originalPrice=" + originalPrice +
+                ", star=" + star +
+                ", parentPosition=" + parentPosition +
+                ", childPosition=" + childPosition +
+                ", partentId=" + partentId +
+                ", childId=" + childId +
+                ", id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", images='" + images + '\'' +
+                ", price='" + price + '\'' +
+                ", goodId='" + goodId + '\'' +
+                ", goodName='" + goodName + '\'' +
+                ", goodImage='" + goodImage + '\'' +
+                ", goodPrice='" + goodPrice + '\'' +
+                ", starLevel=" + starLevel +
+                ", stock=" + stock +
+                ", cartNum=" + cartNum +
+                ", number=" + number +
                 '}';
-
     }
-
-
 }

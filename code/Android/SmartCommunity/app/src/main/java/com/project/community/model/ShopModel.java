@@ -56,11 +56,13 @@ public class ShopModel implements Serializable {
 
     public List<GoodsModel> goods;
 
+
     @Override
     public String toString() {
         return "ShopModel{" +
                 "id='" + id + '\'' +
                 ", shopsName='" + shopsName + '\'' +
+                ", totalCost='" + totalCost + '\'' +
                 ", coordinate='" + coordinate + '\'' +
                 ", auditStatus='" + auditStatus + '\'' +
                 ", shopPhoto='" + shopPhoto + '\'' +
@@ -76,8 +78,13 @@ public class ShopModel implements Serializable {
                 ", legalPerson='" + legalPerson + '\'' +
                 ", legalCardPositive='" + legalCardPositive + '\'' +
                 ", legalCardReverse='" + legalCardReverse + '\'' +
+                ", latitude='" + latitude + '\'' +
                 ", distance='" + distance + '\'' +
-                ", starLevel='" + starLevel + '\'' +
+                ", longitude='" + longitude + '\'' +
+                ", auditContent='" + auditContent + '\'' +
+                ", isOpen=" + isOpen +
+                ", starLevel=" + starLevel +
+                ", goods=" + goods +
                 '}';
     }
 }

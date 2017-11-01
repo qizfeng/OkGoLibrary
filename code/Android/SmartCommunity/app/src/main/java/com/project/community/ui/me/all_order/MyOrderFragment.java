@@ -13,15 +13,24 @@ import android.view.ViewGroup;
 
 import com.donkingliang.groupedadapter.adapter.GroupedRecyclerViewAdapter;
 import com.donkingliang.groupedadapter.holder.BaseViewHolder;
+import com.library.okgo.callback.JsonCallback;
+import com.library.okgo.model.BaseResponse;
+import com.library.okgo.utils.GlideImageLoader;
 import com.library.okgo.utils.LogUtils;
+import com.library.okgo.utils.ToastUtils;
 import com.project.community.R;
 import com.project.community.base.BaseFragment;
+import com.project.community.constants.AppConstants;
 import com.project.community.model.CommentModel;
 import com.project.community.model.GoodsModel;
+import com.project.community.model.MerchantDeailModel;
+import com.project.community.model.OrderModel;
 import com.project.community.model.ShoppingCartModel;
 import com.project.community.ui.adapter.AllOrderApdater;
 import com.project.community.ui.adapter.MyOrderApdater;
 import com.project.community.ui.adapter.ShoppingCartAdapter;
+import com.project.community.ui.life.minsheng.MerchantDetailActivity;
+import com.project.community.util.NetworkUtils;
 import com.project.community.view.VpSwipeRefreshLayout;
 
 import java.util.ArrayList;
@@ -29,6 +38,8 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,7 +52,7 @@ public class MyOrderFragment extends BaseFragment implements SwipeRefreshLayout.
     VpSwipeRefreshLayout refreshLayout;
 
     private MyOrderApdater mAdapter;
-    private List<ShoppingCartModel> mData = new ArrayList<>();
+    private List<OrderModel> mData = new ArrayList<>();
 
     private int code;//0:全部,1:待发货2:已发货3:待评价4:售后
 
@@ -63,7 +74,6 @@ public class MyOrderFragment extends BaseFragment implements SwipeRefreshLayout.
     @Override
     protected void initData() {
         code = getArguments().getInt("ncid");
-        mData = getListData();
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN);
         onRefresh();
@@ -99,7 +109,7 @@ public class MyOrderFragment extends BaseFragment implements SwipeRefreshLayout.
         mAdapter.setOnChildClickListener(new GroupedRecyclerViewAdapter.OnChildClickListener() {
             @Override
             public void onChildClick(GroupedRecyclerViewAdapter adapter, BaseViewHolder holder, int groupPosition, int childPosition) {
-                GoodsOrderActivity.startActivity(getActivity(),code);
+                GoodsOrderActivity.startActivity(getActivity(),code,mData.get(groupPosition));
             }
         });
         mRecyclerView.setAdapter(mAdapter);
@@ -107,8 +117,7 @@ public class MyOrderFragment extends BaseFragment implements SwipeRefreshLayout.
 
     @Override
     public void onRefresh() {
-        setRefreshing(true);
-        setRefreshing(false);
+        getData(code);
     }
     /**
      * 设置是否刷新动画
@@ -143,4 +152,37 @@ public class MyOrderFragment extends BaseFragment implements SwipeRefreshLayout.
         myParent.goods = myChildren;
         return myParent;
     }
+
+    /**
+     * D57获取订单列表
+     */
+
+    private void getData(int status) {
+        setRefreshing(true);
+        if (!NetworkUtils.isNetworkAvailable(getActivity())) {
+            ToastUtils.showShortToast(getActivity(), R.string.network_error);
+            setRefreshing(true);
+            return;
+        }
+        serverDao.getOrder(
+                getUser(getActivity()).id,
+                status,
+                new JsonCallback<BaseResponse<List<OrderModel>>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<List<OrderModel>> listBaseResponse, Call call, Response response) {
+                        setRefreshing(false);
+                        mData.clear();
+                        mData.addAll(listBaseResponse.retData);
+                        mAdapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        setRefreshing(false);
+                        showToast(e.getMessage());
+                    }
+                });
+    }
+
 }

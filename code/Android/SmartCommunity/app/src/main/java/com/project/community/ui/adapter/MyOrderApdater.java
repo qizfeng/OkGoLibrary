@@ -2,15 +2,15 @@ package com.project.community.ui.adapter;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.ImageView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.donkingliang.groupedadapter.adapter.GroupedRecyclerViewAdapter;
+import com.donkingliang.groupedadapter.holder.BaseViewHolder;
+import com.library.okgo.utils.GlideImageLoader;
 import com.project.community.R;
-import com.project.community.listener.RecycleItemClickListener;
-import com.project.community.model.CommentModel;
+import com.project.community.constants.AppConstants;
 import com.project.community.model.GoodsModel;
-import com.project.community.model.ShoppingCartModel;
+import com.project.community.model.OrderModel;
 
 import java.util.List;
 
@@ -21,11 +21,11 @@ import java.util.List;
 
 public class MyOrderApdater extends GroupedRecyclerViewAdapter {
 
-    private List<ShoppingCartModel> mGroups;
+    private List<OrderModel> mGroups;
     private OnFooterClickListener onFooterClickListener;
     private OnGoodsClickListener onGoodsClickListener;
 
-    public MyOrderApdater(Context context, List<ShoppingCartModel> groups, OnGoodsClickListener onGoodsClickListener, OnFooterClickListener onFooterClickListener) {
+    public MyOrderApdater(Context context, List<OrderModel> groups, OnGoodsClickListener onGoodsClickListener, OnFooterClickListener onFooterClickListener) {
         super(context);
         mGroups = groups;
         this.onFooterClickListener = onFooterClickListener;
@@ -39,7 +39,7 @@ public class MyOrderApdater extends GroupedRecyclerViewAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        List<GoodsModel> children = mGroups.get(groupPosition).goods;
+        List<GoodsModel> children = mGroups.get(groupPosition).detailList;
         return children == null ? 0 : children.size();
     }
 
@@ -69,13 +69,40 @@ public class MyOrderApdater extends GroupedRecyclerViewAdapter {
     }
 
     @Override
-    public void onBindHeaderViewHolder(com.donkingliang.groupedadapter.holder.BaseViewHolder holder, int groupPosition) {
-        ShoppingCartModel entity = mGroups.get(groupPosition);
+    public void onBindHeaderViewHolder(BaseViewHolder holder, int groupPosition) {
+        OrderModel entity = mGroups.get(groupPosition);
+        holder.setText(R.id.header_title,entity.shopsName)
+                .setText(R.id.header_time,"共"+entity.createDate);
+        switch (entity.orderStatus){
+            case "0"://"0", #未发货
+                holder.setText(R.id.header_status,mContext.getString(R.string.my_order_wait_fahuo));
+                break;
+            case "1"://1：已发货
+                holder.setText(R.id.header_status,mContext.getString(R.string.my_order_end));
+                break;
+            case "2"://2：已完成
+                holder.setText(R.id.header_status,mContext.getString(R.string.my_order_end_over));
+                break;
+            case "3"://3：退货申请
+                holder.setText(R.id.header_status,mContext.getString(R.string.my_order_address_apply_safe_status));
+                break;
+            case "4"://4：退货中
+                holder.setText(R.id.header_status,mContext.getString(R.string.my_order_address_apply_safe_status_ing));
+                break;
+            case "5"://5：已退货
+                holder.setText(R.id.header_status,mContext.getString(R.string.my_order_address_apply_safe_status_end));
+                break;
+
+
+        }
     }
 
     @Override
-    public void onBindFooterViewHolder(final com.donkingliang.groupedadapter.holder.BaseViewHolder holder, final int groupPosition) {
-        ShoppingCartModel entity = mGroups.get(groupPosition);
+    public void onBindFooterViewHolder(final BaseViewHolder holder, final int groupPosition) {
+        OrderModel entity = mGroups.get(groupPosition);
+        holder.setText(R.id.tv_total_price,"¥"+entity.orderAmountTotal)
+                .setText(R.id.tv_goods_count,"共"+entity.goodsCount+"件商品，合计");
+
         holder.get(R.id.item_foot_1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,8 +126,12 @@ public class MyOrderApdater extends GroupedRecyclerViewAdapter {
     }
 
     @Override
-    public void onBindChildViewHolder(com.donkingliang.groupedadapter.holder.BaseViewHolder holder, int groupPosition, int childPosition) {
-        GoodsModel entity = mGroups.get(groupPosition).goods.get(childPosition);
+    public void onBindChildViewHolder(BaseViewHolder holder, int groupPosition, int childPosition) {
+        GoodsModel entity = mGroups.get(groupPosition).detailList.get(childPosition);
+        holder.setText(R.id.item_goods_name,entity.goodsName)
+                .setText(R.id.tv_unit_price,"¥"+entity.goodPrice)
+                .setText(R.id.tv_goods_count,"x"+entity.number);
+        new GlideImageLoader().onDisplayImageWithDefault(mContext, (ImageView) holder.get(R.id.item_goods_cover), AppConstants.URL_BASE+entity.goodImage,R.mipmap.c1_image2);
 
     }
 
