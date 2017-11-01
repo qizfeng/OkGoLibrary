@@ -548,6 +548,43 @@ public class AppConstants {
     public static final String URL_DELCART=URL_BASE+"/m/propleLife/shop/cart/delete";
 
     /**
+<<<<<<< .mine
+     * D56订单提交
+     */
+    public static final String URL_GETORDER=URL_BASE+"/m/propleLife/shop/order/save";
+
+    /**
+     * D确认订单
+     */
+    public static final String URL_SUBMIT=URL_BASE+"/m/propleLife/shop/order/submit";
+
+    /**
+     * D56订单提交
+     */
+    public static final String URL_GETDETAIL=URL_BASE+"/m/propleLife/order/sale/getDetail";
+
+    /**
+     * D55取消订单
+     */
+    public static final String URL_CACELORDER=URL_BASE+"/m/propleLife/shop/order/cancel";
+
+    /**
+     * D55删除订单
+     */
+    public static final String URL_DELETORDER=URL_BASE+"/m/propleLife/shop/order/delete";
+
+    /**
+     * D57订单列表
+     */
+    public static final String URL_GETORDERLIST=URL_BASE+"/m/propleLife/shop/order/list";
+
+    /**
+     * D55确认收货
+     */
+    public static final String URL_COMPLETE=URL_BASE+"/m/propleLife/shop/order/complete";
+
+    /**
+
      * 维修人员维修单
      */
     public static final String URL_REPAIR_LIST=URL_BASE+"/m/propRepair/repairList";
