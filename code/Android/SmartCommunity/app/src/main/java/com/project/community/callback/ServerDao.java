@@ -1098,6 +1098,43 @@ public interface ServerDao {
             JsonCallback<BaseResponse<List<OrderModel>>> callback);
 
     /**
+     * D88商家订单列表
+     *
+     * @param callback
+     */
+    void getlistByShop(
+            String userId,
+            String shopId,
+            String status,
+            JsonCallback<BaseResponse<List<OrderModel>>> callback);
+
+    /**
+     * D58评价
+     *
+     * @param callback
+     */
+    void comment(
+            String userId,
+            String orderNo,
+            String shopId,
+            double starLevel,
+            String content,
+            JsonCallback<BaseResponse<List>> callback);
+
+
+    /**
+     * D59申请售后
+     *
+     * @param callback
+     */
+    void applySale(
+            String userId,
+            String content,
+            String orderNo,
+            String imagesUrl,
+            JsonCallback<BaseResponse<List>> callback);
+
+    /**
      * D55确认收货
      *
      * @param callback
@@ -1108,11 +1145,31 @@ public interface ServerDao {
             JsonCallback<BaseResponse<List>> callback);
 
     /**
+     * D88发货
+     *
+     * @param callback
+     */
+    void send(
+            String userId,
+            String orderNo,
+            JsonCallback<BaseResponse<List>> callback);
+
+    /**
      * D55取消订单
      *
      * @param callback
      */
     void cacelOrder(
+            String userId,
+            String orderNo,
+            JsonCallback<BaseResponse<List>> callback);
+
+   /**
+     * D55删除订单
+     *
+     * @param callback
+     */
+    void deleteOrder(
             String userId,
             String orderNo,
             JsonCallback<BaseResponse<List>> callback);

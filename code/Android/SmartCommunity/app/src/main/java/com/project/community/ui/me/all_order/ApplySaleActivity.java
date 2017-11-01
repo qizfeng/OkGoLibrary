@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -34,16 +35,24 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.library.okgo.callback.JsonCallback;
+import com.library.okgo.model.BaseResponse;
+import com.library.okgo.utils.LogUtils;
 import com.library.okgo.utils.ToastUtils;
 import com.library.okgo.utils.photo.PhotoUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.listener.RecycleItemClickListener;
 import com.project.community.model.CommentModel;
+import com.project.community.model.FileUploadModel;
+import com.project.community.model.GoodsModel;
 import com.project.community.model.OrderModel;
 import com.project.community.ui.adapter.GoodsOrderDetailApdater;
 import com.project.community.ui.adapter.SendMessageAdapter;
+import com.project.community.ui.life.minsheng.ApplyStoreActivity;
+import com.project.community.util.NetworkUtils;
 import com.project.community.util.ScreenUtils;
+import com.project.community.util.StringUtils;
 import com.project.community.view.MyGridView;
 import com.project.community.view.crop.CropImageActivity;
 
@@ -53,6 +62,8 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * Created by cj on 17/9/27.
@@ -73,6 +84,7 @@ public class ApplySaleActivity extends BaseActivity implements View.OnClickListe
     private File fileCropUri = new File(Environment.getExternalStorageDirectory().getPath() + "/crop_photo.jpg");
     private Uri imageUri;
 
+    private String mImagesUri="";
     @Bind(R.id.layout_root)
     LinearLayout mLayoutRoot;
     @Bind(R.id.toolbar)
@@ -89,14 +101,16 @@ public class ApplySaleActivity extends BaseActivity implements View.OnClickListe
     MyGridView gridview;
 
     private GoodsOrderDetailApdater mAdapter;//商品详情订单适配器
-    List<OrderModel> list =new ArrayList<>();
+    List<GoodsModel> list =new ArrayList<>();
+    private OrderModel orderModel;
 
     private List<String> mImags = new ArrayList<>(); //上传照片
     private SendMessageAdapter mApplyStoryPicAdapter;
 
 
-    public static void startActivity(Context context) {
+    public static void startActivity(Context context,OrderModel item) {
         Intent intent = new Intent(context, ApplySaleActivity.class);
+        intent.putExtra("item",item);
         context.startActivity(intent);
     }
 
@@ -110,6 +124,9 @@ public class ApplySaleActivity extends BaseActivity implements View.OnClickListe
     }
 
     private void initData() {
+
+        orderModel= (OrderModel) getIntent().getSerializableExtra("item");
+
         etComment.setOnTouchListener(this);
         etComment.addTextChangedListener(new TextWatcher() {
             @Override
@@ -132,8 +149,10 @@ public class ApplySaleActivity extends BaseActivity implements View.OnClickListe
 //            commentModel.id="0";
 //            list.add(commentModel);
 //        }
+
+        list.addAll(orderModel.detailList);
         recylerview.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new GoodsOrderDetailApdater(list.get(0).detailList, new RecycleItemClickListener() {
+        mAdapter = new GoodsOrderDetailApdater(list, new RecycleItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
             }
@@ -143,7 +162,6 @@ public class ApplySaleActivity extends BaseActivity implements View.OnClickListe
             }
         });
         recylerview.setAdapter(mAdapter);
-
 
         mApplyStoryPicAdapter = new SendMessageAdapter(mImags, this);
         gridview.setAdapter(mApplyStoryPicAdapter);
@@ -155,14 +173,13 @@ public class ApplySaleActivity extends BaseActivity implements View.OnClickListe
                 }
                 if (i == mApplyStoryPicAdapter.getCount() - 1) {
                     showPhotoDialog();
-
                 }
 
             }
         });
     }
-    private PopupWindow mPopupWindow;
 
+    private PopupWindow mPopupWindow;
 
     public void showPhotoDialog() {
         //填充对话框的布局
@@ -295,7 +312,6 @@ public class ApplySaleActivity extends BaseActivity implements View.OnClickListe
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case CODE_CAMERA_REQUEST://拍照完成回调
-                    Log.e("onActivityResult: ",imageUri.toString() );
                     CropImageActivity.startCrop(this, imageUri.toString(), output_X, output_Y, CODE_RESULT_REQUEST);
                     break;
                 case CODE_GALLERY_REQUEST://访问相册完成回调
@@ -325,6 +341,11 @@ public class ApplySaleActivity extends BaseActivity implements View.OnClickListe
                             mApplyStoryPicAdapter.setGoneAdd(1);
                         }
                         mApplyStoryPicAdapter.notifyDataSetChanged();
+                    }
+                    Uri uri = Uri.parse(data.getStringExtra("uri"));
+                    Bitmap bitmap = PhotoUtils.getBitmapFromUri(uri, this);
+                    if (bitmap != null) {
+                        uploadFile(new File(StringUtils.getRealFilePath(ApplySaleActivity.this, uri)));
                     }
 
                     break;
@@ -361,7 +382,11 @@ public class ApplySaleActivity extends BaseActivity implements View.OnClickListe
                     ToastUtils.showLongToast(this,getResources().getString(R.string.apply_sale_pingzheng_hit));
                     return false;
                 }
-                finish();
+                if (!TextUtils.isEmpty(mImagesUri)){
+                    mImagesUri=mImagesUri.substring(0,mImagesUri.length()-1);
+                }
+                applySale(orderModel.orderNo,mImagesUri);
+
                 return true;
             default:
                 // If we got here, the user's action was not recognized.
@@ -369,4 +394,66 @@ public class ApplySaleActivity extends BaseActivity implements View.OnClickListe
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    /**
+     * D59申请售后
+     */
+
+    private void applySale(String orderNo,String imagesUrl) {
+
+        showLoading();
+        if (!NetworkUtils.isNetworkAvailable(this)) {
+            ToastUtils.showShortToast(this, R.string.network_error);
+            dismissDialog();
+            return;
+        }
+
+        serverDao.applySale(
+                getUser(this).id,
+                etComment.getText().toString(),
+                orderNo,
+                imagesUrl,
+                new JsonCallback<BaseResponse<List>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<List> listBaseResponse, Call call, Response response) {
+                        dismissDialog();
+                        finish();
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        dismissDialog();
+                        showToast(e.getMessage());
+                    }
+                });
+    }
+
+
+
+    /**
+     * 文件上传
+     *
+     * @param file
+     */
+    private void uploadFile(File file) {
+        showLoading();
+        serverDao.uploadFile(file, new JsonCallback<BaseResponse<FileUploadModel>>() {
+            @Override
+            public void onSuccess(BaseResponse<FileUploadModel> baseResponse, Call call, Response response) {
+                dismissDialog();
+                mImagesUri+=baseResponse.retData.filePath+",";
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                showToast(e.getMessage());
+                dismissDialog();
+
+            }
+        });
+    }
+
+
 }

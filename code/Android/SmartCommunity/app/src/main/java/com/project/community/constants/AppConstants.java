@@ -515,7 +515,6 @@ public class AppConstants {
      */
     public  final  static  String URL_PROREPAIR_COMPLETE=URL_BASE + "/m/propRepair/complete";
 
-    /*==========================*/
     /**
      * D80商品删除
      */
@@ -548,7 +547,6 @@ public class AppConstants {
     public static final String URL_DELCART=URL_BASE+"/m/propleLife/shop/cart/delete";
 
     /**
-<<<<<<< .mine
      * D56订单提交
      */
     public static final String URL_GETORDER=URL_BASE+"/m/propleLife/shop/order/save";
@@ -557,6 +555,11 @@ public class AppConstants {
      * D确认订单
      */
     public static final String URL_SUBMIT=URL_BASE+"/m/propleLife/shop/order/submit";
+
+    /**
+     * D58评价
+     */
+    public static final String URL_COMMENTGOODS=URL_BASE+"/m/propleLife/order/comment/save";
 
     /**
      * D56订单提交
@@ -579,9 +582,24 @@ public class AppConstants {
     public static final String URL_GETORDERLIST=URL_BASE+"/m/propleLife/shop/order/list";
 
     /**
+     * D88商家订单列表
+     */
+    public static final String URL_GETLISTBYSHOP=URL_BASE+"/m/propleLife/shop/order/listByShop";
+
+    /**
+     * D59申请售后
+     */
+    public static final String URL_APPLYORDER=URL_BASE+"/m/propleLife/order/sale/save";
+
+    /**
      * D55确认收货
      */
     public static final String URL_COMPLETE=URL_BASE+"/m/propleLife/shop/order/complete";
+
+    /**
+     * 发货
+     */
+    public static final String URL_SEND=URL_BASE+"/m/propleLife/shop/order/send";
 
     /**
 

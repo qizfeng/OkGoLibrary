@@ -120,7 +120,7 @@ public class ShopManagerActivity extends BaseActivity {
                 ShopDataActivity.startActivity(this);
                 break;
             case R.id.shop_manager_order_manager://订单管理
-                AllOrderActivity.startActivity(this);
+                AllOrderActivity.startActivity(this,shopId);
                 break;
             case R.id.shop_manager_zhanghao_manager://账号管理
                 SubdomainsAccountActivity.startActivity(this,shopId);

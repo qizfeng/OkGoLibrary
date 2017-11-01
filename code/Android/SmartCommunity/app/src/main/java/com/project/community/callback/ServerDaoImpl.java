@@ -1102,6 +1102,39 @@ public class ServerDaoImpl implements ServerDao {
     }
 
     @Override
+    public void getlistByShop(String userId, String shopId, String status, JsonCallback<BaseResponse<List<OrderModel>>> callback) {
+        OkGo.get(AppConstants.URL_GETLISTBYSHOP)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("shopId", shopId)
+                .params("status", status)
+                .execute(callback);
+    }
+
+    @Override
+    public void comment(String userId, String orderNo, String shopId, double starLevel, String content, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.URL_COMMENTGOODS)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("orderNo", orderNo)
+                .params("shopId", shopId)
+                .params("starLevel", starLevel)
+                .params("content", content)
+                .execute(callback);
+    }
+
+    @Override
+    public void applySale(String userId, String content, String orderNo, String imagesUrl, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.URL_APPLYORDER)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("content", content)
+                .params("orderNo", orderNo)
+                .params("imagesUrl", imagesUrl)
+                .execute(callback);
+    }
+
+    @Override
     public void complete(String userId, String orderNo, JsonCallback<BaseResponse<List>> callback) {
         OkGo.get(AppConstants.URL_COMPLETE)
                 .tag(mContext)
@@ -1111,8 +1144,26 @@ public class ServerDaoImpl implements ServerDao {
     }
 
     @Override
+    public void send(String userId, String orderNo, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.URL_SEND)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("orderNo", orderNo)
+                .execute(callback);
+    }
+
+    @Override
     public void cacelOrder(String userId, String orderNo, JsonCallback<BaseResponse<List>> callback) {
         OkGo.post(AppConstants.URL_CACELORDER)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("orderNo", orderNo)
+                .execute(callback);
+    }
+
+    @Override
+    public void deleteOrder(String userId, String orderNo, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.URL_DELETORDER)
                 .tag(mContext)
                 .params("userId", userId)
                 .params("orderNo", orderNo)

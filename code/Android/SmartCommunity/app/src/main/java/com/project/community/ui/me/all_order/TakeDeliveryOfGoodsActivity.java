@@ -17,13 +17,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.hedgehog.ratingbar.RatingBar;
+import com.library.okgo.callback.JsonCallback;
+import com.library.okgo.model.BaseResponse;
 import com.library.okgo.utils.ToastUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.listener.RecycleItemClickListener;
 import com.project.community.model.CommentModel;
+import com.project.community.model.GoodsModel;
 import com.project.community.model.OrderModel;
 import com.project.community.ui.adapter.GoodsOrderDetailApdater;
+import com.project.community.util.NetworkUtils;
 import com.project.community.util.ToastUtil;
 
 import java.util.ArrayList;
@@ -31,6 +35,8 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * Created by cj on 17/10/24.
@@ -55,11 +61,13 @@ public class TakeDeliveryOfGoodsActivity extends BaseActivity {
     TextView buildNewTvDescribeNum;
 
     private GoodsOrderDetailApdater mAdapter;//商品详情订单适配器
-    List<OrderModel> list =new ArrayList<>();
-    private float rating=2.5f;
+    List<GoodsModel> list =new ArrayList<>();
+    private float rating=4.0f;
+    private OrderModel orderModel;
 
-    public static void startActivity(Context context) {
+    public static void startActivity(Context context ,OrderModel orderModel) {
         Intent intent = new Intent(context, TakeDeliveryOfGoodsActivity.class);
+        intent.putExtra("item",orderModel);
         ((Activity) context).startActivityForResult(intent, 100);
     }
 
@@ -74,12 +82,10 @@ public class TakeDeliveryOfGoodsActivity extends BaseActivity {
     }
 
     private void initData() {
-//        for (int i = 0; i < 2; i++) {
-//            CommentModel commentModel =new CommentModel();
-//            commentModel.id="0";
-//            list.add(commentModel);
-//        }
-        mRatingBar.setStar(2.5f);
+        orderModel= (OrderModel) getIntent().getSerializableExtra("item");
+        list.addAll(orderModel.detailList);
+
+        mRatingBar.setStar(4.0f);
         mRatingBar.setOnRatingChangeListener(
                 new RatingBar.OnRatingChangeListener() {
                     @Override
@@ -92,7 +98,7 @@ public class TakeDeliveryOfGoodsActivity extends BaseActivity {
         );
 
         recylerview.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new GoodsOrderDetailApdater(list.get(0).detailList, new RecycleItemClickListener() {
+        mAdapter = new GoodsOrderDetailApdater(list, new RecycleItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
             }
@@ -134,12 +140,8 @@ public class TakeDeliveryOfGoodsActivity extends BaseActivity {
                     ToastUtil.showToast(TakeDeliveryOfGoodsActivity.this,getString(R.string.take_delivery_of_goods_edit_hit));
                     return false;
                 }
-                Intent intent = new Intent();
-                CommentModel commentModel = new CommentModel();
-                commentModel.rating = rating;
-                intent.putExtra("value",commentModel);
-                setResult(100,intent);
-                finish();
+                comment();
+
                 return true;
             default:
                 // If we got here, the user's action was not recognized.
@@ -147,6 +149,47 @@ public class TakeDeliveryOfGoodsActivity extends BaseActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+    /**
+     * D58评价
+     */
+
+    private void comment() {
+
+        showLoading();
+        if (!NetworkUtils.isNetworkAvailable(this)) {
+            ToastUtils.showShortToast(this, R.string.network_error);
+            dismissDialog();
+            return;
+        }
+
+        serverDao.comment(
+                getUser(this).id,
+                orderModel.orderNo,
+                orderModel.shopId,
+                rating,
+                etComment.getText().toString(),
+                new JsonCallback<BaseResponse<List>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<List> listBaseResponse, Call call, Response response) {
+                        dismissDialog();
+                        showToast(listBaseResponse.message);
+                        Intent intent = new Intent();
+                        CommentModel commentModel = new CommentModel();
+                        commentModel.rating = rating;
+                        intent.putExtra("value",commentModel);
+                        setResult(100,intent);
+                        finish();
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        dismissDialog();
+                        showToast(e.getMessage());
+                    }
+                });
+    }
+
 
 
 
