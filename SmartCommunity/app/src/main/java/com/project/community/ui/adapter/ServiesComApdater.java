@@ -45,5 +45,9 @@ public class ServiesComApdater extends BaseQuickAdapter<RepairListBean, BaseView
             }
         });
 
+        baseViewHolder.setText(R.id.item_title,model.getRoomAddress());
+        baseViewHolder.setText(R.id.item_data,model.getCreateDate());
+        baseViewHolder.setText(R.id.item_type,"【"+model.getOrderType()+"】");
+
     }
 }

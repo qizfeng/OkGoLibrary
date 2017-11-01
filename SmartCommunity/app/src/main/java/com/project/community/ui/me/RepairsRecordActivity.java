@@ -17,12 +17,18 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
+import com.project.community.Event.DelCommnetEvent;
+import com.project.community.Event.RepairsTypeEvent;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.bean.RepairsRecordBean;
 import com.project.community.constants.AppConstants;
 import com.project.community.ui.PhoneDialogActivity;
 import com.project.community.ui.adapter.RepairsRecordAdapter;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +75,7 @@ public class RepairsRecordActivity extends BaseActivity {
 
     private void setTitles() {
         initToolBar(toolbar, tvTitle, true, "报修记录", R.mipmap.iv_back);
+        EventBus.getDefault().register(this);
     }
 
 
@@ -97,7 +104,8 @@ public class RepairsRecordActivity extends BaseActivity {
         repairsRecordAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(RepairsRecordActivity.this, RepairsDetailsActivity.class));
+
+                RepairsDetailsActivity.startActivity(RepairsRecordActivity.this,mData.get(position).getOrderNo());
             }
         });
 
@@ -120,6 +128,23 @@ public class RepairsRecordActivity extends BaseActivity {
         swipeRl.setRefreshing(true);
         getData();
     }
+
+
+    /**
+     * 删除评论
+     *
+     * @param event
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(RepairsTypeEvent event) {
+      if (event.getType()==1){
+          //取消订单
+          propRepairCancel(event.getId());
+      }else if (event.getType()==2){
+          propRepairComplete(event.getId());
+      }
+    }
+
 
 
     /**
@@ -257,7 +282,7 @@ public class RepairsRecordActivity extends BaseActivity {
 
                             for (int i = 0; i < repairsRecordAdapter.getData().size(); i++) {
                                 if (repairsRecordAdapter.getData().get(i).getOrderNo().equals(id)) {
-                                    repairsRecordAdapter.getData().get(i).setHandleStatus("2");
+                                    repairsRecordAdapter.getData().get(i).setOrderStatus("4");
                                     repairsRecordAdapter.notifyDataSetChanged();
 
                                 }
@@ -278,5 +303,11 @@ public class RepairsRecordActivity extends BaseActivity {
                 });
 
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
     }
 }

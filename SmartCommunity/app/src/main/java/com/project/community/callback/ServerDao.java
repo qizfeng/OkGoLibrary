@@ -1,7 +1,5 @@
 package com.project.community.callback;
 
-import android.view.View;
-
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
 import com.library.okgo.model.HttpParams;
@@ -18,6 +16,7 @@ import com.project.community.bean.GetRepairBean;
 import com.project.community.bean.GovernmentBean;
 import com.project.community.bean.MerchantBean;
 import com.project.community.bean.RepairListBean;
+import com.project.community.bean.RepairsDetailsBean;
 import com.project.community.bean.RepairsRecordBean;
 import com.project.community.bean.RoomList;
 import com.project.community.model.AgreementResponse;
@@ -359,8 +358,7 @@ public interface ServerDao {
      * @param coordinate 关键字
      * @param callback
      */
-    void doShopsSearch(String coordinate,int pageNo,int pageSize, String keywords, JsonCallback<BaseResponse<List<SearchModel>>> callback);
-
+    void doShopsSearch(String coordinate, int pageNo, int pageSize, String keywords, JsonCallback<BaseResponse<List<SearchModel>>> callback);
 
 
     /**
@@ -1330,6 +1328,7 @@ public interface ServerDao {
 
     /**
      * 保存房屋编号
+     *
      * @param roomNo
      * @param userId
      * @param callback
@@ -1341,6 +1340,7 @@ public interface ServerDao {
 
     /**
      * 发布报修
+     *
      * @param userId
      * @param orderType
      * @param roomNo
@@ -1361,6 +1361,7 @@ public interface ServerDao {
 
     /**
      * 评价
+     *
      * @param userId
      * @param orderNo
      * @param repairId
@@ -1368,7 +1369,7 @@ public interface ServerDao {
      * @param content
      * @param callback
      */
-    void  proRepairCommentSave(
+    void proRepairCommentSave(
 
             String userId,
             String orderNo,
@@ -1381,11 +1382,12 @@ public interface ServerDao {
 
     /**
      * 取消订单
+     *
      * @param userId
      * @param orderNo
      * @param callback
      */
-    void  propRepairCancel(
+    void propRepairCancel(
             String userId,
             String orderNo,
 
@@ -1395,11 +1397,12 @@ public interface ServerDao {
 
     /**
      * 完成订单
+     *
      * @param userId
      * @param orderNo
      * @param callback
      */
-    void  propRepairComplete(
+    void propRepairComplete(
             String userId,
             String orderNo,
             JsonCallback<BaseResponse<List>> callback
@@ -1407,13 +1410,14 @@ public interface ServerDao {
 
     /**
      * 维修人员获取维修列表
+     *
      * @param userId
      * @param orderStatus
      * @param pageNo
      * @param pageSize
      * @param callback
      */
-    void  repairList(
+    void repairList(
             String userId,
             String orderStatus,
             String pageNo,
@@ -1424,11 +1428,47 @@ public interface ServerDao {
 
     /**
      * 获取报修列表
+     *
      * @param userId
      * @param callback
      */
     void getRepair(
             String userId,
             JsonCallback<BaseResponse<GetRepairBean>> callback
+    );
+
+
+    /**
+     * 获取报修详情
+     * @param userId
+     * @param orderNo
+     * @param callback
+     */
+    void getPropRepair(
+            String userId,
+            String orderNo,
+            JsonCallback<BaseResponse<RepairsDetailsBean>> callback
+    );
+
+
+    /**
+     * 维修人员处理订单
+     * @param userId
+     * @param orderNo
+     * @param callback
+     */
+    void setPropRepairHandle(
+            String userId,
+            String orderNo,
+            JsonCallback<BaseResponse<List>> callback
+    );
+
+
+    void replaySave(
+            String userId,
+            String orderNo,
+            String imagesUrl,
+            String content,
+            JsonCallback<BaseResponse<List>> callback
     );
 }

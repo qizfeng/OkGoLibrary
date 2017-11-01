@@ -18,7 +18,6 @@
             <TextView
                 android:id="@+id/item_title"
                 android:layout_centerVertical="true"
-                android:text="一区一栋1单元1001"
                 android:textSize="14sp"
                 android:textColor="@color/color_gray_333333"
                 android:layout_width="wrap_content"
@@ -26,7 +25,6 @@
             <TextView
                 android:id="@+id/item_data"
                 android:layout_centerVertical="true"
-                android:text="2007-06-20  19:00"
                 android:textSize="12sp"
                 android:layout_marginTop="13dp"
                 android:textColor="@color/color_gray_666666"
@@ -44,7 +42,6 @@
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/item_type"
-                android:text="【处理】"
                 android:textSize="14sp"
                 android:textColor="@color/login_bottom_txt"
                 android:layout_width="wrap_content"

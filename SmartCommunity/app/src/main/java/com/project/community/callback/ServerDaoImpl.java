@@ -23,6 +23,7 @@ import com.project.community.bean.GetRepairBean;
 import com.project.community.bean.GovernmentBean;
 import com.project.community.bean.MerchantBean;
 import com.project.community.bean.RepairListBean;
+import com.project.community.bean.RepairsDetailsBean;
 import com.project.community.bean.RepairsRecordBean;
 import com.project.community.bean.RoomList;
 import com.project.community.constants.AppConstants;
@@ -1358,6 +1359,36 @@ public class ServerDaoImpl implements ServerDao {
         OkGo.get(AppConstants.URL_GET_REPAIR)
                 .tag(mContext)
                 .params("userId", userId)
+                .execute(callback);
+    }
+
+    @Override
+    public void getPropRepair(String userId, String orderNo, JsonCallback<BaseResponse<RepairsDetailsBean>> callback) {
+        OkGo.get(AppConstants.URL_GET_PROPREPAIR)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("orderNo", orderNo)
+                .execute(callback);
+    }
+
+    @Override
+    public void setPropRepairHandle(String userId, String orderNo, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.URL_SET_PROPREPAIR_HANDLE)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("orderNo", orderNo)
+                .execute(callback);
+    }
+
+    @Override
+    public void replaySave(String userId, String orderNo,
+                           String imagesUrl, String content, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.URL_REPLAY_SAVE)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("orderNo", orderNo)
+                .params("imagesUrl", imagesUrl)
+                .params("content", content)
                 .execute(callback);
     }
 

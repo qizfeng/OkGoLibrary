@@ -4,10 +4,13 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.project.community.Event.DisposeEvent;
 import com.project.community.R;
 import com.project.community.bean.RepairListBean;
 import com.project.community.listener.RecycleItemClickListener;
 import com.project.community.model.CommentModel;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -41,7 +44,7 @@ public class ServiesWaitApdater extends BaseQuickAdapter<RepairListBean, BaseVie
         baseViewHolder.getView(R.id.item_dispose).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                EventBus.getDefault().post(new DisposeEvent(model.getOrderNo()));
 
             }
         });

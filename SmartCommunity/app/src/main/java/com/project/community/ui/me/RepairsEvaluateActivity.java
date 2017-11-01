@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -18,7 +19,7 @@ import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
-import com.project.community.bean.RepairsRecordBean;
+import com.project.community.bean.RepairsDetailsBean;
 import com.project.community.util.ToastUtil;
 
 import java.util.List;
@@ -62,7 +63,7 @@ public class RepairsEvaluateActivity extends BaseActivity {
 
     private int rating = 5;
 
-    private RepairsRecordBean item;
+    private RepairsDetailsBean item;
 
 
     private String orderNo;
@@ -88,12 +89,6 @@ public class RepairsEvaluateActivity extends BaseActivity {
     }
 
     private void addlistening() {
-
-        orderNo = getIntent().getStringExtra("orderNo");
-
-        if (orderNo != null )
-            getData();
-
 
 
         ratingBar.setOnRatingChangeListener(new XLHRatingBar.OnRatingChangeListener() {
@@ -130,14 +125,44 @@ public class RepairsEvaluateActivity extends BaseActivity {
         });
 
 
+        getData();
+
     }
 
     /**
      * 获取订单详情
      */
     private void getData() {
+        progressDialog.show();
 
-        setView();
+        orderNo = getIntent().getStringExtra("orderNo");
+
+        if (orderNo == null || orderNo.equals("")) {
+            ToastUtil.showToast(this, "参数错误！");
+            progressDialog.dismiss();
+            return;
+        }
+        serverDao.getPropRepair(getUser(this).id, orderNo,
+                new JsonCallback<BaseResponse<RepairsDetailsBean>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<RepairsDetailsBean> objectBaseResponse, Call call, Response response) {
+                        progressDialog.dismiss();
+                        if (objectBaseResponse.errNum.equals("0")) {
+                            item = objectBaseResponse.retData;
+                            setView();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        Log.e("tag_f", e.getMessage().toString() + "");
+                        progressDialog.dismiss();
+                    }
+                });
+
+
     }
 
 
@@ -146,14 +171,14 @@ public class RepairsEvaluateActivity extends BaseActivity {
      */
     private void setView() {
 
-        if (item.getCreateDate() != null && item.getCreateDate().length() >= 10)
-            tvTime.setText(item.getCreateDate().substring(0, 5));
-        if (item.getCreateDate() != null && item.getCreateDate().length() >= 10)
-            tvTimes.setText(item.getCreateDate().substring(5, 10));
-        tvOrderType.setText("【" + item.getOrderType() + "】");
-        tvOrderNo.setText("订单号：" + item.getOrderNo());
-        tvRoomNo.setText("房屋编号：" + item.getRoomNo());
-        tvRoomAddress.setText(item.getRoomAddress());
+        if (item.getOrder().getCreateDate() != null && item.getOrder().getCreateDate().length() >= 10)
+            tvTime.setText(item.getOrder().getCreateDate().substring(0, 5));
+        if (item.getOrder().getCreateDate() != null && item.getOrder().getCreateDate().length() >= 10)
+            tvTimes.setText(item.getOrder().getCreateDate().substring(5, 10));
+        tvOrderType.setText("【" + item.getOrder().getOrderType() + "】");
+        tvOrderNo.setText("订单号：" + orderNo);
+        tvRoomNo.setText("房屋编号：" + item.getOrder().getRoomNo());
+        tvRoomAddress.setText(item.getOrder().getRoomAddress());
 
 
     }
@@ -203,31 +228,41 @@ public class RepairsEvaluateActivity extends BaseActivity {
      */
     private void submit() {
 
+        if (orderNo == null) {
+            ToastUtil.showToast(this, "参数错误");
+            return;
+        }
+        if (item.getOrder().getRepair().getNo() == null) {
+            ToastUtil.showToast(this, "维修人员参数错误");
+            return;
+        }
+
+
         if (TextUtils.isEmpty(etEvaluate.getText().toString().trim())) {
             ToastUtil.showToast(this, "请输入评价内容");
             return;
         }
 
 
-//        serverDao.proRepairCommentSave(getUser(this).id, orderNo,
-//                repairId, "", etEvaluate.getText().toString(),
-//                new JsonCallback<BaseResponse<List>>() {
-//                    @Override
-//                    public void onSuccess(BaseResponse<List> listBaseResponse, Call call, Response response) {
-//
-//                        if (listBaseResponse.errNum.equals("0")){
-//                            finish();
-//                        }else {
-//                            ToastUtil.showToast(RepairsEvaluateActivity.this,listBaseResponse.message);
-//                        }
-//
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(Call call, Response response, Exception e) {
-//                        super.onError(call, response, e);
-//                    }
-//                });
+        serverDao.proRepairCommentSave(getUser(this).id, orderNo,
+                item.getOrder().getRepair().getId(),String.valueOf(ratingBar.getCountNum()) , etEvaluate.getText().toString(),
+                new JsonCallback<BaseResponse<List>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<List> listBaseResponse, Call call, Response response) {
+
+                        if (listBaseResponse.errNum.equals("0")) {
+                            finish();
+                        } else {
+                            ToastUtil.showToast(RepairsEvaluateActivity.this, listBaseResponse.message);
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                    }
+                });
     }
 }

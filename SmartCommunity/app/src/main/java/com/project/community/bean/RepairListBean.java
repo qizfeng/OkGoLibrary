@@ -20,7 +20,7 @@ public class RepairListBean {
     private String orderNo;
     private String roomAddress;
     private int orderId;
-    private String phone;
+    private int phone;
     private String createDate;
 
     public String getOrderType() {
@@ -55,11 +55,11 @@ public class RepairListBean {
         this.orderId = orderId;
     }
 
-    public String getPhone() {
+    public int getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(int phone) {
         this.phone = phone;
     }
 
