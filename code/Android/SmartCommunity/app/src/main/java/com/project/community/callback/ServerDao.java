@@ -1088,14 +1088,34 @@ public interface ServerDao {
 
 
     /**
-     * D29商家详情
+     * D57订单列表
      *
      * @param callback
      */
     void getOrder(
             String userId,
-            int status,
+            String status,
             JsonCallback<BaseResponse<List<OrderModel>>> callback);
+
+    /**
+     * D55确认收货
+     *
+     * @param callback
+     */
+    void complete(
+            String userId,
+            String orderNo,
+            JsonCallback<BaseResponse<List>> callback);
+
+    /**
+     * D55取消订单
+     *
+     * @param callback
+     */
+    void cacelOrder(
+            String userId,
+            String orderNo,
+            JsonCallback<BaseResponse<List>> callback);
 
 
     /**
