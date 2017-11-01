@@ -217,7 +217,11 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                 break;
             case R.id.layout_my_order://我的订单
 //                showToast(getString(R.string.toast_online));
-                MyOrderActivity.startActivity(getActivity());
+                if (isLogin(getActivity()))
+                    MyOrderActivity.startActivity(getActivity());
+                else
+                    showToast(getString(R.string.toast_no_login));
+
                 break;
             case R.id.layout_my_collect://我的收藏
 //                showToast(getString(R.string.toast_online));
@@ -255,7 +259,12 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                 startActivity(intent);
                 break;
             case R.id.layout_my_repair_order://我的维修单
-                CommunityActivity.startActivity(getActivity());
+
+                if (isLogin(getActivity()))
+                    CommunityActivity.startActivity(getActivity());
+                else
+                    showToast(getString(R.string.toast_no_login));
+
 //                showToast(getString(R.string.toast_online));
                 break;
             case R.id.layout_system_message://系统消息

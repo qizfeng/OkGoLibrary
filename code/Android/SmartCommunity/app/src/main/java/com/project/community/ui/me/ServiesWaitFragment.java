@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
+import com.project.community.Event.DisposeEvent;
 import com.project.community.R;
 import com.project.community.base.BaseFragment;
 import com.project.community.bean.RepairListBean;
@@ -26,6 +27,10 @@ import com.project.community.ui.adapter.ServiesWaitApdater;
 import com.project.community.util.ToastUtil;
 import com.project.community.view.SpacesItemDecoration;
 import com.project.community.view.VpSwipeRefreshLayout;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +64,9 @@ public class ServiesWaitFragment extends BaseFragment {
 
     @Override
     protected void initData() {
+
+        EventBus.getDefault().register(this);
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -68,6 +76,8 @@ public class ServiesWaitFragment extends BaseFragment {
             @Override
             public void onRefresh() {
                 page = 1;
+                mData.clear();
+                mAdapter.notifyDataSetChanged();
                 getData();
             }
         });
@@ -75,9 +85,8 @@ public class ServiesWaitFragment extends BaseFragment {
         mAdapter = new ServiesWaitApdater(mData, new RecycleItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent = new Intent(getActivity(), OrderDetailActivity.class);
-                startActivity(intent);
-//                ToastUtils.showLongToast(getActivity(),position);
+
+                OrderDetailActivity.startActivity(getActivity(),mAdapter.getData().get(position).getOrderNo());
             }
 
             @Override
@@ -100,14 +109,55 @@ public class ServiesWaitFragment extends BaseFragment {
         getData();
     }
 
+    /**
+     * 处理维修
+     *
+     * @param event
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(DisposeEvent event) {
 
+        setPropRepairHandle(event.getId());
+
+    }
+
+
+    /**
+     * 维修端处理订单
+     *
+     * @param id
+     */
+    private void setPropRepairHandle(final String id) {
+        progressDialog.show();
+        serverDao.setPropRepairHandle(getUser(getActivity()).id, id,
+                new JsonCallback<BaseResponse<List>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<List> listBaseResponse, Call call, Response response) {
+                        progressDialog.dismiss();
+                        if (listBaseResponse.errNum.equals("0")) {
+                            for (int i = 0; i < mData.size(); i++) {
+                                if (mData.get(i).getOrderNo().equals(id))
+                                    mAdapter.remove(i);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        Log.e("tag_f", e.getMessage() + "");
+                        progressDialog.dismiss();
+                    }
+                });
+
+    }
 
 
     /**
      * 获取数据
      */
     private void getData() {
-        serverDao.repairList(getUser(getActivity()).id, "0", String.valueOf(page),
+        serverDao.repairList(getUser(getActivity()).id, "1", String.valueOf(page),
                 String.valueOf(AppConstants.PAGE_SIZE),
                 new JsonCallback<BaseResponse<List<RepairListBean>>>() {
                     @Override
@@ -148,5 +198,13 @@ public class ServiesWaitFragment extends BaseFragment {
                 });
 
     }
+
+
+    @Override
+    public void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
+
 
 }

@@ -259,7 +259,7 @@ public class MyOrderFragment extends BaseFragment implements SwipeRefreshLayout.
 
         serverDao.getOrder(
                 getUser(getActivity()).id,
-                status,
+                String.valueOf(status),
                 new JsonCallback<BaseResponse<List<OrderModel>>>() {
                     @Override
                     public void onSuccess(BaseResponse<List<OrderModel>> listBaseResponse, Call call, Response response) {

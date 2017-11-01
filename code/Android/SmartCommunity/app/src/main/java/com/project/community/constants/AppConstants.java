@@ -372,7 +372,7 @@ public class AppConstants {
     /**
      * D75商铺信息首页
      */
-    public static final String URL_SHOPINDEX=URL_BASE+"/m/propleLife/propShops/shopIndex";
+    public static final String URL_SHOPINDEX = URL_BASE + "/m/propleLife/propShops/shopIndex";
 
     /**
      * D83商铺详情
@@ -387,7 +387,7 @@ public class AppConstants {
     /**
      * D77子账号删除
      */
-    public static final String DELETE_SUBDOMAINACCOUNT=URL_BASE+"/m/propleLife/shop/account/delete";
+    public static final String DELETE_SUBDOMAINACCOUNT = URL_BASE + "/m/propleLife/shop/account/delete";
 
     /**
      * D78子账号详情
@@ -435,126 +435,132 @@ public class AppConstants {
     /**
      * 获取论坛评论列表
      */
-    public  final  static  String  URL_GET_COMMENT_LIST=URL_BASE + "/m/propleLife/comment/list";
+    public final static String URL_GET_COMMENT_LIST = URL_BASE + "/m/propleLife/comment/list";
 
 
     /**
      * 发表评论或者评帖子
      */
-    public  final  static  String  URL_SAVE_COMMENT=URL_BASE + "/m/propleLife/comment/save";
+    public final static String URL_SAVE_COMMENT = URL_BASE + "/m/propleLife/comment/save";
 
     /**
      * 删除所有评论
      */
-    public  final  static  String URL_DEL_ALL_COMMENT =URL_BASE + "/m/user/article/deleteAllComments";
+    public final static String URL_DEL_ALL_COMMENT = URL_BASE + "/m/user/article/deleteAllComments";
 
     /**
      * 删除评论
      */
-    public  final  static  String URL_DEL_COMMENT =URL_BASE + "/m/propleLife/comment/delete";
+    public final static String URL_DEL_COMMENT = URL_BASE + "/m/propleLife/comment/delete";
 
     /**
      * 获取帖子详情
      */
-    public  final  static  String  URL_GET_ARTICLE=URL_BASE + "/m/propleLife/article/get";
+    public final static String URL_GET_ARTICLE = URL_BASE + "/m/propleLife/article/get";
 
     /**
      * 搜索
      */
-    public  final  static  String  URL_GET_BBS_SEARCH=URL_BASE + "/m/propleLife/article/get";
+    public final static String URL_GET_BBS_SEARCH = URL_BASE + "/m/propleLife/article/get";
 
     /**
      * 发布的帖子
      */
 
-    public  final  static  String  URL_GET_ARTICLE_INDEX=URL_BASE + "/m/user/article/index";
+    public final static String URL_GET_ARTICLE_INDEX = URL_BASE + "/m/user/article/index";
 
     /**
      * 删除帖子
      */
-    public  final  static  String  URL_DEL_ARTICLE=URL_BASE + "/m/propleLife/article/delete";
+    public final static String URL_DEL_ARTICLE = URL_BASE + "/m/propleLife/article/delete";
     /**
      * 我的回帖
      */
-    public  final  static  String  URL_ARTICLE_REPLIES=URL_BASE + "/m/user/article/replies";
+    public final static String URL_ARTICLE_REPLIES = URL_BASE + "/m/user/article/replies";
 
 
     /**
      * 我的报修记录
      */
-    public final  static  String  URL_REPAIRS_RECORD=URL_BASE + "/m/propRepair/index";
+    public final static String URL_REPAIRS_RECORD = URL_BASE + "/m/propRepair/index";
 
 
     /**
      * 获取报修分类
      */
-    public  final  static  String URL_GET_ROOM_LIST =URL_BASE + "/m/proRepairRoom/index";
+    public final static String URL_GET_ROOM_LIST = URL_BASE + "/m/proRepairRoom/index";
 
     /**
      * 添加房屋编码
      */
-    public  final  static  String URL_SEVA_HOUSE_NUMBER =URL_BASE + "/m/proRepairRoom/save";
+    public final static String URL_SEVA_HOUSE_NUMBER = URL_BASE + "/m/proRepairRoom/save";
 
     /**
      * 提价报修
      */
-    public final  static  String URL_SAVE_PROP_REPAIR=URL_BASE + "/m/propRepair/save";
+    public final static String URL_SAVE_PROP_REPAIR = URL_BASE + "/m/propRepair/save";
 
     /**
      * 评价报修
      */
-    public final  static  String URL_PROREPAIR_COMMENT_SAVE=URL_BASE + "/m/proRepair/comment/save";
+    public final static String URL_PROREPAIR_COMMENT_SAVE = URL_BASE + "/m/proRepair/comment/save";
 
     /**
      * 取消订单
      */
-    public final  static  String URL_PROREPAIR_CANCEL=URL_BASE + "/m/propRepair/cancel";
+    public final static String URL_PROREPAIR_CANCEL = URL_BASE + "/m/propRepair/cancel";
 
     /**
      * 完成订单
      */
-    public  final  static  String URL_PROREPAIR_COMPLETE=URL_BASE + "/m/propRepair/complete";
+    public final static String URL_PROREPAIR_COMPLETE = URL_BASE + "/m/propRepair/complete";
 
     /**
      * D80商品删除
      */
-    public static final String URL_DELGOODS=URL_BASE+"/m/propleLife/shop/goods/delete";
+    public static final String URL_DELGOODS = URL_BASE + "/m/propleLife/shop/goods/delete";
 
     /**
      * D78上下架
      */
-    public static final String URL_UPDOWNGOODS=URL_BASE+"/m/propleLife/shop/goods/upDownGoods";
+    public static final String URL_UPDOWNGOODS = URL_BASE + "/m/propleLife/shop/goods/upDownGoods";
 
 
     /**
      * D27购物车
      */
-    public static final String URL_GETCARTLIST=URL_BASE+"/m/propleLife/shop/cart/list";
+    public static final String URL_GETCARTLIST = URL_BASE + "/m/propleLife/shop/cart/list";
 
     /**
      * D29商家详情
      */
-    public static final String URL_GETSHOPBYUSER=URL_BASE+"/m/propleLife/propShops/getShopByUser";
+    public static final String URL_GETSHOPBYUSER = URL_BASE + "/m/propleLife/propShops/getShopByUser";
 
     /**
      * D27添加购物车
      */
-    public static final String URL_ADDSHOPCART=URL_BASE+"/m/propleLife/shop/cart/save";
+    public static final String URL_ADDSHOPCART = URL_BASE + "/m/propleLife/shop/cart/save";
 
     /**
      * D27购物车删除
      */
-    public static final String URL_DELCART=URL_BASE+"/m/propleLife/shop/cart/delete";
+    public static final String URL_DELCART = URL_BASE + "/m/propleLife/shop/cart/delete";
 
     /**
+<<<<<<< .mine
+     * <<<<<<< .mine
+||||||| .r526
+<<<<<<< .mine
+=======
+>>>>>>> .r531
      * D56订单提交
      */
-    public static final String URL_GETORDER=URL_BASE+"/m/propleLife/shop/order/save";
+    public static final String URL_GETORDER = URL_BASE + "/m/propleLife/shop/order/save";
 
     /**
      * D确认订单
      */
-    public static final String URL_SUBMIT=URL_BASE+"/m/propleLife/shop/order/submit";
+    public static final String URL_SUBMIT = URL_BASE + "/m/propleLife/shop/order/submit";
 
     /**
      * D58评价
@@ -564,22 +570,22 @@ public class AppConstants {
     /**
      * D56订单提交
      */
-    public static final String URL_GETDETAIL=URL_BASE+"/m/propleLife/order/sale/getDetail";
+    public static final String URL_GETDETAIL = URL_BASE + "/m/propleLife/order/sale/getDetail";
 
     /**
      * D55取消订单
      */
-    public static final String URL_CACELORDER=URL_BASE+"/m/propleLife/shop/order/cancel";
+    public static final String URL_CACELORDER = URL_BASE + "/m/propleLife/shop/order/cancel";
 
     /**
      * D55删除订单
      */
-    public static final String URL_DELETORDER=URL_BASE+"/m/propleLife/shop/order/delete";
+    public static final String URL_DELETORDER = URL_BASE + "/m/propleLife/shop/order/delete";
 
     /**
      * D57订单列表
      */
-    public static final String URL_GETORDERLIST=URL_BASE+"/m/propleLife/shop/order/list";
+    public static final String URL_GETORDERLIST = URL_BASE + "/m/propleLife/shop/order/list";
 
     /**
      * D88商家订单列表
@@ -594,7 +600,7 @@ public class AppConstants {
     /**
      * D55确认收货
      */
-    public static final String URL_COMPLETE=URL_BASE+"/m/propleLife/shop/order/complete";
+    public static final String URL_COMPLETE = URL_BASE + "/m/propleLife/shop/order/complete";
 
     /**
      * 发货
@@ -605,17 +611,33 @@ public class AppConstants {
 
      * 维修人员维修单
      */
-    public static final String URL_REPAIR_LIST=URL_BASE+"/m/propRepair/repairList";
+    public static final String URL_REPAIR_LIST = URL_BASE + "/m/propRepair/repairList";
 
     /**
      * 获取维修人员详情
      */
-    public static final  String URL_GET_REPAIR=URL_BASE+"/m/propRepair/getRepair";
+    public static final String URL_GET_REPAIR = URL_BASE + "/m/propRepair/getRepair";
 
     /**
      * 上传设备唯一标识符
      */
-    public static final String URL_UPLOAD_UDID=URL_BASE+"m/sys/machineCode";
+    public static final String URL_UPLOAD_UDID = URL_BASE + "m/sys/machineCode";
+
+
+    /**
+     * 获取报修详情
+     */
+    public static final String URL_GET_PROPREPAIR = URL_BASE + "/m/propRepair/get";
+
+
+
+    public  static  final  String  URL_SET_PROPREPAIR_HANDLE=URL_BASE + "/m/propRepair/handle";
+
+
+    /**
+     * 维修人员回复
+     */
+    public static final  String  URL_REPLAY_SAVE=URL_BASE + "/m/proRepair/replay/save";
 
     /**
      * 分页大小

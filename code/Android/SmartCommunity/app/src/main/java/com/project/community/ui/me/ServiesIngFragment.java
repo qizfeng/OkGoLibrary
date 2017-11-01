@@ -3,6 +3,7 @@ package com.project.community.ui.me;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -17,15 +18,12 @@ import android.view.ViewGroup;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
-import com.library.okgo.utils.ToastUtils;
 import com.project.community.R;
 import com.project.community.base.BaseFragment;
 import com.project.community.bean.RepairListBean;
 import com.project.community.constants.AppConstants;
 import com.project.community.listener.RecycleItemClickListener;
-import com.project.community.model.CommentModel;
 import com.project.community.ui.adapter.ServiesIngApdater;
-import com.project.community.ui.adapter.ServiesWaitApdater;
 import com.project.community.util.ToastUtil;
 import com.project.community.view.SpacesItemDecoration;
 import com.project.community.view.VpSwipeRefreshLayout;
@@ -42,7 +40,7 @@ import okhttp3.Response;
  * A simple {@link Fragment} subclass.
  * 服务中
  */
-public class ServiesIngFragment extends BaseFragment  {
+public class ServiesIngFragment extends BaseFragment {
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
     @Bind(R.id.refreshLayout)
@@ -51,6 +49,7 @@ public class ServiesIngFragment extends BaseFragment  {
     ServiesIngApdater mAdapter;
     List<RepairListBean> mData = new ArrayList<>();
     private int page = 1;
+
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_servies_ing, container, false);
@@ -69,6 +68,8 @@ public class ServiesIngFragment extends BaseFragment  {
             @Override
             public void onRefresh() {
                 page = 1;
+                mData.clear();
+                mAdapter.notifyDataSetChanged();
                 getData();
             }
         });
@@ -77,14 +78,16 @@ public class ServiesIngFragment extends BaseFragment  {
             @Override
             public void onItemClick(View view, int position) {
 //                ToastUtils.showLongToast(getActivity(),position);
-                Intent intent = new Intent(getActivity(), OrderDetailActivity.class);
-                startActivity(intent);
+                OrderDetailActivity.startActivity(getActivity(), mAdapter.getData().get(position).getOrderNo());
+
             }
 
             @Override
             public void onCustomClick(View view, int position) {
-
-                ToastUtils.showLongToast(getActivity(),"电话"+position);
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + position));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+//                ToastUtils.showLongToast(getActivity(),"电话"+position);
             }
         });
         mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
@@ -96,12 +99,14 @@ public class ServiesIngFragment extends BaseFragment  {
         });
 
         recyclerView.setAdapter(mAdapter);
+        getData();
     }
+
     /**
      * 获取数据
      */
     private void getData() {
-        serverDao.repairList(getUser(getActivity()).id, "1", String.valueOf(page),
+        serverDao.repairList(getUser(getActivity()).id, "2", String.valueOf(page),
                 String.valueOf(AppConstants.PAGE_SIZE),
                 new JsonCallback<BaseResponse<List<RepairListBean>>>() {
                     @Override

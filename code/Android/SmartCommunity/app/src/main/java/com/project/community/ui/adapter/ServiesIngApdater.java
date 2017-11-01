@@ -36,8 +36,13 @@ public class ServiesIngApdater extends BaseQuickAdapter<RepairListBean, BaseView
         baseViewHolder.setOnClickListener(R.id.itme_tel, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                itemClickListener.onCustomClick(view, baseViewHolder.getLayoutPosition());
+                itemClickListener.onCustomClick(view, model.getPhone());
             }
         });
+
+        baseViewHolder.setText(R.id.item_title,model.getRoomAddress());
+        baseViewHolder.setText(R.id.item_data,model.getCreateDate());
+        baseViewHolder.setText(R.id.item_type,"【"+model.getOrderType()+"】");
+
     }
 }

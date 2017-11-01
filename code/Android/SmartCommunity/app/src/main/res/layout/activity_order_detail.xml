@@ -32,7 +32,6 @@
                     android:drawableLeft="@mipmap/d24_icon1"
                     android:textSize="@dimen/sp_12"
                     android:textColor="@color/color_gray_333333"
-                    android:text="一区一栋1单元1001"
                     android:background="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="62dp" />
@@ -65,7 +64,6 @@
                         android:gravity="center_vertical"
                         android:textSize="@dimen/sp_12"
                         android:textColor="@color/color_gray_333333"
-                        android:text="西贝"
                         android:background="@color/white"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
@@ -98,7 +96,6 @@
                         android:gravity="center_vertical"
                         android:textSize="@dimen/sp_12"
                         android:textColor="@color/color_gray_333333"
-                        android:text="水电"
                         android:background="@color/white"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
@@ -114,19 +111,87 @@
                     android:gravity="center_vertical"
                     android:textSize="@dimen/sp_12"
                     android:textColor="@color/color_gray_333333"
-                    android:text="水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电水电"
                     android:background="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
-                <GridView
-                    android:id="@+id/order_detail_imgs"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:horizontalSpacing="6dp"
-                    android:background="@color/white"
-                    android:numColumns="3"/>
+                    android:background="@android:color/white"
+                    android:orientation="vertical">
+
+
+                    <ImageView
+                        android:id="@+id/bbs_item_big_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_margin="15dp"
+                        android:scaleType="centerCrop"
+                        android:src="@color/black"
+                        android:visibility="gone" />
+
+                    <LinearLayout
+                        android:id="@+id/bbs_item_ll_two_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:id="@+id/bbs_item_ll_two_img_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="122dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:scaleType="centerCrop"
+                            android:src="@color/black" />
+
+                        <ImageView
+                            android:id="@+id/bbs_item_ll_two_img_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="122dp"
+                            android:layout_weight="1"
+                            android:scaleType="centerCrop"
+                            android:src="@color/black" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/bbs_item_ll_three_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/bbs_item_ll_three_img_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="111dp"
+                            android:layout_marginRight="6dp"
+                            android:layout_weight="1"
+                            android:scaleType="centerCrop"
+                            android:src="@color/black" />
+
+                        <ImageView
+                            android:id="@+id/bbs_item_ll_three_img_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="111dp"
+                            android:layout_marginRight="6dp"
+                            android:layout_weight="1"
+                            android:scaleType="centerCrop"
+                            android:src="@color/black" />
+
+                        <ImageView
+                            android:id="@+id/bbs_item_ll_three_img_3"
+                            android:layout_width="match_parent"
+                            android:layout_height="111dp"
+                            android:layout_weight="1"
+                            android:scaleType="centerCrop"
+                            android:src="@color/black" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
                 <LinearLayout
                     android:background="@color/white"
                     android:paddingTop="10dp"
@@ -156,7 +221,6 @@
                         android:gravity="center_vertical"
                         android:textSize="@dimen/sp_12"
                         android:textColor="@color/color_gray_333333"
-                        android:text="2017/01/01  10:00"
                         android:background="@color/white"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
@@ -190,7 +254,6 @@
                         android:gravity="center_vertical"
                         android:textSize="11sp"
                         android:textColor="@color/color_gray_999999"
-                        android:text="44121215111212121"
                         android:background="@color/white"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
@@ -224,7 +287,6 @@
                         android:gravity="center_vertical"
                         android:textSize="11sp"
                         android:textColor="@color/color_gray_999999"
-                        android:text="2017-01-01  10:00:53"
                         android:background="@color/white"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
@@ -252,6 +314,13 @@
 
                     </android.support.v7.widget.RecyclerView>
                 </RelativeLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/ll_evaluate">
 
 
                 <LinearLayout
@@ -304,6 +373,7 @@
                     android:numColumns="3">
 
                 </com.project.community.view.MyGridView>
+                </LinearLayout>
             </LinearLayout>
         </com.project.community.view.MyScrollview>
 
