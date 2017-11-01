@@ -193,7 +193,7 @@ public class MerchantDetailActivity extends BaseActivity {
 
                     @Override
                     public void onSuccess(BaseResponse<List> listBaseResponse, Call call, Response response) {
-                        EventBus.getDefault().post(new CartRefreshEvent(""));
+                        EventBus.getDefault().post(new CartRefreshEvent("1"));
                         dismissDialog();
                         if (count > 0) {
                             tv_count.setText((count)+"");
@@ -245,7 +245,7 @@ public class MerchantDetailActivity extends BaseActivity {
 
                     @Override
                     public void onSuccess(BaseResponse<List> listBaseResponse, Call call, Response response) {
-                        EventBus.getDefault().post(new CartRefreshEvent(""));
+                        EventBus.getDefault().post(new CartRefreshEvent("1"));
                         dismissDialog();
                         tv_count.setText((count)+"");
                         tv_count.setVisibility(View.VISIBLE);
@@ -320,7 +320,7 @@ public class MerchantDetailActivity extends BaseActivity {
 
                     @Override
                     public void onSuccess(BaseResponse<List> listBaseResponse, Call call, Response response) {
-                        EventBus.getDefault().post(new CartRefreshEvent(""));
+                        EventBus.getDefault().post(new CartRefreshEvent("1"));
                         dismissDialog();
                         totalCount--;
                         if (totalCount > 0) {
@@ -373,7 +373,7 @@ public class MerchantDetailActivity extends BaseActivity {
 
                     @Override
                     public void onSuccess(BaseResponse<List> listBaseResponse, Call call, Response response) {
-                        EventBus.getDefault().post(new CartRefreshEvent(""));
+                        EventBus.getDefault().post(new CartRefreshEvent("1"));
                         dismissDialog();
                         tv_count.setText("" + count);
 //                tv_price.setText("¥" + mMerchantCartPopwinAdapter.getData().get(position).goodsPrice * count);
@@ -799,7 +799,7 @@ public class MerchantDetailActivity extends BaseActivity {
             @Override
             public void onSuccess(BaseResponse<List> listBaseResponse, Call call, Response response) {
                 dismissDialog();
-                EventBus.getDefault().post(new CartRefreshEvent(""));
+                EventBus.getDefault().post(new CartRefreshEvent("1"));
                 showToast(listBaseResponse.message);
                 mDialog.dismiss();
                 for (int i = 0; i < mData.size(); i++) {
@@ -903,7 +903,7 @@ public class MerchantDetailActivity extends BaseActivity {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(ChangeAddressEvent def) {
-        finish();
+    public void onEventMainThread(CartRefreshEvent def) {
+        if (!def.getItem().equals("1")) finish();
     }
 }

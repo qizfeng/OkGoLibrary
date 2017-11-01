@@ -43,11 +43,13 @@ public class AllOrderActivity extends BaseActivity {
     @Bind(R.id.bbs_viewpager)
     ViewPager mViewpager;
 
+    private String shopId;
     private MyFrageStatePagerAdapter mAdapter;
     List<Fragment> mFragmentsList = new ArrayList<>();
 
-    public static void startActivity(Context context){
+    public static void startActivity(Context context,String shopId){
         Intent intent = new Intent(context,AllOrderActivity.class);
+        intent.putExtra("shopId",shopId);
         context.startActivity(intent);
     }
 
@@ -60,15 +62,17 @@ public class AllOrderActivity extends BaseActivity {
     }
 
     private void ininData() {
+        shopId=getIntent().getStringExtra("shopId");
         initToolBar(mToolBar, mTvTitle, true, getString(R.string.all_order_title), R.mipmap.iv_back);
-        mFragmentsList.add(AllOrderFragment.newInstance(1));
-        mFragmentsList.add(AllOrderFragment.newInstance(2));
-        mFragmentsList.add(AllOrderFragment.newInstance(3));
-        mFragmentsList.add(AllOrderFragment.newInstance(4));
-        mFragmentsList.add(AllOrderFragment.newInstance(5));
-        mFragmentsList.add(AllOrderFragment.newInstance(6));
+        mFragmentsList.add(AllOrderFragment.newInstance("",shopId));
+        mFragmentsList.add(AllOrderFragment.newInstance("0",shopId));
+        mFragmentsList.add(AllOrderFragment.newInstance("1",shopId));
+        mFragmentsList.add(AllOrderFragment.newInstance("2",shopId));
+        mFragmentsList.add(AllOrderFragment.newInstance("4",shopId));//售后
+        mFragmentsList.add(AllOrderFragment.newInstance("5",shopId));
         mAdapter = new MyFrageStatePagerAdapter(getSupportFragmentManager());
         mViewpager.setAdapter(mAdapter);
+        mViewpager.setOffscreenPageLimit(mFragmentsList.size());
         tabLayout.setupWithViewPager(mViewpager);
         tabLayout.post(new Runnable() {
             @Override
@@ -81,7 +85,7 @@ public class AllOrderActivity extends BaseActivity {
     class MyFrageStatePagerAdapter extends FragmentStatePagerAdapter {
 
         FragmentManager fm;
-        private String[] mTitles = new String[]{"全部","代发货","已发货","已完成","售后","已下架"};
+        private String[] mTitles = new String[]{"全部","待发货","已发货","已完成","售后","已下架"};
 
         public MyFrageStatePagerAdapter(FragmentManager fm) {
             super(fm);

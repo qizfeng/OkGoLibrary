@@ -62,15 +62,17 @@ public class MyOrderActivity extends BaseActivity {
     }
 
     private void initData() {
-        fragmentList.add(MyOrderFragment.newInstance(0));
-        fragmentList.add(MyOrderFragment.newInstance(1));
-        fragmentList.add(MyOrderFragment.newInstance(2));
-        fragmentList.add(MyOrderFragment.newInstance(3));
+        fragmentList.add(MyOrderFragment.newInstance(""));
+        fragmentList.add(MyOrderFragment.newInstance("0"));
+        fragmentList.add(MyOrderFragment.newInstance("1"));
+        fragmentList.add(MyOrderFragment.newInstance("2"));
+        fragmentList.add(MyOrderFragment.newInstance("3"));
 
         tablist.add(getString(R.string.my_order_all));
         tablist.add(getString(R.string.my_order_wait_fahuo));
         tablist.add(getString(R.string.my_order_end));
         tablist.add(getString(R.string.my_order_wait_pingjia));
+        tablist.add(getString(R.string.my_order_address_shouhou));
 
         BaseFragmentPageAdapter baseFragmentPageAdapter =
                 new BaseFragmentPageAdapter(getSupportFragmentManager(), fragmentList, tablist);

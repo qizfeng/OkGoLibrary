@@ -38,9 +38,12 @@ public class OrderModel implements Serializable {
     public String orderStatus ;
     public String shopId ;
     public String shopsName ;
+    public String shopsPhone ;
     public int goodsCount ;
     public int orderAmountTotal ;
+    public int isComment ; //#1:已评价；0：未评价
     public AddressModel address ;
+    public SaleModel sale ;
     public List<GoodsModel> detailList ;
 
     @Override

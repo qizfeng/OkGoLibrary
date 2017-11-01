@@ -15,7 +15,10 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.donkingliang.groupedadapter.adapter.GroupedRecyclerViewAdapter;
 import com.donkingliang.groupedadapter.holder.BaseViewHolder;
+import com.library.okgo.callback.JsonCallback;
+import com.library.okgo.model.BaseResponse;
 import com.library.okgo.utils.LogUtils;
+import com.library.okgo.utils.ToastUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.model.GoodsModel;
@@ -23,6 +26,7 @@ import com.project.community.model.OrderModel;
 import com.project.community.model.ShoppingCartModel;
 import com.project.community.ui.adapter.AfterSaleApdater;
 import com.project.community.ui.adapter.MyOrderApdater;
+import com.project.community.util.NetworkUtils;
 import com.project.community.view.VpSwipeRefreshLayout;
 
 import java.util.ArrayList;
@@ -30,6 +34,8 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Response;
 
 public class AfterSaleActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
@@ -63,25 +69,22 @@ public class AfterSaleActivity extends BaseActivity implements SwipeRefreshLayou
     private void initData() {
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN);
-        onRefresh();
-//        mData = getListData();
-
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new AfterSaleApdater(this, mData);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnChildClickListener(new GroupedRecyclerViewAdapter.OnChildClickListener() {
             @Override
             public void onChildClick(GroupedRecyclerViewAdapter adapter, BaseViewHolder holder, int groupPosition, int childPosition) {
-                GoodsOrderActivity.startActivity(AfterSaleActivity.this,4,mData.get(groupPosition));
+                GoodsOrderActivity.startActivity(AfterSaleActivity.this,mData.get(groupPosition),0);
             }
         });
+        onRefresh();
 
     }
 
     @Override
     public void onRefresh() {
-        setRefreshing(true);
-        setRefreshing(false);
+        getData();
     }
     /**
      * 设置是否刷新动画
@@ -97,23 +100,40 @@ public class AfterSaleActivity extends BaseActivity implements SwipeRefreshLayou
         });
     }
 
-    public ArrayList<ShoppingCartModel> getListData() {
-        ArrayList<ShoppingCartModel> myParents = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            ShoppingCartModel myParent = getShoppingCart();
-            myParents.add(myParent);
+
+    /**
+     * D57售后订单列表
+     */
+
+    private void getData() {
+
+        setRefreshing(true);
+        if (!NetworkUtils.isNetworkAvailable(this)) {
+            ToastUtils.showShortToast(this, R.string.network_error);
+            setRefreshing(false);
+            return;
         }
-        return myParents;
+
+        serverDao.getOrder(
+                getUser(this).id,
+                "3",
+                new JsonCallback<BaseResponse<List<OrderModel>>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<List<OrderModel>> listBaseResponse, Call call, Response response) {
+                        setRefreshing(false);
+                        mData.clear();
+                        mData.addAll(listBaseResponse.retData);
+                        mAdapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        setRefreshing(false);
+                        showToast(e.getMessage());
+                    }
+                });
     }
 
-    public ShoppingCartModel getShoppingCart() {
-        ShoppingCartModel myParent = new ShoppingCartModel();
-        ArrayList<GoodsModel> myChildren = new ArrayList<>();
-        for (int j = 0; j < 1; j++) {
-            GoodsModel myChild = new GoodsModel();
-            myChildren.add(myChild);
-        }
-        myParent.goods = myChildren;
-        return myParent;
-    }
+
 }

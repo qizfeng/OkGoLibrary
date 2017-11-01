@@ -2,13 +2,16 @@ package com.project.community.ui.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.loadmore.LoadMoreView;
 import com.chad.library.adapter.base.loadmore.SimpleLoadMoreView;
 import com.donkingliang.groupedadapter.adapter.GroupedRecyclerViewAdapter;
 import com.donkingliang.groupedadapter.holder.BaseViewHolder;
+import com.library.okgo.utils.GlideImageLoader;
 import com.project.community.R;
 import com.project.community.model.GoodsModel;
 import com.project.community.model.OrderModel;
@@ -71,6 +74,16 @@ public class AfterSaleApdater extends GroupedRecyclerViewAdapter {
     @Override
     public void onBindHeaderViewHolder(com.donkingliang.groupedadapter.holder.BaseViewHolder holder, int groupPosition) {
         OrderModel entity = mGroups.get(groupPosition);
+        holder.setText(R.id.item_header_title,mContext.getString(R.string.my_order_address_order_num)+entity.orderNo)
+                .setText(R.id.item_header_status,entity.createDate);
+        if (entity.orderStatus.equals("0")){
+            holder.setText(R.id.item_header_status,mContext.getString(R.string.my_order_address_daichuli))
+                    .setTextColor(R.id.item_header_status,mContext.getResources().getColor(R.color.yellow_ff961b));
+        }
+        else  {
+            holder.setText(R.id.item_header_status,mContext.getString(R.string.my_order_address_yichuli))
+                    .setTextColor(R.id.item_header_status,mContext.getResources().getColor(R.color.yellow));
+        }
     }
 
     @Override
@@ -81,6 +94,10 @@ public class AfterSaleApdater extends GroupedRecyclerViewAdapter {
     @Override
     public void onBindChildViewHolder(com.donkingliang.groupedadapter.holder.BaseViewHolder holder, int groupPosition, int childPosition) {
         GoodsModel entity = mGroups.get(groupPosition).detailList.get(childPosition);
+        holder.setText(R.id.item_goods_name,entity.goodName)
+                .setText(R.id.tv_unit_price,"¥"+entity.goodPrice)
+                .setText(R.id.tv_goods_count,"x"+entity.number);
+        new GlideImageLoader().onDisplayImageWithDefault(mContext, (ImageView) holder.get(R.id.item_goods_cover), entity.goodImage,R.mipmap.c1_image2);
     }
 
     public interface OnFooterClickListener {

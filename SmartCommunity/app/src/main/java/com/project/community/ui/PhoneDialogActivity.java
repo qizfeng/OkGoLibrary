@@ -83,17 +83,24 @@ public class PhoneDialogActivity extends BaseActivity implements View.OnClickLis
                     }
                 });
         hasHeader = getIntent().getBooleanExtra("hasHeader", true);
-        type = getIntent().getStringExtra("type");
+        type = getIntent().getStringExtra("type");//"3联系商家"
         if (hasHeader) {
             mIvHeader.setVisibility(View.VISIBLE);
             mTvPhoneNumber.setGravity(Gravity.CENTER_VERTICAL);
         } else {
-            mTvTitle.setText(getString(R.string.txt_hot_line));
+            if (type.length()>2){
+                mTvTitle.setText(getString(R.string.lianxishangjia));
+                mTvPhoneNumber.setText(type);
+            }
+            else
+                mTvTitle.setText(getString(R.string.txt_hot_line));
+
             mIvHeader.setVisibility(View.GONE);
             mTvPhoneNumber.setGravity(Gravity.CENTER);
         }
 
-        getData();
+
+        if (type.length()<2) getData();
     }
 
     @Override

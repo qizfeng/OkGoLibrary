@@ -22,6 +22,7 @@ import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
 import com.library.okgo.utils.LogUtils;
 import com.library.okgo.utils.ToastUtils;
+import com.project.community.Event.CartRefreshEvent;
 import com.project.community.Event.ChangeAddressEvent;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
@@ -204,6 +205,7 @@ public class ShoppingCartActivity extends BaseActivity {
                 mDialog.dismiss();
                 mAdapter.removeGroup(position);
                 mData.remove(position);
+                EventBus.getDefault().post(new CartRefreshEvent(""));
             }
 
             @Override
@@ -296,7 +298,7 @@ public class ShoppingCartActivity extends BaseActivity {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(ChangeAddressEvent def) {
+    public void onEventMainThread(CartRefreshEvent def) {
         finish();
     }
 }
