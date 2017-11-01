@@ -49,6 +49,7 @@ import com.project.community.model.HotlineModel;
 import com.project.community.model.HouseModel;
 import com.project.community.model.MerchantDeailModel;
 import com.project.community.model.NewsModel;
+import com.project.community.model.OrderModel;
 import com.project.community.model.PaymentHouseHistroyModel;
 import com.project.community.model.PaymentInfoModel;
 import com.project.community.model.PaymentWayModel;
@@ -1053,10 +1054,50 @@ public class ServerDaoImpl implements ServerDao {
     }
 
     @Override
-    public void delCart(String cartId, JsonCallback<BaseResponse<List>> callback) {
+    public void delCart(String userId,
+                        String cartId,
+                        String shopId, JsonCallback<BaseResponse<List>> callback) {
         OkGo.post(AppConstants.URL_DELCART)
                 .tag(mContext)
+                .params("userId", userId)
                 .params("cartId", cartId)
+                .params("shopId", shopId)
+                .execute(callback);
+    }
+
+    @Override
+    public void commitOrder(String orderJson, JsonCallback<BaseResponse<OrderModel>> callback) {
+        OkGo.post(AppConstants.URL_GETORDER)
+                .tag(mContext)
+                .params("orderJson", orderJson)
+                .execute(callback);
+    }
+
+    @Override
+    public void submit(String userId, String addressId, String orderNo, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.URL_SUBMIT)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("addressId", addressId)
+                .params("orderNo", orderNo)
+                .execute(callback);
+    }
+
+    @Override
+    public void getDetail(String userId, String orderNo, JsonCallback<BaseResponse<OrderModel>> callback) {
+        OkGo.get(AppConstants.URL_GETDETAIL)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("orderNo", orderNo)
+                .execute(callback);
+    }
+
+    @Override
+    public void getOrder(String userId, int status, JsonCallback<BaseResponse<List<OrderModel>>> callback) {
+        OkGo.get(AppConstants.URL_GETORDERLIST)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("status", status)
                 .execute(callback);
     }
 

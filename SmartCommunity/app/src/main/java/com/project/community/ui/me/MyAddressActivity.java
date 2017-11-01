@@ -16,6 +16,7 @@ import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
 import com.project.community.Event.AddAddressEvent;
 import com.project.community.Event.AddHouseEvent;
+import com.project.community.Event.ChangeAddressEvent;
 import com.project.community.Event.DefaultAddressEvent;
 import com.project.community.Event.DelAddressEvent;
 import com.project.community.R;
@@ -63,6 +64,8 @@ public class MyAddressActivity extends BaseActivity {
 
     private int page = 1;
 
+    private int cj=0;
+
 
     private List<AddressListBean> mData = new ArrayList<>();
 
@@ -80,6 +83,10 @@ public class MyAddressActivity extends BaseActivity {
     private void steTitle() {
 
         initToolBar(toolbar, tvTitle, true, "地址管理", R.mipmap.iv_back);
+
+        if (getIntent().getExtras()!=null){
+            cj=getIntent().getIntExtra("cj",0);
+        }
 
     }
 
@@ -225,6 +232,10 @@ public class MyAddressActivity extends BaseActivity {
             public void onSuccess(BaseResponse<List<String>> stringBaseResponse, Call call, Response response) {
                 progressDialog.dismiss();
                 ToastUtil.showToast(MyAddressActivity.this, stringBaseResponse.message + "");
+                if (cj!=0) {
+                    EventBus.getDefault().post(new ChangeAddressEvent(def.getAddressListBean()));
+                    finish();
+                }
                 if (stringBaseResponse.errNum.equals("0")) {
                     for (int i = 0; i < mData.size(); i++) {
                         if (mData.get(i).getId().equals(def.getAddressListBean().getId())){

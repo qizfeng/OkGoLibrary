@@ -11,7 +11,7 @@ import com.donkingliang.groupedadapter.adapter.GroupedRecyclerViewAdapter;
 import com.donkingliang.groupedadapter.holder.BaseViewHolder;
 import com.project.community.R;
 import com.project.community.model.GoodsModel;
-import com.project.community.model.ShoppingCartModel;
+import com.project.community.model.OrderModel;
 
 import java.util.List;
 
@@ -22,11 +22,11 @@ import java.util.List;
 
 public class AfterSaleApdater extends GroupedRecyclerViewAdapter {
 
-    private List<ShoppingCartModel> mGroups;
+    private List<OrderModel> mGroups;
     private OnFooterClickListener onFooterClickListener;
     private OnGoodsClickListener onGoodsClickListener;
 
-    public AfterSaleApdater(Context context, List<ShoppingCartModel> groups) {
+    public AfterSaleApdater(Context context, List<OrderModel> groups) {
         super(context);
         mGroups = groups;
 
@@ -39,7 +39,7 @@ public class AfterSaleApdater extends GroupedRecyclerViewAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        List<GoodsModel> children = mGroups.get(groupPosition).goods;
+        List<GoodsModel> children = mGroups.get(groupPosition).detailList;
         return children == null ? 0 : children.size();
     }
 
@@ -70,17 +70,17 @@ public class AfterSaleApdater extends GroupedRecyclerViewAdapter {
 
     @Override
     public void onBindHeaderViewHolder(com.donkingliang.groupedadapter.holder.BaseViewHolder holder, int groupPosition) {
-        ShoppingCartModel entity = mGroups.get(groupPosition);
+        OrderModel entity = mGroups.get(groupPosition);
     }
 
     @Override
     public void onBindFooterViewHolder(final com.donkingliang.groupedadapter.holder.BaseViewHolder holder, final int groupPosition) {
-        ShoppingCartModel entity = mGroups.get(groupPosition);
+        OrderModel entity = mGroups.get(groupPosition);
     }
 
     @Override
     public void onBindChildViewHolder(com.donkingliang.groupedadapter.holder.BaseViewHolder holder, int groupPosition, int childPosition) {
-        GoodsModel entity = mGroups.get(groupPosition).goods.get(childPosition);
+        GoodsModel entity = mGroups.get(groupPosition).detailList.get(childPosition);
     }
 
     public interface OnFooterClickListener {

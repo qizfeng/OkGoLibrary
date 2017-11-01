@@ -36,15 +36,17 @@ public class MerchantDetailAdapter extends BaseQuickAdapter<GoodsModel, BaseView
         final ImageView iv_minus = helper.getView(R.id.iv_minus);
         final ImageView iv_add = helper.getView(R.id.iv_add);
         final TextView tv_count = helper.getView(R.id.tv_count);
+        final TextView tv_goods_name = helper.getView(R.id.tv_goods_name);
         final int position = helper.getLayoutPosition();
         TextView tv_original_price = helper.getView(R.id.tv_original_price);
         final TextView tv_price = helper.getView(R.id.tv_price);
         RatingBar ratingBar = helper.getView(R.id.ratingBar);
         ratingBar.setStar(item.starLevel);
-        new GlideImageLoader().onDisplayImageWithDefault(mContext, (ImageView) helper.getView(R.id.iv_image), AppConstants.HOST + item.images, R.mipmap.c1_image2);
+        new GlideImageLoader().onDisplayImageWithDefault(mContext, (ImageView) helper.getView(R.id.iv_image), AppConstants.URL_BASE + item.images, R.mipmap.c1_image2);
         tv_original_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         tv_original_price.setText("¥"+item.originalPrice);
         tv_price.setText("¥"+item.price);
+        tv_goods_name.setText(item.name);
         int count = item.goodsCount;
         if(count>0){
             iv_minus.setVisibility(View.VISIBLE);

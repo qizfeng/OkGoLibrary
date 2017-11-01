@@ -1,9 +1,11 @@
 package com.project.community.ui.life.minsheng;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -17,12 +19,16 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Display;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -34,15 +40,19 @@ import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
 import com.library.okgo.utils.GlideImageLoader;
 import com.library.okgo.utils.ToastUtils;
+import com.project.community.Event.CartRefreshEvent;
+import com.project.community.Event.ChangeAddressEvent;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.constants.AppConstants;
 import com.project.community.model.GoodsModel;
 import com.project.community.model.MerchantDeailModel;
+import com.project.community.model.OrderModel;
 import com.project.community.ui.PhoneDialogActivity;
 import com.project.community.ui.adapter.MerchantCartPopwinAdapter;
 import com.project.community.ui.adapter.MerchantDetailAdapter;
 import com.project.community.ui.me.MyActivity;
+import com.project.community.ui.me.MyAddressActivity;
 import com.project.community.util.NetworkUtils;
 import com.project.community.util.ScreenUtils;
 import com.project.community.view.SpacesItemDecoration;
@@ -53,6 +63,13 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
 import com.umeng.socialize.shareboard.ShareBoardConfig;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -122,6 +139,7 @@ public class MerchantDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_merchant_detail);
         ButterKnife.bind(this);
         initToolBar(mToolBar, mTvTitle, true, getString(R.string.activity_merchant_detail), R.mipmap.iv_back);
+        EventBus.getDefault().register(this);
         initView();
         initData();
     }
@@ -175,9 +193,10 @@ public class MerchantDetailActivity extends BaseActivity {
 
                     @Override
                     public void onSuccess(BaseResponse<List> listBaseResponse, Call call, Response response) {
+                        EventBus.getDefault().post(new CartRefreshEvent(""));
                         dismissDialog();
                         if (count > 0) {
-                            tv_count.setText("" + count);
+                            tv_count.setText((count)+"");
                             for (int j = 0; j < mCartData.size(); j++) {
                                 if (mAdapter.getData().get(finalPosition).partentId == mCartData.get(j).childId) {
                                     mCartData.get(j).goodsCount = count;
@@ -226,8 +245,9 @@ public class MerchantDetailActivity extends BaseActivity {
 
                     @Override
                     public void onSuccess(BaseResponse<List> listBaseResponse, Call call, Response response) {
+                        EventBus.getDefault().post(new CartRefreshEvent(""));
                         dismissDialog();
-                        tv_count.setText("" + count);
+                        tv_count.setText((count)+"");
                         tv_count.setVisibility(View.VISIBLE);
                         iv_minus.setVisibility(View.VISIBLE);
                         mTvCount.setVisibility(View.VISIBLE);
@@ -240,6 +260,7 @@ public class MerchantDetailActivity extends BaseActivity {
                             goodsModel.partentId = mAdapter.getData().get(finalPosition).partentId;
                             goodsModel.childId = mAdapter.getData().get(finalPosition).partentId;
                             goodsModel.goodId = mAdapter.getData().get(finalPosition).goodId;
+                            goodsModel.name = mAdapter.getData().get(finalPosition).name;
                             mCartData.add(goodsModel);
                         } else {
                             boolean hasChild = false;
@@ -261,6 +282,7 @@ public class MerchantDetailActivity extends BaseActivity {
                                 goodsModel.partentId = mAdapter.getData().get(finalPosition).partentId;
                                 goodsModel.childId = mAdapter.getData().get(finalPosition).partentId;
                                 goodsModel.goodId = mAdapter.getData().get(finalPosition).goodId;
+                                goodsModel.name = mAdapter.getData().get(finalPosition).name;
                                 mCartData.add(goodsModel);
 
                             }
@@ -298,6 +320,7 @@ public class MerchantDetailActivity extends BaseActivity {
 
                     @Override
                     public void onSuccess(BaseResponse<List> listBaseResponse, Call call, Response response) {
+                        EventBus.getDefault().post(new CartRefreshEvent(""));
                         dismissDialog();
                         totalCount--;
                         if (totalCount > 0) {
@@ -350,6 +373,7 @@ public class MerchantDetailActivity extends BaseActivity {
 
                     @Override
                     public void onSuccess(BaseResponse<List> listBaseResponse, Call call, Response response) {
+                        EventBus.getDefault().post(new CartRefreshEvent(""));
                         dismissDialog();
                         tv_count.setText("" + count);
 //                tv_price.setText("¥" + mMerchantCartPopwinAdapter.getData().get(position).goodsPrice * count);
@@ -382,10 +406,51 @@ public class MerchantDetailActivity extends BaseActivity {
         getData(merchant_id);
     }
 
-    @OnClick(R.id.layout_shoppingcart)
+    @OnClick({R.id.layout_shoppingcart,R.id.layout_buy})
     public void onCartClick(View view) {
-        if (mCartData.size() > 0)
-            showCartPopwin(view);
+        switch (view.getId()){
+            case R.id.layout_shoppingcart:
+                if (mCartData.size() > 0)
+                    showCartPopwin(view);
+                break;
+            case R.id.layout_buy:
+
+                JSONArray jsonArray = new JSONArray();
+                JSONArray cartList = new JSONArray();
+                JSONObject jsonObject = new JSONObject();
+                BigDecimal bigDecimal = new BigDecimal("0");
+                for (int i = 0; i < mCartData.size(); i++) {
+                    BigDecimal bigDecimal1=new BigDecimal(mCartData.get(i).goodsPrice).multiply(new BigDecimal(mCartData.get(i).goodsCount));
+                    bigDecimal=bigDecimal.add(bigDecimal1);
+                    JSONObject item = new JSONObject();
+                    try {
+                        item.put("goodId",mCartData.get(i).goodId);
+                        item.put("number",mCartData.get(i).goodsCount);
+                        item.put("goodName",mCartData.get(i).name);
+                        item.put("goodPrice",mCartData.get(i).goodsPrice);
+                        item.put("goodImage",AppConstants.URL_BASE +mCartData.get(i).images);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    cartList.put(item);
+                }
+
+                try {
+                    jsonObject.put("orderAmountTotal",bigDecimal.toString());
+                    jsonObject.put("shopId",mShopId);
+                    jsonObject.put("userId",getUser(this).id);
+                    jsonObject.put("goodsCount",totalCount);
+                    jsonObject.put("cartList",cartList);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                jsonArray.put(jsonObject);
+
+                Log.e("onCartClick: ", jsonArray.toString());
+                commitOrder(jsonArray.toString());
+                break;
+        }
+
     }
 
     /**
@@ -490,15 +555,7 @@ public class MerchantDetailActivity extends BaseActivity {
         mTvClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for (int i = 0; i < mData.size(); i++) {
-                    mData.get(i).goodsCount = 0;
-                    mAdapter.notifyDataSetChanged();
-                }
-                mCartData.clear();
-                mMerchantCartPopwinAdapter.removeAllData();
-                totalCount = 0;
-                mTvCount.setVisibility(View.GONE);
-                mPopLayout.setVisibility(View.GONE);
+                showAlertDialog();
             }
         });
 
@@ -643,6 +700,7 @@ public class MerchantDetailActivity extends BaseActivity {
                         }else {
                             mTvCount.setVisibility(View.GONE);
                         }
+                        totalCount=listBaseResponse.retData.cartTotal;
                         mShopId=listBaseResponse.retData.shop.id;
 
                         new GlideImageLoader().onDisplayImageWithDefault(MerchantDetailActivity.this,headeCover, AppConstants.HOST + listBaseResponse.retData.shop.shopPhoto,R.mipmap.c1_image2);
@@ -663,12 +721,10 @@ public class MerchantDetailActivity extends BaseActivity {
                             mData.get(i).goodsCount= mData.get(i).cartNum;
                             mData.get(i).parentPosition= i;
                             mData.get(i).partentId= i;
+                            mData.get(i).childId= i;
                             if (mData.get(i).cartNum>0){
-                                Log.e("onSuccess---->","---?" );
                                 mCartData.add(mData.get(i));
-                                mPopLayout.setVisibility(View.VISIBLE);
                             }
-                            Log.e("onSuccess---->","---aaa" );
 
                         }
                         mAdapter.notifyDataSetChanged();
@@ -728,5 +784,126 @@ public class MerchantDetailActivity extends BaseActivity {
     }
 
 
+    /**
+     * 删除
+     */
+    private void delData(){
+        showLoading();
+        if (!NetworkUtils.isNetworkAvailable(this)) {
+            ToastUtils.showShortToast(this, R.string.network_error);
+            dismissDialog();
+            return;
+        }
 
+        serverDao.delCart(getUser(this).id,"",mShopId,new JsonCallback<BaseResponse<List>>() {
+            @Override
+            public void onSuccess(BaseResponse<List> listBaseResponse, Call call, Response response) {
+                dismissDialog();
+                EventBus.getDefault().post(new CartRefreshEvent(""));
+                showToast(listBaseResponse.message);
+                mDialog.dismiss();
+                for (int i = 0; i < mData.size(); i++) {
+                    mData.get(i).goodsCount = 0;
+                    mAdapter.notifyDataSetChanged();
+                }
+                mCartData.clear();
+                mMerchantCartPopwinAdapter.removeAllData();
+                totalCount = 0;
+                mTvCount.setVisibility(View.GONE);
+                mPopLayout.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                dismissDialog();
+                showToast(e.getMessage());
+            }
+        });
+    }
+
+    private Dialog mDialog;
+    /**
+     * 删除pop
+     *
+     */
+    public void showAlertDialog() {
+//        mDialog = new AlertDialog.Builder(this).create();
+        mDialog = new Dialog(this);
+        mDialog.setContentView(R.layout.activity_dialog_common);
+        Window window = mDialog.getWindow();
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        WindowManager m = this.getWindowManager();
+        Display d = m.getDefaultDisplay(); // 获取屏幕宽、高用
+        WindowManager.LayoutParams p = window.getAttributes(); // 获取对话框当前的参数值
+        p.height = (int) (d.getHeight() * 0.6); // 高度设置为屏幕的0.6
+        p.width = (int) (d.getWidth() * 0.7); // 宽度设置为屏幕的0.65
+        window.setAttributes(p);
+        mDialog.show();
+        TextView tv_content = (TextView) mDialog.findViewById(R.id.tv_content);
+        tv_content.setText(R.string.txt_confirm_delete);
+        Button btn_confirm = (Button) mDialog.findViewById(R.id.btn_confirm);
+        Button btn_cancel = (Button) mDialog.findViewById(R.id.btn_cancel);
+        ImageView iv_close = (ImageView) mDialog.findViewById(R.id.iv_close);
+        iv_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDialog.dismiss();
+            }
+        });
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDialog.dismiss();
+            }
+        });
+        btn_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                delData();
+            }
+        });
+    }
+
+
+    /**
+     * D56订单提交
+     */
+    private void commitOrder(String orderJson){
+        showLoading();
+        if (!NetworkUtils.isNetworkAvailable(this)) {
+            ToastUtils.showShortToast(this, R.string.network_error);
+            dismissDialog();
+            return;
+        }
+
+        serverDao.commitOrder(orderJson,new JsonCallback<BaseResponse<OrderModel>>() {
+            @Override
+            public void onSuccess(BaseResponse<OrderModel> listBaseResponse, Call call, Response response) {
+                dismissDialog();
+                showToast(listBaseResponse.message);
+                if (listBaseResponse.retData.address==null) startActivity(new Intent(MerchantDetailActivity.this, MyAddressActivity.class));
+                else PayActivity.startActivity(MerchantDetailActivity.this,listBaseResponse.retData);
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                dismissDialog();
+                showToast(e.getMessage());
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(ChangeAddressEvent def) {
+        finish();
+    }
 }

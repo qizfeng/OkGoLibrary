@@ -21,6 +21,7 @@ public class ShoppingCartModel implements Serializable {
     public String cartId;
     public String shopName;
     public String totalPrice;
+
     public int goodsCount;
 
     public String id;
@@ -58,7 +59,9 @@ public class ShoppingCartModel implements Serializable {
                 ", cartId='" + cartId + '\'' +
                 ", shopName='" + shopName + '\'' +
                 ", totalPrice='" + totalPrice + '\'' +
-                ", goodsCount='" + goodsCount + '\'' +
+                ", goodsCount=" + goodsCount +
+                ", id='" + id + '\'' +
+                ", shop=" + shop +
                 '}';
     }
 }

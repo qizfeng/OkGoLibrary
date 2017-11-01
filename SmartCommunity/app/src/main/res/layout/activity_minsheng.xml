@@ -34,6 +34,7 @@
 
                 <TextView
                     android:id="@+id/tv_shop_cart"
+                    android:visibility="gone"
                     android:layout_width="@dimen/dp_20"
                     android:layout_height="@dimen/dp_20"
                     android:layout_gravity="right"
@@ -42,7 +43,6 @@
                     android:layout_marginTop="@dimen/dp_12"
                     android:textSize="@dimen/sp_12"
                     android:textColor="@color/white"
-                    android:text="99"
                     android:background="@drawable/round_point_red" />
             </FrameLayout>
         </FrameLayout>

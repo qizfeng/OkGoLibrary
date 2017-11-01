@@ -22,10 +22,15 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.library.okgo.callback.JsonCallback;
+import com.library.okgo.model.BaseResponse;
+import com.library.okgo.utils.ToastUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.listener.RecycleItemClickListener;
 import com.project.community.model.CommentModel;
+import com.project.community.model.GoodsModel;
+import com.project.community.model.OrderModel;
 import com.project.community.ui.adapter.AllOrderApdater;
 import com.project.community.ui.adapter.ArticleDetailsImagsAdapter;
 import com.project.community.ui.adapter.GoodsOrderCommentApdater;
@@ -33,6 +38,7 @@ import com.project.community.ui.adapter.GoodsOrderDetailApdater;
 import com.project.community.ui.adapter.ProductSellApdater;
 import com.project.community.ui.me.shop_management.AllProductsActivity;
 import com.project.community.ui.me.shop_management.ShopDataActivity;
+import com.project.community.util.NetworkUtils;
 import com.project.community.view.MyButton;
 import com.project.community.view.SpacesItemDecoration;
 
@@ -42,6 +48,8 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * Created by cj on 17/10/24.
@@ -118,7 +126,7 @@ public class GoodsOrderActivity extends BaseActivity {
     RelativeLayout goods_order_shouhou_type3;
 
 
-
+    private OrderModel item;
 
     private int code;//0:全部,1:待发货2:已发货3:待评价4:售后
 
@@ -126,15 +134,16 @@ public class GoodsOrderActivity extends BaseActivity {
     private GoodsOrderDetailApdater mAdapter;//商品详情订单适配器
     private GoodsOrderCommentApdater mCommentAdapter;//商品详情订单评论适配器
     private Dialog mDialog;
-    List<CommentModel> list =new ArrayList<>();
+    List<GoodsModel> list =new ArrayList<>();
     List<CommentModel> mCommentList =new ArrayList<>();
 
     ArticleDetailsImagsAdapter grid_photoAdapter; //凭证的适配器
     private List<String> mImages = new ArrayList<>();
 
-    public static void startActivity(Context context,int code){
+    public static void startActivity(Context context,int code,OrderModel item){
         Intent intent = new Intent(context,GoodsOrderActivity.class);
         intent.putExtra("code",code);
+        intent.putExtra("item",item);
         context.startActivity(intent);
     }
 
@@ -151,6 +160,10 @@ public class GoodsOrderActivity extends BaseActivity {
         code=getIntent().getIntExtra("code",0);
         if (code==4) initToolBar(mToolBar, mTvTitle, true, getString(R.string.apply_sale_detail), R.mipmap.iv_back);
         else initToolBar(mToolBar, mTvTitle, true, getString(R.string.goods_order_title), R.mipmap.iv_back);
+
+        item= (OrderModel) getIntent().getSerializableExtra("item");
+
+        list.addAll(item.detailList);
         switch (code){
             case 0:
 //
@@ -217,13 +230,13 @@ public class GoodsOrderActivity extends BaseActivity {
 
         }
         goodsOrderRvOrder.setLayoutManager(new LinearLayoutManager(this));
-        for (int i = 0; i < 2; i++) {
-            CommentModel commentModel =new CommentModel();
-            commentModel.id="0";
-            commentModel.rating=2.5f;
-            list.add(commentModel);
-            mCommentList.add(commentModel);
-        }
+//        for (int i = 0; i < 2; i++) {
+//            CommentModel commentModel =new CommentModel();
+//            commentModel.id="0";
+//            commentModel.rating=2.5f;
+//            list.add(commentModel);
+//            mCommentList.add(commentModel);
+//        }
         if (code==3 || code == 4){
             goods_order_rv_pinglun.setLayoutManager(new LinearLayoutManager(this));
             mCommentAdapter=new GoodsOrderCommentApdater(mCommentList, new RecycleItemClickListener() {
@@ -328,4 +341,38 @@ public class GoodsOrderActivity extends BaseActivity {
             }
         });
     }
+
+
+
+    /**
+     * D61售后详情
+     */
+    private void commitOrder(String orderNo){
+        showLoading();
+        if (!NetworkUtils.isNetworkAvailable(this)) {
+            ToastUtils.showShortToast(this, R.string.network_error);
+            dismissDialog();
+            return;
+        }
+
+        serverDao.getDetail(
+                getUser(this).id,
+                orderNo,
+                new JsonCallback<BaseResponse<OrderModel>>() {
+            @Override
+            public void onSuccess(BaseResponse<OrderModel> listBaseResponse, Call call, Response response) {
+                dismissDialog();
+                showToast(listBaseResponse.message);
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                dismissDialog();
+                showToast(e.getMessage());
+            }
+        });
+    }
+
+
 }

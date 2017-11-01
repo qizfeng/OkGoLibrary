@@ -43,6 +43,7 @@ import com.project.community.model.HotlineModel;
 import com.project.community.model.HouseModel;
 import com.project.community.model.MerchantDeailModel;
 import com.project.community.model.NewsModel;
+import com.project.community.model.OrderModel;
 import com.project.community.model.PaymentHouseHistroyModel;
 import com.project.community.model.PaymentInfoModel;
 import com.project.community.model.PaymentWayModel;
@@ -1049,8 +1050,52 @@ public interface ServerDao {
      * @param callback
      */
     void delCart(
+            String userId,
             String cartId,
+            String shopId,
             JsonCallback<BaseResponse<List>> callback);
+
+    /**
+     * D56订单提交
+     *
+     * @param callback
+     */
+    void commitOrder(
+            String orderJson,
+            JsonCallback<BaseResponse<OrderModel>> callback);
+
+
+    /**
+     * D确认订单
+     *
+     * @param callback
+     */
+    void submit(
+            String userId,
+            String addressId,
+            String orderNo,
+            JsonCallback<BaseResponse<List>> callback);
+
+    /**
+     * D61售后详情
+     *
+     * @param callback
+     */
+    void getDetail(
+            String userId,
+            String orderNo,
+            JsonCallback<BaseResponse<OrderModel>> callback);
+
+
+    /**
+     * D29商家详情
+     *
+     * @param callback
+     */
+    void getOrder(
+            String userId,
+            int status,
+            JsonCallback<BaseResponse<List<OrderModel>>> callback);
 
 
     /**

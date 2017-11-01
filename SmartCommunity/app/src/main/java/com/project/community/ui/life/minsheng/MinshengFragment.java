@@ -23,6 +23,8 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
+import com.project.community.Event.AddGoodsEvent;
+import com.project.community.Event.CartRefreshEvent;
 import com.project.community.R;
 import com.project.community.base.BaseFragment;
 import com.project.community.constants.AppConstants;
@@ -39,6 +41,10 @@ import com.project.community.util.ScreenUtils;
 import com.project.community.view.HorizaontalGridView;
 import com.project.community.view.SpacesItemDecoration;
 import com.project.community.view.VpSwipeRefreshLayout;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,6 +86,7 @@ public class MinshengFragment extends BaseFragment implements SwipeRefreshLayout
     protected View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_minsheng, container, false);
         ButterKnife.bind(this, view);
+        EventBus.getDefault().register(this);
         initData();
         return view;
     }
@@ -151,7 +158,11 @@ public class MinshengFragment extends BaseFragment implements SwipeRefreshLayout
         serverDao.getMinshengIndexData(userId,locData, page, AppConstants.PAGE_SIZE, new JsonCallback<BaseResponse<ShopResponse>>() {
             @Override
             public void onSuccess(BaseResponse<ShopResponse> baseResponse, Call call, Response response) {
-                mTvShopCart.setText(baseResponse.retData.cartTotal+"");
+                if (baseResponse.retData.cartTotal>0){
+                    mTvShopCart.setText(baseResponse.retData.cartTotal+"");
+                    mTvShopCart.setVisibility(View.VISIBLE);
+                } else
+                    mTvShopCart.setVisibility(View.GONE);
                 if (page == 1) {
                     List<ShopModel> data = new ArrayList<>();
                     data.addAll(baseResponse.retData.shopList);
@@ -361,4 +372,14 @@ public class MinshengFragment extends BaseFragment implements SwipeRefreshLayout
         helper.attachToRecyclerView(mRecyclerView);
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void setAddGoodsEvent(CartRefreshEvent cartRefreshEvent) {
+        onRefresh();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 }

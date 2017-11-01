@@ -16,6 +16,7 @@ import com.project.community.R;
 import com.project.community.base.BaseFragment;
 import com.project.community.listener.RecycleItemClickListener;
 import com.project.community.model.CommentModel;
+import com.project.community.model.OrderModel;
 import com.project.community.ui.adapter.AllOrderApdater;
 import com.project.community.view.SpacesItemDecoration;
 import com.project.community.view.VpSwipeRefreshLayout;
@@ -38,7 +39,7 @@ public class AllOrderFragment extends BaseFragment implements SwipeRefreshLayout
 
     private AllOrderApdater bbsApdater;
 
-    List<CommentModel> data = new ArrayList<>();
+    List<OrderModel> data = new ArrayList<>();
 
     public static AllOrderFragment newInstance(int id) {
         final AllOrderFragment f = new AllOrderFragment();
@@ -66,15 +67,15 @@ public class AllOrderFragment extends BaseFragment implements SwipeRefreshLayout
         refreshLayout.setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN);
         onRefresh();
 
-        for (int i = 0; i < 5; i++) {
-            CommentModel commentModel = new CommentModel();
-            commentModel.id="0";
-            data.add(commentModel);
-        }
+//        for (int i = 0; i < 5; i++) {
+//            CommentModel commentModel = new CommentModel();
+//            commentModel.id="0";
+//            data.add(commentModel);
+//        }
         bbsApdater = new AllOrderApdater(data, new RecycleItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                GoodsOrderActivity.startActivity(getActivity(),1);
+                GoodsOrderActivity.startActivity(getActivity(),1,data.get(position));
 
             }
 
@@ -85,9 +86,9 @@ public class AllOrderFragment extends BaseFragment implements SwipeRefreshLayout
 
                         break;
                     case R.id.bbs_item_like:
-                        if (data.get(position).id.equals("10")) data.get(position).id="0";
-                            else data.get(position).id="10";
-                        bbsApdater.notifyItemChanged(position,data.get(position));
+//                        if (data.get(position).id.equals("10")) data.get(position).id="0";
+//                            else data.get(position).id="10";
+//                        bbsApdater.notifyItemChanged(position,data.get(position));
                         break;
                 }
             }

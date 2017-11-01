@@ -19,6 +19,7 @@ import com.library.okgo.utils.LogUtils;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.model.GoodsModel;
+import com.project.community.model.OrderModel;
 import com.project.community.model.ShoppingCartModel;
 import com.project.community.ui.adapter.AfterSaleApdater;
 import com.project.community.ui.adapter.MyOrderApdater;
@@ -43,7 +44,7 @@ public class AfterSaleActivity extends BaseActivity implements SwipeRefreshLayou
 
 
     private AfterSaleApdater mAdapter;
-    private List<ShoppingCartModel> mData = new ArrayList<>();
+    private List<OrderModel> mData = new ArrayList<>();
     
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, AfterSaleActivity.class);
@@ -63,7 +64,7 @@ public class AfterSaleActivity extends BaseActivity implements SwipeRefreshLayou
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN);
         onRefresh();
-        mData = getListData();
+//        mData = getListData();
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new AfterSaleApdater(this, mData);
@@ -71,7 +72,7 @@ public class AfterSaleActivity extends BaseActivity implements SwipeRefreshLayou
         mAdapter.setOnChildClickListener(new GroupedRecyclerViewAdapter.OnChildClickListener() {
             @Override
             public void onChildClick(GroupedRecyclerViewAdapter adapter, BaseViewHolder holder, int groupPosition, int childPosition) {
-                GoodsOrderActivity.startActivity(AfterSaleActivity.this,4);
+                GoodsOrderActivity.startActivity(AfterSaleActivity.this,4,mData.get(groupPosition));
             }
         });
 

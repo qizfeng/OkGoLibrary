@@ -13,6 +13,7 @@ import com.project.community.model.GoodsModel;
 import com.project.community.model.ShopModel;
 import com.project.community.model.ShoppingCartModel;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -92,7 +93,8 @@ public class ShoppingCartAdapter extends GroupedRecyclerViewAdapter {
             }
         });
         ShopModel entity = mGroups.get(groupPosition).shop;
-        holder.setText(R.id.tv_total_price,"¥"+entity.totalCost);
+        holder.setText(R.id.tv_total_price,"¥"+entity.totalCost)
+                .setText(R.id.tv_goods_count,"共"+mGroups.get(groupPosition).goodsCount+"件商品，合计");
     }
 
     @Override

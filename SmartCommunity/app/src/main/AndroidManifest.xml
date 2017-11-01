@@ -300,12 +300,10 @@
             android:label="@string/activity_im_repairs"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible|adjustResize|stateHidden" />
-
         <activity
             android:name=".ui.me.RepairsDetailsActivity"
             android:label="@string/activity_repairs_details"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.me.AddHouseNumberActivity"
             android:label="@string/activity_add_house_number"
@@ -604,7 +602,8 @@
         <activity android:name=".ui.me.all_order.MyOrderActivity" />
         <activity android:name=".ui.me.all_order.TakeDeliveryOfGoodsActivity" />
         <activity android:name=".ui.me.all_order.ApplySaleActivity" />
-        <activity android:name=".ui.me.all_order.AfterSaleActivity"></activity>
+        <activity android:name=".ui.me.all_order.AfterSaleActivity" />
+        <activity android:name=".ui.life.minsheng.PayActivity"></activity>
     </application>
 
 </manifest>
