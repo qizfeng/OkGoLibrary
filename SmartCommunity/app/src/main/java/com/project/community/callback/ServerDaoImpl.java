@@ -1093,11 +1093,29 @@ public class ServerDaoImpl implements ServerDao {
     }
 
     @Override
-    public void getOrder(String userId, int status, JsonCallback<BaseResponse<List<OrderModel>>> callback) {
+    public void getOrder(String userId, String status, JsonCallback<BaseResponse<List<OrderModel>>> callback) {
         OkGo.get(AppConstants.URL_GETORDERLIST)
                 .tag(mContext)
                 .params("userId", userId)
                 .params("status", status)
+                .execute(callback);
+    }
+
+    @Override
+    public void complete(String userId, String orderNo, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.get(AppConstants.URL_COMPLETE)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("orderNo", orderNo)
+                .execute(callback);
+    }
+
+    @Override
+    public void cacelOrder(String userId, String orderNo, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.URL_CACELORDER)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("orderNo", orderNo)
                 .execute(callback);
     }
 
