@@ -63,7 +63,6 @@
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 android:paddingTop="3dp"
-                android:text="下班"
                 android:textColor="@color/white"
                 android:textSize="15sp" />
         </LinearLayout>

@@ -639,6 +639,13 @@ public class AppConstants {
      */
     public static final  String  URL_REPLAY_SAVE=URL_BASE + "/m/proRepair/replay/save";
 
+
+    /**
+     * 上下班打卡
+     */
+    public static final  String URL_WORK_SAVE=URL_BASE + "/m/proRepair/work/save";
+
+
     /**
      * 分页大小
      */

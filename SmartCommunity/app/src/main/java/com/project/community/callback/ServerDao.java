@@ -1422,7 +1422,7 @@ public interface ServerDao {
             String orderStatus,
             String pageNo,
             String pageSize,
-            JsonCallback<BaseResponse<List<RepairListBean>>> callback
+            JsonCallback<BaseResponse<RepairListBean>> callback
     );
 
 
@@ -1464,11 +1464,25 @@ public interface ServerDao {
     );
 
 
+    /**
+     * 用户评论
+     * @param userId
+     * @param orderNo
+     * @param imagesUrl
+     * @param content
+     * @param callback
+     */
     void replaySave(
             String userId,
             String orderNo,
             String imagesUrl,
             String content,
+            JsonCallback<BaseResponse<List>> callback
+    );
+
+
+    void workSave(
+            String userId,
             JsonCallback<BaseResponse<List>> callback
     );
 }
