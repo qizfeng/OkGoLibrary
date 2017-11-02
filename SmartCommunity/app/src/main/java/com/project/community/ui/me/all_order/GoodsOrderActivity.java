@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
 import com.library.okgo.utils.ToastUtils;
+import com.project.community.Event.AddGoodsEvent;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.listener.RecycleItemClickListener;
@@ -42,6 +43,10 @@ import com.project.community.ui.me.shop_management.ShopDataActivity;
 import com.project.community.util.NetworkUtils;
 import com.project.community.view.MyButton;
 import com.project.community.view.SpacesItemDecoration;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -165,7 +170,7 @@ public class GoodsOrderActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goods_order);
         ButterKnife.bind(this);
-
+        EventBus.getDefault().register(this);
         initData();
     }
 
@@ -173,7 +178,7 @@ public class GoodsOrderActivity extends BaseActivity {
         item= (OrderModel) getIntent().getSerializableExtra("item");
         code = getIntent().getIntExtra("code",0);
         status=item.orderStatus;
-        if (status.equals("3")) initToolBar(mToolBar, mTvTitle, true, getString(R.string.apply_sale_detail), R.mipmap.iv_back);
+        if (status.equals("3") || status.equals("4") ) initToolBar(mToolBar, mTvTitle, true, getString(R.string.apply_sale_detail), R.mipmap.iv_back);
         else initToolBar(mToolBar, mTvTitle, true, getString(R.string.goods_order_title), R.mipmap.iv_back);
         list.addAll(item.detailList);
 
@@ -194,13 +199,24 @@ public class GoodsOrderActivity extends BaseActivity {
                 if (item.isComment==0) goodsOrderTvType4.setText(getString(R.string.my_order_wait_pingjia));
                 else goodsOrderTvType4.setText(getString(R.string.my_order_wait_yipingjia));
                 break;
+            case "3":
+                goodsOrderTvType4.setText(getString(R.string.my_order_daiyichuli));
+                break;
             case "4":
-                goodsOrderTvType4.setText(getString(R.string.my_order_address_apply_safe_status_ing));
+                if (item.sale.handleStatus==0){
+                    goodsOrderTvType4.setText(getString(R.string.all_order_yichuli));
+                    goods_order_shouhou_type1.setText(getString(R.string.all_order_yichuli));
+                }else {
+                    goods_order_shouhou_type1.setText(getString(R.string.all_order_jujuechuli));
+                    goodsOrderTvType4.setText(getString(R.string.all_order_jujuechuli));
+                }
+                goods_order_shouhou_type1.setText(getString(R.string.all_order_jujuechuli));
+
+//                    goodsOrderTvType4.setText(getString(R.string.my_order_yiguanbi));
                 break;
             case "5":
                 goodsOrderTvType4.setText(getString(R.string.my_order_address_apply_safe_status_end));
                 break;
-
 
         }
 
@@ -268,13 +284,15 @@ public class GoodsOrderActivity extends BaseActivity {
 
                     goods_order_tv_order_type.setText("");
                     goodsOrderTvType.setTextColor(getResources().getColor(R.color.color_gray_666666));
+                    goodsOrderTvType.setText(getResources().getString(R.string.my_order_wait_yishouhuo));
                     goods_order_btn_type1.setText(getResources().getString(R.string.my_order_address_pinglun));
                     goods_order_btn_type2.setText(getResources().getString(R.string.my_order_address_del_order));
                     goods_order_btn_type3.setText(getResources().getString(R.string.my_order_address_apply_safe));
                 }
 
                 break;
-            case "3"://售后
+            case "3"://待处理
+            case "4"://已处理
                 goods_order_shouhou_type1.setVisibility(View.VISIBLE);
                 goods_order_shouhou_type2.setVisibility(View.GONE);
                 goods_order_shouhou_type3.setVisibility(View.GONE);
@@ -282,31 +300,34 @@ public class GoodsOrderActivity extends BaseActivity {
                 goods_order_tv_order_type.setVisibility(View.GONE);
                 goods_order_ll_pinglun.setVisibility(View.GONE);
 
-
                 goodsOrderTvReason.setVisibility(View.VISIBLE);
                 goods_order_tv_pingzheng.setVisibility(View.VISIBLE);
                 goodsOrderRvPingzheng.setVisibility(View.VISIBLE);
 
-                goodsOrderTvReason.setText(item.sale.content);
+                goodsOrderTvReason.setText(getResources().getString(R.string.goods_order_reason)+item.sale.content);
+
+                if (item.sale.imagesUrl.contains(",")){
+                    for (int i = 0; i < item.sale.imagesUrl.split(",").length; i++) {
+                        mImages.add( item.sale.imagesUrl.split(",")[i]);
+                    }
+                }else mImages.add(item.sale.imagesUrl);
+                grid_photoAdapter=new ArticleDetailsImagsAdapter(this,mImages);
+                goodsOrderRvPingzheng.setAdapter(grid_photoAdapter);
 
 
                 if (code==1){
                     goods_order_shouhou_type4.setVisibility(View.VISIBLE);
                     goods_order_shouhou_type4_tv1.setVisibility(View.GONE);
-
                 }
-
+                if (status.equals("4")){
+                    goods_order_shouhou_type3.setVisibility(View.GONE);
+                    goods_order_shouhou_type4.setVisibility(View.GONE);
+                }
                 break;
 
         }
         goodsOrderRvOrder.setLayoutManager(new LinearLayoutManager(this));
-//        for (int i = 0; i < 2; i++) {
-//            CommentModel commentModel =new CommentModel();
-//            commentModel.id="0";
-//            commentModel.rating=2.5f;
-//            list.add(commentModel);
-//            mCommentList.add(commentModel);
-//        }
+
         if (status.equals("2")){
             goods_order_rv_pinglun.setLayoutManager(new LinearLayoutManager(this));
             mCommentAdapter=new GoodsOrderCommentApdater(mCommentList, new RecycleItemClickListener() {
@@ -335,14 +356,9 @@ public class GoodsOrderActivity extends BaseActivity {
         goodsOrderRvOrder.setAdapter(mAdapter);
 
 
-        for (int i = 0; i < 3; i++) {
-            mImages.add("");
-        }
-        grid_photoAdapter=new ArticleDetailsImagsAdapter(this,mImages);
-        goodsOrderRvPingzheng.setAdapter(grid_photoAdapter);
     }
 
-    @OnClick({R.id.goods_order_btn_type1,R.id.goods_order_btn_type2,R.id.goods_order_btn_type3,})
+    @OnClick({R.id.goods_order_btn_type1,R.id.goods_order_btn_type2,R.id.goods_order_btn_type3,R.id.goods_order_shouhou_type4_tv1,R.id.goods_order_shouhou_type4_tv2,R.id.goods_order_shouhou_type4_tv3})
     public void onViewClicked(View view) {
         Intent mIntent;
         switch (status){
@@ -356,6 +372,9 @@ public class GoodsOrderActivity extends BaseActivity {
                         break;
                     case R.id.goods_order_btn_type3:
                         showWindomDialog(1);
+                        break;
+                    case R.id.goods_order_shouhou_type4_tv1:
+                        showWindomDialog(3);
                         break;
                 }
                 break;
@@ -387,10 +406,20 @@ public class GoodsOrderActivity extends BaseActivity {
                             break;
                     }
                 break;
+            case "3":
+                switch (view.getId()){
+                    case R.id.goods_order_shouhou_type4_tv2:
+                        showWindomDialog(5);
+                        break;
+                    case R.id.goods_order_shouhou_type4_tv3:
+                        showWindomDialog(4);
+                        break;
+                }
+                break;
             default:
                 switch (view.getId()){
                     case R.id.goods_order_btn_type3:
-//                                ApplySaleActivity.startActivity(getActivity());
+
                         break;
                 }
                 break;
@@ -455,7 +484,6 @@ public class GoodsOrderActivity extends BaseActivity {
     }
 
 
-
     /**
      * D61售后详情
      */
@@ -485,6 +513,8 @@ public class GoodsOrderActivity extends BaseActivity {
             }
         });
     }
+
+
     /**
      * D55取消订单
      */
@@ -506,6 +536,8 @@ public class GoodsOrderActivity extends BaseActivity {
                     public void onSuccess(BaseResponse<List> listBaseResponse, Call call, Response response) {
                         dismissDialog();
                         showToast(listBaseResponse.message);
+                        EventBus.getDefault().post(new AddGoodsEvent(""));
+                        finish();
                     }
 
                     @Override
@@ -539,6 +571,8 @@ public class GoodsOrderActivity extends BaseActivity {
                     public void onSuccess(BaseResponse<List> listBaseResponse, Call call, Response response) {
                         dismissDialog();
                         showToast(listBaseResponse.message);
+                        EventBus.getDefault().post(new AddGoodsEvent(""));
+                        finish();
                     }
 
                     @Override
@@ -571,6 +605,8 @@ public class GoodsOrderActivity extends BaseActivity {
                     public void onSuccess(BaseResponse<List> listBaseResponse, Call call, Response response) {
                         dismissDialog();
                         showToast(listBaseResponse.message);
+                        EventBus.getDefault().post(new AddGoodsEvent(""));
+                        finish();
                     }
 
                     @Override
@@ -582,9 +618,79 @@ public class GoodsOrderActivity extends BaseActivity {
                 });
     }
 
+    /**
+     * D88发货
+     */
+
+    private void send(String orderNo) {
+
+        showLoading();
+        if (!NetworkUtils.isNetworkAvailable(this)) {
+            ToastUtils.showShortToast(this, R.string.network_error);
+            dismissDialog();
+            return;
+        }
+
+        serverDao.send(
+                getUser(this).id,
+                orderNo,
+                new JsonCallback<BaseResponse<List>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<List> listBaseResponse, Call call, Response response) {
+                        dismissDialog();
+                        showToast(listBaseResponse.message);
+                        EventBus.getDefault().post(new AddGoodsEvent("999"));
+                        finish();
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        dismissDialog();
+                        showToast(e.getMessage());
+                    }
+                });
+    }
 
     /**
-     * 0删除,1其他取消订单 2 确认收货  提示窗口
+     * D88商家售后处理
+     */
+
+    private void handleSale(String handleStatus,String orderNo) {
+
+        showLoading();
+        if (!NetworkUtils.isNetworkAvailable(this)) {
+            ToastUtils.showShortToast(this, R.string.network_error);
+            dismissDialog();
+            return;
+        }
+
+        serverDao.handleSale(
+                getUser(this).id,
+                handleStatus,
+                orderNo,
+                new JsonCallback<BaseResponse<List>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<List> listBaseResponse, Call call, Response response) {
+                        dismissDialog();
+                        showToast(listBaseResponse.message);
+                        EventBus.getDefault().post(new AddGoodsEvent(""));
+                        finish();
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        dismissDialog();
+                        showToast(e.getMessage());
+                    }
+                });
+    }
+
+    /**
+     * 0删除,1其他取消订单 2 确认收货
+     * 商铺 3 发货 4处理  5拒绝处理
+     * 提示窗口
      *
      * @param code
      */
@@ -602,13 +708,16 @@ public class GoodsOrderActivity extends BaseActivity {
         p.width = (int) (d.getWidth() * 0.7); // 宽度设置为屏幕的0.65
         window.setAttributes(p);
         mWindomDialog.show();
-        TextView tv_content = (TextView) mDialog.findViewById(R.id.tv_content);
+        TextView tv_content = (TextView) mWindomDialog.findViewById(R.id.tv_content);
         if (code==0) tv_content.setText(R.string.txt_confirm_detlet_order);
         else if (code==1) tv_content.setText(R.string.txt_confirm_cancel);
         else if (code==2) tv_content.setText(R.string.txt_confirm_shouhuo);
-        Button btn_confirm = (Button) mDialog.findViewById(R.id.btn_confirm);
-        Button btn_cancel = (Button) mDialog.findViewById(R.id.btn_cancel);
-        ImageView iv_close = (ImageView) mDialog.findViewById(R.id.iv_close);
+        else if (code==3) tv_content.setText(R.string.txt_confirm_fahuo);
+        else if (code==4) tv_content.setText(R.string.txt_confirm_confirn_chuli);
+        else if (code==5) tv_content.setText(R.string.txt_confirm_confirn_refusechuli);
+        Button btn_confirm = (Button) mWindomDialog.findViewById(R.id.btn_confirm);
+        Button btn_cancel = (Button) mWindomDialog.findViewById(R.id.btn_cancel);
+        ImageView iv_close = (ImageView) mWindomDialog.findViewById(R.id.iv_close);
         iv_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -625,19 +734,25 @@ public class GoodsOrderActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 mWindomDialog.dismiss();
-                if (code==0){
-                    deleteOrder(item.orderNo);
-                }else if (code==1){
-                    cacelOrder(item.orderNo);
-                }else if (code==2){
-                    complete(item.orderNo);
-                }
-
-
+                if (code==0)deleteOrder(item.orderNo);
+                else if (code==1) cacelOrder(item.orderNo);
+                else if (code==2) complete(item.orderNo);
+                else if (code == 3) send(item.orderNo);
+                else if (code == 4) handleSale("0",item.orderNo);
+                else if (code == 5) handleSale("1",item.orderNo);
             }
         });
     }
 
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void setAddGoodsEvent(AddGoodsEvent addGoodsEvent) {
+        finish();
+    }
 }

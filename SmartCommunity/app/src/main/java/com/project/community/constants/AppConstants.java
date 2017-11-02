@@ -608,6 +608,16 @@ public class AppConstants {
     public static final String URL_SEND=URL_BASE+"/m/propleLife/shop/order/send";
 
     /**
+     * 发货
+     */
+    public static final String URL_SALEHANDLE=URL_BASE+"/m/propleLife/order/sale/handle";
+
+    /**
+     * D88商家订单详情
+     */
+    public static final String URL_GETSHOPORDER=URL_BASE+"/m/propleLife/shop/order/get";
+
+    /**
 
      * 维修人员维修单
      */

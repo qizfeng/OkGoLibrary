@@ -1137,7 +1137,7 @@ public class ServerDaoImpl implements ServerDao {
 
     @Override
     public void complete(String userId, String orderNo, JsonCallback<BaseResponse<List>> callback) {
-        OkGo.get(AppConstants.URL_COMPLETE)
+        OkGo.post(AppConstants.URL_COMPLETE)
                 .tag(mContext)
                 .params("userId", userId)
                 .params("orderNo", orderNo)
@@ -1147,6 +1147,25 @@ public class ServerDaoImpl implements ServerDao {
     @Override
     public void send(String userId, String orderNo, JsonCallback<BaseResponse<List>> callback) {
         OkGo.post(AppConstants.URL_SEND)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("orderNo", orderNo)
+                .execute(callback);
+    }
+
+    @Override
+    public void handleSale(String userId, String handleStatus, String orderNo, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.URL_SALEHANDLE)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("handleStatus", handleStatus)
+                .params("orderNo", orderNo)
+                .execute(callback);
+    }
+
+    @Override
+    public void getShopOrder(String userId, String orderNo, JsonCallback<BaseResponse<OrderModel>> callback) {
+        OkGo.get(AppConstants.URL_GETSHOPORDER)
                 .tag(mContext)
                 .params("userId", userId)
                 .params("orderNo", orderNo)

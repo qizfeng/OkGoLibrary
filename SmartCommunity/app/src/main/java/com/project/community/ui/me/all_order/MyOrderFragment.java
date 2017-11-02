@@ -95,7 +95,7 @@ public class MyOrderFragment extends BaseFragment implements SwipeRefreshLayout.
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        mAdapter = new MyOrderApdater(getActivity(), mData,status, new MyOrderApdater.OnGoodsClickListener() {
+        mAdapter = new MyOrderApdater(getActivity(), mData, new MyOrderApdater.OnGoodsClickListener() {
             @Override
             public void onGoodsItemClick(View view,int parentPosition, int childPosition) {
 
@@ -104,62 +104,9 @@ public class MyOrderFragment extends BaseFragment implements SwipeRefreshLayout.
             @Override
             public void onFooterDeleteClick(View view, int position) {
                 Intent mIntent;
-                switch (status){
-                    case ""://"", #全部
-                        switch (mData.get(position).orderStatus){
-                            case "0"://"0", #未发货
-                                switch (view.getId()){
-                                    case R.id.item_foot_2:
-                                        mIntent = new Intent(getActivity(), PhoneDialogActivity.class);
-                                        mIntent.putExtra("hasHeader", false);
-                                        mIntent.putExtra("type", mData.get(position).shopsPhone);
-                                        startActivity(mIntent);
-                                        break;
-                                    case R.id.item_foot_3:
-                                        showAlertDialog( position, 1);
-                                        break;
-                                }
-                                break;
-                            case "1"://:1：已发货
-                                switch (view.getId()){
-                                    case R.id.item_foot_2:
-                                        break;
-                                    case R.id.item_foot_3:
-                                        showAlertDialog( position, 2);
-                                        break;
-                                }
-                                break;
-                            case "2"://2：已完成    (包括 已评价 与 待评价 )
-                                if (mData.get(position).isComment==0)
-                                    switch (view.getId()){
-                                        case R.id.item_foot_1:
-                                        TakeDeliveryOfGoodsActivity.startActivity(getActivity(),mData.get(position));
-                                            break;
-                                        case R.id.item_foot_2:
-                                            showAlertDialog( position, 0);
-                                            break;
-                                        case R.id.item_foot_3:
-                                            ApplySaleActivity.startActivity(getActivity(),mData.get(position));
-                                            break;
-                                    }
-                                else
-                                    switch (view.getId()){
-                                        case R.id.item_foot_3:
-                                            ApplySaleActivity.startActivity(getActivity(),mData.get(position));
-                                            break;
-                                    }
-                                break;
-                            default:
-                                switch (view.getId()){
-                                    case R.id.item_foot_3:
-
-                                        break;
-                                }
-                                break;
-                        }
-                        break;
+                switch (mData.get(position).orderStatus) {
                     case "0"://"0", #未发货
-                        switch (view.getId()){
+                        switch (view.getId()) {
                             case R.id.item_foot_2:
                                 mIntent = new Intent(getActivity(), PhoneDialogActivity.class);
                                 mIntent.putExtra("hasHeader", false);
@@ -167,48 +114,165 @@ public class MyOrderFragment extends BaseFragment implements SwipeRefreshLayout.
                                 startActivity(mIntent);
                                 break;
                             case R.id.item_foot_3:
-                                showAlertDialog( position, 1);
+                                showAlertDialog(position, 1);
                                 break;
                         }
                         break;
                     case "1"://:1：已发货
-                        switch (view.getId()){
+                        switch (view.getId()) {
                             case R.id.item_foot_2:
+                                mIntent = new Intent(getActivity(), PhoneDialogActivity.class);
+                                mIntent.putExtra("hasHeader", false);
+                                mIntent.putExtra("type", mData.get(position).shopsPhone);
+                                startActivity(mIntent);
                                 break;
                             case R.id.item_foot_3:
-                                showAlertDialog( position, 2);
+                                showAlertDialog(position, 2);
                                 break;
                         }
                         break;
-                    case "2"://2：已完成
-                        if (mData.get(position).isComment==0)
-                            switch (view.getId()){
+                    case "2"://2：已完成    (包括 已评价 与 待评价 )
+                        if (mData.get(position).isComment == 0)
+                            switch (view.getId()) {
                                 case R.id.item_foot_1:
-                                    TakeDeliveryOfGoodsActivity.startActivity(getActivity(),mData.get(position));
+                                    TakeDeliveryOfGoodsActivity.startActivity(getActivity(), mData.get(position));
                                     break;
                                 case R.id.item_foot_2:
-                                    showAlertDialog( position, 0);
+                                    showAlertDialog(position, 0);
                                     break;
                                 case R.id.item_foot_3:
-                                    ApplySaleActivity.startActivity(getActivity(),mData.get(position));
+                                    ApplySaleActivity.startActivity(getActivity(), mData.get(position));
                                     break;
                             }
                         else
-                            switch (view.getId()){
+                            switch (view.getId()) {
                                 case R.id.item_foot_3:
-//                                    ApplySaleActivity.startActivity(getActivity());
+                                    ApplySaleActivity.startActivity(getActivity(), mData.get(position));
                                     break;
                             }
                         break;
                     default:
-                        switch (view.getId()){
+                        switch (view.getId()) {
                             case R.id.item_foot_3:
-//                                ApplySaleActivity.startActivity(getActivity());
+
                                 break;
                         }
                         break;
+                    }
                 }
-            }
+//                switch (status){
+//                    case ""://"", #全部
+//                        switch (mData.get(position).orderStatus){
+//                            case "0"://"0", #未发货
+//                                switch (view.getId()){
+//                                    case R.id.item_foot_2:
+//                                        mIntent = new Intent(getActivity(), PhoneDialogActivity.class);
+//                                        mIntent.putExtra("hasHeader", false);
+//                                        mIntent.putExtra("type", mData.get(position).shopsPhone);
+//                                        startActivity(mIntent);
+//                                        break;
+//                                    case R.id.item_foot_3:
+//                                        showAlertDialog( position, 1);
+//                                        break;
+//                                }
+//                                break;
+//                            case "1"://:1：已发货
+//                                switch (view.getId()){
+//                                    case R.id.item_foot_2:
+//                                        mIntent = new Intent(getActivity(), PhoneDialogActivity.class);
+//                                        mIntent.putExtra("hasHeader", false);
+//                                        mIntent.putExtra("type", mData.get(position).shopsPhone);
+//                                        startActivity(mIntent);
+//                                        break;
+//                                    case R.id.item_foot_3:
+//                                        showAlertDialog( position, 2);
+//                                        break;
+//                                }
+//                                break;
+//                            case "2"://2：已完成    (包括 已评价 与 待评价 )
+//                                if (mData.get(position).isComment==0)
+//                                    switch (view.getId()){
+//                                        case R.id.item_foot_1:
+//                                        TakeDeliveryOfGoodsActivity.startActivity(getActivity(),mData.get(position));
+//                                            break;
+//                                        case R.id.item_foot_2:
+//                                            showAlertDialog( position, 0);
+//                                            break;
+//                                        case R.id.item_foot_3:
+//                                            ApplySaleActivity.startActivity(getActivity(),mData.get(position));
+//                                            break;
+//                                    }
+//                                else
+//                                    switch (view.getId()){
+//                                        case R.id.item_foot_3:
+//                                            ApplySaleActivity.startActivity(getActivity(),mData.get(position));
+//                                            break;
+//                                    }
+//                                break;
+//                            default:
+//                                switch (view.getId()){
+//                                    case R.id.item_foot_3:
+//
+//                                        break;
+//                                }
+//                                break;
+//                        }
+//                        break;
+////                    case "0"://"0", #未发货
+////                        switch (view.getId()){
+////                            case R.id.item_foot_2:
+////                                mIntent = new Intent(getActivity(), PhoneDialogActivity.class);
+////                                mIntent.putExtra("hasHeader", false);
+////                                mIntent.putExtra("type", mData.get(position).shopsPhone);
+////                                startActivity(mIntent);
+////                                break;
+////                            case R.id.item_foot_3:
+////                                showAlertDialog( position, 1);
+////                                break;
+////                        }
+////                        break;
+////                    case "1"://:1：已发货
+////                        switch (view.getId()){
+////                            case R.id.item_foot_2:
+////                                mIntent = new Intent(getActivity(), PhoneDialogActivity.class);
+////                                mIntent.putExtra("hasHeader", false);
+////                                mIntent.putExtra("type", mData.get(position).shopsPhone);
+////                                startActivity(mIntent);
+////                                break;
+////                            case R.id.item_foot_3:
+////                                showAlertDialog( position, 2);
+////                                break;
+////                        }
+////                        break;
+////                    case "2"://2：已完成
+////                        if (mData.get(position).isComment==0)
+////                            switch (view.getId()){
+////                                case R.id.item_foot_1:
+////                                    TakeDeliveryOfGoodsActivity.startActivity(getActivity(),mData.get(position));
+////                                    break;
+////                                case R.id.item_foot_2:
+////                                    showAlertDialog( position, 0);
+////                                    break;
+////                                case R.id.item_foot_3:
+////                                    ApplySaleActivity.startActivity(getActivity(),mData.get(position));
+////                                    break;
+////                            }
+////                        else
+////                            switch (view.getId()){
+////                                case R.id.item_foot_3:
+//////                                    ApplySaleActivity.startActivity(getActivity());
+////                                    break;
+////                            }
+////                        break;
+////                    default:
+////                        switch (view.getId()){
+////                            case R.id.item_foot_3:
+//////                                ApplySaleActivity.startActivity(getActivity());
+////                                break;
+////                        }
+////                        break;
+//                }
+
 
             @Override
             public void onSettlementClick(View view, int position) {

@@ -47,7 +47,7 @@
                     android:layout_alignParentLeft="true"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="金川火锅"
+                    android:text=""
                     android:textColor="@color/color_gray_333333"
                     android:textSize="@dimen/sp_14" />
 
@@ -151,7 +151,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/dp_10"
                     android:layout_toLeftOf="@+id/heade_iv_call"
-                    android:text="0558-2627110"
+                    android:text=""
                     android:textColor="@color/color_gray_999999"
                     android:textSize="@dimen/sp_12" />
 
@@ -207,7 +207,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="地址:北京市丰台区云岗北区西里物美超市往东100米云岗中学对面果然鲜"
+                android:text="地址:"
                 android:textColor="@color/color_gray_666666"
                 android:textSize="@dimen/sp_12" />
 
@@ -221,7 +221,7 @@
                     android:id="@+id/heade_tv_distance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="距离1km"
+                    android:text="距离0km"
                     android:textColor="@color/color_gray_666666"
                     android:textSize="@dimen/sp_12" />
 

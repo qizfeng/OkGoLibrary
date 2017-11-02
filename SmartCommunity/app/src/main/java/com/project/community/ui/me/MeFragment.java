@@ -349,7 +349,7 @@ public class MeFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                 saveUser(getActivity(), userStr);
                 Glide.with(getActivity())
                         .load(AppConstants.HOST + userResponseBaseResponse.retData.photo)
-                        // .placeholder(R.mipmap.d54_tx)
+                         .placeholder(R.mipmap.d54_tx)
                         // .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .bitmapTransform(new CropCircleTransformation(getActivity()))
                         .into(mIvHeader);

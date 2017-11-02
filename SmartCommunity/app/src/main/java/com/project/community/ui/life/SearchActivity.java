@@ -87,6 +87,7 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
     private List<SearchModel> mData = new ArrayList<>();
     private List<String> historyData = new ArrayList<>();
     List<String> historyRecordList = new ArrayList<>();
+    
 //    private List<CommentModel> comments = new ArrayList<>();//评论列表
 //    private CommentsApdater commentsPopwinAdapter;
 //    private CommentPopwindow popupWindow;
@@ -353,12 +354,15 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
             switch (index) {
                 case 2:
                     String locData = getIntent().getExtras().getString("locData");
+                    if (page==1)
+                        showLoading();
                     serverDao.doShopsSearch(locData, page, 15, text, new JsonCallback<BaseResponse<List<SearchModel>>>() {
                         @Override
                         public void onSuccess(BaseResponse<List<SearchModel>> listBaseResponse, Call call, Response response) {
                             KeyBoardUtils.closeKeybord(etSearchContent, SearchActivity.this);
+                            Log.e( "StartSearchcj", "-----------------2");
                             if (page == 1) {
-//                                dismissDialog();
+                                dismissDialog();
                                 mData = new ArrayList<>();
                                 mData.addAll(listBaseResponse.retData);
                                 mAdapter.setNewData(mData);
@@ -389,7 +393,7 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
                         @Override
                         public void onError(Call call, Response response, Exception e) {
                             super.onError(call, response, e);
-//                            dismissDialog();
+                            dismissDialog();
                             showToast(e.getMessage());
                         }
                     });

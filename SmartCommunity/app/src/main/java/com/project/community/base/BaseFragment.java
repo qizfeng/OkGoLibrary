@@ -114,7 +114,8 @@ public abstract class BaseFragment extends Fragment {
 
     public void showToast(String msg) {
 //        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-        ToastUtils.showShortToast(getActivity(), msg);
+        if (getActivity()!=null)
+            ToastUtils.showShortToast(getActivity(), msg);
     }
 
     public Toolbar initToolbar(Toolbar toolbar, String title) {

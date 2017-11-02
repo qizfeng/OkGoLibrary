@@ -41,6 +41,8 @@ public class MerchantDetailAdapter extends BaseQuickAdapter<GoodsModel, BaseView
         TextView tv_original_price = helper.getView(R.id.tv_original_price);
         final TextView tv_price = helper.getView(R.id.tv_price);
         RatingBar ratingBar = helper.getView(R.id.ratingBar);
+        if (item.starLevel>5.0f)
+            item.starLevel=5.0f;
         ratingBar.setStar(item.starLevel);
         new GlideImageLoader().onDisplayImageWithDefault(mContext, (ImageView) helper.getView(R.id.iv_image), AppConstants.URL_BASE + item.images, R.mipmap.c1_image2);
         tv_original_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);

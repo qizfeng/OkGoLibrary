@@ -15,12 +15,17 @@ import com.alanapi.switchbutton.SwitchButton;
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
 import com.library.okgo.utils.ToastUtils;
+import com.project.community.Event.AddGoodsEvent;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.model.ShopIndexModel;
 import com.project.community.ui.me.all_order.AllOrderActivity;
 import com.project.community.util.NetworkUtils;
 import com.project.community.util.ToastUtil;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -81,6 +86,7 @@ public class ShopManagerActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_manager);
         ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
         initToolBar(mToolBar, mTvTitle, true, getString(R.string.shop_manager_title), R.mipmap.iv_back);
 
         getShopData();
@@ -127,6 +133,8 @@ public class ShopManagerActivity extends BaseActivity {
                 break;
         }
     }
+
+
     /**
      * 获取店铺信息
      */
@@ -168,4 +176,16 @@ public class ShopManagerActivity extends BaseActivity {
         });
     }
 
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void setAddGoodsEvent(AddGoodsEvent addGoodsEvent) {
+        if (addGoodsEvent.getItem().equals("0") || addGoodsEvent.getItem().equals("999"))
+            getShopData();
+    }
 }

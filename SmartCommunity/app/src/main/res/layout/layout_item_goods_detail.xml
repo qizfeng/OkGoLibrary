@@ -27,7 +27,7 @@
             <TextView
                 android:id="@+id/item_goods_detail_name"
                 android:layout_marginTop="5dp"
-                android:textStyle="bold"
+                style="?android:attr/windowTitleStyle"
                 android:textColor="@color/color_gray_333333"
                 android:textSize="13sp"
                 android:text="郑中牛肉面"

@@ -40,6 +40,7 @@ import com.library.okgo.model.BaseResponse;
 import com.library.okgo.utils.LogUtils;
 import com.library.okgo.utils.ToastUtils;
 import com.library.okgo.utils.photo.PhotoUtils;
+import com.project.community.Event.AddGoodsEvent;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.listener.RecycleItemClickListener;
@@ -55,6 +56,8 @@ import com.project.community.util.ScreenUtils;
 import com.project.community.util.StringUtils;
 import com.project.community.view.MyGridView;
 import com.project.community.view.crop.CropImageActivity;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -417,6 +420,8 @@ public class ApplySaleActivity extends BaseActivity implements View.OnClickListe
                     @Override
                     public void onSuccess(BaseResponse<List> listBaseResponse, Call call, Response response) {
                         dismissDialog();
+                        showToast(listBaseResponse.message);
+                        EventBus.getDefault().post(new AddGoodsEvent(""));
                         finish();
                     }
 
