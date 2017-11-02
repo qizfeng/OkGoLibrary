@@ -16,17 +16,17 @@ import java.util.List;
  * 已完成列表适配器
  */
 
-public class ServiesComApdater extends BaseQuickAdapter<RepairListBean, BaseViewHolder> {
+public class ServiesComApdater extends BaseQuickAdapter<RepairListBean.ListBean, BaseViewHolder> {
     public RecycleItemClickListener itemClickListener;//点击事件
 
-    public ServiesComApdater(List<RepairListBean> data, RecycleItemClickListener itemClick) {
+    public ServiesComApdater(List<RepairListBean.ListBean> data, RecycleItemClickListener itemClick) {
         super(R.layout.layout_item_serives_comple, data);
         itemClickListener = itemClick;
 
     }
 
     @Override
-    protected void convert(final BaseViewHolder baseViewHolder, final RepairListBean model) {
+    protected void convert(final BaseViewHolder baseViewHolder, final RepairListBean.ListBean model) {
 //        baseViewHolder.getConvertView().setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {

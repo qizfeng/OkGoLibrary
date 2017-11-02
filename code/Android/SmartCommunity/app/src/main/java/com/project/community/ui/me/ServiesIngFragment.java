@@ -47,7 +47,7 @@ public class ServiesIngFragment extends BaseFragment {
     VpSwipeRefreshLayout refreshLayout;
 
     ServiesIngApdater mAdapter;
-    List<RepairListBean> mData = new ArrayList<>();
+    List<RepairListBean.ListBean> mData = new ArrayList<>();
     private int page = 1;
 
     @Override
@@ -78,15 +78,14 @@ public class ServiesIngFragment extends BaseFragment {
             @Override
             public void onItemClick(View view, int position) {
 //                ToastUtils.showLongToast(getActivity(),position);
-                OrderDetailActivity.startActivity(getActivity(), mAdapter.getData().get(position).getOrderNo());
+                OrderDetailActivity.startActivity(getActivity(), mAdapter.getData().
+                        get(position).getOrderNo());
 
             }
 
             @Override
             public void onCustomClick(View view, int position) {
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + position));
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+
 //                ToastUtils.showLongToast(getActivity(),"电话"+position);
             }
         });
@@ -108,24 +107,24 @@ public class ServiesIngFragment extends BaseFragment {
     private void getData() {
         serverDao.repairList(getUser(getActivity()).id, "2", String.valueOf(page),
                 String.valueOf(AppConstants.PAGE_SIZE),
-                new JsonCallback<BaseResponse<List<RepairListBean>>>() {
+                new JsonCallback<BaseResponse<RepairListBean>>() {
                     @Override
-                    public void onSuccess(BaseResponse<List<RepairListBean>> listBaseResponse, Call call, Response response) {
+                    public void onSuccess(BaseResponse<RepairListBean> listBaseResponse, Call call, Response response) {
 
                         refreshLayout.setRefreshing(false);
 
                         if (listBaseResponse.errNum.equals("0")) {
                             if (page == 1) {
-                                mData.addAll(listBaseResponse.retData);
+                                mData.addAll(listBaseResponse.retData.getList());
                                 mAdapter.setNewData(mData);
                                 mAdapter.setEnableLoadMore(true);
                             } else {
-                                mData.addAll(listBaseResponse.retData);
-                                mAdapter.addData(listBaseResponse.retData);
+                                mData.addAll(listBaseResponse.retData.getList());
+                                mAdapter.addData(listBaseResponse.retData.getList());
                                 mAdapter.loadMoreComplete();
                             }
 
-                            if (listBaseResponse.retData.size() < AppConstants.PAGE_SIZE)
+                            if (listBaseResponse.retData.getList().size() < AppConstants.PAGE_SIZE)
                                 mAdapter.loadMoreEnd();
 
                         } else {

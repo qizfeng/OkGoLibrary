@@ -1344,7 +1344,7 @@ public class ServerDaoImpl implements ServerDao {
     @Override
     public void repairList(String userId, String orderStatus,
                            String pageNo, String pageSize,
-                           JsonCallback<BaseResponse<List<RepairListBean>>> callback) {
+                           JsonCallback<BaseResponse<RepairListBean>> callback) {
         OkGo.get(AppConstants.URL_REPAIR_LIST)
                 .tag(mContext)
                 .params("userId", userId)
@@ -1389,6 +1389,14 @@ public class ServerDaoImpl implements ServerDao {
                 .params("orderNo", orderNo)
                 .params("imagesUrl", imagesUrl)
                 .params("content", content)
+                .execute(callback);
+    }
+
+    @Override
+    public void workSave(String userId, JsonCallback<BaseResponse<List>> callback) {
+        OkGo.post(AppConstants.URL_WORK_SAVE)
+                .tag(mContext)
+                .params("userId", userId)
                 .execute(callback);
     }
 

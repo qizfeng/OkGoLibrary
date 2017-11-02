@@ -3,25 +3,25 @@ package com.project.community.ui.me;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.library.customview.viewpager.NoScrollViewPager;
-import com.library.okgo.utils.ToastUtils;
+import com.library.okgo.callback.JsonCallback;
+import com.library.okgo.model.BaseResponse;
+import com.project.community.Event.SetWorkBean;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
-import com.project.community.ui.me.all_order.MyOrderActivity;
+import com.project.community.util.ToastUtil;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +29,8 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * Created by cj on 17/9/26.
@@ -68,6 +70,8 @@ public class CommunityActivity extends BaseActivity {
     TextView community_off;
     @Bind(R.id.viewpager)
     NoScrollViewPager mViewpager;
+
+
     private List<Fragment> mFragmentsList;
     private MyFrageStatePagerAdapter mAdapter;
     Fragment mServiesWaitFragment;
@@ -88,10 +92,13 @@ public class CommunityActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community2);
         ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
         initData();
     }
 
     private void initData() {
+
+
         mFragmentsList = new ArrayList<>();
         mServiesWaitFragment = new ServiesWaitFragment();
         mServiesIngFragment = new ServiesIngFragment();
@@ -122,13 +129,13 @@ public class CommunityActivity extends BaseActivity {
             public void onPageSelected(int position) {
                 switch (position) {
                     case 0:
-                        resetTextView(mTvServiewWait,line_1);
+                        resetTextView(mTvServiewWait, line_1);
                         break;
                     case 1:
-                        resetTextView(mTvServiewIng,line_2);
+                        resetTextView(mTvServiewIng, line_2);
                         break;
                     case 2:
-                        resetTextView(mTvServiewComp,line_3);
+                        resetTextView(mTvServiewComp, line_3);
                         break;
 
                 }
@@ -141,7 +148,7 @@ public class CommunityActivity extends BaseActivity {
         });
     }
 
-    private void resetTextView(TextView v,View line) {
+    private void resetTextView(TextView v, View line) {
 
         line_1.setVisibility(View.INVISIBLE);
         line_2.setVisibility(View.INVISIBLE);
@@ -159,7 +166,7 @@ public class CommunityActivity extends BaseActivity {
         mViewpager.setCurrentItem(desTab, true);
     }
 
-    @OnClick({R.id.ll_servers_wait, R.id.ll_servers_ing, R.id.ll_servers_commplet,R.id.community_finish, R.id.community_friends, R.id.community_off})
+    @OnClick({R.id.ll_servers_wait, R.id.ll_servers_ing, R.id.ll_servers_commplet, R.id.community_finish, R.id.community_friends, R.id.community_off})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_servers_wait:
@@ -175,18 +182,45 @@ public class CommunityActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.community_friends:
-                Intent intent = new Intent(this,MyActivity.class);
+                Intent intent = new Intent(this, MyActivity.class);
                 startActivity(intent);
                 break;
             case R.id.community_off:
-                if (!isType){
-                    community_off.setText("上班");
-                }else {
-                    community_off.setText("下班");
-                }
-                isType=!isType;
+                workSave();
+
+
                 break;
         }
+    }
+
+    private void workSave() {
+
+        serverDao.workSave(getUser(this).id, new JsonCallback<BaseResponse<List>>() {
+            @Override
+            public void onSuccess(BaseResponse<List> listBaseResponse, Call call, Response response) {
+
+                if (listBaseResponse.errNum.equals("0")) {
+                    ToastUtil.showToast(CommunityActivity.this, "打卡成功");
+                    if (!isType) {
+                        community_off.setText("上班");
+                    } else {
+                        community_off.setText("下班");
+                    }
+                    isType = !isType;
+
+                } else {
+                    ToastUtil.showToast(CommunityActivity.this, listBaseResponse.message);
+                }
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+
+            }
+        });
+
+
     }
 
     class MyFrageStatePagerAdapter extends FragmentStatePagerAdapter {
@@ -210,4 +244,21 @@ public class CommunityActivity extends BaseActivity {
 
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(SetWorkBean event) {
+        if (event.getWorkStatus().equals("1")) {
+            community_off.setText("上班");
+            isType = true;
+        }
+        if (event.getWorkStatus().equals("2")) {
+            community_off.setText("下班");
+            isType = false;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
 }

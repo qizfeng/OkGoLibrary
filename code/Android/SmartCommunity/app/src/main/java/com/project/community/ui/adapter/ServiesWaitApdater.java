@@ -19,17 +19,17 @@ import java.util.List;
  * 待服务列表适配器
  */
 
-public class ServiesWaitApdater extends BaseQuickAdapter<RepairListBean, BaseViewHolder> {
+public class ServiesWaitApdater extends BaseQuickAdapter<RepairListBean.ListBean, BaseViewHolder> {
     public RecycleItemClickListener itemClickListener;//点击事件
 
-    public ServiesWaitApdater(List<RepairListBean> data, RecycleItemClickListener itemClick) {
+    public ServiesWaitApdater(List<RepairListBean.ListBean> data, RecycleItemClickListener itemClick) {
         super(R.layout.layout_item_serives_wait, data);
         itemClickListener = itemClick;
 
     }
 
     @Override
-    protected void convert(final BaseViewHolder baseViewHolder, final RepairListBean model) {
+    protected void convert(final BaseViewHolder baseViewHolder, final RepairListBean.ListBean model) {
         baseViewHolder.getConvertView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

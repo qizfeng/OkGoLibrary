@@ -41,7 +41,8 @@ public class ArticleDetailsAdapter extends BaseQuickAdapter<CommentsListBean.Com
     }
 
     @Override
-    protected void convert(final BaseViewHolder baseViewHolder, final CommentsListBean.CommentsBean model) {
+    protected void convert(final BaseViewHolder baseViewHolder,
+                           final CommentsListBean.CommentsBean model) {
 //        baseViewHolder.getConvertView().setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -142,7 +143,7 @@ public class ArticleDetailsAdapter extends BaseQuickAdapter<CommentsListBean.Com
                 baseViewHolder.setVisible(R.id.tv_comment_num, true);
                 baseViewHolder.setText(R.id.tv_comment_num, "评论(" + getTotalComments() + ")");
             } else {
-                baseViewHolder.setVisible(R.id.tv_comment_num, true);
+                baseViewHolder.setVisible(R.id.tv_comment_num, false);
 
             }
 
