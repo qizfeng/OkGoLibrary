@@ -38,6 +38,8 @@ public class MinshengAdapter extends BaseQuickAdapter<ShopModel, BaseViewHolder>
                 AppConstants.HOST + model.shopPhoto, R.mipmap.c1_image2);
         baseViewHolder.setText(R.id.tv_address, "地址:" + model.businessAddress);
         baseViewHolder.setText(R.id.tv_distance, "距离" + model.distance + "KM");
+        if (model.isOpen==0) baseViewHolder.setVisible(R.id.tv_status,false);
+        else baseViewHolder.setVisible(R.id.tv_status,false);
         RatingBar ratingBar = baseViewHolder.getView(R.id.ratingBar);
         double starLevel = model.starLevel;
         ratingBar.setStar((float) starLevel);

@@ -12,11 +12,13 @@ public class SaleModel implements Serializable {
 
     public String content ;
     public String imagesUrl ;
+    public int handleStatus ;
 
     @Override
     public String toString() {
         return "SaleModel{" +
                 "content='" + content + '\'' +
+                "handleStatus='" + handleStatus + '\'' +
                 ", imagesUrl='" + imagesUrl + '\'' +
                 '}';
     }

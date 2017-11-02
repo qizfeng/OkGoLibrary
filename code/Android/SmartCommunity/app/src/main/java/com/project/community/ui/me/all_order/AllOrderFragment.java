@@ -35,6 +35,8 @@ import com.project.community.view.SpacesItemDecoration;
 import com.project.community.view.VpSwipeRefreshLayout;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,6 +80,7 @@ public class AllOrderFragment extends BaseFragment implements SwipeRefreshLayout
 
     @Override
     protected void initData() {
+        EventBus.getDefault().register(this);
         shopId=getArguments().getString("shopId");
         status=getArguments().getString("status");
 
@@ -92,8 +95,7 @@ public class AllOrderFragment extends BaseFragment implements SwipeRefreshLayout
         mAdapter = new AllOrderApdater(mData, new RecycleItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                GoodsOrderActivity.startActivity(getActivity(),mData.get(position),1);
-
+                getShopOrder(mData.get(position).orderNo);
             }
 
             @Override
@@ -104,7 +106,8 @@ public class AllOrderFragment extends BaseFragment implements SwipeRefreshLayout
                             case "0":
                                 showAlertDialog(position,0);
                                 break;
-                            case "1":
+                            case "3":
+                                showAlertDialog(position,1);
                                 break;
 
                         }
@@ -192,8 +195,50 @@ public class AllOrderFragment extends BaseFragment implements SwipeRefreshLayout
                     public void onSuccess(BaseResponse<List> listBaseResponse, Call call, Response response) {
                         dismissDialog();
                         showToast(listBaseResponse.message);
-//                        EventBus.getDefault().post(new AddGoodsEvent(status));
-                        mData.get(position).orderStatus="1";
+                        EventBus.getDefault().post(new AddGoodsEvent(status));
+                        if (status.equals("0")){
+                            mData.remove(position);
+                            mAdapter.notifyItemRemoved(position);
+                        }else {
+                            mData.get(position).orderStatus="1";
+                            mData.get(position).isComment=0;
+                            mAdapter.notifyItemChanged(position,mData.get(position));
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        dismissDialog();
+                        showToast(e.getMessage());
+                    }
+                });
+    }
+    /**
+     * D88商家售后处理
+     */
+
+    private void handleSale(String handleStatus,String orderNo, final int position) {
+
+        showLoading();
+        if (!NetworkUtils.isNetworkAvailable(getActivity())) {
+            ToastUtils.showShortToast(getActivity(), R.string.network_error);
+            dismissDialog();
+            return;
+        }
+
+        serverDao.handleSale(
+                getUser(getActivity()).id,
+                handleStatus,
+                orderNo,
+                new JsonCallback<BaseResponse<List>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<List> listBaseResponse, Call call, Response response) {
+                        dismissDialog();
+                        showToast(listBaseResponse.message);
+                        EventBus.getDefault().post(new AddGoodsEvent(status));
+                        mData.get(position).orderStatus="4";
                         mData.get(position).isComment=0;
                         mAdapter.notifyItemChanged(position,mData.get(position));
                     }
@@ -207,9 +252,8 @@ public class AllOrderFragment extends BaseFragment implements SwipeRefreshLayout
                 });
     }
 
-
     /**
-     * 发货
+     * 发货pop 0 ,发货,  1处理 ,2 拒绝处理
      *
      * @param position
      */
@@ -229,6 +273,8 @@ public class AllOrderFragment extends BaseFragment implements SwipeRefreshLayout
         mDialog.show();
         TextView tv_content = (TextView) mDialog.findViewById(R.id.tv_content);
         if (code==0) tv_content.setText(R.string.txt_confirm_confirn_fahuo);
+        else if (code == 1) tv_content.setText(R.string.txt_confirm_confirn_chuli);
+        else if (code==2) tv_content.setText(R.string.txt_confirm_confirn_refusechuli);
 
         Button btn_confirm = (Button) mDialog.findViewById(R.id.btn_confirm);
         Button btn_cancel = (Button) mDialog.findViewById(R.id.btn_cancel);
@@ -249,14 +295,58 @@ public class AllOrderFragment extends BaseFragment implements SwipeRefreshLayout
             @Override
             public void onClick(View view) {
                 mDialog.dismiss();
-                if (code==0){
-                    send(mData.get(position).orderNo,position);
-                }
-
-
+                if (code==0) send(mData.get(position).orderNo,position);
+                else if (code == 1) handleSale("0",mData.get(position).orderNo,position);
+                else if (code==2) handleSale("1",mData.get(position).orderNo,position);
             }
         });
     }
 
 
+    /**
+     * D88商家订单详情
+     *
+     * @param
+     */
+
+    private void getShopOrder(String orderNo) {
+
+        showLoading();
+        if (!NetworkUtils.isNetworkAvailable(getActivity())) {
+            ToastUtils.showShortToast(getActivity(), R.string.network_error);
+            dismissDialog();
+            return;
+        }
+
+        serverDao.getShopOrder(
+                getUser(getActivity()).id,
+                orderNo,
+                new JsonCallback<BaseResponse<OrderModel>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<OrderModel> listBaseResponse, Call call, Response response) {
+                        dismissDialog();
+                        GoodsOrderActivity.startActivity(getActivity(),listBaseResponse.retData,1);
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        dismissDialog();
+                        showToast(e.getMessage());
+                    }
+                });
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void setAddGoodsEvent(AddGoodsEvent addGoodsEvent) {
+        if (!addGoodsEvent.getItem().equals(status))
+            onRefresh();
+    }
 }

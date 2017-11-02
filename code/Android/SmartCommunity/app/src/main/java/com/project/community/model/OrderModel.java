@@ -10,7 +10,8 @@ import java.util.List;
 
 public class OrderModel implements Serializable {
     private static final long serialVersionUID = 6753210234564872868L;
-//    {
+
+    //    {
 //        "createDate": "2017-10-26 14:46:41",
 //            "orderNo": "14440475711889781680",
 //            "orderStatus": "0", #未发货:1：已发货:2：已完成,3：退货申请,4：退货中,5：已退货,

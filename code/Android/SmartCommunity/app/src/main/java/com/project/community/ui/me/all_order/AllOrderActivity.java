@@ -68,8 +68,8 @@ public class AllOrderActivity extends BaseActivity {
         mFragmentsList.add(AllOrderFragment.newInstance("0",shopId));
         mFragmentsList.add(AllOrderFragment.newInstance("1",shopId));
         mFragmentsList.add(AllOrderFragment.newInstance("2",shopId));
-        mFragmentsList.add(AllOrderFragment.newInstance("4",shopId));//售后
-        mFragmentsList.add(AllOrderFragment.newInstance("5",shopId));
+        mFragmentsList.add(AllOrderFragment.newInstance("3",shopId));//售后
+        mFragmentsList.add(AllOrderFragment.newInstance("4",shopId));
         mAdapter = new MyFrageStatePagerAdapter(getSupportFragmentManager());
         mViewpager.setAdapter(mAdapter);
         mViewpager.setOffscreenPageLimit(mFragmentsList.size());
@@ -85,7 +85,7 @@ public class AllOrderActivity extends BaseActivity {
     class MyFrageStatePagerAdapter extends FragmentStatePagerAdapter {
 
         FragmentManager fm;
-        private String[] mTitles = new String[]{"全部","待发货","已发货","已完成","售后","已下架"};
+        private String[] mTitles = new String[]{"全部","待发货","已发货","已完成","售后","已关闭"};
 
         public MyFrageStatePagerAdapter(FragmentManager fm) {
             super(fm);

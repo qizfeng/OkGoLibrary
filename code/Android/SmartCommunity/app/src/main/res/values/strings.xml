@@ -310,8 +310,11 @@
     <string name="txt_confirm_delete">您是否确定要删除?</string>
     <string name="txt_confirm_cancel">您是否确定要取消订单?</string>
     <string name="txt_confirm_shouhuo">您是否确定要确认收货?</string>
+    <string name="txt_confirm_fahuo">您是否确定要确认发货?</string>
     <string name="txt_confirm_detlet_order">您是否确定要确认删除订单?</string>
     <string name="txt_confirm_confirn_fahuo">您是否确定要确认发货?</string>
+    <string name="txt_confirm_confirn_chuli">您是否确定要确认处理?</string>
+    <string name="txt_confirm_confirn_refusechuli">您是否确定要拒绝处理?</string>
     <string name="txt_unsave">离开本页,填写的内容将不保留,您是否确定离开?</string>
     <string name="txt_dialog_house_no">房屋编码</string>
     <string name="btn_bindService">bindService</string>

@@ -111,6 +111,10 @@ public class MinshengFragment extends BaseFragment implements SwipeRefreshLayout
         mAdapter = new MinshengAdapter(null, new MinshengAdapterItemListener() {
             @Override
             public void onItemClick(View view, int position) {//整个item点击事件
+                if (mAdapter.getItem(position).isOpen==1){
+                    showToast(getString(R.string.txt_shop_status));
+                    return;
+                }
                 Bundle bundle = new Bundle();
                 position = position - 1;//去掉头部
                 bundle.putString("merchant_id", mAdapter.getItem(position).id);

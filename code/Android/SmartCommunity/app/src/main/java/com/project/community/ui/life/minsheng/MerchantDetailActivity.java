@@ -709,10 +709,8 @@ public class MerchantDetailActivity extends BaseActivity {
                         headeTvPhone.setText(listBaseResponse.retData.shop.contactPhone);
                         headeTvAddress.setText(listBaseResponse.retData.shop.businessAddress);
                         headeTvDistance.setText("距离"+merchant_distance+"KM");
-                        if (listBaseResponse.retData.shop.isOpen==1)
-                            headeTvStatus.setVisibility(View.INVISIBLE);
+                        if (listBaseResponse.retData.shop.isOpen==0) headeTvStatus.setVisibility(View.INVISIBLE);
                         headeRatingBar.setStar(listBaseResponse.retData.shop.starLevel);
-
 
                         mData.clear();
                         mData.addAll(listBaseResponse.retData.goodsList);

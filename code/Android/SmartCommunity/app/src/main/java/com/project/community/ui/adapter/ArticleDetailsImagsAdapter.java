@@ -12,8 +12,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.library.okgo.utils.GlideImageLoader;
 import com.project.community.App;
 import com.project.community.R;
+import com.project.community.constants.AppConstants;
 
 import java.util.List;
 
@@ -71,6 +73,7 @@ public class ArticleDetailsImagsAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
+        new GlideImageLoader().onDisplayImageWithDefault(context,holder.imagPhoto, AppConstants.URL_BASE+img_list.get(position),R.mipmap.c1_image2);
         return convertView;
     }
 

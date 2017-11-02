@@ -43,6 +43,7 @@ public class AllOrderApdater extends BaseQuickAdapter<OrderModel, BaseViewHolder
                 .setText(R.id.item_all_order_tv_phone,model.address.contactPhone)
                 .setText(R.id.item_all_order_tv_address,model.address.address)
                 .setText(R.id.item_all_order_tv_price,mContext.getString(R.string.money)+model.orderAmountTotal);
+
         switch (model.orderStatus){
             case "0"://待发货
                 baseViewHolder.setText(R.id.item_all_order_tv_type,mContext.getString(R.string.my_order_wait_fahuo))
@@ -52,18 +53,24 @@ public class AllOrderApdater extends BaseQuickAdapter<OrderModel, BaseViewHolder
             case "1"://已发货
                 baseViewHolder.setText(R.id.item_all_order_tv_type,mContext.getString(R.string.my_order_wait_yishouhuo))
                         .setTextColor(R.id.item_all_order_tv_type,mContext.getResources().getColor(R.color.yellow_ff961b))
-                        .setText(R.id.item_all_order_tv_type,mContext.getString(R.string.all_order_yichuli));
+                        .setText(R.id.item_all_order_btn_type,mContext.getString(R.string.all_order_yichuli));
                 break;
             case "2"://已完成
                 baseViewHolder.setText(R.id.item_all_order_tv_type,mContext.getString(R.string.my_order_end_over))
                         .setTextColor(R.id.item_all_order_tv_type,mContext.getResources().getColor(R.color.color_gray_999999));
                 break;
-            case "3":
+            case "3"://售后
+                baseViewHolder.setText(R.id.item_all_order_tv_type,mContext.getString(R.string.my_order_daiyichuli))
+                        .setTextColor(R.id.item_all_order_tv_type,mContext.getResources().getColor(R.color.yellow_ff961b))
+                        .setText(R.id.item_all_order_btn_type,mContext.getString(R.string.all_order_chuli));
                 break;
             case "4":
+                baseViewHolder.setText(R.id.item_all_order_tv_type,mContext.getString(R.string.my_order_yiguanbi))
+                        .setTextColor(R.id.item_all_order_tv_type,mContext.getResources().getColor(R.color.color_gray_999999)) ;
                 break;
 
         }
-
+        if (model.orderStatus.equals("4")) baseViewHolder.setVisible(R.id.item_all_order_btn_type,false);
+        else baseViewHolder.setVisible(R.id.item_all_order_btn_type,true);
     }
 }

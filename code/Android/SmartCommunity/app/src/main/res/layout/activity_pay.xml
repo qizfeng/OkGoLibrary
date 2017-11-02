@@ -200,7 +200,7 @@
             android:layout_weight="1"
             android:background="@drawable/background_toolbar_gradient"
             android:gravity="center"
-            android:text="@string/txt_merchant_pay"
+            android:text="@string/apply_sale_pay"
             android:textColor="@color/white"
             android:textSize="@dimen/common_txt_size" />
     </LinearLayout>

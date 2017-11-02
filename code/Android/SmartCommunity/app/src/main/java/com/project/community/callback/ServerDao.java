@@ -1153,6 +1153,27 @@ public interface ServerDao {
             JsonCallback<BaseResponse<List>> callback);
 
     /**
+     * D88商家售后处理
+     *
+     * @param handleStatus 0:处理；1：拒绝处理
+     */
+    void handleSale(
+            String userId,
+            String handleStatus,
+            String orderNo,
+            JsonCallback<BaseResponse<List>> callback);
+
+
+    /** D88商家订单详情
+     *
+     * @param callback
+     */
+    void getShopOrder(
+            String userId,
+            String orderNo,
+            JsonCallback<BaseResponse<OrderModel>> callback);
+
+    /**
      * D55取消订单
      *
      * @param callback

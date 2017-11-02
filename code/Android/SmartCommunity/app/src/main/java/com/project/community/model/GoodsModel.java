@@ -33,7 +33,7 @@ public class GoodsModel implements Serializable {
     public String goodImage;
     public String goodPrice;
 
-    public float starLevel;
+    public float starLevel=0.0f;
     public int stock;
     public int cartNum=0;
     public int number;
