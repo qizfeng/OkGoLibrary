@@ -547,15 +547,14 @@ public class AppConstants {
     public static final String URL_DELCART = URL_BASE + "/m/propleLife/shop/cart/delete";
 
     /**
-<<<<<<< .mine
-     * <<<<<<< .mine
-||||||| .r526
-<<<<<<< .mine
-=======
->>>>>>> .r531
      * D56订单提交
      */
     public static final String URL_GETORDER = URL_BASE + "/m/propleLife/shop/order/save";
+
+    /**
+     * D订单提交详情
+     */
+    public static final String URL_GETCOMMITDETAIL = URL_BASE + "/m/propleLife/shop/cart/getDetail";
 
     /**
      * D确认订单

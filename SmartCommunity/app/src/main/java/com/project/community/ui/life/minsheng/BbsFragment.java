@@ -326,7 +326,7 @@ public class BbsFragment extends BaseFragment implements SwipeRefreshLayout.OnRe
                     @Override
                     public void onError(Call call, Response response, Exception e) {
                         super.onError(call, response, e);
-                        Log.e("tag_f", e.getMessage().toString() + "");
+//                        Log.e("tag_f", e.getMessage().toString() + "");
                     }
                 });
 

@@ -87,7 +87,7 @@ public class SearchActivity extends BaseActivity implements View.OnKeyListener {
     private List<SearchModel> mData = new ArrayList<>();
     private List<String> historyData = new ArrayList<>();
     List<String> historyRecordList = new ArrayList<>();
-    
+
 //    private List<CommentModel> comments = new ArrayList<>();//评论列表
 //    private CommentsApdater commentsPopwinAdapter;
 //    private CommentPopwindow popupWindow;

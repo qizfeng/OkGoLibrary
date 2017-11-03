@@ -15,7 +15,9 @@ import android.view.Display;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -32,6 +34,7 @@ import com.project.community.listener.RecycleItemClickListener;
 import com.project.community.model.CommentModel;
 import com.project.community.model.GoodsModel;
 import com.project.community.model.OrderModel;
+import com.project.community.ui.ImageBrowseActivity;
 import com.project.community.ui.PhoneDialogActivity;
 import com.project.community.ui.adapter.AllOrderApdater;
 import com.project.community.ui.adapter.ArticleDetailsImagsAdapter;
@@ -142,6 +145,9 @@ public class GoodsOrderActivity extends BaseActivity {
     @Bind(R.id.goods_order_shouhou_type4_tv3)
     TextView goods_order_shouhou_type4_tv3;
 
+    @Bind(R.id.goods_order_shouhou_type_fl)
+    FrameLayout goods_order_shouhou_type_fl; //底部bar
+
 
     private OrderModel item;
     private int code;//1商铺订单详情
@@ -157,6 +163,7 @@ public class GoodsOrderActivity extends BaseActivity {
 
     ArticleDetailsImagsAdapter grid_photoAdapter; //凭证的适配器
     private List<String> mImages = new ArrayList<>();
+    private ArrayList<String> imgs = new ArrayList<>();
 
     public static void startActivity(Context context,OrderModel item,int code){
         Intent intent = new Intent(context,GoodsOrderActivity.class);
@@ -243,7 +250,7 @@ public class GoodsOrderActivity extends BaseActivity {
 
                 goods_order_btn_type1.setVisibility(View.GONE);
                 goods_order_btn_type2.setText(getResources().getString(R.string.my_order_address_lianxishangjia));
-                goods_order_btn_type3.setText(getResources().getString(R.string.my_order_address_cacel_order));
+
                 goodsOrderTvType.setText(getResources().getString(R.string.my_order_address_wait_fahuo));
 
                 if (code==1){
@@ -251,6 +258,12 @@ public class GoodsOrderActivity extends BaseActivity {
                     goods_order_shouhou_type4_tv2.setVisibility(View.GONE);
                     goods_order_shouhou_type4_tv3.setVisibility(View.GONE);
 
+                }
+                if (item.isCancel==1) {
+                    goods_order_tv_order_type.setText(getString(R.string.my_order_address_cacel_order_cancel));
+                    goods_order_btn_type3.setText(getResources().getString(R.string.my_order_address_del_order));
+                }else {
+                    goods_order_btn_type3.setText(getResources().getString(R.string.my_order_address_cacel_order));
                 }
 
                 break;
@@ -296,6 +309,7 @@ public class GoodsOrderActivity extends BaseActivity {
                 goods_order_shouhou_type1.setVisibility(View.VISIBLE);
                 goods_order_shouhou_type2.setVisibility(View.GONE);
                 goods_order_shouhou_type3.setVisibility(View.GONE);
+                goods_order_shouhou_type_fl.setVisibility(View.GONE);
                 goods_order_tv_shop_name.setVisibility(View.GONE);
                 goods_order_tv_order_type.setVisibility(View.GONE);
                 goods_order_ll_pinglun.setVisibility(View.GONE);
@@ -313,6 +327,15 @@ public class GoodsOrderActivity extends BaseActivity {
                 }else mImages.add(item.sale.imagesUrl);
                 grid_photoAdapter=new ArticleDetailsImagsAdapter(this,mImages);
                 goodsOrderRvPingzheng.setAdapter(grid_photoAdapter);
+                imgs.clear();
+                imgs.addAll(mImages);
+                goodsOrderRvPingzheng.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        ImageBrowseActivity.startActivity(GoodsOrderActivity.this,imgs ,i);
+                    }
+                });
+
 
 
                 if (code==1){
@@ -371,9 +394,10 @@ public class GoodsOrderActivity extends BaseActivity {
                         startActivity(mIntent);
                         break;
                     case R.id.goods_order_btn_type3:
-                        showWindomDialog(1);
+                        if (item.isCancel==1) showWindomDialog(0);
+                        else showWindomDialog(1);
                         break;
-                    case R.id.goods_order_shouhou_type4_tv1:
+                    case R.id.goods_order_shouhou_type4_tv1://商铺发货
                         showWindomDialog(3);
                         break;
                 }

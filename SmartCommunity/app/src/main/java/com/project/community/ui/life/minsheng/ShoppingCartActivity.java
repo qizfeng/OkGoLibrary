@@ -104,39 +104,42 @@ public class ShoppingCartActivity extends BaseActivity {
 
             @Override
             public void onSettlementClick(View view, int position) {
-                JSONArray jsonArray = new JSONArray();
-                JSONArray cartList = new JSONArray();
-                JSONObject jsonObject = new JSONObject();
-//                         BigDecimal bigDecimal = new BigDecimal("0");
-                for (int i = 0; i < mData.get(position).shop.goods.size(); i++) {
-//                             BigDecimal bigDecimal1=new BigDecimal(mData.get(position).shop.goods.get(i).number).add(new BigDecimal(mCartData.get(i).goodsCount));
-//                             bigDecimal=bigDecimal.add(new BigDecimal(mData.get(position).shop.goods.get(i).number));
-                    JSONObject item = new JSONObject();
-                    try {
-                        item.put("goodId",mData.get(position).shop.goods.get(i).id);
-                        item.put("number",mData.get(position).shop.goods.get(i).number);
-                        item.put("goodName",mData.get(position).shop.goods.get(i).name);
-                        item.put("goodPrice",mData.get(position).shop.goods.get(i).price);
-                        item.put("goodImage", AppConstants.URL_BASE +mData.get(position).shop.goods.get(i).images);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    cartList.put(item);
-                }
+//                JSONArray jsonArray = new JSONArray();
+//                JSONArray cartList = new JSONArray();
+//                JSONObject jsonObject = new JSONObject();
+////                         BigDecimal bigDecimal = new BigDecimal("0");
+//                for (int i = 0; i < mData.get(position).shop.goods.size(); i++) {
+////                             BigDecimal bigDecimal1=new BigDecimal(mData.get(position).shop.goods.get(i).number).add(new BigDecimal(mCartData.get(i).goodsCount));
+////                             bigDecimal=bigDecimal.add(new BigDecimal(mData.get(position).shop.goods.get(i).number));
+//                    JSONObject item = new JSONObject();
+//                    try {
+//                        item.put("goodId",mData.get(position).shop.goods.get(i).id);
+//                        item.put("number",mData.get(position).shop.goods.get(i).number);
+//                        item.put("goodName",mData.get(position).shop.goods.get(i).name);
+//                        item.put("goodPrice",mData.get(position).shop.goods.get(i).price);
+//                        item.put("goodImage", AppConstants.URL_BASE +mData.get(position).shop.goods.get(i).images);
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                    cartList.put(item);
+//                }
+//
+//                try {
+//                    jsonObject.put("orderAmountTotal",mData.get(position).shop.totalCost);
+//                    jsonObject.put("shopId",mData.get(position).shop.id);
+//                    jsonObject.put("userId",getUser(ShoppingCartActivity.this).id);
+//                    jsonObject.put("goodsCount",mData.get(position).goodsCount);
+//                    jsonObject.put("cartList",cartList);
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//                jsonArray.put(jsonObject);
+//
+//                Log.e("onCartClick: ", jsonArray.toString());
+//                commitOrder(jsonArray.toString());
 
-                try {
-                    jsonObject.put("orderAmountTotal",mData.get(position).shop.totalCost);
-                    jsonObject.put("shopId",mData.get(position).shop.id);
-                    jsonObject.put("userId",getUser(ShoppingCartActivity.this).id);
-                    jsonObject.put("goodsCount",mData.get(position).goodsCount);
-                    jsonObject.put("cartList",cartList);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                jsonArray.put(jsonObject);
+                getDetail(mData.get(position).shop.id);
 
-                Log.e("onCartClick: ", jsonArray.toString());
-                commitOrder(jsonArray.toString());
             }
         });
 
@@ -205,7 +208,7 @@ public class ShoppingCartActivity extends BaseActivity {
                 mDialog.dismiss();
                 mAdapter.removeGroup(position);
                 mData.remove(position);
-                EventBus.getDefault().post(new CartRefreshEvent(""));
+                EventBus.getDefault().post(new CartRefreshEvent("del"));
             }
 
             @Override
@@ -291,6 +294,40 @@ public class ShoppingCartActivity extends BaseActivity {
         });
     }
 
+    /**
+     * D订单提交详情
+     */
+    private void getDetail(String shopId){
+        showLoading();
+        if (!NetworkUtils.isNetworkAvailable(this)) {
+            ToastUtils.showShortToast(this, R.string.network_error);
+            dismissDialog();
+            return;
+        }
+
+        serverDao.getCommitDetail(
+                getUser(this).id,
+                shopId,
+                new JsonCallback<BaseResponse<OrderModel>>() {
+                    @Override
+                    public void onSuccess(BaseResponse<OrderModel> listBaseResponse, Call call, Response response) {
+                        dismissDialog();
+//                showToast(listBaseResponse.message);
+//                if (listBaseResponse.retData.address==null) startActivity(new Intent(MerchantDetailActivity.this, MyAddressActivity.class));
+//                else
+                        PayActivity.startActivity(ShoppingCartActivity.this,listBaseResponse.retData);
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        dismissDialog();
+                        showToast(e.getMessage());
+                    }
+                });
+    }
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -299,6 +336,6 @@ public class ShoppingCartActivity extends BaseActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(CartRefreshEvent def) {
-        finish();
+        if (!def.getItem().equals("del")) finish();
     }
 }

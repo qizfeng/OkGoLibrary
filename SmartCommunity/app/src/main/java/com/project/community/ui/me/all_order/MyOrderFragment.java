@@ -114,7 +114,8 @@ public class MyOrderFragment extends BaseFragment implements SwipeRefreshLayout.
                                 startActivity(mIntent);
                                 break;
                             case R.id.item_foot_3:
-                                showAlertDialog(position, 1);
+                                if (mData.get(position).isCancel==1) showAlertDialog(position, 0);
+                                else showAlertDialog(position, 1);
                                 break;
                         }
                         break;
@@ -365,8 +366,8 @@ public class MyOrderFragment extends BaseFragment implements SwipeRefreshLayout.
                         dismissDialog();
                         showToast(listBaseResponse.message);
                         EventBus.getDefault().post(new AddGoodsEvent(status));
-                        mAdapter.removeGroup(position);
-                        mData.remove(position);
+                        mData.get(position).isCancel=1;
+                        mAdapter.changeRangeGroup(position,1);
                     }
 
                     @Override

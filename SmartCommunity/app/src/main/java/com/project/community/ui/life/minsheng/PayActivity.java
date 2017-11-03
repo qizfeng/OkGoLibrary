@@ -19,6 +19,7 @@ import com.project.community.Event.ChangeAddressEvent;
 import com.project.community.Event.DefaultAddressEvent;
 import com.project.community.R;
 import com.project.community.base.BaseActivity;
+import com.project.community.constants.AppConstants;
 import com.project.community.listener.RecycleItemClickListener;
 import com.project.community.model.GoodsModel;
 import com.project.community.model.MerchantDeailModel;
@@ -33,7 +34,11 @@ import com.project.community.util.ToastUtil;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,6 +74,7 @@ public class PayActivity extends BaseActivity {
     TextView price;
 
     List<GoodsModel> list =new ArrayList<>();
+
     private GoodsOrderDetailApdater mAdapter;//商品详情订单适配器
 
     private OrderModel merchantDeailModel;
@@ -100,19 +106,25 @@ public class PayActivity extends BaseActivity {
         list.clear();
         list.addAll(merchantDeailModel.detailList);
 
-        goodsOrderTvShopName.setText(merchantDeailModel.address.consignee);
+        if (merchantDeailModel.address!=null){
+            goodsOrderTvShopName.setText(merchantDeailModel.address.consignee);
 
-        goodsOrderTvName.setText(merchantDeailModel.address.consignee);
-        goodsOrderTvPhone.setText(merchantDeailModel.address.contactPhone);
-        goodsOrderTvAddress.setText(merchantDeailModel.address.address);
-        addressId=merchantDeailModel.address.id;
+            goodsOrderTvName.setText(getString(R.string.my_order_address_apply_shouhuoren)+merchantDeailModel.address.consignee);
+            goodsOrderTvPhone.setText(merchantDeailModel.address.contactPhone);
+            goodsOrderTvAddress.setText(merchantDeailModel.address.address);
+            addressId=merchantDeailModel.address.id;
+        }else {
+            goodsOrderTvName.setText(getString(R.string.my_order_address_apply_shouhuoren));
+
+        }
+
 
         orderNo=merchantDeailModel.orderNo;
 
         price.setText("¥"+merchantDeailModel.orderAmountTotal);
         goodsOrderTvPrice.setText("¥"+merchantDeailModel.orderAmountTotal);
-        goodsOrderTvJiaoyidanhao.setText(getResources().getString(R.string.goods_order_tv_jiaoyidanhao)+merchantDeailModel.orderNo);
-        goodsOrderTvXiadanTime.setText(getResources().getString(R.string.goods_order_tv_xiadan_time)+merchantDeailModel.createDate);
+//        goodsOrderTvJiaoyidanhao.setText(getResources().getString(R.string.goods_order_tv_jiaoyidanhao)+merchantDeailModel.orderNo);
+//        goodsOrderTvXiadanTime.setText(getResources().getString(R.string.goods_order_tv_xiadan_time)+merchantDeailModel.createDate);
 
 
         goodsOrderRvOrder.setLayoutManager(new LinearLayoutManager(this));
@@ -138,15 +150,52 @@ public class PayActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.layout_buy:
-                delData();
+//                delData();
+
+                JSONArray jsonArray = new JSONArray();
+                JSONArray cartList = new JSONArray();
+                JSONObject jsonObject = new JSONObject();
+//                BigDecimal bigDecimal = new BigDecimal("0");
+                for (int i = 0; i < list.size(); i++) {
+//                    BigDecimal bigDecimal1=new BigDecimal(list.get(i).goodsPrice).multiply(new BigDecimal(list.get(i).goodsCount));
+//                    bigDecimal=bigDecimal.add(bigDecimal1);
+                    JSONObject item = new JSONObject();
+                    try {
+                        item.put("goodId",list.get(i).goodId);
+                        item.put("number",list.get(i).number);
+                        item.put("goodName",list.get(i).goodName);
+                        item.put("goodPrice",list.get(i).goodPrice);
+                        item.put("goodImage", AppConstants.URL_BASE +list.get(i).goodImage);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    cartList.put(item);
+                }
+
+                try {
+                    jsonObject.put("orderAmountTotal",merchantDeailModel.orderAmountTotal);
+                    jsonObject.put("shopId",merchantDeailModel.shopId);
+                    jsonObject.put("addressId",addressId);
+                    jsonObject.put("userId",getUser(this).id);
+                    jsonObject.put("goodsCount",merchantDeailModel.goodsCount);
+                    jsonObject.put("cartList",cartList);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                jsonArray.put(jsonObject);
+
+                Log.e("onCartClick: ", jsonArray.toString());
+//                commitOrder(jsonArray.toString());
+
+                commitOrder(jsonArray.toString());
                 break;
         }
     }
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(ChangeAddressEvent def) {
-        goodsOrderTvName.setText(def.getAddressListBean().getConsignee());
+        goodsOrderTvName.setText(getString(R.string.my_order_address_apply_shouhuoren)+def.getAddressListBean().getConsignee());
         goodsOrderTvPhone.setText(def.getAddressListBean().getContactPhone());
-        goodsOrderTvAddress.setText(def.getAddressListBean().getAddress());
+        goodsOrderTvAddress.setText(def.getAddressListBean().getUserArea() + def.getAddressListBean().getAddress());
         addressId=def.getAddressListBean().getId();
     }
 
@@ -159,7 +208,7 @@ public class PayActivity extends BaseActivity {
 
         goodsOrderTvShopName.setText(merchantDeailModel.address.consignee);
 
-        goodsOrderTvName.setText(merchantDeailModel.address.consignee);
+        goodsOrderTvName.setText(getString(R.string.my_order_address_apply_shouhuoren)+merchantDeailModel.address.consignee);
         goodsOrderTvPhone.setText(merchantDeailModel.address.contactPhone);
         goodsOrderTvAddress.setText(merchantDeailModel.address.address);
         addressId=merchantDeailModel.address.id;
@@ -203,6 +252,39 @@ public class PayActivity extends BaseActivity {
             }
         });
     }
+
+    /**
+     * D56订单提交
+     */
+    private void commitOrder(String orderJson){
+        showLoading();
+        if (!NetworkUtils.isNetworkAvailable(this)) {
+            ToastUtils.showShortToast(this, R.string.network_error);
+            dismissDialog();
+            return;
+        }
+
+        serverDao.commitOrder(orderJson,new JsonCallback<BaseResponse<OrderModel>>() {
+            @Override
+            public void onSuccess(BaseResponse<OrderModel> listBaseResponse, Call call, Response response) {
+                dismissDialog();
+                showToast(listBaseResponse.message);
+//                if (listBaseResponse.retData.address==null) startActivity(new Intent(PayActivity.this, MyAddressActivity.class));
+//                else PayActivity.startActivity(PayActivity.this,listBaseResponse.retData);
+
+                EventBus.getDefault().post(new CartRefreshEvent(""));
+                finish();
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                dismissDialog();
+                showToast(e.getMessage());
+            }
+        });
+    }
+
 
     @Override
     protected void onDestroy() {

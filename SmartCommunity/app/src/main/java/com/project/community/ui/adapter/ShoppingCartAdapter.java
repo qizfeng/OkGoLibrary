@@ -106,6 +106,8 @@ public class ShoppingCartAdapter extends GroupedRecyclerViewAdapter {
                 .setText(R.id.tv_goods_count,"x"+entity.number);
         new GlideImageLoader().onDisplayImageWithDefault(mContext, (ImageView) holder.get(R.id.item_goods_cover), AppConstants.URL_BASE+entity.images, R.mipmap.c1_image2);
 
+
+
     }
 
     public interface OnFooterClickListener {

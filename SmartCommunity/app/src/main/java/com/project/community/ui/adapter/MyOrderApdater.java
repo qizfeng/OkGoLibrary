@@ -121,73 +121,6 @@ public class MyOrderApdater extends GroupedRecyclerViewAdapter {
                 break;
         }
 
-//        switch (status){
-//            case ""://"", #全部
-//                switch (entity.orderStatus){
-//                    case "0"://"0", #未发货
-//                        holder.setText(R.id.header_status,mContext.getString(R.string.my_order_wait_fahuo));
-//                        break;
-//                    case "1"://:1：已发货
-//                        holder.setText(R.id.header_status,mContext.getString(R.string.my_order_end));
-//                        break;
-//                    case "2"://2：已完成    (包括 已评价 与 待评价 )
-//                        if (entity.isComment==0)
-//                            holder.setText(R.id.header_status,mContext.getString(R.string.my_order_wait_pingjia));
-//                        else
-//                            holder.setText(R.id.header_status,mContext.getString(R.string.my_order_wait_yipingjia));
-//                        break;
-//                    case "3"://3：退货申请
-//                        holder.setText(R.id.item_header_title,mContext.getString(R.string.my_order_address_order_num)+entity.orderNo)
-//                                .setText(R.id.item_header_status,entity.createDate);
-//                        if (entity.orderStatus.equals("0")){
-//                            holder.setText(R.id.item_header_status,mContext.getString(R.string.my_order_address_daichuli))
-//                                    .setTextColor(R.id.item_header_status,mContext.getResources().getColor(R.color.yellow_ff961b));
-//                        }
-//                        else  {
-//                            holder.setText(R.id.item_header_status,mContext.getString(R.string.my_order_address_yichuli))
-//                                    .setTextColor(R.id.item_header_status,mContext.getResources().getColor(R.color.yellow));
-//                        }
-//                        break;
-//                    case "4"://,4：退货中
-//                        holder.setText(R.id.header_status,mContext.getString(R.string.my_order_address_apply_safe_status_ing));
-//                        break;
-//                    case "5"://5：已退货
-//                        holder.setText(R.id.header_status,mContext.getString(R.string.my_order_address_apply_safe_status_end));
-//                        break;
-//                }
-//                break;
-//            case "0"://"0", #未发货
-//                holder.setText(R.id.header_status,mContext.getString(R.string.my_order_wait_fahuo));
-//                break;
-//            case "1"://:1：已发货
-//                holder.setText(R.id.header_status,mContext.getString(R.string.my_order_end));
-//                break;
-//            case "2"://2：已完成
-//                if (entity.isComment==0)
-//                    holder.setText(R.id.header_status,mContext.getString(R.string.my_order_wait_pingjia));
-//                else
-//                    holder.setText(R.id.header_status,mContext.getString(R.string.my_order_wait_yipingjia));
-//                break;
-//            case "3"://3：退货申请
-////                holder.setText(R.id.header_status,mContext.getString(R.string.my_order_address_apply_safe_status));
-//                holder.setText(R.id.item_header_title,mContext.getString(R.string.my_order_address_order_num)+entity.orderNo)
-//                        .setText(R.id.item_header_status,entity.createDate);
-//                if (entity.orderStatus.equals("0")){
-//                    holder.setText(R.id.item_header_status,mContext.getString(R.string.my_order_address_daichuli))
-//                            .setTextColor(R.id.item_header_status,mContext.getResources().getColor(R.color.yellow_ff961b));
-//                }
-//                else  {
-//                    holder.setText(R.id.item_header_status,mContext.getString(R.string.my_order_address_yichuli))
-//                            .setTextColor(R.id.item_header_status,mContext.getResources().getColor(R.color.yellow));
-//                }
-//                break;
-//            case "4"://,4：退货中
-//                holder.setText(R.id.header_status,mContext.getString(R.string.my_order_address_apply_safe_status_ing));
-//                break;
-//            case "5"://5：已退货
-//                holder.setText(R.id.header_status,mContext.getString(R.string.my_order_address_apply_safe_status_end));
-//                break;
-//        }
     }
 
     @Override
@@ -201,8 +134,9 @@ public class MyOrderApdater extends GroupedRecyclerViewAdapter {
                 holder.setVisible(R.id.item_foot_1,false)
                         .setVisible(R.id.item_foot_2,true)
                         .setVisible(R.id.item_foot_3,true)
-                        .setText(R.id.item_foot_2,mContext.getString(R.string.my_order_address_lianxishangjia))
-                        .setText(R.id.item_foot_3,mContext.getString(R.string.my_order_address_cacel_order));
+                        .setText(R.id.item_foot_2,mContext.getString(R.string.my_order_address_lianxishangjia));
+                if (entity.isCancel==0) holder.setText(R.id.item_foot_3,mContext.getString(R.string.my_order_address_cacel_order));
+                else holder.setText(R.id.item_foot_3,mContext.getString(R.string.my_order_address_del_order));
                 break;
             case "1"://:1：已发货
                 holder.setVisible(R.id.item_foot_1,false)
@@ -244,100 +178,6 @@ public class MyOrderApdater extends GroupedRecyclerViewAdapter {
                         .setText(R.id.item_foot_3,mContext.getString(R.string.my_order_address_del_order));
                 break;
         }
-
-
-//        switch (status){
-//            case ""://"", #全部
-//                switch (entity.orderStatus){
-//                    case "0"://"0", #未发货
-//                        holder.setVisible(R.id.item_foot_1,false)
-//                                .setVisible(R.id.item_foot_2,true)
-//                                .setVisible(R.id.item_foot_3,true)
-//                                .setText(R.id.item_foot_2,mContext.getString(R.string.my_order_address_lianxishangjia))
-//                                .setText(R.id.item_foot_3,mContext.getString(R.string.my_order_address_cacel_order));
-//                        break;
-//                    case "1"://:1：已发货
-//                        holder.setVisible(R.id.item_foot_1,false)
-//                                .setVisible(R.id.item_foot_2,true)
-//                                .setVisible(R.id.item_foot_3,true)
-//                                .setText(R.id.item_foot_2,mContext.getString(R.string.my_order_address_lianxishangjia))
-//                                .setText(R.id.item_foot_3,mContext.getString(R.string.my_order_address_querenshouhuo));
-//                        break;
-//                    case "2"://2：已完成 (包括 已评价 与 待评价 )
-//                        if (entity.isComment==0) //待评价
-//                            holder.setVisible(R.id.item_foot_1,true)
-//                                .setVisible(R.id.item_foot_2,true)
-//                                .setVisible(R.id.item_foot_3,true)
-//                                .setText(R.id.item_foot_1,mContext.getString(R.string.my_order_address_pingjia))
-//                                .setText(R.id.item_foot_2,mContext.getString(R.string.my_order_address_del_order))
-//                                .setText(R.id.item_foot_3,mContext.getString(R.string.my_order_address_apply_safe));
-//                        else
-//                            holder.setVisible(R.id.item_foot_1,false)
-//                                    .setVisible(R.id.item_foot_2,false)
-//                                    .setVisible(R.id.item_foot_3,true)
-//                                    .setText(R.id.item_foot_3,mContext.getString(R.string.my_order_address_del_order));
-//                        break;
-////                    case "3"://3：退货申请
-////                        holder.setText(R.id.header_status,mContext.getString(R.string.my_order_address_apply_safe_status));
-////                        break;
-////                    case "4"://,4：退货中
-////                        holder.setText(R.id.header_status,mContext.getString(R.string.my_order_address_apply_safe_status_ing));
-////                        break;
-////                    case "5"://5：已退货
-////                        holder.setText(R.id.header_status,mContext.getString(R.string.my_order_address_apply_safe_status_end));
-////                        break;
-//                    default:
-//                        holder.setVisible(R.id.item_foot_1,false)
-//                                .setVisible(R.id.item_foot_2,false)
-//                                .setVisible(R.id.item_foot_3,true)
-//                                .setText(R.id.item_foot_3,mContext.getString(R.string.my_order_address_del_order));
-//                        break;
-//                }
-//                break;
-//            case "0"://"0", #未发货
-//                holder.setVisible(R.id.item_foot_1,false)
-//                        .setVisible(R.id.item_foot_2,true)
-//                        .setVisible(R.id.item_foot_3,true)
-//                        .setText(R.id.item_foot_2,mContext.getString(R.string.my_order_address_lianxishangjia))
-//                        .setText(R.id.item_foot_3,mContext.getString(R.string.my_order_address_cacel_order));
-//                break;
-//            case "1"://:1：已发货
-//                holder.setVisible(R.id.item_foot_1,false)
-//                        .setVisible(R.id.item_foot_2,true)
-//                        .setVisible(R.id.item_foot_3,true)
-//                        .setText(R.id.item_foot_2,mContext.getString(R.string.my_order_address_lianxishangjia))
-//                        .setText(R.id.item_foot_3,mContext.getString(R.string.my_order_address_querenshouhuo));
-//                break;
-//            case "2"://2：已完成(包括 已评价 与 待评价 )
-//                if (entity.isComment==0) //待评价
-//                    holder.setVisible(R.id.item_foot_1,true)
-//                            .setVisible(R.id.item_foot_2,true)
-//                            .setVisible(R.id.item_foot_3,true)
-//                            .setText(R.id.item_foot_1,mContext.getString(R.string.my_order_address_pingjia))
-//                            .setText(R.id.item_foot_2,mContext.getString(R.string.my_order_address_del_order))
-//                            .setText(R.id.item_foot_3,mContext.getString(R.string.my_order_address_apply_safe));
-//                else
-//                    holder.setVisible(R.id.item_foot_1,false)
-//                            .setVisible(R.id.item_foot_2,false)
-//                            .setVisible(R.id.item_foot_3,true)
-//                            .setText(R.id.item_foot_3,mContext.getString(R.string.my_order_address_del_order));
-//                break;
-//            default:
-//                holder.setVisible(R.id.item_foot_1,false)
-//                        .setVisible(R.id.item_foot_2,false)
-//                        .setVisible(R.id.item_foot_3,true)
-//                        .setText(R.id.item_foot_3,mContext.getString(R.string.my_order_address_del_order));
-//                break;
-////            case "3"://3：退货申请
-////                holder.setText(R.id.header_status,mContext.getString(R.string.my_order_address_apply_safe_status));
-////                break;
-////            case "4"://,4：退货中
-////                holder.setText(R.id.header_status,mContext.getString(R.string.my_order_address_apply_safe_status_ing));
-////                break;
-////            case "5"://5：已退货
-////                holder.setText(R.id.header_status,mContext.getString(R.string.my_order_address_apply_safe_status_end));
-////                break;
-//        }
 
         holder.get(R.id.item_foot_1).setOnClickListener(new View.OnClickListener() {
             @Override

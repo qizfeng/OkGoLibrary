@@ -39,52 +39,10 @@ public class MinshengAdapter extends BaseQuickAdapter<ShopModel, BaseViewHolder>
         baseViewHolder.setText(R.id.tv_address, "地址:" + model.businessAddress);
         baseViewHolder.setText(R.id.tv_distance, "距离" + model.distance + "KM");
         if (model.isOpen==0) baseViewHolder.setVisible(R.id.tv_status,false);
-        else baseViewHolder.setVisible(R.id.tv_status,false);
+        else baseViewHolder.setVisible(R.id.tv_status,true);
         RatingBar ratingBar = baseViewHolder.getView(R.id.ratingBar);
         double starLevel = model.starLevel;
         ratingBar.setStar((float) starLevel);
-//        ImageView iv_star1 = (ImageView) baseViewHolder.getView(R.id.iv_star1);
-//        ImageView iv_star2 = (ImageView) baseViewHolder.getView(R.id.iv_star2);
-//        ImageView iv_star3 = (ImageView) baseViewHolder.getView(R.id.iv_star3);
-//        ImageView iv_star4 = (ImageView) baseViewHolder.getView(R.id.iv_star4);
-//        ImageView iv_star5 = (ImageView) baseViewHolder.getView(R.id.iv_star5);
-//        if (starLevel <= 0) {
-//            iv_star1.setImageResource(R.mipmap.d29_icon1_p);
-//            iv_star2.setImageResource(R.mipmap.d29_icon1_p);
-//            iv_star3.setImageResource(R.mipmap.d29_icon1_p);
-//            iv_star4.setImageResource(R.mipmap.d29_icon1_p);
-//            iv_star5.setImageResource(R.mipmap.d29_icon1_p);
-//        } else if (starLevel > 0 && starLevel < 1.5) {
-//            iv_star1.setImageResource(R.mipmap.d29_icon1);
-//            iv_star2.setImageResource(R.mipmap.d29_icon1_p);
-//            iv_star3.setImageResource(R.mipmap.d29_icon1_p);
-//            iv_star4.setImageResource(R.mipmap.d29_icon1_p);
-//            iv_star5.setImageResource(R.mipmap.d29_icon1_p);
-//        } else if (starLevel >= 1.5 && starLevel < 2.5) {
-//            iv_star1.setImageResource(R.mipmap.d29_icon1);
-//            iv_star2.setImageResource(R.mipmap.d29_icon1);
-//            iv_star3.setImageResource(R.mipmap.d29_icon1_p);
-//            iv_star4.setImageResource(R.mipmap.d29_icon1_p);
-//            iv_star5.setImageResource(R.mipmap.d29_icon1_p);
-//        } else if (starLevel >= 2.5 && starLevel < 3.5) {
-//            iv_star1.setImageResource(R.mipmap.d29_icon1);
-//            iv_star2.setImageResource(R.mipmap.d29_icon1);
-//            iv_star3.setImageResource(R.mipmap.d29_icon1);
-//            iv_star4.setImageResource(R.mipmap.d29_icon1_p);
-//            iv_star5.setImageResource(R.mipmap.d29_icon1_p);
-//        } else if (starLevel >= 3.5 && starLevel < 4.5) {
-//            iv_star1.setImageResource(R.mipmap.d29_icon1);
-//            iv_star2.setImageResource(R.mipmap.d29_icon1);
-//            iv_star3.setImageResource(R.mipmap.d29_icon1);
-//            iv_star4.setImageResource(R.mipmap.d29_icon1);
-//            iv_star5.setImageResource(R.mipmap.d29_icon1_p);
-//        } else if (starLevel >= 4.5) {
-//            iv_star1.setImageResource(R.mipmap.d29_icon1);
-//            iv_star2.setImageResource(R.mipmap.d29_icon1);
-//            iv_star3.setImageResource(R.mipmap.d29_icon1);
-//            iv_star4.setImageResource(R.mipmap.d29_icon1);
-//            iv_star5.setImageResource(R.mipmap.d29_icon1);
-//        }
         View view = baseViewHolder.getConvertView();
         final int position = baseViewHolder.getLayoutPosition();
         view.setOnClickListener(new View.OnClickListener() {
@@ -94,5 +52,4 @@ public class MinshengAdapter extends BaseQuickAdapter<ShopModel, BaseViewHolder>
             }
         });
     }
-
 }

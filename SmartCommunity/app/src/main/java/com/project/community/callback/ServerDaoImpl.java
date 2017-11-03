@@ -757,6 +757,7 @@ public class ServerDaoImpl implements ServerDao {
             String legalCardReverse, JsonCallback<BaseResponse<List>> callback) {
         OkGo.post(AppConstants.URL_APPLY_STORE)
                 .tag(mContext)
+                .params("id", id)
                 .params("userId", userId)
                 .params("longitude", longitude)
                 .params("latitude", latitude)
@@ -1071,6 +1072,15 @@ public class ServerDaoImpl implements ServerDao {
         OkGo.post(AppConstants.URL_GETORDER)
                 .tag(mContext)
                 .params("orderJson", orderJson)
+                .execute(callback);
+    }
+
+    @Override
+    public void getCommitDetail(String userId, String shopId, JsonCallback<BaseResponse<OrderModel>> callback) {
+        OkGo.get(AppConstants.URL_GETCOMMITDETAIL)
+                .tag(mContext)
+                .params("userId", userId)
+                .params("shopId", shopId)
                 .execute(callback);
     }
 

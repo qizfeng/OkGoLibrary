@@ -73,10 +73,6 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/color_gray_e5e5e5" />
-    <View
-        android:layout_width="match_parent"
         android:layout_height="@dimen/dp_10"
         android:background="@color/color_gray_eeeeee" />
 </LinearLayout>
