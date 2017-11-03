@@ -1,6 +1,7 @@
 package com.project.community.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by qizfeng on 17/9/21.
@@ -25,6 +26,7 @@ public class ShopIndexModel implements Serializable {
     public String shopId;
     public String orderTotal;
     public String todayMoney;
+    public ChildShopIndexModel childAuthorize;
 
     @Override
     public String toString() {

@@ -207,6 +207,7 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
             applyStoreEtImportant.setText(shopModel.mainBusiness);
             applyStoreEtCompanyName.setText(shopModel.entName);
             applyStoreEtBusinessLicense.setText(shopModel.licenseNo);
+            applyStoreEtLegalPerson.setText(shopModel.legalPerson);
 
             id=shopModel.id;
             mStoreCoverUri=shopModel.shopPhoto;//店铺封面
@@ -317,7 +318,7 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
 //            }
 //        });
 
-        getUnitData();
+//        getUnitData();
     }
 
 
@@ -332,10 +333,11 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
                 startActivityForResult(intent, 100);
                 break;
             case R.id.ll_apply_store_tv_type:
-//                if (!isData){
-//                    getUnitData();
+                getUnitData();
+//                if (mDictionaryModelList.size()==0){
+//
 //                }else {
-                    showDialog(getResources().getString(R.string.send_message_change_type),mDictionaryModelList);
+//                    showDialog(getResources().getString(R.string.send_message_change_type),mDictionaryModelList);
 //                }
                 break;
             case R.id.apply_store_btn_confire:
@@ -509,7 +511,6 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
                         switch (iSCode){
                             case 1:
 //                                mStoreCoverUri=data.getStringExtra("uri");
-                                Log.e("onActivityResult: ", mStoreCoverUri);
                                 new GlideImageLoader().onDisplayImageWithDefault(this, applyStoreImgCover, data.getStringExtra("uri"), R.mipmap.c1_image2);
                                 applyStoreImgAdd.setVisibility(View.GONE);
                                 applyStoreImgDel.setVisibility(View.VISIBLE);
@@ -546,13 +547,6 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
                             uploadFile(new File(StringUtils.getRealFilePath(ApplyStoreActivity.this, uri)));
                             LogUtils.e("uri:" + StringUtils.getRealFilePath(ApplyStoreActivity.this, uri));
                         }
-//                        mImags.add(data.getStringExtra("uri"));
-//                        if (mImags.size() >= 9) {
-//                            mApplyStoryPicAdapter.setGoneAdd(0);
-//                        } else {
-//                            mApplyStoryPicAdapter.setGoneAdd(1);
-//                        }
-//                        mApplyStoryPicAdapter.notifyDataSetChanged();
                     }
 
                     break;
@@ -645,11 +639,10 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
                     mCurrtindex=i;
                 }
             }
-        }else {
-            strings.clear();
-            for (int i = 0; i < list.size(); i++) {
-                strings.add(list.get(i).label);
-            }
+        }
+        strings.clear();
+        for (int i = 0; i < list.size(); i++) {
+            strings.add(list.get(i).label);
         }
 
 
@@ -813,15 +806,21 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
      * 获取分类
      */
     private void getUnitData() {
+        progressDialog.show();
         serverDao.getDictionaryData("prop_shops_type", new JsonCallback<BaseResponse<DictionaryResponse>>() {
             @Override
             public void onSuccess(BaseResponse<DictionaryResponse> baseResponse, Call call, Response response) {
+                dismissDialog();
                 mDictionaryModelList.clear();
                 mDictionaryModelList.addAll(baseResponse.retData.dictList);
-//                if (isData){
-//                    showDialog(getResources().getString(R.string.send_message_change_type),mDictionaryModelList);
-//                }
-//                isData=true;
+                showDialog(getResources().getString(R.string.send_message_change_type),mDictionaryModelList);
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                dismissDialog();
+                showToast(e.getMessage());
             }
         });
     }
@@ -832,8 +831,9 @@ public class ApplyStoreActivity extends BaseActivity implements View.OnClickList
      */
     private void propShops(String id) {
         progressDialog.show();
-        Log.e("propShops: ", "--------"+shopsCategory);
-        serverDao.propShops(id,getUser(this).id,
+        serverDao.propShops(
+                id,
+                getUser(this).id,
                 mLongitude,
                 mLatitude,
                 applyStoreEtTitle.getText().toString(),

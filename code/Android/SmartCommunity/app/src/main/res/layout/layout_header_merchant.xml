@@ -70,6 +70,7 @@
 
             <TextView
                 android:id="@+id/heade_tv_status"
+                android:visibility="invisible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"

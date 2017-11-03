@@ -131,6 +131,7 @@
                 android:background="@color/color_gray_eeeeee"/>
             <TextView
                 android:id="@+id/goods_order_tv_jiaoyidanhao"
+                android:visibility="gone"
                 android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -144,6 +145,7 @@
 
             <TextView
                 android:id="@+id/goods_order_tv_xiadan_time"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"

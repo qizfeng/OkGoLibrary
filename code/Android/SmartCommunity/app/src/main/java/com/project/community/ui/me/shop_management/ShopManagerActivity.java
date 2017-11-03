@@ -70,6 +70,21 @@ public class ShopManagerActivity extends BaseActivity {
 
 
     private String shopId="";
+    private int sumMoney=0;
+    private int sumOrder=0;
+    private int addGoods=0;
+    private int goodsMge=0;
+    private int orderMge=0;
+    private int shopInfo=0;
+
+
+//     "sumMoney": 1,#查看价格
+//                    "sumOrder": 1,#总订单数
+//                    "addGoods": 1,#添加商品
+//                    "goodsMge": 1,#商品管理
+//                    "orderMge": 1,#订单管理
+//                    "shopInfo": 1#商铺资料
+
 
     /**
      *
@@ -120,12 +135,24 @@ public class ShopManagerActivity extends BaseActivity {
         }
         switch (view.getId()) {
             case R.id.shop_manager_goods_manager://商品管理
+                if (goodsMge==1){
+                    showToast(getString(R.string.zanwuquanxian));
+                    return;
+                }
                 AllProductsActivity.startActivity(this,shopId);
                 break;
             case R.id.shop_manager_data_manager://商铺资料
+                if (shopInfo==1){
+                    showToast(getString(R.string.zanwuquanxian));
+                    return;
+                }
                 ShopDataActivity.startActivity(this);
                 break;
             case R.id.shop_manager_order_manager://订单管理
+                if (orderMge==1){
+                    showToast(getString(R.string.zanwuquanxian));
+                    return;
+                }
                 AllOrderActivity.startActivity(this,shopId);
                 break;
             case R.id.shop_manager_zhanghao_manager://账号管理
@@ -136,7 +163,7 @@ public class ShopManagerActivity extends BaseActivity {
 
 
     /**
-     * 获取店铺信息
+     * D75商铺信息首页
      */
     private void getShopData(){
         showLoading();
@@ -153,14 +180,21 @@ public class ShopManagerActivity extends BaseActivity {
                 if (listBaseResponse.retData.isChild==1) {
                     mTvTitle.setText(Html.fromHtml("<font>"+getString(R.string.shop_manager_title)+"</font><font><small>"+getString(R.string.shop_manager_title_son)+"</small></font>"));
                     shopManagerZhanghaoManager.setVisibility(View.INVISIBLE);
+                    if (listBaseResponse.retData.childAuthorize!=null){
+                        sumMoney=listBaseResponse.retData.childAuthorize.sumMoney;
+                        sumOrder=listBaseResponse.retData.childAuthorize.sumOrder;
+                        addGoods=listBaseResponse.retData.childAuthorize.addGoods;
+                        goodsMge=listBaseResponse.retData.childAuthorize.goodsMge;
+                        orderMge=listBaseResponse.retData.childAuthorize.orderMge;
+                        shopInfo=listBaseResponse.retData.childAuthorize.shopInfo;
+                    }
                 }
                 shopManagerLiushui.setText(listBaseResponse.retData.todayMoney+"/"+listBaseResponse.retData.moneyTotal);
                 shopManagerOrder.setText(listBaseResponse.retData.todayOrder+"/"+listBaseResponse.retData.orderTotal);
                 if (listBaseResponse.retData.handleOrder>0) {
                     shopManagerOrderNum.setVisibility(View.VISIBLE);
                     shopManagerOrderNum.setText(listBaseResponse.retData.handleOrder+"");
-                }
-                else shopManagerOrderNum.setVisibility(View.GONE);
+                } else shopManagerOrderNum.setVisibility(View.GONE);
                 if (listBaseResponse.retData.isOpen==0) mSwitchButton.setChecked(true);
                 else mSwitchButton.setChecked(false);
                 shopId=listBaseResponse.retData.shopId;

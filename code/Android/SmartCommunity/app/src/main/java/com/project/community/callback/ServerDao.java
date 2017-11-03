@@ -1062,6 +1062,16 @@ public interface ServerDao {
             String orderJson,
             JsonCallback<BaseResponse<OrderModel>> callback);
 
+    /**
+     * D订单提交详情
+     *
+     * @param callback
+     */
+    void getCommitDetail(
+            String userId,
+            String shopId,
+            JsonCallback<BaseResponse<OrderModel>> callback);
+
 
     /**
      * D确认订单

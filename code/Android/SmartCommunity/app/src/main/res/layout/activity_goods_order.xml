@@ -285,7 +285,6 @@
                 android:paddingLeft="15dp"
                 android:gravity="center_vertical|right"
                 android:textSize="14sp"
-                android:text="已取消"
                 android:layout_width="match_parent"
                 android:layout_height="40dp" />
             <View
@@ -416,6 +415,7 @@
         </LinearLayout>
     </com.project.community.view.MyScrollview>
     <FrameLayout
+        android:id="@+id/goods_order_shouhou_type_fl"
         android:layout_width="match_parent"
         android:layout_height="@dimen/layout_item_height">
         <RelativeLayout

@@ -99,6 +99,8 @@ public class MerchantDetailActivity extends BaseActivity {
     LinearLayout mLayoutBottom;
     @Bind(R.id.tv_count)
     TextView mTvCount;
+    @Bind(R.id.layout_buy)
+    TextView layout_buy;
 
     ImageView headeCover;
     TextView headeTvMerchantName;
@@ -408,48 +410,53 @@ public class MerchantDetailActivity extends BaseActivity {
 
     @OnClick({R.id.layout_shoppingcart,R.id.layout_buy})
     public void onCartClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.layout_shoppingcart:
                 if (mCartData.size() > 0)
                     showCartPopwin(view);
                 break;
             case R.id.layout_buy:
 
-                JSONArray jsonArray = new JSONArray();
-                JSONArray cartList = new JSONArray();
-                JSONObject jsonObject = new JSONObject();
-                BigDecimal bigDecimal = new BigDecimal("0");
-                for (int i = 0; i < mCartData.size(); i++) {
-                    BigDecimal bigDecimal1=new BigDecimal(mCartData.get(i).goodsPrice).multiply(new BigDecimal(mCartData.get(i).goodsCount));
-                    bigDecimal=bigDecimal.add(bigDecimal1);
-                    JSONObject item = new JSONObject();
-                    try {
-                        item.put("goodId",mCartData.get(i).goodId);
-                        item.put("number",mCartData.get(i).goodsCount);
-                        item.put("goodName",mCartData.get(i).name);
-                        item.put("goodPrice",mCartData.get(i).goodsPrice);
-                        item.put("goodImage",AppConstants.URL_BASE +mCartData.get(i).images);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    cartList.put(item);
+//                JSONArray jsonArray = new JSONArray();
+//                JSONArray cartList = new JSONArray();
+//                JSONObject jsonObject = new JSONObject();
+//                BigDecimal bigDecimal = new BigDecimal("0");
+//                for (int i = 0; i < mCartData.size(); i++) {
+//                    BigDecimal bigDecimal1=new BigDecimal(mCartData.get(i).goodsPrice).multiply(new BigDecimal(mCartData.get(i).goodsCount));
+//                    bigDecimal=bigDecimal.add(bigDecimal1);
+//                    JSONObject item = new JSONObject();
+//                    try {
+//                        item.put("goodId",mCartData.get(i).goodId);
+//                        item.put("number",mCartData.get(i).goodsCount);
+//                        item.put("goodName",mCartData.get(i).name);
+//                        item.put("goodPrice",mCartData.get(i).goodsPrice);
+//                        item.put("goodImage",AppConstants.URL_BASE +mCartData.get(i).images);
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                    cartList.put(item);
+//                }
+//
+//                try {
+//                    jsonObject.put("orderAmountTotal",bigDecimal.toString());
+//                    jsonObject.put("shopId",mShopId);
+//                    jsonObject.put("userId",getUser(this).id);
+//                    jsonObject.put("goodsCount",totalCount);
+//                    jsonObject.put("cartList",cartList);
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//                jsonArray.put(jsonObject);
+//
+//                Log.e("onCartClick: ", jsonArray.toString());
+//                commitOrder(jsonArray.toString());
+
+
+//                    break;
+
+                    getDetail(mShopId);
                 }
 
-                try {
-                    jsonObject.put("orderAmountTotal",bigDecimal.toString());
-                    jsonObject.put("shopId",mShopId);
-                    jsonObject.put("userId",getUser(this).id);
-                    jsonObject.put("goodsCount",totalCount);
-                    jsonObject.put("cartList",cartList);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                jsonArray.put(jsonObject);
-
-                Log.e("onCartClick: ", jsonArray.toString());
-                commitOrder(jsonArray.toString());
-                break;
-        }
 
     }
 
@@ -709,7 +716,13 @@ public class MerchantDetailActivity extends BaseActivity {
                         headeTvPhone.setText(listBaseResponse.retData.shop.contactPhone);
                         headeTvAddress.setText(listBaseResponse.retData.shop.businessAddress);
                         headeTvDistance.setText("距离"+merchant_distance+"KM");
-                        if (listBaseResponse.retData.shop.isOpen==0) headeTvStatus.setVisibility(View.INVISIBLE);
+                        if (listBaseResponse.retData.shop.isOpen==0) {
+                            headeTvStatus.setVisibility(View.INVISIBLE);
+                        }else {
+                            headeTvStatus.setVisibility(View.VISIBLE);
+                            layout_buy.setBackgroundResource(R.color.color_gray_cccccc);
+                            layout_buy.setEnabled(false);
+                        }
                         headeRatingBar.setStar(listBaseResponse.retData.shop.starLevel);
 
                         mData.clear();
@@ -883,6 +896,40 @@ public class MerchantDetailActivity extends BaseActivity {
                 showToast(listBaseResponse.message);
                 if (listBaseResponse.retData.address==null) startActivity(new Intent(MerchantDetailActivity.this, MyAddressActivity.class));
                 else PayActivity.startActivity(MerchantDetailActivity.this,listBaseResponse.retData);
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+                dismissDialog();
+                showToast(e.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * D订单提交详情
+     */
+    private void getDetail(String shopId){
+        showLoading();
+        if (!NetworkUtils.isNetworkAvailable(this)) {
+            ToastUtils.showShortToast(this, R.string.network_error);
+            dismissDialog();
+            return;
+        }
+
+        serverDao.getCommitDetail(
+                getUser(this).id,
+                shopId,
+                new JsonCallback<BaseResponse<OrderModel>>() {
+            @Override
+            public void onSuccess(BaseResponse<OrderModel> listBaseResponse, Call call, Response response) {
+                dismissDialog();
+//                showToast(listBaseResponse.message);
+//                if (listBaseResponse.retData.address==null) startActivity(new Intent(MerchantDetailActivity.this, MyAddressActivity.class));
+//                else
+                PayActivity.startActivity(MerchantDetailActivity.this,listBaseResponse.retData);
             }
 
             @Override

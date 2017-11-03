@@ -42,6 +42,7 @@ public class OrderModel implements Serializable {
     public String shopsPhone ;
     public int goodsCount ;
     public int orderAmountTotal ;
+    public int isCancel ; //#1:已取消；0：未取消
     public int isComment ; //#1:已评价；0：未评价
     public AddressModel address ;
     public SaleModel sale ;

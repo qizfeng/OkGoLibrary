@@ -19,10 +19,12 @@ import com.project.community.R;
 import com.project.community.base.BaseActivity;
 import com.project.community.constants.AppConstants;
 import com.project.community.model.ShopModel;
+import com.project.community.ui.ImageBrowseActivity;
 import com.project.community.ui.life.minsheng.AdrressActivity;
 import com.project.community.ui.life.minsheng.ApplyStoreActivity;
 import com.project.community.view.MyButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -50,6 +52,8 @@ public class ShopDataActivity extends BaseActivity {
     TextView shopDataType;
     @Bind(R.id.shop_data_people)
     TextView shopDataPeople;
+    @Bind(R.id.shop_data_phone)
+    TextView shopDataPhone;
     @Bind(R.id.shop_data_address)
     TextView shopDataAddress;
     @Bind(R.id.shop_data_tv_zuobiao)
@@ -84,6 +88,7 @@ public class ShopDataActivity extends BaseActivity {
     private double mLongitude; // 经度
     private double mLatitude;   //纬度
     private ShopModel mShopModel;
+    private ArrayList<String> imgs= new ArrayList<>();
 
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, ShopDataActivity.class);
@@ -117,7 +122,8 @@ public class ShopDataActivity extends BaseActivity {
                         mShopModel=baseResponse.retData;
                         new GlideImageLoader().onDisplayImageWithDefault(ShopDataActivity.this, shopDataCover, AppConstants.URL_BASE+baseResponse.retData.shopPhoto, R.mipmap.c1_image2);
                         shopDataTitle.setText(baseResponse.retData.shopsName);
-                        shopDataPeople.setText(getResources().getString(R.string.goods_order_lianxiren)+baseResponse.retData.contactName+"    "+baseResponse.retData.contactPhone);
+                        shopDataPeople.setText(getResources().getString(R.string.goods_order_lianxiren)+baseResponse.retData.contactName);
+                        shopDataPhone.setText(getResources().getString(R.string.goods_order_lianxiphone)+baseResponse.retData.contactPhone);
                         shopDataAddress.setText(getResources().getString(R.string.goods_order_yingyedizhi)+baseResponse.retData.businessAddress);
 //                        tvHospitalArrow.setText(baseResponse.retData.latitude+","+baseResponse.retData.longitude);
                         mLongitude= Double.parseDouble(baseResponse.retData.longitude);
@@ -126,6 +132,10 @@ public class ShopDataActivity extends BaseActivity {
                         shopDataTvZhuyingyewu.setText(baseResponse.retData.mainBusiness);
                         shopDataTvQiyeName.setText(baseResponse.retData.entName);
                         shopDataTvYingyePhone.setText(baseResponse.retData.licenseNo);
+                        imgs.add(AppConstants.URL_BASE+baseResponse.retData.licensePositive);
+                        imgs.add(AppConstants.URL_BASE+baseResponse.retData.licenseReverse);
+                        imgs.add(AppConstants.URL_BASE+baseResponse.retData.legalCardPositive);
+                        imgs.add(AppConstants.URL_BASE+baseResponse.retData.legalCardReverse);
                         new GlideImageLoader().onDisplayImageWithDefault(ShopDataActivity.this, shopDataYingyePhoto1, AppConstants.URL_BASE+baseResponse.retData.licensePositive, R.mipmap.c1_image2);
                         new GlideImageLoader().onDisplayImageWithDefault(ShopDataActivity.this, shopDataYingyePhoto2, AppConstants.URL_BASE+baseResponse.retData.licenseReverse, R.mipmap.c1_image2);
                         shopDataTvFarenName.setText(baseResponse.retData.legalPerson);
@@ -157,9 +167,8 @@ public class ShopDataActivity extends BaseActivity {
                     }
                 });
     }
-    @OnClick({R.id.shop_data_btn_edit,R.id.shop_data_ll_zuobiao})
+    @OnClick({R.id.shop_data_btn_edit,R.id.shop_data_ll_zuobiao,R.id.shop_data_yingye_photo_1,R.id.shop_data_yingye_photo_2,R.id.shop_data_faren_photo_1,R.id.shop_data_faren_photo_2})
     public void onViewClicked(View v) {
-
         switch (v.getId()){
             case R.id.shop_data_btn_edit:
                 ApplyStoreActivity.startActivity(this,mShopModel);
@@ -167,6 +176,19 @@ public class ShopDataActivity extends BaseActivity {
             case R.id.shop_data_ll_zuobiao:
                 AdrressActivity.startActivity(ShopDataActivity.this,mLongitude+"",mLatitude+"");
                 break;
+            case R.id.shop_data_yingye_photo_1:
+                ImageBrowseActivity.startActivity(this, imgs,0);
+                break;
+            case R.id.shop_data_yingye_photo_2:
+                ImageBrowseActivity.startActivity(this, imgs,1);
+                break;
+            case R.id.shop_data_faren_photo_1:
+                ImageBrowseActivity.startActivity(this, imgs,2);
+                break;
+            case R.id.shop_data_faren_photo_2:
+                ImageBrowseActivity.startActivity(this, imgs,3);
+                break;
+
         }
     }
 

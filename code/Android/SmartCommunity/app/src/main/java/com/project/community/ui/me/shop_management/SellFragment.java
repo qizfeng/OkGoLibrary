@@ -1,8 +1,10 @@
 package com.project.community.ui.me.shop_management;
 
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -10,9 +12,15 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.library.okgo.callback.JsonCallback;
 import com.library.okgo.model.BaseResponse;
@@ -103,7 +111,7 @@ public class SellFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                         mAdapter.notifyItemChanged(position,list.get(position));
                         break;
                     case R.id.item_product_del:
-                        delData(list.get(position).goodId,position);
+                        showAlertDialog(position, 0);
                         break;
                     case R.id.item_product_deit:
                         BuildNewGoodsActivity.startActivity(getActivity(),list.get(position),shopId);
@@ -248,4 +256,50 @@ public class SellFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
+    /**
+     * 发货pop 0 ,发货,  1处理 ,2 拒绝处理
+     *
+     * @param position
+     */
+    private Dialog mDialog;
+    public void showAlertDialog(final int position, final int code) {
+//        mDialog = new AlertDialog.Builder(this).create();
+        mDialog = new Dialog(getActivity());
+        mDialog.setContentView(R.layout.activity_dialog_common);
+        Window window = mDialog.getWindow();
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        WindowManager m = getActivity().getWindowManager();
+        Display d = m.getDefaultDisplay(); // 获取屏幕宽、高用
+        WindowManager.LayoutParams p = window.getAttributes(); // 获取对话框当前的参数值
+        p.height = (int) (d.getHeight() * 0.6); // 高度设置为屏幕的0.6
+        p.width = (int) (d.getWidth() * 0.7); // 宽度设置为屏幕的0.65
+        window.setAttributes(p);
+        mDialog.show();
+        TextView tv_content = (TextView) mDialog.findViewById(R.id.tv_content);
+        if (code==0) tv_content.setText(R.string.txt_confirm_delete);
+
+        Button btn_confirm = (Button) mDialog.findViewById(R.id.btn_confirm);
+        Button btn_cancel = (Button) mDialog.findViewById(R.id.btn_cancel);
+        ImageView iv_close = (ImageView) mDialog.findViewById(R.id.iv_close);
+        iv_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDialog.dismiss();
+            }
+        });
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDialog.dismiss();
+            }
+        });
+        btn_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDialog.dismiss();
+                if (code==0) delData(list.get(position).goodId,position);
+            }
+        });
+    }
+
 }

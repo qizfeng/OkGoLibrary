@@ -35,6 +35,14 @@ public class ImageBrowseActivity extends BaseActivity {
         intent.putStringArrayListExtra("imgs",imgs);
         context.startActivity(intent);
     }
+    public static void startActivity(Context context,ArrayList<String> imgs,int position){
+        Intent intent = new Intent(context,ImageBrowseActivity.class);
+        intent.putStringArrayListExtra("imgs",imgs);
+        intent.putExtra("position",position);
+        context.startActivity(intent);
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
